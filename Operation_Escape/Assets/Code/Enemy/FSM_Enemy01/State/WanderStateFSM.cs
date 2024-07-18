@@ -7,7 +7,7 @@ public class WanderStateFSM : BaseState
     public Transform target;
     float time;
     public WanderStateFSM(FSMEnemyM1 stateMachine) : base("Wander", stateMachine) { }
-    public float distane = 20f;
+    public float distane = 15f;
 
     public override void Enter()
     {

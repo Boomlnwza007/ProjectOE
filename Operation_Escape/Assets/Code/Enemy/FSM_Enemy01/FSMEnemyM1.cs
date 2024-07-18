@@ -11,8 +11,9 @@ public class FSMEnemyM1 : StateMachine
     public float rangSight;
 
     public float Speed;
-    IAstarAI ai;
-    Transform target;
+    public IAstarAI ai;
+    public Transform target;
+    public Rigidbody2D rb;
     [SerializeField]public Collider2D co;
     [HideInInspector]
     public WanderStateFSM wanderState;
@@ -28,6 +29,7 @@ public class FSMEnemyM1 : StateMachine
     {
         ai = gameObject.GetComponent<IAstarAI>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        rb=gameObject.GetComponent<Rigidbody2D>();
         SetData("ai", ai);
         SetData("target", target);
         SetData("co",co);

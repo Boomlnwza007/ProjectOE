@@ -8,7 +8,7 @@ public class CheckDistanceStateFSM : BaseState
     public IAstarAI ai;
     public Transform target;
     public float distance;
-    public CheckDistanceStateFSM(FSMEnemyM1 stateMachine) : base("Charge", stateMachine) { }
+    public CheckDistanceStateFSM(FSMEnemyM1 stateMachine) : base("CheckDistance", stateMachine) { }
     // Start is called before the first frame update
     public override void Enter()
     {

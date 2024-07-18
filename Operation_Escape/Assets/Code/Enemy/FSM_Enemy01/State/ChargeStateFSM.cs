@@ -9,20 +9,25 @@ public class ChargeStateFSM : BaseState
     public Transform target;
     public float speed;
     public Collider2D co;
+    Rigidbody2D rb;
     Transform bulletPos;
     float time;
     bool canApproching;
     bool wait;
-    bool timeOn;
+    bool follow;
+    bool canDodge;
+    int maxDodge;
+    int dodge;
     public ChargeStateFSM(FSMEnemyM1 stateMachine) : base("Charge", stateMachine) { }
     // Start is called before the first frame update
     public override void Enter()
     {
         base.Enter();
-        dod = true;
+        canDodge = true;
         wait = false;
         time = 0;
-        timeOn = false;
+        dodge = 0;
+        follow = true;
         GetData();
         ai.destination = target.position;        
         if (Random.Range(0, 100) > 50)
@@ -34,26 +39,20 @@ public class ChargeStateFSM : BaseState
         {
             canApproching = false;
             ai.maxSpeed = speed * 1.5f;
-            if (Random.Range(80, 100) > 50)
-            {
-                dod = true;
-            }
+            maxDodge = Random.Range(2, 5);
         }
-        canApproching = false;
-        ai.maxSpeed = speed * 1.5f;
     }
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
-        Vector3 rotation = ai.position - target.position;
-        float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        ai.rotation = Quaternion.Euler(0, 0, rot + 90);
+        base.UpdateLogic();        
         float distance = Vector2.Distance(ai.position, target.position);
-        ai.destination = target.position;
-        if (timeOn)
+        if (follow)
         {
-            time += Time.deltaTime;
+            ai.destination = target.position;
+            //Vector3 rotation = ai.position - target.position;
+            //float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+            //ai.rotation = Quaternion.Euler(0, 0, rot + 90);
         }
         if (canApproching)
         {
@@ -96,26 +95,35 @@ public class ChargeStateFSM : BaseState
         }
         else
         {
-            Debug.Log("b " + ai.canMove);
-            if (distance <= 5 && !wait)
+            if (distance <= 2)
             {
-                timeOn = true;
-                ai.canMove = false;                     
+                stateMachine.ChangState(((FSMEnemyM1)stateMachine).N1Attack);
             }
-            if (time >= 2 && !wait)
+            time += Time.deltaTime;
+            if (time > 2f && canDodge)
             {
-                wait = true;
-                ai.canMove = true;
-                stateMachine.ChangState(((FSMEnemyM1)stateMachine).CheckDistance);
+                ai.maxSpeed = speed;
+                time = 0;
+                wait = false;                
             }
 
-            if (dod)
+            if (dodge >= maxDodge)
+            {
+                canDodge = false;
+                if (time > 3f)
+                {
+                    stateMachine.ChangState(((FSMEnemyM1)stateMachine).CheckDistance);
+                }
+            }
+
+            Debug.Log(canDodge + " = " +dodge+" >= " + maxDodge );
+            if (canDodge&&!wait)
             {
                 if (DeBullet())
                 {
+                    Debug.Log("can dodge");
                     DodgeBullet();
                 }
-                dod = false;
             }
         }
     }
@@ -138,12 +146,17 @@ public class ChargeStateFSM : BaseState
         return false;
     }
 
-    bool dod = true;
     public void DodgeBullet()
     {
         var normal = (ai.position - bulletPos.position).normalized;
-        var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
-        ai.Teleport(target.position + normal * 2 + tangent * 5);
+        var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1)); 
+        wait = true;
+        //ai.maxSpeed = speed*15;
+        //ai.destination = ai.position + tangent * 10;
+        ai.Teleport(ai.position + tangent * 5f);
+        dodge++;
+        
+        Debug.Log("dodge");
     }
 
     public void GetData()
@@ -152,6 +165,7 @@ public class ChargeStateFSM : BaseState
         target = (Transform)stateMachine.Getdata("target");
         speed = ((FSMEnemyM1)stateMachine).Speed;
         co = ((FSMEnemyM1)stateMachine).co;
+        rb = ((FSMEnemyM1)stateMachine).rb;
     }
 
 }

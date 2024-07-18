@@ -9,7 +9,7 @@ public class N1AttackStateFSM : BaseState
     public Transform target;
     public float speed;
     float time;
-    public N1AttackStateFSM(FSMEnemyM1 stateMachine) : base("Charge", stateMachine) { }
+    public N1AttackStateFSM(FSMEnemyM1 stateMachine) : base("N1Atack", stateMachine) { }
     // Start is called before the first frame update
     public override void Enter()
     {
@@ -24,6 +24,7 @@ public class N1AttackStateFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
+        ai.destination = target.position;
         time += Time.deltaTime;
         Vector3 rotation = ai.position - target.position;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
