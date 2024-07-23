@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class FSMEnemyM1 : StateMachine
 {
-    [Header("Line Of sight") ]
-    public float lineSight;
-    public float angleSight;
-    public float rangSight;
-
+    public float hp;
     public float Speed;
+    public float dmg;
+    public float visRang;
     public IAstarAI ai;
     public Transform target;
     public Rigidbody2D rb;
