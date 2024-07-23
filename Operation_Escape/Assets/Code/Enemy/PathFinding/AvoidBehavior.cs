@@ -11,10 +11,12 @@ public class AvoidBehavior : MonoBehaviour
     public float stopRadius = 2f; // รัศมีการหยุด
     public LayerMask obstacleLayer; // เลเยอร์ของเอเยนต์อื่น ๆ ที่ต้องหลีกเลี่ยง
     public LayerMask agentLayer; // เลเยอร์ของเอเยนต์อื่น ๆ ที่ต้องหลีกเลี่ยง
+    public float smoothTime = 0.3f; // เวลาที่ใช้ในการทำให้ความเร็วเรียบเนียน
 
     [SerializeField]private Rigidbody2D rb;
     private Vector2 steering;
     private float curSpeed;
+    private Vector2 velocity = Vector2.zero; // สำหรับการเก็บค่า velocity ที่เรียบเนียน
 
     void Start()
     {
@@ -72,18 +74,18 @@ public class AvoidBehavior : MonoBehaviour
         // รวมแรงหลีกเลี่ยงกับความเร็วที่ต้องการ
         steering = desiredVelocity + avoidForce;
 
-        rb.velocity = steering.normalized * curSpeed;
+        // ปรับความเร็วและทิศทางให้เรียบเนียน
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, steering.normalized * curSpeed, ref velocity, smoothTime);
 
-        Vector2 ForwardObtrac = Vector2.zero;
         // ยิงเส้น ray เพื่อเช็คว่ามีวัตถุข้างหน้าหรือไม่
         RaycastHit2D hitForward = Physics2D.Raycast(transform.position, rb.velocity.normalized, rayLength, obstacleLayer);
         if (hitForward.collider != null)
         {
             // ถ้ามีวัตถุข้างหน้า ให้ปรับทิศทาง
             Vector2 newDirection = Vector2.Perpendicular(rb.velocity).normalized;
-            rb.velocity = newDirection * curSpeed;  
+            rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
         }
-        Vector2 LRObtrac = Vector2.zero;
+
         // ยิงเส้น ray ด้านข้างเพื่อหลีกเลี่ยงการไถตัว
         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, 45) * rb.velocity.normalized, rayLength, obstacleLayer);
         RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -45) * rb.velocity.normalized, rayLength, obstacleLayer);
@@ -92,10 +94,9 @@ public class AvoidBehavior : MonoBehaviour
         {
             // ถ้ามีวัตถุด้านข้าง ให้ปรับทิศทาง
             Vector2 newDirection = (hitLeft.collider != null) ? Quaternion.Euler(0, 0, -45) * rb.velocity.normalized : Quaternion.Euler(0, 0, 45) * rb.velocity.normalized;
-            rb.velocity = newDirection * curSpeed;
+            rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
         }
-        
-        
+
     }
 
     void OnDrawGizmos()
