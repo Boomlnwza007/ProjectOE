@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class FSMEnemyM1 : StateMachine
 {
-    public float hp;
+    public int Health;
+    public int dmg;
     public float Speed;
-    public float dmg;
     public float visRang;
     public IAstarAI ai;
+
     public Transform target;
     public Rigidbody2D rb;
     [SerializeField]public Collider2D co;
