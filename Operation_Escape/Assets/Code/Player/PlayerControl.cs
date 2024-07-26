@@ -74,8 +74,8 @@ public class PlayerControl : MonoBehaviour
                 if (dodgeSpeed < dodgeMinimium)
                 {
                    state = State.Normal;
+                   StartCoroutine(DodgeCooldown());
                 }
-                StartCoroutine(DodgeCooldown());
                 break;
         }
         
