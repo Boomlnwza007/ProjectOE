@@ -60,6 +60,10 @@ public class PlayerControl : MonoBehaviour
                 if (Input.GetButtonDown("Jump") && canDodge) 
                 {
                     dodgeDir = new Vector3(horizontal, vertical).normalized;
+                    if (dodgeDir == Vector3.zero)
+                    {
+                        dodgeDir = (transform.position - mousePos).normalized;
+                    }
                     dodgeSpeed = dodgeMaxSpeed;
                     canDodge = false;
                     state = State.Dodge;
