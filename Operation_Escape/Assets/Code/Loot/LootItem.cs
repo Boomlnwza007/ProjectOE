@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class LootItem : MonoBehaviour
+[CreateAssetMenu(fileName = "NewItemLoot", menuName = "Loot System/ItemLoot")]
+public class LootItem : ScriptableObject
 {
     //public Sprite lootSprite;
     public string lootName;

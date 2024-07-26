@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DamageType 
+{ 
+    Rang,Melee,
+}
 public interface IDamageable
 {
-    void Takedamage(int damage);
+    void Takedamage(int damage, DamageType type);
     int Health { get; }
     void Die();
 }
