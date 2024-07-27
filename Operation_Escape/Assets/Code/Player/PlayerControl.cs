@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour ,IDamageable
 {
+    [SerializeField] private List<BaseGun> GunList;
     private enum State { Normal,Dodge,}
     private State state;
     private float horizontal;
@@ -14,21 +16,32 @@ public class PlayerControl : MonoBehaviour ,IDamageable
     private Vector3 mousePos;
     private Camera mainCam;
     private bool canDodge = true;
+    private int comboStep = 0;
+    private float comboTimer;
+    //private int currentGun;
     public int Health = 10;
     public Transform bulletTranform;
     public float speed = 10f;
     public float dodgeMaxSpeed=100f;
     public float coolDownDodge = 1f;
     public float timeBetweenFiring;
-    public bool canfire;
+    public float comboMaxTime = 1.5f;
+    public float comboCooldown = 1f;
+    public int maxComboSteps = 3;
+    private bool canFire = true;
+    private bool firing = true;
+    private bool canMelee = true;
     [SerializeField] public GameObject bullet;
     [SerializeField] private Rigidbody2D rb;
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         state = State.Normal;
+        //currentGun = 0;
     }
     void Start()
     {
@@ -44,20 +57,28 @@ public class PlayerControl : MonoBehaviour ,IDamageable
                 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
                 horizontal = Input.GetAxisRaw("Horizontal");
                 vertical = Input.GetAxisRaw("Vertical");
-                if (!canfire)
+
+                if (!firing)
                 {
                     timer += Time.deltaTime;
                     if (timer > timeBetweenFiring)
                     {
-                        canfire = true;
+                        firing = true;
                         timer = 0;
                     }
                 }
 
-                if (Input.GetButton("Fire1") && canfire)
+                if (Input.GetButton("Fire1") && canFire && firing)
                 {
-                    canfire = false;
+                    firing = false;
+                    comboStep = 0;
+                    comboTimer = 0;
                     Instantiate(bullet, bulletTranform.position, Quaternion.identity);
+                }
+
+                if (Input.GetButtonDown("Fire2") && canMelee)
+                {
+                    ComboAttack();
                 }
 
                 if (Input.GetButtonDown("Jump") && canDodge) 
@@ -85,7 +106,17 @@ public class PlayerControl : MonoBehaviour ,IDamageable
                 }
                 break;
         }
-        
+
+        if (comboStep > 0)
+        {
+            comboTimer += Time.deltaTime;
+            if (comboTimer > comboMaxTime)
+            {
+                comboStep = 0;
+                comboTimer = 0;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -99,6 +130,43 @@ public class PlayerControl : MonoBehaviour ,IDamageable
                 rb.velocity = dodgeDir*dodgeSpeed;
                 break;
         }
+    }
+
+    private void ComboAttack()
+    {
+        if (comboStep < maxComboSteps)
+        {
+            comboStep++;
+            comboTimer = 0;
+            canMelee = false;
+            canFire = false;
+            Debug.Log("Combo Attack Step: " + comboStep);
+
+         
+            Instantiate(bullet, bulletTranform.position, Quaternion.identity);
+
+            StartCoroutine(ComboDelay());
+        }
+        else
+        {
+            canMelee = false;
+            StartCoroutine(ComboCooldown());
+        }
+    }
+
+    private IEnumerator ComboDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        canMelee = true;
+        canFire = true;
+    }
+
+    private IEnumerator ComboCooldown()
+    {
+        yield return new WaitForSeconds(comboCooldown);
+        comboStep = 0;
+        comboTimer = 0;
+        canMelee = true;
     }
 
     private void Flip()
@@ -123,6 +191,11 @@ public class PlayerControl : MonoBehaviour ,IDamageable
         yield return new WaitForSeconds(wait);
     }
 
+    public void Addgun(BaseGun gun)
+    {
+        GunList.Add(gun);
+    }
+
     public void Takedamage(int damage, DamageType type)
     {
         Health -= damage;
@@ -136,4 +209,6 @@ public class PlayerControl : MonoBehaviour ,IDamageable
     {
 
     }
+
+
 }

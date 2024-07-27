@@ -99,12 +99,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf501d178e8eb744b2c014053072aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 10
   bulletTranform: {fileID: 8212452493357251670}
   speed: 8
   dodgeMaxSpeed: 100
   coolDownDodge: 1
   timeBetweenFiring: 0.1
-  canfire: 1
+  comboMaxTime: 1.5
+  comboCooldown: 1
+  maxComboSteps: 3
+  canFire: 1
+  canMelee: 1
   bullet: {fileID: 7771206494892856151, guid: ca783c0bfa468ad47a23d731281bdbe1, type: 3}
   rb: {fileID: 4299975603312084560}
 --- !u!50 &4299975603312084560
