@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float vertical;
     private float dodgeSpeed;
     private bool facingRight = true;
-    private Vector3 dodgeDir;
+    private Vector2 dodgeDir;
     private Vector3 mousePos;
     private bool canDodge = true;
     public float speed = 10f;
@@ -35,14 +35,14 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = 0f;
                 horizontal = Input.GetAxisRaw("Horizontal");
-                vertical = Input.GetAxisRaw("Vertical");
-               
+                vertical = Input.GetAxisRaw("Vertical");               
                 if (Input.GetButtonDown("Jump") && canDodge)
                 {
-                    dodgeDir = new Vector3(horizontal, vertical).normalized;
+                    dodgeDir = new Vector2(horizontal, vertical).normalized;
                     StartCoroutine(gameObject.GetComponent<IDamageable>().Imortal(1));          
-                    if (dodgeDir == Vector3.zero)
+                    if (dodgeDir == Vector2.zero)
                     {
                         dodgeDir = (transform.position - mousePos).normalized;
                     }

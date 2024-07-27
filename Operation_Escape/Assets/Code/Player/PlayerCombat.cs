@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private List<BaseGun> GunList;
+    [SerializeField] private List<BaseGun> GunList = new List<BaseGun>();
     private int currentGun;
     private int comboStep = 0;
     private float comboTimer;
@@ -24,14 +24,23 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         currentGun = 0;
-        maxAmmo = GunList[currentGun].maxAmmo;
-        ammo = maxAmmo;
+        Debug.Log(GunList);
+        if (GunList.Count > 0)
+        {
+            maxAmmo = GunList[currentGun].maxAmmo;
+            ammo = maxAmmo;
+        }
         energy = GetComponent<IEnergy>();
+        Debug.Log(energy);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GunList.Count <= 0)
+        {
+            return;
+        }
         if (!firing)
         {
             timer += Time.deltaTime;

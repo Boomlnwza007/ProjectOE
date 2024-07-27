@@ -15,6 +15,7 @@ public class BulletScriipt : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
         Vector3 dir = mousePos - transform.position;
         Vector3 rotation = transform.position - mousePos;
         rb.velocity = new Vector2(dir.x, dir.y).normalized * force;
