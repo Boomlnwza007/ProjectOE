@@ -21,9 +21,11 @@ public class PlayerControl : MonoBehaviour ,IDamageable
     private int currentGun;
     private int ammo;
     private int maxAmmo;
-    public int Health = 10;
     public Transform bulletTranform;
+    public int Health = 10;
     public float speed = 10f;
+    public int energy;
+    public int maxEnergy = 10;
     public float dodgeMaxSpeed=100f;
     public float coolDownDodge = 1f;
     public float timeBetweenFiring;
@@ -33,6 +35,7 @@ public class PlayerControl : MonoBehaviour ,IDamageable
     private bool canFire = true;
     private bool firing = true;
     private bool canMelee = true;
+    private bool canReload = true;
     [SerializeField] public GameObject bullet;
     [SerializeField] private Rigidbody2D rb;
 
@@ -46,6 +49,7 @@ public class PlayerControl : MonoBehaviour ,IDamageable
         currentGun = 0;
         maxAmmo = GunList[currentGun].maxAmmo;
         ammo = maxAmmo;
+        energy = maxEnergy;
     }
     void Start()
     {
@@ -83,12 +87,21 @@ public class PlayerControl : MonoBehaviour ,IDamageable
                         GunList[currentGun].Fire();
                         //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
                     }
-                }
-                
+                }              
 
                 if (Input.GetButtonDown("Fire2") && canMelee)
                 {
                     ComboAttack();
+                }
+
+                if (energy > 0)
+                {
+                    if (Input.GetButtonDown("Reload") && canReload)
+                    {
+                        energy--;
+                        canReload = false;
+                        StartCoroutine(Reload(GunList[currentGun].timeReload));
+                    }
                 }
 
                 if (Input.GetButtonDown("Jump") && canDodge) 
@@ -189,16 +202,16 @@ public class PlayerControl : MonoBehaviour ,IDamageable
             transform.localScale = localScale;
         }
     }
+    private IEnumerator Reload(float timeReload)
+    {
+        yield return new WaitForSeconds(timeReload);
+        ammo = maxAmmo;
+    } 
 
     private IEnumerator DodgeCooldown()
     {
         yield return new WaitForSeconds(coolDownDodge);
         canDodge = true;
-    }
-
-    IEnumerator Imortal(float wait) 
-    {
-        yield return new WaitForSeconds(wait);
     }
 
     public void Addgun(BaseGun gun)
@@ -220,5 +233,22 @@ public class PlayerControl : MonoBehaviour ,IDamageable
 
     }
 
+    public void AddEnergy(int _energy)
+    {
+        _energy += energy;
+        if (_energy > maxEnergy)
+        {
+            energy = maxEnergy;
+        }
+        else
+        {
+            energy = _energy;
 
+        }
+    }
+
+    public IEnumerator Imortal(float wait)
+    {
+        throw new System.NotImplementedException();
+    }
 }

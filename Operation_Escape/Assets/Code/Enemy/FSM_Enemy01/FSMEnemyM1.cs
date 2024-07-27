@@ -88,4 +88,9 @@ public class FSMEnemyM1 : StateMachine , IDamageable
     {
         Destroy(gameObject);
     }
+
+    public IEnumerator Imortal(float wait)
+    {
+        return null;
+    }
 }
