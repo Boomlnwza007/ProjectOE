@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour ,IDamageable
 {
     private enum State { Normal,Dodge,}
     private State state;
@@ -14,14 +14,17 @@ public class PlayerControl : MonoBehaviour
     private Vector3 mousePos;
     private Camera mainCam;
     private bool canDodge = true;
+    public int Health = 10;
     public Transform bulletTranform;
-    public float speed = 8f;
+    public float speed = 10f;
     public float dodgeMaxSpeed=100f;
     public float coolDownDodge = 1f;
     public float timeBetweenFiring;
     public bool canfire;
     [SerializeField] public GameObject bullet;
     [SerializeField] private Rigidbody2D rb;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -113,5 +116,24 @@ public class PlayerControl : MonoBehaviour
     {
         yield return new WaitForSeconds(coolDownDodge);
         canDodge = true;
+    }
+
+    IEnumerator Imortal(float wait) 
+    {
+        yield return new WaitForSeconds(wait);
+    }
+
+    public void Takedamage(int damage, DamageType type)
+    {
+        Health -= damage;
+        if (Health<=0)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+
     }
 }

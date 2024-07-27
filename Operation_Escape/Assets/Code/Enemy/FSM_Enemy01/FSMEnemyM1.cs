@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSMEnemyM1 : StateMachine
+public class FSMEnemyM1 : StateMachine , IDamageable
 {
     public int Health;
     public int dmg;
     public float Speed;
     public float visRang;
     public IAstarAI ai;
-
+    [SerializeField]LootTable lootDrop;
     public Transform target;
     public Rigidbody2D rb;
     [SerializeField]public Collider2D co;
@@ -66,4 +66,26 @@ public class FSMEnemyM1 : StateMachine
         Gizmos.DrawWireSphere(transform.position, 10);
     }
 
+    public void Takedamage(int damage, DamageType type)
+    {
+        Health -= damage;
+        if (Health<=0)
+        {
+            switch (type)
+            {
+                case DamageType.Rang:
+                    lootDrop.InstantiateLoot(3);
+                    break;
+                case DamageType.Melee:
+                    lootDrop.InstantiateLoot(1);
+                    break;
+            }
+            Die();
+        }        
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
