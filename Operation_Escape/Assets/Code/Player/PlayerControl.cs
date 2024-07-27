@@ -18,7 +18,9 @@ public class PlayerControl : MonoBehaviour ,IDamageable
     private bool canDodge = true;
     private int comboStep = 0;
     private float comboTimer;
-    //private int currentGun;
+    private int currentGun;
+    private int ammo;
+    private int maxAmmo;
     public int Health = 10;
     public Transform bulletTranform;
     public float speed = 10f;
@@ -41,7 +43,9 @@ public class PlayerControl : MonoBehaviour ,IDamageable
     private void Awake()
     {
         state = State.Normal;
-        //currentGun = 0;
+        currentGun = 0;
+        maxAmmo = GunList[currentGun].maxAmmo;
+        ammo = maxAmmo;
     }
     void Start()
     {
@@ -61,20 +65,26 @@ public class PlayerControl : MonoBehaviour ,IDamageable
                 if (!firing)
                 {
                     timer += Time.deltaTime;
-                    if (timer > timeBetweenFiring)
+                    if (timer > GunList[currentGun].fireRate)
                     {
                         firing = true;
                         timer = 0;
                     }
                 }
 
-                if (Input.GetButton("Fire1") && canFire && firing)
+                if (ammo > 0)
                 {
-                    firing = false;
-                    comboStep = 0;
-                    comboTimer = 0;
-                    Instantiate(bullet, bulletTranform.position, Quaternion.identity);
+                    if (Input.GetButton("Fire1") && canFire && firing)
+                    {
+                        ammo--;
+                        firing = false;
+                        comboStep = 0;
+                        comboTimer = 0;
+                        GunList[currentGun].Fire();
+                        //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
+                    }
                 }
+                
 
                 if (Input.GetButtonDown("Fire2") && canMelee)
                 {
@@ -92,7 +102,7 @@ public class PlayerControl : MonoBehaviour ,IDamageable
                     canDodge = false;
                     state = State.Dodge;
                 }
-                Flip();
+                //Flip();
                 break;
             case State.Dodge:
                 float dodgeSpeedDropMultiplier = 5f;
