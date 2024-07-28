@@ -51,12 +51,12 @@ TagManager:
   - name: Player
     uniqueID: 767578383
     locked: 0
+  - name: Enemy
+    uniqueID: 1314857649
+    locked: 0
   - name: Text
     uniqueID: 1611219573
     locked: 0
   - name: UI
     uniqueID: 1392951327
-    locked: 0
-  - name: Enemy
-    uniqueID: 1314857649
     locked: 0
