@@ -486,11 +486,11 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Dash
+    m_Name: Wheel
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left shift
+    positiveButton: tab
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -505,8 +505,8 @@ InputManager:
     m_Name: Reload
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: r
-    positiveButton: 
+    negativeButton: 
+    positiveButton: r
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
