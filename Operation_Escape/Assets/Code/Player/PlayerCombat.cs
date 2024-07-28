@@ -17,6 +17,7 @@ public class PlayerCombat : MonoBehaviour
     private bool firing = true;
     private bool canMelee = true;
     private bool canReload = true;
+    private bool canSwap = true;
     private float timer;
     private IEnergy energy;
     private GameObject currentEquipGun;
@@ -44,7 +45,10 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        HandleWeaponSwitch();
+        if (canSwap)
+        {
+            HandleWeaponSwitch();
+        }
 
         if (!firing)
         {
@@ -52,21 +56,28 @@ public class PlayerCombat : MonoBehaviour
             if (timer > gunList[currentGun].fireRate)
             {
                 firing = true;
+                canSwap = true;
                 timer = 0;
             }
         }
 
-        if (ammo > 0)
+        if (Input.GetButton("Fire1") && canFire && firing)
         {
-            if (Input.GetButton("Fire1") && canFire && firing)
+            if (ammo > 0)
             {
                 ammo--;
                 firing = false;
+                canSwap = false;
                 comboStep = 0;
                 comboTimer = 0;
+                gunList[currentGun].ammo = ammo;
                 gunList[currentGun].Fire();
                 //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
             }
+        }        
+        else
+        {
+            Reload();
         }
 
         if (Input.GetButtonDown("Fire2") && canMelee)
@@ -74,14 +85,9 @@ public class PlayerCombat : MonoBehaviour
             ComboAttack();
         }
 
-        if (energy.energy > 0)
+        if (Input.GetButtonDown("Reload") && canReload)
         {
-            if (Input.GetButtonDown("Reload") && canReload)
-            {
-                energy.UseEnergy(gunList[currentGun].energyUse);
-                canReload = false;
-                StartCoroutine(Reload(gunList[currentGun].timeReload));
-            }
+            Reload();
         }
 
         if (comboStep > 0)
@@ -106,7 +112,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("Combo Attack Step: " + comboStep);
 
             //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
-            StartCoroutine(ComboDelay());
+            StartCoroutine(ComboDelay(1f));
         }
         else
         {
@@ -115,9 +121,19 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    private IEnumerator ComboDelay()
+    public void Reload()
     {
-        yield return new WaitForSeconds(1f);
+        if (energy.energy > 0)
+        {
+            energy.UseEnergy(gunList[currentGun].energyUse);
+            canReload = false;
+            StartCoroutine(Reload(gunList[currentGun].timeReload));
+        }
+    }
+
+    private IEnumerator ComboDelay(float wait)
+    {
+        yield return new WaitForSeconds(wait);
         canMelee = true;
         canFire = true;
     }
@@ -153,18 +169,19 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+        int index;
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
             if (scroll > 0)
             {
-                currentGun = (currentGun + 1) % gunList.Count;
+                index = (currentGun + 1) % gunList.Count;
             }
             else
             {
-                currentGun = (currentGun - 1 + gunList.Count) % gunList.Count;
+                index = (currentGun - 1 + gunList.Count) % gunList.Count;
             }
-            SwapGun(currentGun);
+            SwapGun(index);
         }
     }
 
@@ -174,11 +191,11 @@ public class PlayerCombat : MonoBehaviour
         currentGun = index;
         gunList[currentGun].bulletTranform = AimPoint;
         maxAmmo = gunList[currentGun].maxAmmo;
-        ammo = maxAmmo;
-        canFire = true;
-        firing = true;
-        canMelee = true;
-        canReload = true;
+        ammo = gunList[currentGun].ammo;
+        //canFire = true;
+        //firing = false;
+        //canMelee = false;
+        //canReload = false;
         EquipGun(index);
     }
 

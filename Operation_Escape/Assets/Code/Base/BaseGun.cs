@@ -11,9 +11,11 @@ public abstract class BaseGun : ScriptableObject
     public int damage;
     public float fireRate;
     public float timeReload;
+    public int ammo;
     public int maxAmmo;
     public int energyUse;
 
-    public abstract void Fire();
+    public abstract void Fire();  
+
 
 }

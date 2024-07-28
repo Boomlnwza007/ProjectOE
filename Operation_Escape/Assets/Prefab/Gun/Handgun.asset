@@ -19,5 +19,6 @@ MonoBehaviour:
   damage: 7
   fireRate: 2
   timeReload: 2
+  ammo: 6
   maxAmmo: 7
   energyUse: 1
