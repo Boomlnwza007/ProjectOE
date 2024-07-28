@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class BulletScriipt : MonoBehaviour
 {
-    private Vector3 mousePos;
-    private Camera mainCam;
     private Rigidbody2D rb;
+    public int damage;
     public float force;
+    public string tagUse;
 
     // Start is called before the first frame update
     void Start()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        rb = GetComponent<Rigidbody2D>();
-        mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f;
-        Vector3 dir = mousePos - transform.position;
-        Vector3 rotation = transform.position - mousePos;
-        rb.velocity = new Vector2(dir.x, dir.y).normalized * force;
-        float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, rot + 90);
-
+        rb.velocity = transform.right * force;
     }
 
     private void OnBecameInvisible()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == "tagUse")
+        {
+            IDamageable target = collision.GetComponent<IDamageable>();
+            if (target != null)
+            {
+                target.Takedamage(damage, DamageType.Rang);
+            }
+
+            Destroy(gameObject);
+        }        
     }
 }
