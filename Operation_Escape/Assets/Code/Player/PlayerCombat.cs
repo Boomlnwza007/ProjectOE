@@ -41,6 +41,9 @@ public class PlayerCombat : MonoBehaviour
         {
             return;
         }
+
+        HandleWeaponSwitch();
+
         if (!firing)
         {
             timer += Time.deltaTime;
@@ -100,9 +103,7 @@ public class PlayerCombat : MonoBehaviour
             canFire = false;
             Debug.Log("Combo Attack Step: " + comboStep);
 
-
             //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
-
             StartCoroutine(ComboDelay());
         }
         else
@@ -136,4 +137,56 @@ public class PlayerCombat : MonoBehaviour
     {
         GunList.Add(gun);
     }
+
+    private void HandleWeaponSwitch()
+    {
+        for (int i = 0; i < GunList.Count; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i) || Input.GetKeyDown(KeyCode.Keypad1 + i))
+            {
+                SwapGun(i);
+                return;
+            }
+        }
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+        {
+            if (scroll > 0)
+            {
+                currentGun = (currentGun + 1) % GunList.Count;
+            }
+            else
+            {
+                currentGun = (currentGun - 1 + GunList.Count) % GunList.Count;
+            }
+            SwapGun(currentGun);
+        }
+    }
+
+
+    public void SwapGun(int index)
+    {
+        currentGun = index;
+        maxAmmo = GunList[currentGun].maxAmmo;
+        ammo = maxAmmo;
+        canFire = true;
+        firing = true;
+        canMelee = true;
+        canReload = true;
+    }
+
+    KeyCode[] keypadCodes = new KeyCode[]
+    {
+        KeyCode.Alpha0
+        ,KeyCode.Alpha1
+        ,KeyCode.Alpha2
+        ,KeyCode.Alpha3
+        ,KeyCode.Alpha4
+        ,KeyCode.Alpha5
+        ,KeyCode.Alpha6
+        ,KeyCode.Alpha7
+        ,KeyCode.Alpha8
+        ,KeyCode.Alpha9,
+   };
 }
