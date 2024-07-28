@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private List<BaseGun> GunList;
     private enum State { Normal, Dodge, }
     private Camera mainCam;
     private State state;

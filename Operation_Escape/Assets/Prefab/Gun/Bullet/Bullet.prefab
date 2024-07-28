@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b171a609b8a322469c635132ca8bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 2
   force: 20
+  tagUse: Enemy
 --- !u!50 &-8713237800413251932
 Rigidbody2D:
   serializedVersion: 4

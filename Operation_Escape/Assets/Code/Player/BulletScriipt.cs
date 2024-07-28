@@ -12,6 +12,7 @@ public class BulletScriipt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * force;
     }
 
@@ -22,7 +23,7 @@ public class BulletScriipt : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "tagUse")
+        if (collision.tag == tagUse)
         {
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)

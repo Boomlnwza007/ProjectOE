@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private List<BaseGun> GunList = new List<BaseGun>();
+    [SerializeField] private List<BaseGun> gunList = new List<BaseGun>();
     private int currentGun;
     private int comboStep = 0;
     private float comboTimer;
@@ -19,25 +19,27 @@ public class PlayerCombat : MonoBehaviour
     private bool canReload = true;
     private float timer;
     private IEnergy energy;
+    private GameObject currentEquipGun;
+    [SerializeField]private GameObject WeaponGun;
+    private Transform AimPoint;
 
     // Start is called before the first frame update
     void Start()
     {
+        AimPoint = GameObject.FindGameObjectWithTag("Aim").GetComponent<Transform>();
         currentGun = 0;
-        Debug.Log(GunList);
-        if (GunList.Count > 0)
+        if (gunList.Count > 0)
         {
-            maxAmmo = GunList[currentGun].maxAmmo;
+            maxAmmo = gunList[currentGun].maxAmmo;
             ammo = maxAmmo;
         }
         energy = GetComponent<IEnergy>();
-        Debug.Log(energy);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GunList.Count <= 0)
+        if (gunList.Count <= 0)
         {
             return;
         }
@@ -47,7 +49,7 @@ public class PlayerCombat : MonoBehaviour
         if (!firing)
         {
             timer += Time.deltaTime;
-            if (timer > GunList[currentGun].fireRate)
+            if (timer > gunList[currentGun].fireRate)
             {
                 firing = true;
                 timer = 0;
@@ -62,7 +64,7 @@ public class PlayerCombat : MonoBehaviour
                 firing = false;
                 comboStep = 0;
                 comboTimer = 0;
-                GunList[currentGun].Fire();
+                gunList[currentGun].Fire();
                 //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
             }
         }
@@ -76,9 +78,9 @@ public class PlayerCombat : MonoBehaviour
         {
             if (Input.GetButtonDown("Reload") && canReload)
             {
-                energy.UseEnergy(GunList[currentGun].energyUse);
+                energy.UseEnergy(gunList[currentGun].energyUse);
                 canReload = false;
-                StartCoroutine(Reload(GunList[currentGun].timeReload));
+                StartCoroutine(Reload(gunList[currentGun].timeReload));
             }
         }
 
@@ -135,12 +137,14 @@ public class PlayerCombat : MonoBehaviour
     }
     public void Addgun(BaseGun gun)
     {
-        GunList.Add(gun);
+        currentGun = gunList.Count;
+        gunList.Add(gun);
+        SwapGun(currentGun);
     }
 
     private void HandleWeaponSwitch()
     {
-        for (int i = 0; i < GunList.Count; i++)
+        for (int i = 0; i < gunList.Count; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i) || Input.GetKeyDown(KeyCode.Keypad1 + i))
             {
@@ -154,11 +158,11 @@ public class PlayerCombat : MonoBehaviour
         {
             if (scroll > 0)
             {
-                currentGun = (currentGun + 1) % GunList.Count;
+                currentGun = (currentGun + 1) % gunList.Count;
             }
             else
             {
-                currentGun = (currentGun - 1 + GunList.Count) % GunList.Count;
+                currentGun = (currentGun - 1 + gunList.Count) % gunList.Count;
             }
             SwapGun(currentGun);
         }
@@ -168,25 +172,23 @@ public class PlayerCombat : MonoBehaviour
     public void SwapGun(int index)
     {
         currentGun = index;
-        maxAmmo = GunList[currentGun].maxAmmo;
+        gunList[currentGun].bulletTranform = AimPoint;
+        maxAmmo = gunList[currentGun].maxAmmo;
         ammo = maxAmmo;
         canFire = true;
         firing = true;
         canMelee = true;
         canReload = true;
+        EquipGun(index);
     }
 
-    KeyCode[] keypadCodes = new KeyCode[]
+    private void EquipGun(int index)
     {
-        KeyCode.Alpha0
-        ,KeyCode.Alpha1
-        ,KeyCode.Alpha2
-        ,KeyCode.Alpha3
-        ,KeyCode.Alpha4
-        ,KeyCode.Alpha5
-        ,KeyCode.Alpha6
-        ,KeyCode.Alpha7
-        ,KeyCode.Alpha8
-        ,KeyCode.Alpha9,
-   };
+        if (currentEquipGun != null)
+        {
+            Destroy(currentEquipGun);
+        }
+
+        currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
+    }
 }
