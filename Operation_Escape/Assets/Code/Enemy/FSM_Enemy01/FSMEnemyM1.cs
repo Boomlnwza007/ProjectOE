@@ -74,7 +74,7 @@ public class FSMEnemyM1 : StateMachine , IDamageable
             switch (type)
             {
                 case DamageType.Rang:
-                    lootDrop.InstantiateLoot(3);
+                    //lootDrop.InstantiateLoot(3);
                     break;
                 case DamageType.Melee:
                     lootDrop.InstantiateLoot(1);

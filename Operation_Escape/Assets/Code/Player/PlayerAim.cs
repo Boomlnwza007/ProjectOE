@@ -17,7 +17,7 @@ public class PlayerAim : MonoBehaviour
     {
         mainCam = Camera.main;
         Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-
+        mousePos.z = 0;
         Vector3 aimDir = (mousePos - aimTransform.position).normalized;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         aimTransform.eulerAngles = new Vector3(0, 0, angle);

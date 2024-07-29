@@ -7,8 +7,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
     private int currentGun = -1;
     private int comboStep = 0;
+    public Vector2 sizeHitbox;
     public int ammo;
     private int maxAmmo;
+    public int damage = 1;
     private float comboTimer;
     public float comboMaxTime = 1.5f;
     public float comboCooldown = 1f;
@@ -22,12 +24,12 @@ public class PlayerCombat : MonoBehaviour
     private IEnergy energy;
     private GameObject currentEquipGun;
     [SerializeField]private GameObject WeaponGun;
-    private Transform AimPoint;
+    [SerializeField]private Transform aimPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        AimPoint = GameObject.FindGameObjectWithTag("Aim").GetComponent<Transform>();
+        aimPoint = GameObject.FindGameObjectWithTag("Aim").GetComponent<Transform>();
         currentGun = 0;
         if (gunList.Count > 0)
         {
@@ -40,6 +42,11 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Fire2") && canMelee)
+        {
+            ComboAttack();
+        }
+
         if (gunList.Count <= 0)
         {
             return;
@@ -78,12 +85,7 @@ public class PlayerCombat : MonoBehaviour
         else
         {
             Reload();
-        }
-
-        if (Input.GetButtonDown("Fire2") && canMelee)
-        {
-            ComboAttack();
-        }
+        }        
 
         if (Input.GetButtonDown("Reload") && canReload)
         {
@@ -109,9 +111,38 @@ public class PlayerCombat : MonoBehaviour
             comboTimer = 0;
             canMelee = false;
             canFire = false;
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Vector3 aimDir = (mousePos - aimPoint.position).normalized;
+            float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+            RaycastHit2D[] hitEnemies = null;
             Debug.Log("Combo Attack Step: " + comboStep);
+            switch (comboStep)
+            {
+                case (1) :
+                    sizeHitbox = new Vector2(3, 2);
+                    hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
+                    break;
+                case (2):
+                    sizeHitbox = new Vector2(2, 3);
+                    hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
+                    break;
+                case (3):
+                    sizeHitbox = new Vector2(5, 1);
+                    hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
+                    break;
+            }
 
-            //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
+            foreach (RaycastHit2D hit in hitEnemies)
+            {
+                if (hit.collider.gameObject != gameObject)
+                {
+                    if (hit.collider.GetComponent<IDamageable>() != null)
+                    {
+                        hit.collider.GetComponent<IDamageable>().Takedamage(damage*comboStep, DamageType.Melee);
+                    }
+                }
+            }
             StartCoroutine(ComboDelay(1f));
         }
         else
@@ -155,7 +186,7 @@ public class PlayerCombat : MonoBehaviour
     {
         currentGun = gunList.Count;
         gunList.Add(gun);
-        gunList[currentGun].bulletTranform = AimPoint;
+        gunList[currentGun].bulletTranform = aimPoint;
         maxAmmo = gunList[currentGun].maxAmmo;
         ammo = gunList[currentGun].ammo;
         EquipGun(currentGun);
@@ -198,7 +229,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         currentGun = index;
-        gunList[currentGun].bulletTranform = AimPoint;
+        gunList[currentGun].bulletTranform = aimPoint;
         maxAmmo = gunList[currentGun].maxAmmo;
         ammo = gunList[currentGun].ammo;
         //canFire = true;
@@ -216,5 +247,25 @@ public class PlayerCombat : MonoBehaviour
         }
 
         currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (aimPoint == null)
+            return;
+
+        // แสดงขนาดของ Hitbox ด้วย Gizmo
+        Gizmos.color = Color.red;
+        Vector3 center = aimPoint.position;
+        Gizmos.DrawWireCube(center, sizeHitbox);
+
+        // วาดเส้นเพื่อแสดงทิศทางของ BoxCast
+        Gizmos.color = Color.blue;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        Vector3 aimDir = (mousePos - aimPoint.position).normalized;
+        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        Vector3 direction = Quaternion.Euler(0, 0, angle) * Vector3.right;
+        Gizmos.DrawLine(center, center + direction * sizeHitbox.x / 2);
     }
 }
