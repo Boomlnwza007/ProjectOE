@@ -15,11 +15,12 @@ MonoBehaviour:
   Name: ShotGun
   gunPrefab: {fileID: 4317823783252990171, guid: a718a593a0a8e224cbc8c188cbf94b88, type: 3}
   bulletPrefab: {fileID: 7771206494892856151, guid: ca783c0bfa468ad47a23d731281bdbe1, type: 3}
+  iconGun: {fileID: 5659692917953052963, guid: 2eea795f268bddf42af49b9d055bae9e, type: 3}
   bulletTranform: {fileID: 0}
   damage: 5
   fireRate: 4
   timeReload: 4
-  ammo: 0
+  ammo: 5
   maxAmmo: 5
   energyUse: 3
   spreadAngle: 7

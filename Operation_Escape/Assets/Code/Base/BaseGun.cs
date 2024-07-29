@@ -4,9 +4,10 @@ using UnityEngine;
 
 public abstract class BaseGun : ScriptableObject
 {
-    public string Name;
+    public string Name;    
     public GameObject gunPrefab;
     public GameObject bulletPrefab;
+    public GameObject iconGun;
     public Transform bulletTranform;
     public int damage;
     public float fireRate;

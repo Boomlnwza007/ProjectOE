@@ -15,7 +15,7 @@ public class PlayerAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        mainCam = Camera.main;
         Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 
         Vector3 aimDir = (mousePos - aimTransform.position).normalized;

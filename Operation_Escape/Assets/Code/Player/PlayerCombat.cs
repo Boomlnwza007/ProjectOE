@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] private List<BaseGun> gunList = new List<BaseGun>();
-    private int currentGun;
+    [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
+    private int currentGun = -1;
     private int comboStep = 0;
-    private float comboTimer;
-    private int ammo;
+    public int ammo;
     private int maxAmmo;
+    private float comboTimer;
     public float comboMaxTime = 1.5f;
     public float comboCooldown = 1f;
     public int maxComboSteps = 3;
@@ -155,7 +155,10 @@ public class PlayerCombat : MonoBehaviour
     {
         currentGun = gunList.Count;
         gunList.Add(gun);
-        SwapGun(currentGun);
+        gunList[currentGun].bulletTranform = AimPoint;
+        maxAmmo = gunList[currentGun].maxAmmo;
+        ammo = gunList[currentGun].ammo;
+        EquipGun(currentGun);
     }
 
     private void HandleWeaponSwitch()
@@ -188,6 +191,12 @@ public class PlayerCombat : MonoBehaviour
 
     public void SwapGun(int index)
     {
+        Debug.Log(index + 1 +" > "+ currentGun+" && "+ index +" == " +currentGun);
+        if (index+1 > gunList.Count || index == currentGun)
+        {            
+            return;
+        }
+
         currentGun = index;
         gunList[currentGun].bulletTranform = AimPoint;
         maxAmmo = gunList[currentGun].maxAmmo;
