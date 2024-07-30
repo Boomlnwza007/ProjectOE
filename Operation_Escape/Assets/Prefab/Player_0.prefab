@@ -579,7 +579,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.22467959, g: 0.68029946, b: 0.9339623, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f22a62696bb9ba4d818215fb84d67c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammo: 0
   health: 0
   maxHealth: 10
 --- !u!114 &8600667175816881253
@@ -693,7 +694,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunList: []
+  sizeHitbox: {x: 2, y: 3}
+  ammo: 0
+  damage: 2
   comboMaxTime: 1.5
   comboCooldown: 1
   maxComboSteps: 3
   WeaponGun: {fileID: 3767920626603049848}
+  aimPoint: {fileID: 0}

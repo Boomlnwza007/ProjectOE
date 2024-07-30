@@ -1,17 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AvoidBehavior : MonoBehaviour
+public class AvoidBehavior : MonoBehaviour ,IAiAvoid
 {
-    public Transform target; 
-    public float speed = 5f; 
-    public float avoidRadius = 1f; 
+    public float avoidRadius = 1f;
     public float rayLength = 1f;
-    public float slowDownRadius = 5f;
-    public float stopRadius = 2f;
     public LayerMask obstacleLayer;
     public LayerMask agentLayer;
     public float smoothTime = 0.3f;
+    public float speed = 5f;
+    public Transform target { get; set; }
+    public float Maxspeed { get { return speed; } set { speed = value; } }
+    public bool canMove { get; set; }
+    public bool endMove { get;private set; }
+    public Vector3 position { get { return gameObject.transform.position; } }
+    public float slowDownRadius = 5f;
+    public float stopRadius = 2f;
 
     [SerializeField]private Rigidbody2D rb;
     private Vector2 steering;
@@ -31,6 +35,33 @@ public class AvoidBehavior : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+        if (canMove)
+        {
+            Move();
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, avoidRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)rb.velocity.normalized * rayLength);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(Quaternion.Euler(0, 0, 45) * rb.velocity.normalized * rayLength));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(Quaternion.Euler(0, 0, -45) * rb.velocity.normalized * rayLength));
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, slowDownRadius);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, stopRadius);
+    }
+
+    public void Move()
     {
         Vector2 avoidForce = Vector2.zero;
 
@@ -60,10 +91,15 @@ public class AvoidBehavior : MonoBehaviour
         if (distanceToTarget < stopRadius)
         {
             curSpeed = 0f;
+            endMove = true;
         }
         else if (distanceToTarget < slowDownRadius)// หยุดเมื่อถึงเป้าหมาย
         {
             curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
+        }
+        else
+        {
+            endMove = true;
         }
 
         Vector2 desiredVelocity = targetDirection.normalized;
@@ -86,25 +122,5 @@ public class AvoidBehavior : MonoBehaviour
             Vector2 newDirection = (hitLeft.collider != null) ? Quaternion.Euler(0, 0, -45) * rb.velocity.normalized : Quaternion.Euler(0, 0, 45) * rb.velocity.normalized;
             rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
         }
-
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, avoidRadius);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)rb.velocity.normalized * rayLength);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(Quaternion.Euler(0, 0, 45) * rb.velocity.normalized * rayLength));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(Quaternion.Euler(0, 0, -45) * rb.velocity.normalized * rayLength));
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, slowDownRadius);
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, stopRadius);
     }
 }

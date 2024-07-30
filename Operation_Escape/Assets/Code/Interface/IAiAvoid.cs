@@ -4,9 +4,10 @@ using UnityEngine;
 
 public interface IAiAvoid
 {
-    Transform target { get; set; }
-    float speed { get; set; }
-    bool canMove { get; set; }
-    bool endMove { get; set; }
+    public Transform target { get; set; }
+    public float Maxspeed { get; set; }
+    public bool canMove { get; set; }
+    public bool endMove { get;}
+    Vector3 position { get; }
 
 }
