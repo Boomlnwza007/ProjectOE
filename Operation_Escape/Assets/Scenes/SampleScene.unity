@@ -1386,12 +1386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b110071dd80bd2a4a8b15793338d0772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 5
   avoidRadius: 3
   rayLength: 2
-  slowDownRadius: 5
-  stopRadius: 1.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1399,6 +1395,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
+  speed: 5
+  slowDownRadius: 5
+  stopRadius: 2
   rb: {fileID: 414341599}
 --- !u!212 &414341601
 SpriteRenderer:
@@ -1540,11 +1539,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8212452493357251670, guid: 939046d526f9a9a4aa4f108c838c40b5, type: 3}
   m_PrefabInstance: {fileID: 431995448}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &482404602 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3776936949522445415, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-  m_PrefabInstance: {fileID: 3474390177833571052}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
@@ -2474,12 +2468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b110071dd80bd2a4a8b15793338d0772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 5
   avoidRadius: 3
   rayLength: 2
-  slowDownRadius: 5
-  stopRadius: 1.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2487,6 +2477,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
+  speed: 5
+  slowDownRadius: 5
+  stopRadius: 2
   rb: {fileID: 979808271}
 --- !u!212 &979808273
 SpriteRenderer:
@@ -3763,12 +3756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b110071dd80bd2a4a8b15793338d0772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 5
   avoidRadius: 3
   rayLength: 3
-  slowDownRadius: 5
-  stopRadius: 1.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -3776,6 +3765,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
+  speed: 5
+  slowDownRadius: 5
+  stopRadius: 2
   rb: {fileID: 1472859412}
 --- !u!212 &1472859414
 SpriteRenderer:
@@ -4203,12 +4195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b110071dd80bd2a4a8b15793338d0772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 5
   avoidRadius: 3
   rayLength: 2
-  slowDownRadius: 5
-  stopRadius: 1.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -4216,6 +4204,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
+  speed: 5
+  slowDownRadius: 5
+  stopRadius: 2
   rb: {fileID: 1610353053}
 --- !u!212 &1610353055
 SpriteRenderer:
@@ -5067,18 +5058,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2200673144129377109, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-      propertyPath: AimPoint
-      value: 
-      objectReference: {fileID: 482404602}
-    - target: {fileID: 2200673144129377109, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-      propertyPath: sizeHitbox.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2200673144129377109, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-      propertyPath: sizeHitbox.y
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8152304519124941005, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_Name
       value: Player_0
