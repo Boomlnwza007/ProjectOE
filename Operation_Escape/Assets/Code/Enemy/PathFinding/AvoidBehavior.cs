@@ -9,11 +9,13 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     public LayerMask agentLayer;
     public float smoothTime = 0.3f;
     public float speed = 5f;
-    public Transform target { get; set; }
     public float Maxspeed { get { return speed; } set { speed = value; } }
     public bool canMove { get; set; }
     public bool endMove { get; private set; }
     public Vector3 position { get { return gameObject.transform.position; } }
+    public Vector3 destination { get; set; }
+    public Transform target { get; set; }
+
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
 
@@ -25,23 +27,20 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
         canMove = true;
     }
 
     void Update()
     {
-        
-
+       
         
     }
 
     private void FixedUpdate()
     {
-        if (canMove)
-        {
-            Move();
-        }
+        
+        Move();
+
     }
 
     void OnDrawGizmos()
@@ -86,10 +85,15 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
             }
         }
 
-        Vector2 targetDirection = (Vector2)target.position - (Vector2)transform.position;
+        Vector2 targetDirection = (Vector2)destination - (Vector2)transform.position;
         float distanceToTarget = targetDirection.magnitude;
 
         curSpeed = speed;
+        if (!canMove)
+        {
+            curSpeed = 0f;
+        }
+        endMove = false;
         if (distanceToTarget < stopRadius)
         {
             curSpeed = 0f;
@@ -99,10 +103,8 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
         {
             curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
         }
-        else
-        {
-            endMove = true;
-        }
+
+
 
         Vector2 desiredVelocity = targetDirection.normalized;
         steering = desiredVelocity + avoidForce;

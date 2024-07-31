@@ -9,12 +9,12 @@ public class LootItem : ScriptableObject
     public string lootName;
     public int id;
     [Tooltip("โอกาสในการดรอปไอเทมนี้ (ค่า 0.0 ถึง 1.0)")]
-    public int dropChance;
+    public float dropChance;
     public int minDrop;
     public int maxDrop;
     public GameObject droppedItemPrefab;
 
-    public LootItem(string lootName, int dropChance, int minDrop, int maxDrop, int id)
+    public LootItem(string lootName, float dropChance, int minDrop, int maxDrop, int id)
     {
         this.id = id;
         this.lootName = lootName;

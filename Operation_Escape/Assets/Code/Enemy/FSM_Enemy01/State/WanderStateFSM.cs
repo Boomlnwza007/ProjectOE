@@ -32,7 +32,7 @@ public class WanderStateFSM : BaseState
         }
 
         if (Vector2.Distance(ai.position, target.position) < 10)
-        {
+        {           
             stateMachine.ChangState(((FSMEnemyM1)stateMachine).CheckDistance);
         }
     }

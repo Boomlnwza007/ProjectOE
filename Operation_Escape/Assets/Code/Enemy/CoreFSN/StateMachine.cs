@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    BaseState curState;
+    public BaseState curState;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
