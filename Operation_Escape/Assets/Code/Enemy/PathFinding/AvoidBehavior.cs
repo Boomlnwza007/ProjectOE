@@ -25,6 +25,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        target = GameObject.FindGameObjectWithTag("player").transform;
     }
 
     void Update()

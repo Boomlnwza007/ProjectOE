@@ -76,13 +76,18 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                Reload();
+                if (canReload)
+                {
+                    Debug.Log("Reload");
+                    Reload();
+                }
             }
         }     
                 
 
         if (Input.GetButtonDown("Reload") && canReload)
         {
+            Debug.Log("Reload");
             Reload();
         }
 
@@ -101,6 +106,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (comboStep < maxComboSteps)
         {
+            Debug.Log("Melee");
             comboStep++;
             comboTimer = 0;
             canMelee = false;
@@ -134,6 +140,7 @@ public class PlayerCombat : MonoBehaviour
                     if (hit.collider.GetComponent<IDamageable>() != null)
                     {
                         hit.collider.GetComponent<IDamageable>().Takedamage(damage*comboStep, DamageType.Melee);
+                        Debug.Log(hit.collider.name);
                     }
                 }
             }
@@ -150,7 +157,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (energy.energy > 0)
         {
-            energy.UseEnergy(gunList[currentGun].energyUse);
             canReload = false;
             StartCoroutine(Reload(gunList[currentGun].timeReload));
         }
@@ -174,6 +180,8 @@ public class PlayerCombat : MonoBehaviour
     private IEnumerator Reload(float timeReload)
     {
         yield return new WaitForSeconds(timeReload);
+        energy.UseEnergy(gunList[currentGun].energyUse);
+        canReload = true;
         ammo = maxAmmo;
     }
     public void Addgun(BaseGun gun)
@@ -226,6 +234,7 @@ public class PlayerCombat : MonoBehaviour
         gunList[currentGun].bulletTranform = aimPoint;
         maxAmmo = gunList[currentGun].maxAmmo;
         ammo = gunList[currentGun].ammo;
+        StopCoroutine(Reload(gunList[currentGun].timeReload));
         //canFire = true;
         firing = false;
         //canMelee = false;
