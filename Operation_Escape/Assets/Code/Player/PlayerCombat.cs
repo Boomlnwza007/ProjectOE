@@ -227,7 +227,7 @@ public class PlayerCombat : MonoBehaviour
         maxAmmo = gunList[currentGun].maxAmmo;
         ammo = gunList[currentGun].ammo;
         //canFire = true;
-        //firing = false;
+        firing = false;
         //canMelee = false;
         //canReload = false;
         EquipGun(index);
