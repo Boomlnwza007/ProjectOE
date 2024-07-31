@@ -55,7 +55,7 @@ public class PlayerCombat : MonoBehaviour
         if (!firing)
         {
             gunList[currentGun].fireRate += Time.deltaTime;
-            if (gunList[currentGun].fireRate > gunList[currentGun].maxfireRate)
+            if (gunList[currentGun].fireRate > gunList[currentGun].maxFireRate)
             {
                 firing = true;
                 gunList[currentGun].fireRate = 0;

@@ -12,7 +12,7 @@ public abstract class BaseGun : MonoBehaviour
     public int damage;
     public float fireRate;
     public float timeReload;
-    public float maxfireRate;
+    public float maxFireRate;
     public int ammo;
     public int maxAmmo;
     public int energyUse;

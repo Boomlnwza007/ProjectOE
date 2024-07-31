@@ -53,11 +53,10 @@ MonoBehaviour:
   damage: 5
   fireRate: 0
   timeReload: 3
-  maxfireRate: 4
+  maxFireRate: 2
   ammo: 5
   maxAmmo: 5
   energyUse: 3
-  spreadAngle: 10
 --- !u!1 &4710138414760059746
 GameObject:
   m_ObjectHideFlags: 0
