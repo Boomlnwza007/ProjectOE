@@ -19,8 +19,6 @@ public class PlayerCombat : MonoBehaviour
     private bool firing = true;
     private bool canMelee = true;
     private bool canReload = true;
-    private bool canSwap = true;
-    private float timer;
     private IEnergy energy;
     private GameObject currentEquipGun;
     [SerializeField]private GameObject WeaponGun;
@@ -52,19 +50,15 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        if (canSwap)
-        {
-            HandleWeaponSwitch();
-        }
+        HandleWeaponSwitch();
 
         if (!firing)
         {
-            timer += Time.deltaTime;
-            if (timer > gunList[currentGun].fireRate)
+            gunList[currentGun].fireRate += Time.deltaTime;
+            if (gunList[currentGun].fireRate > gunList[currentGun].maxfireRate)
             {
                 firing = true;
-                canSwap = true;
-                timer = 0;
+                gunList[currentGun].fireRate = 0;
             }
         }
 
@@ -74,18 +68,18 @@ public class PlayerCombat : MonoBehaviour
             {
                 ammo--;
                 firing = false;
-                canSwap = false;
                 comboStep = 0;
                 comboTimer = 0;
                 gunList[currentGun].ammo = ammo;
                 gunList[currentGun].Fire();
                 //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
             }
-        }        
-        else
-        {
-            Reload();
-        }        
+            else
+            {
+                Reload();
+            }
+        }     
+                
 
         if (Input.GetButtonDown("Reload") && canReload)
         {

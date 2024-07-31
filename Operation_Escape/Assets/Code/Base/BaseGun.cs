@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseGun : ScriptableObject
+public abstract class BaseGun : MonoBehaviour
 {
     public string Name;    
     public GameObject gunPrefab;
@@ -12,6 +12,7 @@ public abstract class BaseGun : ScriptableObject
     public int damage;
     public float fireRate;
     public float timeReload;
+    public float maxfireRate;
     public int ammo;
     public int maxAmmo;
     public int energyUse;

@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewShotGun", menuName = "Gun/ShotGun")]
 public class ShotGun : BaseGun
 {
     int bulletCount = 5;
-    public float spreadAngle = 10f;
+    float spreadAngle = 10f;
     public override void Fire()
     {
         float startAngle = -spreadAngle * ((bulletCount - 1) / 2.0f); ;

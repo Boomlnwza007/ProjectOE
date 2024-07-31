@@ -3988,7 +3988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf6ddfc40189314c8272c3daadf95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 6a8f42e1e8bb3364a9ba7aa6386cc8c8, type: 2}
+  gun: {fileID: 4885397738666743173, guid: a718a593a0a8e224cbc8c188cbf94b88, type: 3}
 --- !u!212 &1582844245
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4745,7 +4745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf6ddfc40189314c8272c3daadf95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: 9d051ee26d4b926498ee6746cc40c05d, type: 2}
+  gun: {fileID: 6891942016923813591, guid: 091a971d2147bbd4e9cb86c1cf807116, type: 3}
 --- !u!212 &2034884756
 SpriteRenderer:
   m_ObjectHideFlags: 0
