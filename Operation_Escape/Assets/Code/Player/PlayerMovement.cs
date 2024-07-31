@@ -39,23 +39,21 @@ public class PlayerMovement : MonoBehaviour
                 vertical = Input.GetAxisRaw("Vertical");               
                 if (Input.GetButtonDown("Jump") && canDodge)
                 {
+                    canDodge = false;
                     dodgeDir = new Vector2(horizontal, vertical).normalized;
-                    StartCoroutine(gameObject.GetComponent<IDamageable>().Imortal(1));          
                     if (dodgeDir == Vector2.zero)
                     {
                         dodgeDir = (transform.position - mousePos).normalized;
                     }
-                    StartCoroutine(DodgeCooldown());
-                    dodgeSpeed = dodgeMaxSpeed;
-                    canDodge = false;
+                    dodgeSpeed = dodgeMaxSpeed;                    
                     state = State.Dodge;
+                    StartCoroutine(gameObject.GetComponent<IDamageable>().Imortal(1));
                 }
                 //Flip();
                 break;
             case State.Dodge:
                 float dodgeSpeedDropMultiplier = 5f;
                 dodgeSpeed -= dodgeSpeed * dodgeSpeedDropMultiplier * Time.deltaTime;
-
                 float dodgeMinimium = 50f;
                 if (dodgeSpeed < dodgeMinimium)
                 {
