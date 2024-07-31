@@ -12,7 +12,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     public Transform target { get; set; }
     public float Maxspeed { get { return speed; } set { speed = value; } }
     public bool canMove { get; set; }
-    public bool endMove { get;private set; }
+    public bool endMove { get; private set; }
     public Vector3 position { get { return gameObject.transform.position; } }
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
@@ -26,6 +26,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     {
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        canMove = true;
     }
 
     void Update()
