@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Shotgun
   gunPrefab: {fileID: 4317823783252990171}
-  bulletPrefab: {fileID: 7771206494892856151, guid: ca783c0bfa468ad47a23d731281bdbe1, type: 3}
+  bulletPrefab: {fileID: 3888396136867698908, guid: d6995b128ee471d49b45593065e627e7, type: 3}
   iconGun: {fileID: 5659692917953052963, guid: 2eea795f268bddf42af49b9d055bae9e, type: 3}
   bulletTranform: {fileID: 0}
   damage: 5

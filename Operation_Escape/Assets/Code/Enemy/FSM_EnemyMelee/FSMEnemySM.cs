@@ -23,6 +23,7 @@ public class FSMEnemySM : StateMachine, IDamageable
     public CheckDistanceEMFSM CheckDistance;
     [HideInInspector]
     public ChargeEMFSM Charge;
+    public string stateName;
 
     private void Awake()
     {
@@ -37,11 +38,13 @@ public class FSMEnemySM : StateMachine, IDamageable
         CheckDistance = new CheckDistanceEMFSM(this);
         Charge = new ChargeEMFSM(this);
     }
+
     private void Update()
     {
         if (curState != null)
         {
             curState.UpdateLogic();
+            stateName = curState.name;
         }
         if (cooldown)
         {
@@ -58,7 +61,7 @@ public class FSMEnemySM : StateMachine, IDamageable
         return wanderState;
     }
 
-    public void Takedamage(int damage, DamageType type)
+    public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
         if (Health <= 0)
@@ -74,6 +77,7 @@ public class FSMEnemySM : StateMachine, IDamageable
             }
             Die();
         }
+
     }
 
     public void Die()

@@ -28,6 +28,7 @@ public class ChargeEMFSM : BaseState
         if (((FSMEnemySM)stateMachine).cooldown)
         {
             Debug.Log("ติด CD");
+            ai.Maxspeed = speed;
             stateMachine.ChangState(((FSMEnemySM)stateMachine).CheckDistance);
             return;
         }
@@ -42,6 +43,7 @@ public class ChargeEMFSM : BaseState
             {
                 ai.canMove = true;
                 time = 0;
+                ai.Maxspeed = speed;
                 stateMachine.ChangState(((FSMEnemySM)stateMachine).CheckDistance);
             }
             return;

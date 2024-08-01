@@ -219,7 +219,7 @@ public class PlayerControl : MonoBehaviour ,IDamageable
         GunList.Add(gun);
     }
 
-    public void Takedamage(int damage, DamageType type)
+    public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
         if (Health<=0)

@@ -34,7 +34,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
         imortal = false;
     }
 
-    public void Takedamage(int damage, DamageType type)
+    public void Takedamage(int damage, DamageType type, float knockBack)
     {
         if (!imortal)
         {

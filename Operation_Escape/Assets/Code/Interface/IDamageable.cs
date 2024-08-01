@@ -8,7 +8,7 @@ public enum DamageType
 }
 public interface IDamageable
 {
-    public void Takedamage(int damage, DamageType type);
+    public void Takedamage(int damage, DamageType type ,float knockBack);
     public void Die();
     public IEnumerator Imortal(float wait);
 }

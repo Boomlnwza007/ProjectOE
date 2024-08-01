@@ -11,6 +11,7 @@ public class PlayerCombat : MonoBehaviour
     public int ammo;
     private int maxAmmo;
     public int damage = 1;
+    public float knockBack = 1;
     private float comboTimer;
     public float comboMaxTime = 1.5f;
     public float comboCooldown = 1f;
@@ -139,7 +140,7 @@ public class PlayerCombat : MonoBehaviour
                 {
                     if (hit.collider.GetComponent<IDamageable>() != null)
                     {
-                        hit.collider.GetComponent<IDamageable>().Takedamage(damage*comboStep, DamageType.Melee);
+                        hit.collider.GetComponent<IDamageable>().Takedamage(damage*comboStep, DamageType.Melee,knockBack);
                         Debug.Log(hit.collider.name);
                     }
                 }

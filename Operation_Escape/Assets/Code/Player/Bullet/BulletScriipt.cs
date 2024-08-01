@@ -7,6 +7,7 @@ public class BulletScriipt : MonoBehaviour
     private Rigidbody2D rb;
     public int damage;
     public float force;
+    public float knockBack;
     public string tagUse;
 
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class BulletScriipt : MonoBehaviour
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
             {
-                target.Takedamage(damage, DamageType.Rang);
+                target.Takedamage(damage, DamageType.Rang,knockBack);
             }
 
             Destroy(gameObject);

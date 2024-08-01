@@ -66,7 +66,7 @@ public class FSMEnemyM1 : StateMachine , IDamageable
         Gizmos.DrawWireSphere(transform.position, 10);
     }
 
-    public void Takedamage(int damage, DamageType type)
+    public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
         if (Health<=0)

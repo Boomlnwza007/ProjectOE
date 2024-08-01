@@ -89,11 +89,14 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
         float distanceToTarget = targetDirection.magnitude;
 
         curSpeed = speed;
+
         if (!canMove)
         {
             curSpeed = 0f;
         }
+
         endMove = false;
+
         if (distanceToTarget < stopRadius)
         {
             curSpeed = 0f;
