@@ -55,4 +55,7 @@ public class StateMachine : MonoBehaviour
         string content = curState.name;
         GUILayout.Label($"<color='red'><size=48>{content}</size></color>");
     }
+
+    public virtual void combatPhaseOn() { }
+    public virtual void setCombatPhase(AreaEnermy area) { }
 }

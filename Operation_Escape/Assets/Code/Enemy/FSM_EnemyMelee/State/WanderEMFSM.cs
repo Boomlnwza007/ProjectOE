@@ -30,6 +30,7 @@ public class WanderEMFSM : BaseState
 
         if (Vector2.Distance(ai.position, ai.target.position) < ((FSMEnemySM)stateMachine).visRange)
         {
+            ((FSMEnemySM)stateMachine).areaEnermy.combatPhase();
             stateMachine.ChangState(((FSMEnemySM)stateMachine).CheckDistance);
         }
     }

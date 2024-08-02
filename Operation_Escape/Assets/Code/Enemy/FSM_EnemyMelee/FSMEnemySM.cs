@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FSMEnemySM : StateMachine, IDamageable
 {
+    public AreaEnermy areaEnermy;
     public int Health;
     public int dmg;
     public float Speed;
@@ -11,7 +12,7 @@ public class FSMEnemySM : StateMachine, IDamageable
     public bool cooldown;
     public float time;
     public float timeCooldown = 6f;
-    public IAiAvoid ai;
+    public IAiAvoid ai;    
     [SerializeField] LootTable lootDrop;
     public Transform target;
     public Rigidbody2D rb;
@@ -88,5 +89,15 @@ public class FSMEnemySM : StateMachine, IDamageable
     public IEnumerator Imortal(float wait)
     {
         return null;
+    }
+
+    public override void combatPhaseOn()
+    {
+        ChangState(CheckDistance);
+    }
+
+    public override void setCombatPhase(AreaEnermy area)
+    {
+        areaEnermy = area;
     }
 }
