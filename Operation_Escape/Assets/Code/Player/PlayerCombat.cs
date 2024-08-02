@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
-    private int currentGun = -1;
-    private int comboStep = 0;
-    public Vector2 sizeHitbox;
-    public int ammo;
-    private int maxAmmo;
-    public int damage = 1;
-    public float knockBack = 1;
-    private float comboTimer;
-    public float comboMaxTime = 1.5f;
-    public float comboCooldown = 1f;
-    public int maxComboSteps = 3;
     private bool canFire = true;
     private bool firing = true;
     private bool canMelee = true;
     private bool canReload = true;
     private IEnergy energy;
     private GameObject currentEquipGun;
-    [SerializeField]private GameObject WeaponGun;
-    [SerializeField]private Transform aimPoint;
+    [SerializeField] private GameObject WeaponGun;
+    [SerializeField] private Transform aimPoint;
+    private int currentGun = -1;
+    private int comboStep = 0;
+    private int maxAmmo;
+    private float comboTimer;
+    [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
+    public Vector2 sizeHitbox;
+    public int ammo;    
+    public int damage = 1;
+    public float knockBack = 1;
+    public float comboMaxTime = 1.5f;
+    public float comboCooldown = 1f;
+    public int maxComboSteps = 3;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,7 @@ public class PlayerCombat : MonoBehaviour
                 comboStep = 0;
                 comboTimer = 0;
                 gunList[currentGun].ammo = ammo;
+                CinemachineControl.Instance.ShakeCamera(1f , 0.2f);
                 gunList[currentGun].Fire();
                 //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
             }

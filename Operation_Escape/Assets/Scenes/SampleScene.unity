@@ -1495,6 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaEnermy: {fileID: 0}
   Health: 50
   dmg: 40
   Speed: 15
@@ -2913,6 +2914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030792274}
   - component: {fileID: 1030792273}
+  - component: {fileID: 1030792275}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -2975,6 +2977,19 @@ Transform:
   - {fileID: 1697472757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1030792275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030792272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c830a56c456a34fa98bd5c2f7de39c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cinemachineBasicMultiChannelPerlin: {fileID: 0}
 --- !u!1 &1048871399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3009,6 +3024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaEnermy: {fileID: 0}
   Health: 50
   dmg: 40
   Speed: 15
@@ -3307,6 +3323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaEnermy: {fileID: 0}
   Health: 50
   dmg: 40
   Speed: 15
@@ -3689,6 +3706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaEnermy: {fileID: 0}
   Health: 50
   dmg: 40
   Speed: 15
@@ -5371,7 +5389,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1697472757}
   - component: {fileID: 1697472759}
-  - component: {fileID: 1697472758}
+  - component: {fileID: 1697472760}
+  - component: {fileID: 1697472761}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -5394,7 +5413,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1030792274}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1697472758
+--- !u!114 &1697472759
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697472756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1697472760
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697472756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 5
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &1697472761
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5437,18 +5485,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!114 &1697472759
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697472756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1844709061
 GameObject:
   m_ObjectHideFlags: 0

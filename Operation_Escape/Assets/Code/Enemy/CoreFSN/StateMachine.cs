@@ -50,11 +50,11 @@ public class StateMachine : MonoBehaviour
         return null;
     }
 
-    private void OnGUI()
-    {
-        string content = curState.name;
-        GUILayout.Label($"<color='red'><size=48>{content}</size></color>");
-    }
+    //private void OnGUI()
+    //{
+    //    string content = curState.name;
+    //    GUILayout.Label($"<color='red'><size=48>{content}</size></color>");
+    //}
 
     public virtual void combatPhaseOn() { }
     public virtual void setCombatPhase(AreaEnermy area) { }
