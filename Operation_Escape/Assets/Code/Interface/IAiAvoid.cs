@@ -9,6 +9,7 @@ public interface IAiAvoid
     public float Maxspeed { get; set; }
     public bool canMove { get; set; }
     public bool endMove { get;}
+    public bool slowMove { get; }
     public Vector3 position { get; }
 
 }

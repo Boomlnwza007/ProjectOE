@@ -56,6 +56,6 @@ public class StateMachine : MonoBehaviour
     //    GUILayout.Label($"<color='red'><size=48>{content}</size></color>");
     //}
 
-    public virtual void combatPhaseOn() { }
-    public virtual void setCombatPhase(AreaEnermy area) { }
+    public virtual void CombatPhaseOn() { }
+    public virtual void SetCombatPhase(AreaEnermy area) { }
 }

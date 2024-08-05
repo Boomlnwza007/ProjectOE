@@ -14,8 +14,11 @@ public class AreaEnermy : MonoBehaviour
         foreach (var item in enemygameObject)
         {
             StateMachine state = item.GetComponent<StateMachine>();
-            enemy.Add(state);
-            state.setCombatPhase(GetComponent<AreaEnermy>());
+            if (state != null)
+            {
+                enemy.Add(state);
+                state.SetCombatPhase(GetComponent<AreaEnermy>());
+            }            
         }
     }
 
@@ -24,7 +27,7 @@ public class AreaEnermy : MonoBehaviour
         foreach (var Enemy in enemy)
         {
             Debug.Log("chang");
-            Enemy.combatPhaseOn();
+            Enemy.CombatPhaseOn();
         }
     }
 }

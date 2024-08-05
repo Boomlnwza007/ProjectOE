@@ -40,6 +40,6 @@ public class WanderEMFSM : BaseState
         var point = Random.insideUnitSphere * Size;
         point.z = 0;
         point += position;
-        return point;
+        return point;        
     }
 }
