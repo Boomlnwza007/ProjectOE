@@ -29,9 +29,14 @@ public class ChargSFSM : BaseState
         if (((FSMSEnemySM)stateMachine).cooldown)
         {
             Debug.Log("ติด CD");
+            ((FSMSEnemySM)stateMachine).canGuard = false;
             ai.Maxspeed = speed;
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
             return;
+        }
+        else
+        {
+            ((FSMSEnemySM)stateMachine).canGuard = true;
         }
 
         distance = Vector2.Distance(ai.position, ai.target.position);
