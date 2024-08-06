@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 346242550}
   - component: {fileID: 346242551}
   - component: {fileID: 346242552}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1604,7 +1604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curState: {fileID: 0}
   Health: 50
   dmg: 40
   Speed: 15
@@ -1616,10 +1615,6 @@ MonoBehaviour:
   lootDrop: {fileID: 414341603}
   target: {fileID: 0}
   rb: {fileID: 414341599}
-  wanderState: {fileID: 0}
-  N1Attack: {fileID: 0}
-  CheckDistance: {fileID: 0}
-  Charge: {fileID: 0}
   stateName: 
 --- !u!1001 &431995448
 PrefabInstance:
@@ -2533,7 +2528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752854330}
   - component: {fileID: 752854331}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Heandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3278,7 +3273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curState: {fileID: 0}
   Health: 50
   dmg: 40
   Speed: 15
@@ -3290,10 +3284,6 @@ MonoBehaviour:
   lootDrop: {fileID: 1048871401}
   target: {fileID: 0}
   rb: {fileID: 1048871403}
-  wanderState: {fileID: 0}
-  N1Attack: {fileID: 0}
-  CheckDistance: {fileID: 0}
-  Charge: {fileID: 0}
   stateName: 
 --- !u!114 &1048871401
 MonoBehaviour:
@@ -3751,7 +3741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba3c950d39405042ace3a8c06707836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curState: {fileID: 0}
   bullet: {fileID: 4640713933992763453, guid: b69ce2fad8583714080b3e1eded54141, type: 3}
   bulletTranform: {fileID: 924344408}
   Health: 30
@@ -3764,10 +3753,6 @@ MonoBehaviour:
   lootDrop: {fileID: 1070119683}
   target: {fileID: 0}
   rb: {fileID: 0}
-  wanderState: {fileID: 0}
-  checkDistanceState: {fileID: 0}
-  closeAttackState: {fileID: 0}
-  normalAttackState: {fileID: 0}
   stateName: 
 --- !u!1 &1130010123
 GameObject:
@@ -4056,7 +4041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab87e22ba3d6a414fadac443ccd8f6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curState: {fileID: 0}
   Health: 60
   dmg: 20
   Speed: 11
@@ -4069,12 +4053,8 @@ MonoBehaviour:
   target: {fileID: 0}
   rb: {fileID: 0}
   canGuard: 0
+  shield: {fileID: 752854331}
   stateName: 
-  bashState: {fileID: 0}
-  chargState: {fileID: 0}
-  checkDistanceState: {fileID: 0}
-  defendState: {fileID: 0}
-  wanderState: {fileID: 0}
 --- !u!1 &1222606926
 GameObject:
   m_ObjectHideFlags: 0
