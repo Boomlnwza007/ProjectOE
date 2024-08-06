@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSMEnemySM : StateMachine, IDamageable
+public class FSMMEnemySM : StateMachine, IDamageable
 {
     public int Health;
     public int dmg;
@@ -52,6 +52,7 @@ public class FSMEnemySM : StateMachine, IDamageable
             time += Time.deltaTime;
             if (time > timeCooldown)
             {
+                time = 0;
                 cooldown = false;
             }
         }

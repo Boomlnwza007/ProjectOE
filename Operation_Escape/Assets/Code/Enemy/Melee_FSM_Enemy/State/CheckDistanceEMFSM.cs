@@ -6,11 +6,11 @@ public class CheckDistanceEMFSM : BaseState
 {
     public IAiAvoid ai;
     public float distance;
-    public CheckDistanceEMFSM(FSMEnemySM stateEnemy) : base("CheckDistance", stateEnemy) { }
+    public CheckDistanceEMFSM(FSMMEnemySM stateEnemy) : base("CheckDistance", stateEnemy) { }
 
     public override void Enter()
     {
-        ai = ((FSMEnemySM)stateMachine).ai;
+        ai = ((FSMMEnemySM)stateMachine).ai;
         ai.canMove = true;
         ai.destination = ai.position;
 
@@ -24,11 +24,11 @@ public class CheckDistanceEMFSM : BaseState
         distance = Vector2.Distance(ai.position, ai.target.position);
         if (distance < 2)
         {
-            stateMachine.ChangState(((FSMEnemySM)stateMachine).N1Attack);
+            stateMachine.ChangState(((FSMMEnemySM)stateMachine).N1Attack);
         }
         else if (distance < 5)  
         {
-            stateMachine.ChangState(((FSMEnemySM)stateMachine).Charge);
+            stateMachine.ChangState(((FSMMEnemySM)stateMachine).Charge);
         }
     }
 

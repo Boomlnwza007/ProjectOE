@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargeEMFSM : BaseState
+public class BashSFSM : BaseState
 {
-    public ChargeEMFSM(FSMMEnemySM stateMachine) : base("Charge", stateMachine) { }
+    public BashSFSM(FSMSEnemySM stateMachine) : base("BashAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
     float time;
@@ -14,51 +14,36 @@ public class ChargeEMFSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        ai = ((FSMMEnemySM)stateMachine).ai;
+        ai = ((FSMSEnemySM)stateMachine).ai;
+        ((FSMSEnemySM)stateMachine).canGuard = false;
+        ai.destination = ai.target.position;
         speed = ai.Maxspeed;
-        Debug.Log("µ—Èß∑Ë“‡µ√’¬¡‚®¡µ’");
-        ai.Maxspeed = speed*2;
-        cooldown = false;
     }
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
-        ai.destination = ai.target.position;
-        if (((FSMMEnemySM)stateMachine).cooldown)
-        {
-            Debug.Log("µ‘¥ CD");
-            ai.Maxspeed = speed;
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
-            return;
-        }
-
-        distance = Vector2.Distance(ai.position, ai.target.position);
-
         if (cooldown)
         {
             Debug.Log("À¬ÿ¥Õ¬ŸË°—∫∑’Ë 2s");
-            time += Time.deltaTime;            
+            time += Time.deltaTime;
             if (time > 2)
             {
                 ai.canMove = true;
                 time = 0;
                 ai.Maxspeed = speed;
-                stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
+                stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
             }
             return;
         }
 
-        if (distance < 2 && !cooldown)
+        if (distance < 2.5f && !cooldown)
         {
             ai.Maxspeed = speed;
             time += Time.deltaTime;
             Debug.Log("µ—Èß∑Ë“‚®¡µ’ 0.5s");
             if (time > 0.5f)
             {
-                Debug.Log("‚®¡µ’·∫∫µ‘¥µ“¡");
-                Debug.Log("∑Ë“‚®¡µ’Approching Attack 1 µ‘¥ CD");
-                ((FSMMEnemySM)stateMachine).cooldown = true;
+                Debug.Log("BashAttack");
                 ai.canMove = false;
                 cooldown = true;
             }
@@ -73,6 +58,6 @@ public class ChargeEMFSM : BaseState
                 ai.Maxspeed = speed;
                 cooldown = true;
             }
-        } 
+        }
     }
 }

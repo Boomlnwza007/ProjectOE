@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6900315385699209800}
   - component: {fileID: 1473662757371173205}
   - component: {fileID: 1881743778654116646}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletMon
-  m_TagString: Bullet
+  m_TagString: BulletMon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,10 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b171a609b8a322469c635132ca8bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   damage: 30
   force: 20
   knockBack: 1
   tagUse: Player
+  target: {fileID: 0}
 --- !u!50 &1473662757371173205
 Rigidbody2D:
   serializedVersion: 4
@@ -111,7 +113,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7636867113743857662}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

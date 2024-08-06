@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBladeScriipt : MonoBehaviour
+public class BulletBladeScriipt : BaseBullet
 {
-    private Rigidbody2D rb;
     private Vector3 startPos;
     private HashSet<IDamageable> hitTargets = new HashSet<IDamageable>();
     public float Range;
-    public int damage;
-    public float force;
-    public float knockBack;
-    public string tagUse;
     public Vector3 originScale;
     public Vector3 finalScale = new Vector3(0.2f, 0.2f, 0);
-
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +22,6 @@ public class BulletBladeScriipt : MonoBehaviour
     private void Update()
     {
         float distance = Vector2.Distance(startPos, gameObject.transform.position);
-        Debug.Log(distance);
         if (distance >= Range)
         {
             Destroy(gameObject);
@@ -49,5 +42,10 @@ public class BulletBladeScriipt : MonoBehaviour
                 hitTargets.Add(target);
             }
         }
+    }
+
+    public override void ResetGameObj()
+    {
+        startPos = transform.position;
     }
 }

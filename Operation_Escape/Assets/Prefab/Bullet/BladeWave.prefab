@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6124808370032824950}
   - component: {fileID: 3729552039013170064}
   - component: {fileID: 7054453331396606789}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BladeWave
-  m_TagString: Bullet
+  m_TagString: BulletPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,10 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32bfa29c535d0824d98a95f344d286d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 7
+  rb: {fileID: 0}
   damage: 5
   force: 10
   knockBack: 1
   tagUse: Enemy
+  target: {fileID: 0}
+  Range: 7
   originScale: {x: 0, y: 0, z: 0}
   finalScale: {x: 0.25, y: 0.25, z: 0}

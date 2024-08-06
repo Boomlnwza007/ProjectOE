@@ -23,14 +23,6 @@ public class CinemachineControl : MonoBehaviour
     {
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = 
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        if (cinemachineBasicMultiChannelPerlin != null)
-        {
-            Debug.Log("!null");
-        }
-        else
-        {
-            Debug.Log("null");
-        }
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         shakeTimer = time;
     }

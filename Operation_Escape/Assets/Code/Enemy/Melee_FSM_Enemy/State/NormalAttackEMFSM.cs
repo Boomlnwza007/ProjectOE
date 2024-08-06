@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NormalAttackEMFSM : BaseState
 {
-    public NormalAttackEMFSM(FSMEnemySM stateMachine) : base("NormalAttack", stateMachine) { }
+    public NormalAttackEMFSM(FSMMEnemySM stateMachine) : base("NormalAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
     float time;
@@ -12,7 +12,7 @@ public class NormalAttackEMFSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        ai = ((FSMEnemySM)stateMachine).ai;
+        ai = ((FSMMEnemySM)stateMachine).ai;
         speed = ai.Maxspeed;
         Debug.Log("ตั้งท่าเตรียมโจมตี1 0.5");
     }
@@ -26,7 +26,7 @@ public class NormalAttackEMFSM : BaseState
         if (time >= 4.8f)
         {
             ai.canMove = true;
-            stateMachine.ChangState(((FSMEnemySM)stateMachine).CheckDistance);
+            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
         else if (time >= 2.8f)
         {

@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderEMFSM : BaseState
+public class WanderSFSM : BaseState
 {
-    public WanderEMFSM(FSMMEnemySM stateMachine) : base("Wander", stateMachine) { }
+    public WanderSFSM(FSMSEnemySM stateMachine) : base("Wander", stateMachine) { }
     public IAiAvoid ai;
     public float distane = 15f;
     float time;
 
     public override void Enter()
     {
-        ai = ((FSMMEnemySM)stateMachine).ai;
+        ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         time = 0;
     }
@@ -28,10 +28,10 @@ public class WanderEMFSM : BaseState
             }
         }
 
-        if (Vector2.Distance(ai.position, ai.target.position) < ((FSMMEnemySM)stateMachine).visRange)
+        if (Vector2.Distance(ai.position, ai.target.position) < ((FSMSEnemySM)stateMachine).visRange)
         {
-            ((FSMMEnemySM)stateMachine).areaEnermy.combatPhase();
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
+            ((FSMSEnemySM)stateMachine).areaEnermy.combatPhase();
+            stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
         }
     }
 
@@ -40,6 +40,6 @@ public class WanderEMFSM : BaseState
         var point = Random.insideUnitSphere * Size;
         point.z = 0;
         point += position;
-        return point;        
+        return point;
     }
 }

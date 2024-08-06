@@ -2,32 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSMREnemySM : StateMachine, IDamageable
+public class FSMSEnemySM : StateMachine, IDamageable
 {
-    [SerializeField] 
-    private GameObject bullet;
-    [SerializeField]
-    public Transform bulletTranform;
     public int Health;
     public int dmg;
     public float Speed;
     public float visRange;
     public bool cooldown;
-    public float fireRate = 0.8f;
+    public float time;
+    public float timeCooldown = 6f;
     public IAiAvoid ai;
     public AreaEnermy areaEnermy;
     [SerializeField] LootTable lootDrop;
     public Transform target;
     public Rigidbody2D rb;
+    public bool canGuard;
+    [SerializeField]public GuardShield shield;
+    public string stateName;
     [HideInInspector]
-    public WanderRFSM wanderState;
+    public BashSFSM bashState;
     [HideInInspector]
-    public CheckDistanceRFSM checkDistanceState;
+    public ChargSFSM chargState;
     [HideInInspector]
-    public CloseAttackRFSM closeAttackState;
+    public CheckDistanceSFSM checkDistanceState;
     [HideInInspector]
-    public NormalAttackRFSM normalAttackState;
-    public string stateName; 
+    public DefendSFSM defendState;
+    [HideInInspector]
+    public WanderSFSM wanderState;
+
     private void Awake()
     {
         ai = gameObject.GetComponent<IAiAvoid>();
@@ -35,10 +37,11 @@ public class FSMREnemySM : StateMachine, IDamageable
         rb = gameObject.GetComponent<Rigidbody2D>();
         ai.target = target;
         ai.Maxspeed = Speed;
-        wanderState = new WanderRFSM(this);
-        checkDistanceState = new CheckDistanceRFSM(this);
-        closeAttackState = new CloseAttackRFSM(this);
-        normalAttackState = new NormalAttackRFSM(this);
+        bashState = new BashSFSM(this);
+        chargState = new ChargSFSM(this);
+        checkDistanceState = new CheckDistanceSFSM(this);
+        defendState = new DefendSFSM(this);
+        wanderState = new WanderSFSM(this);
     }
 
     protected override BaseState GetInitialState()
@@ -53,26 +56,28 @@ public class FSMREnemySM : StateMachine, IDamageable
             curState.UpdateLogic();
             stateName = curState.name;
         }
-    }
-
-    public void Fire()
-    {
-        GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
-        bulletG.GetComponent<BulletFollow>().target = ai.target;
-    }
-
-    public void FireClose()
-    {
-        float spreadAngle = 10;
-        int bulletCount = 3;
-        float startAngle = -spreadAngle * ((bulletCount - 1) / 2.0f); ;
-        for (int i = 0; i < bulletCount; i++)
+        if (cooldown)
         {
-            float angle = startAngle + (spreadAngle * i);
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation* rotation);
-            bulletG.GetComponent<BulletFollow>().target = ai.target;
-        }        
+            time += Time.deltaTime;
+            if (time > timeCooldown)
+            {
+                time = 0;
+                cooldown = false;
+            }
+        }
+        Guard();
+    }
+
+    public void Guard()
+    {
+        if (canGuard)
+        {
+            shield.canGuard = canGuard;
+        }
+        else
+        {
+            shield.canGuard = canGuard;
+        }
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)

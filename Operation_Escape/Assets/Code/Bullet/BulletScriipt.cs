@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScriipt : MonoBehaviour
-{
-    private Rigidbody2D rb;
-    public int damage;
-    public float force;
-    public float knockBack;
-    public string tagUse;
+public class BulletScriipt : BaseBullet
+{  
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +26,6 @@ public class BulletScriipt : MonoBehaviour
             {
                 target.Takedamage(damage, DamageType.Rang,knockBack);
             }
-
             Destroy(gameObject);
         }        
     }
