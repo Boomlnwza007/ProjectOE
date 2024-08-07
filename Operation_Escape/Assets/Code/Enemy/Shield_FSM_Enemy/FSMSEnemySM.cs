@@ -54,7 +54,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
         if (curState != null)
         {
             curState.UpdateLogic();
-            stateName = curState.name;
+            stateName = curState.nameState;
         }
         if (cooldown)
         {
@@ -77,6 +77,27 @@ public class FSMSEnemySM : StateMachine, IDamageable
         else
         {
             shield.canGuard = canGuard;
+        }
+    }
+
+    public void CooldownCharg()
+    {
+        float _cooldown = 5;
+        List<StateMachine> enemy = areaEnermy.enemy;
+        foreach (var item in enemy)
+        {
+            if (item.TryGetComponent<FSMSEnemySM>(out FSMSEnemySM fSMM))
+            {
+                if (fSMM != this)
+                {
+                    if (!fSMM.cooldown)
+                    {
+                        fSMM.cooldown = true;
+                        fSMM.time = _cooldown;
+                        _cooldown--;
+                    }                    
+                }
+            }
         }
     }
 

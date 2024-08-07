@@ -45,7 +45,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
         if (curState != null)
         {
             curState.UpdateLogic();
-            stateName = curState.name;
+            stateName = curState.nameState;
         }
         if (cooldown)
         {
@@ -61,6 +61,27 @@ public class FSMMEnemySM : StateMachine, IDamageable
     protected override BaseState GetInitialState()
     {
         return wanderState;
+    }
+
+    public void CooldownApproching()
+    {
+        float _cooldown = 5;
+        List<StateMachine> enemy = areaEnermy.enemy;
+        foreach (var item in enemy)
+        {
+            if (item.TryGetComponent<FSMMEnemySM>(out FSMMEnemySM fSMM))
+            {
+                if (fSMM != this)
+                {
+                    if (!fSMM.cooldown)
+                    {
+                        fSMM.cooldown = true;
+                        fSMM.time = _cooldown;
+                        _cooldown--;
+                    }
+                }
+            }
+        }
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)

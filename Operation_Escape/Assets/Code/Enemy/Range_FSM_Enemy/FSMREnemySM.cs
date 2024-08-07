@@ -51,7 +51,7 @@ public class FSMREnemySM : StateMachine, IDamageable
         if (curState != null)
         {
             curState.UpdateLogic();
-            stateName = curState.name;
+            stateName = curState.nameState;
         }
     }
 

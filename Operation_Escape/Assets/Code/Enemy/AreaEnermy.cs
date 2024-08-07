@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AreaEnermy : MonoBehaviour
 {
-    [SerializeField] List<StateMachine> enemy = new List<StateMachine>();
+    [SerializeField]public List<StateMachine> enemy = new List<StateMachine>();
     public LayerMask enemyleLayer;
     // Start is called before the first frame update
 

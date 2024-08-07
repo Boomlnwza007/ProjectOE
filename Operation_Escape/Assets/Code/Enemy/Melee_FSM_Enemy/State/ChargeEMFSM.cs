@@ -59,6 +59,7 @@ public class ChargeEMFSM : BaseState
                 Debug.Log("‚®¡µ’·∫∫µ‘¥µ“¡");
                 Debug.Log("∑Ë“‚®¡µ’Approching Attack 1 µ‘¥ CD");
                 ((FSMMEnemySM)stateMachine).cooldown = true;
+                ((FSMMEnemySM)stateMachine).CooldownApproching();
                 ai.canMove = false;
                 cooldown = true;
             }

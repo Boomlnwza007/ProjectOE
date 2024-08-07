@@ -65,6 +65,7 @@ public class ChargSFSM : BaseState
                 Debug.Log("‚®¡µ’·∫∫µ‘¥µ“¡");
                 Debug.Log("∑Ë“‚®¡µ’Approching Attack 1 µ‘¥ CD");
                 ((FSMSEnemySM)stateMachine).cooldown = true;
+                ((FSMSEnemySM)stateMachine).CooldownCharg();
                 ai.canMove = false;
                 cooldown = true;
             }

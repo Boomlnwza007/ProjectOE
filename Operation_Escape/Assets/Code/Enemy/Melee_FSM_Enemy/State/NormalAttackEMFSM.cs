@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+
 
 public class NormalAttackEMFSM : BaseState
 {
@@ -14,37 +16,32 @@ public class NormalAttackEMFSM : BaseState
     {
         ai = ((FSMMEnemySM)stateMachine).ai;
         speed = ai.Maxspeed;
-        Debug.Log("ตั้งท่าเตรียมโจมตี1 0.5");
+        Attack().Forget();
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
-        time += Time.deltaTime;
+        ai.destination = ai.target.position;        
+    }
 
-        if (time >= 4.8f)
-        {
-            ai.canMove = true;
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
-        }
-        else if (time >= 2.8f)
-        {
-            Debug.Log("โจมตี 3");
-            Debug.Log("หยุดอยู่กับที่ 2s");
-            ai.canMove = false;
-        }
-        else if (time >= 1.3f)
-        {
-            Debug.Log("โจมตี 2");
-            Debug.Log("ตั้งท่าโจมตี3 1.5s");
-        }
-        else if (time >= 0.5f)
-        {
-            Debug.Log("โจมตี 1");
-            Debug.Log("ตั้งท่าโจมตี2 0.8s");
+    public async UniTask Attack()
+    {
+        Debug.Log("ตั้งท่าเตรียมโจมตี1 0.5");
+        await UniTask.WaitForSeconds(0.5f);
+        Debug.Log("โจมตี 1");
+        Debug.Log("ตั้งท่าโจมตี2 0.8s");
+        await UniTask.WaitForSeconds(0.8f);
+        Debug.Log("โจมตี 2");
+        Debug.Log("ตั้งท่าโจมตี3 1.5s");
+        await UniTask.WaitForSeconds(1.5f);
+        ai.canMove = false;
+        Debug.Log("โจมตี 3");
+        Debug.Log("หยุดอยู่กับที่ 2s");
+        await UniTask.WaitForSeconds(2f);
+        ai.canMove = true;
+        stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
 
-        }
     }
 
 }
