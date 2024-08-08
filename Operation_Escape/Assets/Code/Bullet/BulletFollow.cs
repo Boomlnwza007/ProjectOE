@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BulletFollow : BaseBullet
 {
-    public float rotationSpeed = 1f;
-    private Quaternion targetRotation;
+    public float rotationSpeed = 200f;
+    public float starTime = 0.5f;
+    public float stopTime = 2f;
     public float time;
 
     // Start is called before the first frame update
@@ -18,29 +19,26 @@ public class BulletFollow : BaseBullet
 
     private void FixedUpdate()
     {
+        if (target == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Vector2 dir = (target.position - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        targetRotation = rotation;
        
         time += Time.deltaTime;
-        if (time > 1f)
-        {
-            transform.rotation = transform.rotation;
-        }
-        else
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }
 
+        if (time >= starTime && time <= stopTime)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+
+        }
+        
         rb.velocity = transform.right * force;
 
-        //// เช็คว่ามุมปัจจุบันใกล้เคียงกับมุมที่ต้องการหรือไม่
-        //if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
-        //{
-        //    // เมื่อหมุนถึงมุมที่ต้องการแล้ว หยุดการหมุน
-        //    
-        //}
     }
 
     private void OnBecameInvisible()
