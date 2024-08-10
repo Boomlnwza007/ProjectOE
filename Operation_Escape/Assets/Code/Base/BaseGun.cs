@@ -16,8 +16,10 @@ public abstract class BaseGun : MonoBehaviour
     public int ammo;
     public int maxAmmo;
     public int energyUse;
+    public bool canSpecial;
 
-    public abstract void Fire();  
+    public abstract void Fire();
+    public abstract void Special();
 
 
 }

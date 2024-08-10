@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 170899704722756608}
   - component: {fileID: 8600667175816881253}
   - component: {fileID: 2200673144129377109}
+  - component: {fileID: 3491397946396980606}
   m_Layer: 0
   m_Name: Player_0
   m_TagString: Player
@@ -663,9 +664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f22a62696bb9ba4d818215fb84d67c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 0
-  health: 0
-  maxHealth: 10
+  health: 100
+  maxHealth: 100
 --- !u!114 &8600667175816881253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,9 +678,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc6bc8e92988ab429121997a61b4934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   speed: 10
   dodgeMaxSpeed: 70
   coolDownDodge: 1
+  canCombat: 0
 --- !u!114 &2200673144129377109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,12 +695,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861ad3c292f958247b741c2d026fda47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponGun: {fileID: 3767920626603049848}
+  aimPoint: {fileID: 0}
   gunList: []
   sizeHitbox: {x: 2, y: 3}
-  ammo: 0
   damage: 2
+  knockBack: 1
   comboMaxTime: 1.5
   comboCooldown: 1
   maxComboSteps: 3
-  WeaponGun: {fileID: 3767920626603049848}
-  aimPoint: {fileID: 0}
+  canMelee: 1
+  canReload: 1
+  canFire: 1
+--- !u!114 &3491397946396980606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152304519124941005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf501d178e8eb744b2c014053072aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

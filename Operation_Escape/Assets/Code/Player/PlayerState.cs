@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 {
-    public int ammo;
     public int health;
     public int maxHealth = 10;
     private bool imortal;
@@ -15,7 +14,6 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     // Start is called before the first frame update
     void Start()
     {
-        this.ammo = GetComponent<PlayerCombat>().ammo;
         //combat = GetComponent<PlayerCombat>();
         health = maxHealth;
         maxEnergt = 10;

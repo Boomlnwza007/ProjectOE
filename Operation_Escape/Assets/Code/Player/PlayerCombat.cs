@@ -4,38 +4,31 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    private bool canFire = true;
     private bool firing = true;
-    private bool canMelee = true;
-    private bool canReload = true;
     private IEnergy energy;
     private GameObject currentEquipGun;
     [SerializeField] private GameObject WeaponGun;
     [SerializeField] private Transform aimPoint;
     private int currentGun = -1;
     private int comboStep = 0;
-    private int maxAmmo;
     private float comboTimer;
     [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
     public Vector2 sizeHitbox;
-    public int ammo;    
     public int damage = 1;
     public float knockBack = 1;
     public float comboMaxTime = 1.5f;
     public float comboCooldown = 1f;
     public int maxComboSteps = 3;
-    
+    public bool canMelee = true;
+    public bool canReload = true;
+    public bool canFire = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         aimPoint = GameObject.FindGameObjectWithTag("Aim").GetComponent<Transform>();
         currentGun = 0;
-        if (gunList.Count > 0)
-        {
-            maxAmmo = gunList[currentGun].maxAmmo;
-            ammo = maxAmmo;
-        }
         energy = GetComponent<IEnergy>();
     }
 
@@ -66,13 +59,11 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetButton("Fire1") && canFire && firing)
         {
-            if (ammo > 0)
+            if (gunList[currentGun].ammo > 0)
             {
-                ammo--;
                 firing = false;
                 comboStep = 0;
                 comboTimer = 0;
-                gunList[currentGun].ammo = ammo;
                 CinemachineControl.Instance.ShakeCamera(1f , 0.2f);
                 gunList[currentGun].Fire();
                 //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
@@ -185,15 +176,13 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(timeReload);
         energy.UseEnergy(gunList[currentGun].energyUse);
         canReload = true;
-        ammo = maxAmmo;
+        gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
     }
     public void Addgun(BaseGun gun)
     {
         currentGun = gunList.Count;
         gunList.Add(gun);
         gunList[currentGun].bulletTranform = aimPoint;
-        maxAmmo = gunList[currentGun].maxAmmo;
-        ammo = gunList[currentGun].ammo;
         EquipGun(currentGun);
     }
 
@@ -235,8 +224,6 @@ public class PlayerCombat : MonoBehaviour
 
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
-        maxAmmo = gunList[currentGun].maxAmmo;
-        ammo = gunList[currentGun].ammo;
         StopCoroutine(Reload(gunList[currentGun].timeReload));
         //canFire = true;
         firing = false;

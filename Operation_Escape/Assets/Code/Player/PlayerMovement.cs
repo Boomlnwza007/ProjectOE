@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{
-    private enum State { Normal, Dodge, }
+{  
     private Camera mainCam;
-    private State state;
     private float horizontal;
     private float vertical;
     private float dodgeSpeed;
-    private bool facingRight = true;
     private Vector2 dodgeDir;
     private Vector3 mousePos;
     private bool canDodge = true;
+    public enum State { Normal, Dodge, }
+    public State state;
     public float speed = 10f;
     public float dodgeMaxSpeed = 100f;
     public float coolDownDodge = 1f;
+    public bool canCombat;
     private Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,11 +52,13 @@ public class PlayerMovement : MonoBehaviour
                 //Flip();
                 break;
             case State.Dodge:
+                canCombat = false;
                 float dodgeSpeedDropMultiplier = 5f;
                 dodgeSpeed -= dodgeSpeed * dodgeSpeedDropMultiplier * Time.deltaTime;
                 float dodgeMinimium = 50f;
                 if (dodgeSpeed < dodgeMinimium)
                 {
+                    canCombat = true;
                     state = State.Normal;
                     StartCoroutine(DodgeCooldown());
                 }
@@ -76,17 +78,6 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }  
-
-    private void Flip()
-    {
-        if (facingRight && horizontal < 0f || !facingRight && horizontal > 0f)
-        {
-            facingRight = !facingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
 
     private IEnumerator DodgeCooldown()
     {
