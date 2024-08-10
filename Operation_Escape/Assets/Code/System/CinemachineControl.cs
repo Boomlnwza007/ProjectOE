@@ -7,7 +7,14 @@ public class CinemachineControl : MonoBehaviour
 {
     public static CinemachineControl Instance { get; private set; }
     private CinemachineVirtualCamera cinemachineVirtualCamera;
+    private CinemachineFramingTransposer transposer;
     private float shakeTimer;
+
+    public Transform player;
+    public float maxMouseDistance = 10f;
+    public float maxCameraOffset = 5f;
+    public float timeSmoothCamera = 10f;
+
     private void Awake()
     {
         Instance = this;
@@ -16,15 +23,21 @@ public class CinemachineControl : MonoBehaviour
 
     private void Start()
     {
-        cinemachineVirtualCamera.Follow = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        cinemachineVirtualCamera.Follow = player;
+        transposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+
     }
 
     public void ShakeCamera(float intensity, float time)
     {
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = 
-            cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
-        shakeTimer = time;
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
+        cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        if (cinemachineBasicMultiChannelPerlin != null)
+        {
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+            shakeTimer = time;
+        }
     }
 
     private void Update()
@@ -38,5 +51,23 @@ public class CinemachineControl : MonoBehaviour
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (player == null || transposer == null) return;
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+
+        Vector3 playerPos = player.position;
+        Vector3 direction = (mousePos - playerPos).normalized;
+
+        float distance = Vector3.Distance(mousePos, playerPos);
+        float cameraOffset = Mathf.Clamp(distance / maxMouseDistance * maxCameraOffset, 0, maxCameraOffset);
+
+
+        Vector3 offset = direction * cameraOffset;
+        transposer.m_TrackedObjectOffset = Vector3.Lerp(transposer.m_TrackedObjectOffset, offset, Time.deltaTime * timeSmoothCamera);
     }
 }
