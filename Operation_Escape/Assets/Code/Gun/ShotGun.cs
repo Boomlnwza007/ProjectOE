@@ -8,6 +8,7 @@ public class ShotGun : BaseGun
     {
         ammo--;
         Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation);
+        firing = false;
     }
 
     public override void Special()

@@ -9,7 +9,6 @@ public abstract class BaseGun : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject iconGun;
     public Transform bulletTranform;
-    public int damage;
     public float fireRate;
     public float timeReload;
     public float maxFireRate;
@@ -17,6 +16,7 @@ public abstract class BaseGun : MonoBehaviour
     public int maxAmmo;
     public int energyUse;
     public bool canSpecial;
+    public bool firing = true;
 
     public abstract void Fire();
     public abstract void Special();

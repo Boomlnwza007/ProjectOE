@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    private bool firing = true;
     private IEnergy energy;
     private GameObject currentEquipGun;
     [SerializeField] private GameObject WeaponGun;
@@ -47,21 +46,20 @@ public class PlayerCombat : MonoBehaviour
 
         HandleWeaponSwitch();
 
-        if (!firing)
+        if (!gunList[currentGun].firing)
         {
             gunList[currentGun].fireRate += Time.deltaTime;
             if (gunList[currentGun].fireRate > gunList[currentGun].maxFireRate)
             {
-                firing = true;
+                gunList[currentGun].firing = true;
                 gunList[currentGun].fireRate = 0;
             }
         }
 
-        if (Input.GetButton("Fire1") && canFire && firing)
+        if (Input.GetButton("Fire1") && canFire && gunList[currentGun].firing)
         {
             if (gunList[currentGun].ammo > 0)
             {
-                firing = false;
                 comboStep = 0;
                 comboTimer = 0;
                 CinemachineControl.Instance.ShakeCamera(1f , 0.2f);
@@ -76,7 +74,12 @@ public class PlayerCombat : MonoBehaviour
                     Reload();
                 }
             }
-        }     
+        }
+
+        if (gunList[currentGun].canSpecial)
+        {
+            gunList[currentGun].Special();
+        }
                 
 
         if (Input.GetButtonDown("Reload") && canReload)
@@ -216,7 +219,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void SwapGun(int index)
     {
-        Debug.Log(index + 1 +" > "+ currentGun+" && "+ index +" == " +currentGun);
         if (index+1 > gunList.Count || index == currentGun)
         {            
             return;
@@ -226,7 +228,7 @@ public class PlayerCombat : MonoBehaviour
         gunList[currentGun].bulletTranform = aimPoint;
         StopCoroutine(Reload(gunList[currentGun].timeReload));
         //canFire = true;
-        firing = false;
+        gunList[currentGun].firing = false;
         //canMelee = false;
         //canReload = false;
         EquipGun(index);

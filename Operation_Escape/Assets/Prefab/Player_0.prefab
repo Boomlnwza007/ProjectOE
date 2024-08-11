@@ -682,7 +682,7 @@ MonoBehaviour:
   speed: 10
   dodgeMaxSpeed: 70
   coolDownDodge: 1
-  canCombat: 0
+  canCombat: 1
 --- !u!114 &2200673144129377109
 MonoBehaviour:
   m_ObjectHideFlags: 0
