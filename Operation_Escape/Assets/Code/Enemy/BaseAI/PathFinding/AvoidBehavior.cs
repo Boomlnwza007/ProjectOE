@@ -16,9 +16,15 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     public Vector3 position { get { return gameObject.transform.position; } }
     public Vector3 destination { get; set; }
     public Transform target { get; set; }
+    public bool RandomDeviation { get { return enableRandomDeviation; } set { enableRandomDeviation = value; } }
 
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
+    public bool enableRandomDeviation = true;
+    public float deviationAngle = 10f;
+    public float deviationChangeInterval = 2f; // เวลาในวินาทีที่ทิศทางจะเปลี่ยนแปลง
+    private float deviationTimer;
+    private float currentDeviationAngle;
 
     [SerializeField]private Rigidbody2D rb;
     private Vector2 steering;
@@ -29,6 +35,8 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     {
         rb = GetComponent<Rigidbody2D>();
         canMove = true;
+        deviationTimer = deviationChangeInterval;
+        currentDeviationAngle = Random.Range(-deviationAngle, deviationAngle);
     }
 
     private void FixedUpdate()
@@ -83,7 +91,23 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
             curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
         }
 
+        deviationTimer -= Time.deltaTime;
+        if (deviationTimer <= 0f)
+        {
+            currentDeviationAngle = Random.Range(-deviationAngle, deviationAngle);
+            deviationTimer = deviationChangeInterval;
+        }
+
         Vector2 desiredVelocity = targetDirection.normalized;
+
+        if (enableRandomDeviation)
+        {
+            if (avoidForce == Vector2.zero)
+            {
+                desiredVelocity = Quaternion.Euler(0, 0, currentDeviationAngle) * desiredVelocity;
+            }
+        }        
+
         steering = desiredVelocity + avoidForce;
 
         rb.velocity = Vector2.SmoothDamp(rb.velocity, steering.normalized * curSpeed, ref velocity, smoothTime);
