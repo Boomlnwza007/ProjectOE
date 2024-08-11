@@ -58,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
                 float dodgeMinimium = 50f;
                 if (dodgeSpeed < dodgeMinimium)
                 {
-                    canCombat = true;
                     state = State.Normal;
+                    canCombat = true;
                     StartCoroutine(DodgeCooldown());
                 }
                 break;

@@ -13,12 +13,4 @@ public class PlayerControl : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         PlayerState = GetComponent<PlayerState>();
     }
-
-    private void Update()
-    {
-        if (playerMovement.state == PlayerMovement.State.Dodge)
-        {
-            playerCombat.canFire = playerMovement.canCombat;
-        }
-    }
 }
