@@ -3941,8 +3941,8 @@ MonoBehaviour:
     m_Bits: 128
   smoothTime: 0.3
   speed: 13
-  slowDownRadius: 5
-  stopRadius: 2
+  slowDownRadius: 13
+  stopRadius: 3
   enableRandomDeviation: 1
   deviationAngle: 10
   deviationChangeInterval: 2
@@ -4034,6 +4034,7 @@ MonoBehaviour:
   Speed: 13
   visRange: 30
   cooldown: 0
+  timeCooldown: 0
   fireRate: 0.8
   areaEnermy: {fileID: 0}
   lootDrop: {fileID: 1070119683}
