@@ -13,6 +13,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public float timeCooldown = 6f;
     public IAiAvoid ai;
     public AreaEnermy areaEnermy;
+    public bool imortal { get; set; }
     [SerializeField] LootTable lootDrop;
     public Transform target;
     public Rigidbody2D rb;

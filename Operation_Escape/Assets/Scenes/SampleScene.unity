@@ -1177,6 +1177,9 @@ MonoBehaviour:
   speed: 13
   slowDownRadius: 6
   stopRadius: 3
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 260271169}
 --- !u!212 &260271171
 SpriteRenderer:
@@ -1724,6 +1727,9 @@ MonoBehaviour:
   speed: 15
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 414341599}
 --- !u!212 &414341601
 SpriteRenderer:
@@ -3268,6 +3274,9 @@ MonoBehaviour:
   speed: 5
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 979808271}
 --- !u!212 &979808273
 SpriteRenderer:
@@ -3531,7 +3540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1048871400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3656,6 +3665,9 @@ MonoBehaviour:
   speed: 15
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 45
+  deviationChangeInterval: 2
   rb: {fileID: 1048871403}
 --- !u!212 &1048871405
 SpriteRenderer:
@@ -3931,6 +3943,9 @@ MonoBehaviour:
   speed: 13
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 1070119685}
 --- !u!212 &1070119687
 SpriteRenderer:
@@ -4288,6 +4303,9 @@ MonoBehaviour:
   speed: 15
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 1169542450}
 --- !u!212 &1169542452
 SpriteRenderer:
@@ -5225,6 +5243,9 @@ MonoBehaviour:
   speed: 5
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 1472859412}
 --- !u!212 &1472859414
 SpriteRenderer:
@@ -5520,6 +5541,9 @@ MonoBehaviour:
   speed: 5
   slowDownRadius: 5
   stopRadius: 2
+  enableRandomDeviation: 1
+  deviationAngle: 10
+  deviationChangeInterval: 2
   rb: {fileID: 1610353053}
 --- !u!212 &1610353055
 SpriteRenderer:
@@ -6205,10 +6229,6 @@ PrefabInstance:
     - target: {fileID: 8152304519124941005, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_Name
       value: Player_0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8600667175816881253, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-      propertyPath: canCombat
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9178602101280717769, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_LocalPosition.x

@@ -17,6 +17,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public Transform target;
     public Rigidbody2D rb;
     public bool canGuard;
+    public bool imortal { get; set; }
     [SerializeField]public GuardShield shield;
     public string stateName;
     [HideInInspector]

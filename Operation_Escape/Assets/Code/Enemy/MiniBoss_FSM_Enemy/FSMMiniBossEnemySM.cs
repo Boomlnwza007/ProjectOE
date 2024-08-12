@@ -12,6 +12,7 @@ public class FSMMiniBossEnemySM : StateMachine, IDamageable
     public float time;
     public float timeCooldown = 6f;
     public IAiAvoid ai;
+    public bool imortal { get; set; }
     public AreaEnermy areaEnermy;
     [SerializeField] LootTable lootDrop;
     public Transform target;

@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class PlayerMovement : MonoBehaviour
 {  
     private Camera mainCam;
     private float horizontal;
     private float vertical;
-    private float dodgeSpeed;
+    private float rollSpeed;
+    private int rollCharge;
+    private int maxRollCharge = 3;
+    private float rollTimer;
+    private float rollChargeCC = 0.5f;
+    private float rollCC = 2f;
     private Vector2 dodgeDir;
     private Vector3 mousePos;
     private bool canDodge = true;
@@ -39,30 +45,31 @@ public class PlayerMovement : MonoBehaviour
                 vertical = Input.GetAxisRaw("Vertical");               
                 if (Input.GetButtonDown("Jump") && canDodge)
                 {
-                    canDodge = false;
-                    dodgeDir = new Vector2(horizontal, vertical).normalized;
-                    if (dodgeDir == Vector2.zero)
-                    {
-                        dodgeDir = (transform.position - mousePos).normalized;
-                    }
-                    dodgeSpeed = dodgeMaxSpeed;                    
-                    state = State.Dodge;
-                    StartCoroutine(gameObject.GetComponent<IDamageable>().Imortal(1));
+                    Roll();                    
                 }
                 //Flip();
                 break;
             case State.Dodge:
                 canCombat = false;
                 float dodgeSpeedDropMultiplier = 5f;
-                dodgeSpeed -= dodgeSpeed * dodgeSpeedDropMultiplier * Time.deltaTime;
+                rollSpeed -= rollSpeed * dodgeSpeedDropMultiplier * Time.deltaTime;
                 float dodgeMinimium = 50f;
-                if (dodgeSpeed < dodgeMinimium)
+                if (rollSpeed < dodgeMinimium)
                 {
+                    gameObject.GetComponent<IDamageable>().imortal = false;
                     state = State.Normal;
-                    canCombat = true;
-                    StartCoroutine(DodgeCooldown());
                 }
                 break;
+        }
+
+        if (rollCharge > 0)
+        {
+            rollTimer += Time.deltaTime;
+            if (rollTimer > rollChargeCC)
+            {
+                rollCharge = 0;
+                rollTimer = 0;
+            }
         }
     }
 
@@ -74,15 +81,38 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(horizontal * speed, vertical * speed);
                 break;
             case State.Dodge:
-                rb.velocity = dodgeDir * dodgeSpeed;
+                rb.velocity = dodgeDir * rollSpeed;
                 break;
         }
     }  
 
-    private IEnumerator DodgeCooldown()
+    private void Roll()
     {
-        yield return new WaitForSeconds(coolDownDodge);
-        canDodge = true;
+        if (rollCharge < maxRollCharge)
+        {            
+            rollCharge++;
+            rollTimer = 0;
+            dodgeDir = new Vector2(horizontal, vertical).normalized;
+            if (dodgeDir == Vector2.zero)
+            {
+                dodgeDir = (transform.position - mousePos).normalized;
+            }
+            rollSpeed = dodgeMaxSpeed;
+            state = State.Dodge;
+            gameObject.GetComponent<IDamageable>().imortal = true;
+            rb.velocity = dodgeDir * rollSpeed;
+        }
+        else
+        {
+            RollCooldown().Forget();
+        }
     }
 
+    async public UniTask RollCooldown()
+    {
+        canDodge = false;
+        await UniTask.WaitForSeconds(rollCC);
+        canDodge = true;
+        rollCharge = 0;
+    }
 }

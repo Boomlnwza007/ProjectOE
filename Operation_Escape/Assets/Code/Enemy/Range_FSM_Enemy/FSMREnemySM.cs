@@ -16,6 +16,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     public float fireRate = 0.8f;
     public IAiAvoid ai;
     public AreaEnermy areaEnermy;
+    public bool imortal { get; set; }
     [SerializeField] LootTable lootDrop;
     public Transform target;
     public Rigidbody2D rb;

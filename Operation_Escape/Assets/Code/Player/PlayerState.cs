@@ -6,9 +6,9 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 {
     public int health;
     public int maxHealth = 10;
-    private bool imortal;
     public int energy { get; set; }
     public int maxEnergt { get; set; }
+    public bool imortal { get; set; }
     //public PlayerCombat combat;
 
     // Start is called before the first frame update

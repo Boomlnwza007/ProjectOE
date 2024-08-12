@@ -173,5 +173,6 @@ MonoBehaviour:
   damageChargeMin: 10
   charging: 0
   originScale: {x: 0, y: 0, z: 0}
+  finalScale: {x: 0.7, y: 0.7, z: 0}
   startScale: 0
-  finalScale: 0.7
+  follow: {fileID: 0}
