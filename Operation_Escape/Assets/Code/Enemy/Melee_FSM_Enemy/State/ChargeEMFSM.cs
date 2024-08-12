@@ -17,6 +17,7 @@ public class ChargeEMFSM : BaseState
         ai = ((FSMMEnemySM)stateMachine).ai;
         speed = ai.Maxspeed;
         Debug.Log("ตั้งท่าเตรียมโจมตี");
+        ai.randomDeviation = false;
         ai.Maxspeed = speed*2;
         cooldown = false;
     }
@@ -29,6 +30,7 @@ public class ChargeEMFSM : BaseState
         {
             Debug.Log("ติด CD");
             ai.Maxspeed = speed;
+            ai.randomDeviation = true;
             stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
             return;
         }
@@ -43,6 +45,7 @@ public class ChargeEMFSM : BaseState
             {
                 ai.canMove = true;
                 time = 0;
+                ai.randomDeviation = true;
                 ai.Maxspeed = speed;
                 stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
             }
@@ -52,6 +55,7 @@ public class ChargeEMFSM : BaseState
         if (distance < 2 && !cooldown)
         {
             ai.Maxspeed = speed;
+            ai.randomDeviation = true;
             time += Time.deltaTime;
             Debug.Log("ตั้งท่าโจมตี 0.5s");
             if (time > 0.5f)
@@ -71,6 +75,7 @@ public class ChargeEMFSM : BaseState
             {
                 ai.canMove = false;
                 time = 0;
+                ai.randomDeviation = true;
                 ai.Maxspeed = speed;
                 cooldown = true;
             }

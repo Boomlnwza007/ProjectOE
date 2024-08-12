@@ -18,6 +18,7 @@ public class ChargSFSM : BaseState
         speed = ai.Maxspeed;
         Debug.Log("ตั้งท่าเตรียมโจมตี");
         ai.Maxspeed = speed * 2;
+        ai.randomDeviation = false;
         cooldown = false;
     }
 
@@ -30,6 +31,7 @@ public class ChargSFSM : BaseState
         {
             Debug.Log("ติด CD");
             ((FSMSEnemySM)stateMachine).canGuard = false;
+            ai.randomDeviation = true;
             ai.Maxspeed = speed;
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
             return;
@@ -49,6 +51,7 @@ public class ChargSFSM : BaseState
             {
                 ai.canMove = true;
                 time = 0;
+                ai.randomDeviation = true;
                 ai.Maxspeed = speed;
                 stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
             }
@@ -57,6 +60,7 @@ public class ChargSFSM : BaseState
 
         if (distance < 2 && !cooldown)
         {
+            ai.randomDeviation = true;
             ai.Maxspeed = speed;
             time += Time.deltaTime;
             Debug.Log("ตั้งท่าโจมตี 0.5s");
@@ -77,6 +81,7 @@ public class ChargSFSM : BaseState
             {
                 ai.canMove = false;
                 time = 0;
+                ai.randomDeviation = true;
                 ai.Maxspeed = speed;
                 cooldown = true;
             }

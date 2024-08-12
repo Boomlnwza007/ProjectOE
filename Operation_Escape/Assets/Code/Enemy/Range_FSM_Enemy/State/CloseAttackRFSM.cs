@@ -30,9 +30,13 @@ public class CloseAttackRFSM : BaseState
             ai.destination = ai.target.position;
             ai.canMove = true;
             ai.Maxspeed = speed;
-            ((FSMREnemySM)stateMachine).FireClose();
+            if (!((FSMMEnemySM)stateMachine).cooldown)
+            {
+                ((FSMREnemySM)stateMachine).FireClose();
+            }
             stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
+            ((FSMMEnemySM)stateMachine).cooldown = true;
         }
-        
+
     }
 }

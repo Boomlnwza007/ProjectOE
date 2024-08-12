@@ -16,7 +16,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     public Vector3 position { get { return gameObject.transform.position; } }
     public Vector3 destination { get; set; }
     public Transform target { get; set; }
-    public bool RandomDeviation { get { return enableRandomDeviation; } set { enableRandomDeviation = value; } }
+    public bool randomDeviation { get { return enableRandomDeviation; } set { enableRandomDeviation = value; } }
 
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;

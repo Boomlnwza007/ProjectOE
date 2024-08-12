@@ -11,6 +11,6 @@ public interface IAiAvoid
     public bool endMove { get;}
     public bool slowMove { get; }
     public Vector3 position { get; }
-    public bool RandomDeviation { get; set; }
+    public bool randomDeviation { get; set; }
 
 }

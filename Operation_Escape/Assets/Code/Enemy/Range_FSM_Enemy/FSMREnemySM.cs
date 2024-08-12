@@ -13,6 +13,8 @@ public class FSMREnemySM : StateMachine, IDamageable
     public float Speed;
     public float visRange;
     public bool cooldown;
+    private float time;
+    public float timeCooldown = 2f;
     public float fireRate = 0.8f;
     public IAiAvoid ai;
     public AreaEnermy areaEnermy;
@@ -53,6 +55,16 @@ public class FSMREnemySM : StateMachine, IDamageable
         {
             curState.UpdateLogic();
             stateName = curState.nameState;
+        }
+
+        if (cooldown)
+        {
+            time += Time.deltaTime;
+            if (time > timeCooldown)
+            {
+                time = 0;
+                cooldown = false;
+            }
         }
     }
 

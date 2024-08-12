@@ -13,7 +13,6 @@ public class CheckDistanceSFSM : BaseState
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.canMove = true;
         ai.destination = ai.target.position;
-        ((FSMSEnemySM)stateMachine).canGuard = false;
     }
 
     public override void UpdateLogic()
