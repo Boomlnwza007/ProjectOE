@@ -62,7 +62,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     protected override BaseState GetInitialState()
     {
-        return rangeAState;
+        return idleState;
     }
 
     private void Update()
@@ -94,11 +94,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }
     }
 
-    public async UniTask maleeHitzone(float charge,int hitZone)
+    public async UniTask MeleeHitzone(float charge,int hitZone)
     {
         GameObject HitZone = Instantiate(meleeHitZone[hitZone], handStart.parent);
         Collider2D _colliders = HitZone.GetComponent<Collider2D>();
-        await UniTask.WaitForSeconds(charge);
+        await FadeMelee(HitZone.GetComponent<SpriteRenderer>(),charge);
+
         List<Collider2D> colliders = new List<Collider2D>();
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
         filter.SetLayerMask(LayerMask.GetMask("Player"));
@@ -111,9 +112,28 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
                 player.Takedamage(dmg, DamageType.Rang, 0);
             }
         }
+        
         await UniTask.WaitForSeconds(0.5f);
-        Destroy(HitZone);
-        //currentHitZone.transform.localScale = scale;
+        Destroy(HitZone);        
+    }
+
+    public async UniTask FadeMelee(SpriteRenderer spriteRenderer, float duration )
+    {
+        Color color = spriteRenderer.color;
+        float startAlpha = color.a;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / duration);
+            color.a = newAlpha;
+            spriteRenderer.color = color;
+            await UniTask.Yield();
+        }
+
+        color.a = 1f;
+        spriteRenderer.color = color;
     }
 
     public void MeleeFollow()

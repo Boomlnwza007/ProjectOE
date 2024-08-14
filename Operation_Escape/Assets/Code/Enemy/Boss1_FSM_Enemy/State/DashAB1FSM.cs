@@ -9,6 +9,7 @@ public class DashAB1FSM : BaseState
     public IAiAvoid ai;
     public float speed;
     float time;
+    private bool followMeLee;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -22,6 +23,11 @@ public class DashAB1FSM : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.target.position;
+
+        if (followMeLee)
+        {
+            ((FSMBoss1EnemySM)stateMachine).MeleeFollow();
+        }
     }
 
     public async UniTask Attack()
@@ -32,20 +38,26 @@ public class DashAB1FSM : BaseState
         await UniTask.WaitForSeconds(1f);
         ai.Maxspeed = speed * 2;
         await UniTask.WaitForSeconds(4f);
+        ai.Maxspeed = speed;
         if (Vector2.Distance(ai.target.position, ai.position) < 3)
         {
-            Debug.Log("Attack 0.5s");
-            await UniTask.WaitForSeconds(0.5f);
-            Debug.Log("Attack");
-            await UniTask.WaitForSeconds(0.5f);
-
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.5f,1),Aim(0.4f));
+            ai.canMove = false;
+            await UniTask.WaitForSeconds(1);
+            ai.canMove = true;
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
         }
         else
         {
-
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
         }
-        ai.canMove = true;
-        //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).CheckDistance);
 
+    }
+
+    public async UniTask Aim(float wait)
+    {
+        followMeLee = true;
+        await UniTask.WaitForSeconds(wait);
+        followMeLee = false;
     }
 }

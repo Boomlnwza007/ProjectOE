@@ -22,13 +22,13 @@ public class CheckDistanceB1FSM : BaseState
         ai.destination = ai.target.position;
 
         distance = Vector2.Distance(ai.position, ai.target.position);
-        if (distance < 2)
+        if (distance < 9)
         {
-            //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).N1Attack);
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
         }
-        else if (distance < 5)
+        else if (distance > 9)
         {
-            //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).Charge);
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).rangeAState);
         }
     }
 }

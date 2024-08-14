@@ -9,6 +9,8 @@ public class NormalAB1FSM : BaseState
     public IAiAvoid ai;
     public float speed;
     float time;
+    bool followAim;
+    bool followMe;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -22,24 +24,54 @@ public class NormalAB1FSM : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.target.position;
+        if (followAim)
+        {
+            ((FSMBoss1EnemySM)stateMachine).LaserFollow();
+        }
+
+        if (followMe)
+        {
+            ((FSMBoss1EnemySM)stateMachine).MeleeFollow();
+        }
     }
 
     public async UniTask Attack()
     {
-        Debug.Log("µ—Èß∑Ë“‡µ√’¬¡‚®¡µ’1 0.5");
-        await UniTask.WaitForSeconds(0.5f);
-        Debug.Log("‚®¡µ’ 1");
-        Debug.Log("µ—Èß∑Ë“‚®¡µ’2 0.8s");
-        await UniTask.WaitForSeconds(0.8f);
-        Debug.Log("‚®¡µ’ 2");
-        Debug.Log("µ—Èß∑Ë“‚®¡µ’3 1.5s");
-        await UniTask.WaitForSeconds(1.5f);
-        ai.canMove = false;
-        Debug.Log("‚®¡µ’ 3");
-        Debug.Log("À¬ÿ¥Õ¬ŸË°—∫∑’Ë 2s");
-        await UniTask.WaitForSeconds(2f);
-        ai.canMove = true;
-        //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).CheckDistance);
+        ai.Maxspeed = speed * 2;
+        await UniTask.WaitForSeconds(4f);
+        ai.Maxspeed = speed;
+        if (Vector2.Distance(ai.target.position, ai.position) < 3)
+        {
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(1f, 2), AimMelee(0.8f));
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.3f, 3), AimMelee(0.4f));
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(1f, 1), AimMelee(0.8f));
+            ai.canMove = false;
+            await UniTask.WaitForSeconds(2);
+            ai.canMove = true;
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+        }
+        else
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f+(0.1f)*6f, 0.3f), Aim(0.3f + (0.1f) * 6f));
+            }
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
+        }
 
+    }
+
+    public async UniTask Aim(float wait)
+    {
+        followAim = true;
+        await UniTask.WaitForSeconds(wait);
+        followAim = false;
+    }
+
+    public async UniTask AimMelee(float wait)
+    {
+        followAim = true;
+        await UniTask.WaitForSeconds(wait);
+        followAim = false;
     }
 }

@@ -8,7 +8,7 @@ public class RangeAB1Fsm : BaseState
     public RangeAB1Fsm(FSMBoss1EnemySM stateMachine) : base("RangeAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
-    public bool fllow;
+    public bool follow;
     float time;
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class RangeAB1Fsm : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.target.position;
-        if (fllow)
+        if (follow)
         {
             ((FSMBoss1EnemySM)stateMachine).LaserFollow();
         }
@@ -43,15 +43,16 @@ public class RangeAB1Fsm : BaseState
             await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.3f));
 
         }
-
+        ai.canMove = false;
+        await UniTask.WaitForSeconds(0.5f);
         ai.canMove = true;
-        //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).CheckDistance);
+        stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
     }
 
     public async UniTask Aim(float wait)
     {
-        fllow = true;
+        follow = true;
         await UniTask.WaitForSeconds(wait);
-        fllow = false;
+        follow = false;
     }
 }

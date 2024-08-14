@@ -22,4 +22,5 @@ public class IdleMNBFSM : BaseState
             stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
     }
+
 }
