@@ -22,15 +22,15 @@ public class CloseAttackRFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        Debug.DrawLine(ai.position, ai.destination);
         ai.destination = ai.position + (ai.position - ai.target.position).normalized*2;
+
         time += Time.deltaTime;
-        if (time > 0.5)
+        if (time > 0.5f)
         {
             ai.destination = ai.target.position;
             ai.canMove = true;
             ai.Maxspeed = speed;
-            if (!((FSMMEnemySM)stateMachine).cooldown)
+            if (!((FSMREnemySM)stateMachine).cooldown)
             {
                 ((FSMREnemySM)stateMachine).FireClose();
             }
@@ -39,8 +39,8 @@ public class CloseAttackRFSM : BaseState
                 stateMachine.ChangState(((FSMREnemySM)stateMachine).normalAttackState);
                 return;
             }
+            ((FSMREnemySM)stateMachine).cooldown = true;
             stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
-            ((FSMMEnemySM)stateMachine).cooldown = true;
         }
 
     }

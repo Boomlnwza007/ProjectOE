@@ -3926,7 +3926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1070119683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,8 +4025,8 @@ MonoBehaviour:
     m_Bits: 128
   smoothTime: 0.3
   speed: 13
-  slowDownRadius: 13
-  stopRadius: 3
+  slowDownRadius: 5
+  stopRadius: 2
   enableRandomDeviation: 1
   deviationAngle: 10
   deviationChangeInterval: 2
@@ -4118,7 +4118,7 @@ MonoBehaviour:
   Speed: 13
   visRange: 30
   cooldown: 0
-  timeCooldown: 0
+  timeCooldown: 2
   fireRate: 0.8
   areaEnermy: {fileID: 0}
   lootDrop: {fileID: 1070119683}
@@ -5678,7 +5678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1597926614
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5854,6 +5854,7 @@ MonoBehaviour:
   cooldown: 0
   timeCooldown: 2
   fireRate: 1
+  speedRot: 10
   lootDrop: {fileID: 1597926616}
   target: {fileID: 0}
   rb: {fileID: 1597926619}
@@ -5898,7 +5899,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 5.141593
+  m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
