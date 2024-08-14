@@ -57,17 +57,17 @@ public class FSMMiniBossEnemySM : StateMachine, IDamageable
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
+        switch (type)
+        {
+            case DamageType.Rang:
+                //lootDrop.InstantiateLoot(3);
+                break;
+            case DamageType.Melee:
+                lootDrop.InstantiateLoot(1);
+                break;
+        }
         if (Health <= 0)
         {
-            switch (type)
-            {
-                case DamageType.Rang:
-                    //lootDrop.InstantiateLoot(3);
-                    break;
-                case DamageType.Melee:
-                    lootDrop.InstantiateLoot(1);
-                    break;
-            }
             Die();
         }
 

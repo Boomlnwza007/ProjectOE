@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3645439688518726413}
   - component: {fileID: 1633097509600039155}
   - component: {fileID: 4969074112448884123}
+  - component: {fileID: -4630874276541605232}
   m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
@@ -112,3 +113,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4630874276541605232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211673572640163560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0945b9c35c229748aea226a88a5a6d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  distanceMove: 2
