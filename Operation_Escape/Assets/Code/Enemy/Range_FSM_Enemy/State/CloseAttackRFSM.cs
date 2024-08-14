@@ -34,6 +34,11 @@ public class CloseAttackRFSM : BaseState
             {
                 ((FSMREnemySM)stateMachine).FireClose();
             }
+            else
+            {
+                stateMachine.ChangState(((FSMREnemySM)stateMachine).normalAttackState);
+                return;
+            }
             stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
             ((FSMMEnemySM)stateMachine).cooldown = true;
         }

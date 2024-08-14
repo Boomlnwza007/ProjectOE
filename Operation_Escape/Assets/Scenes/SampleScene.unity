@@ -5881,7 +5881,7 @@ MonoBehaviour:
   smoothTime: 0.3
   speed: 12
   slowDownRadius: 5
-  stopRadius: 2
+  stopRadius: 3
   enableRandomDeviation: 1
   deviationAngle: 10
   deviationChangeInterval: 2

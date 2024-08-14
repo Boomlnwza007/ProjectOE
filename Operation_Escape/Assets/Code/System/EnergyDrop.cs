@@ -13,7 +13,7 @@ public class EnergyDrop : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        targetPlayer = GameObject.Find("Player");
+        targetPlayer = GameObject.FindGameObjectWithTag("Player");
         Destroy().Forget();
     }
 
@@ -45,11 +45,12 @@ public class EnergyDrop : MonoBehaviour
         rb.MovePosition(rb.position + target * moveSpeed * Time.fixedDeltaTime);
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<IEnergy>().GetEnergy(1);
+            collision.gameObject.GetComponent<IEnergy>().GetEnergy(1);
             Destroy(gameObject);
 
         }

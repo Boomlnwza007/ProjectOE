@@ -42,9 +42,9 @@ public class NormalAB1FSM : BaseState
         ai.Maxspeed = speed;
         if (Vector2.Distance(ai.target.position, ai.position) < 3)
         {
-            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(1f, 2), AimMelee(0.8f));
-            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.3f, 3), AimMelee(0.4f));
             await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(1f, 1), AimMelee(0.8f));
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.3f, 2), AimMelee(0.4f));
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(1f, 0), AimMelee(0.8f));
             ai.canMove = false;
             await UniTask.WaitForSeconds(2);
             ai.canMove = true;

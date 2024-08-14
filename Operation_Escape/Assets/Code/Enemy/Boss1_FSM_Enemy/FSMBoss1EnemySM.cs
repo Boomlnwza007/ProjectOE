@@ -31,6 +31,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float timeCooldown = 2f;
     public float fireRate = 0.8f;
     public IAiAvoid ai;
+    public float speedRot = 10f;
     public bool imortal { get; set; }
     [SerializeField] LootTable lootDrop;
     public Transform target;
@@ -138,22 +139,22 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void MeleeFollow()
     {
-        Vector2 dir = (target.position - laserGun.position).normalized;
+        Vector2 dir = (target.position - hand.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        float currentAngle = laserGun.eulerAngles.z;
+        float currentAngle = hand.eulerAngles.z;
 
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle));
 
         if (angleDifference > 5f)
         {
             // ค่อยๆ เปลี่ยนมุมการหมุน
-            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * 10f);
-            laserGun.eulerAngles = new Vector3(0, 0, newAngle);
+            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
+            hand.eulerAngles = new Vector3(0, 0, newAngle);
         }
         else
         {
             // หมุนไปยังมุมเป้าหมายทันที
-            laserGun.eulerAngles = new Vector3(0, 0, targetAngle);
+            hand.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }
 
@@ -168,7 +169,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         if (angleDifference > 5f)
         {
             // ค่อยๆ เปลี่ยนมุมการหมุน
-            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * 10f);
+            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
             laserGun.eulerAngles = new Vector3(0, 0, newAngle);
         }
         else
