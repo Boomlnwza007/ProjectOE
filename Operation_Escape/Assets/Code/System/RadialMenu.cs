@@ -46,7 +46,8 @@ public class RadialMenu : MonoBehaviour
 
         if (Input.GetButtonUp("Wheel"))
         {
-            Gun.SwapGun( ( select+3)% numberOfItems);
+            Gun.SwapGun(select);
+            //Debug.Log(select);
             Wheel.SetActive(false);
             isMenuActive = false;
         }
@@ -67,8 +68,8 @@ public class RadialMenu : MonoBehaviour
             selectObject.rotation = Quaternion.Euler(0, 0, segment * (360 / numberOfItems));
             GameObject selectedItem = items[segment].gunPrefab;
 
-            select = 7 - segment;
-            Debug.Log(segment+" : "+select);
+            select = segment;
+            //Debug.Log(segment + " : "+ select);
 
             HighlightSelectedItem(selectedItem);
         }
