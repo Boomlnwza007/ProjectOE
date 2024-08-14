@@ -46,11 +46,14 @@ public class GuardShield : MonoBehaviour
                     BaseBullet bullet = collider.GetComponent<BaseBullet>();
                     if (bullet != null)
                     {
-                        bullet.target = target;
-                        bullet.tagUse = "Player";
-                        bullet.rb.velocity = (target.position - transform.position).normalized * bullet.force;
-                        bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
-                        bullet.ResetGameObj();
+                        if (bullet.tagUse != "Player")
+                        {
+                            bullet.target = target;
+                            bullet.tagUse = "Player";
+                            bullet.rb.velocity = (target.position - transform.position).normalized * bullet.force;
+                            bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
+                            bullet.ResetGameObj();
+                        }                        
                     }
                 }
             }
