@@ -3926,7 +3926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1070119683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5678,7 +5678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1597926614
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5852,6 +5852,10 @@ MonoBehaviour:
   Speed: 12
   visRange: 30
   cooldown: 0
+  startOverdrive: 0
+  overdrive: 0
+  overdriveGageMax: 1
+  overdriveTimer: 60
   timeCooldown: 2
   fireRate: 1
   speedRot: 10
@@ -5899,7 +5903,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1
+  m_Mass: 5.141593
   m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0

@@ -28,13 +28,12 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
 
     [SerializeField]private Rigidbody2D rb;
     private Vector2 steering;
-    private float curSpeed;
+    public float curSpeed;
     private Vector2 velocity = Vector2.zero;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        canMove = true;
         deviationTimer = deviationChangeInterval;
         currentDeviationAngle = Random.Range(-deviationAngle, deviationAngle);
     }
@@ -72,10 +71,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
 
         curSpeed = speed;
 
-        if (!canMove)
-        {
-            curSpeed = 0f;
-        }
+        
 
         endMove = false;
         slowMove = false;
@@ -109,7 +105,10 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
         }        
 
         steering = desiredVelocity + avoidForce;
-
+        if (!canMove)
+        {
+            curSpeed = 0f;
+        }
         rb.velocity = Vector2.SmoothDamp(rb.velocity, steering.normalized * curSpeed, ref velocity, smoothTime);
 
         RaycastHit2D hitForward = Physics2D.Raycast(transform.position, rb.velocity.normalized, rayLength, obstacleLayer);

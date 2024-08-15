@@ -27,6 +27,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float Speed;
     public float visRange;
     public bool cooldown;
+    public bool startOverdrive;
+    public bool overdrive;
+    public int overdriveGageMax;
+    private int overdriveGage;
+    private float overdriveTime;
+    public float overdriveTimer = 60;
     private float time;
     public float timeCooldown = 2f;
     public float fireRate = 0.8f;
@@ -63,7 +69,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     protected override BaseState GetInitialState()
     {
-        return idleState;
+        return dashAState;
     }
 
     private void Update()
@@ -84,6 +90,16 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             }
         }
 
+        if (overdrive)
+        {
+            overdriveTimer += Time.deltaTime;
+            if (overdriveTimer > overdriveTime)
+            {
+                time = 0;
+                overdrive = false;
+            }
+        }
+
         if (laserHitZone)
         {
             LaserHitZone();
@@ -93,6 +109,13 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         {
             LaserFire();
         }
+    }
+
+    public async UniTask ChangeMode()
+    {
+        ai.destination = Vector2.zero;
+        startOverdrive = false;
+        await UniTask.WaitForSeconds(3f);
     }
 
     public async UniTask MeleeHitzone(float charge,int hitZone)
@@ -132,7 +155,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             spriteRenderer.color = color;
             await UniTask.Yield();
         }
-
+        color = Color.white;
         color.a = 1f;
         spriteRenderer.color = color;
     }
@@ -188,12 +211,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         await FadeLaser(charge,laserColorGradient,false);
         m_lineRenderer.colorGradient = laserColorGradientOriginal;
 
-        laserHitZone = false;
         laserFiring = true;
 
         await UniTask.WaitForSeconds(duration);
 
-        await FadeLaser(duration,laserColorGradientOriginal,true);
+        await FadeLaser(0.2f,laserColorGradientOriginal,true);
+        laserHitZone = false;
         m_lineRenderer.enabled = false;
         laserFiring = false;
 
@@ -276,6 +299,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
+        overdriveGage++;
+        if (overdriveGage == overdriveGageMax)
+        {
+            overdrive = true;
+            startOverdrive = true;
+        }
         Health -= damage;
         switch (type)
         {

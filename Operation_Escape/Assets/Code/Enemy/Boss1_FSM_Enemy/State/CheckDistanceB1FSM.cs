@@ -13,7 +13,6 @@ public class CheckDistanceB1FSM : BaseState
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         ai.canMove = true;
         ai.destination = ai.position;
-
     }
 
     public override void UpdateLogic()
@@ -24,7 +23,7 @@ public class CheckDistanceB1FSM : BaseState
         distance = Vector2.Distance(ai.position, ai.target.position);
         if (distance < 9)
         {
-            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
         }
         else if (distance > 9)
         {

@@ -5,17 +5,19 @@ using Cysharp.Threading.Tasks;
 
 public class DashAB1FSM : BaseState
 {
-    public DashAB1FSM(FSMBoss1EnemySM stateMachine) : base("RangeAttack", stateMachine) { }
+    public DashAB1FSM(FSMBoss1EnemySM stateMachine) : base("DashAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
-    float time;
     private bool followMeLee;
+    public bool overdrive;
 
     // Start is called before the first frame update
     public override void Enter()
     {
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
+        overdrive = ((FSMBoss1EnemySM)stateMachine).overdrive;
         speed = ai.Maxspeed;
+        ai.canMove = true;
         Attack().Forget();
     }
 
@@ -37,21 +39,24 @@ public class DashAB1FSM : BaseState
         Debug.Log("Chage 1s");
         await UniTask.WaitForSeconds(1f);
         ai.Maxspeed = speed * 2;
-        await UniTask.WaitForSeconds(4f);
-        ai.Maxspeed = speed;
-        if (Vector2.Distance(ai.target.position, ai.position) < 3)
+        float time = 0;
+        while (time < 4f)
         {
-            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.5f,1),Aim(0.4f));
-            ai.canMove = false;
-            await UniTask.WaitForSeconds(1);
-            ai.canMove = true;
-            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+            time += Time.deltaTime;
+            if (Vector2.Distance(ai.target.position, ai.position) < 3)
+            {
+                ai.Maxspeed = speed;
+                await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.5f, 1), Aim(0.4f));
+                ai.canMove = false;
+                await UniTask.WaitForSeconds(1);
+                ai.canMove = true;
+                stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+                return;
+            }
+            await UniTask.Yield();
         }
-        else
-        {
-            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
-        }
-
+       ai.Maxspeed = speed;
+       stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
     }
 
     public async UniTask Aim(float wait)

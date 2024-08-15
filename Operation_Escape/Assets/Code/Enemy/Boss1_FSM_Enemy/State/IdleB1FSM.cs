@@ -7,7 +7,6 @@ public class IdleB1FSM : BaseState
     public IdleB1FSM(FSMBoss1EnemySM stateMachine) : base("Wander", stateMachine) { }
     public IAiAvoid ai;
     public float distane = 15f;
-    float time;
 
     public override void Enter()
     {
@@ -19,6 +18,7 @@ public class IdleB1FSM : BaseState
     {
         if (Vector2.Distance(ai.position, ai.target.position) < ((FSMBoss1EnemySM)stateMachine).visRange)
         {
+            ai.canMove = true;
             stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
         }
     }
