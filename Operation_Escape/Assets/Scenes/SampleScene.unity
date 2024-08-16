@@ -5190,8 +5190,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 0.1462652}
-      key1: {r: 1, g: 0, b: 0, a: 0.1462652}
+      key0: {r: 1, g: 0, b: 0, a: 0.9789365}
+      key1: {r: 1, g: 0, b: 0, a: 0.9789365}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5782,6 +5782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserDistance: 100
+  bulletmon: {fileID: 4640713933992763453, guid: a69bf5ec44a730e43b701ec1fade4189, type: 3}
   laserGun: {fileID: 1320392124}
   laserFireStart: {fileID: 723826356}
   m_lineRenderer: {fileID: 1320392123}
@@ -5848,6 +5849,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  speedRot: 10
   hand: {fileID: 2081173713}
   handStart: {fileID: 1651562133}
   meleeHitZone:
@@ -5860,11 +5862,11 @@ MonoBehaviour:
   visRange: 30
   cooldown: 0
   overdrive: 0
+  overdriveChang: 0
   overdriveGageMax: 1
   overdriveTimer: 2
   timeCooldown: 2
   fireRate: 1
-  speedRot: 10
   lootDrop: {fileID: 1597926616}
   target: {fileID: 0}
   rb: {fileID: 1597926619}
@@ -5909,9 +5911,9 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 5.141593
-  m_LinearDrag: 2
+  m_UseAutoMass: 0
+  m_Mass: 1000
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -6819,13 +6821,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_0
       objectReference: {fileID: 0}
-    - target: {fileID: 8238799296013795416, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-      propertyPath: m_SortingLayer
+    - target: {fileID: 9093830181875390882, guid: aa963654f8d60f346907830e91619aa8, type: 3}
+      propertyPath: m_Mass
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8238799296013795416, guid: aa963654f8d60f346907830e91619aa8, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 767578383
       objectReference: {fileID: 0}
     - target: {fileID: 9178602101280717769, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_LocalPosition.x
