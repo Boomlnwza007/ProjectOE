@@ -12,7 +12,6 @@ public class RangeAB1Fsm : BaseState
     public bool overdrive;
     public bool rangeAttack;
     float charge;
-
     // Start is called before the first frame update
     public override void Enter()
     {
@@ -41,29 +40,24 @@ public class RangeAB1Fsm : BaseState
 
     public async UniTask Attack()
     {
-        Debug.Log(ai.canMove + " " + ((FSMBoss1EnemySM)stateMachine).ai.canMove);
         ai.canMove = false;
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.2f), Aim(0.8f));
+        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.1f));
         CheckDistance();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.2f), Aim(0.8f));
+        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.1f));
         CheckDistance();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.2f), Aim(0.8f));
+        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.1f));
         if (overdrive)
         {
             await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 4f), Aim(charge+4f));
         }
 
-        UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f + (0.1f), 0.3f), Aim(0.3f + (0.1f))).Forget();
-        UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f + (0.2f), 0.3f), Aim(0.3f + (0.2f))).Forget();
-        UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f + (0.3f), 0.3f), Aim(0.3f + (0.3f))).Forget();
-        UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f + (0.4f), 0.3f), Aim(0.3f + (0.4f))).Forget();
-        UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f + (0.5f), 0.3f), Aim(0.3f + (0.5f))).Forget();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.4f + (0.6f), 0.3f), Aim(0.3f + (0.6f)));
+        //await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.2f));
 
         ai.canMove = false;
         await UniTask.WaitForSeconds(0.5f);
         ai.canMove = true;
-        stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
+
+        ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
     }
 
     public void CheckDistance()
@@ -72,7 +66,7 @@ public class RangeAB1Fsm : BaseState
         {
             if (Vector2.Distance(ai.target.position, ai.position) < 3)
             {
-                stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
+                ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
             }
         }        
     }
@@ -82,5 +76,18 @@ public class RangeAB1Fsm : BaseState
         follow = true;
         await UniTask.WaitForSeconds(wait);
         follow = false;
+    }
+
+    public void ChangState(BaseState Nextstate)
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        if (state.overdriveChang)
+        {
+            state.ChangState(state.overdriveChangState);
+        }
+        else
+        {
+            state.ChangState(Nextstate);
+        }
     }
 }

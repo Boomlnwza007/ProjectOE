@@ -27,8 +27,8 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float Speed;
     public float visRange;
     public bool cooldown;
-    public bool startOverdrive;
     public bool overdrive;
+    public bool overdriveChang;
     public int overdriveGageMax;
     private int overdriveGage;
     private float overdriveTime;
@@ -53,6 +53,8 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public NormalAB1FSM normalAState;
     [HideInInspector]
     public RangeAB1Fsm rangeAState;
+    [HideInInspector]
+    public OverdriveChangFSM overdriveChangState;
     private void Awake()
     {
         ai = gameObject.GetComponent<IAiAvoid>();
@@ -65,11 +67,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         normalAState = new NormalAB1FSM(this);
         dashAState = new DashAB1FSM(this);
         rangeAState = new RangeAB1Fsm(this);
+        overdriveChangState = new OverdriveChangFSM(this);
     }
 
     protected override BaseState GetInitialState()
     {
-        return dashAState;
+        return idleState;
     }
 
     private void Update()
@@ -92,10 +95,11 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
         if (overdrive)
         {
-            overdriveTimer += Time.deltaTime;
-            if (overdriveTimer > overdriveTime)
+            overdriveTime += Time.deltaTime;
+            if (overdriveTime > overdriveTimer)
             {
-                time = 0;
+                overdriveGage = 0;
+                overdriveTime = 0;
                 overdrive = false;
             }
         }
@@ -109,13 +113,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         {
             LaserFire();
         }
-    }
-
-    public async UniTask ChangeMode()
-    {
-        ai.destination = Vector2.zero;
-        startOverdrive = false;
-        await UniTask.WaitForSeconds(3f);
     }
 
     public async UniTask MeleeHitzone(float charge,int hitZone)
@@ -210,7 +207,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
         await FadeLaser(charge,laserColorGradient,false);
         m_lineRenderer.colorGradient = laserColorGradientOriginal;
-
         laserFiring = true;
 
         await UniTask.WaitForSeconds(duration);
@@ -288,12 +284,18 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
                 }
             }
         }
-
+        LayerMask playerLayer = LayerMask.GetMask("Player");
         if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right))
         {
             RaycastHit2D _hit = Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right);
+            Debug.Log(_hit.collider.name);
             DrawRay(laserFireStart.position, _hit.point);
         }
+        else
+        {
+            DrawRay(laserFireStart.position, laserFireStart.position + laserFireStart.transform.right * laserDistance);
+        }
+        
 
     }
 
@@ -302,8 +304,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         overdriveGage++;
         if (overdriveGage == overdriveGageMax)
         {
-            overdrive = true;
-            startOverdrive = true;
+            overdriveChang = true;
         }
         Health -= damage;
         switch (type)

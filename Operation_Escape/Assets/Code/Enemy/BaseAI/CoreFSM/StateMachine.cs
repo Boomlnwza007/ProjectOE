@@ -45,11 +45,6 @@ public class StateMachine : MonoBehaviour
         return null;
     }
 
-    public virtual object Getdata(string key)
-    {
-        return null;
-    }
-
     //private void OnGUI()
     //{
     //    string content = curState.name;

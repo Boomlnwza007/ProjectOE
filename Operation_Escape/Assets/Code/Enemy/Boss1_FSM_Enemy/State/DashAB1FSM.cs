@@ -46,17 +46,17 @@ public class DashAB1FSM : BaseState
             if (Vector2.Distance(ai.target.position, ai.position) < 3)
             {
                 ai.Maxspeed = speed;
-                await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.5f, 1), Aim(0.4f));
+                await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).MeleeHitzone(0.5f, 0), Aim(0.4f));
                 ai.canMove = false;
                 await UniTask.WaitForSeconds(1);
                 ai.canMove = true;
-                stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+                ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
                 return;
             }
             await UniTask.Yield();
         }
-       ai.Maxspeed = speed;
-       stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+        ai.Maxspeed = speed;
+        ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
     }
 
     public async UniTask Aim(float wait)
@@ -65,4 +65,18 @@ public class DashAB1FSM : BaseState
         await UniTask.WaitForSeconds(wait);
         followMeLee = false;
     }
+
+    public void ChangState(BaseState Nextstate)
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        if (state.overdriveChang)
+        {
+            state.ChangState(state.overdriveChangState);
+        }
+        else
+        {
+            state.ChangState(Nextstate);
+        }
+    }
+
 }

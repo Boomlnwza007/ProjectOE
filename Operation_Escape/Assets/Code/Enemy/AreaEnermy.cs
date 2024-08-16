@@ -20,6 +20,7 @@ public class AreaEnermy : MonoBehaviour
                 state.SetCombatPhase(GetComponent<AreaEnermy>());
             }            
         }
+        GetComponent<Collider2D>().enabled = false;
     }
 
     public void combatPhase()

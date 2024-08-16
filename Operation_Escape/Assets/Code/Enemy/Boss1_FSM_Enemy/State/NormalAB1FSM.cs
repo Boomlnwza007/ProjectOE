@@ -16,6 +16,7 @@ public class NormalAB1FSM : BaseState
     public override void Enter()
     {
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
+        ai.canMove = true;
         speed = ai.Maxspeed;
         Attack().Forget();
     }
@@ -23,7 +24,7 @@ public class NormalAB1FSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;      
+        ai.destination = ai.target.position;
 
         if (followAim)
         {
@@ -52,7 +53,7 @@ public class NormalAB1FSM : BaseState
                 await UniTask.WaitForSeconds(2);
                 ai.canMove = true;
                 ai.Maxspeed = speed;
-                stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
+                ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
                 return;
             }
             await UniTask.Yield();
@@ -65,9 +66,7 @@ public class NormalAB1FSM : BaseState
         await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
         await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
         ai.Maxspeed = speed;
-        stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
-
-
+        ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
     }
 
     public async UniTask Aim(float wait)
@@ -83,5 +82,19 @@ public class NormalAB1FSM : BaseState
         await UniTask.WaitForSeconds(wait);
         followMe = false;
     }
+
+    public void ChangState(BaseState Nextstate)
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        if (state.overdriveChang)
+        {
+            state.ChangState(state.overdriveChangState);
+        }
+        else
+        {
+            state.ChangState(Nextstate);
+        }
+    }
+
 
 }
