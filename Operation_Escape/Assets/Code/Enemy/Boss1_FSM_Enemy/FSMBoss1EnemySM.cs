@@ -171,17 +171,35 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     }
 
+    public void SetStartFollow(Vector3 target)
+    {
+        Vector2 dir = (target - laserGun.position).normalized;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        laserGun.eulerAngles = new Vector3(0, 0, targetAngle);
+    }
+
     public void LaserFollow()
     {
         Vector2 dir = (target.position - laserGun.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float currentAngle = laserGun.eulerAngles.z;
-
-        float angleDifference = Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle));
         float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
 
         laserGun.eulerAngles = new Vector3(0, 0, newAngle);
+    }
 
+    public void LaserFollowStF(Vector3 target)
+    {
+        Vector2 dir = (target - laserGun.position).normalized;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float currentAngle = laserGun.eulerAngles.z;
+
+        float t = Mathf.Clamp01(Time.deltaTime * speedRot);
+        t = Mathf.SmoothStep(0, 1, t);
+
+        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, t);
+
+        laserGun.eulerAngles = new Vector3(0, 0, newAngle);
     }
 
     public async UniTask ShootLaser(float charge, float duration,float speedMulti)
