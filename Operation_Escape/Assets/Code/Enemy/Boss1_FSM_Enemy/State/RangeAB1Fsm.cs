@@ -41,17 +41,17 @@ public class RangeAB1Fsm : BaseState
     public async UniTask Attack()
     {
         ai.canMove = false;
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.1f));
+        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f,1), Aim(charge - 0.1f));
         CheckDistance();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.1f));
+        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f,1), Aim(charge - 0.1f));
         CheckDistance();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.1f));
+        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f,1), Aim(charge - 0.1f));
         if (overdrive)
         {
-            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 4f), Aim(charge+4f));
+            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 4f,2), Aim(charge+4f));
         }
 
-        //await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f), Aim(charge - 0.2f));
+        await ((FSMBoss1EnemySM)stateMachine).ShootMissile();
 
         ai.canMove = false;
         await UniTask.WaitForSeconds(0.5f);

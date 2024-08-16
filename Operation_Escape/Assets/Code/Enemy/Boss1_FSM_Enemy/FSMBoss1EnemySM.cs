@@ -5,8 +5,9 @@ using Cysharp.Threading.Tasks;
 
 public class FSMBoss1EnemySM : StateMachine, IDamageable
 {
-    [Header("Laser")]
+    [Header("Range")]
     [SerializeField] private float laserDistance = 100;
+    [SerializeField] public GameObject bulletmon;
     public Transform laserGun;
     public Transform laserFireStart;
     public LineRenderer m_lineRenderer;
@@ -15,6 +16,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public LayerMask obstacleLayer;
     private bool laserHitZone;
     private bool laserFiring;
+    public float speedRot = 10f;
 
     [Header("Melee")]
     public Transform hand;
@@ -37,7 +39,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float timeCooldown = 2f;
     public float fireRate = 0.8f;
     public IAiAvoid ai;
-    public float speedRot = 10f;
     public bool imortal { get; set; }
     [SerializeField] LootTable lootDrop;
     public Transform target;
@@ -70,10 +71,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         overdriveChangState = new OverdriveChangFSM(this);
     }
 
-    protected override BaseState GetInitialState()
-    {
-        return idleState;
-    }
+    //protected override BaseState GetInitialState()
+    //{
+    //    return idleState;
+    //}
 
     private void Update()
     {
@@ -87,7 +88,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         {
             time += Time.deltaTime;
             if (time > timeCooldown)
-            {
+            {                
                 time = 0;
                 cooldown = false;
             }
@@ -165,17 +166,9 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle));
 
-        if (angleDifference > 5f)
-        {
-            // ค่อยๆ เปลี่ยนมุมการหมุน
-            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
-            hand.eulerAngles = new Vector3(0, 0, newAngle);
-        }
-        else
-        {
-            // หมุนไปยังมุมเป้าหมายทันที
-            hand.eulerAngles = new Vector3(0, 0, targetAngle);
-        }
+        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
+        hand.eulerAngles = new Vector3(0, 0, newAngle);
+
     }
 
     public void LaserFollow()
@@ -185,37 +178,58 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         float currentAngle = laserGun.eulerAngles.z;
 
         float angleDifference = Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle));
+        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
 
-        if (angleDifference > 5f)
-        {
-            // ค่อยๆ เปลี่ยนมุมการหมุน
-            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
-            laserGun.eulerAngles = new Vector3(0, 0, newAngle);
-        }
-        else
-        {
-            // หมุนไปยังมุมเป้าหมายทันที
-            laserGun.eulerAngles = new Vector3(0, 0, targetAngle);
-        }
+        laserGun.eulerAngles = new Vector3(0, 0, newAngle);
+
     }
 
-    public async UniTask ShootLaser(float charge ,float duration)
+    public async UniTask ShootLaser(float charge, float duration,float speedMulti)
     {
+        float speedRotOri = speedRot;
+        speedRot = speedRot * speedMulti;
         m_lineRenderer.colorGradient = laserColorGradient;
         laserHitZone = true;
         m_lineRenderer.enabled = true;
 
-        await FadeLaser(charge,laserColorGradient,false);
+        await FadeLaser(charge, laserColorGradient, false);
         m_lineRenderer.colorGradient = laserColorGradientOriginal;
         laserFiring = true;
 
         await UniTask.WaitForSeconds(duration);
 
-        await FadeLaser(0.2f,laserColorGradientOriginal,true);
+        await FadeLaser(0.2f, laserColorGradientOriginal, true);
         laserHitZone = false;
         m_lineRenderer.enabled = false;
         laserFiring = false;
+        speedRot = speedRotOri;
+    }
 
+    [ContextMenu(nameof(ShootMissile))]
+    public async UniTask ShootMissile()
+    {
+        Vector2 directionToPlayer = (ai.target.position - transform.position).normalized;
+        float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+
+        float angleLeft = angleDirectionToPlayer + 90;
+        float angleRight = angleDirectionToPlayer - 90;
+
+        float spreadAngle = 10;
+        int bulletCount = 3;
+        float startAngle = -spreadAngle * ((bulletCount - 1) / 2.0f);
+        await UniTask.WhenAll(Miissile(bulletCount, startAngle, spreadAngle, angleLeft), Miissile(bulletCount, startAngle, -spreadAngle, angleRight));
+    }
+
+    public async UniTask Miissile(int bulletCount,float startAngle,float spreadAngle,float angleLR)
+    {
+        for (int i = 0; i < bulletCount; i++)
+        {
+            float angle = startAngle + (spreadAngle * i) + angleLR;
+            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            GameObject bulletG = Instantiate(bulletmon, transform.position, rotation);
+            bulletG.GetComponent<BulletFollow>().target = ai.target;
+            await UniTask.WaitForSeconds(0.1f);
+        }
     }
 
     public void DrawRay(Vector2 startPos,Vector2 endPos)

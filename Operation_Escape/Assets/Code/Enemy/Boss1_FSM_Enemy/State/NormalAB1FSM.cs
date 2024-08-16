@@ -59,12 +59,8 @@ public class NormalAB1FSM : BaseState
             await UniTask.Yield();
         }
 
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(0.5f, 0.3f), Aim(0.5f));
+        await ((FSMBoss1EnemySM)stateMachine).ShootMissile();
+
         ai.Maxspeed = speed;
         ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
     }
