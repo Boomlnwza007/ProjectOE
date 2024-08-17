@@ -5,15 +5,30 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     public BaseState curState;
-
+    [Header("statusBasic")]
+    public int Health;
+    public int dmg;
+    public float Speed;
+    public float visRange;
+    public IAiAvoid ai;
+    public LootTable lootDrop;
+    public Transform target;
+    public Rigidbody2D rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
+        ai = gameObject.GetComponent<IAiAvoid>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        ai.target = target;
+        ai.Maxspeed = Speed;
+
         curState = GetInitialState();
         if (curState != null)
         {
             curState.Enter();
-        }
+        }        
     }
 
     private void Update()

@@ -8,7 +8,6 @@ public class RangeAB1Fsm : BaseState
     public RangeAB1Fsm(FSMBoss1EnemySM stateMachine) : base("RangeAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
-    public bool follow;
     public bool overdrive;
     public bool rangeAttack;
     float charge;
@@ -32,26 +31,24 @@ public class RangeAB1Fsm : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.target.position;
-        if (follow)
-        {
-            ((FSMBoss1EnemySM)stateMachine).LaserFollow();
-        }
     }
 
     public async UniTask Attack()
     {
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        state.CreatLaserGun();
         ai.canMove = false;
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f,1), Aim(charge - 0.1f));
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         CheckDistance();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f,1), Aim(charge - 0.1f));
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         CheckDistance();
-        await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 0.5f,1), Aim(charge - 0.1f));
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         if (overdrive)
         {
-            await UniTask.WhenAll(((FSMBoss1EnemySM)stateMachine).ShootLaser(charge, 4f,2), Aim(charge+4f));
+            await state.ShootLaser(charge, 4f, 2, charge + 4f);
         }
-
-        await ((FSMBoss1EnemySM)stateMachine).ShootMissile();
+        state.DelLaserGun();
+        await state.ShootMissile();
 
         ai.canMove = false;
         await UniTask.WaitForSeconds(0.5f);
@@ -71,13 +68,6 @@ public class RangeAB1Fsm : BaseState
         }        
     }
 
-    public async UniTask Aim(float wait)
-    {
-        follow = true;
-        await UniTask.WaitForSeconds(wait);
-        follow = false;
-    }
-
     public void ChangState(BaseState Nextstate)
     {
         var state = (FSMBoss1EnemySM)stateMachine;
@@ -89,5 +79,16 @@ public class RangeAB1Fsm : BaseState
         {
             state.ChangState(Nextstate);
         }
+    }
+
+    public float[] Set()
+    {
+        Vector2 directionToPlayer = (ai.target.position - ai.position).normalized;
+        float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+
+        float angleLeft = angleDirectionToPlayer + 90;
+        float angleRight = angleDirectionToPlayer - 90;
+        float[] angle = { angleLeft, angleRight };
+        return angle;
     }
 }

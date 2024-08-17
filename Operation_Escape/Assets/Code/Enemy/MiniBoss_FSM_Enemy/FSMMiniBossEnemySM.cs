@@ -4,30 +4,17 @@ using UnityEngine;
 
 public class FSMMiniBossEnemySM : StateMachine, IDamageable
 {
-    public int Health;
-    public int dmg;
-    public float Speed;
-    public float visRange;
+    [Header("status")]
     public bool cooldown;
     public float time;
     public float timeCooldown = 6f;
-    public IAiAvoid ai;
     public bool imortal { get; set; }
     public AreaEnermy areaEnermy;
-    [SerializeField] LootTable lootDrop;
-    public Transform target;
-    public Rigidbody2D rb;
-
     public string stateName;
 
     private void Awake()
     {
-        ai = gameObject.GetComponent<IAiAvoid>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        ai.target = target;
-        ai.Maxspeed = Speed;
-        ai.canMove = true;
+        
 
     }
 

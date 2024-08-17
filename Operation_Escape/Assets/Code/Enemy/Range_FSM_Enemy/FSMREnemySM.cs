@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class FSMREnemySM : StateMachine, IDamageable
 {
+    [Header("Range")]
     [SerializeField] 
     private GameObject bullet;
     [SerializeField]
     public Transform bulletTranform;
-    public int Health;
-    public int dmg;
-    public float Speed;
-    public float visRange;
+
+    [Header("status")]
     public bool cooldown;
     private float time;
     public float timeCooldown = 2f;
     public float fireRate = 0.8f;
-    public IAiAvoid ai;
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
-    [SerializeField] LootTable lootDrop;
-    public Transform target;
-    public Rigidbody2D rb;
+
     [HideInInspector]
     public WanderRFSM wanderState;
     [HideInInspector]
@@ -30,14 +26,11 @@ public class FSMREnemySM : StateMachine, IDamageable
     public CloseAttackRFSM closeAttackState;
     [HideInInspector]
     public NormalAttackRFSM normalAttackState;
+
     public string stateName; 
+
     private void Awake()
     {
-        ai = gameObject.GetComponent<IAiAvoid>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        ai.target = target;
-        ai.Maxspeed = Speed;
         wanderState = new WanderRFSM(this);
         checkDistanceState = new CheckDistanceRFSM(this);
         closeAttackState = new CloseAttackRFSM(this);

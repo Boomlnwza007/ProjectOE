@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class FSMSEnemySM : StateMachine, IDamageable
 {
-    public int Health;
-    public int dmg;
-    public float Speed;
-    public float visRange;
+    [Header("status")]
     public bool cooldown;
     public float time;
     public float timeCooldown = 6f;
-    public IAiAvoid ai;
     public AreaEnermy areaEnermy;
-    [SerializeField] LootTable lootDrop;
-    public Transform target;
-    public Rigidbody2D rb;
     public bool canGuard;
     public bool imortal { get; set; }
-    [SerializeField]public GuardShield shield;
     public string stateName;
+
+    [Header("shild")]
+    [SerializeField]public GuardShield shield;
+
     [HideInInspector]
     public BashSFSM bashState;
     [HideInInspector]
@@ -33,11 +29,6 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     private void Awake()
     {
-        ai = gameObject.GetComponent<IAiAvoid>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        ai.target = target;
-        ai.Maxspeed = Speed;
         bashState = new BashSFSM(this);
         chargState = new ChargSFSM(this);
         checkDistanceState = new CheckDistanceSFSM(this);

@@ -13,6 +13,7 @@ public class WanderEMFSM : BaseState
     {
         ai = ((FSMMEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
+        ai.canMove = true;
         time = 0;
     }
 

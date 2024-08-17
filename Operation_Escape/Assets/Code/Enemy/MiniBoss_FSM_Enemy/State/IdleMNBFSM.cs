@@ -19,6 +19,7 @@ public class IdleMNBFSM : BaseState
     {
         if (Vector2.Distance(ai.position, ai.target.position) < ((FSMMiniBossEnemySM)stateMachine).visRange)
         {
+            ai.canMove = true;
             stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
     }
