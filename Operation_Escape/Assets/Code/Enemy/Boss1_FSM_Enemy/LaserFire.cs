@@ -25,11 +25,6 @@ public class LaserFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetPlayer != null)
-        {
-            target = targetPlayer.position;
-        }
-
         if (laserHitZone)
         {
             LaserHitZone();
@@ -48,7 +43,7 @@ public class LaserFire : MonoBehaviour
             }
             else
             {
-                LaserFollow();
+                LaserFollow(targetPlayer);
             }
         }
     }
@@ -67,7 +62,7 @@ public class LaserFire : MonoBehaviour
 
         await UniTask.WaitForSeconds(duration);
 
-        await FadeLaser(0.2f, laserColorGradientOriginal, true);
+        await FadeLaser(0.1f, laserColorGradientOriginal, true);
         laserHitZone = false;
         m_lineRenderer.enabled = false;
         laserFiring = false;
@@ -172,9 +167,19 @@ public class LaserFire : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, newAngle);
     }
 
+    public void LaserFollow(Transform target)
+    {
+        Vector2 dir = (target.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float currentAngle = transform.eulerAngles.z;
+        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
+
+        transform.eulerAngles = new Vector3(0, 0, newAngle);
+    }
+
     public void LaserFollowStF(Vector3 target)
     {
-        Vector2 dir = (target - transform.position).normalized;
+        Vector2 dir = ((transform.position+target) - transform.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float currentAngle = transform.eulerAngles.z;
         targetAngle += overshootAngle;
@@ -220,5 +225,4 @@ public class LaserFire : MonoBehaviour
         await UniTask.WaitForSeconds(wait);
         follow = false;
     }
-
 }

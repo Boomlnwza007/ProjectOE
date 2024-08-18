@@ -6,6 +6,12 @@ public class ChargeGun : BaseGun
 {
     public bool charge;
     BulletCharge bullet;
+
+    private void Start()
+    {
+        charge = false;
+    }
+
     public override void Fire()
     {
         if (Input.GetButtonDown("Fire1"))

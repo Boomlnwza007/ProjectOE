@@ -225,5 +225,5 @@ MonoBehaviour:
   ammo: 4
   maxAmmo: 7
   energyUse: 1
-  canSpecial: 1
+  canSpecial: 0
   firing: 1

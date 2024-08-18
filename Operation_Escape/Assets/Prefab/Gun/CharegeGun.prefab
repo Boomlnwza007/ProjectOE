@@ -142,7 +142,7 @@ MonoBehaviour:
   maxAmmo: 2
   energyUse: 7
   canSpecial: 1
-  firing: 0
+  firing: 1
   charge: 0
 --- !u!1 &8027909560577203779
 GameObject:

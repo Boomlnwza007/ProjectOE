@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AvoidBehavior : MonoBehaviour ,IAiAvoid
+public class AvoidBehavior : MonoBehaviour, IAiAvoid
 {
     public float avoidRadius = 1f;
     public float rayLength = 1f;
@@ -21,12 +21,12 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
     public bool enableRandomDeviation = true;
-    public float deviationAngle = 10f;
-    public float deviationChangeInterval = 2f; // เวลาในวินาทีที่ทิศทางจะเปลี่ยนแปลง
+    public float deviationAngle = 5f; // ลดมุมเบี่ยงเบน
+    public float deviationChangeInterval = 2f;
     private float deviationTimer;
     private float currentDeviationAngle;
 
-    [SerializeField]private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     private Vector2 steering;
     public float curSpeed;
     private Vector2 velocity = Vector2.zero;
@@ -41,7 +41,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
     private void FixedUpdate()
     {
         Move();
-    }   
+    }
 
     public void Move()
     {
@@ -71,8 +71,6 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
 
         curSpeed = speed;
 
-        
-
         endMove = false;
         slowMove = false;
 
@@ -81,7 +79,7 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
             curSpeed = 0f;
             endMove = true;
         }
-        else if (distanceToTarget < slowDownRadius)// หยุดเมื่อถึงเป้าหมาย
+        else if (distanceToTarget < slowDownRadius)
         {
             slowMove = true;
             curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
@@ -96,21 +94,29 @@ public class AvoidBehavior : MonoBehaviour ,IAiAvoid
 
         Vector2 desiredVelocity = targetDirection.normalized;
 
-        if (enableRandomDeviation)
+        if (enableRandomDeviation && avoidForce == Vector2.zero)
         {
-            if (avoidForce == Vector2.zero)
-            {
-                desiredVelocity = Quaternion.Euler(0, 0, currentDeviationAngle) * desiredVelocity;
-            }
-        }        
+            desiredVelocity = Quaternion.Euler(0, 0, currentDeviationAngle) * desiredVelocity;
+        }
 
         steering = desiredVelocity + avoidForce;
+
         if (!canMove)
         {
             curSpeed = 0f;
         }
-        rb.velocity = Vector2.SmoothDamp(rb.velocity, steering.normalized * curSpeed, ref velocity, smoothTime);
 
+        // ใช้ SmoothDamp เฉพาะเมื่อหลีกเลี่ยงสิ่งกีดขวาง
+        if (avoidForce != Vector2.zero)
+        {
+            rb.velocity = Vector2.SmoothDamp(rb.velocity, steering.normalized * curSpeed, ref velocity, smoothTime);
+        }
+        else
+        {
+            rb.velocity = steering.normalized * curSpeed;
+        }
+
+        // ตรวจสอบการชนและเปลี่ยนทิศทางถ้าจำเป็น
         RaycastHit2D hitForward = Physics2D.Raycast(transform.position, rb.velocity.normalized, rayLength, obstacleLayer);
         if (hitForward.collider != null)
         {

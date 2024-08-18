@@ -57,7 +57,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     protected override BaseState GetInitialState()
     {
-        return rangeAState;
+        return idleState;
     }
 
     private void Update()
@@ -94,6 +94,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void CreatLaserGun()
     {
+        SetupHandGun();
         GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.identity, handGun);
         LaserFire laserg = laser.GetComponent<LaserFire>();
         laserg.SetStartFollow(target.position);
@@ -102,6 +103,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void CreatLaserGun(float[] targetStart)
     {
+        SetupHandGun();
         for (int i = 0; i < targetStart.Length; i++)
         {
             GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.identity, handGun);
@@ -110,10 +112,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laserg.SetovershootAngle(5, target);
             lasers.Add(laser);
         }
+
     }
 
     public void CreatLaserGun(int laserCount, float spreadAngle)
     {
+        SetupHandGun();
         Vector2 directionToPlayer = (ai.target.position - transform.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
         float startAngle = -spreadAngle * ((laserCount - 1) / 2.0f); ;
@@ -126,6 +130,13 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laserg.SetovershootAngle(spreadAngle,target);
             lasers.Add(laser);
         }
+    }
+
+    public void SetupHandGun()
+    {
+        Vector2 dir = (target.position - transform.position).normalized;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        handGun.eulerAngles = new Vector3(0, 0, targetAngle);
     }
 
     public void DelLaserGun()
@@ -146,26 +157,26 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laser.targetPlayer = target;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));            
         }        
-    }
+    }   
 
     public async UniTask ShootLaserFollow(float charge, float duration, float speedMulti, float Atime)
     {
-        await UniTask.WaitForSeconds(1);
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
             laser.speedRot = speedRot;
             laser.target = target.position;
             laser.followStF = true;
-            UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime),RangeFollow(charge)).Forget();
+            UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime)).Forget();
         }
-        await UniTask.WaitForSeconds(charge);
+        //await UniTask.WaitForSeconds(charge);
+        await RangeFollow(charge);
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
             laser.accelerationTime = (duration-charge)/2;
         }
-        await UniTask.WaitForSeconds(duration);
+        await UniTask.WaitForSeconds(duration+ charge);
         handGun.localRotation = Quaternion.Euler(0,0,0);
     }
 
@@ -228,10 +239,14 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         while (true)
         {
             timer += Time.deltaTime;
-            Vector2 dir = (target.position - handGun.position).normalized;
+            Vector2 dir = (target.position - transform.position).normalized;
             float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             float currentAngle = handGun.eulerAngles.z;
-
+            for (int i = 0; i < lasers.Count; i++)
+            {
+                LaserFire laser = lasers[i].GetComponent<LaserFire>();
+                laser.target = target.position;
+            }
             float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
             handGun.eulerAngles = new Vector3(0, 0, newAngle);
             if (timer > time)
@@ -239,7 +254,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
                 break;
             }
             await UniTask.Yield();
-        }       
+        }
     }
 
     [ContextMenu(nameof(ShootMissile))]

@@ -54,7 +54,7 @@ public class NormalAB1FSM : BaseState
                 ai.Maxspeed = speed;
                 await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f));
                 await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 2), AimMelee(0.8f));
-                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 4), AimMelee(0.8f));
+                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f));
                 await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f));
                 if (overdrive)
                 {

@@ -18,6 +18,13 @@ public abstract class BaseGun : MonoBehaviour
     public bool canSpecial;
     public bool firing = true;
 
+    private void Awake()
+    {
+        ammo = maxAmmo;
+        firing = true;
+        fireRate = 0;
+    }
+
     public abstract void Fire();
     public abstract void Special();
 

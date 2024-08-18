@@ -45,7 +45,7 @@ public class RangeAB1Fsm : BaseState
         await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         if (overdrive)
         {
-            await state.ShootLaser(charge, 4f, 2, charge + 4f);
+            await state.ShootLaser(charge, 2f, 1, charge + 2f);
         }
         state.DelLaserGun();
         await state.ShootMissile();
