@@ -64,7 +64,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     public void Fire()
     {
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
-        bulletG.GetComponent<BulletFollow>().target = ai.target;
+        bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
     }
 
     public void FireClose()
@@ -77,7 +77,7 @@ public class FSMREnemySM : StateMachine, IDamageable
             float angle = startAngle + (spreadAngle * i);
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation* rotation);
-            bulletG.GetComponent<BulletFollow>().target = ai.target;
+            bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
         }        
     }
 

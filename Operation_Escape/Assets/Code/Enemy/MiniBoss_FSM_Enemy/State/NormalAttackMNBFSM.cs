@@ -22,7 +22,7 @@ public class NormalAttackMNBFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
     }
 
     public async UniTask Attack()

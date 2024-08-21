@@ -23,7 +23,7 @@ public class NormalAttackRFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
         time += Time.deltaTime;
         ai.canMove = true;
 

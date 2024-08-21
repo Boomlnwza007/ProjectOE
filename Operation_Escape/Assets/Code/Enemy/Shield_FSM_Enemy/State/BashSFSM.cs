@@ -16,7 +16,7 @@ public class BashSFSM : BaseState
     {
         ai = ((FSMSEnemySM)stateMachine).ai;
         ((FSMSEnemySM)stateMachine).canGuard = false;
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
         speed = ai.Maxspeed;
     }
 

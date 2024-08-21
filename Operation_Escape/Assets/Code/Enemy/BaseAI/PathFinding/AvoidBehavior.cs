@@ -15,8 +15,10 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public bool endMove { get; private set; }
     public Vector3 position { get { return gameObject.transform.position; } }
     public Vector3 destination { get; set; }
-    public Transform target { get; set; }
+    public Transform targetTarnsform { get; set; }
     public bool randomDeviation { get { return enableRandomDeviation; } set { enableRandomDeviation = value; } }
+    public GameObject playerGameObject { get; private set; }
+    public Vector2 playerVelocity { get; private set; }
 
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
@@ -31,11 +33,18 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public float curSpeed;
     private Vector2 velocity = Vector2.zero;
 
+    private void Awake()
+    {
+        playerGameObject = GameObject.FindGameObjectWithTag("Player");
+        playerVelocity = playerGameObject.GetComponent<Rigidbody2D>().velocity;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         deviationTimer = deviationChangeInterval;
         currentDeviationAngle = Random.Range(-deviationAngle, deviationAngle);
+
     }
 
     private void FixedUpdate()

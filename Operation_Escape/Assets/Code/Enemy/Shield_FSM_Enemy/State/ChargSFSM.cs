@@ -25,7 +25,7 @@ public class ChargSFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
 
         if (((FSMSEnemySM)stateMachine).cooldown)
         {
@@ -41,7 +41,7 @@ public class ChargSFSM : BaseState
             ((FSMSEnemySM)stateMachine).canGuard = true;
         }
 
-        distance = Vector2.Distance(ai.position, ai.target.position);
+        distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
 
         if (cooldown)
         {

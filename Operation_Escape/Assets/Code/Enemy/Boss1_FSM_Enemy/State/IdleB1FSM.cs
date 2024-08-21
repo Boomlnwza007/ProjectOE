@@ -16,7 +16,7 @@ public class IdleB1FSM : BaseState
 
     public override void UpdateLogic()
     {
-        if (Vector2.Distance(ai.position, ai.target.position) < ((FSMBoss1EnemySM)stateMachine).visRange)
+        if (Vector2.Distance(ai.position, ai.targetTarnsform.position) < ((FSMBoss1EnemySM)stateMachine).visRange)
         {
             ai.canMove = true;
             stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);

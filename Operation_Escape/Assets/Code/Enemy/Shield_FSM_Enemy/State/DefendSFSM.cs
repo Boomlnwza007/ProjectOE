@@ -11,14 +11,14 @@ public class DefendSFSM : BaseState
     public override void Enter()
     {
         ai = ((FSMSEnemySM)stateMachine).ai;
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
     }
 
     public override void UpdateLogic()
     {
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
         ((FSMSEnemySM)stateMachine).canGuard = true;
-        float distance = Vector2.Distance(ai.position, ai.target.position);
+        float distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
         if (distance < 8)
         {
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);

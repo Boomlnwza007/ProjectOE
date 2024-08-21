@@ -307,6 +307,9 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  ShootLayer:
+    serializedVersion: 2
+    m_Bits: 64
   follow: 0
   followStF: 0
   overshootAngle: 0

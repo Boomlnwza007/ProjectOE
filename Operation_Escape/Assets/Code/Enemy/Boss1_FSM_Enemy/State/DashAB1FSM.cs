@@ -45,7 +45,7 @@ public class DashAB1FSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
 
         if (followMe)
         {
@@ -75,7 +75,7 @@ public class DashAB1FSM : BaseState
         while (time < 4f)
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.target.position, ai.position) < 3)
+            if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
             {
                 ai.Maxspeed = speed;
                 if (overdrive)
@@ -134,7 +134,7 @@ public class DashAB1FSM : BaseState
 
     public float[] Set()
     {
-        Vector2 directionToPlayer = (ai.target.position - ai.position).normalized;
+        Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
         float angleLeft = angleDirectionToPlayer + 90;

@@ -21,7 +21,7 @@ public class StateMachine : MonoBehaviour
         ai = gameObject.GetComponent<IAiAvoid>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        ai.target = target;
+        ai.targetTarnsform = target;
         ai.Maxspeed = Speed;
 
         curState = GetInitialState();

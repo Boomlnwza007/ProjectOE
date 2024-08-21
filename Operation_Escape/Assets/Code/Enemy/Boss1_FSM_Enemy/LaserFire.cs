@@ -18,6 +18,7 @@ public class LaserFire : MonoBehaviour
     public float accelerationTime = 0.2f;
     public float laserDistance = 100;
     public LayerMask obstacleLayer;
+    public LayerMask ShootLayer;
     public bool follow;
     public bool followStF;
     public float overshootAngle = 0;
@@ -134,9 +135,9 @@ public class LaserFire : MonoBehaviour
                 }
             }
         }
-        if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right))
+        if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right,laserDistance, ShootLayer))
         {
-            RaycastHit2D _hit = Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right);
+            RaycastHit2D _hit = Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, ShootLayer);
             DrawRay(laserFireStart.position, _hit.point);
         }
         else

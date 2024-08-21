@@ -9,6 +9,7 @@ public class NormalAB1FSM : BaseState
     public IAiAvoid ai;
     public float speed;
     public float Charg;
+    public float runTime;
     public bool overdrive;
     bool followMe;
 
@@ -22,10 +23,12 @@ public class NormalAB1FSM : BaseState
         if (!overdrive)
         {
             Charg = 1f;
+            runTime = 4f;
         }
         else
         {
             Charg = 0.5f;
+            runTime = 2f;
         }
         Attack().Forget();
     }
@@ -33,7 +36,7 @@ public class NormalAB1FSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
 
         if (followMe)
         {
@@ -46,10 +49,10 @@ public class NormalAB1FSM : BaseState
         var state = ((FSMBoss1EnemySM)stateMachine);
         ai.Maxspeed = speed * 2;
         float time = 0f;
-        while (time < 4f)
+        while (time < runTime)
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.target.position, ai.position) < 3)
+            if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
             {
                 ai.Maxspeed = speed;
                 await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f));
@@ -58,7 +61,7 @@ public class NormalAB1FSM : BaseState
                 await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f));
                 if (overdrive)
                 {
-                    await UniTask.WhenAll(state.ShootLaserFollow(0.5f, 3f, 1, 4.5f), state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WhenAll(state.ShootLaserFollow(2f, 3f, 1, 4.5f), state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
                 }
 
                 ai.canMove = false;

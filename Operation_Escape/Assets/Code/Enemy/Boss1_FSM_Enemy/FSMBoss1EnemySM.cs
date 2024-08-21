@@ -27,7 +27,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     private float overdriveTime;
     public float overdriveTimer = 60;
     private float time;
-    public float timeCooldown = 2f;
     public float fireRate = 0.8f;
     public bool imortal { get; set; }
     public string stateName;
@@ -66,16 +65,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         {
             curState.UpdateLogic();
             stateName = curState.nameState;
-        }
-
-        if (cooldown)
-        {
-            time += Time.deltaTime;
-            if (time > timeCooldown)
-            {                
-                time = 0;
-                cooldown = false;
-            }
         }
 
         if (overdrive)
@@ -118,7 +107,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public void CreatLaserGun(int laserCount, float spreadAngle)
     {
         SetupHandGun();
-        Vector2 directionToPlayer = (ai.target.position - transform.position).normalized;
+        Vector2 directionToPlayer = (ai.targetTarnsform.position - transform.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
         float startAngle = -spreadAngle * ((laserCount - 1) / 2.0f); ;
         for (int i = 0; i < laserCount; i++)
@@ -260,7 +249,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     [ContextMenu(nameof(ShootMissile))]
     public async UniTask ShootMissile()
     {
-        Vector2 directionToPlayer = (ai.target.position - transform.position).normalized;
+        Vector2 directionToPlayer = (ai.targetTarnsform.position - transform.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
         float angleLeft = angleDirectionToPlayer + 90;
@@ -279,7 +268,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             float angle = startAngle + (spreadAngle * i) + angleLR;
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bulletG = Instantiate(bulletmon, transform.position, rotation);
-            bulletG.GetComponent<BulletFollow>().target = ai.target;
+            bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
             await UniTask.WaitForSeconds(0.1f);
         }
     }   

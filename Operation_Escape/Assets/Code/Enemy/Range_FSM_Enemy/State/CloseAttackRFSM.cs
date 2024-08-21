@@ -22,12 +22,12 @@ public class CloseAttackRFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.position + (ai.position - ai.target.position).normalized*2;
+        ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized*2;
 
         time += Time.deltaTime;
         if (time > 0.5f)
         {
-            ai.destination = ai.target.position;
+            ai.destination = ai.targetTarnsform.position;
             ai.canMove = true;
             ai.Maxspeed = speed;
             if (!((FSMREnemySM)stateMachine).cooldown)

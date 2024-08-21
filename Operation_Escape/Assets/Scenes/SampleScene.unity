@@ -2018,7 +2018,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.99, y: 0.21, z: -10}
+  m_LocalPosition: {x: 26.55, y: -2.32, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3530,7 +3530,7 @@ Transform:
   m_GameObject: {fileID: 1030792272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.99, y: 0.21, z: -10}
+  m_LocalPosition: {x: 26.55, y: -2.32, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5593,7 +5593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 300
   dmg: 30
-  Speed: 0
+  Speed: 12
   visRange: 30
   lootDrop: {fileID: 1597926616}
   target: {fileID: 0}
@@ -5612,8 +5612,8 @@ MonoBehaviour:
   cooldown: 0
   overdrive: 0
   overdriveChang: 0
-  overdriveGageMax: 1
-  overdriveTimer: 2
+  overdriveGageMax: 2
+  overdriveTimer: 120
   timeCooldown: 2
   fireRate: 1
   stateName: 
@@ -5659,7 +5659,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1000
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -6571,13 +6571,17 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9093830181875390882, guid: aa963654f8d60f346907830e91619aa8, type: 3}
+      propertyPath: m_LinearDrag
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9178602101280717769, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.99
+      value: 26.55
       objectReference: {fileID: 0}
     - target: {fileID: 9178602101280717769, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21
+      value: -2.32
       objectReference: {fileID: 0}
     - target: {fileID: 9178602101280717769, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_LocalPosition.z

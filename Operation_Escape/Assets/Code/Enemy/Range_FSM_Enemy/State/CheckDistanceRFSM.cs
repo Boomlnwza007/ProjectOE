@@ -12,15 +12,15 @@ public class CheckDistanceRFSM : BaseState
     {
         ai = ((FSMREnemySM)stateMachine).ai;
         ai.canMove = true;
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
 
-        distance = Vector2.Distance(ai.position, ai.target.position);
+        distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
         if (distance < 9)
         {
            stateMachine.ChangState(((FSMREnemySM)stateMachine).closeAttackState);

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public interface IAiAvoid
 {
-    public Transform target { get; set; }
+    public GameObject playerGameObject { get; }
+    public Transform targetTarnsform { get; set; }
+    public Vector2 playerVelocity { get;}
     public Vector3 destination { get; set; }
     public float Maxspeed { get; set; }
     public bool canMove { get; set; }

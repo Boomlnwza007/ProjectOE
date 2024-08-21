@@ -30,7 +30,7 @@ public class RangeAB1Fsm : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
     }
 
     public async UniTask Attack()
@@ -61,7 +61,7 @@ public class RangeAB1Fsm : BaseState
     {
         if (!overdrive)
         {
-            if (Vector2.Distance(ai.target.position, ai.position) < 3)
+            if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
             {
                 ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
             }
@@ -83,7 +83,7 @@ public class RangeAB1Fsm : BaseState
 
     public float[] Set()
     {
-        Vector2 directionToPlayer = (ai.target.position - ai.position).normalized;
+        Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
         float angleLeft = angleDirectionToPlayer + 90;

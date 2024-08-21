@@ -18,9 +18,9 @@ public class CheckDistanceB1FSM : BaseState
     public override void UpdateLogic()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
-        ai.destination = ai.target.position;
+        ai.destination = ai.targetTarnsform.position;
 
-        distance = Vector2.Distance(ai.position, ai.target.position);
+        distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
         if (distance < 9)
         {
             ChangState(state.dashAState);
