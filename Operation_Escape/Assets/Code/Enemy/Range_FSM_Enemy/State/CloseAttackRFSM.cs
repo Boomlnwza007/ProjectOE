@@ -7,44 +7,45 @@ public class CloseAttackRFSM : BaseState
     public CloseAttackRFSM(FSMREnemySM stateMachine) : base("CloseAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
+    public bool go;
     float time;
 
     // Start is called before the first frame update
     public override void Enter()
     {
+        if (((FSMREnemySM)stateMachine).cooldown)
+        {
+            stateMachine.ChangState(((FSMREnemySM)stateMachine).normalAttackState);
+            return;
+        }
         ai = ((FSMREnemySM)stateMachine).ai;
         speed = ai.Maxspeed;
         time = 0;
         ai.Maxspeed = speed * 10;
         Debug.Log("ตั้งท่าเตรียมโจมตี CloseAttack");
+        ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized * 5;
     }
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();       
+        base.UpdateLogic();
+        if (ai.endMove)
+        {
+            go = true;
+        }
 
-        time += Time.deltaTime;
-        if (time > 0.5f)
+        if (go)
         {
-            ai.destination = ai.targetTarnsform.position;
-            ai.canMove = true;
             ai.Maxspeed = speed;
-            if (!((FSMREnemySM)stateMachine).cooldown)
+            time += Time.deltaTime;
+            if (time > 0.5f)
             {
+                ai.canMove = true;
                 ((FSMREnemySM)stateMachine).FireClose();
+                ((FSMREnemySM)stateMachine).cooldown = true;
+                stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
             }
-            else
-            {
-                stateMachine.ChangState(((FSMREnemySM)stateMachine).normalAttackState);
-                return;
-            }
-            ((FSMREnemySM)stateMachine).cooldown = true;
-            stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
-        }
-        else
-        {
-            ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized * 2;
-        }
+        }      
 
     }
 }

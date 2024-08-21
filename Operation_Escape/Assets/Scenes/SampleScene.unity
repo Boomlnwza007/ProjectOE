@@ -4076,6 +4076,8 @@ MonoBehaviour:
   timeCooldown: 2
   fireRate: 0.8
   areaEnermy: {fileID: 0}
+  radius: 13
+  offset: 3
   stateName: 
 --- !u!1 &1130010123
 GameObject:

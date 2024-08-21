@@ -18,6 +18,11 @@ public class FSMREnemySM : StateMachine, IDamageable
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
 
+    [Header("circle")]
+    private float timeCircle;
+    public float radius = 13;
+    public float offset = 2;
+
     [HideInInspector]
     public WanderRFSM wanderState;
     [HideInInspector]
@@ -76,13 +81,10 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public Vector2 Prefire(Transform target, Transform bulletTransform, float bulletSpeed)
     {
-        // เวกเตอร์จากตำแหน่งกระสุนไปยังตำแหน่งปัจจุบันของเป้าหมาย
         Vector2 toTarget = (Vector2)target.position - (Vector2)bulletTransform.position;
 
-        // คำนวณเวลาที่ใช้ในการเดินทางของกระสุน
         float timeToTarget = toTarget.magnitude / bulletSpeed;
 
-        // คำนวณตำแหน่งที่คาดการณ์ไว้โดยใช้ความเร็วของเป้าหมาย
         Vector2 predictedPosition = (Vector2)target.position + (Vector2)target.GetComponent<Rigidbody2D>().velocity * timeToTarget;
 
         return predictedPosition;
@@ -100,6 +102,30 @@ public class FSMREnemySM : StateMachine, IDamageable
             GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation* rotation);
             bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
         }        
+    }
+
+    public void Movement()
+    {
+        Debug.Log(Vector2.Distance(transform.position, target.position));
+
+        if (Vector2.Distance(transform.position,target.position) < 15)
+        {
+            timeCircle += Time.deltaTime;
+            var normal = (ai.position - target.position).normalized;
+            if (timeCircle > 3)
+            {
+                offset *= -1;
+                timeCircle = 0;
+                radius = Random.Range(5,13);
+            }
+            var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
+            ai.destination = target.position + normal * radius + tangent * offset;
+        }
+        else
+        {
+            ai.destination = target.position;
+        }
+
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)

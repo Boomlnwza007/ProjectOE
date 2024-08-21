@@ -18,19 +18,20 @@ public class NormalAttackRFSM : BaseState
         Debug.Log("ตั้งท่าเตรียมโจมตี1 0.5");
         time = 0;
         bulltCount = 0;
+        ai.canMove = true;
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTarnsform.position;
-        time += Time.deltaTime;
-        ai.canMove = true;
-
+        ((FSMREnemySM)stateMachine).Movement();
+        time += Time.deltaTime;  
+        
         if (bulltCount >=3)
         {
             stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
         }
+
         if (time >= 0.8f)
         {
             bulltCount++;
