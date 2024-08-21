@@ -125,7 +125,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     {
         Vector2 dir = (target.position - transform.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        handGun.eulerAngles = new Vector3(0, 0, targetAngle);
+        handGun.localRotation = Quaternion.Euler(0, 0, targetAngle);
     }
 
     public void DelLaserGun()
@@ -216,9 +216,17 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         Vector2 dir = (target.position - hand.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float currentAngle = hand.eulerAngles.z;
+        targetAngle += 90;
+        targetAngle = (targetAngle + 360) % 360;
+        int segment = Mathf.FloorToInt(targetAngle / 90);
 
-        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
+        float newAngle = Mathf.LerpAngle(currentAngle, segment*90, Time.deltaTime * speedRot*2);
         hand.eulerAngles = new Vector3(0, 0, newAngle);
+
+
+        //Debug.Log(angle);
+       // hand.eulerAngles = new Vector3(0, 0, segment * 90);
+
 
     }
 
@@ -238,10 +246,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             }
             float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
             handGun.eulerAngles = new Vector3(0, 0, newAngle);
+
             if (timer > time)
             {
                 break;
             }
+
             await UniTask.Yield();
         }
     }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
 
 public class EnergyDrop : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class EnergyDrop : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
-        Destroy().Forget();
+        StartCoroutine(Destroy());        
     }
 
     // Update is called once per frame
@@ -27,10 +26,11 @@ public class EnergyDrop : MonoBehaviour
         }
     }
 
-    async UniTask Destroy()
+    IEnumerator Destroy() 
     {
-        await UniTask.WaitForSeconds(10f);
+        yield return new WaitForSeconds(10f);
         Destroy(gameObject);
+
     }
 
     void gotoPlayer()
@@ -52,7 +52,6 @@ public class EnergyDrop : MonoBehaviour
         {
             collision.gameObject.GetComponent<IEnergy>().GetEnergy(1);
             Destroy(gameObject);
-
         }
     }
 }
