@@ -21,8 +21,7 @@ public class CloseAttackRFSM : BaseState
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
-        ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized*2;
+        base.UpdateLogic();       
 
         time += Time.deltaTime;
         if (time > 0.5f)
@@ -41,6 +40,10 @@ public class CloseAttackRFSM : BaseState
             }
             ((FSMREnemySM)stateMachine).cooldown = true;
             stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
+        }
+        else
+        {
+            ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized * 2;
         }
 
     }

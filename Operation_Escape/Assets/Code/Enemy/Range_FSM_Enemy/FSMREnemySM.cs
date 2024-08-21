@@ -63,8 +63,29 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public void Fire()
     {
+        Vector2 predictedPosition = Prefire(target, bulletTranform, 20);
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
         bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
+        if (Random.value > 0.5)
+        {
+            Vector2 direction = (predictedPosition - (Vector2)bulletTranform.position).normalized;
+            bulletG.transform.right = direction;
+            bulletG.GetComponent<Rigidbody2D>().velocity = direction * 20;
+        }
+    }
+
+    public Vector2 Prefire(Transform target, Transform bulletTransform, float bulletSpeed)
+    {
+        // เวกเตอร์จากตำแหน่งกระสุนไปยังตำแหน่งปัจจุบันของเป้าหมาย
+        Vector2 toTarget = (Vector2)target.position - (Vector2)bulletTransform.position;
+
+        // คำนวณเวลาที่ใช้ในการเดินทางของกระสุน
+        float timeToTarget = toTarget.magnitude / bulletSpeed;
+
+        // คำนวณตำแหน่งที่คาดการณ์ไว้โดยใช้ความเร็วของเป้าหมาย
+        Vector2 predictedPosition = (Vector2)target.position + (Vector2)target.GetComponent<Rigidbody2D>().velocity * timeToTarget;
+
+        return predictedPosition;
     }
 
     public void FireClose()

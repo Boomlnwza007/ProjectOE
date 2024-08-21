@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   damage: 5
-  force: 20
+  speed: 7
   knockBack: 1
   tagUse: Enemy
   target: {fileID: 0}

@@ -50,7 +50,7 @@ public class GuardShield : MonoBehaviour
                         {
                             bullet.target = target;
                             bullet.tagUse = "Player";
-                            bullet.rb.velocity = (target.position - transform.position).normalized * bullet.force;
+                            bullet.rb.velocity = (target.position - transform.position).normalized * bullet.speed;
                             bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
                             bullet.ResetGameObj();
                         }                        

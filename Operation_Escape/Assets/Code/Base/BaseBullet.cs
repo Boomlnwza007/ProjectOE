@@ -6,7 +6,7 @@ public abstract class BaseBullet : MonoBehaviour
 {
     public Rigidbody2D rb;
     public int damage;
-    public float force;
+    public float speed;
     public float knockBack;
     public string tagUse;
     public Transform target;

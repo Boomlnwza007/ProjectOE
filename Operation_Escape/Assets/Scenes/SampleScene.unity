@@ -3877,7 +3877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1070119683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4070,7 +4070,7 @@ MonoBehaviour:
   lootDrop: {fileID: 1070119683}
   target: {fileID: 0}
   rb: {fileID: 0}
-  bullet: {fileID: 4640713933992763453, guid: b69ce2fad8583714080b3e1eded54141, type: 3}
+  bullet: {fileID: 4640713933992763453, guid: 1600d66847cfab747ad170f37004b054, type: 3}
   bulletTranform: {fileID: 924344408}
   cooldown: 0
   timeCooldown: 2
@@ -5495,7 +5495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1597926614
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5598,7 +5598,7 @@ MonoBehaviour:
   lootDrop: {fileID: 1597926616}
   target: {fileID: 0}
   rb: {fileID: 1597926619}
-  bulletmon: {fileID: 4640713933992763453, guid: a69bf5ec44a730e43b701ec1fade4189, type: 3}
+  bulletmon: {fileID: 4640713933992763453, guid: 1600d66847cfab747ad170f37004b054, type: 3}
   speedRot: 10
   lineRendererPrefab: {fileID: 6985345348325332878, guid: 6dd1025c435c2814aba30f3618331e48, type: 3}
   handGun: {fileID: 594553986}
@@ -5612,7 +5612,7 @@ MonoBehaviour:
   cooldown: 0
   overdrive: 0
   overdriveChang: 0
-  overdriveGageMax: 3
+  overdriveGageMax: 40
   overdriveTimer: 60
   fireRate: 0.7
   stateName: 

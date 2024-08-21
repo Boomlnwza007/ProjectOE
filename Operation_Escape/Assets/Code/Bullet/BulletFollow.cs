@@ -13,7 +13,7 @@ public class BulletFollow : BaseBullet
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * force;
+        rb.velocity = transform.right * speed;
         time = 0;
     }
 
@@ -38,7 +38,7 @@ public class BulletFollow : BaseBullet
             }           
         }
         
-        rb.velocity = transform.right * force;
+        rb.velocity = transform.right * speed;
 
     }
 

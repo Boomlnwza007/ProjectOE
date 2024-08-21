@@ -9,7 +9,7 @@ public class BulletScript : BaseBullet
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * force;
+        rb.velocity = transform.right * speed;
     }
 
     private void OnBecameInvisible()

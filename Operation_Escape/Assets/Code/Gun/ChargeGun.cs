@@ -41,7 +41,7 @@ public class ChargeGun : BaseGun
                 firing = false;
                 charge = false;
                 bullet.charging = false;
-                bullet.rb.velocity = bullet.transform.right * bullet.force;
+                bullet.rb.velocity = bullet.transform.right * bullet.speed;
             }
         }
 

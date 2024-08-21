@@ -44,7 +44,7 @@ public class BulletCharge : BaseBullet
 
     public void Shoot()
     {
-        rb.velocity = transform.right * force;
+        rb.velocity = transform.right * speed;
     }
 
     private void OnBecameInvisible()
