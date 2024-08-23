@@ -43,11 +43,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: TileMap
+  - name: TileMapDown
     uniqueID: 623214947
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: EffectDown
+    uniqueID: 801742251
     locked: 0
   - name: Player
     uniqueID: 767578383
@@ -55,8 +58,11 @@ TagManager:
   - name: Enemy
     uniqueID: 1314857649
     locked: 0
-  - name: Effect
+  - name: EffectOn
     uniqueID: 4172289957
+    locked: 0
+  - name: TileMapON
+    uniqueID: 812173507
     locked: 0
   - name: Text
     uniqueID: 1611219573

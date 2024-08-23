@@ -6,7 +6,6 @@ using Cysharp.Threading.Tasks;
 public class FSMBoss1EnemySM : StateMachine, IDamageable
 {
     [Header("Range")]
-    //[SerializeField] private float laserDistance = 100;
     [SerializeField] public GameObject bulletmon;
     private List<GameObject> lasers = new List<GameObject>();
     public float speedRot = 10f;
@@ -285,8 +284,8 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
-        overdriveGage++;
-        if (overdriveGage == overdriveGageMax)
+        overdriveGage += damage;
+        if (overdriveGage >= overdriveGageMax && !overdrive)
         {
             overdriveChang = true;
         }
