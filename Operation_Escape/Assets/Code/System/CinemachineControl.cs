@@ -14,7 +14,7 @@ public class CinemachineControl : MonoBehaviour
     public float maxMouseDistance = 10f;
     public float maxCameraOffset = 5f;
     public float timeSmoothCamera = 10f;
-    public bool CancameraMove = true;
+    public bool cancameraMove = true;
 
     private void Awake()
     {
@@ -58,7 +58,7 @@ public class CinemachineControl : MonoBehaviour
     {
         if (player == null || transposer == null) return;
 
-        if (CancameraMove)
+        if (cancameraMove)
         {
             CameraMove();
         }

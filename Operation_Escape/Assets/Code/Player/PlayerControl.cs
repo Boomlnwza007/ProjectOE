@@ -16,6 +16,11 @@ public class PlayerControl : MonoBehaviour
 
     public void EnableInput(bool enable)
     {
+        if (!enable)
+        {
+            playerMovement.rb.velocity = Vector2.zero;
+            playerMovement.state = PlayerMovement.State.Normal;
+        }
         playerMovement.enabled = enable;
         playerCombat.enabled = enable;
     }

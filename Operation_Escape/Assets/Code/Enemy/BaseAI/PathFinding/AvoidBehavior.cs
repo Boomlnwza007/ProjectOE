@@ -115,7 +115,6 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             curSpeed = 0f;
         }
 
-        // ใช้ SmoothDamp เฉพาะเมื่อหลีกเลี่ยงสิ่งกีดขวาง
         if (avoidForce != Vector2.zero)
         {
             rb.velocity = Vector2.SmoothDamp(rb.velocity, steering.normalized * curSpeed, ref velocity, smoothTime);

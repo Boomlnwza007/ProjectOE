@@ -5,7 +5,7 @@ using UnityEngine;
 public class SystemControl : MonoBehaviour
 {
     [SerializeField]private PlayerControl playerControl;
-    [SerializeField]private CinemachineControl cinemachineControl;
+    //[SerializeField]private CinemachineControl cinemachineControl;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,6 @@ public class SystemControl : MonoBehaviour
     public void Cutscene(bool On)
     {
         playerControl.EnableInput(On);
-        cinemachineControl.CancameraMove = On;
+        CinemachineControl.Instance.cancameraMove = On;
     }
 }

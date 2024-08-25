@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float dodgeMaxSpeed = 100f;
     public float coolDownDodge = 1f;
     public bool canCombat;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
