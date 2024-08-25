@@ -13,4 +13,10 @@ public class PlayerControl : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         PlayerState = GetComponent<PlayerState>();
     }
+
+    public void EnableInput(bool enable)
+    {
+        playerMovement.enabled = enable;
+        playerCombat.enabled = enable;
+    }
 }

@@ -14,6 +14,7 @@ public class CinemachineControl : MonoBehaviour
     public float maxMouseDistance = 10f;
     public float maxCameraOffset = 5f;
     public float timeSmoothCamera = 10f;
+    public bool CancameraMove = true;
 
     private void Awake()
     {
@@ -57,6 +58,19 @@ public class CinemachineControl : MonoBehaviour
     {
         if (player == null || transposer == null) return;
 
+        if (CancameraMove)
+        {
+            CameraMove();
+        }
+        else
+        {
+            transposer.m_TrackedObjectOffset = Vector3.zero;
+        }
+
+    }
+
+    public void CameraMove()
+    {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
