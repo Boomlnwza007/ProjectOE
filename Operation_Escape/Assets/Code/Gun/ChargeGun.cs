@@ -7,9 +7,10 @@ public class ChargeGun : BaseGun
     public bool charge;
     BulletCharge bullet;
 
-    private void Awake()
+    private void Start()
     {
         charge = false;
+
     }
 
     public override void Fire()
