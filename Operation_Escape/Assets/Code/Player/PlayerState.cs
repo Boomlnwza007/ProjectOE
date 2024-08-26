@@ -9,7 +9,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     public int energy { get; set; }
     public int maxEnergt { get; set; }
     public bool imortal { get; set; }
-    //public PlayerCombat combat;
+    private SpriteFlash spriteFlash;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +18,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
         health = maxHealth;
         maxEnergt = 10;
         energy = maxEnergt;
+        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     public void Die()
@@ -36,7 +37,13 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     {
         if (!imortal)
         {
+            StartCoroutine(Imortal(0.1f));
             health -= damage;
+            if (spriteFlash != null)
+            {
+                spriteFlash.Flash();
+            }
+
             if (health <= 0)
             {
                 Die();
@@ -48,6 +55,4 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     {
         health = maxHealth;
     }
-
-    
 }

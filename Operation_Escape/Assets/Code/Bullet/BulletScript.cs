@@ -24,7 +24,8 @@ public class BulletScript : BaseBullet
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
             {
-                target.Takedamage(damage, DamageType.Rang,knockBack);
+                target.Takedamage(damage, DamageType.Rang,knockbackForce);
+                KnockBackPush(collision);
             }
             Destroy(gameObject);
         }        

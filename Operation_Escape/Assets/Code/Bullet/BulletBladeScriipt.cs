@@ -38,7 +38,8 @@ public class BulletBladeScriipt : BaseBullet
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null && !hitTargets.Contains(target))
             {
-                target.Takedamage(damage, DamageType.Rang,knockBack);
+                target.Takedamage(damage, DamageType.Rang,knockbackForce);
+                KnockBackPush(collision);
                 hitTargets.Add(target);
             }
         }

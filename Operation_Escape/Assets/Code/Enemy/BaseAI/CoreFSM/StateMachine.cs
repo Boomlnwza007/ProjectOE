@@ -60,12 +60,6 @@ public class StateMachine : MonoBehaviour
         return null;
     }
 
-    //private void OnGUI()
-    //{
-    //    string content = curState.name;
-    //    GUILayout.Label($"<color='red'><size=48>{content}</size></color>");
-    //}
-
     public virtual void CombatPhaseOn() { }
     public virtual void SetCombatPhase(AreaEnermy area) { }
 }
