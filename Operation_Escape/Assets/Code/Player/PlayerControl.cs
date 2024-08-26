@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    static public PlayerControl control;
     private PlayerMovement playerMovement;
     private PlayerCombat playerCombat;
     private PlayerState PlayerState;
@@ -12,6 +13,7 @@ public class PlayerControl : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerCombat = GetComponent<PlayerCombat>();
         PlayerState = GetComponent<PlayerState>();
+        control = this;
     }
 
     public void EnableInput(bool enable)
@@ -23,5 +25,16 @@ public class PlayerControl : MonoBehaviour
         }
         playerMovement.enabled = enable;
         playerCombat.enabled = enable;
+    }
+
+    public void Slow(float percent)
+    {
+        percent /= 100f;
+        playerMovement.slowSpeed = playerMovement.speed * percent;
+    }
+
+    public void ResetSlow()
+    {
+        playerMovement.slowSpeed = 0;
     }
 }

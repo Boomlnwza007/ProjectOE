@@ -681,6 +681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   speed: 10
+  slowSpeed: 0
   dodgeMaxSpeed: 70
   coolDownDodge: 1
   canCombat: 1

@@ -64,7 +64,6 @@ public class PlayerCombat : MonoBehaviour
                 comboTimer = 0;
                 CinemachineControl.Instance.ShakeCamera(1f , 0.2f);
                 gunList[currentGun].Fire();
-                //Instantiate(bullet, bulletTranform.position, Quaternion.identity);
             }
             else
             {
@@ -155,6 +154,7 @@ public class PlayerCombat : MonoBehaviour
         if (energy.energy > 0)
         {
             canReload = false;
+            canFire = false;
             StartCoroutine(Reload(gunList[currentGun].timeReload));
         }
     }
@@ -179,6 +179,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(timeReload);
         energy.UseEnergy(gunList[currentGun].energyUse);
         canReload = true;
+        canFire = true;
         gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
     }
     public void Addgun(BaseGun gun)

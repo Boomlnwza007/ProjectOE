@@ -102,7 +102,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   damage: 5
   speed: 7
-  knockBack: 1
+  knockbackForce: 5
   tagUse: Enemy
   target: {fileID: 0}
 --- !u!50 &-8713237800413251932

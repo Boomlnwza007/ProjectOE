@@ -11,8 +11,8 @@ public class ShotGun : BaseGun
         firing = false;
     }
 
-    public override void Special()
+    public override void Ultimate()
     {
-        return;
+        throw new System.NotImplementedException();
     }
 }

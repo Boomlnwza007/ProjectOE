@@ -17,6 +17,7 @@ public class BulletBladeScriipt : BaseBullet
         startPos = transform.position;
         rb.velocity = transform.right * speed;
         originScale = transform.localScale;
+        ready = true;
     }
 
     private void Update()

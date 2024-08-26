@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public enum State { Normal, Dodge, }
     public State state;
     public float speed = 10f;
+    public float slowSpeed = 0f;
     public float dodgeMaxSpeed = 100f;
     public float coolDownDodge = 1f;
     public bool canCombat;
@@ -78,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+                rb.velocity = new Vector2(horizontal * (speed - slowSpeed), vertical * (speed-slowSpeed));
                 break;
             case State.Dodge:
-                rb.velocity = dodgeDir * rollSpeed;
+                rb.velocity = dodgeDir * (rollSpeed - slowSpeed);
                 break;
         }
     }  

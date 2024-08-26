@@ -17,6 +17,7 @@ public abstract class BaseGun : MonoBehaviour
     public int energyUse;
     public bool canSpecial;
     public bool firing = true;
+    public bool canUltimate;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public abstract class BaseGun : MonoBehaviour
     }
 
     public abstract void Fire();
-    public abstract void Special();
-
+    public virtual void Special() { }
+    public abstract void Ultimate();
 
 }

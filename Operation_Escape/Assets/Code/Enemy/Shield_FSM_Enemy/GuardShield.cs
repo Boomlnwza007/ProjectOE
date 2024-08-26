@@ -46,7 +46,7 @@ public class GuardShield : MonoBehaviour
                     BaseBullet bullet = collider.GetComponent<BaseBullet>();
                     if (bullet != null)
                     {
-                        if (bullet.tagUse != "Player")
+                        if (bullet.tagUse != "Player" && bullet.ready)
                         {
                             bullet.target = target;
                             bullet.tagUse = "Player";

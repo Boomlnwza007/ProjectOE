@@ -10,6 +10,7 @@ public abstract class BaseBullet : MonoBehaviour
     public float knockbackForce;
     public string tagUse;
     public Transform target;
+    public bool ready;
     public virtual void ResetGameObj() {}
     public void KnockBackPush(Collider2D collision)
     {

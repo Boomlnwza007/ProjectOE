@@ -33,7 +33,7 @@ public class BulletCharge : BaseBullet
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (charging)
         {
@@ -45,6 +45,7 @@ public class BulletCharge : BaseBullet
     public void Shoot()
     {
         rb.velocity = transform.right * speed;
+        ready = true;
     }
 
     private void OnBecameInvisible()

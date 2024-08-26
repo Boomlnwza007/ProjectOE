@@ -15,6 +15,7 @@ public class BulletFollow : BaseBullet
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
         time = 0;
+        ready = true;
     }
 
     private void FixedUpdate()

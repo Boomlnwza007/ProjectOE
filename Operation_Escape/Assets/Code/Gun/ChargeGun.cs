@@ -14,7 +14,7 @@ public class ChargeGun : BaseGun
 
     public override void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             if (!charge&&firing)
             {
@@ -33,6 +33,7 @@ public class ChargeGun : BaseGun
             if (bullet != null)
             {
                 bullet.Charge();
+                PlayerControl.control.Slow(50);
             }
 
             if (Input.GetButtonUp("Fire1"))
@@ -42,9 +43,15 @@ public class ChargeGun : BaseGun
                 charge = false;
                 bullet.charging = false;
                 bullet.rb.velocity = bullet.transform.right * bullet.speed;
+                PlayerControl.control.Slow(0);
             }
-        }
 
+        }
         
+    }
+
+    public override void Ultimate()
+    {
+        throw new System.NotImplementedException();
     }
 }
