@@ -6,6 +6,7 @@ public class SpriteFlash : MonoBehaviour
 {
     public Material flashMaterial;
     private Material originalMaterial;
+    private Color originalColor;
     private SpriteRenderer spriteRenderer;
 
     public float duration = 0.1f;
@@ -15,6 +16,7 @@ public class SpriteFlash : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalMaterial = spriteRenderer.material;
+        originalColor = spriteRenderer.color;
     }
 
     public void Flash()
@@ -24,10 +26,12 @@ public class SpriteFlash : MonoBehaviour
 
     private IEnumerator FlashRun()
     {
+        spriteRenderer.color = Color.white;
         spriteRenderer.material = flashMaterial;
 
         yield return new WaitForSeconds(duration);
 
+        spriteRenderer.color = originalColor;
         spriteRenderer.material = originalMaterial;
     }
 }
