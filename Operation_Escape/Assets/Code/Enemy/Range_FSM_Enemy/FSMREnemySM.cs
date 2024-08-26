@@ -31,7 +31,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     public CloseAttackRFSM closeAttackState;
     [HideInInspector]
     public NormalAttackRFSM normalAttackState;
-
+    private SpriteFlash spriteFlash;
     public string stateName; 
 
     private void Awake()
@@ -40,6 +40,7 @@ public class FSMREnemySM : StateMachine, IDamageable
         checkDistanceState = new CheckDistanceRFSM(this);
         closeAttackState = new CloseAttackRFSM(this);
         normalAttackState = new NormalAttackRFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()
@@ -131,6 +132,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
+        spriteFlash.Flash();
         switch (type)
         {
             case DamageType.Rang:

@@ -26,6 +26,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public DefendSFSM defendState;
     [HideInInspector]
     public WanderSFSM wanderState;
+    private SpriteFlash spriteFlash;
 
     private void Awake()
     {
@@ -34,6 +35,8 @@ public class FSMSEnemySM : StateMachine, IDamageable
         checkDistanceState = new CheckDistanceSFSM(this);
         defendState = new DefendSFSM(this);
         wanderState = new WanderSFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
+
     }
 
     protected override BaseState GetInitialState()
@@ -96,6 +99,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
+        spriteFlash.Flash();
         switch (type)
         {
             case DamageType.Rang:

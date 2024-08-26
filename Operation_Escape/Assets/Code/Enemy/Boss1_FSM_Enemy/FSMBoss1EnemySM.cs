@@ -29,6 +29,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float fireRate = 0.8f;
     public bool imortal { get; set; }
     public string stateName;
+    private SpriteFlash spriteFlash;
 
     [HideInInspector]
     public CheckDistanceB1FSM checkDistanceState;
@@ -51,6 +52,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         dashAState = new DashAB1FSM(this);
         rangeAState = new RangeAB1Fsm(this);
         overdriveChangState = new OverdriveChangFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()
@@ -290,6 +292,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             overdriveChang = true;
         }
         Health -= damage;
+        spriteFlash.Flash();
         switch (type)
         {
             case DamageType.Rang:

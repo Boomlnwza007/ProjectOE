@@ -11,6 +11,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
     public string stateName;
+    private SpriteFlash spriteFlash;
 
     [HideInInspector]
     public WanderEMFSM wanderState;
@@ -27,6 +28,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
         N1Attack = new NormalAttackEMFSM(this);
         CheckDistance = new CheckDistanceEMFSM(this);
         Charge = new ChargeEMFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     private void Update()
@@ -76,6 +78,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
+        spriteFlash.Flash();
         switch (type)
         {
             case DamageType.Rang:

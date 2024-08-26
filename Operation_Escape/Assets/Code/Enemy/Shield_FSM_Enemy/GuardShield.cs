@@ -51,7 +51,9 @@ public class GuardShield : MonoBehaviour
                             bullet.target = target;
                             bullet.tagUse = "Player";
                             bullet.rb.velocity = (target.position - transform.position).normalized * bullet.speed;
-                            bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
+                            bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle * Random.Range(-5f,5f));
+                            SpriteRenderer spriteRenderer = collider.GetComponent<SpriteRenderer>();
+                            spriteRenderer.color = Color.red;
                             bullet.ResetGameObj();
                         }                        
                     }
