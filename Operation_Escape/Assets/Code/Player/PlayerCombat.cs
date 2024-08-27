@@ -69,7 +69,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 if (canReload)
                 {
-                    Debug.Log("Reload");
                     Reload();
                 }
             }
@@ -83,8 +82,14 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetButtonDown("Reload") && canReload)
         {
-            Debug.Log("Reload");
             Reload();
+        }
+
+        if (Input.GetButton("Ultimate") && !gunList[currentGun].canUltimate && energy.energy > 10)
+        {
+            energy.UseEnergy(10);
+            gunList[currentGun].Ultimate();
+            Debug.Log("Ultimate");
         }
 
         if (comboStep > 0)
@@ -153,6 +158,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (energy.energy > 0)
         {
+            Debug.Log("Reload");
             canReload = false;
             canFire = false;
             StartCoroutine(Reload(gunList[currentGun].timeReload));
