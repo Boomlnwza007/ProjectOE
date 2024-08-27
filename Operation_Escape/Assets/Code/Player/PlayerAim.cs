@@ -6,6 +6,7 @@ public class PlayerAim : MonoBehaviour
 {
     private Transform aimTransform;
     private Camera mainCam;
+    public float angle;
 
     private void Awake()
     {
@@ -19,12 +20,12 @@ public class PlayerAim : MonoBehaviour
         Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         Vector3 aimDir = (mousePos - aimTransform.position).normalized;
-        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        aimTransform.eulerAngles = new Vector3(0, 0, angle);
-
+        float _angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        aimTransform.eulerAngles = new Vector3(0, 0, _angle);
         Vector3 localScale = Vector3.one;
 
-        if (angle>90||angle<-90)
+        angle = _angle;
+        if (_angle>90||_angle<-90)
         {
             localScale.y = -1;
         }
