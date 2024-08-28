@@ -6,8 +6,8 @@ using Cysharp.Threading.Tasks;
 public class PlayerMovement : MonoBehaviour
 {  
     private Camera mainCam;
-    public float horizontal;
-    public float vertical;
+    [HideInInspector] public float horizontal;
+    [HideInInspector] public float vertical;
     private float rollSpeed;
     private int rollCharge;
     private int maxRollCharge = 3;
