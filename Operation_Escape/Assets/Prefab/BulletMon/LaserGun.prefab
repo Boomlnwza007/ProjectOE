@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -122677339
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -93,7 +93,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5071191039352693398}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -304,12 +304,13 @@ MonoBehaviour:
   speedRot: 10
   accelerationTime: 0.2
   laserDistance: 100
+  dpsDamage: 0.2
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   ShootLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   follow: 0
   followStF: 0
   overshootAngle: 0

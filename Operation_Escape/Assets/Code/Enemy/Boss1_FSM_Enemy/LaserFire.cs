@@ -17,6 +17,8 @@ public class LaserFire : MonoBehaviour
     public float speedRot = 10f;
     public float accelerationTime = 0.2f;
     public float laserDistance = 100;
+    public float dpsDamage = 1;
+    private bool canDamage = true;
     public LayerMask obstacleLayer;
     public LayerMask ShootLayer;
     public bool follow;
@@ -131,7 +133,13 @@ public class LaserFire : MonoBehaviour
                 if (player != null)
                 {
                     ////////Edit
-                    player.Takedamage(dmg, DamageType.Rang, 0);
+                    if (canDamage)
+                    {
+                        canDamage = false;
+                        player.Takedamage(dmg, DamageType.Rang, 0);
+                        DamageHit().Forget();
+                    }
+                    Debug.Log("hit");
                 }
             }
         }
@@ -145,10 +153,15 @@ public class LaserFire : MonoBehaviour
         {
             DrawRay(laserFireStart.position, laserFireStart.position + laserFireStart.transform.right * laserDistance);
         }
-
-
     }
-   
+
+    public async UniTask DamageHit()
+    {
+        await UniTask.WaitForSeconds(dpsDamage);
+        canDamage = true;
+        await UniTask.WaitForSeconds(dpsDamage);
+    }
+
     public void LaserFollow()
     {
         Vector2 dir = (target - transform.position).normalized;
