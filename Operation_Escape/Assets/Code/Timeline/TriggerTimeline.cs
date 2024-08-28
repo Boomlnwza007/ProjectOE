@@ -13,6 +13,7 @@ public class TriggerTimeline : MonoBehaviour
     public Rigidbody2D ActorRb;
     public Vector3 StarPos;
     bool Play;
+    public KeyCode skipKey = KeyCode.B;
 
     private void Start()
     {
@@ -20,6 +21,14 @@ public class TriggerTimeline : MonoBehaviour
         {
             playable.played += OnTimelinePlayed;
             playable.stopped += OnTimelineStopped;
+        }
+    }
+
+    private void Update()
+    {
+        if (playable.state == PlayState.Playing && Input.GetKeyDown(skipKey))
+        {
+            SkipCutscene();
         }
     }
 
@@ -37,7 +46,7 @@ public class TriggerTimeline : MonoBehaviour
     {
         if (!Play)
         {
-            Play = false;
+            Play = true;
             systemControl.Cutscene(false);
             StartCoroutine(StartPosition());            
         }
@@ -63,5 +72,14 @@ public class TriggerTimeline : MonoBehaviour
         }
 
         playable.Play();
+    }
+
+    public void SkipCutscene()
+    {
+        playable.time = playable.duration;
+        //playable.Stop();
+
+        systemControl.Cutscene(true);
+        Debug.Log("Cutscene skipped");
     }
 }

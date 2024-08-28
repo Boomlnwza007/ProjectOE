@@ -139,7 +139,7 @@ public class LaserFire : MonoBehaviour
                         player.Takedamage(dmg, DamageType.Rang, 0);
                         DamageHit().Forget();
                     }
-                    Debug.Log("hit");
+                    //Debug.Log("hit");
                 }
             }
         }
