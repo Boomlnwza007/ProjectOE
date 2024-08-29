@@ -24,16 +24,15 @@ public class PlayerControl : MonoBehaviour
 
         if (isFacingRight)
         {
-            animator.SetBool("Right", false);
+            animator.SetBool("Right", true);
         }
         else
         {
-            animator.SetBool("Right", true);
+            animator.SetBool("Right", false);
         }
 
         if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
         {
-            animator.speed = 1;
             if (isFacingRight && playerMovement.horizontal < 0 || !isFacingRight && playerMovement.horizontal > 0)
             {
                 animator.SetBool("MoveBackwards", true);
@@ -46,7 +45,6 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            animator.speed = 0;
             animator.SetBool("Move", false);
         }
     }

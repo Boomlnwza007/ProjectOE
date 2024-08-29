@@ -44,6 +44,14 @@ public class BulletBladeScriipt : BaseBullet
                 hitTargets.Add(target);
             }
         }
+        else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
+        {
+            bulletInteract.Interact();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public override void ResetGameObj()
