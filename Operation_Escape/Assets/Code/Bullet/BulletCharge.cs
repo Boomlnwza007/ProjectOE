@@ -71,6 +71,14 @@ public class BulletCharge : BaseBullet
 
                 Destroy(gameObject);
             }
+            else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
+            {
+                bulletInteract.Interact();
+            }
+            else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            {
+                Destroy(gameObject);
+            }
         }
         
     }

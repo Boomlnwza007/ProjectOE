@@ -52,6 +52,9 @@ TagManager:
   - name: EffectDown
     uniqueID: 801742251
     locked: 0
+  - name: ObjectInteract
+    uniqueID: 658888119
+    locked: 0
   - name: Player
     uniqueID: 767578383
     locked: 0

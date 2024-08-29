@@ -48,7 +48,7 @@ public class BulletBladeScriipt : BaseBullet
         {
             bulletInteract.Interact();
         }
-        else
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Destroy(gameObject);
         }
