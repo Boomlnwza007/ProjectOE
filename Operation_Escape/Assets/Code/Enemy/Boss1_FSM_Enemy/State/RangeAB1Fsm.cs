@@ -38,10 +38,16 @@ public class RangeAB1Fsm : BaseState
         var state = ((FSMBoss1EnemySM)stateMachine);
         state.CreatLaserGun();
         ai.canMove = false;
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);        
+        if (CheckDistance())
+        {
+            return;
+        }
         await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
-        CheckDistance();
-        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
-        CheckDistance();
+        if (CheckDistance())
+        {
+            return;
+        }
         await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         if (overdrive)
         {
@@ -57,15 +63,19 @@ public class RangeAB1Fsm : BaseState
         ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
     }
 
-    public void CheckDistance()
+    public bool CheckDistance()
     {
+        bool distance = false;
         if (!overdrive)
         {
             if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
             {
+                ((FSMBoss1EnemySM)stateMachine).DelLaserGun();
                 ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
+                distance = true;
             }
-        }        
+        }
+        return distance;
     }
 
     public void ChangState(BaseState Nextstate)
