@@ -40,15 +40,12 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                mousePos.z = 0f;
                 horizontal = Input.GetAxisRaw("Horizontal");
                 vertical = Input.GetAxisRaw("Vertical");               
                 if (Input.GetButtonDown("Jump") && canDodge)
                 {
                     Roll();                    
                 }
-                //Flip();
                 break;
             case State.Dodge:
                 canCombat = false;
@@ -73,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
 
     private void FixedUpdate()
     {

@@ -22,31 +22,40 @@ public class PlayerControl : MonoBehaviour
     {
         bool isFacingRight = playerAim.angle > -90 && playerAim.angle < 90;
 
-        if (isFacingRight)
+        switch (playerMovement.state)
         {
-            animator.SetBool("Right", true);
-        }
-        else
-        {
-            animator.SetBool("Right", false);
-        }
+            case PlayerMovement.State.Normal:
 
-        if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
-        {
-            if (isFacingRight && playerMovement.horizontal < 0 || !isFacingRight && playerMovement.horizontal > 0)
-            {
-                animator.SetBool("MoveBackwards", true);
-            }
-            else
-            {
-                animator.SetBool("MoveBackwards", false);
-            }
-            animator.SetBool("Move", true);
-        }
-        else
-        {
-            animator.SetBool("Move", false);
-        }
+                if (isFacingRight)
+                {
+                    animator.SetBool("Right", true);
+                }
+                else
+                {
+                    animator.SetBool("Right", false);
+                }
+
+                if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
+                {
+                    if (isFacingRight && playerMovement.horizontal < 0 || !isFacingRight && playerMovement.horizontal > 0)
+                    {
+                        animator.SetBool("MoveBackwards", true);
+                    }
+                    else
+                    {
+                        animator.SetBool("MoveBackwards", false);
+                    }
+                    animator.SetBool("Move", true);
+                }
+                else
+                {
+                    animator.SetBool("Move", false);
+                }
+
+                break;
+        }        
+
+        
     }
 
     public void EnableInput(bool enable)

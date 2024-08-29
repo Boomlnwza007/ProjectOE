@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
-    private Transform aimTransform;
     private Camera mainCam;
+    //[SerializeField] private Transform body;
     public float angle;
 
-    private void Awake()
-    {
-        aimTransform = this.transform;
-    }
-
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
         mainCam = Camera.main;
+    }
+
+    void Update()
+    {
+        AimAtMouse();
+    }
+
+    private void AimAtMouse()
+    {
         Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
-        Vector3 aimDir = (mousePos - aimTransform.position).normalized;
+        Vector3 aimDir = (mousePos - transform.position).normalized;
         float _angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        aimTransform.eulerAngles = new Vector3(0, 0, _angle);
-        Vector3 localScale = Vector3.one;
-
         angle = _angle;
-        if (_angle>90||_angle<-90)
+        Vector3 localScaleGun = Vector3.one;
+        //Vector3 localScaleBody = Vector3.one;
+
+        if (_angle > 90 || _angle < -90)
         {
-            localScale.y = -1;
+            localScaleGun.y = -1;
+            //localScaleBody.x = -1;
+            //_angle += 180f;
         }
         else
         {
-            localScale.y = +1;
+            localScaleGun.y = +1;
+            //localScaleBody.x = +1;
         }
-        aimTransform.localScale = localScale;
+
+        transform.eulerAngles = new Vector3(0, 0, _angle);
+        transform.localScale = localScaleGun;
+        //body.localScale = localScaleBody;
     }
+
 }
