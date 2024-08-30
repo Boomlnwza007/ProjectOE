@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                rb.velocity = new Vector2(horizontal * (speed - slowSpeed), vertical * (speed-slowSpeed));
+                rb.velocity = new Vector2(horizontal , vertical).normalized * (speed - slowSpeed);
                 break;
             case State.Dodge:
                 rb.velocity = dodgeDir * (rollSpeed - slowSpeed);
