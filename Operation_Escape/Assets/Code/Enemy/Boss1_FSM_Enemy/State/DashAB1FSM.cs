@@ -145,7 +145,8 @@ public class DashAB1FSM : BaseState
 
         state.CreatLaserGun(angle);
 
-        await state.ShootLaserFollowIn(2f, 3f, 1, 4.5f);
+        await UniTask.WhenAll(state.ShootLaserFollowIn(2f, 3f, 1, 4.5f), state.RangeFollow(2f));
+
     }
 
 }

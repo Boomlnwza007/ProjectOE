@@ -103,7 +103,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laserg.SetovershootAngle(5, target);
             lasers.Add(laser);
         }
-
     }
 
     public void CreatLaserGun(int laserCount, float spreadAngle)
@@ -152,7 +151,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime)
     {
-        RangeFollow(charge).Forget();
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
@@ -240,7 +238,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         while (true)
         {
             timer += Time.deltaTime;
-            Vector2 dir = (target.position - transform.position).normalized;
+            Vector2 dir =  (transform.position - target.position).normalized;
             float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             float currentAngle = handGun.eulerAngles.z;
             for (int i = 0; i < lasers.Count; i++)

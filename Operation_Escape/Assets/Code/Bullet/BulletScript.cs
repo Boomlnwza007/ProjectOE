@@ -33,6 +33,7 @@ public class BulletScript : BaseBullet
         else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
         {
             bulletInteract.Interact();
+            Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
