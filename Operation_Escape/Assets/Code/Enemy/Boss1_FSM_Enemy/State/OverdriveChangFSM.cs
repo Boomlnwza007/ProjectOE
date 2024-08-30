@@ -16,7 +16,6 @@ public class OverdriveChangFSM : BaseState
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         ai.canMove = false;
         time = 0;
-        ((FSMBoss1EnemySM)stateMachine).transform.position = Vector2.zero;
         Debug.Log("Start");
     }
 
@@ -25,6 +24,7 @@ public class OverdriveChangFSM : BaseState
         time += Time.deltaTime;
         if (time > 3)
         {
+            ((FSMBoss1EnemySM)stateMachine).JumpCenter();
             Debug.Log("Comple");
             ((FSMBoss1EnemySM)stateMachine).overdrive = true;
             ((FSMBoss1EnemySM)stateMachine).overdriveChang = false;

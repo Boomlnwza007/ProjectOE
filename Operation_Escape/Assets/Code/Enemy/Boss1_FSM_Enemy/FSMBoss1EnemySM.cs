@@ -22,6 +22,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public bool overdrive;
     public bool overdriveChang;
     public int overdriveGageMax;
+    public Transform originPoint;
     private int overdriveGage;
     private float overdriveTime;
     public float overdriveTimer = 60;
@@ -318,4 +319,8 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         return null;
     }
 
+    public void JumpCenter()
+    {
+        transform.position = originPoint.position;
+    }
 }
