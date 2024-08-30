@@ -614,7 +614,7 @@ SpriteRenderer:
   m_SortingLayerID: 767578383
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 468619868, guid: f7a75607abbb8874fbf9538e8d966951, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd87d9a56170ac0439d076f09be14e86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -715,11 +715,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal: 0
   vertical: 0
+  rollChargeCC: 1.5
   state: 0
   speed: 10
   slowSpeed: 0
   dodgeMaxSpeed: 70
-  coolDownDodge: 1
+  coolDownDodge: 2.5
   canCombat: 1
   rb: {fileID: 0}
 --- !u!114 &2200673144129377109
@@ -735,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponGun: {fileID: 3767920626603049848}
-  aimPoint: {fileID: 0}
+  aimPoint: {fileID: 3776936949522445415}
   gunList: []
   sizeHitbox: {x: 2, y: 3}
   damage: 2

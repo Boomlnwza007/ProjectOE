@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private int rollCharge;
     private int maxRollCharge = 3;
     private float rollTimer;
-    private float rollChargeCC = 0.5f;
+    public float rollChargeCC = 1f;
     private float rollCC = 2f;
     private Vector2 dodgeDir;
     private Vector3 mousePos;
