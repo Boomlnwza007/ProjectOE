@@ -175,7 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
-  speed: 15
+  speed: 17
   slowDownRadius: 5
   stopRadius: 2
   enableRandomDeviation: 1
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 300
   dmg: 30
-  Speed: 15
+  Speed: 17
   visRange: 30
   lootDrop: {fileID: 1094802950873366316}
   target: {fileID: 0}
