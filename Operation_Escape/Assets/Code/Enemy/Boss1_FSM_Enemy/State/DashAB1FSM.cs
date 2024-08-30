@@ -81,8 +81,9 @@ public class DashAB1FSM : BaseState
                 if (overdrive)
                 {
                     await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 0), AimMelee(0.4f));
-                    state.CreatLaserGun(Set());
-                    await UniTask.WhenAll( state.ShootLaserFollow(0.5f, 3f, 1, 4.5f),state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WaitForSeconds(1);
+                    await LaserFollowIn();
                     state.DelLaserGun();
                     await UniTask.WaitForSeconds(1);
                     if (Random.value < 0.5f)
@@ -132,15 +133,19 @@ public class DashAB1FSM : BaseState
         }
     }
 
-    public float[] Set()
+    public async UniTask LaserFollowIn()
     {
+        var state = ((FSMBoss1EnemySM)stateMachine);
         Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
         float angleLeft = angleDirectionToPlayer + 90;
         float angleRight = angleDirectionToPlayer - 90;
         float[] angle = { angleLeft, angleRight };
-        return angle;
+
+        state.CreatLaserGun(angle);
+
+        await state.ShootLaserFollowIn(2f, 3f, 1, 4.5f);
     }
 
 }

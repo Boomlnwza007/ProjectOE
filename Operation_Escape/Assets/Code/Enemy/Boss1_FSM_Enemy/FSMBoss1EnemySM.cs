@@ -150,8 +150,9 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }        
     }   
 
-    public async UniTask ShootLaserFollow(float charge, float duration, float speedMulti, float Atime)
+    public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime)
     {
+        RangeFollow(charge).Forget();
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
@@ -160,14 +161,15 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laser.followStF = true;
             UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime)).Forget();
         }
-        //await UniTask.WaitForSeconds(charge);
-        await RangeFollow(charge);
+        await UniTask.WaitForSeconds(charge);
+
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
             laser.accelerationTime = (duration-charge)/2;
         }
-        await UniTask.WaitForSeconds(duration+ charge);
+
+        await UniTask.WaitForSeconds(duration + charge);
         handGun.localRotation = Quaternion.Euler(0,0,0);
     }
 
@@ -208,6 +210,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             spriteRenderer.color = color;
             await UniTask.Yield();
         }
+
         color = Color.white;
         color.a = 1f;
         spriteRenderer.color = color;

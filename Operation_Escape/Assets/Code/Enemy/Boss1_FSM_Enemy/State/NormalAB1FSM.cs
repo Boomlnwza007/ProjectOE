@@ -22,7 +22,7 @@ public class NormalAB1FSM : BaseState
         speed = ai.Maxspeed;
         if (!overdrive)
         {
-            Charg = 1f;
+            Charg = 0.7f;
             runTime = 4f;
         }
         else
@@ -62,12 +62,13 @@ public class NormalAB1FSM : BaseState
                 if (overdrive)
                 {
                     await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
-                    await UniTask.WaitForSeconds(1f);
-                    await state.ShootLaserFollow(2f, 3f, 1, 4.5f);
+                    await UniTask.WaitForSeconds(1);
+                    await LaserFollowIn();
+                    state.DelLaserGun();
                 }
 
                 ai.canMove = false;
-                await UniTask.WaitForSeconds(2);
+                await UniTask.WaitForSeconds(1);
                 ai.canMove = true;
                 ChangState(state.checkDistanceState);
                 return;
@@ -99,5 +100,17 @@ public class NormalAB1FSM : BaseState
         }
     }
 
+    public async UniTask LaserFollowIn()
+    {
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
+        float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
+        float angleLeft = angleDirectionToPlayer + 90;
+        float angleRight = angleDirectionToPlayer - 90;
+        float[] angle = { angleLeft, angleRight };
+
+        state.CreatLaserGun(angle);
+        await state.ShootLaserFollowIn(2f, 3f, 1, 4.5f);
+    }
 }

@@ -2140,6 +2140,11 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!4 &664595923 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1873108645697890520, guid: 7463c189289507f439161078667a8726, type: 3}
+  m_PrefabInstance: {fileID: 354448167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &673213033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5278,7 +5283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3821068465358028548, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3899851578287766090, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5319,6 +5324,14 @@ PrefabInstance:
     - target: {fileID: 3899851578287766090, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6841419420981266608, guid: df91e9d316db68842bce026677ed92ad, type: 3}
+      propertyPath: originPoint
+      value: 
+      objectReference: {fileID: 664595923}
+    - target: {fileID: 6841419420981266608, guid: df91e9d316db68842bce026677ed92ad, type: 3}
+      propertyPath: overdriveGageMax
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
