@@ -175,7 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
-  speed: 20
+  speed: 15
   slowDownRadius: 5
   stopRadius: 2
   enableRandomDeviation: 1
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 300
   dmg: 30
-  Speed: 20
+  Speed: 15
   visRange: 30
   lootDrop: {fileID: 1094802950873366316}
   target: {fileID: 0}
@@ -217,6 +217,7 @@ MonoBehaviour:
   overdrive: 0
   overdriveChang: 0
   overdriveGageMax: 100
+  originPoint: {fileID: 0}
   overdriveTimer: 60
   fireRate: 0.7
   stateName: 

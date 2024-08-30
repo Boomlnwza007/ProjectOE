@@ -61,7 +61,9 @@ public class NormalAB1FSM : BaseState
                 await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f));
                 if (overdrive)
                 {
-                    await UniTask.WhenAll(state.ShootLaserFollow(2f, 3f, 1, 4.5f), state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WaitForSeconds(1f);
+                    await state.ShootLaserFollow(2f, 3f, 1, 4.5f);
                 }
 
                 ai.canMove = false;
