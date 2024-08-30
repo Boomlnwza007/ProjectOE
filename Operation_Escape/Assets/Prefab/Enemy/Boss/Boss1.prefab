@@ -79,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1314857649
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6ac2f4b4b6a3d674283c672ca43626d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,7 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
-  speed: 12
+  speed: 20
   slowDownRadius: 5
   stopRadius: 2
   enableRandomDeviation: 1
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 300
   dmg: 30
-  Speed: 12
+  Speed: 20
   visRange: 30
   lootDrop: {fileID: 1094802950873366316}
   target: {fileID: 0}
