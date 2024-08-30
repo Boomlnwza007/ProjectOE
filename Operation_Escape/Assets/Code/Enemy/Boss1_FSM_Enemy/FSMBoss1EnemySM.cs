@@ -217,7 +217,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         Vector2 dir = (target.position - hand.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float currentAngle = hand.eulerAngles.z;
-        targetAngle += 90;
+        targetAngle += 45;
         targetAngle = (targetAngle + 360) % 360;
         int segment = Mathf.FloorToInt(targetAngle / 90);
 
@@ -227,7 +227,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
         //Debug.Log(angle);
        // hand.eulerAngles = new Vector3(0, 0, segment * 90);
-
 
     }
 

@@ -4,56 +4,34 @@ using UnityEngine;
 
 public class Vecter : MonoBehaviour
 {
-    public int nLineRay = 17;
-    public float angle = 90f;
-    public float rayRang = 17;
+    public Transform hand;
+    public Transform target;
 
-    // Start is called before the first frame update
-    void Start()
+    public void MeleeFollow()
     {
-        
+        Vector2 dir = (target.position - hand.position).normalized;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float currentAngle = hand.eulerAngles.z;
+        targetAngle += 45;
+        targetAngle = (targetAngle + 360) % 360;
+        int segment = Mathf.FloorToInt(targetAngle / 90);
+
+        float newAngle = Mathf.LerpAngle(currentAngle, segment * 90, Time.deltaTime * 30 * 2);
+        hand.eulerAngles = new Vector3(0, 0, newAngle);
+
+
+        //Debug.Log(angle);
+        // hand.eulerAngles = new Vector3(0, 0, segment * 90);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        MeleeFollow();
     }
-    public float detectionDistance = 2f;
 
     private void OnDrawGizmos()
     {
-        //int c = (int)rayRang-nLineRay/2;
-        //bool pn = false;
-        //for (int i = 0; i < nLineRay; i++)
-        //{
-        //    var rotation = this.transform.rotation;
-        //    var rotationMod = Quaternion.AngleAxis(i / ((float)nLineRay - 1) * angle * 2 - angle, Vector3.forward);
-        //    var dir = rotation * rotationMod * Vector2.up;
-        //    Gizmos.DrawLine(this.transform.position, dir.normalized * c);
-        //    if (c>=rayRang || pn)
-        //    {
-        //        c--;
-        //        pn = true;
-        //    }
-        //    else
-        //    {
-        //        c++;
-        //    }
-
-        //}
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + Vector2.right * detectionDistance);
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up).normalized * detectionDistance);
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down).normalized * detectionDistance);
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.up * 0.5f).normalized * detectionDistance);
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + (Vector2.right + Vector2.down * 0.5f).normalized * detectionDistance);
-        //var facing = gameObject.transform.up;
-        //Quaternion rotation = Quaternion.Euler(0.0f, 0.0f, 30.0f);
-        //Vector3 direction = rotation * facing;
-        //Gizmos.DrawLine(this.transform.position, this.transform.position+ facing);
-        //Gizmos.DrawLine(this.transform.position, this.transform.position+direction.normalized );
-
-
+       
     }
 }
