@@ -147,7 +147,18 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laser.targetPlayer = target;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));            
         }        
-    }   
+    }
+
+    public async UniTask ShootLaser(float charge, float duration, float speedMulti, float Atime ,float speedRot)
+    {
+        foreach (var laserGun in lasers)
+        {
+            LaserFire laser = laserGun.GetComponent<LaserFire>();
+            laser.speedRot = speedRot;
+            laser.targetPlayer = target;
+            await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));
+        }
+    }
 
     public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime)
     {

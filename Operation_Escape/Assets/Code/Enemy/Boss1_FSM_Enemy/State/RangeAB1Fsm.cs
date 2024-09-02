@@ -51,7 +51,7 @@ public class RangeAB1Fsm : BaseState
         await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         if (overdrive)
         {
-            await state.ShootLaser(charge, 2f, 1, charge + 2f);
+            await UniTask.WhenAll(state.ShootLaser(charge, 2f, 1, charge + 2f,3.5f), Missil());
         }
         state.DelLaserGun();
         await state.ShootMissile();
@@ -61,6 +61,18 @@ public class RangeAB1Fsm : BaseState
         ai.canMove = true;
 
         ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
+    }
+
+    public async UniTask Missil()
+    {
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        await UniTask.WaitForSeconds(0.5f);
+        await state.ShootMissile();
+        await UniTask.WaitForSeconds(1f);
+        state.ShootMissile().Forget();
+        await UniTask.WaitForSeconds(0.5f);
+        state.ShootMissile().Forget();
+        await UniTask.WaitForSeconds(1);
     }
 
     public bool CheckDistance()
