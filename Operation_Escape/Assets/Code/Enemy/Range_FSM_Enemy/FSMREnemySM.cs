@@ -161,7 +161,10 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public override void CombatPhaseOn()
     {
-        ChangState(checkDistanceState);
+        if (areaEnermy != null)
+        {
+            areaEnermy.AllcombatPhase();
+        }
     }
 
     public override void SetCombatPhase(AreaEnermy area)

@@ -10,6 +10,11 @@ public class AreaEnermy : MonoBehaviour
 
     private void Start()
     {
+        AddAllEnemy();
+    }
+
+    public void AddAllEnemy()
+    {
         Collider2D[] enemygameObject = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0, enemyleLayer);
         foreach (var item in enemygameObject)
         {
@@ -18,17 +23,21 @@ public class AreaEnermy : MonoBehaviour
             {
                 enemy.Add(state);
                 state.SetCombatPhase(GetComponent<AreaEnermy>());
-            }            
+            }
         }
-        GetComponent<Collider2D>().enabled = false;
     }
 
-    public void combatPhase()
+    public void AllcombatPhase()
     {
         foreach (var Enemy in enemy)
         {
-            Debug.Log("chang");
-            Enemy.CombatPhaseOn();
+            Enemy.attacking = true;
         }
+    }
+
+    public float Size()
+    {
+        float size = transform.localScale.x < transform.localScale.y ? transform.localScale.x : transform.localScale.y;
+        return size;
     }
 }

@@ -10,6 +10,7 @@ public class StateMachine : MonoBehaviour
     public int dmg;
     public float Speed;
     public float visRange;
+    public bool attacking;
     public IAiAvoid ai;
     public LootTable lootDrop;
     public Transform target;

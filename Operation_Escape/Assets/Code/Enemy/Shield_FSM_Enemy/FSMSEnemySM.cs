@@ -77,6 +77,11 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     public void CooldownCharg()
     {
+        if (areaEnermy == null)
+        {
+            return;
+        }
+
         float _cooldown = 5;
         List<StateMachine> enemy = areaEnermy.enemy;
         foreach (var item in enemy)
@@ -128,7 +133,10 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     public override void CombatPhaseOn()
     {
-        ChangState(checkDistanceState);
+        if (areaEnermy != null)
+        {
+            areaEnermy.AllcombatPhase();
+        }
     }
 
     public override void SetCombatPhase(AreaEnermy area)

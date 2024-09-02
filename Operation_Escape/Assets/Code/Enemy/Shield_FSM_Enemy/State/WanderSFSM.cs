@@ -6,7 +6,7 @@ public class WanderSFSM : BaseState
 {
     public WanderSFSM(FSMSEnemySM stateMachine) : base("Wander", stateMachine) { }
     public IAiAvoid ai;
-    public float distane = 15f;
+    public float distane = 5f;
     float time;
 
     public override void Enter()
@@ -14,6 +14,7 @@ public class WanderSFSM : BaseState
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         time = 0;
+        distane = ((FSMSEnemySM)stateMachine).areaEnermy.Size();
     }
 
     public override void UpdateLogic()
@@ -30,15 +31,19 @@ public class WanderSFSM : BaseState
 
         if (Vector2.Distance(ai.position, ai.targetTarnsform.position) < ((FSMSEnemySM)stateMachine).visRange)
         {
-            ((FSMSEnemySM)stateMachine).areaEnermy.combatPhase();
+            ((FSMSEnemySM)stateMachine).CombatPhaseOn();
+            stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
+        }
+
+        if (((FSMSEnemySM)stateMachine).attacking)
+        {
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
         }
     }
 
-    public Vector3 Randomposition(Vector3 position, float Size)
+    public Vector2 Randomposition(Vector2 position, float Size)
     {
-        var point = Random.insideUnitSphere * Size;
-        point.z = 0;
+        var point = Random.insideUnitCircle * (Size - 2f);
         point += position;
         return point;
     }
