@@ -111,6 +111,8 @@ public class NormalAB1FSM : BaseState
         float[] angle = { angleLeft, angleRight };
 
         state.CreatLaserGun(angle);
+
         await UniTask.WhenAll(state.ShootLaserFollowIn(2f, 3f, 1, 4.5f), state.RangeFollow(2f));
+
     }
 }
