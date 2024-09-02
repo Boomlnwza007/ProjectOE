@@ -123,13 +123,12 @@ public class LaserFire : MonoBehaviour
     
     public void LaserFiring()
     {
-        RaycastHit2D[] hitInfo = Physics2D.BoxCastAll(laserFireStart.position, new Vector2(m_lineRenderer.startWidth, m_lineRenderer.startWidth), 0f, transform.right, laserDistance, ShootLayer);
-
-        foreach (var hit in hitInfo)
+        if (Physics2D.BoxCast(laserFireStart.position, new Vector2(m_lineRenderer.startWidth, m_lineRenderer.startWidth), 0f, transform.right, laserDistance, ShootLayer))
         {
-            if (hit.collider.CompareTag("Player"))
+            RaycastHit2D hitInfo = Physics2D.BoxCast(laserFireStart.position, new Vector2(m_lineRenderer.startWidth, m_lineRenderer.startWidth), 0f, transform.right, laserDistance, ShootLayer);
+            if (hitInfo.collider.CompareTag("Player"))
             {
-                IDamageable player = hit.collider.GetComponent<IDamageable>();
+                IDamageable player = hitInfo.collider.GetComponent<IDamageable>();
                 if (player != null)
                 {
                     ////////Edit
@@ -143,6 +142,7 @@ public class LaserFire : MonoBehaviour
                 }
             }
         }
+       
 
         if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right,laserDistance, ShootLayer))
         {

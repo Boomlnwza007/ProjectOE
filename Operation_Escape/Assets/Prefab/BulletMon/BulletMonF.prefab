@@ -168,7 +168,9 @@ MonoBehaviour:
   tagUse: Player
   target: {fileID: 0}
   ready: 0
+  speedChangSpeed: 20
+  startSpeed: 20
   rotationSpeed: 2
   starTime: 0.5
   stopTime: 2
-  time: 3
+  curSpeed: 0

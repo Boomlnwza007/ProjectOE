@@ -163,12 +163,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7283115246020254939}
   damage: 30
-  speed: 10
+  speed: 20
   knockbackForce: 0
   tagUse: Player
   target: {fileID: 0}
   ready: 0
-  rotationSpeed: 5
+  speedChangSpeed: 1
+  startSpeed: 5
+  rotationSpeed: 3
   starTime: 0.5
   stopTime: 2
-  time: 0
