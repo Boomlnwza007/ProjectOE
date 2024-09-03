@@ -9,7 +9,7 @@ public abstract class BaseGun : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject iconGun;
     public Transform bulletTranform;
-    public float fireRate;
+    [HideInInspector]public float fireRate;
     public float timeReload;
     public float maxFireRate;
     public int ammo;
@@ -29,5 +29,6 @@ public abstract class BaseGun : MonoBehaviour
     public abstract void Fire();
     public virtual void Special() { }
     public abstract void Ultimate();
+    public virtual void Remove() { }
 
 }

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 767578383
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8679245, g: 0.7470017, b: 0.20060521, a: 1}
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 767578383
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9056604, g: 0.2264151, b: 0.2264151, a: 1}
@@ -215,15 +215,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Handgun
-  gunPrefab: {fileID: 8725111787388529810}
+  gunPrefab: {fileID: 2977321080288724553, guid: b4b3aa0d4339f5743999906a55c54c36, type: 3}
   bulletPrefab: {fileID: 7771206494892856151, guid: ca783c0bfa468ad47a23d731281bdbe1, type: 3}
   iconGun: {fileID: 2977321080288724553, guid: b4b3aa0d4339f5743999906a55c54c36, type: 3}
   bulletTranform: {fileID: 0}
-  fireRate: 0
+  fireRate: 0.0714856
   timeReload: 1
   maxFireRate: 0.3
-  ammo: 4
+  ammo: 3
   maxAmmo: 7
   energyUse: 1
   canSpecial: 0
-  firing: 1
+  firing: 0
+  canUltimate: 0

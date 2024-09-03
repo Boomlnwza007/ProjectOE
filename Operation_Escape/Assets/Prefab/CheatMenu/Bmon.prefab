@@ -257,7 +257,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4200281095775614328, guid: 9b07527ff8d364345b00676dc5147087, type: 3}
         m_TargetAssemblyTypeName: CheatMenu, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickSpawn
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 5291916211820774412}

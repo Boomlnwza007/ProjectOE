@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     private IEnergy energy;
-    private GameObject currentEquipGun;
+    [HideInInspector] public GameObject currentEquipGun;
     [SerializeField] private GameObject WeaponGun;
     [SerializeField] private Transform aimPoint;
-    private int currentGun = -1;
+    [HideInInspector] public int currentGun = -1;
     private int comboStep = 0;
     private float comboTimer;
     [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
@@ -196,6 +196,48 @@ public class PlayerCombat : MonoBehaviour
         EquipGun(currentGun);
     }
 
+    public void RemoveGun(BaseGun gun)
+    {
+        BaseGun oldGun = gunList[currentGun];       
+
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == gun)
+            {
+                gunList[i].Remove();
+                gunList.RemoveAt(i);                
+            }
+        }
+
+        for (int i = 0; i < gunList.Count; i++)
+        {
+            if (gunList[i] == oldGun)
+            {
+                currentGun = i;
+            }
+        }
+
+        
+
+        if (gun == oldGun)
+        {
+            if (gunList.Count != 0)
+            {
+                int index = (currentGun - 1 + gunList.Count) % gunList.Count;
+                EquipGun(index);
+            }            
+        }
+        else
+        {
+            EquipGun(currentGun);
+        }
+
+        if (gunList.Count < 1)
+        {
+            Destroy(currentEquipGun);
+        }
+    }
+
     private void HandleWeaponSwitch()
     {
         for (int i = 0; i < gunList.Count; i++)
@@ -223,7 +265,6 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-
     public void SwapGun(int index)
     {
         if (index+1 > gunList.Count || index == currentGun)
@@ -241,7 +282,7 @@ public class PlayerCombat : MonoBehaviour
         EquipGun(index);
     }
 
-    private void EquipGun(int index)
+    public void EquipGun(int index)
     {
         if (currentEquipGun != null)
         {

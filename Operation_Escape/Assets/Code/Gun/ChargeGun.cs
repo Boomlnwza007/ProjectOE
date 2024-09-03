@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ChargeGun : BaseGun
 {
-    public bool charge;
+    public bool charge = false;
     BulletCharge bullet;
 
-    private void Start()
+    private void Awake()
     {
         charge = false;
-
     }
 
     public override void Fire()
@@ -23,6 +22,7 @@ public class ChargeGun : BaseGun
                 bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletCharge>();
                 bullet.charging = true;
                 bullet.follow = bulletTranform;
+                Debug.Log("Fire " + bullet.name);
             }
         }
     }
@@ -35,17 +35,18 @@ public class ChargeGun : BaseGun
             {
                 bullet.Charge();
                 PlayerControl.control.Slow(50);
+                if (Input.GetButtonUp("Fire1"))
+                {
+                    ammo--;
+                    firing = false;
+                    charge = false;
+                    bullet.charging = false;
+                    bullet.rb.velocity = bullet.transform.right * bullet.speed;
+                    PlayerControl.control.Slow(0);
+                }
             }
 
-            if (Input.GetButtonUp("Fire1"))
-            {
-                ammo--;
-                firing = false;
-                charge = false;
-                bullet.charging = false;
-                bullet.rb.velocity = bullet.transform.right * bullet.speed;
-                PlayerControl.control.Slow(0);
-            }
+
 
         }
         
@@ -54,5 +55,17 @@ public class ChargeGun : BaseGun
     public override void Ultimate()
     {
         throw new System.NotImplementedException();
+    }
+
+    public override void Remove()
+    {
+        if (bullet != null)
+        {
+            firing = false;
+            charge = false;
+            bullet.charging = false;
+            bullet.rb.velocity = bullet.transform.right * bullet.speed;
+            PlayerControl.control.Slow(0);
+        }        
     }
 }

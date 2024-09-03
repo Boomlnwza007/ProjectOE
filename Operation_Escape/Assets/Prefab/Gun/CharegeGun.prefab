@@ -131,20 +131,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: ChargeGun
-  gunPrefab: {fileID: 6384782066870008561}
+  gunPrefab: {fileID: 6912243992006802206, guid: c87bcda8da6484242a83c1e2b748b4ba, type: 3}
   bulletPrefab: {fileID: 6928389756606254245, guid: 20107695ad05c934cb36491d46cb2200, type: 3}
   iconGun: {fileID: 6912243992006802206, guid: c87bcda8da6484242a83c1e2b748b4ba, type: 3}
   bulletTranform: {fileID: 0}
   fireRate: 0
   timeReload: 3
   maxFireRate: 0.7
-  ammo: 0
+  ammo: 1
   maxAmmo: 2
   energyUse: 7
   canSpecial: 1
   firing: 1
   canUltimate: 0
-  charge: 1
 --- !u!1 &8027909560577203779
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,17 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Shotgun
-  gunPrefab: {fileID: 4317823783252990171}
+  gunPrefab: {fileID: 5659692917953052963, guid: 2eea795f268bddf42af49b9d055bae9e, type: 3}
   bulletPrefab: {fileID: 3888396136867698908, guid: d6995b128ee471d49b45593065e627e7, type: 3}
   iconGun: {fileID: 5659692917953052963, guid: 2eea795f268bddf42af49b9d055bae9e, type: 3}
   bulletTranform: {fileID: 0}
-  damage: 5
-  fireRate: 0
+  fireRate: 1.0420547
   timeReload: 3
   maxFireRate: 2
-  ammo: 5
+  ammo: 4
   maxAmmo: 5
   energyUse: 3
+  canSpecial: 0
+  firing: 0
+  canUltimate: 0
 --- !u!1 &4710138414760059746
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +130,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 767578383
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.90588236, g: 0.22745097, b: 0.30928063, a: 1}
@@ -213,7 +215,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 767578383
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.38049954, g: 0.8666667, b: 0.19999999, a: 1}
