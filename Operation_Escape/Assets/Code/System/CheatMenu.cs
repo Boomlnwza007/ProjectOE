@@ -13,6 +13,11 @@ public class CheatMenu : MonoBehaviour
     private List<GameObject> enemySpawnNow = new List<GameObject>();
     private int curPageSpawn = 0;
 
+    [Header("Player")]
+    private bool[] onPlayer = new bool[6];
+    private Dictionary<BaseBullet, int> originalDamages = new Dictionary<BaseBullet, int>();
+    private List<BaseBullet> bullets = new List<BaseBullet>();
+
     [Header("GunEditer")]
     [SerializeField] private GameObject buttonPrefabGun;
     [SerializeField] private ID listGun;
@@ -22,6 +27,8 @@ public class CheatMenu : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private Canvas canvas;
+    [SerializeField] private GameObject mainMenu;
+    public bool onMainMenu = false;
     private GameObject player;
     public enum Mode { Spawnmon ,PlayerStatus ,GunEdit };
     [SerializeField] private GameObject[] allMenu;
@@ -34,6 +41,7 @@ public class CheatMenu : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<IDamageable>().Takedamage(10, DamageType.Melee, 1);
         mode = Mode.Spawnmon;
+        mainMenu.SetActive(onMainMenu);
     }
 
     void Start()
@@ -46,20 +54,18 @@ public class CheatMenu : MonoBehaviour
 
     private void Update()
     {
-        switch (mode)
+
+        CheckListGun();
+        CheckPlaystatus();
+        CheckListMon();
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.C))
         {
-            case Mode.Spawnmon:
-                CheckListMon();
-                break;
-            case Mode.PlayerStatus:
-                break;
-            case Mode.GunEdit:
-                CheckListGun();
-                break;
-            default:
-                break;
+            onMainMenu = !onMainMenu;
+            mainMenu.SetActive(onMainMenu);
         }
     }
+
     public void ModeSpawn()
     {
         if (listenemy != null)
@@ -146,14 +152,14 @@ public class CheatMenu : MonoBehaviour
     {
         string buttonName = button.name;
         int buttonNumber;
-        if (player == null) // ถ้ายังไม่มีการกำหนดค่า
+        if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+
         PlayerCombat playerCombat = player.GetComponent<PlayerCombat>(); 
         BaseGun gun = null;
 
-        // Try to parse the button's name into an integer
         if (int.TryParse(buttonName, out buttonNumber))
         {
             gun = listGun.Item[buttonNumber].GetComponent<BaseGun>();
@@ -186,23 +192,210 @@ public class CheatMenu : MonoBehaviour
 
     public void CheckListGun()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
         foreach (var button in addButtun)
         {
             TMP_Text text = button.GetComponentInChildren<Button>().gameObject.GetComponentInChildren<TMP_Text>();
-            foreach (var gun in player.GetComponent<PlayerCombat>().gunList)
+            if (player.GetComponent<PlayerCombat>().gunList.Count > 0)
             {
-                if (button.name == gun.name)
+                foreach (var gun in player.GetComponent<PlayerCombat>().gunList)
                 {
-                    text.text = "Remove";
-                    break;
-                }
-                else
-                {
-                    text.text = "Add";
+                    if (button.name == gun.name)
+                    {
+                        text.text = "Remove";
+                        break;
+                    }
+                    else
+                    {
+                        text.text = "Add";
+                    }
                 }
             }
+            
         }
         
+    }
+
+    public void OnClickPlayer(Button button)
+    {
+        string buttonName = button.name;
+        int buttonNumber;
+        TMP_Text text = button.GetComponentInChildren<TMP_Text>();
+
+        if (int.TryParse(buttonName, out buttonNumber))
+        {
+            switch (text.text)
+            {
+                case "On":
+                    onPlayer[buttonNumber] = true;
+                    text.text = "Off";
+                    break;
+                case "Off":
+                    onPlayer[buttonNumber] = false;
+                    if (buttonNumber == 4)
+                    {
+                        RevertDamage();
+                    }
+
+                    text.text = "On";
+                    break;
+            }
+        }
+        else
+        {
+            Debug.LogError("Button name is not a valid integer: " + buttonName);
+        }
+       
+
+        if (player = null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
+
+    public void PlayerImmortal()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        PlayerState state = player.GetComponent<PlayerState>();
+        state.imortal = true;
+    }
+
+    public void UnlimitedEnergy()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        PlayerState playerState = player.GetComponent<PlayerState>();
+        playerState.energy = playerState.maxEnergt;
+    }
+
+    public void UnlimitedUltimateEnergy()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        PlayerState playerState = player.GetComponent<PlayerState>();
+        playerState.ultimateEnergy = playerState.maxultimateEnergy;
+    }
+
+    public void UnlimitedDodgeCharge()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        movement.rollCharge = 0;
+    }
+
+    public void AllDamage1000()
+    {
+        BaseBullet[] foundBullets = GameObject.FindObjectsOfType<BaseBullet>();
+
+        foreach (BaseBullet bullet in foundBullets)
+        {
+            if (!bullets.Contains(bullet) && bullet != null && bullet.tagUse == "Enemy")
+            {
+                bullets.Add(bullet);
+                // เก็บค่า damage เดิมไว้
+                originalDamages[bullet] = bullet.damage;
+            }
+        }
+
+        for (int i = bullets.Count - 1; i >= 0; i--)
+        {
+            if (bullets[i] == null || bullets[i].tagUse == "Player")
+            {
+                bullets.RemoveAt(i);
+            }
+        }
+
+        foreach (var bullet in bullets)
+        {
+            bullet.damage = 1000;
+        }
+    }
+
+    public void RevertDamage()
+    {
+        foreach (var bullet in bullets)
+        {
+            if (originalDamages.ContainsKey(bullet))
+            {
+                bullet.damage = originalDamages[bullet]; // คืนค่า damage เดิม
+            }
+        }
+        originalDamages.Clear(); // ล้างข้อมูลหลังจากคืนค่า
+        bullets.Clear(); // ล้างรายการกระสุนที่เก็บไว้
+    }
+
+    public void UnlimitedMaxAmmo()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        PlayerCombat playerCombat = player.GetComponent<PlayerCombat>();
+        if (playerCombat.gunList.Count > 0)
+        {
+            playerCombat.gunList[playerCombat.currentGun].ammo = playerCombat.gunList[playerCombat.currentGun].maxAmmo;
+        }
+    }
+
+    public void CheckPlaystatus()
+    {
+        for (int i = 0; i < onPlayer.Length; i++)
+        {
+            if (onPlayer[i])
+            {
+                CasePlayer(i);
+            }
+        }
+    }
+
+    public void CasePlayer(int index)
+    {
+        if (player = null)
+        {
+            player = GameObject.Find("Player");
+            Debug.Log("Get");
+        }
+
+        switch (index)
+        {
+            case 0:
+                PlayerImmortal();
+                break;
+            case 1:
+                UnlimitedEnergy();
+                break;
+            case 2:
+                UnlimitedUltimateEnergy();
+                break;
+            case 3:
+                UnlimitedDodgeCharge();
+                break;
+            case 4:
+                AllDamage1000();
+                break;
+            case 5:
+                UnlimitedMaxAmmo(); 
+                break;
+        }
     }
 
     public void NextPage()
@@ -266,5 +459,6 @@ public class CheatMenu : MonoBehaviour
                 break;
         }
     }
+
 
 }

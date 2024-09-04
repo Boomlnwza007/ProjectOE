@@ -5,11 +5,10 @@ using Cysharp.Threading.Tasks;
 
 public class PlayerMovement : MonoBehaviour
 {  
-    private Camera mainCam;
     [HideInInspector] public float horizontal;
     [HideInInspector] public float vertical;
     private float rollSpeed;
-    private int rollCharge;
+    [HideInInspector] public int rollCharge;
     private int maxRollCharge = 3;
     private float rollTimer;
     public float rollChargeCC = 1f;
@@ -30,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         state = State.Normal;
     }
 
