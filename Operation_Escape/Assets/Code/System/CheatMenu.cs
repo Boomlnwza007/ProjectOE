@@ -59,7 +59,7 @@ public class CheatMenu : MonoBehaviour
         CheckPlaystatus();
         CheckListMon();
 
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.C))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
         {
             onMainMenu = !onMainMenu;
             mainMenu.SetActive(onMainMenu);
@@ -105,6 +105,31 @@ public class CheatMenu : MonoBehaviour
         Debug.Log(enemy);
         GameObject _enemy = Instantiate(listenemy.Item[enemy], pos, Quaternion.identity);
         enemySpawnNow.Add(_enemy);
+    }
+
+    public void DestroyMonstersOnScreen()
+    {
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject monster in monsters)
+        {
+            if (IsVisible(monster))
+            {
+                Destroy(monster);
+            }
+        }
+    }
+
+    bool IsVisible(GameObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            return renderer.isVisible;
+        }
+
+        return false;
     }
 
     public void CheckListMon()
