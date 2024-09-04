@@ -224,12 +224,13 @@ public class PlayerCombat : MonoBehaviour
             if (gunList.Count != 0)
             {
                 int index = (currentGun - 1 + gunList.Count) % gunList.Count;
-                SwapGun(index);
+                currentGun = index;
+                currentGun = index;
+                gunList[currentGun].bulletTranform = aimPoint;
+                StopCoroutine(Reload(gunList[currentGun].timeReload));
+                gunList[currentGun].firing = false;
+                EquipGun(currentGun);
             }            
-        }
-        else
-        {
-            EquipGun(currentGun);
         }
 
         if (gunList.Count < 1)
@@ -271,7 +272,9 @@ public class PlayerCombat : MonoBehaviour
         {            
             return;
         }
+
         gunList[currentGun].Remove();
+
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
         StopCoroutine(Reload(gunList[currentGun].timeReload));
