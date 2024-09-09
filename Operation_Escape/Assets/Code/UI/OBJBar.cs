@@ -5,7 +5,6 @@ using UnityEngine;
 public class OBJBar : MonoBehaviour
 {
     [SerializeField]private Transform spawnBar;
-    [Range(0,100)]
     public int value;
     public GameObject obj;
     public GameObject bar;
@@ -46,7 +45,7 @@ public class OBJBar : MonoBehaviour
         }
     }
 
-    public void SetHp(int _value)
+    public void SetValue(int _value)
     {
         value = _value;
     }
