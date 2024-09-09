@@ -2,13 +2,14 @@
 public interface IEnergy
 {
     public int ultimateEnergy { get; set; }
-    public int maxultimateEnergy { get; set; }
+    public int maxUltimateEnergy { get; set; }
 
     public int energy { get; set; }
     public int maxEnergt { get; set; }
+
     public void UseEnergy(int amount)
     {
-        if (energy > amount)
+        if (energy >= amount)
         {
             energy -= amount;
         }
@@ -17,9 +18,11 @@ public interface IEnergy
     public void GetEnergy(int amount)
     {
         energy += amount;
+
         if (energy > maxEnergt)
         {
             energy = maxEnergt;
+            GetultimateEnergy(amount);
         }
     }
 
@@ -33,10 +36,10 @@ public interface IEnergy
 
     public void GetultimateEnergy(int amount)
     {
-        energy += amount;
-        if (energy > maxEnergt)
+        ultimateEnergy += amount;
+        if (ultimateEnergy > maxUltimateEnergy)
         {
-            energy = maxEnergt;
+            ultimateEnergy = maxUltimateEnergy;
         }
     }
 }

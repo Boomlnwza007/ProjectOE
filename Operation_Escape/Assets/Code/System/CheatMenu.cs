@@ -39,7 +39,6 @@ public class CheatMenu : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<IDamageable>().Takedamage(10, DamageType.Melee, 1);
         mode = Mode.Spawnmon;
         mainMenu.SetActive(onMainMenu);
     }
@@ -312,7 +311,7 @@ public class CheatMenu : MonoBehaviour
         }
 
         PlayerState playerState = player.GetComponent<PlayerState>();
-        playerState.ultimateEnergy = playerState.maxultimateEnergy;
+        playerState.ultimateEnergy = playerState.maxUltimateEnergy;
     }
 
     public void UnlimitedDodgeCharge()

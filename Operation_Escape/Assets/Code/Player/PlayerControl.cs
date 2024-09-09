@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    [Header("Player")]
     static public PlayerControl control;
     private PlayerMovement playerMovement;
     private PlayerCombat playerCombat;
     private PlayerState playerState;
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private Animator animator;
+
+    [Header("UI")]
+    [SerializeField] private SliderBar healthBar;
+    [SerializeField] private SliderBar ultimateEnergyBar;
+    [SerializeField] private SliderBar EnergyBar;
+    [SerializeField] private OBJBar bulletBar;
+
+
+
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerCombat = GetComponent<PlayerCombat>();
         playerState = GetComponent<PlayerState>();
         control = this;
+    }
+    private void Start()
+    {
+        healthBar.SetMax(playerState.maxHealth, playerState.health);
+        EnergyBar.SetMax(playerState.maxEnergt, playerState.energy);
+        ultimateEnergyBar.SetMax(playerState.maxUltimateEnergy, playerState.ultimateEnergy);
     }
 
     private void Update()
@@ -53,9 +69,35 @@ public class PlayerControl : MonoBehaviour
                 }
 
                 break;
-        }        
+        }
 
-        
+        Bar();
+        Gun();
+
+
+    }
+
+    public void Bar()
+    {
+        if (playerState.health != healthBar.value)
+        {
+            healthBar.SetValue(playerState.health);
+        }
+
+        if (playerState.energy != EnergyBar.value)
+        {
+            EnergyBar.SetValue(playerState.energy);
+        }
+
+        if (playerState.ultimateEnergy != ultimateEnergyBar.value)
+        {
+            ultimateEnergyBar.SetValue(playerState.ultimateEnergy);
+        }
+    }
+
+    public void Gun()
+    {
+
     }
 
     public void EnableInput(bool enable)

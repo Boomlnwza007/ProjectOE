@@ -10,17 +10,21 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     public int maxEnergt { get; set; }
     public bool imortal { get; set; }
     public int ultimateEnergy { get; set; }
-    public int maxultimateEnergy { get; set; }
+    public int maxUltimateEnergy { get; set; }
 
     private SpriteFlash spriteFlash;
+    private void Awake()
+    {
+        health = maxHealth;
+        maxEnergt = 10;
+        maxUltimateEnergy = 10;
+        ultimateEnergy = 0;
+        energy = maxEnergt;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        //combat = GetComponent<PlayerCombat>();
-        health = maxHealth;
-        maxEnergt = 10;
-        energy = maxEnergt;
         spriteFlash = GetComponent<SpriteFlash>();
     }
 

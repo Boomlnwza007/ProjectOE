@@ -55,11 +55,11 @@ TagManager:
   - name: ObjectInteract
     uniqueID: 658888119
     locked: 0
-  - name: Player
-    uniqueID: 767578383
-    locked: 0
   - name: Enemy
     uniqueID: 1314857649
+    locked: 0
+  - name: Player
+    uniqueID: 767578383
     locked: 0
   - name: EffectOn
     uniqueID: 4172289957
