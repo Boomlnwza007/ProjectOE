@@ -87,7 +87,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetButton("Ultimate") && !gunList[currentGun].canUltimate && energy.ultimateEnergy == 10)
         {
-            energy.UseultimateEnergy(10);
+            energy.UseUltimateEnergy(10);
             gunList[currentGun].Ultimate();
             Debug.Log("Ultimate");
         }
@@ -193,6 +193,7 @@ public class PlayerCombat : MonoBehaviour
         currentGun = gunList.Count;
         gunList.Add(gun);
         gunList[currentGun].bulletTranform = aimPoint;
+        gunList[currentGun].Setup();
         EquipGun(currentGun);
     }
 

@@ -24,7 +24,12 @@ public class HandGun : BaseGun
 
         firing = false;
     }
-
+    public override void Setup()
+    {
+        ammo = maxAmmo;
+        firing = true;
+        fireRate = 0;
+    }
     public override void Ultimate()
     {
         canUltimate = true;

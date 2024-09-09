@@ -26,11 +26,11 @@ public interface IEnergy
         }
     }
 
-    public void UseultimateEnergy(int amount)
+    public void UseUltimateEnergy(int amount)
     {
-        if (energy > amount)
+        if (ultimateEnergy >= amount)
         {
-            energy -= amount;
+            ultimateEnergy -= amount;
         }
     }
 

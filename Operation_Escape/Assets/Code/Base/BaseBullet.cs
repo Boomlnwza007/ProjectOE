@@ -12,6 +12,7 @@ public abstract class BaseBullet : MonoBehaviour
     public Transform target;
     public bool ready;
     public virtual void ResetGameObj() {}
+
     public void KnockBackPush(Collider2D collision)
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();

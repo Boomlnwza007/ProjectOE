@@ -57,6 +57,14 @@ public class ChargeGun : BaseGun
         throw new System.NotImplementedException();
     }
 
+    public override void Setup()
+    {
+        charge = false;
+        ammo = maxAmmo;
+        firing = true;
+        fireRate = 0;
+    }
+
     public override void Remove()
     {
         if (bullet != null)

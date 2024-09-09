@@ -30,5 +30,7 @@ public abstract class BaseGun : MonoBehaviour
     public virtual void Special() { }
     public abstract void Ultimate();
     public virtual void Remove() { }
+    public virtual void Setup() { }
+
 
 }
