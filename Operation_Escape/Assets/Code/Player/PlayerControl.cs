@@ -73,8 +73,6 @@ public class PlayerControl : MonoBehaviour
 
         Bar();
         Gun();
-
-
     }
 
     public void Bar()
@@ -102,8 +100,7 @@ public class PlayerControl : MonoBehaviour
             if (playerCombat.gunList[playerCombat.currentGun].ammo != bulletBar.value)
             {
                 bulletBar.SetValue(playerCombat.gunList[playerCombat.currentGun].ammo);
-            }
-            
+            }            
         }
     }
 
