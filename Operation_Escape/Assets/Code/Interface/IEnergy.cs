@@ -3,6 +3,7 @@ public interface IEnergy
 {
     public int ultimateEnergy { get; set; }
     public int maxUltimateEnergy { get; set; }
+    public bool canGetUltimateEnergy { get; set; }
 
     public int energy { get; set; }
     public int maxEnergt { get; set; }
@@ -22,7 +23,10 @@ public interface IEnergy
         if (energy > maxEnergt)
         {
             energy = maxEnergt;
-            GetultimateEnergy(amount);
+            if (canGetUltimateEnergy)
+            {
+                GetultimateEnergy(amount);
+            }
         }
     }
 

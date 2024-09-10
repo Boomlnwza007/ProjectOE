@@ -59,6 +59,7 @@ MonoBehaviour:
   canSpecial: 0
   firing: 0
   canUltimate: 0
+  timeUltimate: 5
 --- !u!1 &4710138414760059746
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 767578383
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.90588236, g: 0.22745097, b: 0.30928063, a: 1}
@@ -215,7 +216,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 767578383
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.38049954, g: 0.8666667, b: 0.19999999, a: 1}

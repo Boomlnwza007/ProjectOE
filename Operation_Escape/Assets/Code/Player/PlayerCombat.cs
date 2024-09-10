@@ -21,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
     public bool canMelee = true;
     public bool canReload = true;
     public bool canFire = true;
+    public float UltiTime = 0;
 
 
     // Start is called before the first frame update
@@ -87,7 +88,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetButton("Ultimate") && !gunList[currentGun].canUltimate && energy.ultimateEnergy == 10)
         {
-            energy.UseUltimateEnergy(10);
+            energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
             Debug.Log("Ultimate");
         }
@@ -100,6 +101,11 @@ public class PlayerCombat : MonoBehaviour
                 comboStep = 0;
                 comboTimer = 0;
             }
+        }
+
+        if (gunList[currentGun].canUltimate)
+        {
+            TimeUltimate();
         }
     }
 
@@ -154,6 +160,22 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    private void TimeUltimate()
+    {
+        if (UltiTime < gunList[currentGun].timeUltimate)
+        {
+            UltiTime += Time.deltaTime;
+            energy.ultimateEnergy = (int)Mathf.Lerp(10f, 0, UltiTime / gunList[currentGun].timeUltimate);
+        }
+        else
+        {
+            gunList[currentGun].canUltimate = false;
+            energy.canGetUltimateEnergy = true;
+            energy.ultimateEnergy = 0;
+            UltiTime = 0;
+        }
+    }
+
     public void Reload()
     {
         if (energy.energy >= gunList[currentGun].energyUse)
@@ -188,6 +210,7 @@ public class PlayerCombat : MonoBehaviour
         canFire = true;
         gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
     }
+
     public void Addgun(BaseGun gun)
     {
         currentGun = gunList.Count;

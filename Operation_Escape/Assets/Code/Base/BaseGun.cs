@@ -18,6 +18,7 @@ public abstract class BaseGun : MonoBehaviour
     public bool canSpecial;
     public bool firing = true;
     public bool canUltimate;
+    public float timeUltimate;
 
     private void Awake()
     {
