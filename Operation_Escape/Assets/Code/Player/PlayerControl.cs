@@ -16,7 +16,11 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private SliderBar healthBar;
     [SerializeField] private SliderBar ultimateEnergyBar;
     [SerializeField] private SliderBar EnergyBar;
+    [SerializeField] private SliderBar reloadBar;
     [SerializeField] private OBJBar bulletBar;
+
+    private float reloadTime = 0;
+
 
 
 
@@ -32,6 +36,7 @@ public class PlayerControl : MonoBehaviour
         healthBar.SetMax(playerState.maxHealth, playerState.health);
         EnergyBar.SetMax(playerState.maxEnergt, playerState.energy);
         ultimateEnergyBar.SetMax(playerState.maxUltimateEnergy, playerState.ultimateEnergy);
+        reloadBar.SetMax(100, 0);
     }
 
     private void Update()
@@ -73,6 +78,33 @@ public class PlayerControl : MonoBehaviour
 
         Bar();
         Gun();
+        Reload();
+    }
+
+    public void Reload()
+    {
+        if (reloadBar != null)
+        {
+            if (!playerCombat.canReload)
+            {
+                if (reloadTime < playerCombat.gunList[playerCombat.currentGun].timeReload)
+                {
+                    reloadBar.Off(true);
+                    reloadTime += Time.deltaTime;
+                    reloadBar.value = Mathf.Lerp(0, 100f, reloadTime / playerCombat.gunList[playerCombat.currentGun].timeReload);
+                }
+            }
+            else
+            {
+                if (reloadBar.canShow)
+                {
+                    reloadBar.Off(false);
+                    reloadTime = 0;
+                    reloadBar.value = 0;
+                }
+            }
+        }
+        
     }
 
     public void Bar()

@@ -13,6 +13,7 @@ public class PlayerCombat : MonoBehaviour
     public bool canReload = true;
     public bool canFire = true;
     public float UltiTime = 0;
+    private Coroutine reloadCoroutine;
 
     [Header("Melee")]
     public int damage = 1;
@@ -99,7 +100,7 @@ public class PlayerCombat : MonoBehaviour
         {
             energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
-            StartCoroutine(Reload(0));
+            reloadCoroutine = StartCoroutine(ReloadWait(0));
             Debug.Log("Ultimate");
         }
 
@@ -193,16 +194,16 @@ public class PlayerCombat : MonoBehaviour
 
     public void Reload()
     {
-        if (energy.energy >= gunList[currentGun].energyUse)
+        if (energy.energy >= gunList[currentGun].energyUse && gunList[currentGun].ammo != gunList[currentGun].maxAmmo)
         {
             Debug.Log("Reload");
             canReload = false;
             canFire = false;
-            StartCoroutine(Reload(gunList[currentGun].timeReload));
+            reloadCoroutine = StartCoroutine(ReloadWait(gunList[currentGun].timeReload));
         }
     }
 
-    private IEnumerator Reload(float timeReload)
+    private IEnumerator ReloadWait(float timeReload)
     {
         yield return new WaitForSeconds(timeReload);
         energy.UseEnergy(gunList[currentGun].energyUse);
@@ -266,7 +267,11 @@ public class PlayerCombat : MonoBehaviour
                 currentGun = index;
                 currentGun = index;
                 gunList[currentGun].bulletTranform = aimPoint;
-                StopCoroutine(Reload(gunList[currentGun].timeReload));
+                if (reloadCoroutine != null)
+                {
+                    StopCoroutine(reloadCoroutine); // ËÂØ´ Coroutine
+                    reloadCoroutine = null;
+                }
                 gunList[currentGun].firing = false;
                 EquipGun(currentGun);
             }            
@@ -311,7 +316,11 @@ public class PlayerCombat : MonoBehaviour
         {            
             return;
         }
-
+        if (reloadCoroutine != null)
+        {
+            StopCoroutine(reloadCoroutine); // ËÂØ´ Coroutine
+            reloadCoroutine = null;
+        }
         gunList[currentGun].Remove();
 
         if (gunList[currentGun].canUltimate)
@@ -324,11 +333,10 @@ public class PlayerCombat : MonoBehaviour
 
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
-        StopCoroutine(Reload(gunList[currentGun].timeReload));
-        //canFire = true;
+        canFire = true;
         gunList[currentGun].firing = false;
         //canMelee = false;
-        //canReload = false;
+        canReload = true;
         EquipGun(index);
     }
 

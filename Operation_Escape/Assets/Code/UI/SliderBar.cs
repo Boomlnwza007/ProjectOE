@@ -8,6 +8,7 @@ public class SliderBar : MonoBehaviour
     public Slider slider;
     public float value;
     public GameObject bar;
+    public bool canShow;
     private void Update()
     {
         if (slider.value != value)
@@ -40,8 +41,9 @@ public class SliderBar : MonoBehaviour
         value = _value;
     }
 
-    public void Off()
+    public void Off(bool off)
     {
-        bar.SetActive(false);
+        canShow = off;
+        bar.SetActive(canShow);
     }
 }
