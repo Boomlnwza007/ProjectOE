@@ -6,11 +6,13 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 {
     public int health;
     public int maxHealth = 10;
+    public int healUseEnergy = 5;
     public int energy { get; set; }
     public int maxEnergt { get; set; }
     public bool imortal { get; set; }
     public int ultimateEnergy { get; set; }
     public int maxUltimateEnergy { get; set; }
+    public bool canGetUltimateEnergy { get; set; }
 
     private SpriteFlash spriteFlash;
     private void Awake()
@@ -20,12 +22,22 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
         maxUltimateEnergy = 10;
         ultimateEnergy = 0;
         energy = maxEnergt;
+        canGetUltimateEnergy = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         spriteFlash = GetComponent<SpriteFlash>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Heal") && health != maxHealth && energy >= healUseEnergy)
+        {
+            energy -= healUseEnergy;
+            health = maxHealth;
+        }
     }
 
     public void Die()
