@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    private IEnergy energy;
+    [Header("Range")]
+    [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
     [HideInInspector] public GameObject currentEquipGun;
+    [HideInInspector] public int currentGun = -1;
     [SerializeField] private GameObject WeaponGun;
     [SerializeField] private Transform aimPoint;
-    [HideInInspector] public int currentGun = -1;
-    private int comboStep = 0;
-    private float comboTimer;
-    [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
-    public Vector2 sizeHitbox;
+    public bool canReload = true;
+    public bool canFire = true;
+    public float UltiTime = 0;
+
+    [Header("Melee")]
     public int damage = 1;
-    public float knockBack = 1;
     public float comboMaxTime = 1.5f;
     public float comboCooldown = 1f;
     public int maxComboSteps = 3;
     public bool canMelee = true;
-    public bool canReload = true;
-    public bool canFire = true;
-    public float UltiTime = 0;
+    [HideInInspector] public Vector2 sizeHitbox;
+    private int comboStep = 0;
+    private float comboTimer;
+
+
+    [Header("Status")]
+    public float knockBack = 1;
+    private IEnergy energy;
+
+
+
 
 
     // Start is called before the first frame update
@@ -90,6 +99,7 @@ public class PlayerCombat : MonoBehaviour
         {
             energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
+            StartCoroutine(Reload(0));
             Debug.Log("Ultimate");
         }
 
@@ -169,11 +179,16 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            gunList[currentGun].canUltimate = false;
-            energy.canGetUltimateEnergy = true;
-            energy.ultimateEnergy = 0;
-            UltiTime = 0;
+            ReUltimate();
         }
+    }
+
+    public void ReUltimate()
+    {
+        gunList[currentGun].canUltimate = false;
+        energy.canGetUltimateEnergy = true;
+        energy.ultimateEnergy = 0;
+        UltiTime = 0;
     }
 
     public void Reload()
@@ -185,6 +200,15 @@ public class PlayerCombat : MonoBehaviour
             canFire = false;
             StartCoroutine(Reload(gunList[currentGun].timeReload));
         }
+    }
+
+    private IEnumerator Reload(float timeReload)
+    {
+        yield return new WaitForSeconds(timeReload);
+        energy.UseEnergy(gunList[currentGun].energyUse);
+        canReload = true;
+        canFire = true;
+        gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
     }
 
     private IEnumerator ComboDelay(float wait)
@@ -200,16 +224,7 @@ public class PlayerCombat : MonoBehaviour
         comboStep = 0;
         comboTimer = 0;
         canMelee = true;
-    }
-
-    private IEnumerator Reload(float timeReload)
-    {
-        yield return new WaitForSeconds(timeReload);
-        energy.UseEnergy(gunList[currentGun].energyUse);
-        canReload = true;
-        canFire = true;
-        gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
-    }
+    }    
 
     public void Addgun(BaseGun gun)
     {
@@ -298,7 +313,10 @@ public class PlayerCombat : MonoBehaviour
         }
 
         gunList[currentGun].Remove();
-
+        gunList[currentGun].canUltimate = false;
+        energy.canGetUltimateEnergy = true;
+        energy.ultimateEnergy = 0;
+        UltiTime = 0;
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
         StopCoroutine(Reload(gunList[currentGun].timeReload));
@@ -316,7 +334,7 @@ public class PlayerCombat : MonoBehaviour
             Destroy(currentEquipGun);
         }
 
-        currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
+        currentEquipGun = Instantiate(gunList[index].gameObject, WeaponGun.transform);
     }
 
     private void OnDrawGizmos()

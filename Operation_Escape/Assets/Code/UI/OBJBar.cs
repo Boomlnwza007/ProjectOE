@@ -29,6 +29,7 @@ public class OBJBar : MonoBehaviour
 
         ChangPrefab();
     }
+
     public void ChangPrefab()
     {
         if (spawnBar.childCount > 0)

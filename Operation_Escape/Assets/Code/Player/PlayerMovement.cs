@@ -4,26 +4,35 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 public class PlayerMovement : MonoBehaviour
-{  
+{
+    public enum State { Normal, Dodge, }
+
+    [Header("Status")]
+    public State state;
     [HideInInspector] public float horizontal;
     [HideInInspector] public float vertical;
-    private float rollSpeed;
-    [HideInInspector] public int rollCharge;
-    private int maxRollCharge = 3;
-    private float rollTimer;
+    public bool canCombat;
+    public Rigidbody2D rb;
+
+    [Header("Walk")]
+    public float speed = 10f;
+    public float slowSpeed = 0f;
+
+
+    [Header("Roll")]
+    public float dodgeMaxSpeed = 100f;
+    public float coolDownDodge = 1f;
     public float rollChargeCC = 1f;
     private float rollCC = 2f;
     private Vector2 dodgeDir;
     private Vector3 mousePos;
     private bool canDodge = true;
-    public enum State { Normal, Dodge, }
-    public State state;
-    public float speed = 10f;
-    public float slowSpeed = 0f;
-    public float dodgeMaxSpeed = 100f;
-    public float coolDownDodge = 1f;
-    public bool canCombat;
-    public Rigidbody2D rb;
+    private float rollSpeed;
+    private int maxRollCharge = 3;
+    private float rollTimer;
+    [HideInInspector] public int rollCharge;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -92,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
             dodgeDir = new Vector2(horizontal, vertical).normalized;
             if (dodgeDir == Vector2.zero)
             {
+                mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = 0;
                 dodgeDir = (transform.position - mousePos).normalized;
             }
             rollSpeed = dodgeMaxSpeed;

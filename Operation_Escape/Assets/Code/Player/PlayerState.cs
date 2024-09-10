@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 {
+    [Header("Status")]
     public int health;
     public int maxHealth = 10;
     public int healUseEnergy = 5;
@@ -14,7 +15,9 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     public int maxUltimateEnergy { get; set; }
     public bool canGetUltimateEnergy { get; set; }
 
+    [Header("Animetion")]
     private SpriteFlash spriteFlash;
+
     private void Awake()
     {
         health = maxHealth;
