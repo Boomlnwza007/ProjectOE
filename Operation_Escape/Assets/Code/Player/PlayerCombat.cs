@@ -313,10 +313,15 @@ public class PlayerCombat : MonoBehaviour
         }
 
         gunList[currentGun].Remove();
-        gunList[currentGun].canUltimate = false;
-        energy.canGetUltimateEnergy = true;
-        energy.ultimateEnergy = 0;
-        UltiTime = 0;
+
+        if (gunList[currentGun].canUltimate)
+        {
+            gunList[currentGun].canUltimate = false;
+            energy.canGetUltimateEnergy = true;
+            energy.ultimateEnergy = 0;
+            UltiTime = 0;
+        }
+
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
         StopCoroutine(Reload(gunList[currentGun].timeReload));
