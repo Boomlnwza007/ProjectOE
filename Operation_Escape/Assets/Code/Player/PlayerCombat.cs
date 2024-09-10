@@ -25,14 +25,9 @@ public class PlayerCombat : MonoBehaviour
     private int comboStep = 0;
     private float comboTimer;
 
-
     [Header("Status")]
     public float knockBack = 1;
     private IEnergy energy;
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -334,7 +329,7 @@ public class PlayerCombat : MonoBehaviour
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
         canFire = true;
-        gunList[currentGun].firing = false;
+        //gunList[currentGun].firing = false;
         //canMelee = false;
         canReload = true;
         EquipGun(index);

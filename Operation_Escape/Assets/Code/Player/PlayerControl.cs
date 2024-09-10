@@ -6,9 +6,9 @@ public class PlayerControl : MonoBehaviour
 {
     [Header("Player")]
     static public PlayerControl control;
-    private PlayerMovement playerMovement;
-    private PlayerCombat playerCombat;
-    private PlayerState playerState;
+    [HideInInspector] public PlayerMovement playerMovement;
+    [HideInInspector] public PlayerCombat playerCombat;
+    [HideInInspector] public PlayerState playerState;
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private Animator animator;
 
@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private OBJBar bulletBar;
 
     private float reloadTime = 0;
-
+    private string curname;
 
 
 
@@ -84,14 +84,21 @@ public class PlayerControl : MonoBehaviour
     public void Reload()
     {
         if (reloadBar != null)
-        {
+        {          
             if (!playerCombat.canReload)
             {
+                if (curname != playerCombat.gunList[playerCombat.currentGun].name)
+                {
+                    reloadTime = 0;
+                    reloadBar.value = 0;
+                }
+
                 if (reloadTime < playerCombat.gunList[playerCombat.currentGun].timeReload)
                 {
                     reloadBar.Off(true);
                     reloadTime += Time.deltaTime;
                     reloadBar.value = Mathf.Lerp(0, 100f, reloadTime / playerCombat.gunList[playerCombat.currentGun].timeReload);
+                    curname = playerCombat.gunList[playerCombat.currentGun].name;
                 }
             }
             else
@@ -138,9 +145,7 @@ public class PlayerControl : MonoBehaviour
             {
                 bulletBar.SetUp(playerCombat.gunList[playerCombat.currentGun].name);
             }
-        }
-
-        
+        }        
     }
 
     public void EnableInput(bool enable)
