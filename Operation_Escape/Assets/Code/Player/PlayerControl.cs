@@ -100,8 +100,15 @@ public class PlayerControl : MonoBehaviour
             if (playerCombat.gunList[playerCombat.currentGun].ammo != bulletBar.value)
             {
                 bulletBar.SetValue(playerCombat.gunList[playerCombat.currentGun].ammo);
-            }            
+            }
+
+            if (bulletBar.obj.nameItem[bulletBar.curgun] != playerCombat.gunList[playerCombat.currentGun].name)
+            {
+                bulletBar.SetUp(playerCombat.gunList[playerCombat.currentGun].name);
+            }
         }
+
+        
     }
 
     public void EnableInput(bool enable)

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class OBJBar : MonoBehaviour
 {
-    [SerializeField]private Transform spawnBar;
-    public int value;
-    public GameObject obj;
+    [SerializeField] private Transform spawnBar;
+    [HideInInspector] public int value;
+    public ID obj;
+    [HideInInspector]public int curgun;
     public GameObject bar;
     private void Update()
     {
@@ -16,7 +17,19 @@ public class OBJBar : MonoBehaviour
         }
     }
 
-    public void SetUp(int _value)
+    public void SetUp(string name)
+    {
+        for (int i = 0; i < obj.nameItem.Length; i++)
+        {
+            if (name == obj.nameItem[i])
+            {
+                curgun = i;
+            }
+        }
+
+        ChangPrefab();
+    }
+    public void ChangPrefab()
     {
         if (spawnBar.childCount > 0)
         {
@@ -26,22 +39,21 @@ public class OBJBar : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < _value; i++)
+        for (int i = 0; i < value; i++)
         {
-            Instantiate(obj, spawnBar);
+            Instantiate(obj.Item[curgun], spawnBar);
         }
     }
 
     public void Chang()
     {
-        Debug.Log(spawnBar.childCount + " ");
         if (spawnBar.childCount > value)
         {
             Destroy(spawnBar.GetChild(spawnBar.childCount-1).gameObject);
         }
         else
         {
-            GameObject newObj = Instantiate(obj, spawnBar);
+           Instantiate(obj.Item[curgun], spawnBar);
         }
     }
 
@@ -54,4 +66,6 @@ public class OBJBar : MonoBehaviour
     {
         bar.SetActive(false);
     }
+
+   
 }
