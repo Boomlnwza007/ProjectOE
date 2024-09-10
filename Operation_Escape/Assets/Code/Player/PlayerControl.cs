@@ -77,17 +77,17 @@ public class PlayerControl : MonoBehaviour
 
     public void Bar()
     {
-        if (playerState.health != healthBar.value)
+        if (healthBar != null && playerState.health != healthBar.value)
         {
             healthBar.SetValue(playerState.health);
         }
 
-        if (playerState.energy != EnergyBar.value)
+        if (EnergyBar != null && playerState.energy != EnergyBar.value)
         {
             EnergyBar.SetValue(playerState.energy);
         }
 
-        if (playerState.ultimateEnergy != ultimateEnergyBar.value)
+        if (ultimateEnergyBar != null && playerState.ultimateEnergy != ultimateEnergyBar.value)
         {
             ultimateEnergyBar.SetValue(playerState.ultimateEnergy);
         }
@@ -95,7 +95,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Gun()
     {
-        if (playerCombat.gunList.Count != 0)
+        if (bulletBar != null && playerCombat.gunList.Count != 0)
         {
             if (playerCombat.gunList[playerCombat.currentGun].ammo != bulletBar.value)
             {
