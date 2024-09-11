@@ -8,7 +8,7 @@ public class EnergyDrop : MonoBehaviour
     private GameObject targetPlayer;
     public float moveSpeed = 1f;
     public float distanceMove = 2f;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -35,7 +35,7 @@ public class EnergyDrop : MonoBehaviour
 
     void gotoPlayer()
     {
-        if (GameObject.Find("player") == null)
+        if (targetPlayer == null)
         {
             return;
         }
