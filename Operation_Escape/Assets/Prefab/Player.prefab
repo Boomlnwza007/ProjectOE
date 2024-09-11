@@ -1989,14 +1989,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf501d178e8eb744b2c014053072aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
-  playerCombat: {fileID: 0}
-  playerState: {fileID: 0}
+  playerMovement: {fileID: 8600667175816881253}
+  playerCombat: {fileID: 2200673144129377109}
+  playerState: {fileID: 170899704722756608}
   playerAim: {fileID: 1781867465748768360}
   animator: {fileID: 6778737011727104026}
   healthBar: {fileID: 4370306752507434572}
   ultimateEnergyBar: {fileID: 2533806186777912645}
-  EnergyBar: {fileID: 8365382295990206358}
+  energyBar: {fileID: 8365382295990206358}
   reloadBar: {fileID: 5930837384408629262}
   bulletBar: {fileID: 6525948652876562149}
 --- !u!114 &8529641966930444737
