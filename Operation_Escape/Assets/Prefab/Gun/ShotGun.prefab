@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1955206030274520011}
   gun: {fileID: 4885397738666743173}
+  nameGun: 
 --- !u!1 &3152945065102271979
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,9 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Shotgun
-  gunPrefab: {fileID: 5659692917953052963, guid: 2eea795f268bddf42af49b9d055bae9e, type: 3}
   bulletPrefab: {fileID: 3888396136867698908, guid: d6995b128ee471d49b45593065e627e7, type: 3}
-  iconGun: {fileID: 5659692917953052963, guid: 2eea795f268bddf42af49b9d055bae9e, type: 3}
+  iconGun: {fileID: 21300000, guid: 3fecb80e6a1df27459c688fdfb3dc496, type: 3}
   bulletTranform: {fileID: 0}
   fireRate: 1.0420547
   timeReload: 3

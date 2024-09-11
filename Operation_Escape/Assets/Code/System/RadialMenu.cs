@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RadialMenu : MonoBehaviour
 {
@@ -11,10 +12,8 @@ public class RadialMenu : MonoBehaviour
     public float radius;
     public List<GameObject> itemPrefab = new List<GameObject>();
     public int numberOfItems;
-
+    public GameObject iconShow;
     public GameObject Wheel;
-    [SerializeField] private PlayerCombat Gun;
-
     bool isMenuActive;
     private List<BaseGun> items;
     private int select;
@@ -23,10 +22,11 @@ public class RadialMenu : MonoBehaviour
     {
         mainCam = Camera.main;
         isMenuActive = false;
-        this.items = Gun.gunList;
+        items = PlayerControl.control.playerCombat.gunList;
         
         //CreateItems();
         Wheel.SetActive(false);
+        radius = Vector2.Distance(center.position, selectObject.GetChild(0).position);
     }
 
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class RadialMenu : MonoBehaviour
 
         if (Input.GetButtonUp("Wheel"))
         {
-            Gun.SwapGun(select);
+            PlayerControl.control.playerCombat.SwapGun(select);
             //Debug.Log(select);
             Wheel.SetActive(false);
             isMenuActive = false;
@@ -61,12 +61,11 @@ public class RadialMenu : MonoBehaviour
             float angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
             angle += (360 / numberOfItems)/2;
             angle = (angle + 360) % 360;
-            //Debug.Log(angle);
 
             selectObject.rotation = Quaternion.Euler(0, 0, angle);
             int segment = Mathf.FloorToInt(angle / (360 / numberOfItems));
             selectObject.rotation = Quaternion.Euler(0, 0, segment * (360 / numberOfItems));
-            GameObject selectedItem = items[segment].gunPrefab;
+            GameObject selectedItem = items[segment].gameObject;
 
             select = segment;
             //Debug.Log(segment + " : "+ select);
@@ -88,6 +87,7 @@ public class RadialMenu : MonoBehaviour
         {
             Destroy(item);
         }
+
         itemPrefab.Clear();
 
         for (int i = 0; i < items.Count; i++)
@@ -98,7 +98,9 @@ public class RadialMenu : MonoBehaviour
                 center.position.y + Mathf.Sin(angle * Mathf.Deg2Rad) * radius,
                 0f
             );
-            GameObject newIten = Instantiate(items[i].iconGun, itemPosition, Quaternion.identity, Wheel.transform);
+
+            GameObject newIten = Instantiate(iconShow, itemPosition, Quaternion.identity, Wheel.transform);
+            newIten.GetComponent<Image>().sprite = items[i].iconGun;
             itemPrefab.Add(newIten);
         }
     }
@@ -111,11 +113,11 @@ public class RadialMenu : MonoBehaviour
         {
             if (item == selectedItem)
             {
-                item.transform.localScale = new Vector3(150f, 150f, 0f); // Example highlight: enlarge the selected item
+                item.transform.localScale = new Vector3(1.5f, 1.5f, 0f); // Example highlight: enlarge the selected item
             }
             else
             {
-                item.transform.localScale = new Vector3(100f, 100f, 0f); // Reset scale for non-selected items
+                item.transform.localScale = new Vector3(1f, 1f, 0f); // Reset scale for non-selected items
             }
         }
     }

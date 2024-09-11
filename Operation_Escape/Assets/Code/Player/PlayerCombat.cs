@@ -343,6 +343,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         currentEquipGun = Instantiate(gunList[index].gameObject, WeaponGun.transform);
+        Destroy(currentEquipGun.GetComponent<BaseGun>());
     }
 
     private void OnDrawGizmos()

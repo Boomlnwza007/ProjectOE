@@ -1,42 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowGun : MonoBehaviour
 {
-    [SerializeField] private Transform spawnBar;
-    public ID obj;
-    [HideInInspector] public int curgun;
-    public GameObject bar;
+    public GameObject gunUI;
+    public Image image;
+    private int curgun = -1;
+    PlayerCombat gun;
 
-    public void ChangPrefab()
+    private void Start()
     {
-        if (spawnBar.childCount > 0)
-        {
-            foreach (Transform child in spawnBar.transform)
-            {
-                Destroy(child.gameObject);
-            }
-        }
-
-        Instantiate(obj.Item[curgun], spawnBar);
+        gun = PlayerControl.control.playerCombat;
     }
 
-    public void SetUp(string name)
+    private void Update()
     {
-        for (int i = 0; i < obj.nameItem.Length; i++)
+        if (gun.gunList.Count>0)
         {
-            if (name == obj.nameItem[i])
+            if (!gunUI.activeSelf)
             {
-                curgun = i;
+                gunUI.SetActive(true);
+            }
+
+            if (curgun != gun.currentGun)
+            {                
+                image.sprite = gun.gunList[gun.currentGun].iconGun;
+                curgun = gun.currentGun;
             }
         }
-
-        ChangPrefab();
-    }
-
-    public void Off()
-    {
-        bar.SetActive(false);
+        else
+        {
+            if (gunUI.activeSelf)
+            {
+                gunUI.SetActive(false);
+            }
+        }
     }
 }

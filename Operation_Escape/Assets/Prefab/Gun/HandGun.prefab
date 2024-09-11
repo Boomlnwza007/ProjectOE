@@ -435,9 +435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Handgun
-  gunPrefab: {fileID: 2977321080288724553, guid: b4b3aa0d4339f5743999906a55c54c36, type: 3}
   bulletPrefab: {fileID: 7771206494892856151, guid: ca783c0bfa468ad47a23d731281bdbe1, type: 3}
-  iconGun: {fileID: 2977321080288724553, guid: b4b3aa0d4339f5743999906a55c54c36, type: 3}
+  iconGun: {fileID: 21300000, guid: 449a7d3ffca864742b344c971ebfe12b, type: 3}
   bulletTranform: {fileID: 0}
   fireRate: 0.0714856
   timeReload: 1

@@ -5,9 +5,8 @@ using UnityEngine;
 public abstract class BaseGun : MonoBehaviour
 {
     public string Name;    
-    public GameObject gunPrefab;
     public GameObject bulletPrefab;
-    public GameObject iconGun;
+    public Sprite iconGun;
     public Transform bulletTranform;
     [HideInInspector]public float fireRate;
     public float timeReload;

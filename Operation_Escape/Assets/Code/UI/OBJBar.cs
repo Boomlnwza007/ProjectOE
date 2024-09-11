@@ -61,12 +61,5 @@ public class OBJBar : MonoBehaviour
     public void SetValue(int _value)
     {
         value = _value;
-    }
-
-    public void Off()
-    {
-        bar.SetActive(false);
-    }
-
-   
+    }   
 }

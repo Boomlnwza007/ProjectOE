@@ -17,13 +17,17 @@ public class FireRateBar : MonoBehaviour
 
     private void Update()
     {
-        if (nameGun != Player.playerCombat.gunList[Player.playerCombat.currentGun].name)
+        if (Player.playerCombat.gunList.Count != 0)
         {
-            if (!Player.playerCombat.gunList[Player.playerCombat.currentGun].firing)
+            if (nameGun != Player.playerCombat.gunList[Player.playerCombat.currentGun].name)
             {
-                slider.value = Mathf.Lerp(0, Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate, Player.playerCombat.gunList[Player.playerCombat.currentGun].fireRate / Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate);
+                if (!Player.playerCombat.gunList[Player.playerCombat.currentGun].firing)
+                {
+                    slider.value = Mathf.Lerp(0, Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate, Player.playerCombat.gunList[Player.playerCombat.currentGun].fireRate / Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate);
+                }
             }
-        }        
+        }
+            
     }
 
 }

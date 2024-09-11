@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour
         playerState = GetComponent<PlayerState>();
         control = this;
     }
+
     private void Start()
     {
         healthBar.SetMax(playerState.maxHealth, playerState.health);
@@ -77,7 +78,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         Bar();
-        Gun();
+        Bullet();
         Reload();
     }
 
@@ -132,10 +133,15 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Gun()
+    public void Bullet()
     {
         if (bulletBar != null && playerCombat.gunList.Count != 0)
         {
+            if (!bulletBar.bar.activeSelf)
+            {
+                bulletBar.bar.SetActive(true);
+            }
+
             if (playerCombat.gunList[playerCombat.currentGun].ammo != bulletBar.value)
             {
                 bulletBar.SetValue(playerCombat.gunList[playerCombat.currentGun].ammo);
@@ -145,7 +151,14 @@ public class PlayerControl : MonoBehaviour
             {
                 bulletBar.SetUp(playerCombat.gunList[playerCombat.currentGun].name);
             }
-        }        
+        }
+        else
+        {
+            if (bulletBar.bar.activeSelf)
+            {
+                bulletBar.bar.SetActive(false);
+            }
+        }
     }
 
     public void EnableInput(bool enable)

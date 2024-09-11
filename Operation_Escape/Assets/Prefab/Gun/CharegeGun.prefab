@@ -361,6 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 8585257153493195655}
   gun: {fileID: 1334955433083454455}
+  nameGun: 
 --- !u!1 &6384782066870008561
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,9 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: ChargeGun
-  gunPrefab: {fileID: 6912243992006802206, guid: c87bcda8da6484242a83c1e2b748b4ba, type: 3}
   bulletPrefab: {fileID: 6928389756606254245, guid: 20107695ad05c934cb36491d46cb2200, type: 3}
-  iconGun: {fileID: 6912243992006802206, guid: c87bcda8da6484242a83c1e2b748b4ba, type: 3}
+  iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
   bulletTranform: {fileID: 0}
   fireRate: 0
   timeReload: 3
