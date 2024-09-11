@@ -16,6 +16,7 @@ public class SliderBar : MonoBehaviour
             slider.value = Mathf.Lerp(slider.value, value, 0.1f);
         }
     }
+
     public void SetMax(float _value)
     {
         slider.maxValue = _value;

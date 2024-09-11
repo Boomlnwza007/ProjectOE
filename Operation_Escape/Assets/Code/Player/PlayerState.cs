@@ -9,7 +9,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     public int maxHealth = 10;
     public int healUseEnergy = 5;
     public int energy { get; set; }
-    public int maxEnergt { get; set; }
+    public int maxEnergy { get; set; }
     public bool imortal { get; set; }
     public int ultimateEnergy { get; set; }
     public int maxUltimateEnergy { get; set; }
@@ -21,10 +21,10 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     private void Awake()
     {
         health = maxHealth;
-        maxEnergt = 10;
+        maxEnergy = 10;
         maxUltimateEnergy = 10;
         ultimateEnergy = 0;
-        energy = maxEnergt;
+        energy = maxEnergy;
         canGetUltimateEnergy = true;
     }
 

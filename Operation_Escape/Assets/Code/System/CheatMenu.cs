@@ -300,7 +300,7 @@ public class CheatMenu : MonoBehaviour
         }
 
         PlayerState playerState = player.GetComponent<PlayerState>();
-        playerState.energy = playerState.maxEnergt;
+        playerState.energy = playerState.maxEnergy;
     }
 
     public void UnlimitedUltimateEnergy()

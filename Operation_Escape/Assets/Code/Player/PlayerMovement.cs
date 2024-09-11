@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float vertical;
     public bool canCombat;
     public Rigidbody2D rb;
+    private IDamageable damageable;
 
     [Header("Walk")]
     public float speed = 10f;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         state = State.Normal;
+        damageable = GetComponent<IDamageable>();
     }
 
     // Update is called once per frame
@@ -48,20 +50,22 @@ public class PlayerMovement : MonoBehaviour
         {
             case State.Normal:
                 horizontal = Input.GetAxisRaw("Horizontal");
-                vertical = Input.GetAxisRaw("Vertical");               
+                vertical = Input.GetAxisRaw("Vertical");      
+                
                 if (Input.GetButtonDown("Jump") && canDodge)
                 {
                     Roll();                    
                 }
+
                 break;
             case State.Dodge:
                 canCombat = false;
                 float dodgeSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * dodgeSpeedDropMultiplier * Time.deltaTime;
-                float dodgeMinimium = 50f;
-                if (rollSpeed < dodgeMinimium)
+                //float dodgeMinimium = 50f;
+                if (rollSpeed < 50f)
                 {
-                    gameObject.GetComponent<IDamageable>().imortal = false;
+                    damageable.imortal = false;
                     state = State.Normal;
                 }
                 break;
@@ -99,15 +103,17 @@ public class PlayerMovement : MonoBehaviour
             rollCharge++;
             rollTimer = 0;
             dodgeDir = new Vector2(horizontal, vertical).normalized;
+
             if (dodgeDir == Vector2.zero)
             {
                 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = 0;
                 dodgeDir = (transform.position - mousePos).normalized;
             }
+
             rollSpeed = dodgeMaxSpeed;
             state = State.Dodge;
-            gameObject.GetComponent<IDamageable>().imortal = true;
+            damageable.imortal = true;
             rb.velocity = dodgeDir * rollSpeed;
         }
         else

@@ -29,10 +29,10 @@ public class PlayerCombat : MonoBehaviour
     public float knockBack = 1;
     private IEnergy energy;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        aimPoint = GameObject.FindGameObjectWithTag("Aim").GetComponent<Transform>();
         currentGun = 0;
         energy = GetComponent<IEnergy>();
     }
@@ -40,64 +40,7 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2") && canMelee)
-        {
-            ComboAttack();
-        }
-
-        if (gunList.Count <= 0)
-        {
-            return;
-        }
-
-        HandleWeaponSwitch();
-
-        if (!gunList[currentGun].firing)
-        {
-            gunList[currentGun].fireRate += Time.deltaTime;
-            if (gunList[currentGun].fireRate > gunList[currentGun].maxFireRate)
-            {
-                gunList[currentGun].firing = true;
-                gunList[currentGun].fireRate = 0;
-            }
-        }
-
-        if (Input.GetButton("Fire1") && canFire && gunList[currentGun].firing)
-        {
-            if (gunList[currentGun].ammo > 0)
-            {
-                comboStep = 0;
-                comboTimer = 0;
-                CinemachineControl.Instance.ShakeCamera(1f , 0.2f);
-                gunList[currentGun].Fire();
-            }
-            else
-            {
-                if (canReload)
-                {
-                    Reload();
-                }
-            }
-        }
-
-        if (gunList[currentGun].canSpecial)
-        {
-            gunList[currentGun].Special();
-        }
-                
-
-        if (Input.GetButtonDown("Reload") && canReload)
-        {
-            Reload();
-        }
-
-        if (Input.GetButton("Ultimate") && !gunList[currentGun].canUltimate && energy.ultimateEnergy == 10)
-        {
-            energy.canGetUltimateEnergy = false;
-            gunList[currentGun].Ultimate();
-            reloadCoroutine = StartCoroutine(ReloadWait(0));
-            Debug.Log("Ultimate");
-        }
+        HandleInput();
 
         if (comboStep > 0)
         {
@@ -109,9 +52,80 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+        if (gunList.Count <= 0)
+        {
+            return;
+        }
+
+        if (!gunList[currentGun].firing)
+        {
+            gunList[currentGun].fireRate += Time.deltaTime;
+            if (gunList[currentGun].fireRate > gunList[currentGun].maxFireRate)
+            {
+                gunList[currentGun].firing = true;
+                gunList[currentGun].fireRate = 0;
+            }
+        }
+
+        if (gunList[currentGun].canSpecial)
+        {
+            gunList[currentGun].Special();
+        }       
+
         if (gunList[currentGun].canUltimate)
         {
             TimeUltimate();
+        }
+    }
+
+    void HandleInput()
+    {
+        if (Input.GetButtonDown("Fire2") && canMelee)
+        {
+            ComboAttack();
+        }
+
+        if (gunList.Count <= 0)
+        {
+            return;
+        }    
+
+        if (Input.GetButton("Fire1") && canFire && gunList[currentGun].firing)
+        {
+            HandleFire();
+        }
+
+        if (Input.GetButtonDown("Reload") && canReload)
+        {
+            Reload();
+        }
+
+        if (Input.GetButton("Ultimate") && !gunList[currentGun].canUltimate && energy.ultimateEnergy == 10)
+        {
+            energy.canGetUltimateEnergy = false;
+            gunList[currentGun].Ultimate();
+            gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
+            Debug.Log("Ultimate");
+        }
+
+        HandleWeaponSwitch();
+    }
+
+    private void HandleFire()
+    {
+        if (gunList[currentGun].ammo > 0)
+        {
+            comboStep = 0;
+            comboTimer = 0;
+            CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
+            gunList[currentGun].Fire();
+        }
+        else
+        {
+            if (canReload)
+            {
+                Reload();
+            }
         }
     }
 
@@ -128,33 +142,27 @@ public class PlayerCombat : MonoBehaviour
             mousePos.z = 0;
             Vector3 aimDir = (mousePos - aimPoint.position).normalized;
             float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-            RaycastHit2D[] hitEnemies = null;
-            Debug.Log("Combo Attack Step: " + comboStep);
+
             switch (comboStep)
             {
-                case (1) :
+                case 1:
                     sizeHitbox = new Vector2(3, 2);
-                    hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
                     break;
-                case (2):
+                case 2:
                     sizeHitbox = new Vector2(2, 3);
-                    hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
                     break;
-                case (3):
+                case 3:
                     sizeHitbox = new Vector2(5, 1);
-                    hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
                     break;
             }
 
+            RaycastHit2D[] hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
             foreach (RaycastHit2D hit in hitEnemies)
             {
-                if (hit.collider.gameObject != gameObject)
+                if (hit.collider.gameObject != gameObject && hit.collider.GetComponent<IDamageable>() != null)
                 {
-                    if (hit.collider.GetComponent<IDamageable>() != null)
-                    {
-                        hit.collider.GetComponent<IDamageable>().Takedamage(damage*comboStep, DamageType.Melee,knockBack);
-                        Debug.Log(hit.collider.name);
-                    }
+                    hit.collider.GetComponent<IDamageable>().Takedamage(damage * comboStep, DamageType.Melee, knockBack);
+                    Debug.Log(hit.collider.name);
                 }
             }
             StartCoroutine(ComboDelay(1f));
@@ -168,14 +176,14 @@ public class PlayerCombat : MonoBehaviour
 
     private void TimeUltimate()
     {
-        if (UltiTime < gunList[currentGun].timeUltimate)
+        if (UltiTime >= gunList[currentGun].timeUltimate)
         {
-            UltiTime += Time.deltaTime;
-            energy.ultimateEnergy = (int)Mathf.Lerp(10f, 0, UltiTime / gunList[currentGun].timeUltimate);
+            ReUltimate();
         }
         else
         {
-            ReUltimate();
+            UltiTime += Time.deltaTime;
+            energy.ultimateEnergy = (int)Mathf.Lerp(10f, 0f, UltiTime / gunList[currentGun].timeUltimate);
         }
     }
 
@@ -220,7 +228,7 @@ public class PlayerCombat : MonoBehaviour
         comboStep = 0;
         comboTimer = 0;
         canMelee = true;
-    }    
+    }
 
     public void Addgun(BaseGun gun)
     {
@@ -233,14 +241,14 @@ public class PlayerCombat : MonoBehaviour
 
     public void RemoveGun(BaseGun gun)
     {
-        BaseGun oldGun = gunList[currentGun];       
+        BaseGun oldGun = gunList[currentGun];
 
         for (int i = 0; i < gunList.Count; i++)
         {
             if (gunList[i] == gun)
             {
                 gunList[i].Remove();
-                gunList.RemoveAt(i);                
+                gunList.RemoveAt(i);
             }
         }
 
@@ -252,24 +260,21 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        
-
         if (gun == oldGun)
         {
             if (gunList.Count != 0)
             {
                 int index = (currentGun - 1 + gunList.Count) % gunList.Count;
                 currentGun = index;
-                currentGun = index;
                 gunList[currentGun].bulletTranform = aimPoint;
                 if (reloadCoroutine != null)
                 {
-                    StopCoroutine(reloadCoroutine); // ËÂØ´ Coroutine
+                    StopCoroutine(reloadCoroutine);
                     reloadCoroutine = null;
                 }
                 gunList[currentGun].firing = false;
                 EquipGun(currentGun);
-            }            
+            }
         }
 
         if (gunList.Count < 1)
@@ -293,29 +298,24 @@ public class PlayerCombat : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
-            if (scroll > 0)
-            {
-                index = (currentGun + 1) % gunList.Count;
-            }
-            else
-            {
-                index = (currentGun - 1 + gunList.Count) % gunList.Count;
-            }
+            index = scroll > 0 ? (currentGun + 1) % gunList.Count : (currentGun - 1 + gunList.Count) % gunList.Count;
             SwapGun(index);
         }
     }
 
     public void SwapGun(int index)
     {
-        if (index+1 > gunList.Count || index == currentGun)
-        {            
+        if (index + 1 > gunList.Count || index == currentGun)
+        {
             return;
         }
+
         if (reloadCoroutine != null)
         {
-            StopCoroutine(reloadCoroutine); // ËÂØ´ Coroutine
+            StopCoroutine(reloadCoroutine);
             reloadCoroutine = null;
         }
+
         gunList[currentGun].Remove();
 
         if (gunList[currentGun].canUltimate)
@@ -329,8 +329,6 @@ public class PlayerCombat : MonoBehaviour
         currentGun = index;
         gunList[currentGun].bulletTranform = aimPoint;
         canFire = true;
-        //gunList[currentGun].firing = false;
-        //canMelee = false;
         canReload = true;
         EquipGun(index);
     }

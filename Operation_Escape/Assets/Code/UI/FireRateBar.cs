@@ -13,6 +13,13 @@ public class FireRateBar : MonoBehaviour
     {
         Player = PlayerControl.control;
         nameGun = gun.name;
+
+        if (GunDown())
+        {
+            slider.slider.value = 0;
+            return;
+        }
+
         if (CheckCurGun())
         {
             slider.SetMax(gun.maxFireRate, Player.playerCombat.gunList[Player.playerCombat.currentGun].fireRate);
@@ -25,24 +32,37 @@ public class FireRateBar : MonoBehaviour
 
     private void Update()
     {
-
-            if (CheckCurGun())
-            {
-                slider.value = Mathf.Lerp(0, Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate, Player.playerCombat.gunList[Player.playerCombat.currentGun].fireRate / Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate);
-            }
-        
-            
+        if (GunDown() && slider.value != 0)
+        {
+            slider.slider.value = 0;
+        }
+        else if (CheckCurGun())
+        {
+            var currentGun = Player.playerCombat.gunList[Player.playerCombat.currentGun];
+            slider.value = Mathf.Lerp(0, currentGun.maxFireRate, currentGun.fireRate / currentGun.maxFireRate);
+        }
     }
 
     private bool CheckCurGun()
     {
         if (Player.playerCombat.gunList.Count == 0)
         {
-            return false;            
+            return false;
         }
 
-        return nameGun == Player.playerCombat.gunList[Player.playerCombat.currentGun].name
-           && !Player.playerCombat.gunList[Player.playerCombat.currentGun].firing;
+        var currentGun = Player.playerCombat.gunList[Player.playerCombat.currentGun];
+        return nameGun == currentGun.name && !currentGun.firing;
+    }
+
+    private bool GunDown()
+    {
+        if (Player.playerCombat.gunList.Count == 0)
+        {
+            return false;
+        }
+
+        var currentGun = Player.playerCombat.gunList[Player.playerCombat.currentGun];
+        return currentGun.energyUse > Player.playerState.energy && currentGun.ammo == 0;
     }
 
 }

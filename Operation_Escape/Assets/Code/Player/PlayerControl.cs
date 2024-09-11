@@ -5,24 +5,22 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     [Header("Player")]
-    static public PlayerControl control;
-    [HideInInspector] public PlayerMovement playerMovement;
-    [HideInInspector] public PlayerCombat playerCombat;
-    [HideInInspector] public PlayerState playerState;
+    public static PlayerControl control;
+    public PlayerMovement playerMovement;
+    public PlayerCombat playerCombat;
+    public PlayerState playerState;
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private Animator animator;
 
     [Header("UI")]
     [SerializeField] private SliderBar healthBar;
     [SerializeField] private SliderBar ultimateEnergyBar;
-    [SerializeField] private SliderBar EnergyBar;
+    [SerializeField] private SliderBar energyBar;
     [SerializeField] private SliderBar reloadBar;
     [SerializeField] private OBJBar bulletBar;
 
     private float reloadTime = 0;
-    private string curname;
-
-
+    private string currentGunName;
 
     private void Awake()
     {
@@ -35,96 +33,77 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         healthBar.SetMax(playerState.maxHealth, playerState.health);
-        EnergyBar.SetMax(playerState.maxEnergt, playerState.energy);
+        energyBar.SetMax(playerState.maxEnergy, playerState.energy);
         ultimateEnergyBar.SetMax(playerState.maxUltimateEnergy, playerState.ultimateEnergy);
         reloadBar.SetMax(100, 0);
     }
 
     private void Update()
     {
+        UpdateAnimation();
+        UpdateBars();
+        UpdateBullets();
+        HandleReload();
+    }
+
+    private void UpdateAnimation()
+    {
         bool isFacingRight = playerAim.angle > -90 && playerAim.angle < 90;
 
-        switch (playerMovement.state)
+        animator.SetBool("Right", isFacingRight);
+
+        if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
         {
-            case PlayerMovement.State.Normal:
-
-                if (isFacingRight)
-                {
-                    animator.SetBool("Right", true);
-                }
-                else
-                {
-                    animator.SetBool("Right", false);
-                }
-
-                if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
-                {
-                    if (isFacingRight && playerMovement.horizontal < 0 || !isFacingRight && playerMovement.horizontal > 0)
-                    {
-                        animator.SetBool("MoveBackwards", true);
-                    }
-                    else
-                    {
-                        animator.SetBool("MoveBackwards", false);
-                    }
-                    animator.SetBool("Move", true);
-                }
-                else
-                {
-                    animator.SetBool("Move", false);
-                }
-
-                break;
+            bool isMovingBackwards = (isFacingRight && playerMovement.horizontal < 0) || (!isFacingRight && playerMovement.horizontal > 0);
+            animator.SetBool("MoveBackwards", isMovingBackwards);
+            animator.SetBool("Move", true);
         }
-
-        Bar();
-        Bullet();
-        Reload();
+        else
+        {
+            animator.SetBool("Move", false);
+        }
     }
 
-    public void Reload()
+    private void HandleReload()
     {
-        if (reloadBar != null)
-        {          
-            if (!playerCombat.canReload)
-            {
-                if (curname != playerCombat.gunList[playerCombat.currentGun].name)
-                {
-                    reloadTime = 0;
-                    reloadBar.value = 0;
-                }
+        if (reloadBar == null || playerCombat.gunList.Count == 0) return;
 
-                if (reloadTime < playerCombat.gunList[playerCombat.currentGun].timeReload)
-                {
-                    reloadBar.Off(true);
-                    reloadTime += Time.deltaTime;
-                    reloadBar.value = Mathf.Lerp(0, 100f, reloadTime / playerCombat.gunList[playerCombat.currentGun].timeReload);
-                    curname = playerCombat.gunList[playerCombat.currentGun].name;
-                }
-            }
-            else
+        var currentGun = playerCombat.gunList[playerCombat.currentGun];
+
+        if (!playerCombat.canReload)
+        {
+            if (currentGunName != currentGun.name)
             {
-                if (reloadBar.canShow)
-                {
-                    reloadBar.Off(false);
-                    reloadTime = 0;
-                    reloadBar.value = 0;
-                }
+                reloadTime = 0;
+                reloadBar.value = 0;
+                currentGunName = currentGun.name;
+            }
+
+            if (reloadTime < currentGun.timeReload)
+            {
+                reloadBar.Off(true);
+                reloadTime += Time.deltaTime;
+                reloadBar.value = Mathf.Lerp(0, 100f, reloadTime / currentGun.timeReload);
             }
         }
-        
+        else if (reloadBar.canShow)
+        {
+            reloadBar.Off(false);
+            reloadTime = 0;
+            reloadBar.value = 0;
+        }
     }
 
-    public void Bar()
+    private void UpdateBars()
     {
         if (healthBar != null && playerState.health != healthBar.value)
         {
             healthBar.SetValue(playerState.health);
         }
 
-        if (EnergyBar != null && playerState.energy != EnergyBar.value)
+        if (energyBar != null && playerState.energy != energyBar.value)
         {
-            EnergyBar.SetValue(playerState.energy);
+            energyBar.SetValue(playerState.energy);
         }
 
         if (ultimateEnergyBar != null && playerState.ultimateEnergy != ultimateEnergyBar.value)
@@ -133,31 +112,32 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Bullet()
+    private void UpdateBullets()
     {
-        if (bulletBar != null && playerCombat.gunList.Count != 0)
+        if (bulletBar == null || playerCombat.gunList.Count == 0)
         {
-            if (!bulletBar.bar.activeSelf)
-            {
-                bulletBar.bar.SetActive(true);
-            }
-
-            if (playerCombat.gunList[playerCombat.currentGun].ammo != bulletBar.value)
-            {
-                bulletBar.SetValue(playerCombat.gunList[playerCombat.currentGun].ammo);
-            }
-
-            if (bulletBar.obj.nameItem[bulletBar.curgun] != playerCombat.gunList[playerCombat.currentGun].name)
-            {
-                bulletBar.SetUp(playerCombat.gunList[playerCombat.currentGun].name);
-            }
-        }
-        else
-        {
-            if (bulletBar.bar.activeSelf)
+            if (bulletBar != null && bulletBar.bar.activeSelf)
             {
                 bulletBar.bar.SetActive(false);
             }
+            return;
+        }
+
+        if (!bulletBar.bar.activeSelf)
+        {
+            bulletBar.bar.SetActive(true);
+        }
+
+        var currentGun = playerCombat.gunList[playerCombat.currentGun];
+
+        if (currentGun.ammo != bulletBar.value)
+        {
+            bulletBar.SetValue(currentGun.ammo);
+        }
+
+        if (bulletBar.obj.nameItem[bulletBar.curgun] != currentGun.name)
+        {
+            bulletBar.SetUp(currentGun.name);
         }
     }
 
@@ -174,8 +154,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Slow(float percent)
     {
-        percent /= 100f;
-        playerMovement.slowSpeed = playerMovement.speed * percent;
+        playerMovement.slowSpeed = playerMovement.speed * (percent / 100f);
     }
 
     public void ResetSlow()
