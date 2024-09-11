@@ -8,7 +8,8 @@ public class FireRateBar : MonoBehaviour
     [SerializeField] BaseGun gun;
     private PlayerControl Player;
     public string nameGun;
-    private void Awake()
+
+    private void Start()
     {
         Player = PlayerControl.control;
         nameGun = gun.name;
@@ -24,18 +25,22 @@ public class FireRateBar : MonoBehaviour
 
     private void Update()
     {
-        if (Player.playerCombat.gunList.Count > 0)
-        {
+
             if (CheckCurGun())
             {
                 slider.value = Mathf.Lerp(0, Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate, Player.playerCombat.gunList[Player.playerCombat.currentGun].fireRate / Player.playerCombat.gunList[Player.playerCombat.currentGun].maxFireRate);
             }
-        }
+        
             
     }
 
     private bool CheckCurGun()
     {
+        if (Player.playerCombat.gunList.Count == 0)
+        {
+            return false;            
+        }
+
         return nameGun == Player.playerCombat.gunList[Player.playerCombat.currentGun].name
            && !Player.playerCombat.gunList[Player.playerCombat.currentGun].firing;
     }

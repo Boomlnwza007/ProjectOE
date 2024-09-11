@@ -299,7 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8816259435896984979}
   m_Layer: 0
-  m_Name: CharegeGun
+  m_Name: ChargeGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 100286178828527985}
   - component: {fileID: 1334955433083454455}
   m_Layer: 0
-  m_Name: CharegeGun
+  m_Name: ChargeGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

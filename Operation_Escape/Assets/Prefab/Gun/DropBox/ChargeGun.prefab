@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5511712679682052109
+--- !u!1 &6993148821742251366
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7738661917898446672}
-  - component: {fileID: 9023089216895054596}
-  - component: {fileID: 6632621285194257836}
-  - component: {fileID: 5740592605012378541}
+  - component: {fileID: 354298647924053956}
+  - component: {fileID: 4169468469581627259}
+  - component: {fileID: 2766571911178461505}
+  - component: {fileID: 1527910377843015390}
   m_Layer: 0
-  m_Name: Drop 2
+  m_Name: ChargeGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7738661917898446672
+--- !u!4 &354298647924053956
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511712679682052109}
+  m_GameObject: {fileID: 6993148821742251366}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.95, y: -2.15, z: 0}
+  m_LocalPosition: {x: 20.85, y: -0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9023089216895054596
+--- !u!212 &4169468469581627259
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511712679682052109}
+  m_GameObject: {fileID: 6993148821742251366}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.27491045, g: 0.7075472, b: 0.103462085, a: 1}
+  m_Color: {r: 0.082858644, g: 0.7487762, b: 0.9245283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -86,26 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6632621285194257836
+--- !u!114 &2766571911178461505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511712679682052109}
+  m_GameObject: {fileID: 6993148821742251366}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baf6ddfc40189314c8272c3daadf95da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 4885397738666743173, guid: a718a593a0a8e224cbc8c188cbf94b88, type: 3}
---- !u!61 &5740592605012378541
+  gun: {fileID: 1334955433083454455, guid: 792fbe7103798a543aefc45a0fcdb664, type: 3}
+--- !u!61 &1527910377843015390
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511712679682052109}
+  m_GameObject: {fileID: 6993148821742251366}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}

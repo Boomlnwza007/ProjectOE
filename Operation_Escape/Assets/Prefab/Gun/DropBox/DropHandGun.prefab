@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4336711308065004899}
   - component: {fileID: 5583516650884506903}
   m_Layer: 0
-  m_Name: Drop
+  m_Name: DropHandGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 6891942016923813591, guid: 091a971d2147bbd4e9cb86c1cf807116, type: 3}
+  floatAmplitude: 0.5
+  floatSpeed: 1
 --- !u!61 &5583516650884506903
 BoxCollider2D:
   m_ObjectHideFlags: 0

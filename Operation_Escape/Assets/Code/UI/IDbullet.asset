@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameItem:
   - HandGun
-  - CharegeGun
+  - ChargeGun
   - ShotGun
   Item:
   - {fileID: 1270858507958518733, guid: 1e6e6373fcf66cc4cbfd9679e0e626c1, type: 3}
