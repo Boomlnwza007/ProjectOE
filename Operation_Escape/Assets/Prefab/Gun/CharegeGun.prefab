@@ -234,7 +234,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 160774980398094797}
-  m_Father: {fileID: 100286178828527985}
+  - {fileID: 4470316772987127879}
+  m_Father: {fileID: 8816259435896984979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9041548891461644854
 SpriteRenderer:
@@ -288,6 +289,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4387351244970923408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8816259435896984979}
+  m_Layer: 0
+  m_Name: CharegeGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8816259435896984979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4387351244970923408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 755605381847510228}
+  m_Father: {fileID: 100286178828527985}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4434265290077415320
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,8 +425,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 755605381847510228}
-  - {fileID: 4470316772987127879}
+  - {fileID: 8816259435896984979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1334955433083454455
@@ -409,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: ChargeGun
+  gunPrefab: {fileID: 4387351244970923408}
   bulletPrefab: {fileID: 6928389756606254245, guid: 20107695ad05c934cb36491d46cb2200, type: 3}
   iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
   bulletTranform: {fileID: 0}
@@ -535,15 +568,15 @@ RectTransform:
   m_GameObject: {fileID: 8567710796200927911}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 3.3333333, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2272326231259156424}
-  m_Father: {fileID: 100286178828527985}
+  m_Father: {fileID: 755605381847510228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.381, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6126662649652987877

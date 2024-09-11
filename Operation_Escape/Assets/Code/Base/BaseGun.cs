@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class BaseGun : MonoBehaviour
 {
-    public string Name;    
+    public string Name;
+    public GameObject gunPrefab;
     public GameObject bulletPrefab;
     public Sprite iconGun;
     public Transform bulletTranform;

@@ -12,7 +12,7 @@ public class LootTable : MonoBehaviour
         {
             for (int i = 0; i <  item.minDrop/ dropMinus; i++)
             {
-                Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 1f;
+                Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 2f;
                 GameObject lootGameObject = Instantiate(item.droppedItemPrefab, dropPosition, Quaternion.identity);
                 Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
                 if (rb != null)
@@ -28,7 +28,7 @@ public class LootTable : MonoBehaviour
                 int amountToDrop = Random.Range(0, (item.maxDrop - item.minDrop) + 1);
                 for (int i = 0; i < amountToDrop/ dropMinus; i++)
                 {
-                    Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 1f;
+                    Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 2f;
                     GameObject lootGameObject = Instantiate(item.droppedItemPrefab, dropPosition, Quaternion.identity);
                     Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
                     if (rb != null)

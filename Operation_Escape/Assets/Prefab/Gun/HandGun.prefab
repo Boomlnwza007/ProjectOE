@@ -133,7 +133,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7164344838843286917}
-  m_Father: {fileID: 3555346580633687772}
+  m_Father: {fileID: 4280416868280369569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7566091920194326233
 SpriteRenderer:
@@ -261,6 +261,38 @@ MonoBehaviour:
   slider: {fileID: 3325746502252467729}
   gun: {fileID: 6891942016923813591}
   nameGun: 
+--- !u!1 &5520762139760519814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4280416868280369569}
+  m_Layer: 0
+  m_Name: HandGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4280416868280369569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5520762139760519814}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1162336333987656338}
+  m_Father: {fileID: 3555346580633687772}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7858565089701172932
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +451,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1162336333987656338}
+  - {fileID: 4280416868280369569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6891942016923813591
@@ -435,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Handgun
+  gunPrefab: {fileID: 5520762139760519814}
   bulletPrefab: {fileID: 7771206494892856151, guid: ca783c0bfa468ad47a23d731281bdbe1, type: 3}
   iconGun: {fileID: 21300000, guid: 449a7d3ffca864742b344c971ebfe12b, type: 3}
   bulletTranform: {fileID: 0}
