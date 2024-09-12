@@ -124,7 +124,6 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             rb.velocity = steering.normalized * curSpeed;
         }
 
-        // ตรวจสอบการชนและเปลี่ยนทิศทางถ้าจำเป็น
         RaycastHit2D hitForward = Physics2D.Raycast(transform.position, rb.velocity.normalized, rayLength, obstacleLayer);
         if (hitForward.collider != null)
         {

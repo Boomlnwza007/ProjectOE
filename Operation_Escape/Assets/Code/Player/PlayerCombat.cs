@@ -17,13 +17,9 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Melee")]
     public int damage = 1;
-    public float comboMaxTime = 1.5f;
     public float comboCooldown = 1f;
-    public int maxComboSteps = 3;
     public bool canMelee = true;
-    [HideInInspector] public Vector2 sizeHitbox;
-    private int comboStep = 0;
-    private float comboTimer;
+    public Vector2 sizeHitbox;
 
     [Header("Status")]
     public float knockBack = 1;
@@ -41,16 +37,6 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         HandleInput();
-
-        if (comboStep > 0)
-        {
-            comboTimer += Time.deltaTime;
-            if (comboTimer > comboMaxTime)
-            {
-                comboStep = 0;
-                comboTimer = 0;
-            }
-        }
 
         if (gunList.Count <= 0)
         {
@@ -114,8 +100,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (gunList[currentGun].ammo > 0)
         {
-            comboStep = 0;
-            comboTimer = 0;
             CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
             gunList[currentGun].Fire();
         }
@@ -130,47 +114,38 @@ public class PlayerCombat : MonoBehaviour
 
     private void ComboAttack()
     {
-        if (comboStep < maxComboSteps)
+        Debug.Log("Melee");
+        canMelee = false;
+        canFire = false;
+        PlayerControl.control.Slow(100);
+        if (gunList.Count > 0)
         {
-            Debug.Log("Melee");
-            comboStep++;
-            comboTimer = 0;
-            canMelee = false;
-            canFire = false;
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            Vector3 aimDir = (mousePos - aimPoint.position).normalized;
-            float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-
-            switch (comboStep)
-            {
-                case 1:
-                    sizeHitbox = new Vector2(3, 2);
-                    break;
-                case 2:
-                    sizeHitbox = new Vector2(2, 3);
-                    break;
-                case 3:
-                    sizeHitbox = new Vector2(5, 1);
-                    break;
-            }
-
-            RaycastHit2D[] hitEnemies = Physics2D.BoxCastAll(aimPoint.position, sizeHitbox, angle, Vector2.right);
-            foreach (RaycastHit2D hit in hitEnemies)
-            {
-                if (hit.collider.gameObject != gameObject && hit.collider.GetComponent<IDamageable>() != null)
-                {
-                    hit.collider.GetComponent<IDamageable>().Takedamage(damage * comboStep, DamageType.Melee, knockBack);
-                    Debug.Log(hit.collider.name);
-                }
-            }
-            StartCoroutine(ComboDelay(1f));
+            gunList[currentGun].Remove();
         }
-        else
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        Vector3 aimDir = (mousePos - aimPoint.position).normalized;
+
+        // กำหนดทิศทางการคัสต์
+        Vector2 castDirection = aimDir.x > 0 ? Vector2.right : Vector2.left;
+
+        // ขนาดของกล่องและตำแหน่งเริ่มต้น
+        Vector2 boxCastSize = new Vector2(sizeHitbox.x, sizeHitbox.y);
+        Vector2 boxCastOrigin = new Vector2(aimPoint.position.x, aimPoint.position.y);
+
+        // คัสต์เป็นกล่อง
+        RaycastHit2D[] hitEnemies = Physics2D.BoxCastAll(boxCastOrigin + (castDirection * boxCastSize.x / 2), boxCastSize, 0f, castDirection,1);
+
+        foreach (RaycastHit2D hit in hitEnemies)
         {
-            canMelee = false;
-            StartCoroutine(ComboCooldown());
+            if (hit.collider.gameObject != gameObject && hit.collider.TryGetComponent(out IDamageable dam))
+            {
+                dam.Takedamage(damage, DamageType.Melee, knockBack);
+                Debug.Log(hit.collider.name);
+            }
         }
+        StartCoroutine(ComboDelay(comboCooldown));
     }
 
     private void TimeUltimate()
@@ -220,14 +195,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(wait);
         canMelee = true;
         canFire = true;
-    }
-
-    private IEnumerator ComboCooldown()
-    {
-        yield return new WaitForSeconds(comboCooldown);
-        comboStep = 0;
-        comboTimer = 0;
-        canMelee = true;
+        PlayerControl.control.Slow(0);
     }
 
     public void Addgun(BaseGun gun)
@@ -345,21 +313,21 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (aimPoint == null)
-            return;
 
-        // แสดงขนาดของ Hitbox ด้วย Gizmo
-        Gizmos.color = Color.red;
-        Vector3 center = aimPoint.position;
-        Gizmos.DrawWireCube(center, sizeHitbox);
+        if (Application.isPlaying)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            Vector3 aimDir = (mousePos - aimPoint.position).normalized;
 
-        // วาดเส้นเพื่อแสดงทิศทางของ BoxCast
-        Gizmos.color = Color.blue;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        Vector3 aimDir = (mousePos - aimPoint.position).normalized;
-        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        Vector3 direction = Quaternion.Euler(0, 0, angle) * Vector3.right;
-        Gizmos.DrawLine(center, center + direction * sizeHitbox.x / 2);
+            Vector2 castDirection = aimDir.x > 0 ? Vector2.right : Vector2.left;
+
+            Vector2 boxCastSize = new Vector2(sizeHitbox.x, sizeHitbox.y);
+            Vector2 boxCastOrigin = new Vector2(aimPoint.position.x, aimPoint.position.y);
+
+            Gizmos.color = Color.red;
+            Vector2 gizmoSize = new Vector2(boxCastSize.x, boxCastSize.y);
+            Gizmos.DrawWireCube(boxCastOrigin + (castDirection * gizmoSize.x / 2), gizmoSize);
+        }
     }
 }
