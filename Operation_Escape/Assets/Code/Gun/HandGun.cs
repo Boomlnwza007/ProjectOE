@@ -13,7 +13,11 @@ public class HandGun : BaseGun
             bullet.damage = 50;
             bullet.speed = 25;
             bullet.transform.localScale *= 4;
-            ammo++;
+            if (ammo <= 0)
+            {
+                var playerCombat = PlayerControl.control.playerCombat;
+                playerCombat.ReUltimate();
+            }
         }
 
         firing = false;
@@ -29,5 +33,6 @@ public class HandGun : BaseGun
     public override void Ultimate()
     {
         canUltimate = true;
+        ammo = 4;
     }
 }

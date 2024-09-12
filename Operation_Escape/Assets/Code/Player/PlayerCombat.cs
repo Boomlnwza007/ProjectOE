@@ -104,7 +104,6 @@ public class PlayerCombat : MonoBehaviour
         {
             energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
-            gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
             Debug.Log("Ultimate");
         }
 
@@ -193,6 +192,7 @@ public class PlayerCombat : MonoBehaviour
         energy.canGetUltimateEnergy = true;
         energy.ultimateEnergy = 0;
         UltiTime = 0;
+        gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
     }
 
     public void Reload()

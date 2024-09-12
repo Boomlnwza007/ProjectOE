@@ -7,8 +7,10 @@ public class OBJBar : MonoBehaviour
     [SerializeField] private Transform spawnBar;
     [HideInInspector] public int value;
     public ID obj;
+    public ID objUl;
     [HideInInspector]public int curgun;
     public GameObject bar;
+
     private void Update()
     {
         if (spawnBar.childCount != value)
@@ -17,7 +19,7 @@ public class OBJBar : MonoBehaviour
         }
     }
 
-    public void SetUp(string name)
+    public void SetUp(string name , bool Ul)
     {
         for (int i = 0; i < obj.nameItem.Length; i++)
         {
@@ -27,22 +29,20 @@ public class OBJBar : MonoBehaviour
             }
         }
 
-        ChangPrefab();
+        ChangPrefab(Ul);
     }
 
-    public void ChangPrefab()
+    public void ChangPrefab(bool Ul)
     {
-        if (spawnBar.childCount > 0)
+        foreach (Transform child in spawnBar.transform)
         {
-            foreach (Transform child in spawnBar.transform)
-            {
-                Destroy(child.gameObject);
-            }
+            Destroy(child.gameObject);
         }
 
+        var itemList = Ul ? objUl.Item : obj.Item;
         for (int i = 0; i < value; i++)
         {
-            Instantiate(obj.Item[curgun], spawnBar);
+            Instantiate(itemList[curgun], spawnBar);
         }
     }
 
@@ -56,7 +56,7 @@ public class OBJBar : MonoBehaviour
         {
            Instantiate(obj.Item[curgun], spawnBar);
         }
-    }
+    }   
 
     public void SetValue(int _value)
     {

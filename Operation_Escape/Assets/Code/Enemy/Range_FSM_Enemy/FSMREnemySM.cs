@@ -107,8 +107,6 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public void Movement()
     {
-        Debug.Log(Vector2.Distance(transform.position, target.position));
-
         if (Vector2.Distance(transform.position,target.position) < 15)
         {
             timeCircle += Time.deltaTime;

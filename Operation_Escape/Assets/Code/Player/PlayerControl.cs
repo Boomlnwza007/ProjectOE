@@ -137,7 +137,7 @@ public class PlayerControl : MonoBehaviour
 
         if (bulletBar.obj.nameItem[bulletBar.curgun] != currentGun.name)
         {
-            bulletBar.SetUp(currentGun.name);
+            bulletBar.SetUp(currentGun.name,false);
         }
     }
 
