@@ -32,7 +32,7 @@ public class BulletScript : BaseBullet
         }
         else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
         {
-            bulletInteract.Interact();
+            bulletInteract.Interact(DamageType.Rang);
             Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))

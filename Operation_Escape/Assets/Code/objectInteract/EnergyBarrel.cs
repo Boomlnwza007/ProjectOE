@@ -2,26 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour, IBulletInteract
+public class EnergyBarrel : MonoBehaviour, IBulletInteract
 {
     [SerializeField] private GameObject hitbox;
     private Collider2D bomb;
     public int damage = 10;
     public float timeBlast = 2f;
     public bool blast;
+    public LootTable lootDrop;
 
-    public void Interact()
+    public void Interact(DamageType type)
     {
-        if (!blast)
+        switch (type)
         {
-            SetBomb();
-            StartCoroutine(FadeBomb(bomb.GetComponent<SpriteRenderer>(), timeBlast));
+            case DamageType.Rang:
+                if (!blast)
+                {
+                    SetBomb();
+                    StartCoroutine(FadeBomb(bomb.GetComponent<SpriteRenderer>(), timeBlast));
+                }
+                else
+                {
+                    StopAllCoroutines();
+                    BombBlast(bomb.GetComponent<SpriteRenderer>());
+                }
+                break;
+            case DamageType.Melee:
+                lootDrop.InstantiateLoot(1);
+                Destroy(gameObject);
+                break;
+            default:
+                break;
         }
-        else
-        {
-            StopAllCoroutines();
-            BombBlast(bomb.GetComponent<SpriteRenderer>());
-        }
+        
     }
 
     public void SetBomb()

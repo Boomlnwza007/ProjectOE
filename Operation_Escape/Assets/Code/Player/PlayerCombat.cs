@@ -127,14 +127,11 @@ public class PlayerCombat : MonoBehaviour
         mousePos.z = 0;
         Vector3 aimDir = (mousePos - aimPoint.position).normalized;
 
-        // กำหนดทิศทางการคัสต์
         Vector2 castDirection = aimDir.x > 0 ? Vector2.right : Vector2.left;
 
-        // ขนาดของกล่องและตำแหน่งเริ่มต้น
         Vector2 boxCastSize = new Vector2(sizeHitbox.x, sizeHitbox.y);
         Vector2 boxCastOrigin = new Vector2(aimPoint.position.x, aimPoint.position.y);
 
-        // คัสต์เป็นกล่อง
         RaycastHit2D[] hitEnemies = Physics2D.BoxCastAll(boxCastOrigin + (castDirection * boxCastSize.x / 2), boxCastSize, 0f, castDirection,1);
 
         foreach (RaycastHit2D hit in hitEnemies)
@@ -143,6 +140,10 @@ public class PlayerCombat : MonoBehaviour
             {
                 dam.Takedamage(damage, DamageType.Melee, knockBack);
                 Debug.Log(hit.collider.name);
+            }
+            else if (hit.collider.TryGetComponent(out IBulletInteract bulletInteract))
+            {
+                bulletInteract.Interact(DamageType.Melee);
             }
         }
         StartCoroutine(ComboDelay(comboCooldown));

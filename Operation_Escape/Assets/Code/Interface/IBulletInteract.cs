@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBulletInteract
 {
-    public void Interact();
+    public void Interact(DamageType type);
 }
