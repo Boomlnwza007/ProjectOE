@@ -101,4 +101,12 @@ public class LaserDrone : MonoBehaviour
         laser.SetPosition(0, startPos);
         laser.SetPosition(1, endPos);
     }
+
+    public void Destroy()
+    {
+        Destroy(laser);
+        Destroy(GetComponent<LaserDrone>());
+        Destroy(firstPos.GetComponent<LaserPillar>());
+        Destroy(endPos.GetComponent<LaserPillar>());
+    }
 }
