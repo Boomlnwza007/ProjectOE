@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 5947116574581708181}
   - component: {fileID: 2211829862301332668}
   - component: {fileID: 8048974882410049308}
-  - component: {fileID: 3588059641769196586}
+  - component: {fileID: 5797580609426181300}
   m_Layer: 0
   m_Name: LaerDrone
   m_TagString: Untagged
@@ -380,7 +380,7 @@ MonoBehaviour:
   ShootLayer:
     serializedVersion: 2
     m_Bits: 576
---- !u!120 &3588059641769196586
+--- !u!120 &5797580609426181300
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -401,7 +401,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: e0332f28ada951a4c845e3309395f36b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -419,12 +419,12 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 658888119
-  m_SortingLayer: 2
+  m_SortingLayerID: -1179515719
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -445,17 +445,17 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.8207547, g: 0.17421682, b: 0.7218086, a: 1}
+      key1: {r: 0.8867924, g: 0.74348384, b: 0.12967247, a: 1}
+      key2: {r: 0.8196079, g: 0.17254902, b: 0.72156864, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 31804
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -471,10 +471,10 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: -1
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 90
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
@@ -482,5 +482,5 @@ LineRenderer:
     generateLightingData: 0
   m_MaskInteraction: 0
   m_UseWorldSpace: 1
-  m_Loop: 0
+  m_Loop: 1
   m_ApplyActiveColorSpace: 1
