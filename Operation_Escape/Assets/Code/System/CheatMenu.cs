@@ -58,7 +58,7 @@ public class CheatMenu : MonoBehaviour
         CheckPlaystatus();
         CheckListMon();
 
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.O))
         {
             onMainMenu = !onMainMenu;
             mainMenu.SetActive(onMainMenu);
