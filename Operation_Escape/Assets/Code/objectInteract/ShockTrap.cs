@@ -6,14 +6,15 @@ using UnityEngine;
 public class ShockTrap : MonoBehaviour
 {
     [SerializeField] private GameObject hitbox;
+    private HashSet<IDamageable> hitTargets = new HashSet<IDamageable>();
     private Collider2D trap;
     private float time;
     private bool isRunning = false;
-    public float timeBetween;
+    public float timeAc;
     public float duration;
     public int damage = 60;
     public float dpsDamage = 1;
-    private bool canDamage = true;
+    private bool trapOn;
 
     // Start is called before the first frame update
     void Start()
@@ -24,28 +25,34 @@ public class ShockTrap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isRunning && time >= timeBetween)
+        if (trapOn)
         {
-            trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
-            isRunning = true;
-            time = 0f;
-        }
-
-        if (isRunning)
-        {
-            time += Time.deltaTime;
-            Shock();
-            if (time >= duration)
+            if (!isRunning && time >= timeAc)
             {
-                isRunning = false;
+                trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
+                isRunning = true;
                 time = 0f;
-                Destroy(trap.gameObject);
+                GetComponent<SpriteRenderer>().color = Color.red;
+
             }
-        }
-        else
-        {
-            time += Time.deltaTime;
-        }
+
+            if (isRunning)
+            {
+                time += Time.deltaTime;
+                Shock();
+                if (time >= duration)
+                {
+                    isRunning = false;
+                    time = 0f;
+                    Destroy(trap.gameObject);
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                time += Time.deltaTime;
+            }
+        }        
     }
 
     public void Shock()
@@ -55,15 +62,15 @@ public class ShockTrap : MonoBehaviour
         Physics2D.OverlapCollider(trap, filter, colliders);
         foreach (var hit in colliders)
         {
-            IDamageable any = hit.GetComponent<IDamageable>();
-            if (any != null)
+            if (hit.TryGetComponent(out IDamageable dam))
             {
-                if (canDamage)
+                if (!hitTargets.Contains(dam))
                 {
-                    canDamage = false;
-                    any.Takedamage(damage, DamageType.Rang, 0);
-                    DamageHit().Forget();
-                }                
+                    dam.Takedamage(damage, DamageType.Rang, 0);
+                    hitTargets.Add(dam);
+                    DamageHit().Forget();                    
+                }
+                
             }
         }
     }
@@ -71,7 +78,12 @@ public class ShockTrap : MonoBehaviour
     public async UniTask DamageHit()
     {
         await UniTask.WaitForSeconds(dpsDamage);
-        canDamage = true;
+        hitTargets.Clear();
         await UniTask.WaitForSeconds(dpsDamage);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        trapOn = true;
     }
 }

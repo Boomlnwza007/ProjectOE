@@ -16,6 +16,7 @@ public class LaserDrone : MonoBehaviour
     public int damage = 60;
     public float dpsDamage = 1;
     private bool canDamage = true;
+
     private LineRenderer laser;
     public LayerMask obstacleLayer;
     public LayerMask ShootLayer;
