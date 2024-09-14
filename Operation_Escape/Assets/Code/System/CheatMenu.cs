@@ -99,7 +99,7 @@ public class CheatMenu : MonoBehaviour
     public void SpawnMon(int enemy)
     {
         Vector3 pos = CinemachineControl.Instance.player.position;
-        pos += (Random.insideUnitSphere * 15);
+        pos += (Random.insideUnitSphere * 10);
         pos.z = 0;
         Debug.Log(enemy);
         GameObject _enemy = Instantiate(listenemy.Item[enemy], pos, Quaternion.identity);
@@ -260,7 +260,11 @@ public class CheatMenu : MonoBehaviour
                     break;
                 case "Off":
                     onPlayer[buttonNumber] = false;
-                    if (buttonNumber == 4)
+                    if (buttonNumber == 0)
+                    {
+                        PlayerImmortal(false);
+                    }
+                    else if (buttonNumber == 4)
                     {
                         RevertDamage();
                     }
@@ -281,7 +285,7 @@ public class CheatMenu : MonoBehaviour
         }
     }
 
-    public void PlayerImmortal()
+    public void PlayerImmortal(bool on)
     {
         if (player == null)
         {
@@ -289,7 +293,7 @@ public class CheatMenu : MonoBehaviour
         }
 
         PlayerState state = player.GetComponent<PlayerState>();
-        state.imortal = true;
+        state.imortal = on;
     }
 
     public void UnlimitedEnergy()
@@ -402,7 +406,7 @@ public class CheatMenu : MonoBehaviour
         switch (index)
         {
             case 0:
-                PlayerImmortal();
+                PlayerImmortal(true);
                 break;
             case 1:
                 UnlimitedEnergy();
