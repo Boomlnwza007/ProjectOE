@@ -6581,41 +6581,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2367761221680331546, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.667
-      objectReference: {fileID: 0}
-    - target: {fileID: 2630248486326316758, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_Size.y
-      value: 0.55351233
-      objectReference: {fileID: 0}
-    - target: {fileID: 2630248486326316758, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.22324382
-      objectReference: {fileID: 0}
-    - target: {fileID: 4747608945231303354, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4747608945231303354, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 767578383
-      objectReference: {fileID: 0}
-    - target: {fileID: 5329434545779695586, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_Size.y
-      value: 6.200144
-      objectReference: {fileID: 0}
-    - target: {fileID: 5329434545779695586, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_Offset.y
-      value: -1.3268118
-      objectReference: {fileID: 0}
     - target: {fileID: 6129785748048553307, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
       propertyPath: m_Name
       value: Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 6656444642249361238, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8617804537962744023, guid: 444e0d8e313ddf746a5cdd499ba0f4d5, type: 3}
       propertyPath: m_LocalPosition.x
