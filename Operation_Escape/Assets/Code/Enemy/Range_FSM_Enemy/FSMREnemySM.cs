@@ -149,6 +149,11 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public void Die()
     {
+        if (areaEnermy != null)
+        {
+            areaEnermy.Die(this);
+        }
+
         Destroy(gameObject);
     }
 

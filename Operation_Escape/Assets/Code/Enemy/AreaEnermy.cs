@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class AreaEnermy : MonoBehaviour
 {
-    [SerializeField]public List<StateMachine> enemy = new List<StateMachine>();
+    [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
+    [SerializeField] public AutoDoor[] door;
+
     public LayerMask enemyleLayer;
     // Start is called before the first frame update
 
     private void Start()
     {
         AddAllEnemy();
+    }
+
+    private void Update()
+    {
+        if (enemy.Count == 0)
+        {
+            foreach (var door in door)
+            {
+                door.Unlock();
+            }
+        }
     }
 
     public void AddAllEnemy()
@@ -39,5 +52,10 @@ public class AreaEnermy : MonoBehaviour
     {
         float size = transform.localScale.x < transform.localScale.y ? transform.localScale.x : transform.localScale.y;
         return size;
+    }
+
+    public void Die(StateMachine _enemy)
+    {
+        enemy.Remove(_enemy);
     }
 }

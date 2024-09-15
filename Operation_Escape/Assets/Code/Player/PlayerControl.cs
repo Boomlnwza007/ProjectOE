@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerMovement playerMovement;
     public PlayerCombat playerCombat;
     public PlayerState playerState;
+    public List<int> key = new List<int>();
     [SerializeField] private PlayerAim playerAim;
     [SerializeField] private Animator animator;
 
