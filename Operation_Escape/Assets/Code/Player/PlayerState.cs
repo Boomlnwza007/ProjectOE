@@ -24,7 +24,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
         maxEnergy = 10;
         maxUltimateEnergy = 10;
         ultimateEnergy = 0;
-        energy = maxEnergy;
+        energy = 0;
         canGetUltimateEnergy = true;
     }
 
