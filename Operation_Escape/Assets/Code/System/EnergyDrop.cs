@@ -8,12 +8,16 @@ public class EnergyDrop : MonoBehaviour
     private GameObject targetPlayer;
     public float moveSpeed = 1f;
     public float distanceMove = 2f;
+    public bool canDestroy;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         targetPlayer = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(Destroy());        
+        if (canDestroy)
+        {
+            StartCoroutine(Destroy());
+        }
     }
 
     // Update is called once per frame
@@ -30,7 +34,6 @@ public class EnergyDrop : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);
-
     }
 
     void gotoPlayer()
