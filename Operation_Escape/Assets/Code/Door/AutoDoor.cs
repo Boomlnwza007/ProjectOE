@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class AutoDoor : MonoBehaviour
 {
-    public GameObject door;
+    public TypeDoor door;
     public bool locked = true;
-    private bool opening;
     public int key;
     public TriggerDoor plateSC;
 
     public void Open()
     {
-        door.SetActive(false);
-        opening = true;
+        door.Open();
     }
 
     public void Close()
     {
-        if (opening)
-        {
-            door.SetActive(true);
-            opening = false;
-        }
+        door.Close();
     }
 
 
