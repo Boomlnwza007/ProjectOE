@@ -107,7 +107,7 @@ public class LaserDrone : MonoBehaviour
     {
         Destroy(laser);
         Destroy(GetComponent<LaserDrone>());
-        Destroy(firstPos.GetComponent<LaserPillar>());
-        Destroy(endPos.GetComponent<LaserPillar>());
+        Destroy(firstPos.gameObject);
+        Destroy(endPos.gameObject);
     }
 }

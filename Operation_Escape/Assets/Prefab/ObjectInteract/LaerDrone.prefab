@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4574368014766647895}
   - component: {fileID: 299700905553649707}
   - component: {fileID: 4933833272243351020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,13 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 32898057623056752}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0030975342, y: 0.48939514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8873717863753743130}
-  m_Father: {fileID: 5947116574581708181}
+  m_Children: []
+  m_Father: {fileID: 8873717863753743130}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4574368014766647895
 SpriteRenderer:
@@ -73,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 658888119
-  m_SortingLayer: 2
+  m_SortingLayerID: -122677339
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f8f5a44c79ebdae43b3e8f14256aed50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -129,12 +128,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
 --- !u!1 &3346403351259706755
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +146,7 @@ GameObject:
   - component: {fileID: 2816146720312697097}
   - component: {fileID: 5860090538133391722}
   - component: {fileID: 1716623213064210270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,13 +161,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3346403351259706755}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0032958984, y: 0.48939514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8385989521751642081}
-  m_Father: {fileID: 5947116574581708181}
+  m_Children: []
+  m_Father: {fileID: 8385989521751642081}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2816146720312697097
 SpriteRenderer:
@@ -208,8 +206,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 658888119
-  m_SortingLayer: 2
+  m_SortingLayerID: -122677339
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f8f5a44c79ebdae43b3e8f14256aed50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -264,12 +262,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
 --- !u!1 &3466218788658717907
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +278,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8873717863753743130}
   - component: {fileID: 3580683054949654941}
-  m_Layer: 0
+  - component: {fileID: 184159008063857733}
+  m_Layer: 6
   m_Name: Asset_LaserTerret_Body R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,11 +295,12 @@ Transform:
   m_GameObject: {fileID: 3466218788658717907}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0030975342, y: -0.48939514, z: 0}
+  m_LocalPosition: {x: 3.9969025, y: -0.48939514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7983847389770035423}
+  m_Children:
+  - {fileID: 7983847389770035423}
+  m_Father: {fileID: 5947116574581708181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3580683054949654941
 SpriteRenderer:
@@ -340,9 +340,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 767578383
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3ee8ee7b772cb47418db3f8f41dbeec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -354,6 +354,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &184159008063857733
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3466218788658717907}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.38538098}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.5}
+    newSize: {x: 1, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.72923803}
+  m_EdgeRadius: 0
 --- !u!1 &4141519897840919873
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +409,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8385989521751642081}
   - component: {fileID: 8266779158285804515}
-  m_Layer: 0
+  - component: {fileID: 9028923197931109405}
+  m_Layer: 6
   m_Name: Asset_LaserTerret_Body L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,11 +426,12 @@ Transform:
   m_GameObject: {fileID: 4141519897840919873}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0032958984, y: -0.48939514, z: 0}
+  m_LocalPosition: {x: -4.003296, y: -0.48939514, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6371309625656747858}
+  m_Children:
+  - {fileID: 6371309625656747858}
+  m_Father: {fileID: 5947116574581708181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8266779158285804515
 SpriteRenderer:
@@ -424,9 +471,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 767578383
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3ee8ee7b772cb47418db3f8f41dbeec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -438,6 +485,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &9028923197931109405
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4141519897840919873}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.38538098}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.5}
+    newSize: {x: 1, y: 1.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.72923803}
+  m_EdgeRadius: 0
 --- !u!1 &4644897362271933355
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +542,7 @@ GameObject:
   - component: {fileID: 2211829862301332668}
   - component: {fileID: 8048974882410049308}
   - component: {fileID: 5797580609426181300}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaerDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,12 +558,12 @@ Transform:
   m_GameObject: {fileID: 4644897362271933355}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.779657, y: -2.1949368, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6371309625656747858}
-  - {fileID: 7983847389770035423}
+  - {fileID: 8385989521751642081}
+  - {fileID: 8873717863753743130}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2211829862301332668
@@ -589,15 +681,15 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1179515719
-  m_SortingLayer: 0
+  m_SortingLayerID: -122677339
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
