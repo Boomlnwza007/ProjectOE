@@ -28,12 +28,9 @@ public class ShockTrap : MonoBehaviour
         if (trapOn)
         {
             if (!isRunning && time >= timeAc)
-            {
-                trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
+            {                
                 isRunning = true;
                 time = 0f;
-                GetComponent<SpriteRenderer>().color = Color.red;
-
             }
 
             if (isRunning)
@@ -85,5 +82,27 @@ public class ShockTrap : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         trapOn = true;
+        trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
+        StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
+    }
+
+    public IEnumerator FadeBomb(SpriteRenderer spriteRenderer, float duration)
+    {
+        Color color = spriteRenderer.color;
+        float startAlpha = color.a;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / duration);
+            color.a = newAlpha;
+            spriteRenderer.color = color;
+            yield return null;
+        }
+
+        color = Color.red;
+        color.a = 1f;
+        spriteRenderer.color = color;
     }
 }

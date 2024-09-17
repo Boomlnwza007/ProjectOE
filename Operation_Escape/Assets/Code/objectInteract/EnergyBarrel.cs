@@ -23,13 +23,21 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract
                 }
                 else
                 {
-                    StopAllCoroutines();
+                    StopCoroutine("FadeBomb");
                     BombBlast(bomb.GetComponent<SpriteRenderer>());
                 }
                 break;
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(1);
-                Destroy(gameObject);
+                if (!blast)
+                {
+                    lootDrop.InstantiateLoot(1);
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    StopCoroutine("FadeBomb");
+                    BombBlast(bomb.GetComponent<SpriteRenderer>());
+                }                
                 break;
             default:
                 break;
