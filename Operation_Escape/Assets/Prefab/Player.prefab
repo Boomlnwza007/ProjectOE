@@ -1431,6 +1431,7 @@ MonoBehaviour:
   spawnBar: {fileID: 4062585208610903050}
   value: 0
   obj: {fileID: 11400000, guid: bb85ff18970069f4fb876e5b5ac954f9, type: 2}
+  objUl: {fileID: 0}
   curgun: 0
   bar: {fileID: 6946206738789570545}
 --- !u!1 &7095220157485924617
@@ -1971,9 +1972,7 @@ MonoBehaviour:
   canFire: 1
   UltiTime: 0
   damage: 2
-  comboMaxTime: 1.5
-  comboCooldown: 1
-  maxComboSteps: 3
+  comboCooldown: 0.5
   canMelee: 1
   sizeHitbox: {x: 2, y: 3}
   knockBack: 1
@@ -1992,6 +1991,7 @@ MonoBehaviour:
   playerMovement: {fileID: 8600667175816881253}
   playerCombat: {fileID: 2200673144129377109}
   playerState: {fileID: 170899704722756608}
+  key: 
   playerAim: {fileID: 1781867465748768360}
   animator: {fileID: 6778737011727104026}
   healthBar: {fileID: 4370306752507434572}
