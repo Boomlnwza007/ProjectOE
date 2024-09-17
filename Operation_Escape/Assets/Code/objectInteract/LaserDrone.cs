@@ -18,7 +18,6 @@ public class LaserDrone : MonoBehaviour
     private bool canDamage = true;
 
     private LineRenderer laser;
-    public LayerMask obstacleLayer;
     public LayerMask ShootLayer;
 
     // Start is called before the first frame update
