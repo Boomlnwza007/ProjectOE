@@ -22,8 +22,8 @@ public class LaserFire : MonoBehaviour
     public LayerMask obstacleLayer;
     public LayerMask ShootLayer;
     public bool follow;
-    public bool followStF;
     public float overshootAngle = 0;
+    public int followCode;
 
     // Update is called once per frame
     void Update()
@@ -40,13 +40,19 @@ public class LaserFire : MonoBehaviour
 
         if (follow)
         {
-            if (followStF)
+            switch (followCode)
             {
-                LaserFollowStF(target);
-            }
-            else
-            {
-                LaserFollow(targetPlayer);
+                case 0:
+                    LaserFollow(0);
+                    break;
+                case 1:
+                    LaserFollowStF(target);
+                    break;
+                case 2:
+                    LaserFollow(targetPlayer);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -205,7 +211,18 @@ public class LaserFire : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, 0, newAngle);
     }
+    public void LaserFollow(float target)
+    {        
+        float targetAngle = target;
+        float currentAngle = transform.eulerAngles.z;
+        targetAngle += overshootAngle;
+        float t = Mathf.Clamp01(Time.deltaTime * speedRot);
+        t = Mathf.SmoothStep(0, accelerationTime, t);
 
+        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, t);
+
+        transform.eulerAngles = new Vector3(0, 0, newAngle);
+    }
     public void SetStartFollow(Vector3 target)
     {
         Vector2 dir = (target - transform.position).normalized;

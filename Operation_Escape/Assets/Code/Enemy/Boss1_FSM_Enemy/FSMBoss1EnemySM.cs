@@ -92,34 +92,20 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         lasers.Add(laser);
     }
 
-    public void CreatLaserGun(float[] targetStart)
+    public void CreatLaserGunFollow()
     {
-        SetupHandGun();
-        for (int i = 0; i < targetStart.Length; i++)
-        {
-            GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.identity, handGun);
-            LaserFire laserg = laser.GetComponent<LaserFire>();
-            laserg.SetStartFollow(targetStart[i]);
-            laserg.SetovershootAngle(5, target);
-            lasers.Add(laser);
-        }
-    }
+        handGun.localRotation = Quaternion.Euler(0, 0, 0);
+        GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.Euler(0, 0, 90), handGun);
+        LaserFire laserg = laser.GetComponent<LaserFire>();
+        laserg.SetovershootAngle(5, target);
+        lasers.Add(laser);
 
-    public void CreatLaserGun(int laserCount, float spreadAngle)
-    {
+        GameObject laser2 = Instantiate(lineRendererPrefab, transform.position, Quaternion.Euler(0, 0, -90), handGun);
+        LaserFire laserg2 = laser.GetComponent<LaserFire>();
+        laserg2.SetovershootAngle(5, target);
+        lasers.Add(laser2);
+
         SetupHandGun();
-        Vector2 directionToPlayer = (ai.targetTarnsform.position - transform.position).normalized;
-        float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-        float startAngle = -spreadAngle * ((laserCount - 1) / 2.0f); ;
-        for (int i = 0; i < laserCount; i++)
-        {
-            float angle = startAngle + (spreadAngle * i);
-            GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.identity, handGun);
-            LaserFire laserg = laser.GetComponent<LaserFire>();
-            laserg.SetStartFollow(angleDirectionToPlayer+angle);
-            laserg.SetovershootAngle(spreadAngle,target);
-            lasers.Add(laser);
-        }
     }
 
     public void SetupHandGun()
@@ -145,6 +131,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             LaserFire laser = laserGun.GetComponent<LaserFire>();
             laser.speedRot = speedRot;
             laser.targetPlayer = target;
+            laser.followCode = 2;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));            
         }        
     }
@@ -156,18 +143,21 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             LaserFire laser = laserGun.GetComponent<LaserFire>();
             laser.speedRot = speedRot;
             laser.targetPlayer = target;
+            laser.followCode = 2;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));
         }
     }
 
     public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime)
     {
+        CreatLaserGunFollow();
+
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
             laser.speedRot = speedRot;
             laser.target = target.position;
-            laser.followStF = true;
+            laser.followCode = 0;
             UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime)).Forget();
         }
         await UniTask.WaitForSeconds(charge);

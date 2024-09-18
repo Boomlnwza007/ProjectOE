@@ -136,15 +136,14 @@ public class DashAB1FSM : BaseState
     public async UniTask LaserFollowIn()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
-        float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+        //Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
+        //float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
-        float angleLeft = angleDirectionToPlayer + 90;
-        float angleRight = angleDirectionToPlayer - 90;
-        float[] angle = { angleLeft, angleRight };
+        //float angleLeft = angleDirectionToPlayer + 90;
+        //float angleRight = angleDirectionToPlayer - 90;
+        //float[] angle = { angleLeft, angleRight };
 
-        state.CreatLaserGun(angle);
-
+        //state.CreatLaserGun(angle);
         await UniTask.WhenAll(state.ShootLaserFollowIn(2f, 3f, 1, 4.5f), state.RangeFollow(2f));
 
     }
