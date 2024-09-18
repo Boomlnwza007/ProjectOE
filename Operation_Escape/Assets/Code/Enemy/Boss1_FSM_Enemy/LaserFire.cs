@@ -43,7 +43,14 @@ public class LaserFire : MonoBehaviour
             switch (followCode)
             {
                 case 0:
-                    LaserFollow(0);
+                    if (targetPlayer!=null)
+                    {
+                        LaserFollowIN(targetPlayer);
+                    }
+                    else
+                    {
+                        Debug.Log(gameObject.name);
+                    }
                     break;
                 case 1:
                     LaserFollowStF(target);
@@ -211,9 +218,11 @@ public class LaserFire : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, 0, newAngle);
     }
-    public void LaserFollow(float target)
-    {        
-        float targetAngle = target;
+
+    public void LaserFollowIN(Transform target)
+    {
+        Vector2 dir = target.right;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float currentAngle = transform.eulerAngles.z;
         targetAngle += overshootAngle;
         float t = Mathf.Clamp01(Time.deltaTime * speedRot);

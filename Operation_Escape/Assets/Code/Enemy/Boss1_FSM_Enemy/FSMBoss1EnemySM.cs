@@ -94,18 +94,21 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void CreatLaserGunFollow()
     {
-        handGun.localRotation = Quaternion.Euler(0, 0, 0);
-        GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.Euler(0, 0, 90), handGun);
+        SetupHandGun();
+        Quaternion topRotation = handGun.rotation * Quaternion.Euler(0, 0, 90);
+        GameObject laser = Instantiate(lineRendererPrefab, transform.position, topRotation, handGun);
         LaserFire laserg = laser.GetComponent<LaserFire>();
-        laserg.SetovershootAngle(5, target);
+        laserg.targetPlayer = handGun;
+        //laserg.SetovershootAngle(5, target);
         lasers.Add(laser);
 
-        GameObject laser2 = Instantiate(lineRendererPrefab, transform.position, Quaternion.Euler(0, 0, -90), handGun);
-        LaserFire laserg2 = laser.GetComponent<LaserFire>();
-        laserg2.SetovershootAngle(5, target);
+        Quaternion bottomRotation = handGun.rotation * Quaternion.Euler(0, 0, -90);
+        GameObject laser2 = Instantiate(lineRendererPrefab, transform.position, bottomRotation, handGun);
+        LaserFire laserg2 = laser2.GetComponent<LaserFire>();
+        laserg2.targetPlayer = handGun;
+        //laserg2.SetovershootAngle(5, target);
         lasers.Add(laser2);
 
-        SetupHandGun();
     }
 
     public void SetupHandGun()
@@ -239,7 +242,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         while (true)
         {
             timer += Time.deltaTime;
-            Vector2 dir =  (transform.position - target.position).normalized;
+            Vector2 dir =  (target.position - transform.position).normalized;
             float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             float currentAngle = handGun.eulerAngles.z;
             for (int i = 0; i < lasers.Count; i++)
@@ -324,5 +327,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public void JumpCenter()
     {
         transform.position = originPoint.position;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + (handGun.right).normalized * 5);
     }
 }

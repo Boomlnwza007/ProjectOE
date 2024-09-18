@@ -3433,15 +3433,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3821068465358028548, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3899851578287766090, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.399118
+      value: 14.2
       objectReference: {fileID: 0}
     - target: {fileID: 3899851578287766090, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1348547
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 3899851578287766090, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3483,6 +3483,10 @@ PrefabInstance:
       propertyPath: bulletmon
       value: 
       objectReference: {fileID: 4640713933992763453, guid: 3aaaae0f0a045f242be35346e039847d, type: 3}
+    - target: {fileID: 6841419420981266608, guid: df91e9d316db68842bce026677ed92ad, type: 3}
+      propertyPath: overdrive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6841419420981266608, guid: df91e9d316db68842bce026677ed92ad, type: 3}
       propertyPath: originPoint
       value: 
