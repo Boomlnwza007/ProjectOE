@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pipeline
   m_EditorClassIdentifier: 
   m_Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 552274507, guid: 7a1a83e736f7f5c4f8006144a9de7947, type: 3}
+  - {fileID: 1774454568, guid: 7a1a83e736f7f5c4f8006144a9de7947, type: 3}
+  - {fileID: 652844525, guid: 324b88f1cc5751349859b10ed33e3f62, type: 3}
+  - {fileID: 2108973467, guid: 7a1a83e736f7f5c4f8006144a9de7947, type: 3}
+  - {fileID: 552274507, guid: 7a1a83e736f7f5c4f8006144a9de7947, type: 3}
