@@ -242,7 +242,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
-  speed: 17
+  speed: 15
   slowDownRadius: 5
   stopRadius: 2
   enableRandomDeviation: 1

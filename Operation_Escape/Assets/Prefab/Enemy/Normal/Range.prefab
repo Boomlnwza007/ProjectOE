@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 30
   dmg: 30
-  Speed: 13
+  Speed: 11
   visRange: 30
   attacking: 0
   lootDrop: {fileID: 8382806372236893102}

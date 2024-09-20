@@ -1945,7 +1945,7 @@ MonoBehaviour:
   vertical: 0
   canCombat: 1
   rb: {fileID: 0}
-  speed: 10
+  speed: 8
   slowSpeed: 0
   dodgeMaxSpeed: 70
   coolDownDodge: 2.5
