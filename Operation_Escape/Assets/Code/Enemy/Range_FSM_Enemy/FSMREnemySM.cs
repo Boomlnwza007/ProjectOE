@@ -71,7 +71,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     {
         Vector2 predictedPosition = Prefire(target, bulletTranform, 20);
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
-        bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
+        bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
         if (Random.value > 0.5)
         {
             Vector2 direction = (predictedPosition - (Vector2)bulletTranform.position).normalized;
@@ -101,7 +101,7 @@ public class FSMREnemySM : StateMachine, IDamageable
             float angle = startAngle + (spreadAngle * i);
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation* rotation);
-            bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
+            bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
         }        
     }
 

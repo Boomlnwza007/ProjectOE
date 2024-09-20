@@ -13,35 +13,51 @@ public class CloseAttackRFSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        if (((FSMREnemySM)stateMachine).cooldown)
+        go = false;
+        time = 0;
+
+        var state = (FSMREnemySM)stateMachine;
+        if (state.cooldown)
         {
-            stateMachine.ChangState(((FSMREnemySM)stateMachine).normalAttackState);
+            stateMachine.ChangState(state.normalAttackState);
             return;
         }
+
         ai = ((FSMREnemySM)stateMachine).ai;
-        speed = ai.Maxspeed;
-        time = 0;
-        ai.Maxspeed = speed * 10;
-        Debug.Log("ตั้งท่าเตรียมโจมตี CloseAttack");
-        ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized * 5;
+        //speed = ai.Maxspeed;
+        //time = 0;
+        //ai.Maxspeed = speed * 10;
+        Debug.Log("ตั้งท่าเตรียมโจมตี CloseAttack");        
+        if (state.rb != null)
+        {
+            ai.canMove = false;
+            Vector2 knockbackDirection = (ai.position - ai.targetTransform.position).normalized;
+            Debug.DrawLine(ai.position, ai.position + (ai.position - ai.targetTransform.position).normalized *10);
+            state.rb.AddForce(knockbackDirection * 200, ForceMode2D.Impulse);
+            ((FSMREnemySM)stateMachine).FireClose();
+
+            Debug.Log("back");
+        }
+        //ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized * 5;
     }
 
-    public override void UpdateLogic()
+    public override void UpdateLogic()  
     {
-        base.UpdateLogic();
-        if (ai.endMove)
+        if (!go)
         {
-            go = true;
-        }
-
-        if (go)
-        {
-            ai.Maxspeed = speed;
             time += Time.deltaTime;
             if (time > 0.5f)
             {
+                ((FSMREnemySM)stateMachine).rb.velocity = Vector2.zero;
                 ai.canMove = true;
-                ((FSMREnemySM)stateMachine).FireClose();
+                go = true;
+            }
+        }
+        else
+        {
+            time += Time.deltaTime;
+            if (time > 0.5f)
+            {
                 ((FSMREnemySM)stateMachine).cooldown = true;
                 stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
             }

@@ -18,7 +18,7 @@ public class CheckDistanceRFSM : BaseState
     {
         base.UpdateLogic();
         ((FSMREnemySM)stateMachine).Movement();
-        distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
+        distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         if (distance < 9)
         {
            stateMachine.ChangState(((FSMREnemySM)stateMachine).closeAttackState);

@@ -265,7 +265,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     [ContextMenu(nameof(ShootMissile))]
     public async UniTask ShootMissile()
     {
-        Vector2 directionToPlayer = (ai.targetTarnsform.position - transform.position).normalized;
+        Vector2 directionToPlayer = (ai.targetTransform.position - transform.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
         float angleLeft = angleDirectionToPlayer + 90;
@@ -284,7 +284,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             float angle = startAngle + (spreadAngle * i) + angleLR;
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bulletG = Instantiate(bulletmon, transform.position, rotation);
-            bulletG.GetComponent<BulletFollow>().target = ai.targetTarnsform;
+            bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
             await UniTask.WaitForSeconds(0.1f);
         }
     }   

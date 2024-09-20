@@ -29,7 +29,7 @@ public class WanderSFSM : BaseState
             }
         }
 
-        if (Vector2.Distance(ai.position, ai.targetTarnsform.position) < ((FSMSEnemySM)stateMachine).visRange)
+        if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMSEnemySM)stateMachine).visRange)
         {
             ((FSMSEnemySM)stateMachine).CombatPhaseOn();
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);

@@ -30,7 +30,7 @@ public class RangeAB1Fsm : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTarnsform.position;
+        ai.destination = ai.targetTransform.position;
     }
 
     public async UniTask Attack()
@@ -80,7 +80,7 @@ public class RangeAB1Fsm : BaseState
         bool distance = false;
         if (!overdrive)
         {
-            if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
+            if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
                 ((FSMBoss1EnemySM)stateMachine).DelLaserGun();
                 ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
@@ -105,7 +105,7 @@ public class RangeAB1Fsm : BaseState
 
     public float[] Set()
     {
-        Vector2 directionToPlayer = (ai.targetTarnsform.position - ai.position).normalized;
+        Vector2 directionToPlayer = (ai.targetTransform.position - ai.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
 
         float angleLeft = angleDirectionToPlayer + 90;

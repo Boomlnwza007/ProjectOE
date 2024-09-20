@@ -45,7 +45,7 @@ public class DashAB1FSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTarnsform.position;
+        ai.destination = ai.targetTransform.position;
 
         if (followMe)
         {
@@ -75,7 +75,7 @@ public class DashAB1FSM : BaseState
         while (time < 4f)
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
+            if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
                 ai.Maxspeed = speed;
                 if (overdrive)

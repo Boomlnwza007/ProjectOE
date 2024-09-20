@@ -25,7 +25,7 @@ public class ChargeEMFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTarnsform.position;
+        ai.destination = ai.targetTransform.position;
         if (((FSMMEnemySM)stateMachine).cooldown)
         {
             Debug.Log("ติด CD");
@@ -35,7 +35,7 @@ public class ChargeEMFSM : BaseState
             return;
         }
 
-        distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
+        distance = Vector2.Distance(ai.position, ai.targetTransform.position);
 
         if (cooldown)
         {

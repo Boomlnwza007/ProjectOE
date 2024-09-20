@@ -19,9 +19,9 @@ public class CheckDistanceEMFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTarnsform.position;
+        ai.destination = ai.targetTransform.position;
 
-        distance = Vector2.Distance(ai.position, ai.targetTarnsform.position);
+        distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         if (distance < 2)
         {
             stateMachine.ChangState(((FSMMEnemySM)stateMachine).N1Attack);

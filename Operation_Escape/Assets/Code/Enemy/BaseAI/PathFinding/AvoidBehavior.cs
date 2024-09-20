@@ -15,7 +15,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public bool endMove { get; private set; }
     public Vector3 position { get { return gameObject.transform.position; } }
     public Vector3 destination { get; set; }
-    public Transform targetTarnsform { get; set; }
+    public Transform targetTransform { get; set; }
     public bool randomDeviation { get { return enableRandomDeviation; } set { enableRandomDeviation = value; } }
     public GameObject playerGameObject { get; private set; }
     public Vector2 playerVelocity { get; private set; }
@@ -54,6 +54,11 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
 
     public void Move()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         Vector2 avoidForce = Vector2.zero;
 
         Collider2D[] obstacles = Physics2D.OverlapCircleAll(transform.position, avoidRadius, obstacleLayer);
@@ -109,11 +114,6 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
         }
 
         steering = desiredVelocity + avoidForce;
-
-        if (!canMove)
-        {
-            curSpeed = 0f;
-        }
 
         if (avoidForce != Vector2.zero)
         {

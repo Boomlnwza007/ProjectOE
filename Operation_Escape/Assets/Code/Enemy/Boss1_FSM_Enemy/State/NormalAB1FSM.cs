@@ -36,7 +36,7 @@ public class NormalAB1FSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTarnsform.position;
+        ai.destination = ai.targetTransform.position;
 
         if (followMe)
         {
@@ -52,7 +52,7 @@ public class NormalAB1FSM : BaseState
         while (time < runTime)
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.targetTarnsform.position, ai.position) < 3)
+            if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
                 ai.Maxspeed = speed;
                 await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f));

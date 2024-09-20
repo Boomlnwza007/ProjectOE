@@ -14,7 +14,11 @@ public class WanderRFSM : BaseState
         ai = ((FSMREnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         time = 0;
-        distane = ((FSMREnemySM)stateMachine).areaEnermy.Size();
+        if (((FSMREnemySM)stateMachine).areaEnermy!= null)
+        {
+            distane = ((FSMREnemySM)stateMachine).areaEnermy.Size();
+
+        }
     }
 
     public override void UpdateLogic()
@@ -29,7 +33,7 @@ public class WanderRFSM : BaseState
             }
         }
 
-        if (Vector2.Distance(ai.position, ai.targetTarnsform.position) < ((FSMREnemySM)stateMachine).visRange)
+        if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMREnemySM)stateMachine).visRange)
         {
             ((FSMREnemySM)stateMachine).CombatPhaseOn();
             stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
