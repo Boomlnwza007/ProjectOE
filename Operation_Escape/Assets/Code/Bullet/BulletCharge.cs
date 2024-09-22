@@ -46,6 +46,7 @@ public class BulletCharge : BaseBullet
     public void Shoot()
     {
         rb.velocity = Direction() * speed;
+        SpriteRotation();
         ready = true;
     }
 

@@ -8,8 +8,9 @@ public class BulletScript : BaseBullet
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();        
         rb.velocity = Direction() * speed;
+        SpriteRotation();
     }
 
     private void OnBecameInvisible()

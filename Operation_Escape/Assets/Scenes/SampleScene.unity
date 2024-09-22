@@ -1971,6 +1971,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Range (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 635215977825158641, guid: 2846162f0fde75d428d146bf8e126c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2841144634926014607, guid: 2846162f0fde75d428d146bf8e126c4f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 44.046043
@@ -7132,6 +7136,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3776936949522445415, guid: aa963654f8d60f346907830e91619aa8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4566426579663762199, guid: aa963654f8d60f346907830e91619aa8, type: 3}
       propertyPath: m_Camera
       value: 

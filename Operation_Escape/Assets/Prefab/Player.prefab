@@ -1840,7 +1840,7 @@ SpriteRenderer:
   m_SortingLayerID: 767578383
   m_SortingLayer: 4
   m_SortingOrder: 5
-  m_Sprite: {fileID: 450083640, guid: 65bd6d604315ff541aaed8d82d3a9294, type: 3}
+  m_Sprite: {fileID: 468619868, guid: f7a75607abbb8874fbf9538e8d966951, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1999,6 +1999,7 @@ MonoBehaviour:
   energyBar: {fileID: 8365382295990206358}
   reloadBar: {fileID: 5930837384408629262}
   bulletBar: {fileID: 6525948652876562149}
+  guntSprite: {fileID: 0}
 --- !u!114 &8529641966930444737
 MonoBehaviour:
   m_ObjectHideFlags: 0
