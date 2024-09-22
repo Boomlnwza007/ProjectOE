@@ -171,5 +171,5 @@ MonoBehaviour:
   speedChangSpeed: 20
   startSpeed: 20
   rotationSpeed: 2
-  starTime: 0.5
+  starTime: 0.2
   stopTime: 2

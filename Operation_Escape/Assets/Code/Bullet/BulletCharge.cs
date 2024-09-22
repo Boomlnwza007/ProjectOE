@@ -21,6 +21,7 @@ public class BulletCharge : BaseBullet
         originScale = transform.localScale;
         startScale = originScale.x;
     }
+
     public void Charge()
     {
         if (time < chargeTime)
@@ -44,7 +45,7 @@ public class BulletCharge : BaseBullet
 
     public void Shoot()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = Direction() * speed;
         ready = true;
     }
 
