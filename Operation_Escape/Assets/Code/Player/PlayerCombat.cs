@@ -310,6 +310,8 @@ public class PlayerCombat : MonoBehaviour
         }
 
         currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
+        PlayerControl.control.guntSprite = currentEquipGun.GetComponentInChildren<SpriteRenderer>();
+
     }
 
     private void OnDrawGizmos()

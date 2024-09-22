@@ -9,6 +9,10 @@ public class FireRateBar : MonoBehaviour
     private PlayerControl Player;
     public string nameGun;
 
+    [Header("Layer")]
+    public Canvas canvas;
+    public SpriteRenderer gunSprite;
+
     private void Start()
     {
         Player = PlayerControl.control;
@@ -40,6 +44,11 @@ public class FireRateBar : MonoBehaviour
         {
             var currentGun = Player.playerCombat.gunList[Player.playerCombat.currentGun];
             slider.value = Mathf.Lerp(0, currentGun.maxFireRate, currentGun.fireRate / currentGun.maxFireRate);
+        }
+
+        if (canvas.sortingOrder != gunSprite.sortingOrder)
+        {
+            canvas.sortingOrder = gunSprite.sortingOrder+1;
         }
     }
 

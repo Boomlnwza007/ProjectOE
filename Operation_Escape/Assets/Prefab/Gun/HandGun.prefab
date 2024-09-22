@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 2290035833471304035}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.381, y: 0, z: 0}
+  m_LocalPosition: {x: 0.55, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -176,7 +176,7 @@ SpriteRenderer:
   m_SortingLayerID: 767578383
   m_SortingLayer: 4
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 449a7d3ffca864742b344c971ebfe12b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16f81660107e5994d9cbaa0ba947b28a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,6 +261,8 @@ MonoBehaviour:
   slider: {fileID: 3325746502252467729}
   gun: {fileID: 6891942016923813591}
   nameGun: 
+  canvas: {fileID: 8552687086910890758}
+  gunSprite: {fileID: 7566091920194326233}
 --- !u!1 &5520762139760519814
 GameObject:
   m_ObjectHideFlags: 0
