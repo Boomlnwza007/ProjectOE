@@ -16,20 +16,22 @@ public class DashAB1FSM : BaseState
     // Start is called before the first frame update
     public override async void Enter()
     {
-        ai = ((FSMBoss1EnemySM)stateMachine).ai;
-        overdrive = ((FSMBoss1EnemySM)stateMachine).overdrive;
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("DashAB1FSM", true);
+        ai = state.ai;
+        overdrive = state.overdrive;
         speed = ai.Maxspeed;
         ai.canMove = true;
 
         if (!overdrive)
         {
-            if (!((FSMBoss1EnemySM)stateMachine).rangeAState.rangeAttack)
+            if (!state.rangeAState.rangeAttack)
             {
                 Changemode = 1;
                 Charg = 1;
                 await UniTask.WaitForSeconds(1f);
-                ((FSMBoss1EnemySM)stateMachine).rangeAState.rangeAttack = false;
-                ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+                state.rangeAState.rangeAttack = false;
+                ChangState(state.normalAState);
                 return;
             }
         }
@@ -148,4 +150,9 @@ public class DashAB1FSM : BaseState
 
     }
 
+    public override void Exit()
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("DashAB1FSM", false);
+    }
 }

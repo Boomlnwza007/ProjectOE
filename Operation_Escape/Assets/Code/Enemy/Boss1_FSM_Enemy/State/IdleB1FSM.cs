@@ -10,6 +10,7 @@ public class IdleB1FSM : BaseState
 
     public override void Enter()
     {
+        ((FSMBoss1EnemySM)stateMachine).animator.SetBool("IdleB1FSM", true);
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         ai.destination = ai.position;
     }
@@ -19,7 +20,13 @@ public class IdleB1FSM : BaseState
         if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMBoss1EnemySM)stateMachine).visRange)
         {
             ai.canMove = true;
+
             stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
         }
+    }
+
+    public override void Exit()
+    {
+        ((FSMBoss1EnemySM)stateMachine).animator.SetBool("IdleB1FSM", false);
     }
 }

@@ -32,6 +32,9 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public string stateName;
     private SpriteFlash spriteFlash;
 
+    [Header("Animation")]
+    [SerializeField] public Animator animator;
+
     [HideInInspector]
     public CheckDistanceB1FSM checkDistanceState;
     [HideInInspector]

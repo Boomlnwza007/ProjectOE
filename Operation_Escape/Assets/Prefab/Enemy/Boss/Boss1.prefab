@@ -289,6 +289,7 @@ MonoBehaviour:
   overdriveTimer: 60
   fireRate: 0.7
   stateName: 
+  animator: {fileID: 3410424261096391286}
 --- !u!114 &1094802950873366316
 MonoBehaviour:
   m_ObjectHideFlags: 0

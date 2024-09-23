@@ -14,6 +14,8 @@ public class RangeAB1Fsm : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("RangeAB1Fsm", true);
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         overdrive = ((FSMBoss1EnemySM)stateMachine).overdrive;
         speed = ai.Maxspeed;
@@ -112,5 +114,11 @@ public class RangeAB1Fsm : BaseState
         float angleRight = angleDirectionToPlayer - 90;
         float[] angle = { angleLeft, angleRight };
         return angle;
+    }
+
+    public override void Exit()
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("RangeAB1Fsm", false);
     }
 }

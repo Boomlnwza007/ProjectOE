@@ -13,7 +13,9 @@ public class OverdriveChangFSM : BaseState
 
     public override void Enter()
     {
-        ai = ((FSMBoss1EnemySM)stateMachine).ai;
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("OverdriveChangFSM", true);
+        ai = state.ai;
         ai.canMove = false;
         time = 0;
         Debug.Log("Start");
@@ -30,5 +32,11 @@ public class OverdriveChangFSM : BaseState
             ((FSMBoss1EnemySM)stateMachine).overdriveChang = false;
             stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
         }
+    }
+
+    public override void Exit()
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("OverdriveChangFSM", false);
     }
 }

@@ -18,6 +18,8 @@ public class CheckDistanceB1FSM : BaseState
     public override void UpdateLogic()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("CheckDistanceB1FSM", true);
+
         ai.destination = ai.targetTransform.position;
 
         distance = Vector2.Distance(ai.position, ai.targetTransform.position);
@@ -42,5 +44,11 @@ public class CheckDistanceB1FSM : BaseState
         {
             state.ChangState(Nextstate);
         }
+    }
+
+    public override void Exit()
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("CheckDistanceB1FSM", false);
     }
 }

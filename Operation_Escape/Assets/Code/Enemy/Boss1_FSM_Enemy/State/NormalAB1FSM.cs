@@ -16,6 +16,8 @@ public class NormalAB1FSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("NormalAB1FSM", true);
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         overdrive = ((FSMBoss1EnemySM)stateMachine).overdrive;
         ai.canMove = true;
@@ -114,5 +116,11 @@ public class NormalAB1FSM : BaseState
 
         await UniTask.WhenAll(state.ShootLaserFollowIn(2f, 3f, 1, 4.5f), state.RangeFollow(2f));
 
+    }
+
+    public override void Exit()
+    {
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("NormalAB1FSM", false);
     }
 }
