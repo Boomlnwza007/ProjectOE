@@ -53,8 +53,10 @@ public class PlayerControl : MonoBehaviour
     private void UpdateAnimation()
     {
         bool isFacingRight = playerAim.angle > -90 && playerAim.angle < 90;
+        bool HasGun = playerCombat.gunList.Count > 0;
 
         animator.SetBool("Right", isFacingRight);
+        animator.SetBool("HasGun", HasGun);
 
         if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
         {
@@ -79,6 +81,8 @@ public class PlayerControl : MonoBehaviour
                 guntSprite.sortingOrder = 3;
             }
         }
+
+
         
     }
 
