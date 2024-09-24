@@ -17,6 +17,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     public float fireRate = 0.8f;
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
+    public ER_Animation animator;
 
     [Header("circle")]
     private float timeCircle;

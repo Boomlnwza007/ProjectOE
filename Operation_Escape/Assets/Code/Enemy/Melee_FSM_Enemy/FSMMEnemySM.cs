@@ -12,6 +12,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public bool imortal { get; set; }
     public string stateName;
     private SpriteFlash spriteFlash;
+    public EM_Animation animator;
 
     [HideInInspector]
     public WanderEMFSM wanderState;
@@ -38,6 +39,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
             curState.UpdateLogic();
             stateName = curState.nameState;
         }
+
         if (cooldown)
         {
             time += Time.deltaTime;
@@ -127,4 +129,5 @@ public class FSMMEnemySM : StateMachine, IDamageable
     {
         areaEnermy = area;
     }
+
 }

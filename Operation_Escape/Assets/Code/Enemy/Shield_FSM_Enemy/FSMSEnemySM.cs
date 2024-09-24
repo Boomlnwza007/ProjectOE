@@ -12,6 +12,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public bool canGuard;
     public bool imortal { get; set; }
     public string stateName;
+    public ES_animation animator;
 
     [Header("shild")]
     [SerializeField]public GuardShield shield;
