@@ -189,7 +189,7 @@ MonoBehaviour:
   timeCooldown: 2
   fireRate: 0.8
   areaEnermy: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 8165175477225224536}
   radius: 13
   offset: 3
   stateName: 

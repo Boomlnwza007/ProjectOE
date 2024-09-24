@@ -382,7 +382,7 @@ MonoBehaviour:
   areaEnermy: {fileID: 0}
   canGuard: 0
   stateName: 
-  animator: {fileID: 0}
+  animator: {fileID: 6324656494063990374}
   shield: {fileID: 9136803762061904664}
 --- !u!70 &1983402571418764075
 CapsuleCollider2D:
