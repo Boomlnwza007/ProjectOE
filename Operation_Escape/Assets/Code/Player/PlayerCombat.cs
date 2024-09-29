@@ -114,7 +114,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void ComboAttack()
     {
-        Debug.Log("Melee");
+        PlayerControl.control.animator.SetTrigger("Attack");
         canMelee = false;
         canFire = false;
         PlayerControl.control.Slow(100);

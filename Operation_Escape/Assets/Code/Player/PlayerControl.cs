@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerState playerState;
     public List<int> key = new List<int>();
     [SerializeField] private PlayerAim playerAim;
-    [SerializeField] private Animator animator;
+    public Animator animator;
 
     [Header("UI")]
     [SerializeField] private SliderBar healthBar;
