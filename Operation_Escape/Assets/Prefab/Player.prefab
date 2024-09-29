@@ -1972,7 +1972,7 @@ MonoBehaviour:
   canFire: 1
   UltiTime: 0
   damage: 2
-  comboCooldown: 0.5
+  comboCooldown: 0.2
   canMelee: 1
   sizeHitbox: {x: 2, y: 3}
   knockBack: 1
