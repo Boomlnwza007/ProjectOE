@@ -83,7 +83,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             }
         }
 
-
+        DiractionAttack();
     }
 
     public void CreatLaserGun()
@@ -335,5 +335,45 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + (handGun.right).normalized * 5);
+    }
+
+    public void DiractionAttack()
+    {
+        Vector2 dir = (target.position - gameObject.transform.position).normalized;
+        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        bool isFacingRight = targetAngle > -90 && targetAngle < 90;
+        animator.SetBool("isRight", isFacingRight);
+        targetAngle += 45;
+        targetAngle = (targetAngle + 360) % 360;
+        int segment = Mathf.FloorToInt(targetAngle / 90);
+
+        switch (segment)
+        {
+            case 0: // ด้านขวา
+                animator.SetFloat("horizon", 1);
+                animator.SetFloat("vertical", 0);
+                break;
+
+            case 1: // ด้านบน
+                animator.SetFloat("horizon", isFacingRight ? 1 : -1);
+                animator.SetFloat("vertical", 1);
+                animator.SetBool("isUp", true);
+                break;
+
+            case 2: // ด้านซ้าย
+                animator.SetFloat("horizon", -1);
+                animator.SetFloat("vertical", 0);
+                break;
+
+            case 3: // ด้านล่าง
+                animator.SetFloat("horizon", isFacingRight ? 1 : -1);
+                animator.SetFloat("vertical", -1);
+                animator.SetBool("isUp", false);
+                break;
+
+            default:
+                Debug.LogError("segment value: " + segment);
+                break;
+        }
     }
 }

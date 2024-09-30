@@ -57,18 +57,20 @@ public class NormalAB1FSM : BaseState
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
                 ai.Maxspeed = speed;
-                await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f));
-                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 2), AimMelee(0.8f));
-                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f));
-                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f));
+                state.animator.SetBool("Attacking", true);
+                await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f), PreAttack(1f)); // hit 1
+                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 2), AimMelee(0.8f)); // hit 2
+                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f), PreAttack(Charg)); // hit 3
+                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f)); // hit 4
                 if (overdrive)
                 {
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f)); // hit 4
                     await UniTask.WaitForSeconds(1);
                     await LaserFollowIn();
                     state.DelLaserGun();
                 }
 
+                state.animator.SetBool("Attacking", false);
                 ai.canMove = false;
                 await UniTask.WaitForSeconds(1);
                 ai.canMove = true;
@@ -122,5 +124,12 @@ public class NormalAB1FSM : BaseState
     {
         var state = (FSMBoss1EnemySM)stateMachine;
         state.animator.SetBool("NormalAB1FSM", false);
+    }
+
+    public async UniTask PreAttack(float wait)
+    {
+        await UniTask.WaitForSeconds(wait);
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        state.animator.SetTrigger("Attack");
     }
 }

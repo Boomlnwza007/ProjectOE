@@ -40,9 +40,11 @@ public class RangeAB1Fsm : BaseState
         var state = ((FSMBoss1EnemySM)stateMachine);
         state.CreatLaserGun();
         ai.canMove = false;
+        state.animator.SetBool("Attacking", true);
+        state.animator.SetTrigger("Attack");
         await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);        
         if (CheckDistance())
-        {
+        {            
             return;
         }
         await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
@@ -57,6 +59,7 @@ public class RangeAB1Fsm : BaseState
         }
         state.DelLaserGun();
         await state.ShootMissile();
+        state.animator.SetBool("Attacking", false);
 
         ai.canMove = false;
         await UniTask.WaitForSeconds(0.5f);
@@ -84,8 +87,10 @@ public class RangeAB1Fsm : BaseState
         {
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
-                ((FSMBoss1EnemySM)stateMachine).DelLaserGun();
-                ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
+                var state = ((FSMBoss1EnemySM)stateMachine);
+                state.DelLaserGun();
+                state.animator.SetBool("Attacking", false);
+                ChangState(state.dashAState);
                 distance = true;
             }
         }

@@ -10,7 +10,9 @@ public class CheckDistanceB1FSM : BaseState
 
     public override void Enter()
     {
-        ai = ((FSMBoss1EnemySM)stateMachine).ai;
+        var state = (FSMBoss1EnemySM)stateMachine;
+        state.animator.SetBool("CheckDistanceB1FSM", true);
+        ai = state.ai;
         ai.canMove = true;
         ai.destination = ai.position;
     }
@@ -18,10 +20,7 @@ public class CheckDistanceB1FSM : BaseState
     public override void UpdateLogic()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
-        state.animator.SetBool("CheckDistanceB1FSM", true);
-
         ai.destination = ai.targetTransform.position;
-
         distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         if (distance < 9)
         {

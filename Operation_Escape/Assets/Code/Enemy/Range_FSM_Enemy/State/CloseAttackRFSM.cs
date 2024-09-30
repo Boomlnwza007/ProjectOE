@@ -33,8 +33,8 @@ public class CloseAttackRFSM : BaseState
             ai.canMove = false;
             Vector2 knockbackDirection = (ai.position - ai.targetTransform.position).normalized;
             Debug.DrawLine(ai.position, ai.position + (ai.position - ai.targetTransform.position).normalized *10);
-            state.rb.AddForce(knockbackDirection * 200, ForceMode2D.Impulse);
-            ((FSMREnemySM)stateMachine).FireClose();
+            state.rb.AddForce(knockbackDirection * 150, ForceMode2D.Impulse);
+            
 
             Debug.Log("back");
         }
@@ -48,6 +48,7 @@ public class CloseAttackRFSM : BaseState
             time += Time.deltaTime;
             if (time > 0.5f)
             {
+                ((FSMREnemySM)stateMachine).FireClose();
                 ((FSMREnemySM)stateMachine).rb.velocity = Vector2.zero;
                 ai.canMove = true;
                 go = true;

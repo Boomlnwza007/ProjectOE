@@ -21,27 +21,35 @@ public class DashAB1FSM : BaseState
         ai = state.ai;
         overdrive = state.overdrive;
         speed = ai.Maxspeed;
+        
         ai.canMove = true;
 
         if (!overdrive)
         {
             if (!state.rangeAState.rangeAttack)
+            {                
+                await UniTask.WaitForSeconds(1f);
+                state.rangeAState.rangeAttack = false;
+                state.animator.SetBool("Attacking", false);
+                state.animator.SetTrigger("DashExit");                
+                ChangState(state.normalAState);
+                return;
+            }
+            else
             {
                 Changemode = 1;
                 Charg = 1;
-                await UniTask.WaitForSeconds(1f);
-                state.rangeAState.rangeAttack = false;
-                ChangState(state.normalAState);
-                return;
+                Attack().Forget();
             }
         }
         else
         {
             Changemode = 0.5f;
             Charg = 0.3f;
+            Attack().Forget();
         }
 
-        Attack().Forget();
+        
     }
 
     public override void UpdateLogic()
@@ -64,6 +72,7 @@ public class DashAB1FSM : BaseState
         await UniTask.WaitForSeconds(Changemode);
         Debug.Log("Charg 1s");
         await UniTask.WaitForSeconds(Charg);
+        state.animator.SetBool("Attacking", true);
         if (overdrive)
         {
             ai.Maxspeed = speed * 3;
@@ -79,11 +88,12 @@ public class DashAB1FSM : BaseState
             time += Time.deltaTime;
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
+                state.animator.SetTrigger("Attack");
                 ai.Maxspeed = speed;
                 if (overdrive)
                 {
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 0), AimMelee(0.4f));
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f));
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 0), AimMelee(0.4f)); // AfDash
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f)); // hit 4
                     await UniTask.WaitForSeconds(1);
                     await LaserFollowIn();
                     state.DelLaserGun();
@@ -100,17 +110,20 @@ public class DashAB1FSM : BaseState
                 }
                 else
                 {
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.7f, 0), AimMelee(0.4f));
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.7f, 0), AimMelee(0.4f)); // AfDash
                     ai.canMove = false;
                     await UniTask.WaitForSeconds(1);
                     ai.canMove = true;
                     ChangState(state.normalAState);
                 }
+                state.animator.SetBool("Attacking", false);
                 return;
             }
+
             await UniTask.Yield();
         }
         ai.Maxspeed = speed;
+        state.animator.SetBool("Attacking", false);
         ChangState(state.normalAState);
     }
 
