@@ -58,17 +58,22 @@ public class NormalAB1FSM : BaseState
             {
                 ai.Maxspeed = speed;
                 state.animator.SetBool("Attacking", true);
-                await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f), PreAttack(1f)); // hit 1
+                await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f), AttackAnimation(1f,1f,Boss1AniControl.StateBoss.PreAtk1_2,Boss1AniControl.StateBoss.Atk1_2)); // hit 1
                 await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 2), AimMelee(0.8f)); // hit 2
-                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f), PreAttack(Charg)); // hit 3
-                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f)); // hit 4
+
+                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f), AttackAnimation(Charg, 0.5f, Boss1AniControl.StateBoss.PreAtk3, Boss1AniControl.StateBoss.Atk3)); // hit 3
+                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f) , AttackAnimation(0.5f, 0.5f, Boss1AniControl.StateBoss.Atk4)); // hit 4
                 if (overdrive)
                 {
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f)); // hit 4
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f), AttackAnimation(0.5f, 0.5f, Boss1AniControl.StateBoss.Atk4)); // hit 4
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     await UniTask.WaitForSeconds(1);
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
                     await LaserFollowIn();
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     state.DelLaserGun();
                 }
+                Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
 
                 state.animator.SetBool("Attacking", false);
                 ai.canMove = false;
@@ -126,10 +131,17 @@ public class NormalAB1FSM : BaseState
         state.animator.SetBool("NormalAB1FSM", false);
     }
 
-    public async UniTask PreAttack(float wait)
+    public async UniTask AttackAnimation(float charge, float duration, Boss1AniControl.StateBoss stateBoss)
     {
-        await UniTask.WaitForSeconds(wait);
-        var state = ((FSMBoss1EnemySM)stateMachine);
-        state.animator.SetTrigger("Attack");
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(stateBoss);
+        await UniTask.WaitForSeconds(duration);
+    }
+
+    public async UniTask AttackAnimation(float charge, float duration, Boss1AniControl.StateBoss PrestateBoss, Boss1AniControl.StateBoss stateBoss)
+    {
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(PrestateBoss);
+        await UniTask.WaitForSeconds(charge);
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(stateBoss);
+        await UniTask.WaitForSeconds(duration);
     }
 }

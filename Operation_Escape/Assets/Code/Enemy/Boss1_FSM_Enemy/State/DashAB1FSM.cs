@@ -81,21 +81,26 @@ public class DashAB1FSM : BaseState
         {
             ai.Maxspeed = speed * 2;
         }
-
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StartDash);
         float time = 0;
         while (time < 4f)
         {
             time += Time.deltaTime;
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
-                state.animator.SetTrigger("Attack");
+                Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StopDash);
                 ai.Maxspeed = speed;
                 if (overdrive)
                 {
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.AfterDash);
                     await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 0), AimMelee(0.4f)); // AfDash
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Atk4);
                     await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f)); // hit 4
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     await UniTask.WaitForSeconds(1);
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
                     await LaserFollowIn();
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     state.DelLaserGun();
                     await UniTask.WaitForSeconds(1);
                     if (Random.value < 0.5f)
@@ -110,7 +115,9 @@ public class DashAB1FSM : BaseState
                 }
                 else
                 {
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.AfterDash);
                     await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.7f, 0), AimMelee(0.4f)); // AfDash
+                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     ai.canMove = false;
                     await UniTask.WaitForSeconds(1);
                     ai.canMove = true;
@@ -123,6 +130,9 @@ public class DashAB1FSM : BaseState
             await UniTask.Yield();
         }
         ai.Maxspeed = speed;
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StopDash);
+        await UniTask.WaitForSeconds(0.2f);
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
         state.animator.SetBool("Attacking", false);
         ChangState(state.normalAState);
     }
@@ -160,7 +170,6 @@ public class DashAB1FSM : BaseState
 
         //state.CreatLaserGun(angle);
         await UniTask.WhenAll(state.ShootLaserFollowIn(2f, 3f, 1, 4.5f), state.RangeFollow(2f));
-
     }
 
     public override void Exit()

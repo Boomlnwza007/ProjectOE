@@ -56,7 +56,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         dashAState = new DashAB1FSM(this);
         rangeAState = new RangeAB1Fsm(this);
         overdriveChangState = new OverdriveChangFSM(this);
-        spriteFlash = GetComponent<SpriteFlash>();
+        spriteFlash = GetComponentInChildren<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()
@@ -180,9 +180,11 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public async UniTask MeleeHitzone(float charge, float duration, int hitZone)
     {
+        animator.SetTrigger("PreAttack"); //§éÒ§
         GameObject HitZone = Instantiate(meleeHitZone[hitZone], handStart.parent);
         Collider2D _colliders = HitZone.GetComponent<Collider2D>();
-        await FadeMelee(HitZone.GetComponent<SpriteRenderer>(),charge);
+        await FadeMelee(HitZone.GetComponent<SpriteRenderer>(),charge);      
+        animator.SetTrigger("PreAttack"); //¨º§éÒ§
 
         List<Collider2D> colliders = new List<Collider2D>();
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
@@ -198,6 +200,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }
         
         await UniTask.WaitForSeconds(duration);
+        animator.SetTrigger("Attack");//¨ºµÕ
         Destroy(HitZone);        
     }
 
@@ -300,7 +303,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             overdriveChang = true;
         }
         Health -= damage;
-        spriteFlash.Flash();
+        spriteFlash.Flash();    
         switch (type)
         {
             case DamageType.Rang:

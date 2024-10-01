@@ -15,8 +15,7 @@ public class BulletBladeScriipt : BaseBullet
     {
         rb = GetComponent<Rigidbody2D>();
         startPos = transform.position;
-        rb.velocity = Direction() * speed;
-        SpriteRotation();
+        rb.velocity = transform.right * speed;
         originScale = transform.localScale;
         ready = true;
     }

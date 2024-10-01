@@ -4,53 +4,49 @@ using UnityEngine;
 
 public class Boss1AniControl : MonoBehaviour
 {
-    [SerializeField] private FSMBoss1EnemySM boss1;
+    public static Boss1AniControl boss1AniControl;
     [SerializeField] private Animator animator;
+    private bool isAttacking;
+    private bool isAttackPressed;
+    private string currentAnimaton;
+    //public string[] stateName = {
+    //    "StartDash",
+    //    "StopDash",
+    //    "AfterDash",
+    //    "RangeAtk",
+    //    "PreAtk1-2",
+    //    "StartAtk1-2",
+    //    "PreAtk3",
+    //    "Atk3",
+    //    "Atk4",
+    //    "Wait"
+    //};
 
-    private void Start()
+    public enum StateBoss
     {
-        //boss1.curState.nameState;
+        StartDash,
+        StopDash,
+        AfterDash,
+        RangeAtk,
+        PreAtk1_2,         
+        Atk1_2,
+        PreAtk3,
+        Atk3,
+        Atk4,
+        Wait
     }
 
-    private void Update()
+    private void Awake()
     {
-        switch (boss1.curState)
-        {
-            case CheckDistanceB1FSM:
-                animator.SetBool("CheckDistanceB1FSM",true);
-
-                break;
-            case DashAB1FSM:
-                animator.SetBool("DashAB1FSM", true);
-
-                break;
-            case IdleB1FSM:
-                animator.SetBool("IdleB1FSM", true);
-
-                break;
-            case NormalAB1FSM:
-                animator.SetBool("NormalAB1FSM", true);
-
-                break;
-            case RangeAB1Fsm:
-                animator.SetBool("RangeAB1Fsm", true);
-
-                break;
-            case OverdriveChangFSM:
-                animator.SetBool("OverdriveChangFSM", true);
-
-                break;
-        }
+        boss1AniControl = this;
     }
 
-    public void Set()
+    public void ChangeAnimationState(StateBoss newAnimation)
     {
-        animator.SetBool("CheckDistanceB1FSM", false);
-        animator.SetBool("DashAB1FSM", false);
-        animator.SetBool("IdleB1FSM", false);
-        animator.SetBool("NormalAB1FSM", false);
-        animator.SetBool("RangeAB1Fsm", false);
-        animator.SetBool("OverdriveChangFSM", false);
+        if (currentAnimaton == newAnimation.ToString()) return;
+
+        animator.Play(newAnimation.ToString());
+        currentAnimaton = newAnimation.ToString();
     }
 
 }
