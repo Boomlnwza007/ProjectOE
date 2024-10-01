@@ -23,20 +23,24 @@ public class NormalAttackRFSM : BaseState
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
-        ((FSMREnemySM)stateMachine).Movement();
+        var state = ((FSMREnemySM)stateMachine);
+        state.Movement();
         time += Time.deltaTime;  
         
         if (bulltCount >=3)
         {
-            stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
+            if (time >= state.fireCooldown)
+            {
+                stateMachine.ChangState(state.checkDistanceState);
+                time = 0;
+            }
         }
 
-        if (time >= 0.8f)
+        if (time >= state.fireRate)
         {
             bulltCount++;
             Debug.Log(bulltCount);
-            ((FSMREnemySM)stateMachine).Fire();
+            state.Fire();
             time = 0;
         }
     }
