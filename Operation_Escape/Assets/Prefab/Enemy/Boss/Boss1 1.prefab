@@ -442,9 +442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503749f3de7742b43b266e2cb91b478e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 300
+  Health: 600
   dmg: 30
-  Speed: 17
+  Speed: 13
   visRange: 30
   attacking: 0
   lootDrop: {fileID: 5271488527250015382}
