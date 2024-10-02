@@ -27,20 +27,27 @@ public class NormalAttackEMFSM : BaseState
 
     public async UniTask Attack()
     {
+        var state = ((FSMMEnemySM)stateMachine);
         Debug.Log("ตั้งท่าเตรียมโจมตี1 0.5");
         await UniTask.WaitForSeconds(0.5f);
+
+        state.Attack();
         Debug.Log("โจมตี 1");
         Debug.Log("ตั้งท่าโจมตี2 0.8s");
         await UniTask.WaitForSeconds(0.8f);
+
+        state.Attack();
         Debug.Log("โจมตี 2");
         Debug.Log("ตั้งท่าโจมตี3 1.5s");
         await UniTask.WaitForSeconds(1.5f);
         ai.canMove = false;
+
+        state.Attack();
         Debug.Log("โจมตี 3");
         Debug.Log("หยุดอยู่กับที่ 2s");
         await UniTask.WaitForSeconds(2f);
         ai.canMove = true;
-        stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
+        stateMachine.ChangState(state.CheckDistance);
 
     }
 

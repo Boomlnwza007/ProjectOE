@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 2634054303400587680}
   - component: {fileID: 7733956874344963183}
   m_Layer: 0
-  m_Name: HpBoss
+  m_Name: Hp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
