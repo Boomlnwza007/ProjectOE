@@ -23,13 +23,11 @@ public class DashAB1FSM : BaseState
         speed = ai.Maxspeed;
         
         ai.canMove = true;
-
         if (!overdrive)
         {
             if (!state.rangeAState.rangeAttack)
             {                
                 await UniTask.WaitForSeconds(1f);
-                state.rangeAState.rangeAttack = false;
                 state.animator.SetBool("Attacking", false);
                 state.animator.SetTrigger("DashExit");                
                 ChangState(state.normalAState);
@@ -37,6 +35,7 @@ public class DashAB1FSM : BaseState
             }
             else
             {
+                state.rangeAState.rangeAttack = false;
                 Changemode = 1;
                 Charg = 1;
                 Attack().Forget();
@@ -67,11 +66,14 @@ public class DashAB1FSM : BaseState
 
     public async UniTask Attack()
     {
-        var state = ((FSMBoss1EnemySM)stateMachine);
+        ai.canMove = false;
+        var state = ((FSMBoss1EnemySM)stateMachine);        
         Debug.Log("Change Mode 1s");
         await UniTask.WaitForSeconds(Changemode);
+        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StartDash);
         Debug.Log("Charg 1s");
         await UniTask.WaitForSeconds(Charg);
+        ai.canMove = true;
         state.animator.SetBool("Attacking", true);
         if (overdrive)
         {
@@ -81,7 +83,6 @@ public class DashAB1FSM : BaseState
         {
             ai.Maxspeed = speed * 2;
         }
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StartDash);
         float time = 0;
         while (time < 4f)
         {

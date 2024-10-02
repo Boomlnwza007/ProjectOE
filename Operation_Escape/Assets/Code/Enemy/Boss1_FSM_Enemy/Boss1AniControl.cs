@@ -9,6 +9,7 @@ public class Boss1AniControl : MonoBehaviour
     private bool isAttacking;
     private bool isAttackPressed;
     private string currentAnimaton;
+    public float timeplay;
     //public string[] stateName = {
     //    "StartDash",
     //    "StopDash",
@@ -43,9 +44,10 @@ public class Boss1AniControl : MonoBehaviour
 
     public void ChangeAnimationState(StateBoss newAnimation)
     {
-        if (currentAnimaton == newAnimation.ToString()) return;
+       // if (currentAnimaton == newAnimation.ToString()) return;
 
         animator.Play(newAnimation.ToString());
+        timeplay = animator.GetCurrentAnimatorClipInfo(0).Length;
         currentAnimaton = newAnimation.ToString();
     }
 

@@ -378,5 +378,14 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
                 Debug.LogError("segment value: " + segment);
                 break;
         }
+
+        if (rb.velocity != Vector2.zero && !ai.endMove)
+        {
+            animator.SetBool("Move", true);
+        }
+        else
+        {
+            animator.SetBool("Move", false);
+        }
     }
 }

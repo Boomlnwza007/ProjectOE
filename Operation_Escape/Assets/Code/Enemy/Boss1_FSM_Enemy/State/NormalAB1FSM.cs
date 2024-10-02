@@ -24,12 +24,12 @@ public class NormalAB1FSM : BaseState
         speed = ai.Maxspeed;
         if (!overdrive)
         {
-            Charg = 0.7f;
+            Charg = 0.6f;
             runTime = 4f;
         }
         else
         {
-            Charg = 0.5f;
+            Charg = 0.4f;
             runTime = 2f;
         }
         Attack().Forget();
@@ -56,24 +56,28 @@ public class NormalAB1FSM : BaseState
             time += Time.deltaTime;
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
+                var animComtrol = Boss1AniControl.boss1AniControl;
                 ai.Maxspeed = speed;
                 state.animator.SetBool("Attacking", true);
-                await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f), AttackAnimation(1f,1f,Boss1AniControl.StateBoss.PreAtk1_2,Boss1AniControl.StateBoss.Atk1_2)); // hit 1
-                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 2), AimMelee(0.8f)); // hit 2
+                animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.PreAtk1_2);
+                await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f),AttackAnimation(1f,0.5f,Boss1AniControl.StateBoss.Atk1_2)); // hit 1
+                await UniTask.WhenAll(state.MeleeHitzone(0.1f, 0.5f, 2), AimMelee(0.8f)); // hit 2
 
-                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f), AttackAnimation(Charg, 0.5f, Boss1AniControl.StateBoss.PreAtk3, Boss1AniControl.StateBoss.Atk3)); // hit 3
-                await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.5f, 1), AimMelee(0.8f) , AttackAnimation(0.5f, 0.5f, Boss1AniControl.StateBoss.Atk4)); // hit 4
+                animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.PreAtk3);
+                await UniTask.WhenAll(state.MeleeHitzone(Charg, 0.5f, 3), AimMelee(0.8f), AttackAnimation(Charg, 0.5f, Boss1AniControl.StateBoss.Atk3)); // hit 3
+                animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.Atk4);
+                await UniTask.WhenAll(state.MeleeHitzone(0.2f, 0.5f, 1), AimMelee(0.8f)); // hit 4
                 if (overdrive)
                 {
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f), AttackAnimation(0.5f, 0.5f, Boss1AniControl.StateBoss.Atk4)); // hit 4
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
+                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f)); // hit 4
+                    animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     await UniTask.WaitForSeconds(1);
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
+                    animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
                     await LaserFollowIn();
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
+                    animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
                     state.DelLaserGun();
                 }
-                Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
+                animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
 
                 state.animator.SetBool("Attacking", false);
                 ai.canMove = false;
@@ -133,15 +137,17 @@ public class NormalAB1FSM : BaseState
 
     public async UniTask AttackAnimation(float charge, float duration, Boss1AniControl.StateBoss stateBoss)
     {
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(stateBoss);
-        await UniTask.WaitForSeconds(duration);
+        var animComtrol = Boss1AniControl.boss1AniControl;
+        await UniTask.WaitForSeconds(charge);
+        animComtrol.ChangeAnimationState(stateBoss);
     }
 
     public async UniTask AttackAnimation(float charge, float duration, Boss1AniControl.StateBoss PrestateBoss, Boss1AniControl.StateBoss stateBoss)
     {
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(PrestateBoss);
+        var animComtrol = Boss1AniControl.boss1AniControl;
+        animComtrol.ChangeAnimationState(PrestateBoss);
         await UniTask.WaitForSeconds(charge);
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(stateBoss);
+        animComtrol.ChangeAnimationState(stateBoss);
         await UniTask.WaitForSeconds(duration);
     }
 }
