@@ -130,4 +130,16 @@ public class FSMMEnemySM : StateMachine, IDamageable
         areaEnermy = area;
     }
 
+    public void Attack()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,2.5f);
+        foreach (var hit in colliders)
+        {
+            IDamageable player = hit.GetComponent<IDamageable>();
+            if (hit.CompareTag("Player"))
+            {
+                player.Takedamage(dmg, DamageType.Melee, 0);
+            }
+        }
+    }
 }

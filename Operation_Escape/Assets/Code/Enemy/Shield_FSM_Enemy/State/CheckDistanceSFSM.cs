@@ -29,9 +29,11 @@ public class CheckDistanceSFSM : BaseState
         {
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).chargState);
         }
-        else if (distance < 15)
+        else if (distance > 8)
         {
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).defendState);
         }
+
+        Debug.Log(distance);
     }
 }
