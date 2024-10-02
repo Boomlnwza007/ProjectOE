@@ -14,7 +14,11 @@ public class WanderSFSM : BaseState
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         time = 0;
-        distane = ((FSMSEnemySM)stateMachine).areaEnermy.Size();
+        if (((FSMSEnemySM)stateMachine).areaEnermy != null)
+        {
+            distane = ((FSMSEnemySM)stateMachine).areaEnermy.Size();
+
+        }
     }
 
     public override void UpdateLogic()

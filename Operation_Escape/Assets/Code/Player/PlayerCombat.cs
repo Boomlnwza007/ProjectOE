@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class PlayerCombat : MonoBehaviour
     public float comboCooldown = 1f;
     public bool canMelee = true;
     public Vector2 sizeHitbox;
+    public GameObject meleeHand;
+    public GameObject meleeZone;
 
     [Header("Status")]
     public float knockBack = 1;
@@ -114,7 +117,6 @@ public class PlayerCombat : MonoBehaviour
 
     private void ComboAttack()
     {
-        PlayerControl.control.animator.SetTrigger("Attack");
         canMelee = false;
         canFire = false;
         PlayerControl.control.Slow(100);
@@ -122,31 +124,49 @@ public class PlayerCombat : MonoBehaviour
         {
             gunList[currentGun].Remove();
         }
+        //PreAttack();
+        PlayerControl.control.animator.SetTrigger("Attack");
+       // Attack();
+        StartCoroutine(ComboDelay(comboCooldown));
+    }
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        Vector3 aimDir = (mousePos - aimPoint.position).normalized;
-
-        Vector2 castDirection = aimDir.x > 0 ? Vector2.right : Vector2.left;
-
-        Vector2 boxCastSize = new Vector2(sizeHitbox.x, sizeHitbox.y);
-        Vector2 boxCastOrigin = new Vector2(aimPoint.position.x, aimPoint.position.y);
-
-        RaycastHit2D[] hitEnemies = Physics2D.BoxCastAll(boxCastOrigin + (castDirection * boxCastSize.x / 2), boxCastSize, 0f, castDirection,1);
-
-        foreach (RaycastHit2D hit in hitEnemies)
+    public void PreAttack()
+    {
+        if (PlayerControl.control.animator.GetBool("Right"))
         {
-            if (hit.collider.gameObject != gameObject && hit.collider.TryGetComponent(out IDamageable dam))
+            Vector3 newVector = new Vector3(1,1,1);
+            meleeHand.transform.localScale = newVector;
+        }
+        else
+        {
+            Vector3 newVector = new Vector3(-1, 1, 1);
+            meleeHand.transform.localScale = newVector;
+        }
+        meleeZone.SetActive(true);
+        Invoke("Attack", 0.1f);
+    }
+
+    public void Attack()
+    {       
+        Collider2D _colliders = meleeZone.GetComponent<Collider2D>();
+        List<Collider2D> colliders = new List<Collider2D>();
+        ContactFilter2D filter = new ContactFilter2D().NoFilter();
+        Physics2D.OverlapCollider(_colliders, filter, colliders);
+
+        foreach (var hit in colliders)
+        {
+            if (hit.gameObject != gameObject && hit.TryGetComponent(out IDamageable dam))
             {
                 dam.Takedamage(damage, DamageType.Melee, knockBack);
-                Debug.Log(hit.collider.name);
+                Debug.Log(hit.name);
             }
-            else if (hit.collider.TryGetComponent(out IBulletInteract bulletInteract))
+            else if (hit.TryGetComponent(out IBulletInteract bulletInteract))
             {
                 bulletInteract.Interact(DamageType.Melee);
             }
         }
-        StartCoroutine(ComboDelay(comboCooldown));
+        meleeZone.SetActive(false);
+
     }
 
     private void TimeUltimate()
