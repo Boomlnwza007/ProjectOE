@@ -26,6 +26,10 @@ public class DeadEnemy : MonoBehaviour, IBulletInteract
                     Destroy(gameObject);
                 }
                 break;
+            case DamageType.Rang:
+                Hp--;
+                spriteFlash.Flash();
+                break;
         }
     }
 
