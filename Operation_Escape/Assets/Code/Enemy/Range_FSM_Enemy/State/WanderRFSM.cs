@@ -19,6 +19,10 @@ public class WanderRFSM : BaseState
             distane = ((FSMREnemySM)stateMachine).areaEnermy.Size();
 
         }
+        else
+        {
+            distane = 5;
+        }
     }
 
     public override void UpdateLogic()
@@ -30,6 +34,14 @@ public class WanderRFSM : BaseState
             {
                 time = 0;
                 ai.destination = Randomposition(ai.position, distane);
+            }
+        }
+
+        if (((FSMSEnemySM)stateMachine).areaEnermy != null)
+        {
+            if (!((FSMSEnemySM)stateMachine).areaEnermy.hasPlayer)
+            {
+                return;
             }
         }
 

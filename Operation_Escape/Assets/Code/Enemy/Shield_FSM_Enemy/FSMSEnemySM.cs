@@ -149,6 +149,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
     {
         areaEnermy = area;
     }
+
     public void Attack()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2.5f);

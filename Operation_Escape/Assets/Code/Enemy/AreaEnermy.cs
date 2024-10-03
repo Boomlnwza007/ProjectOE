@@ -6,12 +6,16 @@ public class AreaEnermy : MonoBehaviour
 {
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
     [SerializeField] public AutoDoor[] door;
-
+    public bool hasPlayer;
     public LayerMask enemyleLayer;
     // Start is called before the first frame update
 
     private void Start()
     {
+        foreach (var item in door)
+        {
+            item.area = this;
+        }
         AddAllEnemy();
     }
 
@@ -24,6 +28,8 @@ public class AreaEnermy : MonoBehaviour
                 door.Unlock();
             }
         }
+
+
     }
 
     public void AddAllEnemy()
@@ -38,6 +44,19 @@ public class AreaEnermy : MonoBehaviour
                 state.SetCombatPhase(GetComponent<AreaEnermy>());
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            hasPlayer = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
     public void AllcombatPhase()

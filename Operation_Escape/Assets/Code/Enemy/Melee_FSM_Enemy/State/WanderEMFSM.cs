@@ -19,6 +19,10 @@ public class WanderEMFSM : BaseState
         {
             distane = ((FSMMEnemySM)stateMachine).areaEnermy.Size();
         }
+        else
+        {
+            distane = 7;
+        }
     }
 
     public override void UpdateLogic()
@@ -30,6 +34,14 @@ public class WanderEMFSM : BaseState
             {
                 time = 0;
                 ai.destination = Randomposition(ai.position, distane);
+            }
+        }
+
+        if (((FSMSEnemySM)stateMachine).areaEnermy != null)
+        {
+            if (!((FSMSEnemySM)stateMachine).areaEnermy.hasPlayer)
+            {
+                return;
             }
         }
 

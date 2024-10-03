@@ -8,6 +8,7 @@ public class AutoDoor : MonoBehaviour
     public bool locked = true;
     public int key;
     public TriggerDoor plateSC;
+    public AreaEnermy area;
 
     public void Open()
     {

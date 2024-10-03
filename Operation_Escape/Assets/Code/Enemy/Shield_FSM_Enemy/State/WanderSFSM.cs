@@ -14,10 +14,14 @@ public class WanderSFSM : BaseState
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         time = 0;
+
         if (((FSMSEnemySM)stateMachine).areaEnermy != null)
         {
             distane = ((FSMSEnemySM)stateMachine).areaEnermy.Size();
-
+        }
+        else
+        {
+            distane = 5;
         }
     }
 
@@ -30,6 +34,14 @@ public class WanderSFSM : BaseState
             {
                 time = 0;
                 ai.destination = Randomposition(ai.position, distane);
+            }
+        }
+
+        if (((FSMSEnemySM)stateMachine).areaEnermy != null)
+        {
+            if (!((FSMSEnemySM)stateMachine).areaEnermy.hasPlayer)
+            {
+                return;
             }
         }
 
