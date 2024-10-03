@@ -9,6 +9,9 @@ public class TriggerBoss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Boss.attacking = true;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Boss.attacking = true;
+        }
     }
 }
