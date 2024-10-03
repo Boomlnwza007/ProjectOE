@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283f0f4793561414597eac369286f7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 30
+  dmg: 40
   m_lineRenderer: {fileID: 1777197163819890171}
   laserColorGradientOriginal:
     serializedVersion: 2
@@ -302,7 +302,7 @@ MonoBehaviour:
   laserHitZone: 0
   laserFiring: 0
   speedRot: 10
-  accelerationTime: 0.2
+  accelerationTime: 0.4
   laserDistance: 100
   dpsDamage: 0.2
   obstacleLayer:
@@ -312,5 +312,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   follow: 0
-  followStF: 0
   overshootAngle: 0
+  followCode: 0

@@ -2326,6 +2326,7 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   healUseEnergy: 5
+  collDownHealth: 3
 --- !u!114 &8600667175816881253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2370,11 +2371,12 @@ MonoBehaviour:
   canFire: 1
   UltiTime: 0
   damage: 1
-  comboCooldown: 0.5
+  comboCooldown: 0.6
   canMelee: 1
   sizeHitbox: {x: 2, y: 3}
   meleeHand: {fileID: 860093020735938029}
   meleeZone: {fileID: 1945397137040485284}
+  isAttackRight: 0
   knockBack: 1
 --- !u!114 &3491397946396980606
 MonoBehaviour:

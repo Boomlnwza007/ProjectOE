@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 60
-  dmg: 40
+  dmg: 25
   Speed: 13
   visRange: 30
   attacking: 0

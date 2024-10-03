@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 40
-  dmg: 20
+  dmg: 15
   Speed: 11
   visRange: 30
   attacking: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   cooldown: 0
   timeCooldown: 2
   fireRate: 0.8
+  fireCooldown: 1
   areaEnermy: {fileID: 0}
   animator: {fileID: 8165175477225224536}
   radius: 13
