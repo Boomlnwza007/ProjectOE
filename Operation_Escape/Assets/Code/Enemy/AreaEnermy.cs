@@ -9,8 +9,7 @@ public class AreaEnermy : MonoBehaviour
     public bool hasPlayer;
     public LayerMask enemyleLayer;
     // Start is called before the first frame update
-
-    private void Start()
+    private void Awake()
     {
         foreach (var item in door)
         {

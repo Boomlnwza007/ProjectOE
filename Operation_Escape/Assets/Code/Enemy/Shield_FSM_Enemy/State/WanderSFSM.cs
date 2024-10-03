@@ -19,7 +19,7 @@ public class WanderSFSM : BaseState
         if (((FSMSEnemySM)stateMachine).areaEnermy != null)
         {
             distane = ((FSMSEnemySM)stateMachine).areaEnermy.Size();
-            center = ((FSMSEnemySM)stateMachine).areaEnermy.transform.position;
+            center = ((FSMSEnemySM)stateMachine).areaEnermy.gameObject.transform.position;
         }
         else
         {

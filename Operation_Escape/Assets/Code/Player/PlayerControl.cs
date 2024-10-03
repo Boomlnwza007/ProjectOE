@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     [Header("UI")]
     [SerializeField] private SliderBar healthBar;
     [SerializeField] private SliderBar ultimateEnergyBar;
+    [SerializeField] private SliderBar ultimateEnergyBarCircle;
     [SerializeField] private SliderBar energyBar;
     [SerializeField] private SliderBar reloadBar;
     [SerializeField] private OBJBar bulletBar;
@@ -131,6 +132,11 @@ public class PlayerControl : MonoBehaviour
         if (ultimateEnergyBar != null && playerState.ultimateEnergy != ultimateEnergyBar.value)
         {
             ultimateEnergyBar.SetValue(playerState.ultimateEnergy);
+        }
+
+        if (ultimateEnergyBarCircle != null && playerState.ultimateEnergy != ultimateEnergyBarCircle.value)
+        {
+            ultimateEnergyBarCircle.SetValue(playerState.ultimateEnergy);
         }
     }
 
