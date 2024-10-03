@@ -20,6 +20,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private SliderBar energyBar;
     [SerializeField] private SliderBar reloadBar;
     [SerializeField] private OBJBar bulletBar;
+    [SerializeField] private PauseScene menu;
+
 
     [Header("Gun")]
     [SerializeField] public SpriteRenderer guntSprite;
@@ -190,4 +192,14 @@ public class PlayerControl : MonoBehaviour
     {
         playerMovement.slowSpeed = 0;
     }
+
+    public void Spawn(Transform spawnPoint)
+    {
+        gameObject.transform.position = spawnPoint.position;
+        playerState.health = playerState.maxEnergy;
+        playerState.energy = 0;
+        playerState.ultimateEnergy = 0;
+        gameObject.SetActive(true);
+    }
+
 }

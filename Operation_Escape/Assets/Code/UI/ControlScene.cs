@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ControlScene : MonoBehaviour
 {
+    public static ControlScene scene;
     public Animator animator;
     public float timeTransition = 1f;
+
+    private void Awake()
+    {
+        scene = this;
+    }
 
     public void ChangeScene(int nScene)
     {
@@ -26,5 +32,11 @@ public class ControlScene : MonoBehaviour
         yield return new WaitForSeconds(timeTransition);
 
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void PlayAnimation()
+    {
+        animator.SetTrigger("Start");
+        Debug.Log("play");
     }
 }
