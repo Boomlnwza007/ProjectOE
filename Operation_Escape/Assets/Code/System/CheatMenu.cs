@@ -25,6 +25,9 @@ public class CheatMenu : MonoBehaviour
     public Transform menuGun;
     private int curPageGun = 0;
 
+    [Header("Player")]
+    public bool HackWall ;
+
     [Header("Other")]
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject mainMenu;
@@ -60,9 +63,20 @@ public class CheatMenu : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.O))
         {
-            onMainMenu = !onMainMenu;
-            mainMenu.SetActive(onMainMenu);
+            OnOff();
         }
+    }
+
+    public void OnOff()
+    {
+        onMainMenu = !onMainMenu;
+        mainMenu.SetActive(onMainMenu);
+    }
+
+    public void Hide()
+    {
+        onMainMenu = !onMainMenu;
+        mainMenu.SetActive(onMainMenu);
     }
 
     public void ModeSpawn()
