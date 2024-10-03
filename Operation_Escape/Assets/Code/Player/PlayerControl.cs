@@ -54,8 +54,6 @@ public class PlayerControl : MonoBehaviour
             menu.HidePause();
         }
 
-
-
         if (menu.onPauseMenu || menu.onmenuAfterDie)
         {
             return;
@@ -213,6 +211,11 @@ public class PlayerControl : MonoBehaviour
         playerState.energy = 0;
         playerState.ultimateEnergy = 0;
         gameObject.SetActive(true);
+    }
+
+    public void ShowGameOver()
+    {
+        menu.HideAfterDie();
     }
 
 }

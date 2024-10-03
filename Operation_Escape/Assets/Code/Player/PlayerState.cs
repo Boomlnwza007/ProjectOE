@@ -51,7 +51,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
     public void Die()
     {
-        
+        PlayerControl.control.ShowGameOver();
     }
 
     public IEnumerator Imortal(float wait)

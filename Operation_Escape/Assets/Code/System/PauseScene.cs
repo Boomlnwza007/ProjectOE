@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.EventSystems;
 
 public class PauseScene : MonoBehaviour
@@ -25,8 +26,9 @@ public class PauseScene : MonoBehaviour
             return;
         }
         Time.timeScale = 1;
-        StartCoroutine(wait());
-        EventSystem.current.SetSelectedGameObject(null);
+        ControlScene.scene.ChangeScene(1);
+        //StartCoroutine(wait());
+        //EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void NextScene(int index)
