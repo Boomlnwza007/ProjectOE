@@ -461,7 +461,7 @@ MonoBehaviour:
   dmg: 30
   Speed: 13
   visRange: 30
-  attacking: 0
+  attacking: 1
   lootDrop: {fileID: 5271488527250015382}
   target: {fileID: 0}
   rb: {fileID: 7838424579805757511}
@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3544962096193456687}
+  timeplay: 0
 --- !u!1 &3755152588520734656
 GameObject:
   m_ObjectHideFlags: 0
