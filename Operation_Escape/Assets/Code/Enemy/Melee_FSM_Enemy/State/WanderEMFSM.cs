@@ -37,9 +37,9 @@ public class WanderEMFSM : BaseState
             }
         }
 
-        if (((FSMSEnemySM)stateMachine).areaEnermy != null)
+        if (((FSMMEnemySM)stateMachine).areaEnermy != null)
         {
-            if (!((FSMSEnemySM)stateMachine).areaEnermy.hasPlayer)
+            if (!((FSMMEnemySM)stateMachine).areaEnermy.hasPlayer)
             {
                 return;
             }

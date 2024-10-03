@@ -17,11 +17,10 @@ public class WanderRFSM : BaseState
         if (((FSMREnemySM)stateMachine).areaEnermy!= null)
         {
             distane = ((FSMREnemySM)stateMachine).areaEnermy.Size();
-
         }
         else
         {
-            distane = 5;
+            distane = 7;
         }
     }
 
@@ -37,9 +36,9 @@ public class WanderRFSM : BaseState
             }
         }
 
-        if (((FSMSEnemySM)stateMachine).areaEnermy != null)
+        if (((FSMREnemySM)stateMachine).areaEnermy != null)
         {
-            if (!((FSMSEnemySM)stateMachine).areaEnermy.hasPlayer)
+            if (!((FSMREnemySM)stateMachine).areaEnermy.hasPlayer)
             {
                 return;
             }
