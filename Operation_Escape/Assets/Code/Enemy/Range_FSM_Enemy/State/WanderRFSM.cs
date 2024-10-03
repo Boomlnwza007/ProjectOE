@@ -8,6 +8,7 @@ public class WanderRFSM : BaseState
     public IAiAvoid ai;
     public float distane = 5f;
     float time;
+    public Vector2 center;
 
     public override void Enter()
     {
@@ -17,9 +18,12 @@ public class WanderRFSM : BaseState
         if (((FSMREnemySM)stateMachine).areaEnermy!= null)
         {
             distane = ((FSMREnemySM)stateMachine).areaEnermy.Size();
+            center = ((FSMREnemySM)stateMachine).areaEnermy.transform.position;
+
         }
         else
         {
+            center = ai.position;
             distane = 7;
         }
     }
