@@ -6,6 +6,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 {
     [Header("Status")]
     public int health;
+    private bool canHealth = true;
     public int maxHealth = 10;
     public int healUseEnergy = 5;
     public int energy { get; set; }
@@ -14,6 +15,9 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     public int ultimateEnergy { get; set; }
     public int maxUltimateEnergy { get; set; }
     public bool canGetUltimateEnergy { get; set; }
+
+    [Header("CoolDown")]
+    public float collDownHealth;
 
     [Header("Animetion")]
     private SpriteFlash spriteFlash;
@@ -36,10 +40,12 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
     private void Update()
     {
-        if (Input.GetButtonDown("Heal") && health != maxHealth && energy >= healUseEnergy)
+        if (Input.GetButtonDown("Heal") && health != maxHealth && energy >= healUseEnergy && canHealth)
         {
             energy -= healUseEnergy;
             health = maxHealth;
+            canHealth = false;
+            StartCoroutine(ColDownHealth(collDownHealth));
         }
     }
 
@@ -76,5 +82,11 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     public void Heal()
     {
         health = maxHealth;
+    }
+
+    private IEnumerator ColDownHealth (float time)
+    {
+        yield return new WaitForSeconds(time);
+        canHealth = true;
     }
 }
