@@ -36,7 +36,7 @@ public class NormalAttackRFSM : BaseState
             }
         }
 
-        if (time >= state.fireRate)
+        if (time >= state.fireRate && bulltCount <= 3)
         {
             bulltCount++;
             Debug.Log(bulltCount);
