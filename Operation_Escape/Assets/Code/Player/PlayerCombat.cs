@@ -23,6 +23,7 @@ public class PlayerCombat : MonoBehaviour
     public Vector2 sizeHitbox;
     public GameObject meleeHand;
     public GameObject meleeZone;
+    public bool isAttackRight;
 
     [Header("Status")]
     public float knockBack = 1;
@@ -124,15 +125,14 @@ public class PlayerCombat : MonoBehaviour
         {
             gunList[currentGun].Remove();
         }
-        //PreAttack();
+        isAttackRight = PlayerControl.control.animator.GetBool("Right");
         PlayerControl.control.animator.SetTrigger("Attack");
-       // Attack();
         StartCoroutine(ComboDelay(comboCooldown));
     }
 
     public void PreAttack()
     {
-        if (PlayerControl.control.animator.GetBool("Right"))
+        if (isAttackRight)
         {
             Vector3 newVector = new Vector3(1,1,1);
             meleeHand.transform.localScale = newVector;
@@ -166,7 +166,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
         meleeZone.SetActive(false);
-
+        PlayerControl.control.Slow(0);
     }
 
     private void TimeUltimate()
@@ -215,8 +215,7 @@ public class PlayerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(wait);
         canMelee = true;
-        canFire = true;
-        PlayerControl.control.Slow(0);
+        canFire = true;        
     }
 
     public void Addgun(BaseGun gun)
