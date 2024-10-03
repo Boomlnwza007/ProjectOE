@@ -40,6 +40,7 @@ public class PlayerControl : MonoBehaviour
         healthBar.SetMax(playerState.maxHealth, playerState.health);
         energyBar.SetMax(playerState.maxEnergy, playerState.energy);
         ultimateEnergyBar.SetMax(playerState.maxUltimateEnergy, playerState.ultimateEnergy);
+        ultimateEnergyBarCircle.SetMax(playerState.maxUltimateEnergy, playerState.ultimateEnergy);
         reloadBar.SetMax(100, 0);
     }
 
