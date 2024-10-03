@@ -9,6 +9,7 @@ public class BulletScript : BaseBullet
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ready = true;
         rb.velocity = transform.right * speed;
     }
 

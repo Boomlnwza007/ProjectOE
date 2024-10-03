@@ -22,13 +22,17 @@ public class GuardShield : MonoBehaviour
         Vector2 dir = (target.position - transform.position).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (canGuard)
-        {            
+        {
+            shield.gameObject.SetActive(true);
             gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
+
             Guard(angle);
         }
         else
         {
-            gameObject.transform.eulerAngles = new Vector3(0, 0, angle+90);
+            shield.gameObject.SetActive(false);
+
+            //gameObject.transform.eulerAngles = new Vector3(0, 0, angle+90);
         }
     }
 
