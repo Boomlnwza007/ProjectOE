@@ -16,6 +16,7 @@ public class DeadEnemy : MonoBehaviour, IBulletInteract
             case DamageType.Melee:
                 lootDrop.InstantiateLoot(1);
                 spriteFlash.Flash();
+                Hp--;
                 if (Hp <= 0)
                 {
                     if (gun != null)
