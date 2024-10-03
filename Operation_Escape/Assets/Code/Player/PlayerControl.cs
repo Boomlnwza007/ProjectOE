@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -48,6 +49,18 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetButtonDown("Pause"))
+        {
+            menu.HidePause();
+        }
+
+
+
+        if (menu.onPauseMenu || menu.onmenuAfterDie)
+        {
+            return;
+        }
+
         UpdateAnimation();
         UpdateBars();
         UpdateBullets();
