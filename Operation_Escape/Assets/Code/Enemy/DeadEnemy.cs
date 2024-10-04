@@ -28,6 +28,10 @@ public class DeadEnemy : MonoBehaviour, IBulletInteract
                 break;
             case DamageType.Rang:
                 Hp--;
+                if (Hp <= 0)
+                {
+                    Destroy(gameObject);
+                }
                 spriteFlash.Flash();
                 break;
         }
