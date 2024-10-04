@@ -18,5 +18,6 @@ public class TriggerBoss : MonoBehaviour
     public void Off()
     {
         uiBoss.uiBody.SetActive(false);
+        Boss.attacking = false;        
     }
 }

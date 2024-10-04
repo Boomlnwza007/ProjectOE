@@ -64,4 +64,5 @@ public class StateMachine : MonoBehaviour
 
     public virtual void CombatPhaseOn() { }
     public virtual void SetCombatPhase(AreaEnermy area) { }
+
 }

@@ -75,6 +75,7 @@ public class AreaEnermy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             hasPlayer = true;
+            PauseScene.area = this;
         }
     }
 
