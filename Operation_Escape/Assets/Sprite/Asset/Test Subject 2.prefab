@@ -151,7 +151,7 @@ MonoBehaviour:
   - {x: 0.8481598, y: -0.914032, z: 0}
   m_ShapePathHash: -1303951251
   m_Mesh: {fileID: 0}
-  m_InstanceId: 42050
+  m_InstanceId: 282300
   m_LocalBounds:
     m_Center: {x: 0.00077056885, y: 0.08287048, z: 0}
     m_Extent: {x: 0.8473892, y: 1.0032043, z: 0}
@@ -249,6 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8685275715250670354}
   - component: {fileID: 1505184360693618035}
+  - component: {fileID: 2183029241438286063}
   m_Layer: 0
   m_Name: Asset_TestTube_Lower (1)
   m_TagString: Untagged
@@ -323,3 +324,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &2183029241438286063
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578787796472202392}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4375, y: 0.0625}
+      - {x: -0.90625, y: -0.59375}
+      - {x: -0.90625, y: -0.9375}
+      - {x: -0.875, y: -1}
+      - {x: 0.90625, y: -1}
+      - {x: 0.90625, y: -0.5625}
+      - {x: 0.34375, y: 0.0625}
+  m_UseDelaunayMesh: 0
