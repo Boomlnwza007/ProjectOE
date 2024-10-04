@@ -22,7 +22,6 @@ public class IdleB1FSM : BaseState
         {
             ai.canMove = true;
             stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
-            ((FSMBoss1EnemySM)stateMachine).uiBoss.uiBody.SetActive(true);
         }
     }
 

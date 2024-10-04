@@ -6,10 +6,12 @@ public class AreaEnermy : MonoBehaviour
 {
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
     [SerializeField] public AutoDoor[] door;
+    [SerializeField] public TriggerBoss areaBoss;
     public bool ready = true;
     public Transform checkPoint;
     public bool hasPlayer;
     public LayerMask enemyleLayer;
+    public bool boss;
 
     // Start is called before the first frame update
     private void Awake()
@@ -36,10 +38,22 @@ public class AreaEnermy : MonoBehaviour
 
     public void ResetMon()
     {
-        foreach (var item in enemy)
+        if (!boss)
         {
-            item.Health = item.maxHealth;
+            foreach (var item in enemy)
+            {
+                item.Health = item.maxHealth;
+            }
         }
+        else
+        {
+            foreach (var item in enemy)
+            {
+                item.Health = item.maxHealth;
+            }
+            areaBoss.Off();
+        }
+        
     }
 
     public void AddAllEnemy()
@@ -61,7 +75,6 @@ public class AreaEnermy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             hasPlayer = true;
-            PauseScene.area = this;
         }
     }
 
