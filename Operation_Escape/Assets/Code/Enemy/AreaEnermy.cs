@@ -6,9 +6,11 @@ public class AreaEnermy : MonoBehaviour
 {
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
     [SerializeField] public AutoDoor[] door;
+    public bool ready = true;
     public Transform checkPoint;
     public bool hasPlayer;
     public LayerMask enemyleLayer;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -21,15 +23,16 @@ public class AreaEnermy : MonoBehaviour
 
     private void Update()
     {
-        if (enemy.Count == 0)
+        if (enemy.Count == 0 && ready)
         {
             foreach (var door in door)
             {
                 door.Unlock();
+                PauseScene.spawnPoint = checkPoint;
+                PauseScene.area = this;
             }
+            ready = false;
         }
-
-
     }
 
     public void AddAllEnemy()
@@ -52,11 +55,6 @@ public class AreaEnermy : MonoBehaviour
         {
             hasPlayer = true;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
     }
 
     public void AllcombatPhase()
