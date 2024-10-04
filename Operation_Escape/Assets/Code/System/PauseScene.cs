@@ -125,8 +125,9 @@ public class PauseScene : MonoBehaviour
         {
             foreach (var item in area.door)
             {
-                item.locked = false;
+                item.Unlock();
             }
+
             area.ResetMon();
         }        
         PlayerControl.control.Spawn(spawnPoint);

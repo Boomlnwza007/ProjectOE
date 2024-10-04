@@ -20,7 +20,6 @@ public class AutoDoor : MonoBehaviour
         door.Close();
     }
 
-
     public void Unlock()
     {
         Destroy(plateSC);
