@@ -23,7 +23,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public bool overdriveChang;
     public int overdriveGageMax;
     public Transform originPoint;
-    private int overdriveGage;
+    [HideInInspector]public int overdriveGage;
     private float overdriveTime;
     public float overdriveTimer = 60;
     private float time;
