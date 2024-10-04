@@ -26,16 +26,18 @@ public class CheatMenu : MonoBehaviour
     private int curPageGun = 0;
 
     [Header("Player Walk")]
-    [SerializeField] private GameObject buttonPreWalk;
+    [SerializeField] private GameObject buttonPreWarp;
     [SerializeField] private Transform[] warpPoint;
-    public bool HackWall;
+    [SerializeField] private static Transform[] warpPointReal;
+
+    public Transform menuWarp;
 
     [Header("Other")]
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject mainMenu;
     public bool onMainMenu = false;
     private GameObject player;
-    public enum Mode { Spawnmon ,PlayerStatus ,GunEdit };
+    public enum Mode { Spawnmon ,PlayerStatus ,GunEdit,Warp };
     [SerializeField] private GameObject[] allMenu;
     public Mode mode;
     private int curPage = 0;
@@ -46,6 +48,7 @@ public class CheatMenu : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mode = Mode.Spawnmon;
         mainMenu.SetActive(onMainMenu);
+        warpPointReal = warpPoint;
     }
 
     void Start()
@@ -54,6 +57,7 @@ public class CheatMenu : MonoBehaviour
         ChangMode(Mode.Spawnmon);
         ModeGun();
         ModeSpawn();
+        SetupWalk();
     }
 
     private void Update()
@@ -466,6 +470,9 @@ public class CheatMenu : MonoBehaviour
             case 3:
                 _mode = Mode.GunEdit;
                 break;
+            case 4:
+                _mode = Mode.Warp;
+                break;
         }
 
         ChangMode(_mode);
@@ -486,6 +493,9 @@ public class CheatMenu : MonoBehaviour
                 curPageGun = curPage;
                 allMenu[2].SetActive(false);
                 break;
+            case Mode.Warp:
+                allMenu[3].SetActive(false);
+                break;
         }      
 
         mode = _mode;
@@ -501,11 +511,45 @@ public class CheatMenu : MonoBehaviour
             case Mode.GunEdit:
                 allMenu[2].SetActive(true);
                 break;
+            case Mode.Warp:
+                allMenu[3].SetActive(true);
+                break;
         }
     }
 
     public void SetupWalk()
     {
+        if (warpPoint.Length != 0)
+        {
+            for (int i = 0; i < warpPoint.Length; i++)
+            {
+                GameObject button = Instantiate(buttonPreWarp, menuWarp);
+                button.name = i.ToString();
+                button.GetComponentInChildren<TMP_Text>().text = warpPoint[i].name;
+            }
+        }
+    }
 
+    public void OnClickWrap(Button button)
+    {
+        string buttonName = button.name;
+        int buttonNumber;
+        if (int.TryParse(buttonName, out buttonNumber))
+        {
+            CinemachineControl.Instance.player.position = warpPointReal[buttonNumber].position;
+        }
+        else
+        {
+            Debug.LogError("Button name is not a valid integer: " + buttonName);
+        }        
+    }
+
+    public void HackWall(Button button)
+    {
+        //HackWall = !HackWall;
+        //PlayerControl.control.gameObject
+        Collider2D collider = PlayerControl.control.gameObject.GetComponent<Collider2D>();
+        collider.enabled = !collider.enabled; // สลับสถานะเปิด/ปิด Collider
+        button.GetComponentInChildren<TMP_Text>().text = "Colition " + collider.enabled.ToString();
     }
 }
