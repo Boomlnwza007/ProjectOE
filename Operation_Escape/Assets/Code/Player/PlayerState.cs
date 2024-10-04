@@ -67,6 +67,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
         {
             StartCoroutine(Imortal(0.1f));
             health -= damage;
+
             if (spriteFlash != null)
             {
                 spriteFlash.Flash();
@@ -74,6 +75,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
             if (health <= 0)
             {
+                health = 0;
                 Die();
             }
         }

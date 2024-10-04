@@ -6,6 +6,7 @@ public class StateMachine : MonoBehaviour
 {
     public BaseState curState;
     [Header("statusBasic")]
+    public int maxHealth;
     public int Health;
     public int dmg;
     public float Speed;

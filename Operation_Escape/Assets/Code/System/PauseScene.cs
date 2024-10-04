@@ -87,7 +87,23 @@ public class PauseScene : MonoBehaviour
         menuAfterDie.SetActive(onmenuAfterDie);
         if (onmenuAfterDie)
         {
-            waitDie(0.2f);
+            Time.timeScale = 0;
+            //StartCoroutine(waitDie(0.2f));
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void HideAfterDieCode()
+    {
+        onmenuAfterDie = !onmenuAfterDie;
+        menuAfterDie.SetActive(onmenuAfterDie);
+        if (onmenuAfterDie)
+        {
+            Time.timeScale = 0;
         }
         else
         {
@@ -101,22 +117,26 @@ public class PauseScene : MonoBehaviour
         ControlScene.scene.PlayAnimation();
         retrying = true;
         ControlScene.scene.LoadScene = true;
-        yield return new WaitForSeconds(1f);
-        HideAfterDie();
-        foreach (var item in area.door)
+        PlayerControl.control.EnableInput(false);
+        CinemachineControl.Instance.cancameraMove = false;
+        yield return new WaitForSeconds(1.8f);
+        HideAfterDieCode();
+        if (area != null)
         {
-            item.locked = false;
-        }
+            foreach (var item in area.door)
+            {
+                item.locked = false;
+            }
+            area.ResetMon();
+        }        
         PlayerControl.control.Spawn(spawnPoint);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         retrying = false;
         ControlScene.scene.LoadScene = false;
+        PlayerControl.control.EnableInput(true);
+        CinemachineControl.Instance.cancameraMove = true;
         ControlScene.scene.PlayAnimation();
     }
 
-    IEnumerator waitDie(float wait)
-    {
-        yield return new WaitForSeconds(1f);
-        Time.timeScale = 0;
-    }
+
 }

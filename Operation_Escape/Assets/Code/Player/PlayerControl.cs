@@ -54,15 +54,17 @@ public class PlayerControl : MonoBehaviour
             menu.HidePause();
         }
 
+        UpdateBars();
+        UpdateBullets();
+        HandleReload();
+
         if (menu.onPauseMenu || menu.onmenuAfterDie)
         {
             return;
         }
 
         UpdateAnimation();
-        UpdateBars();
-        UpdateBullets();
-        HandleReload();
+
     }
 
     private void UpdateAnimation()
@@ -207,8 +209,8 @@ public class PlayerControl : MonoBehaviour
     public void Spawn(Transform spawnPoint)
     {
         gameObject.transform.position = spawnPoint.position;
-        playerState.health = playerState.maxEnergy;
-        playerState.energy = 0;
+        playerState.health = playerState.maxHealth;
+        playerState.energy = playerState.maxEnergy;
         playerState.ultimateEnergy = 0;
         gameObject.SetActive(true);
     }

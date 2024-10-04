@@ -27,11 +27,19 @@ public class AreaEnermy : MonoBehaviour
         {
             foreach (var door in door)
             {
-                door.Unlock();
-                PauseScene.spawnPoint = checkPoint;
-                PauseScene.area = this;
+                door.Unlock();                
             }
+            PauseScene.spawnPoint = checkPoint;
+            PauseScene.area = this;
             ready = false;
+        }
+    }
+
+    public void ResetMon()
+    {
+        foreach (var item in enemy)
+        {
+            item.Health = item.maxHealth;
         }
     }
 
