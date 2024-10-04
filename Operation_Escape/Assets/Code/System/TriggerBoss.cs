@@ -20,5 +20,7 @@ public class TriggerBoss : MonoBehaviour
         uiBoss.uiBody.SetActive(false);
         Boss.attacking = false;
         ((FSMBoss1EnemySM)Boss).overdriveGage = 0;
+        ((FSMBoss1EnemySM)Boss).overdriveTime = 0;
+        ((FSMBoss1EnemySM)Boss).overdrive = false;
     }
 }

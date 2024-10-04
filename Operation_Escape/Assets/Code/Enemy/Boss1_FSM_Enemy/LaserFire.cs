@@ -136,7 +136,7 @@ public class LaserFire : MonoBehaviour
     
     public void LaserFiring()
     {
-        if (Physics2D.BoxCast(laserFireStart.position, new Vector2(m_lineRenderer.startWidth-0.5f, m_lineRenderer.startWidth-0.5f), 0f, transform.right, laserDistance, ShootLayer))
+        if (Physics2D.BoxCast(laserFireStart.position, new Vector2(m_lineRenderer.startWidth-1f, m_lineRenderer.startWidth-1f), 0f, transform.right, laserDistance, ShootLayer))
         {
             RaycastHit2D hitInfo = Physics2D.BoxCast(laserFireStart.position, new Vector2(m_lineRenderer.startWidth, m_lineRenderer.startWidth), 0f, transform.right, laserDistance, ShootLayer);
             if (hitInfo.collider.CompareTag("Player"))
