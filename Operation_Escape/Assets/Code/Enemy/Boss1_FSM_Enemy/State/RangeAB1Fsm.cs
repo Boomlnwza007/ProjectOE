@@ -52,7 +52,6 @@ public class RangeAB1Fsm : BaseState
         if (CheckDistance())
         {
             Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-
             return;
         }
         Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
@@ -115,6 +114,13 @@ public class RangeAB1Fsm : BaseState
     public void ChangState(BaseState Nextstate)
     {
         var state = (FSMBoss1EnemySM)stateMachine;
+        if (!state.attacking)
+        {
+            state.JumpCenter();
+            state.ChangState(state.idleState);
+            return;           
+        }
+
         if (state.overdriveChang)
         {
             state.ChangState(state.overdriveChangState);

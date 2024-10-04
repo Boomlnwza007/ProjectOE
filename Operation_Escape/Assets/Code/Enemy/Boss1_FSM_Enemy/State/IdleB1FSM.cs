@@ -13,6 +13,7 @@ public class IdleB1FSM : BaseState
         ((FSMBoss1EnemySM)stateMachine).animator.SetBool("IdleB1FSM", true);
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         ai.destination = ai.position;
+        ai.canMove = false;
     }
 
     public override void UpdateLogic()

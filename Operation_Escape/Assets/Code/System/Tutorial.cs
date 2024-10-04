@@ -78,7 +78,7 @@ public class Tutorial : MonoBehaviour
                     tutorial = false;
                 }
             }
-            if (Input.GetButton(key))
+            else if (Input.GetButton(key))
             {
                 StopCoroutine(curWait);
                 curWait = StartCoroutine(Wait(0.5f));
