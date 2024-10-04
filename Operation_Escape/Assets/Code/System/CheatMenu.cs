@@ -29,7 +29,6 @@ public class CheatMenu : MonoBehaviour
     [SerializeField] private GameObject buttonPreWarp;
     [SerializeField] private Transform[] warpPoint;
     [SerializeField] private static Transform[] warpPointReal;
-
     public Transform menuWarp;
 
     [Header("Other")]
