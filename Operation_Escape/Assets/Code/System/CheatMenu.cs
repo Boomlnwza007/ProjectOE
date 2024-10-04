@@ -25,8 +25,10 @@ public class CheatMenu : MonoBehaviour
     public Transform menuGun;
     private int curPageGun = 0;
 
-    [Header("Player")]
-    public bool HackWall ;
+    [Header("Player Walk")]
+    [SerializeField] private GameObject buttonPreWalk;
+    [SerializeField] private Transform[] warpPoint;
+    public bool HackWall;
 
     [Header("Other")]
     [SerializeField] private Canvas canvas;
@@ -502,5 +504,8 @@ public class CheatMenu : MonoBehaviour
         }
     }
 
+    public void SetupWalk()
+    {
 
+    }
 }

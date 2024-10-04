@@ -125,7 +125,7 @@ public class PauseScene : MonoBehaviour
         {
             foreach (var item in area.door)
             {
-                item.Unlock();
+                item.locked = false;
             }
 
             area.ResetMon();
