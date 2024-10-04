@@ -25,7 +25,7 @@ public class Tutorial : MonoBehaviour
         set = this;
     }
 
-    public void show(int index)
+    public void show(int index,float time)
     {
         if (tutorial)
         {
@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour
                 break;
         }
         mode[curMode].SetActive(true);
-        curWait = StartCoroutine(Wait(5f));
+        curWait = StartCoroutine(Wait(time));
         tutorial = true;
     }
 
