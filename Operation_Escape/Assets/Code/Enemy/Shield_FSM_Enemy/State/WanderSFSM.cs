@@ -30,15 +30,15 @@ public class WanderSFSM : BaseState
 
     public override void UpdateLogic()
     {
-        if (ai.endMove)
-        {
-            time += Time.deltaTime;
-            if (time > 3)
-            {
-                time = 0;
-                ai.destination = Randomposition(center, distane);
-            }
-        }
+        //if (ai.endMove)
+        //{
+        //    time += Time.deltaTime;
+        //    if (time > 3)
+        //    {
+        //        time = 0;
+        //        ai.destination = Randomposition(center, distane);
+        //    }
+        //}
 
         if (((FSMSEnemySM)stateMachine).areaEnermy != null)
         {
