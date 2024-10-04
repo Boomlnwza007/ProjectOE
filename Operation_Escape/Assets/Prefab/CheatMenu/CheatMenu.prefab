@@ -896,7 +896,7 @@ MonoBehaviour:
   canvas: {fileID: 5229799554054898413}
   menuTop: {fileID: 2107908036530391144}
   mainMenu: {fileID: 350711570985464660}
-  onMainMenu: 0
+  onMainMenu: 1
   onMainMenuTop: 0
   allMenu:
   - {fileID: 5464829657641758692}
