@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0945b9c35c229748aea226a88a5a6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  distanceMove: 2
+  moveSpeed: 2
+  distanceMove: 4
   canDestroy: 1
 --- !u!58 &3655024311465011623
 CircleCollider2D:
