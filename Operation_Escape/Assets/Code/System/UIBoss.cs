@@ -5,14 +5,22 @@ using TMPro;
 
 public class UIBoss : MonoBehaviour
 {
-    public static UIBoss uiBoss;
+    public FSMBoss1EnemySM boss;
     public GameObject uiBody;
     public TMP_Text text;
-    public SliderBar slider;
+    public SliderBar slider;    
 
     private void Awake()
     {
-        uiBoss = this;
+        slider.SetMax(boss.maxHealth);
+    }
+
+    private void Update()
+    {
+        if (boss.Health != slider.value)
+        {
+            slider.SetValue(boss.Health);
+        }
     }
 
     public void SetUpBoss(string nameBoss, int hpBoss)

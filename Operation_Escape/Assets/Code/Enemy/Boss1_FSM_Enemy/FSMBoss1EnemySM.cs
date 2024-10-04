@@ -31,6 +31,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public bool imortal { get; set; }
     public string stateName;
     private SpriteFlash spriteFlash;
+    public UIBoss uiBoss;
 
     [Header("Animation")]
     [SerializeField] public Animator animator;

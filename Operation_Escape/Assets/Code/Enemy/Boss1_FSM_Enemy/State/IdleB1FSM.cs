@@ -21,8 +21,8 @@ public class IdleB1FSM : BaseState
         if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMBoss1EnemySM)stateMachine).visRange && ((FSMBoss1EnemySM)stateMachine).attacking)
         {
             ai.canMove = true;
-
             stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
+            ((FSMBoss1EnemySM)stateMachine).uiBoss.uiBody.SetActive(true);
         }
     }
 
