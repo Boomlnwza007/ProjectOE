@@ -34,8 +34,10 @@ public class CheatMenu : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] private Canvas canvas;
+    [SerializeField] private GameObject menuTop;
     [SerializeField] private GameObject mainMenu;
-    public bool onMainMenu = false;
+    public bool onMainMenu = true;
+    public bool onMainMenuTop = false;
     private GameObject player;
     public enum Mode { Spawnmon ,PlayerStatus ,GunEdit,Warp };
     [SerializeField] private GameObject[] allMenu;
@@ -48,6 +50,7 @@ public class CheatMenu : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mode = Mode.Spawnmon;
         mainMenu.SetActive(onMainMenu);
+        menuTop.SetActive(onMainMenuTop);
         warpPointReal = warpPoint;
     }
 
@@ -75,14 +78,14 @@ public class CheatMenu : MonoBehaviour
 
     public void OnOff()
     {
-        onMainMenu = !onMainMenu;
-        mainMenu.SetActive(onMainMenu);
+        onMainMenuTop = !onMainMenuTop;
+        menuTop.SetActive(onMainMenuTop);
     }
 
     public void Hide()
     {
         onMainMenu = !onMainMenu;
-        mainMenu.SetActive(onMainMenu);
+        mainMenu.SetActive(onMainMenu);        
     }
 
     public void ModeSpawn()
