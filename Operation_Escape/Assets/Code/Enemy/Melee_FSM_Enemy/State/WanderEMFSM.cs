@@ -16,6 +16,7 @@ public class WanderEMFSM : BaseState
         ai.destination = Randomposition(ai.position, distane);
         ai.canMove = true;
         time = 0;
+
         if (((FSMMEnemySM)stateMachine).areaEnermy != null)
         {
             distane = ((FSMMEnemySM)stateMachine).areaEnermy.Size();
@@ -48,16 +49,18 @@ public class WanderEMFSM : BaseState
             }
         }
 
+        if (((FSMMEnemySM)stateMachine).attacking)
+        {
+            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
+        }
+
         if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMMEnemySM)stateMachine).visRange)
         {
             ((FSMMEnemySM)stateMachine).CombatPhaseOn();
             stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
 
-        if (((FSMMEnemySM)stateMachine).attacking)
-        {
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
-        }
+
     }
 
     public Vector2 Randomposition(Vector2 position, float Size)

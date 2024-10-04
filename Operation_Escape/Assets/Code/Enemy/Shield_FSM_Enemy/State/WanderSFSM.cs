@@ -48,16 +48,18 @@ public class WanderSFSM : BaseState
             }
         }
 
+        if (((FSMSEnemySM)stateMachine).attacking)
+        {
+            stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
+        }
+
         if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMSEnemySM)stateMachine).visRange)
         {
             ((FSMSEnemySM)stateMachine).CombatPhaseOn();
             stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
         }
 
-        if (((FSMSEnemySM)stateMachine).attacking)
-        {
-            stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
-        }
+        
     }
 
     public Vector2 Randomposition(Vector2 position, float Size)
