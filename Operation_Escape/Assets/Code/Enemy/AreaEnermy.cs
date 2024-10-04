@@ -6,6 +6,7 @@ public class AreaEnermy : MonoBehaviour
 {
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
     [SerializeField] public AutoDoor[] door;
+    public Transform checkPoint;
     public bool hasPlayer;
     public LayerMask enemyleLayer;
     // Start is called before the first frame update
