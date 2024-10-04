@@ -712,8 +712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503749f3de7742b43b266e2cb91b478e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 600
-  Health: 600
+  maxHealth: 300
+  Health: 300
   dmg: 30
   Speed: 13
   visRange: 30
@@ -737,6 +737,8 @@ MonoBehaviour:
   overdriveChang: 0
   overdriveGageMax: 100
   originPoint: {fileID: 0}
+  overdriveGage: 0
+  overdriveTime: 0
   overdriveTimer: 60
   fireRate: 0.7
   stateName: 
