@@ -24,7 +24,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
     private void Awake()
     {
-        health = maxHealth;
+        health = 20;
         maxEnergy = 10;
         maxUltimateEnergy = 10;
         ultimateEnergy = 0;
