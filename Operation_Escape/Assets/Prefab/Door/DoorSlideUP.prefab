@@ -613,5 +613,5 @@ MonoBehaviour:
   doorL: {fileID: 8694977972625249207}
   doorR: {fileID: 6234787063326622088}
   speed: 5
-  sizeDoor: 4
+  sizeDoor: 5
   isLR: 0
