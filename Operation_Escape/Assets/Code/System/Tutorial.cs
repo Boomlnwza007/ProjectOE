@@ -61,7 +61,7 @@ public class Tutorial : MonoBehaviour
                 break;
         }
         mode[curMode].SetActive(true);
-        curWait = StartCoroutine(Wait(3f));
+        curWait = StartCoroutine(Wait(5f));
         tutorial = true;
     }
 
