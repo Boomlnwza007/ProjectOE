@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e105ea05ef63b40aea472439fec710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
+  Hp: 2
   lootDrop: {fileID: 283496450024756617}
   gun: {fileID: 0}
   spriteFlash: {fileID: 5260602313064698070}

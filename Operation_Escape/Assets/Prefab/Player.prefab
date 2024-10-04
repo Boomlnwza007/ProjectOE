@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: -722350
+  m_InstanceId: 1144418
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8431,8 +8431,8 @@ MonoBehaviour:
   speed: 8
   slowSpeed: 0
   dodgeMaxSpeed: 65
-  coolDownDodge: 2.5
-  rollChargeCC: 1.5
+  coolDownDodge: 1.5
+  rollChargeCC: 0.5
   rollCharge: 0
 --- !u!114 &2200673144129377109
 MonoBehaviour:
