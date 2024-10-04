@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8694977972625249207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: U
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8637404304970347989}
   - component: {fileID: 1402941562596305490}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7391347525685223090}
   - component: {fileID: 6084072153933790187}
   - component: {fileID: 6901090229033174587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorBodyR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 6325227015926331409}
   - component: {fileID: 6701063524782131784}
   - component: {fileID: 5267322963413814737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorBodyL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6234787063326622088}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 1015114158740269013}
   - component: {fileID: 2041961609468466709}
   - component: {fileID: 7221209966230087464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TrapLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 6443746462098930224}
   - component: {fileID: 693740511650744281}
   - component: {fileID: 7215983844107891229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorSlideUP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,6 +612,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorL: {fileID: 8694977972625249207}
   doorR: {fileID: 6234787063326622088}
-  speed: 5
+  speed: 7
   sizeDoor: 5
   isLR: 0
