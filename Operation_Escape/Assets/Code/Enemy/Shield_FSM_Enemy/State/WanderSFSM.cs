@@ -7,14 +7,14 @@ public class WanderSFSM : BaseState
     public WanderSFSM(FSMSEnemySM stateMachine) : base("Wander", stateMachine) { }
     public IAiAvoid ai;
     public float distane = 5f;
-    float time;
+    //float time;
     public Vector2 center;
 
     public override void Enter()
     {
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
-        time = 0;
+        //time = 0;
 
         if (((FSMSEnemySM)stateMachine).areaEnermy != null)
         {

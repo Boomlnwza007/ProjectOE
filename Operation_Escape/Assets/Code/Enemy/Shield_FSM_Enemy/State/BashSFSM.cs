@@ -16,14 +16,14 @@ public class BashSFSM : BaseState
         ai = state.ai;
         state.canGuard = true;
         ai.destination = ai.targetTransform.position;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         Attack().Forget();
     }
 
     public async UniTask Attack()
     {
         var state = (FSMSEnemySM)stateMachine;
-        ai.Maxspeed = speed;
+        ai.maxspeed = speed;
         await UniTask.WaitForSeconds(0.5f);
         state.Attack();
         state.canGuard = false;

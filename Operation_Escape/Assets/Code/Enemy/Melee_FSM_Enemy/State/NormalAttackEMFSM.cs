@@ -1,3 +1,5 @@
+using System.Threading;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +10,16 @@ public class NormalAttackEMFSM : BaseState
 {
     public NormalAttackEMFSM(FSMMEnemySM stateMachine) : base("NormalAttack", stateMachine) { }
     public IAiAvoid ai;
-    public float speed;
-    float time;
+    private CancellationTokenSource cancellationTokenSource;
 
     // Start is called before the first frame update
     public override void Enter()
     {
         ai = ((FSMMEnemySM)stateMachine).ai;
-        speed = ai.Maxspeed;
-        Attack().Forget();
+        ((FSMMEnemySM)stateMachine).Walk();
+        cancellationTokenSource = new CancellationTokenSource();
+
+        Attack(cancellationTokenSource.Token).Forget();
     }
 
     public override void UpdateLogic()
@@ -25,30 +28,44 @@ public class NormalAttackEMFSM : BaseState
         ai.destination = ai.targetTransform.position;        
     }
 
-    public async UniTask Attack()
+    public async UniTaskVoid Attack(CancellationToken token)
     {
         var state = ((FSMMEnemySM)stateMachine);
-        Debug.Log("µ—Èß∑Ë“‡µ√’¬¡‚®¡µ’1 0.5");
-        await UniTask.WaitForSeconds(0.5f);
+        try
+        {
+            //Debug.Log("Preparing to attack 1 for 0.5 seconds");
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            //await state.Attack("Attack");
+            //Debug.Log("Attack 1");
 
-        state.Attack();
-        Debug.Log("‚®¡µ’ 1");
-        Debug.Log("µ—Èß∑Ë“‚®¡µ’2 0.8s");
-        await UniTask.WaitForSeconds(0.8f);
+            //Debug.Log("Preparing to attack 2 for 0.8 seconds");
+            //wait UniTask.WaitForSeconds(0.8f, cancellationToken: token);
+            await state.Attack("Attack");
+           // Debug.Log("Attack 2");
 
-        state.Attack();
-        Debug.Log("‚®¡µ’ 2");
-        Debug.Log("µ—Èß∑Ë“‚®¡µ’3 1.5s");
-        await UniTask.WaitForSeconds(1.5f);
-        ai.canMove = false;
+            //Debug.Log("Preparing to attack 3 for 1.5 seconds");
+            //await UniTask.WaitForSeconds(1.5f, cancellationToken: token);          
+            await state.Attack("Attack");
+           // Debug.Log("Attack 3");
 
-        state.Attack();
-        Debug.Log("‚®¡µ’ 3");
-        Debug.Log("À¬ÿ¥Õ¬ŸË°—∫∑’Ë 2s");
-        await UniTask.WaitForSeconds(2f);
-        ai.canMove = true;
-        stateMachine.ChangState(state.CheckDistance);
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
 
+
+            ai.canMove = true;
+
+            stateMachine.ChangState(state.CheckDistance);
+        }
+        catch (OperationCanceledException)
+        {
+
+            Debug.Log("The attack was canceled.");
+        }      
+
+    }
+
+    public override void Exit()
+    {
+         cancellationTokenSource.Cancel();
     }
 
 }

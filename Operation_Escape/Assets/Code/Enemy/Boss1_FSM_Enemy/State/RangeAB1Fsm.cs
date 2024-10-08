@@ -18,7 +18,7 @@ public class RangeAB1Fsm : BaseState
         state.animator.SetBool("RangeAB1Fsm", true);
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         overdrive = ((FSMBoss1EnemySM)stateMachine).overdrive;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         ai.canMove = false;
         rangeAttack = true;
 
@@ -40,7 +40,7 @@ public class RangeAB1Fsm : BaseState
         ai.destination = ai.targetTransform.position;
     }
 
-    public async UniTask Attack()
+    public async UniTaskVoid Attack()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
         state.CreatLaserGun();

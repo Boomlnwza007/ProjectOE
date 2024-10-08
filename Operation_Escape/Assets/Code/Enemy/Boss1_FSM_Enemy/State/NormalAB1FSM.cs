@@ -21,7 +21,7 @@ public class NormalAB1FSM : BaseState
         ai = ((FSMBoss1EnemySM)stateMachine).ai;
         overdrive = ((FSMBoss1EnemySM)stateMachine).overdrive;
         ai.canMove = true;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         if (!overdrive)
         {
             Charg = 0.6f;
@@ -46,10 +46,10 @@ public class NormalAB1FSM : BaseState
         }
     }
 
-    public async UniTask Attack()
+    public async UniTaskVoid Attack()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        ai.Maxspeed = speed * 2;
+        ai.maxspeed = speed * 2;
         float time = 0f;
         while (time < runTime)
         {
@@ -57,7 +57,7 @@ public class NormalAB1FSM : BaseState
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
                 var animComtrol = Boss1AniControl.boss1AniControl;
-                ai.Maxspeed = speed;
+                ai.maxspeed = speed;
                 state.animator.SetBool("Attacking", true);
                 animComtrol.ChangeAnimationState(Boss1AniControl.StateBoss.PreAtk1_2);
                 await UniTask.WhenAll(state.MeleeHitzone(1f,0.5f, 2), AimMelee(0.8f),AttackAnimation(1f,0.5f,Boss1AniControl.StateBoss.Atk1_2)); // hit 1
@@ -89,7 +89,7 @@ public class NormalAB1FSM : BaseState
             await UniTask.Yield();
         }
 
-        ai.Maxspeed = speed;
+        ai.maxspeed = speed;
         ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
     }
 

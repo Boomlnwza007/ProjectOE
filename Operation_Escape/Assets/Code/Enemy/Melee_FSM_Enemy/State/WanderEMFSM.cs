@@ -7,7 +7,7 @@ public class WanderEMFSM : BaseState
     public WanderEMFSM(FSMMEnemySM stateMachine) : base("Wander", stateMachine) { }
     public IAiAvoid ai;
     public float distane = 5f;
-    float time;
+    //float time;
     public Vector2 center;
 
     public override void Enter()
@@ -15,7 +15,7 @@ public class WanderEMFSM : BaseState
         ai = ((FSMMEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         ai.canMove = true;
-        time = 0;
+        //time = 0;
 
         if (((FSMMEnemySM)stateMachine).areaEnermy != null)
         {

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
 {
     [Header("status")]
     public bool cooldown;
-    public float time;
+    [HideInInspector]public float time;
     public float timeCooldown = 6f;
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
@@ -130,16 +131,30 @@ public class FSMMEnemySM : StateMachine, IDamageable
         areaEnermy = area;
     }
 
-    public void Attack()
+    public async UniTask Attack(string name)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,2.5f);
-        foreach (var hit in colliders)
-        {
-            IDamageable player = hit.GetComponent<IDamageable>();
-            if (hit.CompareTag("Player"))
-            {
-                player.Takedamage(dmg, DamageType.Melee, 0);
-            }
-        }
+        animator.animator.SetTrigger(name);
+        await UniTask.WaitForSeconds(animator.TimePlayer());
+        //Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,2.5f);
+        //foreach (var hit in colliders)
+        //{
+        //    IDamageable player = hit.GetComponent<IDamageable>();
+        //    if (hit.CompareTag("Player"))
+        //    {
+        //        player.Takedamage(dmg, DamageType.Melee, 0);
+        //    }
+        //}
+    }
+
+    public void Run(float multiply)
+    {
+        ai.maxspeed *= multiply;
+        animator.animator.speed *= multiply;
+    }
+
+    public void Walk()
+    {
+        ai.maxspeed = Speed;
+        animator.animator.speed = 1;
     }
 }

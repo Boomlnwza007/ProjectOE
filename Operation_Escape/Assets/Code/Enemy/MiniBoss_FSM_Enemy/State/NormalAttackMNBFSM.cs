@@ -15,7 +15,7 @@ public class NormalAttackMNBFSM : BaseState
     public override void Enter()
     {
         ai = ((FSMMEnemySM)stateMachine).ai;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         Attack().Forget();
     }
 

@@ -14,7 +14,7 @@ public class NormalAttackRFSM : BaseState
     public override void Enter()
     {
         ai = ((FSMREnemySM)stateMachine).ai;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         Debug.Log("ตั้งท่าเตรียมโจมตี1 0.5");
         time = 0;
         bulltCount = 0;

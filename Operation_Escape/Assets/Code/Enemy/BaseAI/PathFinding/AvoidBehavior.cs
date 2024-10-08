@@ -9,7 +9,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public LayerMask agentLayer;
     public float smoothTime = 0.3f;
     public float speed = 5f;
-    public float Maxspeed { get { return speed; } set { speed = value; } }
+    public float maxspeed { get { return speed; } set { speed = value; } }
     public bool canMove { get; set; }
     public bool slowMove { get; private set; }
     public bool endMove { get; private set; }
@@ -19,6 +19,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public bool randomDeviation { get { return enableRandomDeviation; } set { enableRandomDeviation = value; } }
     public GameObject playerGameObject { get; private set; }
     public Vector2 playerVelocity { get; private set; }
+    public Vector2 monVelocity { get { return rb.velocity; } set { rb.velocity = value; } }
 
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;

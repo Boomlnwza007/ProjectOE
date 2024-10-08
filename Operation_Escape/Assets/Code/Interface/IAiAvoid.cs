@@ -7,8 +7,9 @@ public interface IAiAvoid
     public GameObject playerGameObject { get; }
     public Transform targetTransform { get; set; }
     public Vector2 playerVelocity { get;}
+    public Vector2 monVelocity { get; set; }
     public Vector3 destination { get; set; }
-    public float Maxspeed { get; set; }
+    public float maxspeed { get; set; }
     public bool canMove { get; set; }
     public bool endMove { get;}
     public bool slowMove { get; }

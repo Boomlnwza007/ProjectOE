@@ -7,6 +7,8 @@ public class EM_Animation : MonoBehaviour
     public Animator animator;
     public Rigidbody2D rb;
     public IAiAvoid ai;
+    private string currentAnimaton;
+    public float timeplay;
 
     private void Start()
     {
@@ -23,8 +25,16 @@ public class EM_Animation : MonoBehaviour
         Vector2 target = (PlayerControl.control.transform.position - gameObject.transform.position).normalized;
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
         bool isFacingRight = angle > -90 && angle < 90;
-
         animator.SetBool("IsRight", isFacingRight);
+
+        if (isFacingRight)
+        {
+            animator.SetFloat("horizon", 1);
+        }
+        else
+        {
+            animator.SetFloat("horizon", -1);
+        }
 
         if (rb.velocity != Vector2.zero && !ai.endMove)
         {
@@ -33,8 +43,20 @@ public class EM_Animation : MonoBehaviour
         }
         else
         {
-            animator.speed = 0;
+            animator.speed = 1;
             animator.SetBool("Walk", false);
         }
+    }
+
+    public float TimePlayer()
+    {
+        return animator.GetCurrentAnimatorClipInfo(1).Length;
+    }
+
+    public void ChangeAnimationAttack(string newAnimation)
+    {
+        animator.Play(newAnimation,1);
+        timeplay = animator.GetCurrentAnimatorClipInfo(1).Length;
+        currentAnimaton = newAnimation;
     }
 }

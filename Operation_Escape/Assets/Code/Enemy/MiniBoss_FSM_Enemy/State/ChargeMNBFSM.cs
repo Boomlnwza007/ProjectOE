@@ -14,10 +14,10 @@ public class ChargeMNBFSM : BaseState
     public override void Enter()
     {
         ai = ((FSMMiniBossEnemySM)stateMachine).ai;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         Debug.Log("ตั้งท่าเตรียมโจมตี");
         ai.randomDeviation = false;
-        ai.Maxspeed = speed * 2;
+        ai.maxspeed = speed * 2;
         cooldown = false;
     }
 
@@ -28,7 +28,7 @@ public class ChargeMNBFSM : BaseState
         if (((FSMMiniBossEnemySM)stateMachine).cooldown)
         {
             Debug.Log("ติด CD");
-            ai.Maxspeed = speed;
+            ai.maxspeed = speed;
             ai.randomDeviation = true;
             //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).CheckDistance);
             return;
@@ -45,7 +45,7 @@ public class ChargeMNBFSM : BaseState
                 ai.canMove = true;
                 time = 0;
                 ai.randomDeviation = true;
-                ai.Maxspeed = speed;
+                ai.maxspeed = speed;
                 //stateMachine.ChangState(((FSMMiniBossEnemySM)stateMachine).CheckDistance);
             }
             return;
@@ -53,7 +53,7 @@ public class ChargeMNBFSM : BaseState
 
         if (distance < 2 && !cooldown)
         {
-            ai.Maxspeed = speed;
+            ai.maxspeed = speed;
             ai.randomDeviation = true;
             time += Time.deltaTime;
             Debug.Log("ตั้งท่าโจมตี 0.5s");
@@ -75,7 +75,7 @@ public class ChargeMNBFSM : BaseState
                 ai.canMove = false;
                 time = 0;
                 ai.randomDeviation = true;
-                ai.Maxspeed = speed;
+                ai.maxspeed = speed;
                 cooldown = true;
             }
         }

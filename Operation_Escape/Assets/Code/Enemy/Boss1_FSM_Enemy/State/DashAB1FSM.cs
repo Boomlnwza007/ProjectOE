@@ -20,7 +20,7 @@ public class DashAB1FSM : BaseState
         state.animator.SetBool("DashAB1FSM", true);
         ai = state.ai;
         overdrive = state.overdrive;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         
         ai.canMove = true;
         if (!overdrive)
@@ -64,7 +64,7 @@ public class DashAB1FSM : BaseState
 
     }
 
-    public async UniTask Attack()
+    public async UniTaskVoid Attack()
     {
         ai.canMove = false;
         var state = ((FSMBoss1EnemySM)stateMachine);        
@@ -77,11 +77,11 @@ public class DashAB1FSM : BaseState
         state.animator.SetBool("Attacking", true);
         if (overdrive)
         {
-            ai.Maxspeed = speed * 3;
+            ai.maxspeed = speed * 3;
         }
         else
         {
-            ai.Maxspeed = speed * 2;
+            ai.maxspeed = speed * 2;
         }
         float time = 0;
         while (time < 4f)
@@ -90,7 +90,7 @@ public class DashAB1FSM : BaseState
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
             {
                 Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StopDash);
-                ai.Maxspeed = speed;
+                ai.maxspeed = speed;
                 if (overdrive)
                 {
                     Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.AfterDash);
@@ -130,7 +130,7 @@ public class DashAB1FSM : BaseState
 
             await UniTask.Yield();
         }
-        ai.Maxspeed = speed;
+        ai.maxspeed = speed;
         Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StopDash);
         await UniTask.WaitForSeconds(0.2f);
         Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);

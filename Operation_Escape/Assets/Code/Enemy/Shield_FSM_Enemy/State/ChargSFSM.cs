@@ -15,7 +15,7 @@ public class ChargSFSM : BaseState
     {
         var state = (FSMSEnemySM)stateMachine;
         ai = state.ai;
-        speed = ai.Maxspeed;
+        speed = ai.maxspeed;
         Debug.Log("ตั้งท่าเตรียมโจมตี");        
         ai.randomDeviation = false;
         time = 0;
@@ -35,14 +35,14 @@ public class ChargSFSM : BaseState
     {
         var state = (FSMSEnemySM)stateMachine;
         state.canGuard = true;
-        ai.Maxspeed = speed * 2;
+        ai.maxspeed = speed * 2;
         while (time < 2f)
         {
             ai.randomDeviation = false;
             time += Time.deltaTime;
             if (Vector2.Distance(ai.targetTransform.position, ai.position) < 2)
             {
-                ai.Maxspeed = speed;
+                ai.maxspeed = speed;
                 state.cooldown = true;
                 stateMachine.ChangState(state.bashState);
                 return;
@@ -52,7 +52,7 @@ public class ChargSFSM : BaseState
         ai.canMove = false;
         await UniTask.WaitForSeconds(2f);
         ai.randomDeviation = true;
-        ai.Maxspeed = speed;
+        ai.maxspeed = speed;
         stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
     }
 

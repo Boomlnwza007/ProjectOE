@@ -13,22 +13,22 @@ public class CheckDistanceEMFSM : BaseState
         ai = ((FSMMEnemySM)stateMachine).ai;
         ai.canMove = true;
         ai.destination = ai.position;
-
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
+        var state = (FSMMEnemySM)stateMachine;
         ai.destination = ai.targetTransform.position;
 
         distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         if (distance < 2)
         {
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).N1Attack);
+            stateMachine.ChangState(state.N1Attack);
         }
-        else if (distance < 5)  
+        else if (distance >= 5 && !state.cooldown)  
         {
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).Charge);
+            stateMachine.ChangState(state.Charge);
         }
     }
 
