@@ -208,6 +208,10 @@ public class PlayerControl : MonoBehaviour
 
     public void Spawn(Transform spawnPoint)
     {
+        if (spawnPoint = null)
+        {
+            return;
+        }
         gameObject.transform.position = spawnPoint.position;
         playerState.health = playerState.maxHealth;
         playerState.energy = playerState.maxEnergy;

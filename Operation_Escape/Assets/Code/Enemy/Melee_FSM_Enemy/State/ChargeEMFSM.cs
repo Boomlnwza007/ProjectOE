@@ -22,7 +22,6 @@ public class ChargeEMFSM : BaseState
 
         if (!((FSMMEnemySM)stateMachine).cooldown)
         {
-            Debug.Log("ตั้งท่าเตรียมโจมตี");
             Attack(cancellationToken.Token).Forget();
         }
         else
@@ -41,25 +40,55 @@ public class ChargeEMFSM : BaseState
 
         try
         {
-            while (time < 2f)//Edit Time Run 
+            ai.canMove = false;
+            await state.PreAttackN("PreDashAttack", 0.5f);
+            Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
+
+            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, 50, state.raycastMask);
+            foreach (var hit in raycast)
+            {
+                if (hit.collider != null && hit.collider.gameObject != state.gameObject)
+                {
+                    ai.destination = hit.point;
+                    break;
+                }
+                else
+                {
+                    ai.destination = (Vector2)ai.position + dir.normalized * 50;
+                }
+            }
+
+            ai.canMove = true;
+            bool hasAttacked = false;
+            state.animator.isFacing = false;
+
+            while (time < 10 && !hasAttacked)//Edit Time Run 
             {
                 time += Time.deltaTime;
-
-                if (Vector2.Distance(ai.position, ai.targetTransform.position) < 2f)//Edit Distance
+                if (Vector2.Distance(ai.destination,ai.position)<2f && ai.endMove)
                 {
-                    ai.monVelocity = Vector2.zero;
-                    state.Walk();
-                    //await UniTask.WaitForSeconds(0.5f, cancellationToken: token);//Edit time PreAttack
-                    await state.Attack("Attack");
-                    Debug.Log("A1");
-                    state.cooldown = true;
+                    await Attack();
+                    hasAttacked = true;
+                    state.animator.isFacing = true;
                     break;
                 }
 
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
+                foreach (var hit in colliders)
+                {
+                    if (hit.gameObject != state.gameObject)
+                    {
+                        await Attack();
+                        hasAttacked = true;     
+                        state.animator.isFacing = true;
+                        break;
+                    }
+                }
                 token.ThrowIfCancellationRequested();
                 await UniTask.Yield();               
             }
 
+            state.animator.isFacing = true;
             state.Walk();
             ai.canMove = false;
             Debug.Log("Stop");
@@ -72,6 +101,18 @@ public class ChargeEMFSM : BaseState
         {
             Debug.Log("Attack was cancelled.");
         }
+    }
+
+    public async UniTask Attack()
+    {
+        var state = (FSMMEnemySM)stateMachine;
+        ai.canMove = false;
+        ai.monVelocity = Vector2.zero;
+        state.Walk();
+        await state.Attack("DashAttack", 0.4f);
+        state.animator.ChangeAnimationAttack("Normal");
+        state.cooldown = true;
+        Debug.Log("A12");
     }
 
     public override void Exit()

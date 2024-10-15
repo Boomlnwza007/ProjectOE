@@ -33,34 +33,72 @@ public class NormalAttackEMFSM : BaseState
         var state = ((FSMMEnemySM)stateMachine);
         try
         {
-            //Debug.Log("Preparing to attack 1 for 0.5 seconds");
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-            //await state.Attack("Attack");
-            //Debug.Log("Attack 1");
+            state.Run(0.2f);
+            ai.canMove = false;
+            state.animator.isFacing = false;
+            await state.PreAttack("PreAttack", 0.5f);
+            await state.Attack("Attack", 0.3f);
+            if (Distance())
+            {
+                state.animator.ChangeAnimationAttack("Normal");
+                await UniTask.WaitForSeconds(1f); Debug.Log("Far");
+                ai.canMove = true;
+                state.animator.isFacing = true;
+                state.Walk();
+                stateMachine.ChangState(state.CheckDistance);
+                return;
+            }  
+            
+            ai.canMove = true;
+            state.animator.isFacing = true;
+            await UniTask.DelayFrame(1);
 
-            //Debug.Log("Preparing to attack 2 for 0.8 seconds");
-            //wait UniTask.WaitForSeconds(0.8f, cancellationToken: token);
-            await state.Attack("Attack");
-           // Debug.Log("Attack 2");
-
-            //Debug.Log("Preparing to attack 3 for 1.5 seconds");
-            //await UniTask.WaitForSeconds(1.5f, cancellationToken: token);          
-            await state.Attack("Attack");
-           // Debug.Log("Attack 3");
-
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-
+            ai.canMove = false;
+            state.animator.isFacing = false;
+            await state.PreAttack("PreAttack", 0.8f);
+            await state.Attack("Attack", 0.3f);
+            if (Distance())
+            {
+                state.animator.ChangeAnimationAttack("Normal");
+                await UniTask.WaitForSeconds(1f); Debug.Log("Far");
+                ai.canMove = true;
+                state.animator.isFacing = true;
+                state.Walk();
+                stateMachine.ChangState(state.CheckDistance);
+                return;
+            }
 
             ai.canMove = true;
+            state.animator.isFacing = true;
+            await UniTask.DelayFrame(1);
 
+            ai.canMove = false;
+            state.animator.isFacing = false;
+            await state.PreAttack("PreAttack", 1.5f);
+            await state.Attack("Attack", 0.3f);
+            ai.canMove = true;
+            state.animator.isFacing = true;
+
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            ai.canMove = true;
+            state.Walk();
             stateMachine.ChangState(state.CheckDistance);
         }
         catch (OperationCanceledException)
         {
-
             Debug.Log("The attack was canceled.");
-        }      
+            return;
+        }
 
+    }
+
+    public bool Distance()
+    {
+        if (Vector2.Distance(ai.targetTransform.position, ai.position) > 3f)
+        {
+            return true;
+        }
+        return false;
     }
 
     public override void Exit()

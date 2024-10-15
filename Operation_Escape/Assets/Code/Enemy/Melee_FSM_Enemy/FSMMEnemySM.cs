@@ -14,6 +14,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public string stateName;
     private SpriteFlash spriteFlash;
     public EM_Animation animator;
+    public LayerMask raycastMask;
 
     [HideInInspector]
     public WanderEMFSM wanderState;
@@ -131,19 +132,36 @@ public class FSMMEnemySM : StateMachine, IDamageable
         areaEnermy = area;
     }
 
+    public async UniTask PreAttack(string name,float time)
+    {
+        float animationSpeed = 1 / time;
+        animator.animator.speed = animationSpeed;
+        animator.ChangeAnimationAttack(name);
+        await UniTask.WaitForSeconds(time);
+        animator.animator.speed = 1;
+        animator.ChangeAnimationAttack("Normal");
+    }
+
+    public async UniTask PreAttackN(string name, float time)
+    {
+        animator.ChangeAnimationAttack(name);
+        await UniTask.WaitForSeconds(time);
+    }
+
+    public async UniTask Attack(string name, float time)
+    {
+        animator.ChangeAnimationAttack(name);
+        await UniTask.WaitForSeconds(time);
+    }
+    public async UniTask Attack(string name, int time)
+    {
+        animator.ChangeAnimationAttack(name);
+        await UniTask.DelayFrame(time);
+    }
     public async UniTask Attack(string name)
     {
         animator.animator.SetTrigger(name);
         await UniTask.WaitForSeconds(animator.TimePlayer());
-        //Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position,2.5f);
-        //foreach (var hit in colliders)
-        //{
-        //    IDamageable player = hit.GetComponent<IDamageable>();
-        //    if (hit.CompareTag("Player"))
-        //    {
-        //        player.Takedamage(dmg, DamageType.Melee, 0);
-        //    }
-        //}
     }
 
     public void Run(float multiply)

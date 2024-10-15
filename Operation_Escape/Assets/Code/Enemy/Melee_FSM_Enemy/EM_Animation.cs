@@ -8,6 +8,7 @@ public class EM_Animation : MonoBehaviour
     public Rigidbody2D rb;
     public IAiAvoid ai;
     private string currentAnimaton;
+    public bool isFacing = true;
     public float timeplay;
 
     private void Start()
@@ -17,7 +18,10 @@ public class EM_Animation : MonoBehaviour
 
     private void Update()
     {
-        UpdateAnimation();
+        if (isFacing)
+        {
+            UpdateAnimation();
+        }
     }
 
     public void UpdateAnimation()

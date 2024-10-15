@@ -57,6 +57,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     {
         if (!canMove)
         {
+            rb.velocity = Vector2.SmoothDamp(rb.velocity, Vector2.zero, ref velocity, smoothTime);
             return;
         }
 
@@ -94,11 +95,11 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             curSpeed = 0f;
             endMove = true;
         }
-        else if (distanceToTarget < slowDownRadius)
-        {
-            slowMove = true;
-            curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
-        }
+        //else if (distanceToTarget < slowDownRadius)
+        //{
+        //    slowMove = true;
+        //    curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
+        //}
 
         deviationTimer -= Time.deltaTime;
         if (deviationTimer <= 0f)
