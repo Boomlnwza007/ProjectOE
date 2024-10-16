@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class ChargeGun : BaseGun
 {
     public bool charge = false;
     BulletCharge bullet;
+    LaserCharge laser;
+    public GameObject laserUltiPrefab;
+
 
     private void Awake()
     {
@@ -18,11 +22,19 @@ public class ChargeGun : BaseGun
         {
             if (!charge&&firing)
             {
-                charge = true;
-                bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletCharge>();
-                bullet.charging = true;
-                bullet.follow = bulletTranform;
-                Debug.Log("Fire " + bullet.name);
+                if (canUltimate)
+                {
+                    charge = true;
+                    laser = Instantiate(laserUltiPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<LaserCharge>();
+                    laser.bulletTranform = bulletTranform;
+                }
+                else
+                {
+                    charge = true;
+                    bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletCharge>();
+                    bullet.charging = true;
+                    bullet.follow = bulletTranform;
+                }                
             }
         }
     }
@@ -31,7 +43,21 @@ public class ChargeGun : BaseGun
     {
         if (charge)
         {
-            if (bullet != null)
+            if (canUltimate)
+            {
+                //PlayerControl.control.Slow(50);
+                if (Input.GetButtonUp("Fire1"))
+                {
+                    ammo--;
+                    firing = false;
+                    charge = false;
+                    canUltimate = false;
+                    RemoveUltimate();
+                    //bullet.charging = false;
+                    //PlayerControl.control.Slow(0);
+                }
+            }
+            else if (bullet != null)
             {
                 bullet.Charge();
                 PlayerControl.control.Slow(50);
@@ -45,16 +71,14 @@ public class ChargeGun : BaseGun
                     PlayerControl.control.Slow(0);
                 }
             }
-
-
-
-        }
-        
+        }        
     }
 
     public override void Ultimate()
     {
-        throw new System.NotImplementedException();
+        Remove();
+        canUltimate = true;
+        ammo = 1;
     }
 
     public override void Setup()
@@ -75,5 +99,13 @@ public class ChargeGun : BaseGun
             bullet.rb.velocity = bullet.transform.right * bullet.speed;
             PlayerControl.control.Slow(0);
         }        
+    }   
+
+    public override void RemoveUltimate()
+    {
+        firing = false;
+        charge = false;
+        Destroy(laser.gameObject);
+        PlayerControl.control.Slow(0);
     }
 }

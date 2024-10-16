@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class HandGun : BaseGun
 {
+    public GameObject bulletUltiPrefab;
     public override void Fire()
     {
         ammo--;
-        BaseBullet bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
         if (canUltimate)
         {
-            bullet.damage = 50;
-            bullet.speed = 25;
-            bullet.transform.localScale *= 4;
+            BaseBullet bullet = Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
             if (ammo <= 0)
             {
                 var playerCombat = PlayerControl.control.playerCombat;
                 playerCombat.ReUltimate();
             }
         }
+        else
+        {
+            BaseBullet bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
 
+        }
+
+
+        firing = false;
+    }
+
+    public override void RemoveUltimate()
+    {
         firing = false;
     }
 

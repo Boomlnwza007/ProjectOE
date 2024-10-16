@@ -185,6 +185,7 @@ public class PlayerCombat : MonoBehaviour
     public void ReUltimate()
     {
         gunList[currentGun].canUltimate = false;
+        gunList[currentGun].RemoveUltimate();
         energy.canGetUltimateEnergy = true;
         energy.ultimateEnergy = 0;
         UltiTime = 0;

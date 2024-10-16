@@ -457,6 +457,7 @@ MonoBehaviour:
   canUltimate: 0
   timeUltimate: 5
   charge: 0
+  laserUltiPrefab: {fileID: 3000801688261200796, guid: a0026d6417629a144811cca2a1f27266, type: 3}
 --- !u!1 &8567710796200927911
 GameObject:
   m_ObjectHideFlags: 0

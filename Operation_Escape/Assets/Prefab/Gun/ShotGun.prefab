@@ -345,6 +345,7 @@ MonoBehaviour:
   firing: 0
   canUltimate: 0
   timeUltimate: 5
+  bulletUltiPrefab: {fileID: 3888396136867698908, guid: 8749401094c15eb478be69f9b8b08869, type: 3}
 --- !u!1 &6287998774151085065
 GameObject:
   m_ObjectHideFlags: 0
