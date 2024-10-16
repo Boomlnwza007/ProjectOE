@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 35650
+  m_InstanceId: 108950
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8428,7 +8428,7 @@ MonoBehaviour:
   vertical: 0
   canCombat: 1
   rb: {fileID: 0}
-  speed: 8
+  speed: 7
   slowSpeed: 0
   dodgeMaxSpeed: 65
   coolDownDodge: 1.5
