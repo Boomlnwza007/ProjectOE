@@ -9,6 +9,7 @@ public class EM_Animation : MonoBehaviour
     public IAiAvoid ai;
     private string currentAnimaton;
     public bool isFacing = true;
+    public bool isFacingRight = true;
     public float timeplay;
 
     private void Start()
@@ -34,10 +35,12 @@ public class EM_Animation : MonoBehaviour
         if (isFacingRight)
         {
             animator.SetFloat("horizon", 1);
+            this.isFacingRight = true;
         }
         else
         {
             animator.SetFloat("horizon", -1);
+            this.isFacingRight = false;
         }
 
         if (rb.velocity != Vector2.zero && !ai.endMove)

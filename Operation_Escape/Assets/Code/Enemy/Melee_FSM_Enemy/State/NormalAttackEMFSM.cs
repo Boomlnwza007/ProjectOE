@@ -34,10 +34,13 @@ public class NormalAttackEMFSM : BaseState
         try
         {
             state.Run(0.2f);
+
             ai.canMove = false;
             state.animator.isFacing = false;
             await state.PreAttack("PreAttack", 0.5f);
+            Dash();
             await state.Attack("Attack", 0.3f);
+            state.rb.velocity = Vector2.zero;
             if (Distance())
             {
                 state.animator.ChangeAnimationAttack("Normal");
@@ -47,8 +50,8 @@ public class NormalAttackEMFSM : BaseState
                 state.Walk();
                 stateMachine.ChangState(state.CheckDistance);
                 return;
-            }  
-            
+            }
+
             ai.canMove = true;
             state.animator.isFacing = true;
             await UniTask.DelayFrame(1);
@@ -56,7 +59,9 @@ public class NormalAttackEMFSM : BaseState
             ai.canMove = false;
             state.animator.isFacing = false;
             await state.PreAttack("PreAttack", 0.8f);
+            Dash();
             await state.Attack("Attack", 0.3f);
+            state.rb.velocity = Vector2.zero;
             if (Distance())
             {
                 state.animator.ChangeAnimationAttack("Normal");
@@ -75,7 +80,9 @@ public class NormalAttackEMFSM : BaseState
             ai.canMove = false;
             state.animator.isFacing = false;
             await state.PreAttack("PreAttack", 1.5f);
+            Dash();
             await state.Attack("Attack", 0.3f);
+            state.rb.velocity = Vector2.zero;
             ai.canMove = true;
             state.animator.isFacing = true;
 
@@ -104,6 +111,47 @@ public class NormalAttackEMFSM : BaseState
     public override void Exit()
     {
          cancellationTokenSource.Cancel();
+    }
+
+    public async UniTask Attack(float tPreA ,float tA)
+    {
+        var state = ((FSMMEnemySM)stateMachine);
+        ai.canMove = false;
+        state.animator.isFacing = false;
+        await state.PreAttack("PreAttack", tPreA);
+        Dash();
+        await state.Attack("Attack", tA);
+        state.rb.velocity = Vector2.zero;
+        if (Distance())
+        {
+            state.animator.ChangeAnimationAttack("Normal");
+            await UniTask.WaitForSeconds(1f); Debug.Log("Far");
+            ai.canMove = true;
+            state.animator.isFacing = true;
+            state.Walk();
+            stateMachine.ChangState(state.CheckDistance);
+            return;
+        }
+
+        ai.canMove = true;
+        state.animator.isFacing = true;
+        await UniTask.DelayFrame(1);
+    }
+
+    public void Dash()
+    {
+        var state = ((FSMMEnemySM)stateMachine);
+        Vector2 dir = Vector2.zero;
+        if (state.animator.isFacingRight)
+        {
+            dir = Vector2.right;
+        }
+        else
+        {
+            dir = Vector2.left;
+        }
+        state.rb.AddForce(dir * state.forcePush, ForceMode2D.Impulse);
+
     }
 
 }

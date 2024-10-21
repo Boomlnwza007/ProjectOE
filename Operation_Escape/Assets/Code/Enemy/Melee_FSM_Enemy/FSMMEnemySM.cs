@@ -17,6 +17,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public LayerMask raycastMaskWay;
     public LayerMask raycastMask;
     public float jumpLength = 20;
+    public float forcePush = 100;
 
     [HideInInspector]
     public WanderEMFSM wanderState;
