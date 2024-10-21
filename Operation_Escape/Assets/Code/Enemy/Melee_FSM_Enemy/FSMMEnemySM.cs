@@ -14,7 +14,9 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public string stateName;
     private SpriteFlash spriteFlash;
     public EM_Animation animator;
+    public LayerMask raycastMaskWay;
     public LayerMask raycastMask;
+    public float jumpLength = 20;
 
     [HideInInspector]
     public WanderEMFSM wanderState;

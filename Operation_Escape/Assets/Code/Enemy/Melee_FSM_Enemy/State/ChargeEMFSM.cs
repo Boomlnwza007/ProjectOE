@@ -43,20 +43,31 @@ public class ChargeEMFSM : BaseState
             ai.canMove = false;
             await state.PreAttackN("PreDashAttack", 0.5f);
             Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-
-            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, 50, state.raycastMask);
-            foreach (var hit in raycast)
+            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.jumpLength, state.raycastMaskWay);
+            if (raycast.Length > 0)
             {
-                if (hit.collider != null && hit.collider.gameObject != state.gameObject)
+                foreach (var hit in raycast)
                 {
-                    ai.destination = hit.point;
-                    break;
-                }
-                else
-                {
-                    ai.destination = (Vector2)ai.position + dir.normalized * 50;
+                    if (hit.collider != null && hit.collider.gameObject != state.gameObject)
+                    {
+                        //Debug.Log(hit.collider.name + " hit");
+                        ai.destination = hit.point;
+                        break;
+                    }
+                    else
+                    {
+                        ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
+                        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);  
+                        //Debug.Log("no hit");                       
+                    }
                 }
             }
+            else
+            {
+                ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
+                //Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);
+            }
+
 
             ai.canMove = true;
             bool hasAttacked = false;
@@ -65,8 +76,9 @@ public class ChargeEMFSM : BaseState
             while (time < 10 && !hasAttacked)//Edit Time Run 
             {
                 time += Time.deltaTime;
-                if (Vector2.Distance(ai.destination,ai.position)<2f && ai.endMove)
+                if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
                 {
+                    //Debug.Log("ai.endMove");
                     await Attack();
                     hasAttacked = true;
                     state.animator.isFacing = true;
@@ -78,6 +90,7 @@ public class ChargeEMFSM : BaseState
                 {
                     if (hit.gameObject != state.gameObject)
                     {
+                        Debug.Log(hit.name + "hit 2 ");
                         await Attack();
                         hasAttacked = true;     
                         state.animator.isFacing = true;
