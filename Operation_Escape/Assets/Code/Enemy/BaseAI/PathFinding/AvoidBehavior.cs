@@ -20,6 +20,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public GameObject playerGameObject { get; private set; }
     public Vector2 playerVelocity { get; private set; }
     public Vector2 monVelocity { get { return rb.velocity; } set { rb.velocity = value; } }
+    private Vector3 curDestination;
 
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
@@ -46,6 +47,15 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
         deviationTimer = deviationChangeInterval;
         currentDeviationAngle = Random.Range(-deviationAngle, deviationAngle);
 
+    }
+
+    private void Update()
+    {
+        if (curDestination != destination)
+        {
+            endMove = false;
+            curDestination = destination;
+        }
     }
 
     private void FixedUpdate()

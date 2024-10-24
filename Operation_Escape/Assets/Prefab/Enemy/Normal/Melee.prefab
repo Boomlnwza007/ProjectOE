@@ -680,6 +680,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 704
   jumpLength: 20
+  forcePush: 100
 --- !u!114 &3171470274902600665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,6 +766,7 @@ MonoBehaviour:
   animator: {fileID: 5011779000538463124}
   rb: {fileID: 8775170577091479340}
   isFacing: 1
+  isFacingRight: 1
   timeplay: 0
 --- !u!1 &5458121437017106546
 GameObject:

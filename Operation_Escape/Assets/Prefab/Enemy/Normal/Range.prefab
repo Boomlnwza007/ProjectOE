@@ -117,7 +117,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 49318
+  m_InstanceId: -46882
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -315,6 +315,14 @@ MonoBehaviour:
   fireCooldown: 1
   areaEnermy: {fileID: 0}
   animator: {fileID: 8165175477225224536}
+  raycastMaskWay:
+    serializedVersion: 2
+    m_Bits: 64
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 704
+  forcePush: 100
+  jumpLength: 7
   radius: 13
   offset: 3
   stateName: 
@@ -402,6 +410,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3147429572110553193}
   rb: {fileID: 8517935894679314439}
+  isFacing: 1
+  isFacingRight: 1
+  timeplay: 0
 --- !u!1 &1779229937017213570
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +438,7 @@ Transform:
   m_GameObject: {fileID: 1779229937017213570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.213, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

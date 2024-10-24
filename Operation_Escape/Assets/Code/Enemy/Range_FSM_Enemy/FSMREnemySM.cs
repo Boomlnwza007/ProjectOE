@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,10 @@ public class FSMREnemySM : StateMachine, IDamageable
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
     public ER_Animation animator;
+    public LayerMask raycastMaskWay;
+    public LayerMask raycastMask;
+    public float forcePush = 100;
+    public float jumpLength= 3;
 
     [Header("circle")]
     private float timeCircle;
@@ -91,6 +96,37 @@ public class FSMREnemySM : StateMachine, IDamageable
         Vector2 predictedPosition = (Vector2)target.position + (Vector2)target.GetComponent<Rigidbody2D>().velocity * timeToTarget;
 
         return predictedPosition;
+    }
+
+    public async UniTask PreAttack(string name, float time)
+    {
+        float animationSpeed = 1 / time;
+        animator.animator.speed = animationSpeed;
+        animator.ChangeAnimationAttack(name);
+        await UniTask.WaitForSeconds(time);
+        animator.animator.speed = 1;        
+    }
+
+    public async UniTask PreAttackN(string name, float time)
+    {
+        animator.ChangeAnimationAttack(name);
+        await UniTask.WaitForSeconds(time);
+    }
+
+    public async UniTask Attack(string name, float time)
+    {
+        animator.ChangeAnimationAttack(name);
+        await UniTask.WaitForSeconds(time);
+    }
+    public async UniTask Attack(string name, int time)
+    {
+        animator.ChangeAnimationAttack(name);
+        await UniTask.DelayFrame(time);
+    }
+    public async UniTask Attack(string name)
+    {
+        animator.animator.SetTrigger(name);
+        await UniTask.WaitForSeconds(animator.TimePlayer());
     }
 
     public void FireClose()
@@ -175,5 +211,17 @@ public class FSMREnemySM : StateMachine, IDamageable
     public override void SetCombatPhase(AreaEnermy area)
     {
         areaEnermy = area;
+    }
+
+    public void Run(float multiply)
+    {
+        ai.maxspeed *= multiply;
+        animator.animator.speed *= multiply;
+    }
+
+    public void Walk()
+    {
+        ai.maxspeed = Speed;
+        animator.animator.speed = 1;
     }
 }
