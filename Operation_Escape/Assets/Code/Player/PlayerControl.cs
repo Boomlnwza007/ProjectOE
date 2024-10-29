@@ -174,6 +174,13 @@ public class PlayerControl : MonoBehaviour
 
         var currentGun = playerCombat.gunList[playerCombat.currentGun];
 
+        if (bulletBar.ultimate != currentGun.canUltimate)
+        {
+            bulletBar.ultimate = currentGun.canUltimate;
+            bulletBar.ChangPrefab(bulletBar.ultimate);
+            Debug.Log("Ultimate Ui " + bulletBar.ultimate);
+        }
+
         if (currentGun.ammo != bulletBar.value)
         {
             bulletBar.SetValue(currentGun.ammo);
@@ -182,7 +189,7 @@ public class PlayerControl : MonoBehaviour
         if (bulletBar.obj.nameItem[bulletBar.curgun] != currentGun.name)
         {
             bulletBar.SetUp(currentGun.name,false);
-        }
+        }        
     }
 
     public void EnableInput(bool enable)

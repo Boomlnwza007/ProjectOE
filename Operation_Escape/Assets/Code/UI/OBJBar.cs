@@ -10,6 +10,7 @@ public class OBJBar : MonoBehaviour
     public ID objUl;
     [HideInInspector]public int curgun;
     public GameObject bar;
+    public bool ultimate;
 
     private void Update()
     {
@@ -54,7 +55,9 @@ public class OBJBar : MonoBehaviour
         }
         else
         {
-           Instantiate(obj.Item[curgun], spawnBar);
+            var itemList = ultimate ? objUl.Item : obj.Item;
+            Instantiate(itemList[curgun], spawnBar);
+            //Instantiate(obj.Item[curgun], spawnBar);
         }
     }   
 
