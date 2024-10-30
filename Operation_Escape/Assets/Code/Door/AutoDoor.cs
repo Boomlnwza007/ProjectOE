@@ -30,18 +30,18 @@ public class AutoDoor : MonoBehaviour
     {
         if (aniDoor != null)
         {
-            door.Open();
+            aniDoor.Openning();
         }
-        aniDoor.Openning();
+        door.Open();
     }
 
     public void Close()
     {
         if (aniDoor != null)
         {
-            door.Close();
+            aniDoor.Closesing();
         }
-        aniDoor.Closesing();
+        door.Close();
     }
 
     public void Unlock()
@@ -60,6 +60,7 @@ public class AutoDoor : MonoBehaviour
         {
             aniDoor.Lock();
         }
+
         if (area != null)
         {
             area.Lock();
@@ -93,6 +94,9 @@ public class AutoDoor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Close();
+        if (!locked)
+        {
+            Close();
+        }
     }
 }

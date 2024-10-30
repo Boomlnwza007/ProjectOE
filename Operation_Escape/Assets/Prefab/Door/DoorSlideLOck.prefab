@@ -510,7 +510,6 @@ GameObject:
   - component: {fileID: 2890244399439824939}
   - component: {fileID: 2737638267092153965}
   - component: {fileID: 1797237683612347395}
-  - component: {fileID: 8779960003812967954}
   - component: {fileID: 86168620634772445}
   m_Layer: 6
   m_Name: DoorSlideLOck
@@ -551,7 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1797237683612347395}
-  aniDoor: {fileID: 8779960003812967954}
+  aniDoor: {fileID: 86168620634772445}
   locked: 0
   key: 0
   plateSC: {fileID: 317149262169284259}
@@ -618,27 +617,6 @@ MonoBehaviour:
   speed: 7
   sizeDoor: 3
   isLR: 1
---- !u!114 &8779960003812967954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9157361280929595113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b81bb5cc18b183459c3f90a98e7f8a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteDoor:
-  - {fileID: 4278695624336734005}
-  - {fileID: 1965161489034140563}
-  spriteDoorLock:
-  - {fileID: 21300000, guid: 40014bed5c325734d954833d80a15c32, type: 3}
-  - {fileID: 21300000, guid: d0f7ead3c6826144982229cf28443b48, type: 3}
-  spriteDoorUnlock:
-  - {fileID: 21300000, guid: 2a74fd8a9b0eaab4ea381245dc0a5644, type: 3}
-  - {fileID: 21300000, guid: 921adc40e5c55ad4b99913b1931bcc29, type: 3}
 --- !u!114 &86168620634772445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,7 +632,23 @@ MonoBehaviour:
   spriteDoor:
   - {fileID: 4278695624336734005}
   - {fileID: 1965161489034140563}
-  spriteDoorLock_L: []
-  spriteDoorLock_R: []
-  spriteDoorUnlock_L: []
-  spriteDoorUnlock_R: []
+  spriteDoorLock_L:
+  - {fileID: -712602129, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  - {fileID: 1651780502, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  - {fileID: 1010657274, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  - {fileID: 1483140640, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  spriteDoorLock_R:
+  - {fileID: 1875753342, guid: d9d1600c59127594584df713780c933d, type: 3}
+  - {fileID: 754039176, guid: d9d1600c59127594584df713780c933d, type: 3}
+  - {fileID: -622900125, guid: d9d1600c59127594584df713780c933d, type: 3}
+  - {fileID: 1856697827, guid: d9d1600c59127594584df713780c933d, type: 3}
+  spriteDoorUnlock_L:
+  - {fileID: -712602129, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  - {fileID: 1651780502, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  - {fileID: 1010657274, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  - {fileID: 1483140640, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
+  spriteDoorUnlock_R:
+  - {fileID: 1875753342, guid: d9d1600c59127594584df713780c933d, type: 3}
+  - {fileID: 754039176, guid: d9d1600c59127594584df713780c933d, type: 3}
+  - {fileID: -622900125, guid: d9d1600c59127594584df713780c933d, type: 3}
+  - {fileID: 1856697827, guid: d9d1600c59127594584df713780c933d, type: 3}

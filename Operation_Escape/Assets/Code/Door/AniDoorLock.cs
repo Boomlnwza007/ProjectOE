@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 
 public class AniDoorLock : TypeAniDoor
 {
+    public int speedFrame = 20;
     [SerializeField] private SpriteRenderer[] spriteDoor;
     private Sprite[] spriteDoorOri_L;
     private Sprite[] spriteDoorOri_R;
@@ -23,29 +24,31 @@ public class AniDoorLock : TypeAniDoor
 
     public override void Openning()
     {
-        UniTask.WhenAll(Open(spriteDoor[0], spriteDoorOri_L), Open(spriteDoor[1], spriteDoorOri_R)).Forget();
+        Open().Forget();
     }
 
-    public async UniTask Open(SpriteRenderer spriteDoor, Sprite[] spriteDoorNe)
+    public async UniTask Open()
     {
-        for (int i = 0; i < spriteDoorNe.Length; i++)
+        for (int i = 0; i < spriteDoorOri_L.Length; i++)
         {
-            spriteDoor.sprite = spriteDoorNe[i];
-            await UniTask.DelayFrame(10);
+            spriteDoor[0].sprite = spriteDoorOri_L[i];
+            spriteDoor[1].sprite = spriteDoorOri_R[i];
+            await UniTask.DelayFrame(speedFrame);
         }
     }
 
     public override void Closesing()
     {
-        UniTask.WhenAll(close(spriteDoor[0], spriteDoorOri_L), close(spriteDoor[1], spriteDoorOri_R)).Forget();
+        Close().Forget();
     }
 
-    public async UniTask close(SpriteRenderer spriteDoor, Sprite[] spriteDoorNe)
+    public async UniTask Close()
     {
-        for (int i = spriteDoorNe.Length-1; i >= 0; i--)
+        for (int i = spriteDoorOri_L.Length-1; i >=0 ; i--)
         {
-            spriteDoor.sprite = spriteDoorNe[i];
-            await UniTask.DelayFrame(10);
+            spriteDoor[0].sprite = spriteDoorOri_L[i];
+            spriteDoor[1].sprite = spriteDoorOri_R[i];
+            await UniTask.DelayFrame(speedFrame);
         }
     }
 
@@ -53,11 +56,15 @@ public class AniDoorLock : TypeAniDoor
     {
         spriteDoorOri_L = spriteDoorLock_L;
         spriteDoorOri_R = spriteDoorLock_R;
+        spriteDoor[0].sprite = spriteDoorOri_L[0];
+        spriteDoor[1].sprite = spriteDoorOri_R[0];
     }
 
     public override void UnLock()
     {
         spriteDoorOri_L = spriteDoorUnlock_L;
         spriteDoorOri_R = spriteDoorUnlock_R;
+        spriteDoor[0].sprite = spriteDoorOri_L[0];
+        spriteDoor[1].sprite = spriteDoorOri_R[0];
     }
 }

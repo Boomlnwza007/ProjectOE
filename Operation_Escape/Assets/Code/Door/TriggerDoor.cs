@@ -8,12 +8,15 @@ public class TriggerDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        door.Close();
-        door.Lock();
-        if (door.area != null)
+        if (!door.locked)
         {
-            door.area.hasPlayer = true;
-        }
+            door.Close();
+            door.Lock();
+            if (door.area != null)
+            {
+                door.area.hasPlayer = true;
+            }
+        }        
     }
 
 }
