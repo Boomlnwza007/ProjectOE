@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5001837357462073203}
   - component: {fileID: 1598415747218189492}
   - component: {fileID: 6156291694624543428}
+  - component: {fileID: 1737859693994317277}
   m_Layer: 6
   m_Name: DoorSlide
   m_TagString: Untagged
@@ -134,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 6156291694624543428}
+  aniDoor: {fileID: 1737859693994317277}
   locked: 0
   key: 0
   plateSC: {fileID: 64931353988158012}
@@ -200,6 +202,27 @@ MonoBehaviour:
   speed: 7
   sizeDoor: 3
   isLR: 1
+--- !u!114 &1737859693994317277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701135832979156320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b81bb5cc18b183459c3f90a98e7f8a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteDoor:
+  - {fileID: 1961333527660515264}
+  - {fileID: 789951252490341602}
+  spriteDoorLock:
+  - {fileID: 21300000, guid: 40014bed5c325734d954833d80a15c32, type: 3}
+  - {fileID: 21300000, guid: d0f7ead3c6826144982229cf28443b48, type: 3}
+  spriteDoorUnlock:
+  - {fileID: 21300000, guid: 2a74fd8a9b0eaab4ea381245dc0a5644, type: 3}
+  - {fileID: 21300000, guid: 921adc40e5c55ad4b99913b1931bcc29, type: 3}
 --- !u!1 &1966412475956870893
 GameObject:
   m_ObjectHideFlags: 0
