@@ -97,4 +97,12 @@ public class AreaEnermy : MonoBehaviour
     {
         enemy.Remove(_enemy);
     }
+
+    public void Lock()
+    {
+        foreach (var door in door)
+        {
+            door.LockOn();
+        }
+    }
 }

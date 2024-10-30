@@ -26,6 +26,16 @@ public class AutoDoor : MonoBehaviour
         locked = false;
     }
 
+    public void Lock()
+    {
+        area.Lock();
+    }
+
+    public void LockOn()
+    {
+        locked = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (locked)
