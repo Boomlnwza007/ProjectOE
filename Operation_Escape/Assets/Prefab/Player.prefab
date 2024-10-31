@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 37248
+  m_InstanceId: 146358
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8253,6 +8253,7 @@ GameObject:
   - component: {fileID: 3491397946396980606}
   - component: {fileID: 8529641966930444737}
   - component: {fileID: 6778737011727104026}
+  - component: {fileID: 3186234886009120841}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -8524,6 +8525,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3186234886009120841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152304519124941005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ddc63746e5793409b0cd37b2406775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChangGun: {fileID: 0}
+  gunFail: {fileID: 0}
+  ultimateOn: {fileID: 0}
+  ultimateOff: {fileID: 0}
+  reload: {fileID: 0}
+  melee: {fileID: 0}
+  dash: {fileID: 0}
+  walk: {fileID: 0}
 --- !u!1 &8175531228837757456
 GameObject:
   m_ObjectHideFlags: 0
