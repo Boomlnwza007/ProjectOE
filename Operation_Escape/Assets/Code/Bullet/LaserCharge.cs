@@ -57,7 +57,7 @@ public class LaserCharge : MonoBehaviour
             laserUltiPrefab.endWidth = Mathf.Lerp(1f, 2f, t);
             laserUltiPrefab.endWidth = Mathf.Lerp(1f, 2f, t);
             startLaser.transform.localScale = Vector3.Lerp(new Vector3(5, 5, 0),new Vector3(9, 9, 0), t);
-            offset = Mathf.Lerp(0f, 2f, t);
+            offset = Mathf.Lerp(0f, 1f, t);
             dmgUl = (int)Mathf.Lerp(startDmg, maxDmgUl, t);
         }
 
@@ -80,6 +80,7 @@ public class LaserCharge : MonoBehaviour
                 }
             }
         }
+
         if (Physics2D.Raycast(startLaser.transform.position, bulletTranform.transform.right, laserDistance, ShootLayer))
         {
             RaycastHit2D _hit = Physics2D.Raycast(startLaser.transform.position, bulletTranform.transform.right, laserDistance, ShootLayer);

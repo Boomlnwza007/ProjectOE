@@ -85,14 +85,13 @@ public class PlayerCombat : MonoBehaviour
             HandleFire();
         }
 
-        if (Input.GetButtonDown("Reload") && canReload)
+        if (Input.GetButtonDown("Reload") && canReload && !gunList[currentGun].canUltimate)
         {
             Reload();
         }
 
         if (Input.GetButton("Ultimate") && !gunList[currentGun].canUltimate && energy.ultimateEnergy == 10 && canReload)
         {
-            canReload = false;
             energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
             Debug.Log("Ultimate");
@@ -191,7 +190,6 @@ public class PlayerCombat : MonoBehaviour
         energy.ultimateEnergy = 0;
         UltiTime = 0;
         gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
-        canReload = true;
     }
 
     public void Reload()
@@ -225,6 +223,7 @@ public class PlayerCombat : MonoBehaviour
     {
         currentGun = gunList.Count;
         gunList.Add(gun);
+        aimPoint.localPosition = new Vector3(gunList[currentGun].aimDistance, 0, 0);
         gunList[currentGun].bulletTranform = aimPoint;
         gunList[currentGun].Setup();
         EquipGun(currentGun);
@@ -318,6 +317,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         currentGun = index;
+        aimPoint.localPosition = new Vector3(gunList[currentGun].aimDistance, 0, 0);
         gunList[currentGun].bulletTranform = aimPoint;
         canFire = true;
         canReload = true;
