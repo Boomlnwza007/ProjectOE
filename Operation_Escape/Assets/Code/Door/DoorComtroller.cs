@@ -13,7 +13,7 @@ public class DoorComtroller : MonoBehaviour
         {
             if (PlayerControl.control.key.Contains(key))
             {
-                door.locked = false;
+                door.Unlock();
             }
         }
     }
