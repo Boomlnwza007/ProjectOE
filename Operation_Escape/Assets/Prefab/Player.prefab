@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 108950
+  m_InstanceId: 37248
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -7195,9 +7195,10 @@ MonoBehaviour:
   spawnBar: {fileID: 4062585208610903050}
   value: 0
   obj: {fileID: 11400000, guid: bb85ff18970069f4fb876e5b5ac954f9, type: 2}
-  objUl: {fileID: 0}
+  objUl: {fileID: 11400000, guid: fa3883badaeb24a4e88a6435ce716eeb, type: 2}
   curgun: 0
   bar: {fileID: 6946206738789570545}
+  ultimate: 0
 --- !u!1 &7095220157485924617
 GameObject:
   m_ObjectHideFlags: 0
