@@ -215,15 +215,14 @@ public class PlayerControl : MonoBehaviour
 
     public void Spawn(Transform spawnPoint)
     {
-        if (spawnPoint = null)
+        if (spawnPoint != null)
         {
-            return;
-        }
-        gameObject.transform.position = spawnPoint.position;
-        playerState.health = playerState.maxHealth;
-        playerState.energy = playerState.maxEnergy;
-        playerState.ultimateEnergy = 0;
-        gameObject.SetActive(true);
+            gameObject.transform.position = spawnPoint.position;
+            playerState.health = playerState.maxHealth;
+            playerState.energy = playerState.maxEnergy;
+            playerState.ultimateEnergy = 0;
+            gameObject.SetActive(true);
+        }    
     }
 
     public void ShowGameOver()

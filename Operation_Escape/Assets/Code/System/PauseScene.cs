@@ -129,8 +129,20 @@ public class PauseScene : MonoBehaviour
             }
 
             area.ResetMon();
-        }        
-        PlayerControl.control.Spawn(spawnPoint);
+        }
+
+        if (spawnPoint != null)
+        {
+            Debug.Log(1);
+            PlayerControl.control.Spawn(spawnPoint);
+        }
+        else
+        {
+            Debug.Log(2);
+            PlayerControl.control.Spawn(firstSpawn);
+            spawnPoint = firstSpawn;
+
+        }
         yield return new WaitForSeconds(1f);
         retrying = false;
         ControlScene.scene.LoadScene = false;
