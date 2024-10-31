@@ -36,6 +36,8 @@ public class HandGun : BaseGun
         ammo = maxAmmo;
         firing = true;
         fireRate = 0;
+        SetUpbulletTranform();
+
     }
 
     public override void Ultimate()

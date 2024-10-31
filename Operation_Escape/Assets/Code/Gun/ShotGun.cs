@@ -34,6 +34,7 @@ public class ShotGun : BaseGun
         ammo = maxAmmo;
         firing = true;
         fireRate = 0;
+        SetUpbulletTranform();
     }
 
     public override void Ultimate()

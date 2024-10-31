@@ -9,6 +9,8 @@ public abstract class BaseGun : MonoBehaviour
     public GameObject bulletPrefab;
     public Sprite iconGun;
     public Transform bulletTranform;
+    public Transform aimTranform;
+    public float aimDistance;
     [HideInInspector]public float fireRate;
     public float timeReload;
     public float maxFireRate;
@@ -25,6 +27,12 @@ public abstract class BaseGun : MonoBehaviour
         ammo = maxAmmo;
         firing = true;
         fireRate = 0;
+    }
+
+    public void SetUpbulletTranform()
+    {
+        aimDistance = Vector2.Distance(gameObject.transform.position, aimTranform.position);
+        Debug.Log(aimDistance);
     }
 
     public abstract void Fire();

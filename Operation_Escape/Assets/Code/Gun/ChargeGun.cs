@@ -89,6 +89,8 @@ public class ChargeGun : BaseGun
         ammo = maxAmmo;
         firing = true;
         fireRate = 0;
+        SetUpbulletTranform();
+
     }
 
     public override void Remove()
