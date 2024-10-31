@@ -448,6 +448,7 @@ MonoBehaviour:
   iconGun: {fileID: 21300000, guid: 26dda8d265ce32b4f98a64043e66e44a, type: 3}
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 8247812860874605738}
+  aimDistance: 0
   fireRate: 0
   timeReload: 3
   maxFireRate: 0.7
@@ -460,6 +461,7 @@ MonoBehaviour:
   timeUltimate: 5
   charge: 0
   laserUltiPrefab: {fileID: 3000801688261200796, guid: a0026d6417629a144811cca2a1f27266, type: 3}
+  ChangeEffPrefab: {fileID: 4468603144254925480, guid: d8cfef896484f2d42b4484a308bf80fd, type: 3}
 --- !u!1 &7100839272305897412
 GameObject:
   m_ObjectHideFlags: 0

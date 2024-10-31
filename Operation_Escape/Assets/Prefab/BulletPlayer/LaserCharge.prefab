@@ -73,9 +73,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 801742251
-  m_SortingLayer: 1
-  m_SortingOrder: -1
+  m_SortingLayerID: 356601471
+  m_SortingLayer: 5
+  m_SortingOrder: 0
   m_Positions:
   - {x: 1.8, y: 0, z: 0}
   - {x: 13.9, y: 0, z: 0}
@@ -160,8 +160,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   dpsDamage: 1
-  charge: 0
-  canUltimate: 0
   bulletTranform: {fileID: 0}
 --- !u!1 &5572155206249119768
 GameObject:

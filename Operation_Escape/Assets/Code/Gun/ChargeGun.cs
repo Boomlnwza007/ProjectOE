@@ -9,6 +9,9 @@ public class ChargeGun : BaseGun
     BulletCharge bullet;
     LaserCharge laser;
     public GameObject laserUltiPrefab;
+    public GameObject ChangeEffPrefab;
+    private GameObject ChangeEff;
+
 
 
     private void Awake()
@@ -34,7 +37,8 @@ public class ChargeGun : BaseGun
                     bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletCharge>();
                     bullet.charging = true;
                     bullet.follow = bulletTranform;
-                }                
+                    ChangeEff = Instantiate(ChangeEffPrefab, bulletTranform.position, bulletTranform.rotation, bulletTranform);
+                }
             }
         }
     }
@@ -55,6 +59,7 @@ public class ChargeGun : BaseGun
                     canUltimate = false;
                     RemoveUltimate();
                     playerCombat.ReUltimate();
+
                     //bullet.charging = false;
                     //PlayerControl.control.Slow(0);
                 }
@@ -71,6 +76,7 @@ public class ChargeGun : BaseGun
                     bullet.charging = false;
                     bullet.rb.velocity = bullet.transform.right * bullet.speed;
                     PlayerControl.control.Slow(0);
+                    Destroy(ChangeEff);
                 }
             }
         }        

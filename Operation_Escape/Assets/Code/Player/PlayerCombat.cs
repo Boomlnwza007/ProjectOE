@@ -223,9 +223,9 @@ public class PlayerCombat : MonoBehaviour
     {
         currentGun = gunList.Count;
         gunList.Add(gun);
+        gunList[currentGun].Setup();
         aimPoint.localPosition = new Vector3(gunList[currentGun].aimDistance, 0, 0);
         gunList[currentGun].bulletTranform = aimPoint;
-        gunList[currentGun].Setup();
         EquipGun(currentGun);
     }
 
