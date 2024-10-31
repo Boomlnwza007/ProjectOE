@@ -62,6 +62,9 @@ TagManager:
   - name: Player
     uniqueID: 767578383
     locked: 0
+  - name: Bullet
+    uniqueID: 356601471
+    locked: 0
   - name: EffectOn
     uniqueID: 4172289957
     locked: 0
