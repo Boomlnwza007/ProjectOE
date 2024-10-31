@@ -83,6 +83,7 @@ public class AutoDoor : MonoBehaviour
             if (PlayerControl.control.key.Contains(key))
             {
                 locked = false;
+                Unlock();
                 Open();
             }
         }
