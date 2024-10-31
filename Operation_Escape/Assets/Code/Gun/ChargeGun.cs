@@ -48,11 +48,13 @@ public class ChargeGun : BaseGun
                 //PlayerControl.control.Slow(50);
                 if (Input.GetButtonUp("Fire1"))
                 {
+                    var playerCombat = PlayerControl.control.playerCombat;
                     ammo--;
                     firing = false;
                     charge = false;
                     canUltimate = false;
                     RemoveUltimate();
+                    playerCombat.ReUltimate();
                     //bullet.charging = false;
                     //PlayerControl.control.Slow(0);
                 }

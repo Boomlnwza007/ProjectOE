@@ -11,6 +11,11 @@ public class ShotGun : BaseGun
         if (canUltimate)
         {
             Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation);
+            if (ammo <= 0)
+            {
+                var playerCombat = PlayerControl.control.playerCombat;
+                playerCombat.ReUltimate();
+            }
         }
         else
         {

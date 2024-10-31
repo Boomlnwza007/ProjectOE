@@ -20,7 +20,6 @@ public class HandGun : BaseGun
         else
         {
             BaseBullet bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
-
         }
 
 
