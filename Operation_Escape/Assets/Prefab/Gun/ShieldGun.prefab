@@ -208,7 +208,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 16f81660107e5994d9cbaa0ba947b28a, type: 3}
-  m_Color: {r: 0.86524314, g: 0.5050285, b: 0.9150943, a: 1}
+  m_Color: {r: 0.51607454, g: 0.9137255, b: 0.5058824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 3325746502252467729}
-  gun: {fileID: 5097906164062990767}
+  gun: {fileID: -658071257884095492}
   nameGun: 
   canvas: {fileID: 8552687086910890758}
   gunSprite: {fileID: 7566091920194326233}
@@ -304,7 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280416868280369569}
   m_Layer: 0
-  m_Name: StickyGun
+  m_Name: ShieldGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,9 +464,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3555346580633687772}
-  - component: {fileID: 5097906164062990767}
+  - component: {fileID: -658071257884095492}
   m_Layer: 0
-  m_Name: StickyGun
+  m_Name: ShieldGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -488,7 +488,7 @@ Transform:
   - {fileID: 4280416868280369569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5097906164062990767
+--- !u!114 &-658071257884095492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -497,28 +497,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 8725111787388529810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cab48d610963615448ce08f4fd88e6a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 59b9bf0b85d57aa42a3120dfaf6f9467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: StickyGun
+  Name: ShieldGun
   gunPrefab: {fileID: 5520762139760519814}
-  bulletPrefab: {fileID: 6928389756606254245, guid: f18ce48597e360d4b96d7d5d85c29f27, type: 3}
+  bulletPrefab: {fileID: 7771206494892856151, guid: 07def35f49f7b8a4593be21946fa812a, type: 3}
   iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 5693397721559973199}
-  aimDistance: 0
+  aimDistance: 1.16
   fireRate: 0
-  timeReload: 2
-  maxFireRate: 0.5
-  ammo: 5
-  maxAmmo: 5
+  timeReload: 1.5
+  maxFireRate: 1
+  ammo: 15
+  maxAmmo: 15
   energyUse: 4
   canSpecial: 0
   firing: 1
   canUltimate: 0
-  timeUltimate: 5
-  sound: {fileID: 11400000, guid: 9f8b2b0b51136f64da0d7f57864e01b5, type: 2}
-  bulletUltiPrefab: {fileID: 6928389756606254245, guid: 6ef0c9bc2b85d244aa91828e243a3710, type: 3}
+  timeUltimate: 3
+  sound: {fileID: 11400000, guid: 9f7d6fcdfc9318944b46f850ceca17db, type: 2}
+  bulletUltiPrefab: {fileID: 7771206494892856151, guid: 34fd414df8a61d145925e21a6e83c713, type: 3}
+  shieldPrefab: {fileID: 1742944556682704556, guid: e847f77938ba70f458f8d352476648ca, type: 3}
+  MaxhpShield: 200
 --- !u!1 &8848806051544522932
 GameObject:
   m_ObjectHideFlags: 0

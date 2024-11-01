@@ -104,7 +104,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (gunList[currentGun].ammo > 0)
         {
-            CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
             gunList[currentGun].Fire();
         }
         else
@@ -307,7 +306,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         gunList[currentGun].Remove();
-
+        gunList[currentGun].Exit();
         if (gunList[currentGun].canUltimate)
         {
             gunList[currentGun].canUltimate = false;
@@ -333,7 +332,7 @@ public class PlayerCombat : MonoBehaviour
 
         currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
         PlayerControl.control.guntSprite = currentEquipGun.GetComponentInChildren<SpriteRenderer>();
-
+        gunList[index].Enter();
     }
 
     private void OnDrawGizmos()

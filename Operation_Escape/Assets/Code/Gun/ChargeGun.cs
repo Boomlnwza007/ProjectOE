@@ -47,6 +47,7 @@ public class ChargeGun : BaseGun
     {
         if (charge)
         {
+            CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
             if (canUltimate)
             {
                 //PlayerControl.control.Slow(50);

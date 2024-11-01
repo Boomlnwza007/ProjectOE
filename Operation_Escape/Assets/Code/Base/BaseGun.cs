@@ -50,6 +50,7 @@ public abstract class BaseGun : MonoBehaviour
     public abstract void RemoveUltimate();
     public virtual void Remove() { }
     public virtual void Setup() { }
-
+    public virtual void Enter() { }
+    public virtual void Exit() { }
 
 }

@@ -8,6 +8,8 @@ public class ShotGun : BaseGun
     public override void Fire()
     {
         ammo--;
+        CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
+
         if (canUltimate)
         {
             Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation);
