@@ -96,7 +96,6 @@ public class ChargeGun : BaseGun
         firing = true;
         fireRate = 0;
         SetUpbulletTranform();
-
     }
 
     public override void Remove()

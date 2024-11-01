@@ -97,7 +97,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
                 //lootDrop.InstantiateLoot(3);
                 break;
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(1);
+                lootDrop.InstantiateLoot(dropChange);
                 break;
         }
         if (Health <= 0)

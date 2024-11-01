@@ -30,7 +30,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract
             case DamageType.Melee:
                 if (!blast)
                 {
-                    lootDrop.InstantiateLoot(1);
+                    lootDrop.InstantiateLoot(0);
                     Destroy(gameObject);
                 }
                 else

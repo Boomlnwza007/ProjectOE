@@ -16,5 +16,5 @@ MonoBehaviour:
   id: 1
   dropChance: 0.2
   minDrop: 1
-  maxDrop: 3
+  maxDrop: 1
   droppedItemPrefab: {fileID: 211673572640163560, guid: a1e32d0ca47e38a418809e8a4d6f29c7, type: 3}

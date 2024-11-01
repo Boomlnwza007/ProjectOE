@@ -6,11 +6,11 @@ public class LootTable : MonoBehaviour
 { 
     public List<LootItem> lootlist = new List<LootItem>();
 
-    public void InstantiateLoot(float dropMinus)
+    public void InstantiateLoot(float dropChamge)
     {
         foreach (var item in lootlist)
         {
-            for (int i = 0; i <  item.minDrop/ dropMinus; i++)
+            for (int i = 0; i <  item.minDrop+dropChamge; i++)
             {
                 Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 2f;
                 GameObject lootGameObject = Instantiate(item.droppedItemPrefab, dropPosition, Quaternion.identity);
@@ -20,23 +20,26 @@ public class LootTable : MonoBehaviour
                     rb.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
                 }
             }
-        }
+        }        
         foreach (var item in lootlist)
         {
-            if (Random.value < item.dropChance)
+            if ((item.maxDrop - item.minDrop)!=0)
             {
-                int amountToDrop = Random.Range(0, (item.maxDrop - item.minDrop) + 1);
-                for (int i = 0; i < amountToDrop/ dropMinus; i++)
+                if (Random.value < item.dropChance)
                 {
-                    Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 2f;
-                    GameObject lootGameObject = Instantiate(item.droppedItemPrefab, dropPosition, Quaternion.identity);
-                    Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
-                    if (rb != null)
+                    int amountToDrop = Random.Range(0, (item.maxDrop - item.minDrop) + 1);
+                    for (int i = 0; i < amountToDrop; i++)
                     {
-                        rb.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
+                        Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 2f;
+                        GameObject lootGameObject = Instantiate(item.droppedItemPrefab, dropPosition, Quaternion.identity);
+                        Rigidbody2D rb = lootGameObject.GetComponent<Rigidbody2D>();
+                        if (rb != null)
+                        {
+                            rb.AddForce(Random.insideUnitCircle * 2f, ForceMode2D.Impulse);
+                        }
                     }
                 }
-            }
+            }            
         }
     }
 }
