@@ -32,6 +32,8 @@ public class ShieldGun : BaseGun
         if (canUltimate)    
         {
             Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation);
+            CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
+
             firing = false;
         }
         else

@@ -9,23 +9,19 @@ public class BounceGun : BaseGun
     public override void Fire()
     {
         ammo--;
+        CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
+
         if (canUltimate)
         {
-            //BaseBullet bullet = Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
-            //PlaySound(sound.shootUltimate);
-
-            //if (ammo <= 0)
-            //{
-            //    var playerCombat = PlayerControl.control.playerCombat;
-            //    playerCombat.ReUltimate();
-            //}
+            BulletBounce bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletBounce>();
+            bullet.ultimate = true;
+            PlaySound(sound.shoot);
         }
         else
         {
-            BaseBullet bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
+            BulletBounce bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletBounce>();
             PlaySound(sound.shoot);
         }
-
 
         firing = false;
     }

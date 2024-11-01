@@ -16,12 +16,13 @@ MonoBehaviour:
   - HandGun
   - ChargeGun
   - ShotGun
-  - ShotGun
-  - ShotGun
-  - ShotGun
+  - StickyGun
+  - ShieldGun
+  - BounceGun
   Item:
   - {fileID: 1270858507958518733, guid: 1e6e6373fcf66cc4cbfd9679e0e626c1, type: 3}
   - {fileID: 1270858507958518733, guid: bc1d589a965a3984ca8ab8b029f370c3, type: 3}
   - {fileID: 1270858507958518733, guid: 7aa662f7927204940a90b33b60cf9143, type: 3}
+  - {fileID: 1270858507958518733, guid: 1e6e6373fcf66cc4cbfd9679e0e626c1, type: 3}
   - {fileID: 1270858507958518733, guid: 1e6e6373fcf66cc4cbfd9679e0e626c1, type: 3}
   - {fileID: 1270858507958518733, guid: 1e6e6373fcf66cc4cbfd9679e0e626c1, type: 3}
