@@ -64,16 +64,16 @@ public class LaserCharge : MonoBehaviour
         if (Physics2D.BoxCast(startLaser.transform.position, new Vector2(laserUltiPrefab.endWidth, laserUltiPrefab.endWidth), 0f, transform.right, laserDistance, ShootLayer))
         {
             RaycastHit2D hitInfo = Physics2D.BoxCast(startLaser.transform.position, new Vector2(laserUltiPrefab.endWidth, laserUltiPrefab.endWidth), 0f, transform.right, laserDistance, ShootLayer);
-            if (hitInfo.collider.CompareTag("Player"))
+            if (hitInfo.collider.CompareTag("Enemy"))
             {
-                IDamageable player = hitInfo.collider.GetComponent<IDamageable>();
-                if (player != null)
+                IDamageable Enemy = hitInfo.collider.GetComponent<IDamageable>();
+                if (Enemy != null)
                 {
                     ////////Edit
                     if (canDamage)
                     {
                         canDamage = false;
-                        player.Takedamage(dmgUl, DamageType.Rang, 0);
+                        Enemy.Takedamage(dmgUl, DamageType.Rang, 0);
                         DamageHit().Forget();
                     }
                     //Debug.Log("hit");
