@@ -11,6 +11,7 @@ public class ShotGun : BaseGun
         if (canUltimate)
         {
             Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation);
+            PlaySound(sound.shootUltimate);
             if (ammo <= 0)
             {
                 var playerCombat = PlayerControl.control.playerCombat;
@@ -20,6 +21,7 @@ public class ShotGun : BaseGun
         else
         {
             Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation);
+            PlaySound(sound.shoot);
         }
         firing = false;
     }
@@ -41,5 +43,5 @@ public class ShotGun : BaseGun
     {
         canUltimate = true;
         ammo = 2;
-    }
+    }   
 }

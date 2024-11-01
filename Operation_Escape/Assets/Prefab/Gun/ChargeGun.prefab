@@ -459,6 +459,7 @@ MonoBehaviour:
   firing: 1
   canUltimate: 0
   timeUltimate: 5
+  sound: {fileID: 11400000, guid: fc3d350abd180e849916c03f5a27cbdd, type: 2}
   charge: 0
   laserUltiPrefab: {fileID: 3000801688261200796, guid: a0026d6417629a144811cca2a1f27266, type: 3}
   ChangeEffPrefab: {fileID: 4468603144254925480, guid: d8cfef896484f2d42b4484a308bf80fd, type: 3}

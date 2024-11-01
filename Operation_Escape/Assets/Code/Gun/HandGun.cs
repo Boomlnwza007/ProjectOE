@@ -11,6 +11,8 @@ public class HandGun : BaseGun
         if (canUltimate)
         {
             BaseBullet bullet = Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
+            PlaySound(sound.shootUltimate);
+
             if (ammo <= 0)
             {
                 var playerCombat = PlayerControl.control.playerCombat;
@@ -20,6 +22,7 @@ public class HandGun : BaseGun
         else
         {
             BaseBullet bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BaseBullet>();
+            PlaySound(sound.shoot);
         }
 
 

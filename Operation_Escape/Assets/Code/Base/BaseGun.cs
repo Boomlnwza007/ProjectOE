@@ -21,6 +21,7 @@ public abstract class BaseGun : MonoBehaviour
     public bool firing = true;
     public bool canUltimate;
     public float timeUltimate;
+    public GunSound sound;
 
     private void Awake()
     {
@@ -33,6 +34,14 @@ public abstract class BaseGun : MonoBehaviour
     {
         aimDistance = Vector2.Distance(gameObject.transform.position, aimTranform.position);
         Debug.Log(aimDistance);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            AudioManager.audioManager.PlaySFX(clip);
+        }
     }
 
     public abstract void Fire();

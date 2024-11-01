@@ -337,6 +337,7 @@ MonoBehaviour:
   iconGun: {fileID: 21300000, guid: 3fecb80e6a1df27459c688fdfb3dc496, type: 3}
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 2128694304809498545}
+  aimDistance: 0
   fireRate: 1.0420547
   timeReload: 3
   maxFireRate: 2
@@ -347,6 +348,7 @@ MonoBehaviour:
   firing: 0
   canUltimate: 0
   timeUltimate: 5
+  sound: {fileID: 11400000, guid: 338238b194123e84ead609b6d0601d7e, type: 2}
   bulletUltiPrefab: {fileID: 3888396136867698908, guid: 8749401094c15eb478be69f9b8b08869, type: 3}
 --- !u!1 &4968563867268283792
 GameObject:
