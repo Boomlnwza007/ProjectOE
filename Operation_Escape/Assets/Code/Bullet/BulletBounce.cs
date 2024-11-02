@@ -17,7 +17,12 @@ public class BulletBounce : BaseBullet
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (collision.gameObject.TryGetComponent(out IBulletInteract bulletInteract))
+        {
+            bulletInteract.Interact(DamageType.Rang);
+            Destroy(gameObject);
+        }
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             bounceCount++;
 
@@ -53,11 +58,7 @@ public class BulletBounce : BaseBullet
             }
             Destroy(gameObject);
         }
-        else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
-        {
-            bulletInteract.Interact(DamageType.Rang);
-            Destroy(gameObject);
-        }
+
         
     }
 }

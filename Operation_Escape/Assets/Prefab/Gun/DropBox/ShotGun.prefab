@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.27491045, g: 0.7075472, b: 0.103462085, a: 1}
+  m_Color: {r: 0.44281766, g: 0.8773585, b: 0.26900145, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 4885397738666743173, guid: a718a593a0a8e224cbc8c188cbf94b88, type: 3}
+  floatAmplitude: 0.5
+  floatSpeed: 1
 --- !u!61 &5740592605012378541
 BoxCollider2D:
   m_ObjectHideFlags: 0
