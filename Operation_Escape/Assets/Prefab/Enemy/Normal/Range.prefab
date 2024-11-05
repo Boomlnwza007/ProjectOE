@@ -117,7 +117,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 36186
+  m_InstanceId: 139346
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -205,7 +205,7 @@ SpriteRenderer:
   m_SortingLayerID: 1314857649
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1634602767, guid: c6a3840fd44c767469c831a83e0f1e40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82f29f11c1a7ccd4286878b60a486da6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -307,6 +307,7 @@ MonoBehaviour:
   lootDrop: {fileID: 8382806372236893102}
   target: {fileID: 0}
   rb: {fileID: 0}
+  dropChange: 0
   bullet: {fileID: 4640713933992763453, guid: 1600d66847cfab747ad170f37004b054, type: 3}
   bulletTranform: {fileID: 2257339517205150815}
   cooldown: 0

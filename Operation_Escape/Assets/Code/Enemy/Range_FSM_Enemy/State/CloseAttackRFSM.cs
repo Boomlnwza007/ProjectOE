@@ -113,7 +113,8 @@ public class CloseAttackRFSM : BaseState
         ai.canMove = true;
 
         state.Walk();
-        state.cooldown = true;        
+        state.cooldown = true;
+        state.animator.isFacing = true;
         stateMachine.ChangState(state.checkDistanceState);
     }
 
