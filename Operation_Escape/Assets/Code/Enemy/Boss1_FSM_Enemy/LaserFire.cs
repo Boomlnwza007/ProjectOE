@@ -7,6 +7,7 @@ public class LaserFire : MonoBehaviour
 {
     public int dmg;
     public LineRenderer m_lineRenderer;
+    public LineRenderer pre_lineRenderer;
     public Gradient laserColorGradientOriginal;
     public Gradient laserColorGradient;
     public Transform laserFireStart;
@@ -24,6 +25,14 @@ public class LaserFire : MonoBehaviour
     public bool follow;
     public float overshootAngle = 0;
     public int followCode;
+    public GameObject startSFX;
+    public GameObject endSFX;
+    private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+
+    private void Start()
+    {
+        FillLaser();
+    }
 
     // Update is called once per frame
     void Update()
@@ -68,30 +77,55 @@ public class LaserFire : MonoBehaviour
     {
         float speedRotOri = speedRot;
         speedRot = speedRot * speedMulti;
-        m_lineRenderer.colorGradient = laserColorGradient;
+        pre_lineRenderer.colorGradient = laserColorGradient;
+        pre_lineRenderer.enabled = true;
         laserHitZone = true;
-        m_lineRenderer.enabled = true;
 
-        await FadeLaser(charge, laserColorGradient, false);
+        await FadeLaser(pre_lineRenderer,charge, laserColorGradient, false);
+        pre_lineRenderer.enabled = false;
+
+        laserHitZone = false;
+
         m_lineRenderer.colorGradient = laserColorGradientOriginal;
+        m_lineRenderer.enabled = true;
+        for (int i = 0; i < particleSystems.Count; i++)
+        {
+            particleSystems[i].Play();
+        }
         laserFiring = true;
 
         await UniTask.WaitForSeconds(duration);
 
-        await FadeLaser(0.1f, laserColorGradientOriginal, true);
+        await FadeLaser(m_lineRenderer,0.1f, laserColorGradientOriginal, true);
         laserHitZone = false;
         m_lineRenderer.enabled = false;
         laserFiring = false;
         speedRot = speedRotOri;
+        for (int i = 0; i < particleSystems.Count; i++)
+        {
+            particleSystems[i].Stop();
+        }
     }
     
     public void DrawRay(Vector2 startPos, Vector2 endPos)
     {
         m_lineRenderer.SetPosition(0, startPos);
         m_lineRenderer.SetPosition(1, endPos);
+        startSFX.transform.position = startPos;
+        endSFX.transform.position = endPos;
+        Vector3 aimDir = (endPos - startPos).normalized;
+        float _angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        startSFX.transform.eulerAngles = new Vector3(0, 0, _angle);
+        endSFX.transform.eulerAngles = new Vector3(0, 0, _angle);
     }
-   
-    private async UniTask FadeLaser(float charge, Gradient colorGradient, bool fadeOut)
+
+    public void DrawRayHitZone(Vector2 startPos, Vector2 endPos)
+    {
+        pre_lineRenderer.SetPosition(0, startPos);
+        pre_lineRenderer.SetPosition(1, endPos);
+    }
+
+    private async UniTask FadeLaser(LineRenderer line,float charge, Gradient colorGradient, bool fadeOut)
     {
         float elapsedTime = 0f;
         int fadeStart = 0;
@@ -115,7 +149,7 @@ public class LaserFire : MonoBehaviour
 
             Gradient gradient = new Gradient();
             gradient.SetKeys(colorGradient.colorKeys, alphaKeys);
-            m_lineRenderer.colorGradient = gradient;
+            line.colorGradient = gradient;
 
             await UniTask.Yield();
         }
@@ -126,11 +160,11 @@ public class LaserFire : MonoBehaviour
         if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, obstacleLayer))
         {
             RaycastHit2D _hit = Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, obstacleLayer);
-            DrawRay(laserFireStart.position, _hit.point);
+            DrawRayHitZone(laserFireStart.position, _hit.point);
         }
         else
         {
-            DrawRay(laserFireStart.position, laserFireStart.position + laserFireStart.transform.right * laserDistance);
+            DrawRayHitZone(laserFireStart.position, laserFireStart.position + laserFireStart.transform.right * laserDistance);
         }
     }
     
@@ -228,7 +262,7 @@ public class LaserFire : MonoBehaviour
         float t = Mathf.Clamp01(Time.deltaTime * speedRot);
         t = Mathf.SmoothStep(0, accelerationTime, t);
 
-        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, t);
+        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, t); 
 
         transform.eulerAngles = new Vector3(0, 0, newAngle);
     }
@@ -265,5 +299,32 @@ public class LaserFire : MonoBehaviour
         follow = true;
         await UniTask.WaitForSeconds(wait);
         follow = false;
+    }
+
+    public void FillLaser()
+    {
+        for (int i = 0; i < startSFX.transform.childCount; i++)
+        {
+            var ps = startSFX.transform.GetChild(i).GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                particleSystems.Add(ps);
+            }
+        }
+
+        for (int i = 0; i < endSFX.transform.childCount; i++)
+        {
+            var ps = endSFX.transform.GetChild(i).GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                particleSystems.Add(ps);
+            }
+        }
+
+
+        for (int i = 0; i < particleSystems.Count; i++)
+        {
+            particleSystems[i].Stop();
+        }
     }
 }
