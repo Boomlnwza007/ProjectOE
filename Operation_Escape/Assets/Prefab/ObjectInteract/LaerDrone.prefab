@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4574368014766647895}
   - component: {fileID: 299700905553649707}
   - component: {fileID: 4933833272243351020}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4688731386264422841}
   - component: {fileID: 539094400768040657}
   - component: {fileID: 2175783591966798872}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bleam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4975,7 +4975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7789133079765010564}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: PartiStaqrt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5009,7 +5009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6563648407067383034}
   - component: {fileID: 3516047095404573974}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Light 2D '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5092,7 +5092,7 @@ GameObject:
   - component: {fileID: 4730974088025659092}
   - component: {fileID: 5499525839138092446}
   - component: {fileID: 1580387603025244217}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9922,7 +9922,7 @@ GameObject:
   - component: {fileID: 6263290114720831106}
   - component: {fileID: 6047322587436231779}
   - component: {fileID: 7015604125215188711}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Bleam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14753,7 +14753,7 @@ GameObject:
   - component: {fileID: 2816146720312697097}
   - component: {fileID: 5860090538133391722}
   - component: {fileID: 1716623213064210270}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: First
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14888,7 +14888,7 @@ GameObject:
   - component: {fileID: 8873717863753743130}
   - component: {fileID: 3580683054949654941}
   - component: {fileID: 184159008063857733}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Asset_LaserTerret_Body R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15019,7 +15019,7 @@ GameObject:
   - component: {fileID: 8385989521751642081}
   - component: {fileID: 8266779158285804515}
   - component: {fileID: 9028923197931109405}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Asset_LaserTerret_Body L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15149,7 +15149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8733456433565100271}
   - component: {fileID: 1646710474482460710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 'Light 2D '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15233,7 +15233,7 @@ GameObject:
   - component: {fileID: 2211829862301332668}
   - component: {fileID: 8048974882410049308}
   - component: {fileID: 2345503973643408658}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: LaerDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15447,7 +15447,7 @@ GameObject:
   - component: {fileID: 4139905214585900858}
   - component: {fileID: 2035434281440983880}
   - component: {fileID: 8829940595614734212}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20275,7 +20275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8727191899504646791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: partiEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
