@@ -676,10 +676,10 @@ MonoBehaviour:
   animator: {fileID: 1353224174552318050}
   raycastMaskWay:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   raycastMask:
     serializedVersion: 2
-    m_Bits: 704
+    m_Bits: 640
   jumpLength: 20
   forcePush: 100
 --- !u!114 &3171470274902600665
