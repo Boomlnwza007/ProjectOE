@@ -16,16 +16,23 @@ public class LaserDrone : MonoBehaviour
     public int damage = 60;
     public float dpsDamage = 1;
     private bool canDamage = true;
-
+    public GameObject startSFX;
+    public GameObject endSFX;
+    private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
     private LineRenderer laser;
     public LayerMask ShootLayer;
 
     // Start is called before the first frame update
     void Start()
     {
+        FillLaser();
         time = 0;
         laser = GetComponent<LineRenderer>();
         distance = Vector2.Distance(firstPos.position, endPos.position);
+        for (int i = 0; i < particleSystems.Count; i++)
+        {
+            particleSystems[i].Play();
+        }
     }
 
     // Update is called once per frame
@@ -34,6 +41,10 @@ public class LaserDrone : MonoBehaviour
         if (!isFiring && time >= timeBetween)
         {
             isFiring = true;
+            for (int i = 0; i < particleSystems.Count; i++)
+            {
+                particleSystems[i].Play();
+            }
             time = 0f;
         }
 
@@ -45,6 +56,10 @@ public class LaserDrone : MonoBehaviour
             {
                 isFiring = false;
                 laser.enabled = false;
+                for (int i = 0; i < particleSystems.Count; i++)
+                {
+                    particleSystems[i].Stop();
+                }
                 time = 0f;
             }
         }
@@ -100,6 +115,12 @@ public class LaserDrone : MonoBehaviour
     {
         laser.SetPosition(0, startPos);
         laser.SetPosition(1, endPos);
+        startSFX.transform.position = startPos;
+        endSFX.transform.position = endPos;
+        Vector3 aimDir = (endPos - startPos).normalized;
+        float _angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        startSFX.transform.eulerAngles = new Vector3(0, 0, _angle);
+        endSFX.transform.eulerAngles = new Vector3(0, 0, _angle);
     }
 
     public void Destroy()
@@ -108,5 +129,26 @@ public class LaserDrone : MonoBehaviour
         Destroy(GetComponent<LaserDrone>());
         Destroy(firstPos.gameObject);
         Destroy(endPos.gameObject);
+    }
+
+    public void FillLaser()
+    {
+        for (int i = 0; i < startSFX.transform.childCount; i++)
+        {
+            var ps = startSFX.transform.GetChild(i).GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                particleSystems.Add(ps);
+            }
+        }
+
+        for (int i = 0; i < endSFX.transform.childCount; i++)
+        {
+            var ps = endSFX.transform.GetChild(i).GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                particleSystems.Add(ps);
+            }
+        }
     }
 }

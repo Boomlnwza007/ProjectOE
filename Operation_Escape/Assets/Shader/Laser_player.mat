@@ -51,7 +51,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _LaserEdgeSmoothness: 10
-    - _LaserScale: 5
+    - _LaserScale: 1
     - _LaserSmooth: 10
     - _LaserThickness: 11
     - _LaserThickness2: 10
