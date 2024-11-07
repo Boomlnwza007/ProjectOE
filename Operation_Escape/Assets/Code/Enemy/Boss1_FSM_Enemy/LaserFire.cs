@@ -184,6 +184,7 @@ public class LaserFire : MonoBehaviour
                         canDamage = false;
                         player.Takedamage(dmg, DamageType.Rang, 0);
                         DamageHit().Forget();
+                        Debug.Log("hit");
                     }
                     //Debug.Log("hit");
                 }
@@ -206,7 +207,6 @@ public class LaserFire : MonoBehaviour
     {
         await UniTask.WaitForSeconds(dpsDamage);
         canDamage = true;
-        await UniTask.WaitForSeconds(dpsDamage);
     }
 
     public void LaserFollow()

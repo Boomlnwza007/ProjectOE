@@ -70,6 +70,7 @@ public class DashAB1FSM : BaseState
         ai.canMove = false;
         var state = ((FSMBoss1EnemySM)stateMachine);
         var ani = Boss1AniControl.boss1AniControl;
+        state.isFacing = false;
         ani.ChangeAnimationState("StartJump");
         await UniTask.WaitForSeconds(2.1f);
         ai.canMove = true;
@@ -78,10 +79,13 @@ public class DashAB1FSM : BaseState
         ai.canMove = false;
         ani.ChangeAnimationState("StopJump");
         await UniTask.WaitForSeconds(0.15f);
+        state.isFacing = true;
         ani.ChangeAnimationState("Wait");        
         await UniTask.WaitForSeconds(2f);
+        state.isFacing = false;
         ani.ChangeAnimationState("AfterDash");
         await UniTask.WaitForSeconds(5.1f);
+        state.isFacing = true;
         ani.ChangeAnimationState("Wait");
         await UniTask.WaitForSeconds(3f);
         ai.canMove = true;
@@ -99,13 +103,20 @@ public class DashAB1FSM : BaseState
         ani.ChangeAnimationState("AirJumpO");
         await UniTask.WaitForSeconds(3f);
         ai.canMove = false;
+        state.isFacing = false;
         ani.ChangeAnimationState("StopJump");
         await UniTask.WaitForSeconds(0.15f);
+        state.isFacing = true;
+
         ani.ChangeAnimationState("Wait");
         await UniTask.WaitForSeconds(2f);
         PullPlayer().Forget();
+
+        state.isFacing = false;
         ani.ChangeAnimationState("AfterDash");
         await UniTask.WaitForSeconds(6.2f);
+        state.isFacing = true;
+
         ani.ChangeAnimationState("Wait");
         await UniTask.WaitForSeconds(3f);
         ai.canMove = true;

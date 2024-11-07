@@ -24,6 +24,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
     private void Awake()
     {
+        imortal = false;
         //health = 20;
         maxEnergy = 10;
         maxUltimateEnergy = 10;
@@ -65,14 +66,16 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     {
         if (!imortal)
         {
-            StartCoroutine(Imortal(0.1f));
-            health -= damage;          
-
+            health -= damage;
+            Debug.Log(health+" "+ damage);
             if (health <= 0)
             {
                 health = 0;
                 Die();
             }
+
+            StartCoroutine(Imortal(0.1f));
+
         }
 
         if (spriteFlash != null)

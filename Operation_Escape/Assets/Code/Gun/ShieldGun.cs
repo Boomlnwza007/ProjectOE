@@ -18,13 +18,14 @@ public class ShieldGun : BaseGun
     {
         Debug.Log(1);
         shield = Instantiate(shieldPrefab, PlayerControl.control.transform).GetComponent<ShieldGun_Shield>();
+        shield.Wake(true);
         shield.gameObject.transform.localPosition = Vector3.zero;
-
     }
 
     public override void Exit()
     {
         Destroy(shield.gameObject);
+        shield.Wake(false);
     }
 
     public override void Fire()

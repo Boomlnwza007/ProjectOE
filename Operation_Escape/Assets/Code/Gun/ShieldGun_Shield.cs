@@ -16,9 +16,9 @@ public class ShieldGun_Shield : MonoBehaviour,IDamageable
     private bool timeDmg;
     private float timer=0;
 
-    private void Start()
+    public void Wake(bool on)
     {
-        PlayerControl.control.playerState.imortal = true;
+        PlayerControl.control.playerState.imortal = on;
     }
 
     public void Die()

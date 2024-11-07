@@ -14634,7 +14634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283f0f4793561414597eac369286f7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 40
+  dmg: 30
   m_lineRenderer: {fileID: 7925801510427646344}
   pre_lineRenderer: {fileID: 6397908632240032916}
   laserColorGradientOriginal:
