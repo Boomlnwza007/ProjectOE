@@ -12,24 +12,22 @@ public class DashAB1FSM : BaseState
     public float Charg;
     bool followMe;
     public bool overdrive;
+    public bool pull;
 
     // Start is called before the first frame update
     public override async void Enter()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
-        state.animator.SetBool("DashAB1FSM", true);
         ai = state.ai;
         overdrive = state.overdrive;
         speed = ai.maxspeed;
-        
+        pull = false;
         ai.canMove = true;
         if (!overdrive)
         {
             if (!state.rangeAState.rangeAttack)
             {                
-                await UniTask.WaitForSeconds(1f);
-                state.animator.SetBool("Attacking", false);
-                state.animator.SetTrigger("DashExit");                
+                await UniTask.WaitForSeconds(1f);             
                 ChangState(state.normalAState);
                 return;
             }
@@ -38,14 +36,14 @@ public class DashAB1FSM : BaseState
                 state.rangeAState.rangeAttack = false;
                 Changemode = 1;
                 Charg = 1;
-                Attack().Forget();
+                AttackN().Forget();
             }
         }
         else
         {
             Changemode = 0.5f;
             Charg = 0.3f;
-            Attack().Forget();
+            AttackO().Forget();
         }
 
         
@@ -61,82 +59,79 @@ public class DashAB1FSM : BaseState
             ((FSMBoss1EnemySM)stateMachine).MeleeFollow();
         }
 
-
+        if (pull)
+        {
+            //PullPlayer();
+        }
     }
 
-    public async UniTaskVoid Attack()
+    public async UniTaskVoid AttackN()
     {
         ai.canMove = false;
-        var state = ((FSMBoss1EnemySM)stateMachine);        
-        Debug.Log("Change Mode 1s");
-        await UniTask.WaitForSeconds(Changemode);
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StartDash);
-        Debug.Log("Charg 1s");
-        await UniTask.WaitForSeconds(Charg);
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        var ani = Boss1AniControl.boss1AniControl;
+        ani.ChangeAnimationState("StartJump");
+        await UniTask.WaitForSeconds(2.1f);
         ai.canMove = true;
-        state.animator.SetBool("Attacking", true);
-        if (overdrive)
+        ani.ChangeAnimationState("AirJump");
+        await UniTask.WaitForSeconds(3f);
+        ai.canMove = false;
+        ani.ChangeAnimationState("StopJump");
+        await UniTask.WaitForSeconds(0.15f);
+        ani.ChangeAnimationState("Wait");        
+        await UniTask.WaitForSeconds(2f);
+        ani.ChangeAnimationState("AfterDash");
+        await UniTask.WaitForSeconds(5.1f);
+        ani.ChangeAnimationState("Wait");
+        await UniTask.WaitForSeconds(3f);
+        ai.canMove = true;
+        ChangState(state.normalAState);
+    }
+
+    public async UniTaskVoid AttackO()
+    {
+        ai.canMove = false;
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        var ani = Boss1AniControl.boss1AniControl;
+        ani.ChangeAnimationState("StartJump");
+        await UniTask.WaitForSeconds(2.1f);
+        ai.canMove = true;
+        ani.ChangeAnimationState("AirJumpO");
+        await UniTask.WaitForSeconds(3f);
+        ai.canMove = false;
+        ani.ChangeAnimationState("StopJump");
+        await UniTask.WaitForSeconds(0.15f);
+        ani.ChangeAnimationState("Wait");
+        await UniTask.WaitForSeconds(2f);
+        PullPlayer().Forget();
+        ani.ChangeAnimationState("AfterDash");
+        await UniTask.WaitForSeconds(6.2f);
+        ani.ChangeAnimationState("Wait");
+        await UniTask.WaitForSeconds(3f);
+        ai.canMove = true;
+        if (Random.value > 0.5f)
         {
-            ai.maxspeed = speed * 3;
+            ChangState(state.normalAState);
         }
         else
         {
-            ai.maxspeed = speed * 2;
+            ChangState(state.rangeAState);
         }
-        float time = 0;
-        while (time < 4f)
-        {
-            time += Time.deltaTime;
-            if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
-            {
-                Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StopDash);
-                ai.maxspeed = speed;
-                if (overdrive)
-                {
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.AfterDash);
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 0), AimMelee(0.4f)); // AfDash
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Atk4);
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.3f, 1), AimMelee(0.4f)); // hit 4
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-                    await UniTask.WaitForSeconds(1);
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
-                    await LaserFollowIn();
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-                    state.DelLaserGun();
-                    await UniTask.WaitForSeconds(1);
-                    if (Random.value < 0.5f)
-                    {
-                        ChangState(state.normalAState);
-                    }
-                    else
-                    {
-                        ChangState(state.rangeAState);
-                    }
-
-                }
-                else
-                {
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.AfterDash);
-                    await UniTask.WhenAll(state.MeleeHitzone(0.5f, 0.7f, 0), AimMelee(0.4f)); // AfDash
-                    Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-                    ai.canMove = false;
-                    await UniTask.WaitForSeconds(1);
-                    ai.canMove = true;
-                    ChangState(state.normalAState);
-                }
-                state.animator.SetBool("Attacking", false);
-                return;
-            }
-
-            await UniTask.Yield();
-        }
-        ai.maxspeed = speed;
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.StopDash);
-        await UniTask.WaitForSeconds(0.2f);
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-        state.animator.SetBool("Attacking", false);
-        ChangState(state.normalAState);
     }
+
+    public async UniTask PullPlayer()
+    {
+        await UniTask.WaitForSeconds(3);
+        float distance = Vector2.Distance(ai.position, ai.targetTransform.position);
+        Vector2 dir = (ai.position - ai.targetTransform.position).normalized;
+        float range = 30f; // ÃÐÂÐ·ÕèàÃÔèÁ´Ö§´Ù´
+        float pullStrength = 10f; // ¡ÓË¹´áÃ§´Ö§
+        if (distance <= range)
+        {
+            PlayerControl.control.playerMovement.rb.AddForce(dir * pullStrength / distance, ForceMode2D.Force);
+        }
+    }
+
 
     public async UniTask AimMelee(float wait)
     {

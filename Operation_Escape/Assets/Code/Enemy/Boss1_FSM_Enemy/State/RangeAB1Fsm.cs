@@ -44,54 +44,56 @@ public class RangeAB1Fsm : BaseState
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
         state.CreatLaserGun();
-        ai.canMove = false;
-        state.animator.SetBool("Attacking", true);
-        state.animator.SetTrigger("Attack");
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
-        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
-        if (CheckDistance())
-        {
-            Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-            return;
-        }
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
-        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
-        if (CheckDistance())
-        {
-            Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
-
-            return;
-        }
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
-        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f);
         if (overdrive)
         {
-            Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
-            await UniTask.WhenAll(state.ShootLaser(charge, 2f, 1, charge + 2f,3.5f), Missil());
+            state.Setdamage(60);
+        }
+        ai.canMove = false;
+
+        Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //1
+        await state.ShootMissile();
+        if (CheckDistance())
+        {
+            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+            return;
+        }
+        Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //2
+        await state.ShootMissile();
+        if (CheckDistance())
+        {
+            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+
+            return;
+        }
+        Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+        await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //3
+        await state.ShootMissile();
+        if (overdrive)
+        {
+            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+            await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
         }
         state.DelLaserGun();
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.RangeAtk);
-        await state.ShootMissile();
-        state.animator.SetBool("Attacking", false);
+        Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
 
         ai.canMove = false;
-        await UniTask.WaitForSeconds(0.5f);
+        await UniTask.WaitForSeconds(3f);
         ai.canMove = true;
-        Boss1AniControl.boss1AniControl.ChangeAnimationState(Boss1AniControl.StateBoss.Wait);
 
+        Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
         ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
     }
 
     public async UniTask Missil()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        await UniTask.WaitForSeconds(0.5f);
-        await state.ShootMissile();
-        await UniTask.WaitForSeconds(1f);
-        state.ShootMissile().Forget();
-        await UniTask.WaitForSeconds(0.5f);
-        state.ShootMissile().Forget();
-        await UniTask.WaitForSeconds(1);
+        await state.ShootMissile(1);
+        await UniTask.WaitForSeconds(2f);
+        await state.ShootMissile(1);
+        await UniTask.WaitForSeconds(2f);
+        await state.ShootMissile(1);
     }
 
     public bool CheckDistance()

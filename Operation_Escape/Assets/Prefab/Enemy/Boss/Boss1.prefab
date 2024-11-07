@@ -150,6 +150,38 @@ MonoBehaviour:
   uiBody: {fileID: 7515010452003917456}
   text: {fileID: 8808565567761625763}
   slider: {fileID: 1373171585079106916}
+--- !u!1 &111687797783198769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 70525070986245059}
+  m_Layer: 7
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &70525070986245059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111687797783198769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7050771219770007231}
+  m_Father: {fileID: 3100522675146778750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515863329286055391
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +282,8 @@ Transform:
   - {fileID: 4231805128014358765}
   - {fileID: 3676955293325648013}
   - {fileID: 9191436787194638947}
+  - {fileID: 4638616191477543978}
+  - {fileID: 70525070986245059}
   m_Father: {fileID: 6466789501963007617}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1649695290617205636
@@ -400,6 +434,37 @@ Transform:
   m_Children:
   - {fileID: 4862444813070133073}
   m_Father: {fileID: 9191436787194638947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1244210965028990519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7050771219770007231}
+  m_Layer: 7
+  m_Name: Blast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7050771219770007231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244210965028990519}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.88, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 70525070986245059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1862575892083056251
 GameObject:
@@ -786,7 +851,6 @@ Transform:
   - {fileID: 827654921515527445}
   - {fileID: 5016643351636492999}
   - {fileID: 1254062072560420160}
-  - {fileID: 4638616191477543978}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &6807547225655466880
@@ -913,6 +977,9 @@ MonoBehaviour:
   - {fileID: 5895254802588254631, guid: f39f8c779cbff9c418d1caf0220f9dfb, type: 3}
   - {fileID: 6013396911579296216, guid: 140539df52ebfe34086e7f1a24c5a222, type: 3}
   - {fileID: 6013396911579296216, guid: 48d72cebd7d470a4abc738a91ec29eb3, type: 3}
+  forcePush: 100
+  bladeslash: {fileID: 7636867113743857662, guid: bff6fde2c7b94eb4ba68ed35d68dd4a0, type: 3}
+  bladeslashTransform: {fileID: 7050771219770007231}
   cooldown: 0
   overdrive: 0
   overdriveChang: 0
@@ -925,6 +992,8 @@ MonoBehaviour:
   stateName: 
   uiBoss: {fileID: 1622645830190059736}
   animator: {fileID: 3544962096193456687}
+  isFacing: 0
+  isFacingRight: 0
 --- !u!114 &5271488527250015382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2421,11 +2490,11 @@ Transform:
   m_GameObject: {fileID: 8192204324609840048}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.124, y: -1.462, z: 0}
+  m_LocalPosition: {x: -0.12400055, y: -1.4619999, z: 0}
   m_LocalScale: {x: 1.2828, y: 1.2828, z: 1.2828}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6466789501963007617}
+  m_Father: {fileID: 3100522675146778750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8345945735147018484
 SpriteRenderer:

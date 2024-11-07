@@ -16,6 +16,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public Transform hand;
     public Transform handStart;
     public GameObject[] meleeHitZone;
+    public float forcePush = 100;
+    public GameObject bladeslash;
+    public Transform bladeslashTransform;
+
 
     [Header("status")]
     public bool cooldown;
@@ -35,6 +39,9 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     [Header("Animation")]
     [SerializeField] public Animator animator;
+    public bool isFacing;
+    public bool isFacingRight;
+
 
     [HideInInspector]
     public CheckDistanceB1FSM checkDistanceState;
@@ -58,6 +65,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         rangeAState = new RangeAB1Fsm(this);
         overdriveChangState = new OverdriveChangFSM(this);
         spriteFlash = GetComponentInChildren<SpriteFlash>();
+        isFacing = true;
     }
 
     protected override BaseState GetInitialState()
@@ -84,7 +92,11 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             }
         }
 
-        DiractionAttack();
+        if (isFacing)
+        {
+            DiractionAttack();
+        }
+        
     }
 
     public void CreatLaserGun()
@@ -94,6 +106,15 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         LaserFire laserg = laser.GetComponent<LaserFire>();
         laserg.SetStartFollow(target.position);
         lasers.Add(laser);
+    }
+
+    public void Setdamage(int damage)
+    {
+        foreach (var item in lasers)
+        {
+            LaserFire laser = item.GetComponent<LaserFire>();
+            laser.dmg = damage;
+        }
     }
 
     public void CreatLaserGunFollow()
@@ -269,7 +290,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }
     }
 
-    [ContextMenu(nameof(ShootMissile))]
     public async UniTask ShootMissile()
     {
         Vector2 directionToPlayer = (ai.targetTransform.position - transform.position).normalized;
@@ -284,6 +304,19 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         await UniTask.WhenAll(Miissile(bulletCount, startAngle, spreadAngle, angleLeft), Miissile(bulletCount, startAngle, -spreadAngle, angleRight));
     }
 
+    public async UniTask ShootMissile(int bulletCount)
+    {
+        Vector2 directionToPlayer = (ai.targetTransform.position - transform.position).normalized;
+        float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+
+        float angleLeft = angleDirectionToPlayer + 90;
+        float angleRight = angleDirectionToPlayer - 90;
+
+        float spreadAngle = 10;
+        float startAngle = -spreadAngle * ((bulletCount - 1) / 2.0f);
+        await UniTask.WhenAll(Miissile(bulletCount, startAngle, spreadAngle, angleLeft), Miissile(bulletCount, startAngle, -spreadAngle, angleRight));
+    }
+
     public async UniTask Miissile(int bulletCount,float startAngle,float spreadAngle,float angleLR)
     {
         for (int i = 0; i < bulletCount; i++)
@@ -294,7 +327,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
             await UniTask.WaitForSeconds(0.1f);
         }
-    }   
+    }
+
+    public void ShootBladeslash()
+    {
+        Instantiate(bladeslash, bladeslashTransform.position, bladeslashTransform.rotation);
+    }
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
@@ -345,40 +383,49 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     {
         Vector2 dir = (target.position - gameObject.transform.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        bool isFacingRight = targetAngle > -90 && targetAngle < 90;
+        isFacingRight = targetAngle > -90 && targetAngle < 90;
         animator.SetBool("isRight", isFacingRight);
-        targetAngle += 45;
-        targetAngle = (targetAngle + 360) % 360;
-        int segment = Mathf.FloorToInt(targetAngle / 90);
-
-        switch (segment)
+        if (isFacingRight)
         {
-            case 0: // ด้านขวา
-                animator.SetFloat("horizon", 1);
-                animator.SetFloat("vertical", 0);
-                break;
-
-            case 1: // ด้านบน
-                animator.SetFloat("horizon", isFacingRight ? 1 : -1);
-                animator.SetFloat("vertical", 1);
-                animator.SetBool("isUp", true);
-                break;
-
-            case 2: // ด้านซ้าย
-                animator.SetFloat("horizon", -1);
-                animator.SetFloat("vertical", 0);
-                break;
-
-            case 3: // ด้านล่าง
-                animator.SetFloat("horizon", isFacingRight ? 1 : -1);
-                animator.SetFloat("vertical", -1);
-                animator.SetBool("isUp", false);
-                break;
-
-            default:
-                Debug.LogError("segment value: " + segment);
-                break;
+            animator.SetFloat("horizon", 1);
         }
+        else
+        {
+            animator.SetFloat("horizon", -1);
+        }
+
+        //targetAngle += 45;
+        //targetAngle = (targetAngle + 360) % 360;
+        //int segment = Mathf.FloorToInt(targetAngle / 90);
+
+        //switch (segment)
+        //{
+        //    case 0: // ด้านขวา
+        //        animator.SetFloat("horizon", 1);
+        //        animator.SetFloat("vertical", 0);
+        //        break;
+
+        //    case 1: // ด้านบน
+        //        animator.SetFloat("horizon", isFacingRight ? 1 : -1);
+        //        animator.SetFloat("vertical", 1);
+        //        animator.SetBool("isUp", true);
+        //        break;
+
+        //    case 2: // ด้านซ้าย
+        //        animator.SetFloat("horizon", -1);
+        //        animator.SetFloat("vertical", 0);
+        //        break;
+
+        //    case 3: // ด้านล่าง
+        //        animator.SetFloat("horizon", isFacingRight ? 1 : -1);
+        //        animator.SetFloat("vertical", -1);
+        //        animator.SetBool("isUp", false);
+        //        break;
+
+        //    default:
+        //        Debug.LogError("segment value: " + segment);
+        //        break;
+        //}
 
         if (rb.velocity != Vector2.zero && !ai.endMove)
         {

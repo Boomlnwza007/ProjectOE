@@ -6,49 +6,23 @@ public class Boss1AniControl : MonoBehaviour
 {
     public static Boss1AniControl boss1AniControl;
     [SerializeField] private Animator animator;
-    private bool isAttacking;
-    private bool isAttackPressed;
     private string currentAnimaton;
-    public float timeplay;
-    //public string[] stateName = {
-    //    "StartDash",
-    //    "StopDash",
-    //    "AfterDash",
-    //    "RangeAtk",
-    //    "PreAtk1-2",
-    //    "StartAtk1-2",
-    //    "PreAtk3",
-    //    "Atk3",
-    //    "Atk4",
-    //    "Wait"
-    //};
+    public float timeplay;  
 
-    public enum StateBoss
-    {
-        StartDash,
-        StopDash,
-        AfterDash,
-        RangeAtk,
-        PreAtk1_2,         
-        Atk1_2,
-        PreAtk3,
-        Atk3,
-        Atk4,
-        Wait
-    }
+
 
     private void Awake()
     {
         boss1AniControl = this;
     }
 
-    public void ChangeAnimationState(StateBoss newAnimation)
+    public void ChangeAnimationState(string newAnimation)
     {
-       // if (currentAnimaton == newAnimation.ToString()) return;
+        // if (currentAnimaton == newAnimation.ToString()) return;
 
-        animator.Play(newAnimation.ToString());
+        animator.Play(newAnimation, 0);
         timeplay = animator.GetCurrentAnimatorClipInfo(0).Length;
-        currentAnimaton = newAnimation.ToString();
+        currentAnimaton = newAnimation;
     }
 
 }
