@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6233964659992468515}
   - component: {fileID: 2118050019230750407}
   m_Layer: 0
-  m_Name: Asset_ShockTap
+  m_Name: Asset_SavePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
