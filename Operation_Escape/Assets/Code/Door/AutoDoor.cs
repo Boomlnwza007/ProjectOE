@@ -46,7 +46,16 @@ public class AutoDoor : MonoBehaviour
 
     public void Unlock()
     {
-        Destroy(plateSC);
+        plateSC.gameObject.SetActive(false);
+        if (aniDoor != null)
+        {
+            aniDoor.UnLock();
+        }
+        locked = false;
+    }
+
+    public void UnlockDead()
+    {
         if (aniDoor != null)
         {
             aniDoor.UnLock();
