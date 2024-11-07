@@ -21,7 +21,7 @@ public class Boss1AniControl : MonoBehaviour
         // if (currentAnimaton == newAnimation.ToString()) return;
 
         animator.Play(newAnimation, 0);
-        timeplay = animator.GetCurrentAnimatorClipInfo(0).Length;
+        AnimationClip clip = null;
         currentAnimaton = newAnimation;
     }
 
