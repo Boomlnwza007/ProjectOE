@@ -991,6 +991,7 @@ MonoBehaviour:
   fireRate: 0.7
   stateName: 
   uiBoss: {fileID: 1622645830190059736}
+  gunDrop: {fileID: 6993148821742251366, guid: ef9f87c05a1aaae4f89b509d7eab4314, type: 3}
   animator: {fileID: 3544962096193456687}
   isFacing: 0
   isFacingRight: 0

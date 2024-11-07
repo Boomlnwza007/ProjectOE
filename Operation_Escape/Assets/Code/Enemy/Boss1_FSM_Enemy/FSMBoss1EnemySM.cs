@@ -36,6 +36,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public string stateName;
     private SpriteFlash spriteFlash;
     public UIBoss uiBoss;
+    public GameObject gunDrop;
 
     [Header("Animation")]
     [SerializeField] public Animator animator;
@@ -361,6 +362,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void Die()
     {
+        Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

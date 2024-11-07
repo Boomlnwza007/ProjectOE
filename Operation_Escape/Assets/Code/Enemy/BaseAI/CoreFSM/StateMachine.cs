@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+    protected Vector3 firstSpawn;
     public BaseState curState;
     [Header("statusBasic")]
     public int maxHealth;
@@ -31,7 +32,9 @@ public class StateMachine : MonoBehaviour
         if (curState != null)
         {
             curState.Enter();
-        }        
+        }
+
+        firstSpawn = gameObject.transform.position;
     }
 
     private void Update()
@@ -65,5 +68,7 @@ public class StateMachine : MonoBehaviour
 
     public virtual void CombatPhaseOn() { }
     public virtual void SetCombatPhase(AreaEnermy area) { }
+    public virtual void Reset() { }
+
 
 }
