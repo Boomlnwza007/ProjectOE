@@ -5,6 +5,7 @@ using UnityEngine;
 public class AreaEnermy : MonoBehaviour
 {
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
+    private int enemyCount;
     [SerializeField] public AutoDoor[] door;
     [SerializeField] public TriggerBoss areaBoss;
     public bool ready = true;
@@ -25,7 +26,7 @@ public class AreaEnermy : MonoBehaviour
 
     private void Update()
     {
-        if (enemy.Count == 0 && ready)
+        if (enemyCount == 0 && ready)
         {
             foreach (var door in door)
             {
@@ -43,6 +44,8 @@ public class AreaEnermy : MonoBehaviour
             foreach (var item in enemy)
             {
                 item.Health = item.maxHealth;
+                item.Reset();
+                item.gameObject.SetActive(true);
             }
         }
         else
@@ -66,8 +69,10 @@ public class AreaEnermy : MonoBehaviour
             {
                 enemy.Add(state);
                 state.SetCombatPhase(GetComponent<AreaEnermy>());
+
             }
         }
+        enemyCount = enemy.Count;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -93,9 +98,9 @@ public class AreaEnermy : MonoBehaviour
         return size;
     }
 
-    public void Die(StateMachine _enemy)
+    public void Die()
     {
-        enemy.Remove(_enemy);
+        enemyCount--;
     }
 
     public void Lock()

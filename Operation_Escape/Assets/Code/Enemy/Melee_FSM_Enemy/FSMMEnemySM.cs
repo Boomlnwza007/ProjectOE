@@ -111,10 +111,10 @@ public class FSMMEnemySM : StateMachine, IDamageable
     {
         if (areaEnermy != null)
         {
-            areaEnermy.Die(this);
+            areaEnermy.Die();
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public IEnumerator Imortal(float wait)

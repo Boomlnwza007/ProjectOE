@@ -189,7 +189,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     {
         if (areaEnermy != null)
         {
-            areaEnermy.Die(this);
+            areaEnermy.Die();
         }
 
         Destroy(gameObject);
@@ -223,5 +223,11 @@ public class FSMREnemySM : StateMachine, IDamageable
     {
         ai.maxspeed = Speed;
         animator.animator.speed = 1;
+    }
+
+    public override void Reset()
+    {
+        gameObject.transform.position = firstSpawn;
+        ChangState(wanderState);
     }
 }

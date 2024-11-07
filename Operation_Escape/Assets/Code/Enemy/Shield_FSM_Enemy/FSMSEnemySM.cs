@@ -126,7 +126,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
     {
         if (areaEnermy != null)
         {
-            areaEnermy.Die(this);
+            areaEnermy.Die();
         }
 
         Destroy(gameObject);
@@ -161,5 +161,11 @@ public class FSMSEnemySM : StateMachine, IDamageable
                 player.Takedamage(dmg, DamageType.Melee, 0);
             }
         }
+    }
+
+    public override void Reset()
+    {
+        gameObject.transform.position = firstSpawn;
+        ChangState(wanderState);
     }
 }
