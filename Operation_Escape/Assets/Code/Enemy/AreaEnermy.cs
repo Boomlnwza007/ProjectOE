@@ -32,7 +32,8 @@ public class AreaEnermy : MonoBehaviour
             {
                 door.Unlock();                
             }
-            PauseScene.spawnPoint = checkPoint;            
+            PauseScene.spawnPoint = checkPoint;
+            checkPoint.gameObject.GetComponent<SavePoint>().SetAc(true);
             ready = false;
         }
     }

@@ -4923,6 +4923,7 @@ GameObject:
   - component: {fileID: 7086044812400498775}
   - component: {fileID: 6233964659992468515}
   - component: {fileID: 2118050019230750407}
+  - component: {fileID: 3068724401513607478}
   m_Layer: 0
   m_Name: Asset_SavePoint
   m_TagString: Untagged
@@ -5020,3 +5021,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3068724401513607478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824426863200793588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52286c5362f92e4a88b18afc1096789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2118050019230750407}
