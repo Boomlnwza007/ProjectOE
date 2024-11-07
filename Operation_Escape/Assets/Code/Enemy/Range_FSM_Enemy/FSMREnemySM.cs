@@ -228,6 +228,8 @@ public class FSMREnemySM : StateMachine, IDamageable
     public override void Reset()
     {
         gameObject.transform.position = firstSpawn;
+        attacking = false;
+        spriteFlash.ReFlash();
         ChangState(wanderState);
     }
 }

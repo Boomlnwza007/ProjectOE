@@ -34,4 +34,10 @@ public class SpriteFlash : MonoBehaviour
         spriteRenderer.color = originalColor;
         spriteRenderer.material = originalMaterial;
     }
+
+    public void ReFlash()
+    {
+        spriteRenderer.color = originalColor;
+        spriteRenderer.material = originalMaterial;
+    }
 }

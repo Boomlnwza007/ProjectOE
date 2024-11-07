@@ -182,6 +182,9 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public override void Reset()
     {
         gameObject.transform.position = firstSpawn;
+        animator.ResetHitZone();
+        attacking = false;
+        spriteFlash.ReFlash();
         ChangState(wanderState);
     }
 }

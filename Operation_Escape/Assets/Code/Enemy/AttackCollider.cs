@@ -5,6 +5,14 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     [SerializeField] private StateMachine mon;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D colliderA;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        colliderA = GetComponent<Collider2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,5 +22,11 @@ public class AttackCollider : MonoBehaviour
             player.Takedamage(mon.dmg, DamageType.Melee, 0);
         }
 
+    }
+
+    public void Re()
+    {
+        spriteRenderer.enabled = false;
+        colliderA.enabled = false;
     }
 }

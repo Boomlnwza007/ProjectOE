@@ -11,6 +11,7 @@ public class EM_Animation : MonoBehaviour
     public bool isFacing = true;
     public bool isFacingRight = true;
     public float timeplay;
+    public AttackCollider[] hitZone;
 
     private void Start()
     {
@@ -65,5 +66,13 @@ public class EM_Animation : MonoBehaviour
         animator.Play(newAnimation,1);
         timeplay = animator.GetCurrentAnimatorClipInfo(1).Length;
         currentAnimaton = newAnimation;
+    }
+
+    public void ResetHitZone()
+    {
+        foreach (var item in hitZone)
+        {
+            item.Re();
+        }
     }
 }
