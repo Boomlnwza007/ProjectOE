@@ -129,7 +129,8 @@ public class FSMSEnemySM : StateMachine, IDamageable
             areaEnermy.Die();
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+
     }
 
     public IEnumerator Imortal(float wait)
