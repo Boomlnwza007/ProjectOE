@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    protected Vector3 firstSpawn;
+    public Vector3 firstSpawn;
     public BaseState curState;
     [Header("statusBasic")]
     public int maxHealth;

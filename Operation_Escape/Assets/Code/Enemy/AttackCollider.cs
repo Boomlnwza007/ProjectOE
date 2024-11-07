@@ -5,8 +5,8 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     [SerializeField] private StateMachine mon;
-    private SpriteRenderer spriteRenderer;
-    private Collider2D colliderA;
+    public SpriteRenderer spriteRenderer;
+    public Collider2D colliderA;
 
     private void Awake()
     {

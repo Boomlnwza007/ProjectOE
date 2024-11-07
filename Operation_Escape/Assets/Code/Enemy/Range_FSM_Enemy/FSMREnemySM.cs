@@ -192,6 +192,7 @@ public class FSMREnemySM : StateMachine, IDamageable
             areaEnermy.Die();
         }
 
+        ChangState(wanderState);
         gameObject.SetActive(false);
     }
 
@@ -227,9 +228,9 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public override void Reset()
     {
-        gameObject.transform.position = firstSpawn;
         attacking = false;
-        spriteFlash.ReFlash();
         ChangState(wanderState);
+        gameObject.transform.position = firstSpawn;
+        spriteFlash.ReFlash();
     }
 }

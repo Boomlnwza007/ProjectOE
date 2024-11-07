@@ -201,6 +201,7 @@ public class PlayerControl : MonoBehaviour
         }
         playerMovement.enabled = enable;
         playerCombat.enabled = enable;
+        playerAim.enabled = enable;
     }
 
     public void Slow(float percent)

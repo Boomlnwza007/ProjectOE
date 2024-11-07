@@ -37,7 +37,6 @@ public class FSMSEnemySM : StateMachine, IDamageable
         defendState = new DefendSFSM(this);
         wanderState = new WanderSFSM(this);
         spriteFlash = GetComponent<SpriteFlash>();
-
     }
 
     protected override BaseState GetInitialState()
@@ -129,6 +128,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
             areaEnermy.Die();
         }
 
+        ChangState(wanderState);
         gameObject.SetActive(false);
 
     }
@@ -166,9 +166,9 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     public override void Reset()
     {
-        gameObject.transform.position = firstSpawn;
         attacking = false;
-        spriteFlash.ReFlash();
         ChangState(wanderState);
+        gameObject.transform.position = firstSpawn;
+        spriteFlash.ReFlash();
     }
 }

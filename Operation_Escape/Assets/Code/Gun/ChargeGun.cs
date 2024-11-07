@@ -108,6 +108,7 @@ public class ChargeGun : BaseGun
             bullet.charging = false;
             bullet.rb.velocity = bullet.transform.right * bullet.speed;
             PlayerControl.control.Slow(0);
+            Destroy(ChangeEff);
         }        
     }   
 

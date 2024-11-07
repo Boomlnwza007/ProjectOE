@@ -64,6 +64,7 @@ public class PauseScene : MonoBehaviour
         }
 
         onPauseMenu = !onPauseMenu;
+        PlayerControl.control.EnableInput(!onPauseMenu);
         menuPause.SetActive(onPauseMenu);
         if (onPauseMenu)
         {
@@ -84,6 +85,8 @@ public class PauseScene : MonoBehaviour
         }
 
         onmenuAfterDie = !onmenuAfterDie;
+        PlayerControl.control.EnableInput(!onmenuAfterDie);
+
         menuAfterDie.SetActive(onmenuAfterDie);
         if (onmenuAfterDie)
         {
@@ -115,11 +118,13 @@ public class PauseScene : MonoBehaviour
     IEnumerator wait() 
     {
         ControlScene.scene.PlayAnimation();
+        ControlScene.scene.animator.speed = 10;
         retrying = true;
         ControlScene.scene.LoadScene = true;
         PlayerControl.control.EnableInput(false);
         CinemachineControl.Instance.cancameraMove = false;
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1f);
+        ControlScene.scene.animator.speed = 1;
         HideAfterDieCode();
         if (area != null)
         {

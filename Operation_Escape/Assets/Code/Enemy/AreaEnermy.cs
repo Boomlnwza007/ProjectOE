@@ -33,7 +33,7 @@ public class AreaEnermy : MonoBehaviour
                 door.Unlock();                
             }
             PauseScene.spawnPoint = checkPoint;
-            checkPoint.gameObject.GetComponent<SavePoint>().SetAc(true);
+            checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
             ready = false;
         }
     }
@@ -44,9 +44,11 @@ public class AreaEnermy : MonoBehaviour
         {
             foreach (var item in enemy)
             {
-                item.Health = item.maxHealth;
-                item.Reset();
                 item.gameObject.SetActive(true);
+                item.rb.velocity = Vector3.zero;
+                item.Health = item.maxHealth;                
+                item.Reset();
+                enemyCount = enemy.Count;
             }
         }
         else
@@ -57,7 +59,8 @@ public class AreaEnermy : MonoBehaviour
             }
             areaBoss.Off();
         }
-        
+
+        hasPlayer = false;
     }
 
     public void AddAllEnemy()
