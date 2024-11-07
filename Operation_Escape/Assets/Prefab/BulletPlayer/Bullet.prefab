@@ -189,6 +189,7 @@ MonoBehaviour:
   tagUse: Enemy
   target: {fileID: 0}
   ready: 0
+  expo: {fileID: 4468603144254925480, guid: bff72df5c68973d449971adfb6f01e27, type: 3}
 --- !u!50 &-8713237800413251932
 Rigidbody2D:
   serializedVersion: 4
