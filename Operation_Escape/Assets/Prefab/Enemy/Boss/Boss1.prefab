@@ -1323,7 +1323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 698608399022449225}
   - component: {fileID: 3111619212306059440}
-  - component: {fileID: 565879904958776926}
+  - component: {fileID: 7147007399141606102}
   - component: {fileID: 6836464561234138672}
   m_Layer: 0
   m_Name: AfterJumpAtk
@@ -1399,8 +1399,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &565879904958776926
-BoxCollider2D:
+--- !u!58 &7147007399141606102
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1432,18 +1432,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 7}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!114 &6836464561234138672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,7 +1815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8288421939416693862}
   - component: {fileID: 8756243198172986098}
-  - component: {fileID: 1359844915577942735}
+  - component: {fileID: 5140843440903898061}
   - component: {fileID: 3214508988211234287}
   m_Layer: 0
   m_Name: AfterJumpAtkO
@@ -1901,8 +1891,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1359844915577942735
-BoxCollider2D:
+--- !u!58 &5140843440903898061
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1934,18 +1924,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 7}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!114 &3214508988211234287
 MonoBehaviour:
   m_ObjectHideFlags: 0
