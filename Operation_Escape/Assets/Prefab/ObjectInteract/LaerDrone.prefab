@@ -15331,7 +15331,7 @@ MonoBehaviour:
   endSFX: {fileID: 8085177475843786292}
   ShootLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 512
 --- !u!120 &2345503973643408658
 LineRenderer:
   serializedVersion: 2
