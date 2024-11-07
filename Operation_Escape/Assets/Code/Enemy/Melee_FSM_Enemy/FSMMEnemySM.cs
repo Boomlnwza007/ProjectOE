@@ -178,4 +178,10 @@ public class FSMMEnemySM : StateMachine, IDamageable
         ai.maxspeed = Speed;
         animator.animator.speed = 1;
     }
+
+    public override void Reset()
+    {
+        gameObject.transform.position = firstSpawn;
+        ChangState(wanderState);
+    }
 }

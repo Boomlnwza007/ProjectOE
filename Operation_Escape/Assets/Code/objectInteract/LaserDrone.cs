@@ -31,7 +31,7 @@ public class LaserDrone : MonoBehaviour
         distance = Vector2.Distance(firstPos.position, endPos.position);
         for (int i = 0; i < particleSystems.Count; i++)
         {
-            particleSystems[i].Play();
+            particleSystems[i].Stop();
         }
     }
 
@@ -115,6 +115,7 @@ public class LaserDrone : MonoBehaviour
     {
         laser.SetPosition(0, startPos);
         laser.SetPosition(1, endPos);
+
         startSFX.transform.position = startPos;
         endSFX.transform.position = endPos;
         Vector3 aimDir = (endPos - startPos).normalized;
