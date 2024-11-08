@@ -11,10 +11,16 @@ public class Boss1AniControl : MonoBehaviour
     public GameObject BossBody;
     public AttackCollider[] hitZone;
     public GameObject[] hitZoneBar;
+    public Transform[] bone;
+    public Vector3[] bonePos;
 
     private void Awake()
     {
         boss1AniControl = this;
+        for (int i = 0; i < bone.Length; i++)
+        {
+            bonePos[i] = bone[i].localPosition;
+        }
     }
 
     public void ResetAnim()
@@ -29,6 +35,12 @@ public class Boss1AniControl : MonoBehaviour
         {
             item.SetActive(false);
             item.transform.position = Vector3.zero;
+        }
+
+
+        for (int i = 0; i < bonePos.Length; i++)
+        {
+            bone[i].localPosition = bonePos[i];
         }
     }
 
