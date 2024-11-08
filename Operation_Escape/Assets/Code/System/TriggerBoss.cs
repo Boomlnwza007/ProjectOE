@@ -17,7 +17,9 @@ public class TriggerBoss : MonoBehaviour
     }
     public void Off()
     {
+        Boss.gameObject.SetActive(false);
         uiBoss.uiBody.SetActive(false);
+        Boss.gameObject.SetActive(true);
         Boss.attacking = false;
         var state = ((FSMBoss1EnemySM)Boss);
         state.overdriveGage = 0;
