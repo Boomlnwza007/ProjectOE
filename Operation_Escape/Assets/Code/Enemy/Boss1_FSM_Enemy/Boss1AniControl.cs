@@ -35,11 +35,10 @@ public class Boss1AniControl : MonoBehaviour
             item.Re();
         }
 
-        //foreach (var item in hitZoneBar)
-        //{
-        //    //item.SetActive(false);
-        //    item.transform.position = Vector3.zero;
-        //}
+        foreach (var item in hitZoneBar)
+        {
+            item.SetActive(false);
+        }
 
 
         for (int i = 0; i < bonePos.Length; i++)
