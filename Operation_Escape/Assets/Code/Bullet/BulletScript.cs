@@ -29,17 +29,25 @@ public class BulletScript : BaseBullet
                 KnockBackPush(collision);
             }
 
-            Instantiate(expo, gameObject.transform.position, Quaternion.identity);
+            Expo();
             Destroy(gameObject);
         }
         else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
         {
             bulletInteract.Interact(DamageType.Rang);
+            Expo();
 
-            Instantiate(expo, gameObject.transform.position, Quaternion.identity);
-            Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            Expo();
+            Destroy(gameObject);
+        }
+    }
+
+    public void Expo()
+    {
+        if (expo != null)
         {
             Instantiate(expo, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
