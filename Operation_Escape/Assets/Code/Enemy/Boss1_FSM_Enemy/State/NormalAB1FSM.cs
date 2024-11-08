@@ -78,6 +78,7 @@ public class NormalAB1FSM : BaseState
                     ani.ChangeAnimationState("Atk1");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
                     state.isFacing = true;
@@ -92,6 +93,7 @@ public class NormalAB1FSM : BaseState
                     ani.ChangeAnimationState("Atk2");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
 
@@ -108,6 +110,7 @@ public class NormalAB1FSM : BaseState
                     ani.ChangeAnimationState("Atk3");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
                     state.isFacing = true;
@@ -123,6 +126,7 @@ public class NormalAB1FSM : BaseState
                     state.ShootBladeslash();
                     await UniTask.WaitForSeconds(3f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
                     state.isFacing = true;
@@ -175,6 +179,7 @@ public class NormalAB1FSM : BaseState
                     ani.ChangeAnimationState("Atk1");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
                     state.isFacing = true;
@@ -189,6 +194,7 @@ public class NormalAB1FSM : BaseState
                     ani.ChangeAnimationState("Atk2");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
 
@@ -205,6 +211,7 @@ public class NormalAB1FSM : BaseState
                     ani.ChangeAnimationState("Atk3");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
+                    await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
                     state.isFacing = true;
@@ -293,15 +300,15 @@ public class NormalAB1FSM : BaseState
     public void Dash()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        Vector2 dir = Vector2.zero;
-        if (state.isFacingRight)
-        {
-            dir = Vector2.right;
-        }
-        else
-        {
-            dir = Vector2.left;
-        }
+        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
+        //if (state.isFacingRight)
+        //{
+        //    dir = Vector2.right;
+        //}
+        //else
+        //{
+        //    dir = Vector2.left;
+        //}
         state.rb.AddForce(dir * state.forcePush, ForceMode2D.Impulse);
 
     }
