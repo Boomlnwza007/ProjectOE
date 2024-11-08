@@ -53,7 +53,7 @@ public class OverdriveChangFSM : BaseState
     public override void Exit()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
-        cancellationToken?.Cancel();
+        //cancellationToken?.Cancel();
         state.animator.SetBool("OverdriveChangFSM", false);
     }
 }
