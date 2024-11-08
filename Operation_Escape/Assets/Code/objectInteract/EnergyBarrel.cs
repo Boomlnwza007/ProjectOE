@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyBarrel : MonoBehaviour, IBulletInteract
+public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
 {
     [SerializeField] private GameObject hitbox;
     private Collider2D bomb;
@@ -31,7 +31,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract
                 if (!blast)
                 {
                     lootDrop.InstantiateLoot(0);
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
                 else
                 {
@@ -93,7 +93,17 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract
         color.a = 1f;
         spriteRenderer.color = color;
         MakeDamage();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         Destroy(bomb.gameObject);
+    }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+        if (bomb != null)
+        {
+            Destroy(bomb.gameObject);
+        }
+        blast = false;
     }
 }

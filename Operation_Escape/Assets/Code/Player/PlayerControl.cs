@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     public List<int> key = new List<int>();
     [SerializeField] private PlayerAim playerAim;
     public Animator animator;
+    public bool isdaed;
 
     [Header("UI")]
     [SerializeField] private SliderBar healthBar;

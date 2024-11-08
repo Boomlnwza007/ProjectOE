@@ -52,6 +52,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
     public void Die()
     {
+        PlayerControl.control.isdaed = true;
         PlayerControl.control.ShowGameOver();
     }
 

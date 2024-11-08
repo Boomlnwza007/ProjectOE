@@ -154,6 +154,7 @@ public class PauseScene : MonoBehaviour
         PlayerControl.control.EnableInput(true);
         CinemachineControl.Instance.cancameraMove = true;
         ControlScene.scene.PlayAnimation();
+        PlayerControl.control.isdaed = false;
     }
 
 

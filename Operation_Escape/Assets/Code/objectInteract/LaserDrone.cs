@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserDrone : MonoBehaviour
+public class LaserDrone : MonoBehaviour , IRestartOBJ
 {
     public Transform firstPos;
     public Transform endPos;
@@ -21,6 +21,7 @@ public class LaserDrone : MonoBehaviour
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
     private LineRenderer laser;
     public LayerMask ShootLayer;
+    private bool isOof;
 
     // Start is called before the first frame update
     void Start()
@@ -126,10 +127,16 @@ public class LaserDrone : MonoBehaviour
 
     public void Destroy()
     {
-        Destroy(laser);
-        Destroy(GetComponent<LaserDrone>());
-        Destroy(firstPos.gameObject);
-        Destroy(endPos.gameObject);
+        laser.enabled = false;
+        firstPos.gameObject.SetActive(false);
+        endPos.gameObject.SetActive(false);
+        GetComponent<LaserDrone>().enabled = false;
+
+
+        //Destroy(laser);
+        //Destroy(firstPos.gameObject);
+        //Destroy(endPos.gameObject);
+        //Destroy(GetComponent<LaserDrone>());
     }
 
     public void FillLaser()
@@ -151,5 +158,13 @@ public class LaserDrone : MonoBehaviour
                 particleSystems.Add(ps);
             }
         }
+    }
+
+    public void Reset()
+    {
+        GetComponent<LaserDrone>().enabled = true;
+        laser.enabled = true;
+        firstPos.gameObject.SetActive(true);
+        endPos.gameObject.SetActive(true);
     }
 }

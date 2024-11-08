@@ -21,7 +21,6 @@ public class Boss1AniControl : MonoBehaviour
         // if (currentAnimaton == newAnimation.ToString()) return;
 
         animator.Play(newAnimation, 0);
-        AnimationClip clip = null;
         currentAnimaton = newAnimation;
     }
 

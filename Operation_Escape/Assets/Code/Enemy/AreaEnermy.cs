@@ -5,6 +5,7 @@ using UnityEngine;
 public class AreaEnermy : MonoBehaviour
 {
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
+    [SerializeField] public List<IRestartOBJ> objInterac = new List<IRestartOBJ>();
     private int enemyCount;
     [SerializeField] public AutoDoor[] door;
     [SerializeField] public TriggerBoss areaBoss;
@@ -13,6 +14,7 @@ public class AreaEnermy : MonoBehaviour
     public bool hasPlayer;
     public LayerMask enemyleLayer;
     public bool boss;
+    private Collider2D colliderHit;
 
     // Start is called before the first frame update
     private void Awake()
@@ -24,43 +26,42 @@ public class AreaEnermy : MonoBehaviour
         AddAllEnemy();
     }
 
-    private void Update()
-    {
-        if (enemyCount == 0 && ready)
-        {
-            foreach (var door in door)
-            {
-                door.Unlock();                
-            }
-            PauseScene.spawnPoint = checkPoint;
-            checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
-            ready = false;
-        }
-    }
-
     public void ResetMon()
     {
-        if (!boss)
+        if (ready)
         {
-            foreach (var item in enemy)
+            if (!boss)
             {
-                item.gameObject.SetActive(true);
-                item.rb.velocity = Vector3.zero;
-                item.Health = item.maxHealth;                
-                item.Reset();
-                enemyCount = enemy.Count;
-            }
-        }
-        else
-        {
-            foreach (var item in enemy)
-            {
-                item.Health = item.maxHealth;
-            }
-            areaBoss.Off();
-        }
+                foreach (var item in enemy)
+                {
+                    item.gameObject.SetActive(true);
+                    item.rb.velocity = Vector3.zero;
+                    item.Health = item.maxHealth;
+                    item.Reset();
+                    enemyCount = enemy.Count;
+                }
 
-        hasPlayer = false;
+                foreach (var item in objInterac)
+                {
+                    item.Reset();
+                }
+            }
+            else
+            {
+                foreach (var item in enemy)
+                {
+                    item.Health = item.maxHealth;
+                }
+
+                foreach (var item in objInterac)
+                {
+                    item.Reset();
+                }
+                areaBoss.Off();
+            }
+
+            hasPlayer = false;
+        }       
     }
 
     public void AddAllEnemy()
@@ -68,14 +69,18 @@ public class AreaEnermy : MonoBehaviour
         Collider2D[] enemygameObject = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0, enemyleLayer);
         foreach (var item in enemygameObject)
         {
-            StateMachine state = item.GetComponent<StateMachine>();
-            if (state != null)
+            if (item.TryGetComponent(out StateMachine stateMachine))
             {
-                enemy.Add(state);
-                state.SetCombatPhase(GetComponent<AreaEnermy>());
-
+                enemy.Add(stateMachine);
+                stateMachine.SetCombatPhase(GetComponent<AreaEnermy>());
+            }
+            else if (item.TryGetComponent(out IRestartOBJ restart))
+            {
+                objInterac.Add(restart);
             }
         }
+
+
         enemyCount = enemy.Count;
     }
 
@@ -105,6 +110,16 @@ public class AreaEnermy : MonoBehaviour
     public void Die()
     {
         enemyCount--;
+        if (enemyCount == 0 && ready && !PlayerControl.control.isdaed)
+        {
+            foreach (var door in door)
+            {
+                door.Unlock();
+            }
+            PauseScene.spawnPoint = checkPoint;
+            checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
+            ready = false;
+        }
     }
 
     public void Lock()

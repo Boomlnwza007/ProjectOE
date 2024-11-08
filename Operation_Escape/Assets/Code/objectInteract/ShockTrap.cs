@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShockTrap : MonoBehaviour
+public class ShockTrap : MonoBehaviour , IRestartOBJ
 {
     [SerializeField] private GameObject hitbox;
     private HashSet<IDamageable> hitTargets = new HashSet<IDamageable>();
@@ -41,8 +41,8 @@ public class ShockTrap : MonoBehaviour
                 {
                     isRunning = false;
                     time = 0f;
-                    Destroy(trap.gameObject);
-                    Destroy(gameObject);
+                    Destroy(trap.gameObject);                    
+                    gameObject.SetActive(false);
                 }
             }
             else
@@ -81,9 +81,12 @@ public class ShockTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        trapOn = true;
-        trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
-        StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
+        if (!trapOn)
+        {
+            trapOn = true;
+            trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
+            StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
+        }
     }
 
     public IEnumerator FadeBomb(SpriteRenderer spriteRenderer, float duration)
@@ -104,5 +107,17 @@ public class ShockTrap : MonoBehaviour
         color = Color.red;
         color.a = 1f;
         spriteRenderer.color = color;
+    }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+        if (trap != null)
+        {
+            Destroy(trap.gameObject);
+        }
+
+        trapOn = false;
+        time = 0;
     }
 }
