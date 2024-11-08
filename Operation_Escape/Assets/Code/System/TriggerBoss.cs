@@ -28,7 +28,8 @@ public class TriggerBoss : MonoBehaviour
         state.overdriveGage = 0;
         state.overdriveTime = 0;
         state.overdrive = false;
+        state.rb.velocity = Vector3.zero;
         state.JumpCenter();
-        //state.ChangState(state.idleState);
+        state.ChangState(state.idleState);
     }
 }
