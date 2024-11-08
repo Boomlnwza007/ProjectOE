@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7625140513865999105}
   - component: {fileID: 2634942710057667092}
   - component: {fileID: 9140858741993304783}
+  - component: {fileID: 5168941981807238506}
   m_Layer: 0
   m_Name: Area
   m_TagString: Untagged
@@ -100,12 +101,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: []
   door: []
+  areaBoss: {fileID: 0}
+  delBulletAll: {fileID: 5168941981807238506}
   ready: 1
   checkPoint: {fileID: 0}
   hasPlayer: 0
   enemyleLayer:
     serializedVersion: 2
     m_Bits: 128
+  boss: 0
 --- !u!61 &9140858741993304783
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,3 +155,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5168941981807238506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132582779289549087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d2292996c12744c816fb3a293d5b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletleLayer:
+    serializedVersion: 2
+    m_Bits: 256

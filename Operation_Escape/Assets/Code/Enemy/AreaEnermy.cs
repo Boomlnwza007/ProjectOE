@@ -9,6 +9,7 @@ public class AreaEnermy : MonoBehaviour
     private int enemyCount;
     [SerializeField] public AutoDoor[] door;
     [SerializeField] public TriggerBoss areaBoss;
+    public DelBulletAll delBulletAll;
     public bool ready = true;
     public Transform checkPoint;
     public bool hasPlayer;
@@ -45,6 +46,8 @@ public class AreaEnermy : MonoBehaviour
                 {
                     item.Reset();
                 }
+
+                delBulletAll.DestroyBullet();
             }
             else
             {
@@ -58,6 +61,8 @@ public class AreaEnermy : MonoBehaviour
                     item.Reset();
                 }
                 areaBoss.Off();
+
+                delBulletAll.DestroyBullet();
             }
 
             hasPlayer = false;
