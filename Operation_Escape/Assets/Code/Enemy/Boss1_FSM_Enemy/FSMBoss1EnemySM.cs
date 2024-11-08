@@ -82,16 +82,16 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             stateName = curState.nameState;
         }
 
-        if (overdrive)
-        {
-            overdriveTime += Time.deltaTime;
-            if (overdriveTime > overdriveTimer)
-            {
-                overdriveGage = 0;
-                overdriveTime = 0;
-                overdrive = false;
-            }
-        }
+        //if (overdrive)
+        //{
+        //    overdriveTime += Time.deltaTime;
+        //    if (overdriveTime > overdriveTimer)
+        //    {
+        //        overdriveGage = 0;
+        //        overdriveTime = 0;
+        //        overdrive = false;
+        //    }
+        //}
 
         if (isFacing)
         {
