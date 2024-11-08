@@ -34,8 +34,6 @@ public class ER_Animation : MonoBehaviour
         // ปรับมุมให้อยู่ในช่วง 0 ถึง 360 องศา
         targetAngle = (targetAngle + 360) % 360;
 
-        Debug.Log(targetAngle);
-
         // ตรวจสอบช่วงมุมแล้วกำหนดทิศทางตามที่ต้องการ
         if (targetAngle >= 90 && targetAngle < 112.5f)
         {

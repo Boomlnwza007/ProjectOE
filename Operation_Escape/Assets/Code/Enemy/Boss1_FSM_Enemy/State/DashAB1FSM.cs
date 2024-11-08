@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 public class DashAB1FSM : BaseState
 {
@@ -13,11 +15,13 @@ public class DashAB1FSM : BaseState
     bool followMe;
     public bool overdrive;
     public bool pull;
+    private CancellationTokenSource cancellationToken;
 
     // Start is called before the first frame update
     public override async void Enter()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
+        cancellationToken = new CancellationTokenSource();
         ai = state.ai;
         overdrive = state.overdrive;
         speed = ai.maxspeed;
@@ -67,66 +71,89 @@ public class DashAB1FSM : BaseState
 
     public async UniTaskVoid AttackN()
     {
+        cancellationToken = new CancellationTokenSource();
+        var token = cancellationToken.Token;
+
         ai.canMove = false;
         var state = ((FSMBoss1EnemySM)stateMachine);
         var ani = Boss1AniControl.boss1AniControl;
-        state.isFacing = false;
-        ani.ChangeAnimationState("StartJump");
-        await UniTask.WaitForSeconds(2.1f);
-        ai.canMove = true;
-        ani.ChangeAnimationState("AirJump");
-        await UniTask.WaitForSeconds(3f);
-        ai.canMove = false;
-        ani.ChangeAnimationState("StopJump");
-        await UniTask.WaitForSeconds(0.15f);
-        state.isFacing = true;
-        ani.ChangeAnimationState("Wait");        
-        await UniTask.WaitForSeconds(2f);
-        state.isFacing = false;
-        ani.ChangeAnimationState("AfterDash");
-        await UniTask.WaitForSeconds(5.1f);
-        state.isFacing = true;
-        ani.ChangeAnimationState("Wait");
-        await UniTask.WaitForSeconds(3f);
-        ai.canMove = true;
-        ChangState(state.normalAState);
+
+        try
+        {
+            state.isFacing = false;
+            ani.ChangeAnimationState("StartJump");
+            await UniTask.WaitForSeconds(2.1f, cancellationToken: token);
+            ai.canMove = true;
+            ani.ChangeAnimationState("AirJump");
+            await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            ai.canMove = false;
+            ani.ChangeAnimationState("StopJump");
+            await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
+            state.isFacing = true;
+            ani.ChangeAnimationState("Wait");
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            state.isFacing = false;
+            ani.ChangeAnimationState("AfterDash");
+            await UniTask.WaitForSeconds(5.1f, cancellationToken: token);
+            state.isFacing = true;
+            ani.ChangeAnimationState("Wait");
+            await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            ai.canMove = true;
+            ChangState(state.normalAState);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
     }
 
     public async UniTaskVoid AttackO()
     {
+        cancellationToken = new CancellationTokenSource();
+        var token = cancellationToken.Token;
+
         ai.canMove = false;
         var state = ((FSMBoss1EnemySM)stateMachine);
         var ani = Boss1AniControl.boss1AniControl;
-        ani.ChangeAnimationState("StartJump");
-        await UniTask.WaitForSeconds(2.1f);
-        ai.canMove = true;
-        ani.ChangeAnimationState("AirJumpO");
-        await UniTask.WaitForSeconds(3f);
-        ai.canMove = false;
-        state.isFacing = false;
-        ani.ChangeAnimationState("StopJump");
-        await UniTask.WaitForSeconds(0.15f);
-        state.isFacing = true;
 
-        ani.ChangeAnimationState("Wait");
-        await UniTask.WaitForSeconds(2f);
-        PullPlayer().Forget();
-
-        state.isFacing = false;
-        ani.ChangeAnimationState("AfterDash");
-        await UniTask.WaitForSeconds(6.2f);
-        state.isFacing = true;
-
-        ani.ChangeAnimationState("Wait");
-        await UniTask.WaitForSeconds(3f);
-        ai.canMove = true;
-        if (Random.value > 0.5f)
+        try
         {
-            ChangState(state.normalAState);
+            ani.ChangeAnimationState("StartJump");
+            await UniTask.WaitForSeconds(2.1f, cancellationToken: token);
+            ai.canMove = true;
+            ani.ChangeAnimationState("AirJumpO");
+            await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            ai.canMove = false;
+            state.isFacing = false;
+            ani.ChangeAnimationState("StopJump");
+            await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
+            state.isFacing = true;
+
+            ani.ChangeAnimationState("Wait");
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            PullPlayer().Forget();
+
+            state.isFacing = false;
+            ani.ChangeAnimationState("AfterDash");
+            await UniTask.WaitForSeconds(6.2f, cancellationToken: token);
+            state.isFacing = true;
+
+            ani.ChangeAnimationState("Wait");
+            await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            ai.canMove = true;
+
+            if (UnityEngine.Random.value > 0.5f)
+            {
+                ChangState(state.normalAState);
+            }
+            else
+            {
+                ChangState(state.rangeAState);
+            }
         }
-        else
+        catch (OperationCanceledException)
         {
-            ChangState(state.rangeAState);
+            return;
         }
     }
 
@@ -190,6 +217,7 @@ public class DashAB1FSM : BaseState
     public override void Exit()
     {
         var state = (FSMBoss1EnemySM)stateMachine;
+        cancellationToken?.Cancel();
         state.animator.SetBool("DashAB1FSM", false);
     }
 }

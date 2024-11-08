@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 
@@ -9,6 +11,7 @@ public class NormalAttackRFSM : BaseState
     public NormalAttackRFSM(FSMREnemySM stateMachine) : base("NormalAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
+    private CancellationTokenSource cancellationToken;
     //float time;
     //int bulltCount;
 
@@ -17,57 +20,48 @@ public class NormalAttackRFSM : BaseState
     {
         ai = ((FSMREnemySM)stateMachine).ai;
         speed = ai.maxspeed;
+        cancellationToken = new CancellationTokenSource();
         //time = 0;
         //bulltCount = 0;
         ai.canMove = true;
-        Attack().Forget();
+        Attack(cancellationToken.Token).Forget();
     }
 
     public override void UpdateLogic()
     {
         var state = ((FSMREnemySM)stateMachine);
-        state.Movement();
-        //time += Time.deltaTime;  
-        
-        //if (bulltCount >=3)
-        //{
-        //    if (time >= state.fireCooldown)
-        //    {
-        //        stateMachine.ChangState(state.checkDistanceState);
-        //        time = 0;
-        //    }
-        //}
-
-        //if (time >= state.fireRate && bulltCount <= 3)
-        //{
-        //    bulltCount++;
-        //    Debug.Log(bulltCount);
-        //    state.Fire();
-        //    time = 0;
-        //}
+        state.Movement();        
     }
 
-    public async UniTask Attack()
+    public async UniTask Attack(CancellationToken token)
     {
         var state = ((FSMREnemySM)stateMachine);
-        for (int i = 0; i < 3; i++)
+        try
         {
-            if (Vector2.Distance(ai.destination, ai.position) < 3f)
+            for (int i = 0; i < 3; i++)
             {
-                stateMachine.ChangState(state.closeAttackState);
-                return;
-            }            
-            await UniTask.WaitForSeconds(state.fireRate);
-            ai.canMove = false;
-            state.rb.velocity = Vector2.zero;
-            await state.PreAttack("PreAttack", 0.1f);
-            await state.Attack("Attack", 0.1f);
-            state.Fire();
-            await UniTask.WaitForSeconds(0.2f); ;
-            state.animator.ChangeAnimationAttack("Normal");            
-            ai.canMove = true;
+                if (Vector2.Distance(ai.destination, ai.position) < 3f)
+                {
+                    stateMachine.ChangState(state.closeAttackState);
+                    return;
+                }
+                await UniTask.WaitForSeconds(state.fireRate, cancellationToken: token);
+                ai.canMove = false;
+                state.rb.velocity = Vector2.zero;
+                await state.PreAttack("PreAttack", 0.1f);
+                await state.Attack("Attack", 0.1f);
+                state.Fire();
+                await UniTask.WaitForSeconds(0.2f, cancellationToken: token); ;
+                state.animator.ChangeAnimationAttack("Normal");
+                ai.canMove = true;
+            }
+            await UniTask.WaitForSeconds(state.fireCooldown, cancellationToken: token);
+            stateMachine.ChangState(state.checkDistanceState);
         }
-        await UniTask.WaitForSeconds(state.fireCooldown);
-        stateMachine.ChangState(state.checkDistanceState);
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+       
     }
 }

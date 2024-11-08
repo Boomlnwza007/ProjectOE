@@ -113,6 +113,7 @@ public class ChargeEMFSM : BaseState
         catch (OperationCanceledException)
         {
             Debug.Log("Attack was cancelled.");
+            return;
         }
     }
 

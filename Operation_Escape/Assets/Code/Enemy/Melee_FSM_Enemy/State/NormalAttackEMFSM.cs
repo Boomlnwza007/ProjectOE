@@ -44,7 +44,7 @@ public class NormalAttackEMFSM : BaseState
             if (Distance())
             {
                 state.animator.ChangeAnimationAttack("Normal");
-                await UniTask.WaitForSeconds(1f); Debug.Log("Far");
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
                 ai.canMove = true;
                 state.animator.isFacing = true;
                 state.Walk();
@@ -65,7 +65,7 @@ public class NormalAttackEMFSM : BaseState
             if (Distance())
             {
                 state.animator.ChangeAnimationAttack("Normal");
-                await UniTask.WaitForSeconds(1f); Debug.Log("Far");
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
                 ai.canMove = true;
                 state.animator.isFacing = true;
                 state.Walk();
@@ -106,6 +106,15 @@ public class NormalAttackEMFSM : BaseState
             return true;
         }
         return false;
+    }
+
+    public void ChangState(BaseState Nextstate)
+    {
+        var state = ((FSMMEnemySM)stateMachine);
+        if (state.curState == this)
+        {
+            stateMachine.ChangState(Nextstate);
+        }
     }
 
     public override void Exit()

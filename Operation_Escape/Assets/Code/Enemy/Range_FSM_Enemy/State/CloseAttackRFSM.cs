@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class CloseAttackRFSM : BaseState
@@ -10,12 +12,15 @@ public class CloseAttackRFSM : BaseState
     public float speed;
     public bool go;
     float time;
+    private CancellationTokenSource cancellationToken;
+
 
     // Start is called before the first frame update
     public override void Enter()
     {
         go = false;
         time = 0;
+        cancellationToken = new CancellationTokenSource();
 
         var state = (FSMREnemySM)stateMachine;
         if (state.cooldown)
@@ -25,97 +30,69 @@ public class CloseAttackRFSM : BaseState
         }
 
         ai = ((FSMREnemySM)stateMachine).ai;
-        //speed = ai.Maxspeed;
-        //time = 0;
-        //ai.Maxspeed = speed * 10;
+
         Debug.Log("ตั้งท่าเตรียมโจมตี CloseAttack");
-        Attack().Forget();
-        //if (state.rb != null)
-        //{
-        //    ai.canMove = false;
-        //    Vector2 knockbackDirection = (ai.position - ai.targetTransform.position).normalized;
-        //    Debug.DrawLine(ai.position, ai.position + (ai.position - ai.targetTransform.position).normalized * 10);
-        //    state.rb.AddForce(knockbackDirection * 150, ForceMode2D.Impulse);
-
-        //    Debug.Log("back");
-        //}
-        //ai.destination = ai.position + (ai.position - ai.targetTarnsform.position).normalized * 5;
-    }
-
-    public override void UpdateLogic()  
-    {
-        //if (!go)
-        //{
-        //    time += Time.deltaTime;
-        //    if (time > 0.5f)
-        //    {
-        //        ((FSMREnemySM)stateMachine).rb.velocity = Vector2.zero;
-        //        ((FSMREnemySM)stateMachine).FireClose();
-        //        ai.canMove = true;
-        //        go = true;
-        //    }
-        //}
-        //else
-        //{
-        //    time += Time.deltaTime;
-        //    if (time > 0.5f)
-        //    {
-        //        ((FSMREnemySM)stateMachine).cooldown = true;
-        //        stateMachine.ChangState(((FSMREnemySM)stateMachine).checkDistanceState);
-        //    }
-        //}
+        Attack(cancellationToken.Token).Forget();
 
     }
-
-    public async UniTask Attack()
+    
+    public async UniTask Attack(CancellationToken token)
     {
         var state = (FSMREnemySM)stateMachine;
-        state.animator.isFacing = false;
-        state.Run(2);
-        Ray();
-        ai.canMove = true;
-        bool hasAttacked = false;       
-
-        while (time < 3 && !hasAttacked)
+        try
         {
-            time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 3f && ai.endMove)
-            {
-                Debug.Log(0);
-                state.Walk();
-                hasAttacked = true;
-                state.animator.isFacing = true;
-                break;
-            }
+            state.animator.isFacing = false;
+            state.Run(2);
+            Ray();
+            ai.canMove = true;
+            bool hasAttacked = false;
 
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-            foreach (var hit in colliders)
+            while (time < 3 && !hasAttacked)
             {
-                if (hit.gameObject != state.gameObject)
+                time += Time.deltaTime;
+                if (Vector2.Distance(ai.destination, ai.position) < 3f && ai.endMove)
                 {
-                    Debug.Log(hit.gameObject.name);
+                    Debug.Log(0);
                     state.Walk();
                     hasAttacked = true;
                     state.animator.isFacing = true;
                     break;
                 }
+
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
+                foreach (var hit in colliders)
+                {
+                    if (hit.gameObject != state.gameObject)
+                    {
+                        Debug.Log(hit.gameObject.name);
+                        state.Walk();
+                        hasAttacked = true;
+                        state.animator.isFacing = true;
+                        break;
+                    }
+                }
+                token.ThrowIfCancellationRequested();
+                await UniTask.Yield();
             }
-            await UniTask.Yield();
+
+            ai.canMove = false;
+            state.rb.velocity = Vector2.zero;
+            await state.PreAttack("PreAttack", 0.1f);
+            await state.Attack("Attack", 0.1f);
+            state.FireClose();
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
+            state.animator.ChangeAnimationAttack("Normal");
+            ai.canMove = true;
+
+            state.Walk();
+            state.cooldown = true;
+            state.animator.isFacing = true;
+            stateMachine.ChangState(state.checkDistanceState);
         }
-
-        ai.canMove = false;
-        state.rb.velocity = Vector2.zero;
-        await state.PreAttack("PreAttack", 0.1f);
-        await state.Attack("Attack", 0.1f);
-        state.FireClose();
-        await UniTask.WaitForSeconds(0.2f); ;
-        state.animator.ChangeAnimationAttack("Normal");
-        ai.canMove = true;
-
-        state.Walk();
-        state.cooldown = true;
-        state.animator.isFacing = true;
-        stateMachine.ChangState(state.checkDistanceState);
+        catch (OperationCanceledException)
+        {
+            return;
+        }        
     }
 
     public void Ray()
@@ -188,7 +165,7 @@ public class CloseAttackRFSM : BaseState
 
         if (obstacleDetected)
         {
-            bool randomTurnLeft = Random.Range(0, 2) == 0;
+            bool randomTurnLeft = UnityEngine.Random.Range(0, 2) == 0;
 
             float finalAngle = maxAngle * Mathf.Deg2Rad;  
             float cos = Mathf.Cos(finalAngle);
@@ -216,5 +193,10 @@ public class CloseAttackRFSM : BaseState
 
         Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (lastValidDirection.normalized * state.jumpLength), Color.blue);
 
+    }
+
+    public override void Exit()
+    {
+        cancellationToken?.Cancel();
     }
 }
