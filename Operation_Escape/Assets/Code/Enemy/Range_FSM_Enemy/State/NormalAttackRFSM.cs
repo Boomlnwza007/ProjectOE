@@ -40,6 +40,7 @@ public class NormalAttackRFSM : BaseState
         {
             for (int i = 0; i < 3; i++)
             {
+                token.ThrowIfCancellationRequested();
                 if (Vector2.Distance(ai.destination, ai.position) < 3f)
                 {
                     stateMachine.ChangState(state.closeAttackState);
