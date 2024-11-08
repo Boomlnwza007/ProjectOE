@@ -111,13 +111,13 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
 
     public void Reset()
     {
+        trapOn = false;
         gameObject.SetActive(true);
+        time = 0;
+
         if (trap != null)
         {
             Destroy(trap.gameObject);
         }
-
-        trapOn = false;
-        time = 0;
     }
 }
