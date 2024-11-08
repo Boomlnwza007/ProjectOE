@@ -430,7 +430,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         //        break;
         //}
 
-        if (rb.velocity != Vector2.zero && !ai.endMove)
+        if (rb.velocity != Vector2.zero /*&& !ai.endMove*/)
         {
             animator.SetBool("Move", true);
         }
