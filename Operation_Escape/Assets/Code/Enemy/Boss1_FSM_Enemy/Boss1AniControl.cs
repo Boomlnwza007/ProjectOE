@@ -12,14 +12,18 @@ public class Boss1AniControl : MonoBehaviour
     public AttackCollider[] hitZone;
     public GameObject[] hitZoneBar;
     public Transform[] bone;
-    public Vector3[] bonePos;
+    public Vector3[] bonePos = new Vector3[13];
+    public Quaternion[] boneRota = new Quaternion[13];
+
 
     private void Awake()
     {
         boss1AniControl = this;
+
         for (int i = 0; i < bone.Length; i++)
         {
             bonePos[i] = bone[i].localPosition;
+            boneRota[i] = bone[i].localRotation;
         }
     }
 
@@ -33,7 +37,7 @@ public class Boss1AniControl : MonoBehaviour
 
         foreach (var item in hitZoneBar)
         {
-            item.SetActive(false);
+            //item.SetActive(false);
             item.transform.position = Vector3.zero;
         }
 
@@ -41,6 +45,7 @@ public class Boss1AniControl : MonoBehaviour
         for (int i = 0; i < bonePos.Length; i++)
         {
             bone[i].localPosition = bonePos[i];
+            bone[i].localRotation = boneRota[i];
         }
     }
 
