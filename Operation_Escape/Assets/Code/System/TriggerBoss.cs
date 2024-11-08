@@ -31,5 +31,7 @@ public class TriggerBoss : MonoBehaviour
         state.rb.velocity = Vector3.zero;
         state.JumpCenter();
         state.ChangState(state.idleState);
+        Boss1AniControl.boss1AniControl.ResetAnim();
+
     }
 }
