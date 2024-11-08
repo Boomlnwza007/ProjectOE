@@ -37,6 +37,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     private SpriteFlash spriteFlash;
     public UIBoss uiBoss;
     public GameObject gunDrop;
+    public Collider2D colliderBoss;
 
     [Header("Animation")]
     [SerializeField] public Animator animator;

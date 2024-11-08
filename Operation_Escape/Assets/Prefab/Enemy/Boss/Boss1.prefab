@@ -1141,6 +1141,7 @@ MonoBehaviour:
   stateName: 
   uiBoss: {fileID: 1622645830190059736}
   gunDrop: {fileID: 6993148821742251366, guid: ef9f87c05a1aaae4f89b509d7eab4314, type: 3}
+  colliderBoss: {fileID: 6807547225655466880}
   animator: {fileID: 3544962096193456687}
   isFacing: 0
   isFacingRight: 0
