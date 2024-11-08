@@ -63,7 +63,7 @@ public class RangeAB1Fsm : BaseState
             await state.ShootMissile();
             if (CheckDistance())
             {
-                Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+                Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
                 return;
             }
             Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
@@ -71,7 +71,7 @@ public class RangeAB1Fsm : BaseState
             await state.ShootMissile();
             if (CheckDistance())
             {
-                Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+                Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
 
                 return;
             }
@@ -84,7 +84,7 @@ public class RangeAB1Fsm : BaseState
                 await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
             }
             state.DelLaserGun();
-            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+            Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
 
             ai.canMove = false;
             await UniTask.WaitForSeconds(3f);
