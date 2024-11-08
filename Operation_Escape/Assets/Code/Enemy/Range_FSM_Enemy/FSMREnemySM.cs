@@ -230,6 +230,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     {
         attacking = false;
         ChangState(wanderState);
+        rb.velocity = Vector3.zero;
         gameObject.transform.position = firstSpawn;
         spriteFlash.ReFlash();
     }

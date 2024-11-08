@@ -481,7 +481,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 270662
+  m_InstanceId: 502522
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -662,8 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115e0475d28d3e4b94656ba0efdfcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnpoint: {fileID: 3296154539166018876, guid: f61fc48f7612ef2489dafe86c0315825, type: 3}
-  firstSpawn: {fileID: 0}
+  firstSpawn: {x: 0, y: 0, z: 0}
   maxHealth: 60
   Health: 60
   dmg: 25
@@ -778,6 +777,7 @@ MonoBehaviour:
   hitZone:
   - {fileID: 8253767373466218031}
   - {fileID: 379053001685113411}
+  hitZoneBar: {fileID: 7462196969455856928}
 --- !u!1 &5458121437017106546
 GameObject:
   m_ObjectHideFlags: 0

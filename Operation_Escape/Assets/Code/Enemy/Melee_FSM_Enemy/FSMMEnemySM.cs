@@ -186,6 +186,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
         ChangState(wanderState);
         animator.ResetHitZone();
         spriteFlash.ReFlash();
+        rb.velocity = Vector3.zero;
         gameObject.transform.position = firstSpawn;
     }
 }
