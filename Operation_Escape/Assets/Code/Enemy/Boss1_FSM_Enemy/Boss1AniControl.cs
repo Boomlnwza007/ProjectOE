@@ -7,13 +7,28 @@ public class Boss1AniControl : MonoBehaviour
     public static Boss1AniControl boss1AniControl;
     [SerializeField] private Animator animator;
     private string currentAnimaton;
-    public float timeplay;  
-
-
+    public float timeplay;
+    public GameObject BossBody;
+    public AttackCollider[] hitZone;
+    public GameObject[] hitZoneBar;
 
     private void Awake()
     {
         boss1AniControl = this;
+    }
+
+    public void ResetAnim()
+    {
+        BossBody.SetActive(true);
+        foreach (var item in hitZone)
+        {
+            item.Re();
+        }
+
+        foreach (var item in hitZoneBar)
+        {
+            item.SetActive(false);
+        }
     }
 
     public void ChangeAnimationState(string newAnimation)

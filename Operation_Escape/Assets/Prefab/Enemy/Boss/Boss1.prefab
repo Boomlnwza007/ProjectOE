@@ -1173,6 +1173,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3544962096193456687}
   timeplay: 0
+  BossBody: {fileID: 1063079117122623977}
+  hitZone:
+  - {fileID: 8827200893229408863}
+  - {fileID: 8507641356904939611}
+  - {fileID: 5541176987777944813}
+  - {fileID: 6836464561234138672}
+  - {fileID: 3214508988211234287}
+  - {fileID: 8753186957530920934}
+  hitZoneBar:
+  - {fileID: 1937512712195619424}
+  - {fileID: 8969219172141690982}
 --- !u!1 &3489448332505499029
 GameObject:
   m_ObjectHideFlags: 0

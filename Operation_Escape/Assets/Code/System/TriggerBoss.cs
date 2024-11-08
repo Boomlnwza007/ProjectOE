@@ -21,6 +21,7 @@ public class TriggerBoss : MonoBehaviour
         uiBoss.uiBody.SetActive(false);
         Boss.gameObject.SetActive(true);
         Boss.attacking = false;
+        Boss1AniControl.boss1AniControl.ResetAnim();
         var state = ((FSMBoss1EnemySM)Boss);
         state.overdriveGage = 0;
         state.overdriveTime = 0;
