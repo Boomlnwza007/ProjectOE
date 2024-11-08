@@ -84,8 +84,10 @@ public class DashAB1FSM : BaseState
             ani.ChangeAnimationState("StartJump");
             await UniTask.WaitForSeconds(2.1f, cancellationToken: token);
             ai.canMove = true;
+            state.colliderBoss.enabled = false;
             ani.ChangeAnimationState("AirJump");
             await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            state.colliderBoss.enabled = true;
             ai.canMove = false;
             ani.ChangeAnimationState("StopJump");
             await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
