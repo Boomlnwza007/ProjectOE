@@ -19,8 +19,11 @@ public class TriggerBoss : MonoBehaviour
     {
         uiBoss.uiBody.SetActive(false);
         Boss.attacking = false;
-        ((FSMBoss1EnemySM)Boss).overdriveGage = 0;
-        ((FSMBoss1EnemySM)Boss).overdriveTime = 0;
-        ((FSMBoss1EnemySM)Boss).overdrive = false;
+        var state = ((FSMBoss1EnemySM)Boss);
+        state.overdriveGage = 0;
+        state.overdriveTime = 0;
+        state.overdrive = false;
+        state.JumpCenter();
+        state.ChangState(state.idleState);
     }
 }
