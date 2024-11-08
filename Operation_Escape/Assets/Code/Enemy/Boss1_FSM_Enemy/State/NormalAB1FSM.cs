@@ -216,13 +216,13 @@ public class NormalAB1FSM : BaseState
                     await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                     ai.canMove = false;
                     ani.ChangeAnimationState("Atk4O");
-                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.ShootBladeslash();
                     await UniTask.WaitForSeconds(1f, cancellationToken: token);
                     state.ShootMissile().Forget();
                     await UniTask.WaitForSeconds(1f, cancellationToken: token);
                     LaserFollowIn().Forget();
-                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                    await UniTask.WaitForSeconds(4.2f, cancellationToken: token);
 
                     state.isFacing = true;
                     await UniTask.DelayFrame(1, cancellationToken: token);
