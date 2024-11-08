@@ -92,8 +92,7 @@ public class DashAB1FSM : BaseState
             state.isFacing = false;
             ani.ChangeAnimationState("StopJump");
             await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
-            state.isFacing = true;
-            ani.ChangeAnimationState("Wait");
+
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.isFacing = false;
             ani.ChangeAnimationState("AfterDash");
@@ -132,9 +131,7 @@ public class DashAB1FSM : BaseState
             state.isFacing = false;
             ani.ChangeAnimationState("StopJump");
             await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
-            state.isFacing = true;
 
-            ani.ChangeAnimationState("Wait");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             PullPlayer().Forget();
 
