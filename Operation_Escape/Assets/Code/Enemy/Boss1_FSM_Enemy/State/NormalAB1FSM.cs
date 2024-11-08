@@ -170,11 +170,12 @@ public class NormalAB1FSM : BaseState
                 {
                     ai.maxspeed = speed;
                     ai.canMove = false;///
-                    state.isFacing = false;
+                    state.isFacing = true;
                     Debug.Log("PAtk1");
                     ani.ChangeAnimationState("PreAtk1");
                     await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     //ai.canMove = false;
+                    state.isFacing = false;
                     Dash();
                     Debug.Log("Atk1");
                     ani.ChangeAnimationState("Atk1");
