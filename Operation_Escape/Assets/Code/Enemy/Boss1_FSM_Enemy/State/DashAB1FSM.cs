@@ -89,6 +89,7 @@ public class DashAB1FSM : BaseState
             state.colliderBoss.enabled = true;
             ai.canMove = false;
             state.isFacing = false;
+            await UniTask.DelayFrame(1, cancellationToken: token);
             ani.ChangeAnimationState("StopJump");
             await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
 
@@ -128,6 +129,7 @@ public class DashAB1FSM : BaseState
             state.colliderBoss.enabled = true;
             ai.canMove = false;
             state.isFacing = false;
+            await UniTask.DelayFrame(1, cancellationToken: token);
             ani.ChangeAnimationState("StopJump");
             await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
 
