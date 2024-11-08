@@ -69,12 +69,14 @@ public class NormalAB1FSM : BaseState
                     ai.maxspeed = speed;
                     ai.canMove = true;
                     state.isFacing = false;
+                    Debug.Log("PAtk1");
                     ani.ChangeAnimationState("PreAtk1");
-                    await UniTask.DelayFrame(110, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     ai.canMove = false;
                     Dash();
+                    Debug.Log("Atk1");
                     ani.ChangeAnimationState("Atk1");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
 
@@ -84,11 +86,11 @@ public class NormalAB1FSM : BaseState
                     ai.canMove = true;
                     state.isFacing = false;
                     ani.ChangeAnimationState("PreAtk2");
-                    await UniTask.DelayFrame(110, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     ai.canMove = false;
                     Dash();
                     ani.ChangeAnimationState("Atk2");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
 
@@ -100,11 +102,11 @@ public class NormalAB1FSM : BaseState
                     ai.canMove = true;
                     state.isFacing = false;
                     ani.ChangeAnimationState("PreAtk3");
-                    await UniTask.DelayFrame(110, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     ai.canMove = false;
                     Dash();
                     ani.ChangeAnimationState("Atk3");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
 
@@ -114,12 +116,12 @@ public class NormalAB1FSM : BaseState
                     ai.canMove = true;
                     state.isFacing = false;
                     ani.ChangeAnimationState("PreAtk4");
-                    await UniTask.DelayFrame(50, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                     ai.canMove = false;
                     ani.ChangeAnimationState("Atk4");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.ShootBladeslash();
-                    await UniTask.DelayFrame(190, cancellationToken: token);
+                    await UniTask.WaitForSeconds(3f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
 
@@ -164,12 +166,14 @@ public class NormalAB1FSM : BaseState
                     ai.maxspeed = speed;
                     ai.canMove = true;
                     state.isFacing = false;
+                    Debug.Log("PAtk1");
                     ani.ChangeAnimationState("PreAtk1");
-                    await UniTask.DelayFrame(110, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     ai.canMove = false;
                     Dash();
+                    Debug.Log("Atk1");
                     ani.ChangeAnimationState("Atk1");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
 
@@ -179,25 +183,27 @@ public class NormalAB1FSM : BaseState
                     ai.canMove = true;
                     state.isFacing = false;
                     ani.ChangeAnimationState("PreAtk2");
-                    await UniTask.DelayFrame(110, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     ai.canMove = false;
                     Dash();
                     ani.ChangeAnimationState("Atk2");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
+
 
                     state.isFacing = true;
                     await UniTask.DelayFrame(1, cancellationToken: token);
 
+
                     ai.canMove = true;
                     state.isFacing = false;
                     ani.ChangeAnimationState("PreAtk3");
-                    await UniTask.DelayFrame(110, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     ai.canMove = false;
                     Dash();
                     ani.ChangeAnimationState("Atk3");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                     state.rb.velocity = Vector2.zero;
                     ai.canMove = true;
 
@@ -207,16 +213,16 @@ public class NormalAB1FSM : BaseState
                     ai.canMove = true;
                     state.isFacing = false;
                     ani.ChangeAnimationState("PreAtk4");
-                    await UniTask.DelayFrame(50, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                     ai.canMove = false;
                     ani.ChangeAnimationState("Atk4O");
-                    await UniTask.DelayFrame(10, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
                     state.ShootBladeslash();
-                    await UniTask.DelayFrame(60, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
                     state.ShootMissile().Forget();
-                    await UniTask.DelayFrame(60, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
                     LaserFollowIn().Forget();
-                    await UniTask.DelayFrame(60, cancellationToken: token);
+                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
                     state.isFacing = true;
                     await UniTask.DelayFrame(1, cancellationToken: token);
