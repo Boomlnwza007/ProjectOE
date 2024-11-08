@@ -299,7 +299,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: cffdfb9978911fc4a82ad4faeb177b1b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -319,7 +319,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -352,7 +352,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.7234583, g: 0, b: 1, a: 0.7254902}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 0.7944628, b: 0, a: 0.7411765}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1075,8 +1075,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b110071dd80bd2a4a8b15793338d0772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidRadius: 3
-  rayLength: 3
+  avoidRadius: 3.5
+  rayLength: 3.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   smoothTime: 0.3
   speed: 15
   slowDownRadius: 5
-  stopRadius: 2.5
+  stopRadius: 2.7
   enableRandomDeviation: 1
   deviationAngle: 10
   deviationChangeInterval: 2
@@ -1105,8 +1105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSpawn: {x: 0, y: 0, z: 0}
-  maxHealth: 300
-  Health: 300
+  maxHealth: 600
+  Health: 600
   dmg: 30
   Speed: 13
   visRange: 30
@@ -1126,17 +1126,17 @@ MonoBehaviour:
   - {fileID: 5895254802588254631, guid: f39f8c779cbff9c418d1caf0220f9dfb, type: 3}
   - {fileID: 6013396911579296216, guid: 140539df52ebfe34086e7f1a24c5a222, type: 3}
   - {fileID: 6013396911579296216, guid: 48d72cebd7d470a4abc738a91ec29eb3, type: 3}
-  forcePush: 100
+  forcePush: 10000
   bladeslash: {fileID: 7636867113743857662, guid: bff6fde2c7b94eb4ba68ed35d68dd4a0, type: 3}
   bladeslashTransform: {fileID: 7050771219770007231}
   cooldown: 0
   overdrive: 0
   overdriveChang: 0
-  overdriveGageMax: 100
+  overdriveGageMax: 300
   originPoint: {fileID: 0}
   overdriveGage: 0
   overdriveTime: 0
-  overdriveTimer: 60
+  overdriveTimer: 600
   fireRate: 0.7
   stateName: 
   uiBoss: {fileID: 1622645830190059736}
@@ -2360,7 +2360,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: cffdfb9978911fc4a82ad4faeb177b1b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2380,7 +2380,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -2413,7 +2413,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.7234583, g: 0, b: 1, a: 0.7254902}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 0.7944628, b: 0, a: 0.7411765}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -2777,8 +2777,8 @@ Transform:
   m_GameObject: {fileID: 8192204324609840048}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.12400055, y: -1.4619999, z: 0}
-  m_LocalScale: {x: 1.2828, y: 1.2828, z: 1.2828}
+  m_LocalPosition: {x: -0.0000016172417, y: -1.811, z: 0}
+  m_LocalScale: {x: 1.1502305, y: 1.1502305, z: 1.1502305}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3100522675146778750}
