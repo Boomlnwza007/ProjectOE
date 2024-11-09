@@ -298,8 +298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba3c950d39405042ace3a8c06707836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnpoint: {fileID: 3296154539166018876, guid: f61fc48f7612ef2489dafe86c0315825, type: 3}
-  firstSpawn: {fileID: 0}
+  ID: 2
+  firstSpawn: {x: 0, y: 0, z: 0}
   maxHealth: 40
   Health: 40
   dmg: 15

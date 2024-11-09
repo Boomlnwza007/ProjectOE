@@ -64,24 +64,29 @@ public class AutoDoor : MonoBehaviour
     }
 
     public void Lock()
-    {
-        if (aniDoor != null)
-        {
-            aniDoor.Lock();
-        }
+    {       
 
         if (area != null)
         {
+
             area.Lock();
         }
         else
         {
+            if (aniDoor != null)
+            {
+                aniDoor.Lock();
+            }
             locked = true;
         }
     }
 
     public void LockOn()
     {
+        if (aniDoor != null)
+        {
+            aniDoor.Lock();
+        }
         locked = true;
     }
 

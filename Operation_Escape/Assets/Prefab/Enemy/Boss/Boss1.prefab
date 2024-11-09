@@ -1190,6 +1190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503749f3de7742b43b266e2cb91b478e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 1
   firstSpawn: {x: 0, y: 0, z: 0}
   maxHealth: 600
   Health: 600

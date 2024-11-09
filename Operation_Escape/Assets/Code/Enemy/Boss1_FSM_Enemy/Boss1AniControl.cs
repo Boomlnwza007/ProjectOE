@@ -30,6 +30,7 @@ public class Boss1AniControl : MonoBehaviour
     public void ResetAnim()
     {
         BossBody.SetActive(true);
+
         foreach (var item in hitZone)
         {
             item.Re();

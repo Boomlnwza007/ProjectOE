@@ -125,12 +125,11 @@ public class FSMSEnemySM : StateMachine, IDamageable
     {
         if (areaEnermy != null)
         {
-            areaEnermy.Die();
+            areaEnermy.Die(this);
         }
 
         ChangState(wanderState);
-        gameObject.SetActive(false);
-
+        Destroy(gameObject);
     }
 
     public IEnumerator Imortal(float wait)
@@ -162,14 +161,5 @@ public class FSMSEnemySM : StateMachine, IDamageable
                 player.Takedamage(dmg, DamageType.Melee, 0);
             }
         }
-    }
-
-    public override void Reset()
-    {
-        attacking = false;
-        ChangState(wanderState);
-        rb.velocity = Vector3.zero;
-        gameObject.transform.position = firstSpawn;
-        spriteFlash.ReFlash();
     }
 }

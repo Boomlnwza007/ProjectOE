@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AreaEnermy : MonoBehaviour
 {
+    public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
+    [SerializeField] public ID idMonNormal;
+    [SerializeField] public ID idMonBoss;
     [SerializeField] public List<StateMachine> enemy = new List<StateMachine>();
     [SerializeField] public List<IRestartOBJ> objInterac = new List<IRestartOBJ>();
     private int enemyCount;
@@ -32,15 +35,17 @@ public class AreaEnermy : MonoBehaviour
         if (ready)
         {
             if (!boss)
-            {
-                foreach (var item in enemy)
+            {               
+                ClaerMon();
+
+                foreach (var enemySpawn in spawnPoints)
                 {
-                    item.gameObject.SetActive(true);
-                    item.rb.velocity = Vector3.zero;
-                    item.Health = item.maxHealth;
-                    item.Reset();
-                    enemyCount = enemy.Count;
-                }
+                    StateMachine mon = Instantiate(idMonNormal.Item[enemySpawn.id], enemySpawn.spawnPosition, Quaternion.identity).GetComponent<StateMachine>();
+                    mon.SetCombatPhase(this);
+                    enemy.Add(mon);
+
+                }  
+                enemyCount = enemy.Count;
 
                 foreach (var item in objInterac)
                 {
@@ -69,6 +74,15 @@ public class AreaEnermy : MonoBehaviour
         }       
     }
 
+    public void ClaerMon()
+    {
+        foreach (var enemy in enemy)
+        {
+            Destroy(enemy.gameObject);
+        }
+        enemy.Clear();
+    }
+
     public void AddAllEnemy()
     {
         Collider2D[] enemygameObject = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0, enemyleLayer);
@@ -77,6 +91,7 @@ public class AreaEnermy : MonoBehaviour
             if (item.TryGetComponent(out StateMachine stateMachine))
             {
                 enemy.Add(stateMachine);
+                spawnPoints.Add(new SpawnPoint(stateMachine.ID, stateMachine.gameObject.transform.position));
                 stateMachine.SetCombatPhase(GetComponent<AreaEnermy>());
             }
             else if (item.TryGetComponent(out IRestartOBJ restart))
@@ -84,7 +99,6 @@ public class AreaEnermy : MonoBehaviour
                 objInterac.Add(restart);
             }
         }
-
 
         enemyCount = enemy.Count;
     }
@@ -112,9 +126,10 @@ public class AreaEnermy : MonoBehaviour
         return size;
     }
 
-    public void Die()
+    public void Die(StateMachine state)
     {
         enemyCount--;
+        enemy.Remove(state);
         if (enemyCount == 0 && ready && !PlayerControl.control.isdaed)
         {
             foreach (var door in door)
