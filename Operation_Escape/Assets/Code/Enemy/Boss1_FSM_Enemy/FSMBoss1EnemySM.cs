@@ -94,11 +94,9 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         //    }
         //}
 
-        if (isFacing)
-        {
-            DiractionAttack();
-        }
-        
+        DiractionAttack();
+
+
     }
 
     public void CreatLaserGun()
@@ -384,18 +382,47 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void DiractionAttack()
     {
-        Vector2 dir = (target.position - gameObject.transform.position).normalized;
-        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        isFacingRight = targetAngle > -90 && targetAngle < 90;
-        animator.SetBool("isRight", isFacingRight);
-        if (isFacingRight)
+        if (isFacing)
         {
-            animator.SetFloat("horizon", 1);
+            Vector2 dir = (target.position - gameObject.transform.position).normalized;
+            float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            isFacingRight = targetAngle > -90 && targetAngle < 90;
+            animator.SetBool("isRight", isFacingRight);
+            if (isFacingRight)
+            {
+                animator.SetFloat("horizon", 1);
+            }
+            else
+            {
+                animator.SetFloat("horizon", -1);
+            }
         }
         else
         {
-            animator.SetFloat("horizon", -1);
+            animator.SetFloat("horizon", isFacingRight ? 1 : -1);
         }
+
+        if (rb.velocity != Vector2.zero /*&& !ai.endMove*/)
+        {
+            animator.SetBool("Move", true);
+        }
+        else
+        {
+            animator.SetBool("Move", false);
+        }
+
+        //Vector2 dir = (target.position - gameObject.transform.position).normalized;
+        //float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //isFacingRight = targetAngle > -90 && targetAngle < 90;
+        //animator.SetBool("isRight", isFacingRight);
+        //if (isFacingRight)
+        //{
+        //    animator.SetFloat("horizon", 1);
+        //}
+        //else
+        //{
+        //    animator.SetFloat("horizon", -1);
+        //}
 
         //targetAngle += 45;
         //targetAngle = (targetAngle + 360) % 360;
@@ -430,13 +457,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         //        break;
         //}
 
-        if (rb.velocity != Vector2.zero /*&& !ai.endMove*/)
-        {
-            animator.SetBool("Move", true);
-        }
-        else
-        {
-            animator.SetBool("Move", false);
-        }
+
     }
 }
