@@ -5,7 +5,7 @@ using TMPro;
 
 public class UIBoss : MonoBehaviour
 {
-    public FSMBoss1EnemySM boss;
+    public StateMachine boss;
     public GameObject uiBody;
     public TMP_Text text;
     public SliderBar slider;    

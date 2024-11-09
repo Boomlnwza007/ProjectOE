@@ -41,6 +41,7 @@ public class AreaEnermy : MonoBehaviour
                 foreach (var enemySpawn in spawnPoints)
                 {
                     StateMachine mon = Instantiate(idMonNormal.Item[enemySpawn.id], enemySpawn.spawnPosition, Quaternion.identity).GetComponent<StateMachine>();
+                    mon.attacking = false;
                     mon.SetCombatPhase(this);
                     enemy.Add(mon);
 
@@ -56,16 +57,21 @@ public class AreaEnermy : MonoBehaviour
             }
             else
             {
-                foreach (var item in enemy)
+                ClaerMon();
+                foreach (var enemySpawn in spawnPoints)
                 {
-                    item.Health = item.maxHealth;
+                    StateMachine mon = Instantiate(idMonBoss.Item[enemySpawn.id], enemySpawn.spawnPosition, Quaternion.identity).GetComponent<StateMachine>();
+                    mon.attacking = false;
+                    mon.SetCombatPhase(this);
+                    enemy.Add(mon);
+                    areaBoss.SetUp(mon,mon.GetComponentInChildren<UIBoss>());
                 }
+                enemyCount = enemy.Count;
 
                 foreach (var item in objInterac)
                 {
                     item.Reset();
                 }
-                areaBoss.Off();
 
                 delBulletAll.DestroyBullet();
             }

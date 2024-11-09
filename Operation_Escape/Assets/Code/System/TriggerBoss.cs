@@ -15,23 +15,9 @@ public class TriggerBoss : MonoBehaviour
             uiBoss.uiBody.SetActive(true); 
         }
     }
-    public void Off()
+    public void SetUp(StateMachine Boss , UIBoss uiBoss)
     {
-        Boss.gameObject.SetActive(false);
-        uiBoss.uiBody.SetActive(false);
-        Boss.gameObject.SetActive(true);
-        Boss.attacking = false;
-        var state = ((FSMBoss1EnemySM)Boss);
-        state.isFacing = true;
-        Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
-        Boss1AniControl.boss1AniControl.ResetAnim();
-        state.overdriveGage = 0;
-        state.overdriveTime = 0;
-        state.overdrive = false;
-        state.rb.velocity = Vector3.zero;
-        state.JumpCenter();
-        state.ChangState(state.idleState);
-        Boss1AniControl.boss1AniControl.ResetAnim();
-
+        this.Boss = Boss;
+        this.uiBoss = uiBoss;
     }
 }
