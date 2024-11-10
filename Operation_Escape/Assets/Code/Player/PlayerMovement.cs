@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Roll")]
     public float dodgeMaxSpeed = 100f;
+    public float dodgeMinimium = 50f;
+    public float dodgeSpeedDropMultiplier = 5f;
     public float coolDownDodge = 1f;
     public float rollChargeCC = 1f;
     private float rollCC = 2f;
@@ -60,10 +62,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case State.Dodge:
                 canCombat = false;
-                float dodgeSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * dodgeSpeedDropMultiplier * Time.deltaTime;
-                //float dodgeMinimium = 50f;
-                if (rollSpeed < 50f)
+                if (rollSpeed < dodgeMinimium)
                 {
                     damageable.imortal = false;
                     state = State.Normal;
