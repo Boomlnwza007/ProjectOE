@@ -98,10 +98,7 @@ public class PlayerControl : MonoBehaviour
             {
                 guntSprite.sortingOrder = 3;
             }
-        }
-
-
-        
+        }        
     }
 
     private void HandleReload()
