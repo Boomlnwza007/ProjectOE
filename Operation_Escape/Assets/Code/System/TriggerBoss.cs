@@ -6,6 +6,7 @@ public class TriggerBoss : MonoBehaviour
 {
     [SerializeField] private StateMachine Boss;
     [SerializeField] private UIBoss uiBoss;
+    [SerializeField] private Transform jumpCenter;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,5 +20,6 @@ public class TriggerBoss : MonoBehaviour
     {
         this.Boss = Boss;
         this.uiBoss = uiBoss;
+        this.Boss.jumpCenter = jumpCenter;
     }
 }

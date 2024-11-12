@@ -26,7 +26,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public bool overdrive;
     public bool overdriveChang;
     public int overdriveGageMax;
-    public Transform originPoint;
     [HideInInspector] public int overdriveGage;
     [HideInInspector] public float overdriveTime;
     public float overdriveTimer = 60;
