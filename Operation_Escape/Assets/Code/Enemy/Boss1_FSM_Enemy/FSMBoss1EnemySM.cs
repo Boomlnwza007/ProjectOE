@@ -371,7 +371,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void JumpCenter()
     {
-        transform.position = originPoint.position;
+        transform.position = jumpCenter.position;
     }
 
     private void OnDrawGizmos()
