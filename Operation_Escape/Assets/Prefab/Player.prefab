@@ -8432,7 +8432,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 7
   slowSpeed: 0
-  dodgeMaxSpeed: 65
+  dodgeMaxSpeed: 35
+  dodgeMinimium: 20
+  dodgeSpeedDropMultiplier: 5
   coolDownDodge: 1.5
   rollChargeCC: 0.5
   rollCharge: 0
@@ -8482,6 +8484,7 @@ MonoBehaviour:
   key: 
   playerAim: {fileID: 1781867465748768360}
   animator: {fileID: 6778737011727104026}
+  isdaed: 0
   healthBar: {fileID: 4370306752507434572}
   ultimateEnergyBar: {fileID: 2533806186777912645}
   ultimateEnergyBarCircle: {fileID: 2975865491650251715}
