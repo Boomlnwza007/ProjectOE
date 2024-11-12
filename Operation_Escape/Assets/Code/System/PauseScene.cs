@@ -136,6 +136,12 @@ public class PauseScene : MonoBehaviour
             area.ResetMon();
         }
 
+        AreaEnermy[] areaAll = GameObject.FindObjectsOfType<AreaEnermy>();
+        foreach (var item in areaAll)
+        {
+            item.ReItem();
+        }
+
         if (spawnPoint != null)
         {
             Debug.Log(1);

@@ -48,10 +48,7 @@ public class AreaEnermy : MonoBehaviour
                 }  
                 enemyCount = enemy.Count;
 
-                foreach (var item in objInterac)
-                {
-                    item.Reset();
-                }
+                //ReItem();
 
                 delBulletAll.DestroyBullet();
             }
@@ -67,12 +64,7 @@ public class AreaEnermy : MonoBehaviour
                     areaBoss.SetUp(mon,mon.GetComponentInChildren<UIBoss>());
                 }
                 enemyCount = enemy.Count;
-
-                foreach (var item in objInterac)
-                {
-                    item.Reset();
-                }
-
+                //ReItem();
                 delBulletAll.DestroyBullet();
             }
 
@@ -87,6 +79,14 @@ public class AreaEnermy : MonoBehaviour
             Destroy(enemy.gameObject);
         }
         enemy.Clear();
+    }
+
+    public void ReItem()
+    {
+        foreach (var item in objInterac)
+        {
+            item.Reset();
+        }
     }
 
     public void AddAllEnemy()

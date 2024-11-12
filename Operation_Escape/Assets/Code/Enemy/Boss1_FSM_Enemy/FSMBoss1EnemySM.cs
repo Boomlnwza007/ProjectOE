@@ -37,6 +37,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public UIBoss uiBoss;
     public GameObject gunDrop;
     public Collider2D colliderBoss;
+    public AreaEnermy areaEnermy;
 
     [Header("Animation")]
     [SerializeField] public Animator animator;
@@ -361,6 +362,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public void Die()
     {
         Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
+        if (areaEnermy != null)
+        {
+            areaEnermy.Die(this);
+        }
         Destroy(gameObject);
     }
 
