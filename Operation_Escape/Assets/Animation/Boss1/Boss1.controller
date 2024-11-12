@@ -1039,9 +1039,9 @@ AnimatorStateMachine:
     second: []
   - first: {fileID: 6121468552177849588}
     second: []
-  - first: {fileID: 1812269073269794583}
-    second: []
   - first: {fileID: 1865369292924268927}
+    second: []
+  - first: {fileID: 1812269073269794583}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 1130, y: -880, z: 0}
@@ -5712,7 +5712,7 @@ BlendTree:
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 9275bd137a11c15408663dd0bee7572a, type: 2}
-    m_Threshold: -5.0823045
+    m_Threshold: -1
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -5728,7 +5728,7 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: horizon
   m_BlendParameterY: vertical
-  m_MinThreshold: -5.0823045
+  m_MinThreshold: -1
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0

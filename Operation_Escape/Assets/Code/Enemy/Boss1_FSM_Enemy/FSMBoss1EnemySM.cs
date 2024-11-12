@@ -26,7 +26,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public bool overdrive;
     public bool overdriveChang;
     public int overdriveGageMax;
-    public Transform originPoint;
     [HideInInspector] public int overdriveGage;
     [HideInInspector] public float overdriveTime;
     public float overdriveTimer = 60;
@@ -38,6 +37,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public UIBoss uiBoss;
     public GameObject gunDrop;
     public Collider2D colliderBoss;
+    public AreaEnermy areaEnermy;
 
     [Header("Animation")]
     [SerializeField] public Animator animator;
@@ -362,6 +362,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public void Die()
     {
         Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
+        if (areaEnermy != null)
+        {
+            areaEnermy.Die(this);
+        }
         Destroy(gameObject);
     }
 
@@ -372,7 +376,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void JumpCenter()
     {
-        transform.position = originPoint.position;
+        transform.position = jumpCenter.position;
     }
 
     private void OnDrawGizmos()
