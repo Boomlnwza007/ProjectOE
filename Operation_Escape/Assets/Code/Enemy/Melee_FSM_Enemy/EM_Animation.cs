@@ -13,6 +13,7 @@ public class EM_Animation : MonoBehaviour
     public float timeplay;
     public AttackCollider[] hitZone;
     public GameObject hitZoneBar;
+    public bool endAnim;
 
 
     private void Start()
@@ -65,17 +66,14 @@ public class EM_Animation : MonoBehaviour
 
     public void ChangeAnimationAttack(string newAnimation)
     {
+        endAnim = false;
         animator.Play(newAnimation,1);
         timeplay = animator.GetCurrentAnimatorClipInfo(1).Length;
         currentAnimaton = newAnimation;
     }
 
-    public void ResetHitZone()
+    public void EndAnimation()
     {
-        foreach (var item in hitZone)
-        {
-            item.Re();
-        }
-        hitZoneBar.SetActive(false);
+        endAnim = true;
     }
 }

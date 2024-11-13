@@ -14,7 +14,6 @@ public class NormalAB1FSM : BaseState
     public float Charg;
     public float runTime;
     public bool overdrive;
-    bool followMe;
     bool dash;
 
     // Start is called before the first frame update
@@ -45,11 +44,6 @@ public class NormalAB1FSM : BaseState
         base.UpdateLogic();
         ai.destination = ai.targetTransform.position;
 
-        if (followMe)
-        {
-            ((FSMBoss1EnemySM)stateMachine).MeleeFollow();  
-        }
-
         if (dash)
         {
             DashStart();
@@ -59,7 +53,7 @@ public class NormalAB1FSM : BaseState
     public async UniTaskVoid Attack()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        var ani = Boss1AniControl.boss1AniControl;
+        var ani = ((FSMBoss1EnemySM)stateMachine).boss1AniControl;
         var token = cancellationToken.Token;
         try
         {
@@ -77,6 +71,7 @@ public class NormalAB1FSM : BaseState
                     state.isFacing = true;
                     Debug.Log("PAtk1");
                     ani.ChangeAnimationState("PreAtk1");
+                    //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                     await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
                     //ai.canMove = false;
                     Dash();
@@ -149,7 +144,7 @@ public class NormalAB1FSM : BaseState
                         await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
                         state.ShootBladeslash();
                         await UniTask.WaitForSeconds(1f, cancellationToken: token);
-                        state.ShootMissile().Forget();
+                        state.ShootMissile(token).Forget();
                         await UniTask.WaitForSeconds(1f, cancellationToken: token);
                         LaserFollowIn().Forget();
                         await UniTask.WaitForSeconds(4.2f, cancellationToken: token);
@@ -175,15 +170,9 @@ public class NormalAB1FSM : BaseState
         {
             return;
         }        
-    }   
+    } 
 
-    public async UniTask AimMelee(float wait)
-    {
-        followMe= true;
-        await UniTask.WaitForSeconds(wait);
-        followMe = false;
-    }     
-
+     
     //public override void ChangState(BaseState Nextstate)
     //{
     //    var state = (FSMBoss1EnemySM)stateMachine;

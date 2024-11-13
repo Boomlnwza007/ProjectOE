@@ -48,6 +48,7 @@ public class RangeAB1Fsm : BaseState
     {
         var token = cancellationToken.Token;
         var state = ((FSMBoss1EnemySM)stateMachine);
+        var ani = state.boss1AniControl;
 
         try
         {
@@ -58,39 +59,38 @@ public class RangeAB1Fsm : BaseState
             }
             ai.canMove = false;
 
-            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+            ani.ChangeAnimationState("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //1
-            await state.ShootMissile();
+            await state.ShootMissile(token);
             if (CheckDistance())
             {
-                Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
+                ani.ChangeAnimationState("Wait");
                 return;
             }
-            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+            ani.ChangeAnimationState("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //2
-            await state.ShootMissile();
+            await state.ShootMissile(token);
             if (CheckDistance())
             {
-                Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
-
+                ani.ChangeAnimationState("Wait");
                 return;
             }
-            Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+            ani.ChangeAnimationState("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //3
-            await state.ShootMissile();
+            await state.ShootMissile(token);
             if (overdrive)
             {
-                Boss1AniControl.boss1AniControl.ChangeAnimationState("RangeAtk");
+                ani.ChangeAnimationState("RangeAtk");
                 await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
             }
             state.DelLaserGun();
-            Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
+            ani.ChangeAnimationState("Wait");
 
             ai.canMove = false;
             await UniTask.WaitForSeconds(3f);
             ai.canMove = true;
 
-            Boss1AniControl.boss1AniControl.ChangeAnimationState("Wait");
+            ani.ChangeAnimationState("Wait");
             ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
         }
         catch (OperationCanceledException)
@@ -102,11 +102,12 @@ public class RangeAB1Fsm : BaseState
     public async UniTask Missil()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        await state.ShootMissile(1);
+        var token = cancellationToken.Token;
+        await state.ShootMissile(1, token);
         await UniTask.WaitForSeconds(2f);
-        await state.ShootMissile(1);
+        await state.ShootMissile(1, token);
         await UniTask.WaitForSeconds(2f);
-        await state.ShootMissile(1);
+        await state.ShootMissile(1, token);
     }
 
     public bool CheckDistance()

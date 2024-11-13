@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class FSMBoss1EnemySM : StateMachine, IDamageable
 {
@@ -47,6 +48,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     [Header("Animation")]
     [SerializeField] public Animator animator;
+    [SerializeField] public Boss1AniControl boss1AniControl;
     public bool isFacing;
     public bool isFacingRight;
 
@@ -167,7 +169,8 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             laser.targetPlayer = target;
             laser.followCode = 2;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));            
-        }        
+        }
+
     }
 
     public async UniTask ShootLaser(float charge, float duration, float speedMulti, float Atime ,float speedRot)
@@ -206,70 +209,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         handGun.localRotation = Quaternion.Euler(0,0,0);
     }
 
-    public async UniTask MeleeHitzone(float charge, float duration, int hitZone)
-    {
-        animator.SetTrigger("PreAttack"); //§éÒ§
-        GameObject HitZone = Instantiate(meleeHitZone[hitZone], handStart.parent);
-        Collider2D _colliders = HitZone.GetComponent<Collider2D>();
-        await FadeMelee(HitZone.GetComponent<SpriteRenderer>(),charge);      
-        animator.SetTrigger("PreAttack"); //¨º§éÒ§
-
-        List<Collider2D> colliders = new List<Collider2D>();
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        filter.SetLayerMask(LayerMask.GetMask("Player"));
-        Physics2D.OverlapCollider(_colliders, filter, colliders);
-        foreach (var hit in colliders)
-        {
-            IDamageable player = hit.GetComponent<IDamageable>();
-            if (hit.CompareTag("Player"))
-            {
-                player.Takedamage(dmg, DamageType.Rang, 0);
-            }
-        }
-        
-        await UniTask.WaitForSeconds(duration);
-        animator.SetTrigger("Attack");//¨ºµÕ
-        Destroy(HitZone);        
-    }
-
-    public async UniTask FadeMelee(SpriteRenderer spriteRenderer, float duration )
-    {
-        Color color = spriteRenderer.color;
-        float startAlpha = color.a;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / duration);
-            color.a = newAlpha;
-            spriteRenderer.color = color;
-            await UniTask.Yield();
-        }
-
-        color = Color.white;
-        color.a = 1f;
-        spriteRenderer.color = color;
-    }
-
-    public void MeleeFollow()
-    {
-        Vector2 dir = (target.position - hand.position).normalized;
-        float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        float currentAngle = hand.eulerAngles.z;
-        targetAngle += 45;
-        targetAngle = (targetAngle + 360) % 360;
-        int segment = Mathf.FloorToInt(targetAngle / 90);
-
-        float newAngle = Mathf.LerpAngle(currentAngle, segment*90, Time.deltaTime * speedRot*2);
-        hand.eulerAngles = new Vector3(0, 0, newAngle);
-
-
-        //Debug.Log(angle);
-       // hand.eulerAngles = new Vector3(0, 0, segment * 90);
-
-    }
-
     public async UniTask RangeFollow(float time)
     {
         float timer = 0;
@@ -296,7 +235,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }
     }
 
-    public async UniTask ShootMissile()
+    public async UniTask ShootMissile(CancellationToken token)
     {
         Vector2 directionToPlayer = (ai.targetTransform.position - transform.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
@@ -307,10 +246,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         float spreadAngle = 10;
         int bulletCount = 3;
         float startAngle = -spreadAngle * ((bulletCount - 1) / 2.0f);
-        await UniTask.WhenAll(Miissile(bulletCount, startAngle, spreadAngle, angleLeft), Miissile(bulletCount, startAngle, -spreadAngle, angleRight));
+        await UniTask.WhenAll(Miissile(bulletCount, startAngle, spreadAngle, angleLeft, token), Miissile(bulletCount, startAngle, -spreadAngle, angleRight, token));
     }
 
-    public async UniTask ShootMissile(int bulletCount)
+    public async UniTask ShootMissile(int bulletCount, CancellationToken token)
     {
         Vector2 directionToPlayer = (ai.targetTransform.position - transform.position).normalized;
         float angleDirectionToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
@@ -320,17 +259,25 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
         float spreadAngle = 10;
         float startAngle = -spreadAngle * ((bulletCount - 1) / 2.0f);
-        await UniTask.WhenAll(Miissile(bulletCount, startAngle, spreadAngle, angleLeft), Miissile(bulletCount, startAngle, -spreadAngle, angleRight));
+
+        await UniTask.WhenAll(
+            Miissile(bulletCount, startAngle, spreadAngle, angleLeft, token),
+            Miissile(bulletCount, startAngle, -spreadAngle, angleRight, token)
+        );
     }
 
-    public async UniTask Miissile(int bulletCount,float startAngle,float spreadAngle,float angleLR)
+    public async UniTask Miissile(int bulletCount, float startAngle, float spreadAngle, float angleLR, CancellationToken token)
     {
         for (int i = 0; i < bulletCount; i++)
         {
+            // µÃÇ¨ÊÍº¡ÒÃÂ¡àÅÔ¡
+            token.ThrowIfCancellationRequested();
+
             float angle = startAngle + (spreadAngle * i) + angleLR;
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             GameObject bulletG = Instantiate(bulletmon, transform.position, rotation);
             bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
+
             await UniTask.WaitForSeconds(0.1f);
         }
     }

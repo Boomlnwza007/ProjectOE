@@ -13,7 +13,6 @@ public class DashAB1FSM : BaseState
     public float stopRadius;
     public float Changemode;
     public float Charg;
-    bool followMe;
     public bool overdrive;
     public bool pull;
     private CancellationTokenSource cancellationToken;
@@ -60,11 +59,6 @@ public class DashAB1FSM : BaseState
         base.UpdateLogic();
         ai.destination = ai.targetTransform.position;
 
-        if (followMe)
-        {
-            ((FSMBoss1EnemySM)stateMachine).MeleeFollow();
-        }
-
         if (pull)
         {
             //PullPlayer();
@@ -78,7 +72,7 @@ public class DashAB1FSM : BaseState
 
         ai.canMove = false;
         var state = ((FSMBoss1EnemySM)stateMachine);
-        var ani = Boss1AniControl.boss1AniControl;
+        var ani = ((FSMBoss1EnemySM)stateMachine).boss1AniControl;
 
         try
         {
@@ -119,7 +113,8 @@ public class DashAB1FSM : BaseState
 
         ai.canMove = false;
         var state = ((FSMBoss1EnemySM)stateMachine);
-        var ani = Boss1AniControl.boss1AniControl;
+        var ani = ((FSMBoss1EnemySM)stateMachine).boss1AniControl;
+
 
         try
         {
@@ -175,16 +170,7 @@ public class DashAB1FSM : BaseState
             PlayerControl.control.playerMovement.rb.AddForce(dir * pullStrength / distance, ForceMode2D.Force);
         }
     }
-
-
-    public async UniTask AimMelee(float wait)
-    {
-        followMe = true;
-        await UniTask.WaitForSeconds(wait);
-        followMe = false;
-    }
-
-
+      
     //public void ChangState(BaseState Nextstate)
     //{
     //    var state = (FSMBoss1EnemySM)stateMachine;

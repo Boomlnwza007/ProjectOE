@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Boss1AniControl : MonoBehaviour
 {
-    public static Boss1AniControl boss1AniControl;
     [SerializeField] private Animator animator;
     private string currentAnimaton;
     public float timeplay;
@@ -14,12 +13,11 @@ public class Boss1AniControl : MonoBehaviour
     public Transform[] bone;
     public Vector3[] bonePos = new Vector3[13];
     public Quaternion[] boneRota = new Quaternion[13];
+    public bool endAnim;
 
 
     private void Awake()
     {
-        boss1AniControl = this;
-
         for (int i = 0; i < bone.Length; i++)
         {
             bonePos[i] = bone[i].localPosition;
@@ -53,8 +51,12 @@ public class Boss1AniControl : MonoBehaviour
     {
         // if (currentAnimaton == newAnimation.ToString()) return;
 
+        endAnim = false;
         animator.Play(newAnimation, 0);
         currentAnimaton = newAnimation;
     }
-
+    public void EndAnimation()
+    {
+        endAnim = true;
+    }
 }
