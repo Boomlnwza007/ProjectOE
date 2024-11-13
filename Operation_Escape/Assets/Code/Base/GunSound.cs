@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "GunName")]
+[CreateAssetMenu(fileName = "GunName",menuName = "Audio/Gun")]
 public class GunSound : ScriptableObject
 {
     public AudioClip shoot;
     public AudioClip shootUltimate;
+    public AudioClip[] special;
 }

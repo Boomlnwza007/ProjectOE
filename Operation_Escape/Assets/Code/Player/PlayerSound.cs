@@ -9,12 +9,15 @@ public class PlayerSound : MonoBehaviour
     [Header("----- Audio Clip -----")]
     public AudioClip ChangGun;
     public AudioClip gunFail;
-    public AudioClip ultimateOn;
-    public AudioClip ultimateOff;
     public AudioClip reload;
     public AudioClip melee;
     public AudioClip dash;
     public AudioClip walk;
+    public AudioClip dodge;
+    public AudioClip eCollect;
+    public AudioClip heal;
+    public AudioClip ultFull;
+    public AudioClip useUlt;
 
 
     private void Awake()
