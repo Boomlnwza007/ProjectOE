@@ -11,8 +11,6 @@ public class DashAB1FSM : BaseState
     public IAiAvoid ai;
     public float speed;
     public float stopRadius;
-    public float Changemode;
-    public float Charg;
     public bool overdrive;
     public bool pull;
     private CancellationTokenSource cancellationToken;
@@ -39,16 +37,12 @@ public class DashAB1FSM : BaseState
             else
             {
                 state.rangeAState.rangeAttack = false;
-                Changemode = 1;
-                Charg = 1;
-                AttackN().Forget();
+                Attack().Forget();
             }
         }
         else
         {
-            Changemode = 0.5f;
-            Charg = 0.3f;
-            AttackO().Forget();
+            Attack().Forget();
         }
 
         
@@ -65,7 +59,7 @@ public class DashAB1FSM : BaseState
         }
     }
 
-    public async UniTaskVoid AttackN()
+    public async UniTaskVoid Attack()
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
@@ -78,85 +72,71 @@ public class DashAB1FSM : BaseState
         {
             state.isFacing = false;
             ani.ChangeAnimationState("StartJump");
-            await UniTask.WaitForSeconds(2.1f, cancellationToken: token);
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ai.canMove = true;
             state.colliderBoss.enabled = false;
             ai.stopRadius = 0.5f;
-            ani.ChangeAnimationState("AirJump");
-            await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            if (!overdrive)
+            {
+                ani.ChangeAnimationState("AirJump");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            }
+            else
+            {
+                ani.ChangeAnimationState("AirJumpO");
+                await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            }            
             state.colliderBoss.enabled = true;
             ai.stopRadius = stopRadius;
             ai.canMove = false;
             ani.ChangeAnimationState("StopJump");
-            await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
-
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            state.isFacing = false;
-            ani.ChangeAnimationState("AfterDash");
-            await UniTask.WaitForSeconds(5.1f, cancellationToken: token);
-            state.isFacing = true;
-            ani.ChangeAnimationState("Wait");
-            await UniTask.WaitForSeconds(3f, cancellationToken: token);
-            ai.canMove = true;
-            ChangState(state.normalAState);
-        }
-        catch (OperationCanceledException)
-        {
-            return;
-        }
-    }
 
-    public async UniTaskVoid AttackO()
-    {
-        cancellationToken = new CancellationTokenSource();
-        var token = cancellationToken.Token;
-
-        ai.canMove = false;
-        var state = ((FSMBoss1EnemySM)stateMachine);
-        var ani = ((FSMBoss1EnemySM)stateMachine).boss1AniControl;
-
-
-        try
-        {
-            ani.ChangeAnimationState("StartJump");
-            await UniTask.WaitForSeconds(2.1f, cancellationToken: token);
-            ai.canMove = true;
-            state.colliderBoss.enabled = false;
-            ani.ChangeAnimationState("AirJumpO");
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            state.colliderBoss.enabled = true;
-            ai.canMove = false;
-            state.isFacing = false;
-            await UniTask.DelayFrame(1, cancellationToken: token);
-            ani.ChangeAnimationState("StopJump");
-            await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
-
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            PullPlayer().Forget();
-
-            state.isFacing = false;
-            ani.ChangeAnimationState("AfterDash");
-            await UniTask.WaitForSeconds(6.2f, cancellationToken: token);
-            state.isFacing = true;
-
-            ani.ChangeAnimationState("Wait");
-            await UniTask.WaitForSeconds(3f, cancellationToken: token);
-            ai.canMove = true;
-
-            if (UnityEngine.Random.value > 0.5f)
+            if (!overdrive)
             {
+                state.isFacing = false;
+                ani.ChangeAnimationState("AfterDash");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+
+                state.isFacing = true;
+                ani.ChangeAnimationState("Wait");
+                await UniTask.WaitForSeconds(3f, cancellationToken: token);
+                ai.canMove = true;
+
                 ChangState(state.normalAState);
             }
             else
             {
-                ChangState(state.rangeAState);
+
+                state.isFacing = false;
+                ani.ChangeAnimationState("AfterDashO");
+                await UniTask.WaitForSeconds(3f, cancellationToken: token);
+                PullPlayer().Forget();
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+
+                state.isFacing = true;
+                ani.ChangeAnimationState("Wait");
+                await UniTask.WaitForSeconds(3f, cancellationToken: token);
+                ai.canMove = true;
+
+                if (UnityEngine.Random.value > 0.5f)
+                {
+                    ChangState(state.normalAState);
+                }
+                else
+                {
+                    ChangState(state.rangeAState);
+                }
             }
+
+            
         }
         catch (OperationCanceledException)
         {
             return;
         }
-    }
+    }    
 
     public async UniTask PullPlayer()
     {
@@ -164,7 +144,7 @@ public class DashAB1FSM : BaseState
         float distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         Vector2 dir = (ai.position - ai.targetTransform.position).normalized;
         float range = 30f; // ระยะที่เริ่มดึงดูด
-        float pullStrength = 10f; // กำหนดแรงดึง
+        float pullStrength = 20f; // กำหนดแรงดึง
         if (distance <= range)
         {
             PlayerControl.control.playerMovement.rb.AddForce(dir * pullStrength / distance, ForceMode2D.Force);

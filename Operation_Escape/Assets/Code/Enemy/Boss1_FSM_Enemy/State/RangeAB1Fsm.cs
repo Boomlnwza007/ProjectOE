@@ -67,6 +67,8 @@ public class RangeAB1Fsm : BaseState
                 ani.ChangeAnimationState("Wait");
                 return;
             }
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+
             ani.ChangeAnimationState("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //2
             await state.ShootMissile(token);
@@ -75,14 +77,18 @@ public class RangeAB1Fsm : BaseState
                 ani.ChangeAnimationState("Wait");
                 return;
             }
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+
             ani.ChangeAnimationState("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //3
             await state.ShootMissile(token);
             if (overdrive)
             {
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                 ani.ChangeAnimationState("RangeAtk");
                 await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
             }
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.DelLaserGun();
             ani.ChangeAnimationState("Wait");
 
