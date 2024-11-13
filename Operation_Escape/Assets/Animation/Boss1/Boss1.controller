@@ -1039,9 +1039,9 @@ AnimatorStateMachine:
     second: []
   - first: {fileID: 6121468552177849588}
     second: []
-  - first: {fileID: 1865369292924268927}
-    second: []
   - first: {fileID: 1812269073269794583}
+    second: []
+  - first: {fileID: 1865369292924268927}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 1130, y: -880, z: 0}
@@ -1600,7 +1600,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AirJump 0
+  m_Name: AirJumpO
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

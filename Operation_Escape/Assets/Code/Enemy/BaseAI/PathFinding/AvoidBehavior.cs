@@ -20,8 +20,12 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public GameObject playerGameObject { get; private set; }
     public Vector2 playerVelocity { get; private set; }
     public Vector2 monVelocity { get { return rb.velocity; } set { rb.velocity = value; } }
+    float IAiAvoid.slowDownRadius { get { return slowDownRadius; } set { slowDownRadius = value; } }
+    float IAiAvoid.stopRadius { get { return stopRadius; } set { stopRadius = value; } }
+
     private Vector3 curDestination;
 
+    public bool stopRadiusOn;
     public float slowDownRadius = 5f;
     public float stopRadius = 2f;
     public bool enableRandomDeviation = true;
@@ -105,11 +109,11 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             curSpeed = 0f;
             endMove = true;
         }
-        //else if (distanceToTarget < slowDownRadius)
-        //{
-        //    slowMove = true;
-        //    curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
-        //}
+        else if (distanceToTarget < slowDownRadius && stopRadiusOn)
+        {
+            slowMove = true;
+            curSpeed = Mathf.Lerp(0, speed, distanceToTarget / slowDownRadius);
+        }
 
         deviationTimer -= Time.deltaTime;
         if (deviationTimer <= 0f)

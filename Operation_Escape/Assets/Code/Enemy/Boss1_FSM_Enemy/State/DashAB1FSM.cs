@@ -10,6 +10,7 @@ public class DashAB1FSM : BaseState
     public DashAB1FSM(FSMBoss1EnemySM stateMachine) : base("DashAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
+    public float stopRadius;
     public float Changemode;
     public float Charg;
     bool followMe;
@@ -27,6 +28,7 @@ public class DashAB1FSM : BaseState
         speed = ai.maxspeed;
         pull = false;
         ai.canMove = true;
+        stopRadius = ai.stopRadius;
         if (!overdrive)
         {
             if (!state.rangeAState.rangeAttack)
@@ -85,9 +87,11 @@ public class DashAB1FSM : BaseState
             await UniTask.WaitForSeconds(2.1f, cancellationToken: token);
             ai.canMove = true;
             state.colliderBoss.enabled = false;
+            ai.stopRadius = 0.5f;
             ani.ChangeAnimationState("AirJump");
             await UniTask.WaitForSeconds(3f, cancellationToken: token);
             state.colliderBoss.enabled = true;
+            ai.stopRadius = stopRadius;
             ai.canMove = false;
             ani.ChangeAnimationState("StopJump");
             await UniTask.WaitForSeconds(0.15f, cancellationToken: token);
@@ -181,26 +185,26 @@ public class DashAB1FSM : BaseState
     }
 
 
-    public void ChangState(BaseState Nextstate)
-    {
-        var state = (FSMBoss1EnemySM)stateMachine;
-        if (!state.attacking)
-        {
-            state.JumpCenter();
-            state.ChangState(state.idleState);
-            return;
+    //public void ChangState(BaseState Nextstate)
+    //{
+    //    var state = (FSMBoss1EnemySM)stateMachine;
+    //    if (!state.attacking)
+    //    {
+    //        state.JumpCenter();
+    //        state.ChangState(state.idleState);
+    //        return;
 
-        }
+    //    }
 
-        if (state.overdriveChang)
-        {
-            state.ChangState(state.overdriveChangState);
-        }
-        else
-        {
-            state.ChangState(Nextstate);
-        }
-    }
+    //    if (state.overdriveChang)
+    //    {
+    //        state.ChangState(state.overdriveChangState);
+    //    }
+    //    else
+    //    {
+    //        state.ChangState(Nextstate);
+    //    }
+    //}
 
     public async UniTask LaserFollowIn()
     {

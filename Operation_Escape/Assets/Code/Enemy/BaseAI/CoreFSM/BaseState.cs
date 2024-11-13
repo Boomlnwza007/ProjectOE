@@ -14,4 +14,11 @@ public class BaseState
     public virtual void UpdateLogic() { }
     public virtual void UpdatePhysics() { }
     public virtual void Exit() { }
+    public virtual void ChangState(BaseState Nextstate) 
+    {
+        if (stateMachine.curState == this)
+        {
+            stateMachine.ChangState(Nextstate);
+        }
+    }
 }

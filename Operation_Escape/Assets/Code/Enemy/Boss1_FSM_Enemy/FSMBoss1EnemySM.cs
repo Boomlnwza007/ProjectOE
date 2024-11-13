@@ -20,6 +20,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public GameObject bladeslash;
     public Transform bladeslashTransform;
 
+    [Header("Dash")]
+    public bool dash;
+    public float dodgeMaxSpeed = 100f;
+    public float dodgeMinimium = 50f;
+    public float dodgeSpeedDropMultiplier = 5f;
+    [HideInInspector]public float rollSpeed;
 
     [Header("status")]
     public bool cooldown;
@@ -340,6 +346,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         if (overdriveGage >= overdriveGageMax && !overdrive)
         {
             overdriveChang = true;
+            ChangState(overdriveChangState);
         }
         Health -= damage;
         spriteFlash.Flash();    

@@ -15,6 +15,7 @@ public class NormalAB1FSM : BaseState
     public float runTime;
     public bool overdrive;
     bool followMe;
+    bool dash;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -29,14 +30,14 @@ public class NormalAB1FSM : BaseState
         if (!overdrive)
         {
             runTime = 4f;
-            Attack().Forget();
-
         }
         else
         {
             runTime = 3f;
-            AttackO().Forget();
         }
+
+        Attack().Forget();
+
     }
 
     public override void UpdateLogic()
@@ -47,6 +48,11 @@ public class NormalAB1FSM : BaseState
         if (followMe)
         {
             ((FSMBoss1EnemySM)stateMachine).MeleeFollow();  
+        }
+
+        if (dash)
+        {
+            DashStart();
         }
     }
 
@@ -78,7 +84,7 @@ public class NormalAB1FSM : BaseState
                     Debug.Log("Atk1");
                     ani.ChangeAnimationState("Atk1");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
+                    //state.rb.velocity = Vector2.zero;
                     await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
@@ -93,7 +99,7 @@ public class NormalAB1FSM : BaseState
                     Dash();
                     ani.ChangeAnimationState("Atk2");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
+                    //state.rb.velocity = Vector2.zero;
                     await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
@@ -110,25 +116,45 @@ public class NormalAB1FSM : BaseState
                     Dash();
                     ani.ChangeAnimationState("Atk3");
                     await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
+                    //state.rb.velocity = Vector2.zero;
                     await UniTask.DelayFrame(1, cancellationToken: token);
                     ai.canMove = true;
 
                     state.isFacing = true;
                     await UniTask.DelayFrame(1, cancellationToken: token);
 
-                    ai.canMove = false;///
-                    state.isFacing = false;
-                    ani.ChangeAnimationState("PreAtk4");
-                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-                    //ai.canMove = false;
-                    ani.ChangeAnimationState("Atk4");
-                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.ShootBladeslash();
-                    await UniTask.WaitForSeconds(3f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-                    ai.canMove = true;
+                    if (!overdrive)
+                    {
+                        ai.canMove = false;///
+                        state.isFacing = false;
+                        ani.ChangeAnimationState("PreAtk4");
+                        await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+                        //ai.canMove = false;
+                        ani.ChangeAnimationState("Atk4");
+                        await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
+                        state.ShootBladeslash();
+                        await UniTask.WaitForSeconds(3f, cancellationToken: token);
+                        //state.rb.velocity = Vector2.zero;
+                        await UniTask.DelayFrame(1, cancellationToken: token);
+                        ai.canMove = true;
+                    }
+                    else
+                    {
+                        ai.canMove = false;///
+                        state.isFacing = false;
+                        ani.ChangeAnimationState("PreAtk4");
+                        await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+                        //ai.canMove = false;
+                        ani.ChangeAnimationState("Atk4O");
+                        await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
+                        state.ShootBladeslash();
+                        await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                        state.ShootMissile().Forget();
+                        await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                        LaserFollowIn().Forget();
+                        await UniTask.WaitForSeconds(4.2f, cancellationToken: token);
+                    }
+                    
 
                     state.isFacing = true;
                     await UniTask.DelayFrame(1, cancellationToken: token);
@@ -149,139 +175,35 @@ public class NormalAB1FSM : BaseState
         {
             return;
         }        
-    }
-
-    public async UniTaskVoid AttackO()
-    {
-        var state = ((FSMBoss1EnemySM)stateMachine);
-        var ani = Boss1AniControl.boss1AniControl;
-        var token = cancellationToken.Token;
-
-        try
-        {
-            await UniTask.WaitForSeconds(1, cancellationToken: token);
-            ai.maxspeed = speed * 2;
-            float time = 0f;
-
-            while (time < runTime)
-            {
-                time += Time.deltaTime;
-                if (Vector2.Distance(ai.targetTransform.position, ai.position) < 3)
-                {
-                    ai.maxspeed = speed;
-                    ai.canMove = false;///
-                    state.isFacing = true;
-                    Debug.Log("PAtk1");
-                    ani.ChangeAnimationState("PreAtk1");
-                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
-                    //ai.canMove = false;
-                    state.isFacing = false;
-                    Dash();
-                    Debug.Log("Atk1");
-                    ani.ChangeAnimationState("Atk1");
-                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-                    ai.canMove = true;
-
-                    state.isFacing = true;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-
-                    ai.canMove = false;///
-                    state.isFacing = false;
-                    ani.ChangeAnimationState("PreAtk2");
-                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
-                    //ai.canMove = false;
-                    Dash();
-                    ani.ChangeAnimationState("Atk2");
-                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-                    ai.canMove = true;
-
-
-                    state.isFacing = true;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-
-
-                    ai.canMove = false;///
-                    state.isFacing = false;
-                    ani.ChangeAnimationState("PreAtk3");
-                    await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
-                    //ai.canMove = false;
-                    Dash();
-                    ani.ChangeAnimationState("Atk3");
-                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.rb.velocity = Vector2.zero;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-                    ai.canMove = true;
-
-                    state.isFacing = true;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-
-                    ai.canMove = false;///
-                    state.isFacing = false;
-                    ani.ChangeAnimationState("PreAtk4");
-                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-                    //ai.canMove = false;
-                    ani.ChangeAnimationState("Atk4O");
-                    await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                    state.ShootBladeslash();
-                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
-                    state.ShootMissile().Forget();
-                    await UniTask.WaitForSeconds(1f, cancellationToken: token);
-                    LaserFollowIn().Forget();
-                    await UniTask.WaitForSeconds(4.2f, cancellationToken: token);
-
-                    state.isFacing = true;
-                    await UniTask.DelayFrame(1, cancellationToken: token);
-
-                    ai.canMove = true;
-                    break;
-                }
-
-                token.ThrowIfCancellationRequested();
-                await UniTask.Yield();
-            }
-
-            ani.ChangeAnimationState("Wait");
-            ai.maxspeed = speed;
-            await UniTask.WaitForSeconds(3, cancellationToken: token);
-            ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
-        }
-        catch (OperationCanceledException)
-        {
-            return;
-        }       
-    }
+    }   
 
     public async UniTask AimMelee(float wait)
     {
         followMe= true;
         await UniTask.WaitForSeconds(wait);
         followMe = false;
-    }
+    }     
 
-    public void ChangState(BaseState Nextstate)
-    {
-        var state = (FSMBoss1EnemySM)stateMachine;
-        if (!state.attacking)
-        {
-            state.JumpCenter();
-            state.ChangState(state.idleState);
-            return;
+    //public override void ChangState(BaseState Nextstate)
+    //{
+    //    var state = (FSMBoss1EnemySM)stateMachine;
+    //    if (!state.attacking)
+    //    {
+    //        state.JumpCenter();
+    //        state.ChangState(state.idleState);
+    //        return;
 
-        }
+    //    }
 
-        if (state.overdriveChang)
-        {
-            state.ChangState(state.overdriveChangState);
-        }
-        else
-        {
-            state.ChangState(Nextstate);
-        }
-    }
+    //    if (state.overdriveChang)
+    //    {
+    //        state.ChangState(state.overdriveChangState);
+    //    }
+    //    else
+    //    {
+    //        state.ChangState(Nextstate);
+    //    }
+    //}
 
     public async UniTask LaserFollowIn()
     {
@@ -302,17 +224,21 @@ public class NormalAB1FSM : BaseState
     public void Dash()
     {
         var state = ((FSMBoss1EnemySM)stateMachine);
-        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-        //if (state.isFacingRight)
-        //{
-        //    dir = Vector2.right;
-        //}
-        //else
-        //{
-        //    dir = Vector2.left;
-        //}
-        state.rb.AddForce(dir * state.forcePush, ForceMode2D.Impulse);
+        dash = true;
+        state.rollSpeed = state.dodgeMaxSpeed;
+    }
 
+    public void DashStart()
+    {
+        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
+        var state = ((FSMBoss1EnemySM)stateMachine);
+        state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
+        if (state.rollSpeed < state.dodgeMinimium)
+        {
+            dash = false;
+        }
+
+        state.rb.velocity = dir * state.rollSpeed;
     }
 
     public override void Exit()

@@ -126,25 +126,25 @@ public class RangeAB1Fsm : BaseState
         return distance;
     }
 
-    public void ChangState(BaseState Nextstate)
-    {
-        var state = (FSMBoss1EnemySM)stateMachine;
-        if (!state.attacking)
-        {
-            state.JumpCenter();
-            state.ChangState(state.idleState);
-            return;           
-        }
+    //public override void ChangState(BaseState Nextstate)
+    //{
+    //    var state = (FSMBoss1EnemySM)stateMachine;
+    //    if (!state.attacking)
+    //    {
+    //        state.JumpCenter();
+    //        state.ChangState(state.idleState);
+    //        return;           
+    //    }
 
-        if (state.overdriveChang)
-        {
-            state.ChangState(state.overdriveChangState);
-        }
-        else
-        {
-            state.ChangState(Nextstate);
-        }
-    }
+    //    if (state.overdriveChang)
+    //    {
+    //        state.ChangState(state.overdriveChangState);
+    //    }
+    //    else
+    //    {
+    //        state.ChangState(Nextstate);
+    //    }
+    //}
 
     public float[] Set()
     {

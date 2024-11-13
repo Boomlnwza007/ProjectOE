@@ -48,7 +48,7 @@ public class NormalAttackEMFSM : BaseState
                 ai.canMove = true;
                 state.animator.isFacing = true;
                 state.Walk();
-                stateMachine.ChangState(state.CheckDistance);
+                ChangState(state.CheckDistance);
                 return;
             }
 
@@ -69,7 +69,7 @@ public class NormalAttackEMFSM : BaseState
                 ai.canMove = true;
                 state.animator.isFacing = true;
                 state.Walk();
-                stateMachine.ChangState(state.CheckDistance);
+                ChangState(state.CheckDistance);
                 return;
             }
 
@@ -89,7 +89,7 @@ public class NormalAttackEMFSM : BaseState
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             ai.canMove = true;
             state.Walk();
-            stateMachine.ChangState(state.CheckDistance);
+            ChangState(state.CheckDistance);
         }
         catch (OperationCanceledException)
         {
@@ -106,15 +106,6 @@ public class NormalAttackEMFSM : BaseState
             return true;
         }
         return false;
-    }
-
-    public void ChangState(BaseState Nextstate)
-    {
-        var state = ((FSMMEnemySM)stateMachine);
-        if (state.curState == this)
-        {
-            stateMachine.ChangState(Nextstate);
-        }
     }
 
     public override void Exit()
@@ -138,7 +129,7 @@ public class NormalAttackEMFSM : BaseState
             ai.canMove = true;
             state.animator.isFacing = true;
             state.Walk();
-            stateMachine.ChangState(state.CheckDistance);
+            ChangState(state.CheckDistance);
             return;
         }
 

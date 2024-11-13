@@ -32,26 +32,26 @@ public class CheckDistanceB1FSM : BaseState
         }
     }
 
-    public void ChangState(BaseState Nextstate)
-    {
-        var state = (FSMBoss1EnemySM)stateMachine;
-        if (!state.attacking)
-        {
-            state.JumpCenter();
-            state.ChangState(state.idleState);
-            return;
+    //public void ChangState(BaseState Nextstate)
+    //{
+    //    var state = (FSMBoss1EnemySM)stateMachine;
+    //    if (!state.attacking)
+    //    {
+    //        state.JumpCenter();
+    //        state.ChangState(state.idleState);
+    //        return;
 
-        }
+    //    }
 
-        if (state.overdriveChang)
-        {
-            state.ChangState(state.overdriveChangState);
-        }
-        else
-        {
-            state.ChangState(Nextstate);
-        }
-    }
+    //    if (state.overdriveChang)
+    //    {
+    //        state.ChangState(state.overdriveChangState);
+    //    }
+    //    else
+    //    {
+    //        state.ChangState(Nextstate);
+    //    }
+    //}
 
     public override void Exit()
     {
