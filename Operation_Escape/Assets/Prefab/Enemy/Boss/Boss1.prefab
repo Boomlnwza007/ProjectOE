@@ -1210,10 +1210,10 @@ MonoBehaviour:
   ID: 1
   maxHealth: 600
   Health: 600
-  dmg: 30
+  dmg: 40
   Speed: 13
   visRange: 30
-  attacking: 1
+  attacking: 0
   lootDrop: {fileID: 5271488527250015382}
   target: {fileID: 0}
   rb: {fileID: 7838424579805757511}
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   - {fileID: 5895254802588254631, guid: f39f8c779cbff9c418d1caf0220f9dfb, type: 3}
   - {fileID: 6013396911579296216, guid: 140539df52ebfe34086e7f1a24c5a222, type: 3}
   - {fileID: 6013396911579296216, guid: 48d72cebd7d470a4abc738a91ec29eb3, type: 3}
-  forcePush: 10000
+  forcePush: 50000
   bladeslash: {fileID: 7636867113743857662, guid: bff6fde2c7b94eb4ba68ed35d68dd4a0, type: 3}
   bladeslashTransform: {fileID: 7050771219770007231}
   dash: 0
