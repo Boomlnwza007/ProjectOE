@@ -60,28 +60,29 @@ public class RangeAB1Fsm : BaseState
             ai.canMove = false;
 
             ani.ChangeAnimationAttack("RangeAtk");
-            await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //1
-            await state.ShootMissile(token);
+            await UniTask.WhenAll(state.ShootLaser(charge, 0.5f, 1, charge - 0.1f), state.ShootMissile(token));
             if (CheckDistance())
             {
+                ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
                 ani.ChangeAnimationAttack("Wait");
                 return;
             }
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
             ani.ChangeAnimationAttack("RangeAtk");
-            await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //2
-            await state.ShootMissile(token);
+            await UniTask.WhenAll(state.ShootLaser(charge, 0.5f, 1, charge - 0.1f), state.ShootMissile(token));
+
             if (CheckDistance())
             {
+                ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
                 ani.ChangeAnimationAttack("Wait");
                 return;
             }
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
             ani.ChangeAnimationAttack("RangeAtk");
-            await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //3
-            await state.ShootMissile(token);
+            await UniTask.WhenAll(state.ShootLaser(charge, 0.5f, 1, charge - 0.1f), state.ShootMissile(token));
+
             if (overdrive)
             {
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
