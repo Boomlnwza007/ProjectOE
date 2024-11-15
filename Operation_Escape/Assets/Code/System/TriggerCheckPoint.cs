@@ -10,6 +10,5 @@ public class TriggerCheckPoint : MonoBehaviour
     {
         PauseScene.spawnPoint = checkPoint;
         checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
-        Destroy(gameObject);
     }
 }
