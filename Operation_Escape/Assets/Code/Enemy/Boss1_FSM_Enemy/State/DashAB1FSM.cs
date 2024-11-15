@@ -71,36 +71,36 @@ public class DashAB1FSM : BaseState
         try
         {
             state.isFacing = false;
-            ani.ChangeAnimationState("StartJump");
+            ani.ChangeAnimationAttack("StartJump");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ai.canMove = true;
             state.colliderBoss.enabled = false;
             ai.stopRadius = 0.5f;
             if (!overdrive)
             {
-                ani.ChangeAnimationState("AirJump");
+                ani.ChangeAnimationAttack("AirJump");
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             }
             else
             {
-                ani.ChangeAnimationState("AirJumpO");
+                ani.ChangeAnimationAttack("AirJumpO");
                 await UniTask.WaitForSeconds(2f, cancellationToken: token);
             }            
             state.colliderBoss.enabled = true;
             ai.stopRadius = stopRadius;
             ai.canMove = false;
-            ani.ChangeAnimationState("StopJump");
+            ani.ChangeAnimationAttack("StopJump");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
 
             if (!overdrive)
             {
                 state.isFacing = false;
-                ani.ChangeAnimationState("AfterDash");
+                ani.ChangeAnimationAttack("AfterDash");
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
                 state.isFacing = true;
-                ani.ChangeAnimationState("Wait");
+                ani.ChangeAnimationAttack("Wait");
                 await UniTask.WaitForSeconds(3f, cancellationToken: token);
                 ai.canMove = true;
 
@@ -110,13 +110,13 @@ public class DashAB1FSM : BaseState
             {
 
                 state.isFacing = false;
-                ani.ChangeAnimationState("AfterDashO");
+                ani.ChangeAnimationAttack("AfterDashO");
                 await UniTask.WaitForSeconds(3f, cancellationToken: token);
                 PullPlayer().Forget();
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
                 state.isFacing = true;
-                ani.ChangeAnimationState("Wait");
+                ani.ChangeAnimationAttack("Wait");
                 await UniTask.WaitForSeconds(3f, cancellationToken: token);
                 ai.canMove = true;
 

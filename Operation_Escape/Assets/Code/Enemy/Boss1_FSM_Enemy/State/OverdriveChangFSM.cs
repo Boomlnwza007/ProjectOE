@@ -21,7 +21,7 @@ public class OverdriveChangFSM : BaseState
         time = 0;
         Debug.Log("Start");
         var ani = state.boss1AniControl;
-        ani.ChangeAnimationState("ChangeState");
+        ani.ChangeAnimationAttack("ChangeState");
         //Over().Forget();
     }
 
@@ -29,7 +29,7 @@ public class OverdriveChangFSM : BaseState
     {
         var state = (FSMBoss1EnemySM)stateMachine;
         var ani = state.boss1AniControl;
-        ani.ChangeAnimationState("ChangeState");
+        ani.ChangeAnimationAttack("ChangeState");
         await UniTask.WaitForSeconds(3);
         state.JumpCenter();
         Debug.Log("Comple");

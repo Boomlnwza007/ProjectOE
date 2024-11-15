@@ -563,9 +563,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3544962096193456687}
+  layerIndex: 0
+  rb: {fileID: 7838424579805757511}
   timeplay: 0
-  BossBody: {fileID: 1063079117122623977}
   endAnim: 0
+  BossBody: {fileID: 1063079117122623977}
 --- !u!1 &1101482974929538245
 GameObject:
   m_ObjectHideFlags: 0

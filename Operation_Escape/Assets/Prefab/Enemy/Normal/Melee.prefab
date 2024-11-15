@@ -481,7 +481,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 502522
+  m_InstanceId: 41718
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -602,6 +602,7 @@ MonoBehaviour:
     m_Bits: 128
   smoothTime: 0.3
   speed: 13
+  stopRadiusOn: 0
   slowDownRadius: 5
   stopRadius: 2
   enableRandomDeviation: 1
@@ -663,7 +664,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 1
-  firstSpawn: {x: 0, y: 0, z: 0}
   maxHealth: 60
   Health: 60
   dmg: 25
@@ -674,6 +674,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rb: {fileID: 8775170577091479340}
   dropChange: 0
+  jumpCenter: {fileID: 0}
   cooldown: 0
   time: 0
   timeCooldown: 6
@@ -771,10 +772,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5011779000538463124}
+  layerIndex: 1
   rb: {fileID: 8775170577091479340}
+  timeplay: 0
+  endAnim: 0
   isFacing: 1
   isFacingRight: 1
-  timeplay: 0
   hitZone:
   - {fileID: 8253767373466218031}
   - {fileID: 379053001685113411}

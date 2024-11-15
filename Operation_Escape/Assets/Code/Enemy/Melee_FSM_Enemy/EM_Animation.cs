@@ -2,18 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EM_Animation : MonoBehaviour
+public class EM_Animation : BaseAnimEnemy
 {
-    public Animator animator;
-    public Rigidbody2D rb;
+
     public IAiAvoid ai;
     private string currentAnimaton;
     public bool isFacing = true;
     public bool isFacingRight = true;
-    public float timeplay;
     public AttackCollider[] hitZone;
     public GameObject hitZoneBar;
-    public bool endAnim;
 
 
     private void Start()
@@ -57,23 +54,5 @@ public class EM_Animation : MonoBehaviour
             animator.speed = 1;
             animator.SetBool("Walk", false);
         }
-    }
-
-    public float TimePlayer()
-    {
-        return animator.GetCurrentAnimatorClipInfo(1).Length;
-    }
-
-    public void ChangeAnimationAttack(string newAnimation)
-    {
-        endAnim = false;
-        animator.Play(newAnimation,1);
-        timeplay = animator.GetCurrentAnimatorClipInfo(1).Length;
-        currentAnimaton = newAnimation;
-    }
-
-    public void EndAnimation()
-    {
-        endAnim = true;
-    }
+    } 
 }

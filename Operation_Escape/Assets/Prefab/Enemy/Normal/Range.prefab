@@ -117,7 +117,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 91168
+  m_InstanceId: 41866
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -238,6 +238,7 @@ MonoBehaviour:
     m_Bits: 128
   smoothTime: 0.3
   speed: 11
+  stopRadiusOn: 0
   slowDownRadius: 5
   stopRadius: 2
   enableRandomDeviation: 1
@@ -299,7 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 2
-  firstSpawn: {x: 0, y: 0, z: 0}
   maxHealth: 40
   Health: 40
   dmg: 15
@@ -310,6 +310,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rb: {fileID: 0}
   dropChange: 0
+  jumpCenter: {fileID: 0}
   bullet: {fileID: 4640713933992763453, guid: 1600d66847cfab747ad170f37004b054, type: 3}
   bulletTranform: {fileID: 2257339517205150815}
   cooldown: 0
@@ -412,10 +413,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3147429572110553193}
+  layerIndex: 1
   rb: {fileID: 8517935894679314439}
+  timeplay: 0
+  endAnim: 0
   isFacing: 1
   isFacingRight: 1
-  timeplay: 0
 --- !u!1 &1779229937017213570
 GameObject:
   m_ObjectHideFlags: 0

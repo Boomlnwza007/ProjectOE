@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ES_animation : MonoBehaviour
+public class ES_animation : BaseAnimEnemy
 {
-    public Animator animator;
-    public Rigidbody2D rb;
     public IAiAvoid ai;
 
     private void Start()

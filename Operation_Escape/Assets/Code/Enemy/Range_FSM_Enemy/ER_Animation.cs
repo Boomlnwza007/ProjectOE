@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ER_Animation : MonoBehaviour
+public class ER_Animation : BaseAnimEnemy
 {
-    public Animator animator;
-    public Rigidbody2D rb;
     public IAiAvoid ai;
     private string currentAnimaton;
     public bool isFacing = true;
     public bool isFacingRight = true;
-    public float timeplay;
 
     private void Start()
     {
@@ -108,18 +105,6 @@ public class ER_Animation : MonoBehaviour
             animator.SetBool("Walk", false);
         }
 
-    }
-
-    public float TimePlayer()
-    {
-        return animator.GetCurrentAnimatorClipInfo(1).Length;
-    }
-
-    public void ChangeAnimationAttack(string newAnimation)
-    {
-        animator.Play(newAnimation, 1);
-        timeplay = animator.GetCurrentAnimatorClipInfo(1).Length;
-        currentAnimaton = newAnimation;
     }
 }
 

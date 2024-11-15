@@ -59,44 +59,44 @@ public class RangeAB1Fsm : BaseState
             }
             ai.canMove = false;
 
-            ani.ChangeAnimationState("RangeAtk");
+            ani.ChangeAnimationAttack("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //1
             await state.ShootMissile(token);
             if (CheckDistance())
             {
-                ani.ChangeAnimationState("Wait");
+                ani.ChangeAnimationAttack("Wait");
                 return;
             }
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
-            ani.ChangeAnimationState("RangeAtk");
+            ani.ChangeAnimationAttack("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //2
             await state.ShootMissile(token);
             if (CheckDistance())
             {
-                ani.ChangeAnimationState("Wait");
+                ani.ChangeAnimationAttack("Wait");
                 return;
             }
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
-            ani.ChangeAnimationState("RangeAtk");
+            ani.ChangeAnimationAttack("RangeAtk");
             await state.ShootLaser(charge, 0.5f, 1, charge - 0.1f); //3
             await state.ShootMissile(token);
             if (overdrive)
             {
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-                ani.ChangeAnimationState("RangeAtk");
+                ani.ChangeAnimationAttack("RangeAtk");
                 await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
             }
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.DelLaserGun();
-            ani.ChangeAnimationState("Wait");
+            ani.ChangeAnimationAttack("Wait");
 
             ai.canMove = false;
             await UniTask.WaitForSeconds(3f);
             ai.canMove = true;
 
-            ani.ChangeAnimationState("Wait");
+            ani.ChangeAnimationAttack("Wait");
             ChangState(((FSMBoss1EnemySM)stateMachine).dashAState);
         }
         catch (OperationCanceledException)
