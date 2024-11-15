@@ -236,12 +236,14 @@ public class NormalAB1FSM : BaseState
         {
             state.rollSpeed = state.dodgeMinimium;
             dash = false;
+            state.rb.velocity = Vector3.zero;
             return;
         }
         state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
         if (state.rollSpeed < state.dodgeMinimium)
         {
             dash = false;
+            state.rb.velocity = Vector3.zero;
         }
 
         state.rb.velocity = dir * state.rollSpeed;
