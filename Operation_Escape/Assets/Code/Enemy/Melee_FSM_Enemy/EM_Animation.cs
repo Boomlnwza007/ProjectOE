@@ -12,7 +12,6 @@ public class EM_Animation : BaseAnimEnemy
     public AttackCollider[] hitZone;
     public GameObject hitZoneBar;
 
-
     private void Start()
     {
         ai = gameObject.GetComponent<IAiAvoid>();
