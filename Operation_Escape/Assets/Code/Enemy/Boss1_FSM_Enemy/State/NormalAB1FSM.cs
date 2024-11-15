@@ -228,19 +228,22 @@ public class NormalAB1FSM : BaseState
 
     public void DashStart()
     {
+        var state = ((FSMBoss1EnemySM)stateMachine);
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
 
-        RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, 3, LayerMask.GetMask("Obstacle"));
+        RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.dodgeStopRange, LayerMask.GetMask("Obstacle"));
         if (raycast.Length > 0)
         {
+            state.rollSpeed = state.dodgeMinimium;
             dash = false;
+            state.rb.velocity = Vector3.zero;
             return;
         }
-        var state = ((FSMBoss1EnemySM)stateMachine);
         state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
         if (state.rollSpeed < state.dodgeMinimium)
         {
             dash = false;
+            state.rb.velocity = Vector3.zero;
         }
 
         state.rb.velocity = dir * state.rollSpeed;

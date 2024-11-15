@@ -28,7 +28,7 @@ public class CheatMenu : MonoBehaviour
     [Header("Player Walk")]
     [SerializeField] private GameObject buttonPreWarp;
     [SerializeField] private Transform[] warpPoint;
-    [SerializeField] private static Transform[] warpPointReal;
+    public static Transform[] warpPointReal;
     public Transform menuWarp;
 
     [Header("Other")]
@@ -538,7 +538,7 @@ public class CheatMenu : MonoBehaviour
         int buttonNumber;
         if (int.TryParse(buttonName, out buttonNumber))
         {
-            CinemachineControl.Instance.player.position = warpPointReal[buttonNumber].position;
+            PlayerControl.control.gameObject.transform.position = warpPointReal[buttonNumber].position;
         }
         else
         {

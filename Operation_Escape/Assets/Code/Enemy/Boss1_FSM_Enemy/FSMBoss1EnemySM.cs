@@ -26,6 +26,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float dodgeMaxSpeed = 100f;
     public float dodgeMinimium = 50f;
     public float dodgeSpeedDropMultiplier = 5f;
+    public float dodgeStopRange = 5f;
     [HideInInspector]public float rollSpeed;
 
     [Header("status")]
