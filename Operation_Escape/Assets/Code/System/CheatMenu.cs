@@ -84,7 +84,8 @@ public class CheatMenu : MonoBehaviour
     public void Hide()
     {
         onMainMenu = !onMainMenu;
-        mainMenu.SetActive(onMainMenu);        
+        mainMenu.SetActive(onMainMenu);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void ModeSpawn()
