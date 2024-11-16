@@ -45,8 +45,7 @@ public class StateMachine : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (curState != null)
         {

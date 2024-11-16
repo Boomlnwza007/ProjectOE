@@ -481,7 +481,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 41718
+  m_InstanceId: 176862
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -689,6 +689,12 @@ MonoBehaviour:
     m_Bits: 640
   jumpLength: 20
   forcePush: 100
+  dash: 0
+  dodgeMaxSpeed: 50
+  dodgeMinimium: 30
+  dodgeSpeedDropMultiplier: 5
+  dodgeStopRange: 3
+  rollSpeed: 0
 --- !u!114 &3171470274902600665
 MonoBehaviour:
   m_ObjectHideFlags: 0

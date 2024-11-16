@@ -43,7 +43,10 @@ public class NormalAB1FSM : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.targetTransform.position;
+    }
 
+    public override void UpdatePhysics()
+    {
         if (dash)
         {
             DashStart();

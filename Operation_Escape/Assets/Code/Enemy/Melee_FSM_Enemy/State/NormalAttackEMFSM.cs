@@ -11,6 +11,7 @@ public class NormalAttackEMFSM : BaseState
     public NormalAttackEMFSM(FSMMEnemySM stateMachine) : base("NormalAttack", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationTokenSource;
+    bool dash;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -25,7 +26,16 @@ public class NormalAttackEMFSM : BaseState
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        ai.destination = ai.targetTransform.position;        
+        ai.destination = ai.targetTransform.position;
+       
+    }
+
+    public override void UpdatePhysics()
+    {
+         if (dash)
+        {
+            DashStart();
+        }
     }
 
     public async UniTaskVoid Attack(CancellationToken token)
@@ -141,6 +151,13 @@ public class NormalAttackEMFSM : BaseState
     public void Dash()
     {
         var state = ((FSMMEnemySM)stateMachine);
+        dash = true;
+        state.rollSpeed = state.dodgeMaxSpeed;
+    }
+
+    public void DashStart()
+    {
+        var state = ((FSMMEnemySM)stateMachine);
         Vector2 dir = Vector2.zero;
         if (state.animator.isFacingRight)
         {
@@ -150,8 +167,24 @@ public class NormalAttackEMFSM : BaseState
         {
             dir = Vector2.left;
         }
-        state.rb.AddForce(dir * state.forcePush, ForceMode2D.Impulse);
+        //Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
 
+        RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.dodgeStopRange, LayerMask.GetMask("Obstacle"));
+        if (raycast.Length > 0)
+        {
+            state.rollSpeed = state.dodgeMinimium;
+            dash = false;
+            state.rb.velocity = Vector3.zero;
+            return;
+        }
+        state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
+        if (state.rollSpeed < state.dodgeMinimium)
+        {
+            dash = false;
+            state.rb.velocity = Vector3.zero;
+        }
+
+        state.rb.velocity = dir * state.rollSpeed;
     }
 
 }

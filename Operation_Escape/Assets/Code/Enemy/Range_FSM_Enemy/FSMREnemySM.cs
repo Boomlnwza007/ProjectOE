@@ -30,6 +30,14 @@ public class FSMREnemySM : StateMachine, IDamageable
     public float radius = 13;
     public float offset = 2;
 
+    [Header("Dash")]
+    public bool dash;
+    public float dodgeMaxSpeed = 50f;
+    public float dodgeMinimium = 30f;
+    public float dodgeSpeedDropMultiplier = 5f;
+    public float dodgeStopRange = 5f;
+    [HideInInspector] public float rollSpeed;
+
     [HideInInspector]
     public WanderRFSM wanderState;
     [HideInInspector]

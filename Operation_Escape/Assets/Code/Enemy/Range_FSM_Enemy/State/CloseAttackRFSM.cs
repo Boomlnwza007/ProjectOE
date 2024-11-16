@@ -11,7 +11,7 @@ public class CloseAttackRFSM : BaseState
     public IAiAvoid ai;
     public float speed;
     public bool go;
-    float time;
+    bool dash;
     private CancellationTokenSource cancellationToken;
 
 
@@ -19,7 +19,6 @@ public class CloseAttackRFSM : BaseState
     public override void Enter()
     {
         go = false;
-        time = 0;
         cancellationToken = new CancellationTokenSource();
 
         var state = (FSMREnemySM)stateMachine;
@@ -35,46 +34,23 @@ public class CloseAttackRFSM : BaseState
         Attack(cancellationToken.Token).Forget();
 
     }
-    
+    public override void UpdateLogic()
+    {
+        if (dash)
+        {
+            DashStart();
+        }
+    }
+
     public async UniTask Attack(CancellationToken token)
     {
         var state = (FSMREnemySM)stateMachine;
         try
         {
-            state.animator.isFacing = false;
-            state.Run(2);
-            Ray();
-            ai.canMove = true;
-            bool hasAttacked = false;
-
-            while (time < 3 && !hasAttacked)
-            {
-                time += Time.deltaTime;
-                if (Vector2.Distance(ai.destination, ai.position) < 3f && ai.endMove)
-                {
-                    Debug.Log(0);
-                    state.Walk();
-                    hasAttacked = true;
-                    state.animator.isFacing = true;
-                    break;
-                }
-
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-                foreach (var hit in colliders)
-                {
-                    if (hit.gameObject != state.gameObject)
-                    {
-                        Debug.Log(hit.gameObject.name);
-                        state.Walk();
-                        hasAttacked = true;
-                        state.animator.isFacing = true;
-                        break;
-                    }
-                }
-                token.ThrowIfCancellationRequested();
-                await UniTask.Yield();
-            }
-
+            state.animator.isFacing = false;            
+            ai.canMove = false;
+            Dash();
+            await UniTask.WaitWhile(() => dash);
             ai.canMove = false;
             state.rb.velocity = Vector2.zero;
             await state.PreAttack("PreAttack", 0.1f);
@@ -95,7 +71,7 @@ public class CloseAttackRFSM : BaseState
         }        
     }
 
-    public void Ray()
+    public Vector2 Ray()
     {
         var state = (FSMREnemySM)stateMachine;
         Vector2 dir = (ai.position- ai.targetTransform.position).normalized;
@@ -187,12 +163,42 @@ public class CloseAttackRFSM : BaseState
                 );
             }
 
-            ai.destination = (Vector2)ai.position + (lastValidDirection.normalized * state.jumpLength);
-            Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (lastValidDirection.normalized * state.jumpLength), Color.blue);
+            return lastValidDirection.normalized;
         }
 
-        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (lastValidDirection.normalized * state.jumpLength), Color.blue);
+        return lastValidDirection.normalized;
+    }
 
+    public void Dash()
+    {
+        var state = ((FSMREnemySM)stateMachine);
+        dash = true;
+        state.rollSpeed = state.dodgeMaxSpeed;
+    }
+
+    public void DashStart()
+    {
+        var state = ((FSMREnemySM)stateMachine);
+        Vector2 dir = (ai.position - ai.targetTransform.position ).normalized;
+        //Vector2 dir = Ray();
+
+        //RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.dodgeStopRange, LayerMask.GetMask("Obstacle"));
+        //if (raycast.Length > 0)
+        //{
+        //    state.rollSpeed = state.dodgeMinimium;
+        //    dash = false;
+        //    state.rb.velocity = Vector3.zero;
+        //    return;
+        //}
+
+        state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
+        if (state.rollSpeed < state.dodgeMinimium)
+        {
+            dash = false;
+            state.rb.velocity = Vector3.zero;
+        }
+
+        state.rb.velocity = dir * state.rollSpeed;
     }
 
     public override void Exit()

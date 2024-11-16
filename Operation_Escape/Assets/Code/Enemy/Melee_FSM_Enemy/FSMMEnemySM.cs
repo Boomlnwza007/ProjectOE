@@ -19,6 +19,14 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public float jumpLength = 20;
     public float forcePush = 100;
 
+    [Header("Dash")]
+    public bool dash;
+    public float dodgeMaxSpeed = 50f;
+    public float dodgeMinimium = 30f;
+    public float dodgeSpeedDropMultiplier = 5f;
+    public float dodgeStopRange = 5f;
+    [HideInInspector] public float rollSpeed;
+
     [HideInInspector]
     public WanderEMFSM wanderState;
     [HideInInspector]
