@@ -20,6 +20,7 @@ public class ShieldGun : BaseGun
         shield = Instantiate(shieldPrefab, PlayerControl.control.transform).GetComponent<ShieldGun_Shield>();
         shield.Wake(true);
         shield.gameObject.transform.localPosition = Vector3.zero;
+        shoot = false;
     }
 
     public override void Exit()
