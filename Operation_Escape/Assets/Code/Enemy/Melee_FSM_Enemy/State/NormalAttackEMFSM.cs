@@ -27,12 +27,7 @@ public class NormalAttackEMFSM : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.targetTransform.position;
-       
-    }
-
-    public override void UpdatePhysics()
-    {
-         if (dash)
+        if (dash)
         {
             DashStart();
         }
