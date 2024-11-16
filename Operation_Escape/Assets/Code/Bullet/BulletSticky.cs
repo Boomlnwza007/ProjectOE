@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 public class BulletSticky : BaseBullet
 {
@@ -12,6 +14,7 @@ public class BulletSticky : BaseBullet
     private IDamageable targetDmg;
     private StateMachine enermy;
     private bool sticky;
+    private CancellationTokenSource cancellationTokenSource;
 
     void Start()
     {
@@ -36,7 +39,7 @@ public class BulletSticky : BaseBullet
                 {
                     enermy.dropChange++;
                 }
-                Blast().Forget();
+                StartBlast();
             }
         }
         else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
@@ -50,15 +53,23 @@ public class BulletSticky : BaseBullet
         }
     }
 
-    public async UniTask Blast()
+    public async UniTask Blast(CancellationToken cancellationToken)
     {
         float timer = 0f;
         float flashSpeed = 1f; // ความเร็วเริ่มต้นของการกระพริบ
         Color originalColor = spriteBullet.color; // เก็บสีเดิมไว้
         sticky = true;
+
         while (timer < timeBomb)
         {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                Debug.Log("Blast was canceled!");
+                return;
+            }
+
             timer += Time.deltaTime;
+
             // เปลี่ยนสีให้ค่อย ๆ แดงเมื่อเข้าใกล้ 10 วินาที
             float redValue = Mathf.Lerp(0, 1, timer / timeBomb);
             spriteBullet.color = new Color(redValue, originalColor.g * (1 - redValue), originalColor.b * (1 - redValue));
@@ -71,7 +82,7 @@ public class BulletSticky : BaseBullet
                 spriteBullet.color = Color.Lerp(originalColor, Color.red, Mathf.PingPong(Time.time * flashSpeed, 1f));
             }
 
-            await UniTask.Yield();
+            await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
         }
 
         if (enermy != null)
@@ -87,11 +98,34 @@ public class BulletSticky : BaseBullet
         Destroy(gameObject);
     }
 
+    public void StartBlast()
+    {
+        cancellationTokenSource = new CancellationTokenSource();
+        Blast(cancellationTokenSource.Token).Forget();
+    }
+
+    public void StopBlast()
+    {
+        if (cancellationTokenSource != null)
+        {
+            cancellationTokenSource.Cancel();
+            cancellationTokenSource.Dispose();
+            cancellationTokenSource = null;
+        }
+    }
+
     private void OnBecameInvisible()
     {
         if (!sticky)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void DelAFMelee()
+    {
+        StopBlast();
+        enermy.dropChange--;
+        Destroy(gameObject);
     }
 }

@@ -157,6 +157,14 @@ public class PlayerCombat : MonoBehaviour
             if (hit.gameObject != gameObject && hit.TryGetComponent(out IDamageable dam))
             {
                 dam.Takedamage(damage, DamageType.Melee, knockBack);
+                foreach (Transform child in hit.transform)
+                {
+                    BulletSticky bullet = child.GetComponent<BulletSticky>();
+                    if (bullet != null)
+                    {
+                        bullet.DelAFMelee();
+                    }
+                }
                 Debug.Log(hit.name);
             }
             else if (hit.TryGetComponent(out IBulletInteract bulletInteract))
@@ -220,6 +228,19 @@ public class PlayerCombat : MonoBehaviour
 
     public void Addgun(BaseGun gun)
     {
+        if (gunList.Count != 0)
+        {
+            gunList[currentGun].Remove();
+            gunList[currentGun].Exit();
+            if (gunList[currentGun].canUltimate)
+            {
+                gunList[currentGun].canUltimate = false;
+                energy.canGetUltimateEnergy = true;
+                energy.ultimateEnergy = 0;
+                UltiTime = 0;
+            }
+        }       
+
         currentGun = gunList.Count;
         gunList.Add(gun);
         gunList[currentGun].Setup();
@@ -237,6 +258,7 @@ public class PlayerCombat : MonoBehaviour
             if (gunList[i] == gun)
             {
                 gunList[i].Remove();
+                gunList[i].Exit();
                 gunList.RemoveAt(i);
             }
         }

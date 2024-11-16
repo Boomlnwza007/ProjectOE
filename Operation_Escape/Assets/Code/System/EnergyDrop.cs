@@ -62,8 +62,11 @@ public class EnergyDrop : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<IEnergy>().GetEnergy(1);
-            Destroy(gameObject);
+            if (collision.TryGetComponent(out IEnergy energy))
+            {
+                energy.GetEnergy(1);
+                Destroy(gameObject);
+            }
         }
     }
 }
