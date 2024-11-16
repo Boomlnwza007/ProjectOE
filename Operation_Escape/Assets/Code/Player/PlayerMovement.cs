@@ -99,21 +99,24 @@ public class PlayerMovement : MonoBehaviour
     private void Roll()
     {
         if (rollCharge < maxRollCharge)
-        {            
+        {
+
             rollCharge++;
             rollTimer = 0;
             dodgeDir = new Vector2(horizontal, vertical).normalized;
-
+            PlayerControl.control.animator.SetBool("RollRightDir", horizontal == 1);
             if (dodgeDir == Vector2.zero)
             {
                 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePos.z = 0;
                 dodgeDir = (transform.position - mousePos).normalized;
+                PlayerControl.control.animator.SetBool("RollRightDir", !PlayerControl.control.animator.GetBool("Right"));
             }
 
             rollSpeed = dodgeMaxSpeed;
             state = State.Dodge;
             damageable.imortal = true;
+            PlayerControl.control.animator.SetTrigger("Roll");
             rb.velocity = dodgeDir * rollSpeed;
         }
         else

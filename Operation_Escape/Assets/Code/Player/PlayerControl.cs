@@ -74,6 +74,7 @@ public class PlayerControl : MonoBehaviour
         bool HasGun = playerCombat.gunList.Count > 0;
 
         animator.SetBool("Right", isFacingRight);
+
         animator.SetBool("HasGun", HasGun);
 
         if (playerMovement.horizontal != 0 || playerMovement.vertical != 0)
