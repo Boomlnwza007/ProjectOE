@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioEnemy_EM : AudioCharacter
 {
-    [Header("------ Audio Base ------")]
+    [Header("------ Audio Special ------")]
     public AudioClip jump;
 
     public void PlayJump(string name)

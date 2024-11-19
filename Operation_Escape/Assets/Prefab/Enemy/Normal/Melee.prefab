@@ -481,7 +481,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 176862
+  m_InstanceId: 39402
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 4329810430280661751}
   - component: {fileID: 5011779000538463124}
   - component: {fileID: 1353224174552318050}
+  - component: {fileID: 1358442506345676462}
   m_Layer: 7
   m_Name: Melee
   m_TagString: Enemy
@@ -788,6 +789,21 @@ MonoBehaviour:
   - {fileID: 8253767373466218031}
   - {fileID: 379053001685113411}
   hitZoneBar: {fileID: 7462196969455856928}
+--- !u!114 &1358442506345676462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734301062694279331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fcad4b9f1bb7a4ba4ce196d63c9aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk: {fileID: 0}
+  attack: []
+  jump: {fileID: 0}
 --- !u!1 &5458121437017106546
 GameObject:
   m_ObjectHideFlags: 0

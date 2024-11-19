@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioEnemy_RE : AudioCharacter
 {
-    [Header("------ Audio Base ------")]
+    [Header("------ Audio Special ------")]
     public AudioClip dodge;
 
     public void PlayDodge(string name)

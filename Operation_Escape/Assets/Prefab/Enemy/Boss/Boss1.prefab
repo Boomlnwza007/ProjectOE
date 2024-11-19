@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 3544962096193456687}
   - component: {fileID: 5903309602965604086}
   - component: {fileID: 323760578986285259}
+  - component: {fileID: 5884963000556520212}
   m_Layer: 7
   m_Name: BossBody
   m_TagString: Enemy
@@ -571,6 +572,21 @@ MonoBehaviour:
   timeplay: 0
   endAnim: 0
   BossBody: {fileID: 1063079117122623977}
+--- !u!114 &5884963000556520212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063079117122623977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd245944e3fc7c40a77986c59efd312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk: {fileID: 0}
+  attack: []
+  effect: []
 --- !u!1 &1101482974929538245
 GameObject:
   m_ObjectHideFlags: 0

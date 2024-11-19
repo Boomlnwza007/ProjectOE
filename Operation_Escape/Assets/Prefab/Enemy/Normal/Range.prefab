@@ -117,7 +117,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 41866
+  m_InstanceId: 39710
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 7558812849801600034}
   - component: {fileID: 3147429572110553193}
   - component: {fileID: 8165175477225224536}
+  - component: {fileID: 3394457640366998608}
   m_Layer: 7
   m_Name: Range
   m_TagString: Enemy
@@ -329,6 +330,12 @@ MonoBehaviour:
   jumpLength: 7
   radius: 13
   offset: 3
+  dash: 0
+  dodgeMaxSpeed: 50
+  dodgeMinimium: 30
+  dodgeSpeedDropMultiplier: 5
+  dodgeStopRange: 5
+  rollSpeed: 0
   stateName: 
 --- !u!70 &7763781285922267960
 CapsuleCollider2D:
@@ -419,6 +426,21 @@ MonoBehaviour:
   endAnim: 0
   isFacing: 1
   isFacingRight: 1
+--- !u!114 &3394457640366998608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635215977825158641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09021d53fd20d74585d0d8d12a759d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walk: {fileID: 0}
+  attack: []
+  dodge: {fileID: 0}
 --- !u!1 &1779229937017213570
 GameObject:
   m_ObjectHideFlags: 0

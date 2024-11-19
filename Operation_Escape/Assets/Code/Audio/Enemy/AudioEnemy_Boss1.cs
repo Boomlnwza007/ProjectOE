@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioEnemy_Boss1 : AudioCharacter
 {
-    [Header("------ Audio Base ------")]
+    [Header("------ Audio Special ------")]
     public AudioClip[] effect;
 
     public void PlayWarp(int index)
