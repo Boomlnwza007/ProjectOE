@@ -1052,6 +1052,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -13395787112955814}
     m_Position: {x: 190, y: -370, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 328142745539291999}
+    m_Position: {x: 225, y: -305, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -1708857977680505265}
@@ -3336,6 +3339,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 5870c87e87e26824992ba8760130eca6, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &328142745539291999
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cutscene
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 332d340fef597524aa53516f2d8eb98d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
