@@ -21,7 +21,10 @@ public class LaserDrone : MonoBehaviour
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
     private LineRenderer laser;
     public LayerMask ShootLayer;
-    private bool isOof;
+
+    [Header("------ Audio Base ------")]
+    public AudioClip shoot;
+    public AudioClip breakLaser;
 
     // Start is called before the first frame update
     void Start()
@@ -75,7 +78,6 @@ public class LaserDrone : MonoBehaviour
         laser.enabled = true;
         direction = (endPos.position - firstPos.position).normalized;
         distance = Vector2.Distance(firstPos.position, endPos.position);
-
         if (Physics2D.BoxCast(firstPos.position, new Vector2(laser.startWidth, laser.startWidth), 0f, direction, distance, ShootLayer))
         {
             RaycastHit2D hitInfo = Physics2D.BoxCast(firstPos.position, new Vector2(laser.startWidth, laser.startWidth), 0f, direction, distance, ShootLayer);
@@ -103,6 +105,8 @@ public class LaserDrone : MonoBehaviour
         {
             DrawRay(firstPos.position, endPos.position);
         }
+        AudioManager.audioManager.PlaySFX(shoot);
+
     }
 
     public async UniTask DamageHit()

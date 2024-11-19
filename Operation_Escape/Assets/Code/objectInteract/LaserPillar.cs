@@ -9,6 +9,7 @@ public class LaserPillar : MonoBehaviour, IBulletInteract, IRestartOBJ
     public void Interact(DamageType type)
     {       
         laserDrone.Destroy();
+        AudioManager.audioManager.PlaySFX(laserDrone.breakLaser);
     }
 
     public void Reset()

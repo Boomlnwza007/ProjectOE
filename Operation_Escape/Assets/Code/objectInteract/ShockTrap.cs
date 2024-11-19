@@ -16,6 +16,10 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
     public float dpsDamage = 1;
     private bool trapOn;
 
+    [Header("------ Audio Base ------")]
+    public AudioClip prepare;
+    public AudioClip explode;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
                     time = 0f;
                     Destroy(trap.gameObject);                    
                     gameObject.SetActive(false);
+                    AudioManager.audioManager.PlaySFX(explode);
                 }
             }
             else
@@ -86,6 +91,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
             trapOn = true;
             trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
             StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
+            AudioManager.audioManager.PlaySFX(prepare);
         }
     }
 
