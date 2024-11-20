@@ -15332,6 +15332,8 @@ MonoBehaviour:
   ShootLayer:
     serializedVersion: 2
     m_Bits: 512
+  shoot: {fileID: 0}
+  breakLaser: {fileID: 0}
 --- !u!120 &2345503973643408658
 LineRenderer:
   serializedVersion: 2
