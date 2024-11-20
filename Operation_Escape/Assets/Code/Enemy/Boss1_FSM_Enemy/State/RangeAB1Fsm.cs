@@ -63,7 +63,7 @@ public class RangeAB1Fsm : BaseState
             await UniTask.WhenAll(state.ShootLaser(charge, 0.5f, 1, charge - 0.1f), state.ShootMissile(token));
             if (CheckDistance())
             {
-                ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+                //ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
                 ani.ChangeAnimationAttack("Wait");
                 return;
             }
@@ -74,7 +74,7 @@ public class RangeAB1Fsm : BaseState
 
             if (CheckDistance())
             {
-                ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
+                //ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
                 ani.ChangeAnimationAttack("Wait");
                 return;
             }
@@ -126,8 +126,7 @@ public class RangeAB1Fsm : BaseState
             {
                 var state = ((FSMBoss1EnemySM)stateMachine);
                 state.DelLaserGun();
-                state.animator.SetBool("Attacking", false);
-                ChangState(state.dashAState);
+                ChangState(state.normalAState);
                 distance = true;
             }
         }
