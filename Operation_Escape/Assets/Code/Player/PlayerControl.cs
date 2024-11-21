@@ -244,4 +244,12 @@ public class PlayerControl : MonoBehaviour
         menu.HideAfterDie();
     }
 
+    public void ShowGun(bool on)
+    {
+        if (playerCombat.currentEquipGun!=null)
+        {
+           playerCombat.currentEquipGun.SetActive(on);
+        }
+    }
+
 }
