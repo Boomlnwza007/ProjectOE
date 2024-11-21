@@ -15334,7 +15334,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   sfxSource: {fileID: 4926440337135404813}
-  shoot: {fileID: 0}
+  shoot: {fileID: 8300000, guid: 1f2bda16fec24ce48ab38354e43b0453, type: 3}
   breakLaser: {fileID: 0}
 --- !u!120 &2345503973643408658
 LineRenderer:
