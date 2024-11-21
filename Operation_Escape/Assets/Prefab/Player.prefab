@@ -8543,10 +8543,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChangGun: {fileID: 0}
   gunFail: {fileID: 0}
-  reload: {fileID: 0}
+  reload: {fileID: 8300000, guid: 37ea6888753cd9543a3e698e57258805, type: 3}
   melee: {fileID: 0}
   dash: {fileID: 0}
-  walk: {fileID: 0}
+  walk: {fileID: 8300000, guid: f23a8fb4f7fe28249b859ef3b4349b9e, type: 3}
   dodge: {fileID: 0}
   eCollect: {fileID: 0}
   heal: {fileID: 0}
