@@ -66,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
                 if (rollSpeed < dodgeMinimium)
                 {
                     damageable.imortal = false;
+                    PlayerControl.control.ShowGun(true);
+                    PlayerControl.control.playerCombat.canFire = true;
                     state = State.Normal;
                 }
                 break;
@@ -100,7 +102,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (rollCharge < maxRollCharge)
         {
-
+            PlayerControl.control.ShowGun(false);
+            PlayerControl.control.playerCombat.canFire = false;
             rollCharge++;
             rollTimer = 0;
             dodgeDir = new Vector2(horizontal, vertical).normalized;
