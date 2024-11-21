@@ -40,6 +40,8 @@ public class TriggerTimeline : MonoBehaviour
     private void OnTimelineStopped(PlayableDirector director)
     {
         systemControl.Cutscene(true);
+        PlayerControl.control.EnableUI(true);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,6 +56,7 @@ public class TriggerTimeline : MonoBehaviour
 
     public IEnumerator StartPosition()
     {
+        PlayerControl.control.EnableUI(false);
         yield return new WaitForSeconds(0.5f);
         while (Vector3.Distance(Actor.position, StarPos) > 0.01f)
         {

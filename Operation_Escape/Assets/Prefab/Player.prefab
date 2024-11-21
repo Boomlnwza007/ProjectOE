@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 356422
+  m_InstanceId: 60534
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8485,6 +8485,7 @@ MonoBehaviour:
   playerAim: {fileID: 1781867465748768360}
   animator: {fileID: 6778737011727104026}
   isdaed: 0
+  UI: {fileID: 3257738974196051764}
   healthBar: {fileID: 4370306752507434572}
   ultimateEnergyBar: {fileID: 2533806186777912645}
   ultimateEnergyBarCircle: {fileID: 2975865491650251715}
@@ -8542,12 +8543,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChangGun: {fileID: 0}
   gunFail: {fileID: 0}
-  ultimateOn: {fileID: 0}
-  ultimateOff: {fileID: 0}
   reload: {fileID: 0}
   melee: {fileID: 0}
   dash: {fileID: 0}
   walk: {fileID: 0}
+  dodge: {fileID: 0}
+  eCollect: {fileID: 0}
+  heal: {fileID: 0}
+  ultFull: {fileID: 0}
+  useUlt: {fileID: 0}
 --- !u!1 &8175531228837757456
 GameObject:
   m_ObjectHideFlags: 0

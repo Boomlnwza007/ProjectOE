@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     public bool isdaed;
 
     [Header("UI")]
+    [SerializeField] private GameObject UI;
+    private bool UIOnUpdate = true;
     [SerializeField] private SliderBar healthBar;
     [SerializeField] private SliderBar ultimateEnergyBar;
     [SerializeField] private SliderBar ultimateEnergyBarCircle;
@@ -50,14 +52,19 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+
         if (Input.GetButtonDown("Pause"))
         {
             menu.HidePause();
         }
 
-        UpdateBars();
-        UpdateBullets();
-        HandleReload();
+        if (UIOnUpdate)
+        {
+            UpdateBars();
+            UpdateBullets();
+            HandleReload();
+        }
+
 
         if (menu.onPauseMenu || menu.onmenuAfterDie)
         {
@@ -202,6 +209,13 @@ public class PlayerControl : MonoBehaviour
         playerCombat.enabled = enable;
         playerAim.enabled = enable;
     }
+
+    public void EnableUI(bool enable)
+    {
+        UIOnUpdate = enable;
+        UI.SetActive(enable);
+    }
+
 
     public void Slow(float percent)
     {
