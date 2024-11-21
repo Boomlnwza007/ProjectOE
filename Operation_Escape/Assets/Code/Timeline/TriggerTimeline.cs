@@ -5,7 +5,6 @@ using UnityEngine.Playables;
 
 public class TriggerTimeline : MonoBehaviour
 {
-    public bool playAwake;
     [SerializeField] private PlayableDirector playable;
     [SerializeField] public SystemControl systemControl;
     public float speed = 0.5f;
@@ -13,7 +12,6 @@ public class TriggerTimeline : MonoBehaviour
     public Transform Actor;
     public Rigidbody2D ActorRb;
     public Vector3 StarPos;
-    public Vector3 EndPos;
     bool Play;
     public KeyCode skipKey = KeyCode.B;
 
@@ -23,16 +21,6 @@ public class TriggerTimeline : MonoBehaviour
         {
             playable.played += OnTimelinePlayed;
             playable.stopped += OnTimelineStopped;
-        }
-
-        if (playAwake)
-        {
-            if (!Play)
-            {
-                Play = true;
-                systemControl.Cutscene(false);
-                StartCoroutine(StartPosition());
-            }
         }
     }
 
@@ -53,10 +41,7 @@ public class TriggerTimeline : MonoBehaviour
     {
         systemControl.Cutscene(true);
         PlayerControl.control.EnableUI(true);
-        if (playAwake)
-        {
-            Actor.position = EndPos;
-        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
