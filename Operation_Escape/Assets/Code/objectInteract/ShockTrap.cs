@@ -17,6 +17,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
     private bool trapOn;
 
     [Header("------ Audio Base ------")]
+    public AudioSource sfxSource;
     public AudioClip prepare;
     public AudioClip explode;
 
@@ -47,7 +48,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
                     time = 0f;
                     Destroy(trap.gameObject);                    
                     gameObject.SetActive(false);
-                    AudioManager.audioManager.PlaySFX(explode);
+                    sfxSource.PlayOneShot(explode);
                 }
             }
             else
@@ -91,7 +92,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
             trapOn = true;
             trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
             StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
-            AudioManager.audioManager.PlaySFX(prepare);
+            sfxSource.PlayOneShot(prepare);
         }
     }
 

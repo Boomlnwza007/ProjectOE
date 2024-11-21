@@ -9,6 +9,6 @@ public class AudioEnemy_Boss1 : AudioCharacter
 
     public void PlayWarp(int index)
     {
-        audioGame.PlaySFX(effect[index]);
+        audioGame.PlayOneShot(effect[index]);
     }
 }

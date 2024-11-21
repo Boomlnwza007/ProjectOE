@@ -9,6 +9,6 @@ public class AudioEnemy_RE : AudioCharacter
 
     public void PlayDodge(string name)
     {
-        audioGame.PlaySFX(dodge);
+        audioGame.PlayOneShot(dodge);
     }
 }

@@ -9,6 +9,6 @@ public class AudioEnemy_EM : AudioCharacter
 
     public void PlayJump(string name)
     {
-        audioGame.PlaySFX(jump);
+        audioGame.PlayOneShot(jump);
     }
 }

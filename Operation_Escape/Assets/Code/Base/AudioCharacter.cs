@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class AudioCharacter : MonoBehaviour
 {
-    protected AudioManager audioGame;
+    public AudioSource audioGame;
     [Header("------ Audio Base ------")]
     public AudioClip walk;
     public AudioClip[] attack;
 
-    private void Awake()
-    {
-        audioGame = AudioManager.audioManager;
-    }
-
     public void PlayWalk()
     {
-        audioGame.PlaySFX(walk);
+        audioGame.PlayOneShot(walk);
     }
 
     public void PlayAtttack(int index)
     {
-        audioGame.PlaySFX(attack[index]);
+        audioGame.PlayOneShot(attack[index]);
     }
 
 }

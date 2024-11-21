@@ -12,6 +12,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
     public LootTable lootDrop;
 
     [Header("------ Audio Base ------")]
+    public AudioSource sfxSource;
     public AudioClip explode;
     public AudioClip meleeHit;
 
@@ -36,7 +37,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
                 {
                     lootDrop.InstantiateLoot(0);
                     gameObject.SetActive(false);
-                    AudioManager.audioManager.PlaySFX(meleeHit);
+                    sfxSource.PlayOneShot(meleeHit);
                 }
                 else
                 {
@@ -100,7 +101,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
         MakeDamage();
         gameObject.SetActive(false);
         Destroy(bomb.gameObject);
-        AudioManager.audioManager.PlaySFX(explode);
+        sfxSource.PlayOneShot(explode);
     }
 
     public void Reset()

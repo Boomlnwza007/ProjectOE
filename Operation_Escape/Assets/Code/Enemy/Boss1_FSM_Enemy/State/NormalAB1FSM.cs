@@ -43,7 +43,10 @@ public class NormalAB1FSM : BaseState
     {
         base.UpdateLogic();
         ai.destination = ai.targetTransform.position;
+    }
 
+    public override void UpdatePhysics()
+    {
         if (dash)
         {
             DashStart();
@@ -180,7 +183,6 @@ public class NormalAB1FSM : BaseState
             return;
         }        
     } 
-
      
     //public override void ChangState(BaseState Nextstate)
     //{
@@ -236,7 +238,6 @@ public class NormalAB1FSM : BaseState
         {
             state.rollSpeed = state.dodgeMinimium;
             dash = false;
-            state.rb.velocity = Vector3.zero;
             return;
         }
         state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;

@@ -23,6 +23,7 @@ public class LaserDrone : MonoBehaviour
     public LayerMask ShootLayer;
 
     [Header("------ Audio Base ------")]
+    public AudioSource sfxSource;
     public AudioClip shoot;
     public AudioClip breakLaser;
 
@@ -105,8 +106,7 @@ public class LaserDrone : MonoBehaviour
         {
             DrawRay(firstPos.position, endPos.position);
         }
-        AudioManager.audioManager.PlaySFX(shoot);
-
+        sfxSource.PlayOneShot(shoot);
     }
 
     public async UniTask DamageHit()
