@@ -127,6 +127,7 @@ public class CheatMenu : MonoBehaviour
         Debug.Log(enemy);
         GameObject _enemy = Instantiate(listenemy.Item[enemy], pos, Quaternion.identity);
         enemySpawnNow.Add(_enemy);
+        _enemy.GetComponent<StateMachine>().attacking = true;
     }
 
     public void DestroyMonstersOnScreen()
