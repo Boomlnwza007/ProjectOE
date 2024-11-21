@@ -50,7 +50,7 @@ public class ChargeGun : BaseGun
             CinemachineControl.Instance.ShakeCamera(1f, 0.2f);
             if (canUltimate)
             {
-                //PlayerControl.control.Slow(50);
+                PlayerControl.control.Slow(80);
                 if (Input.GetButtonUp("Fire1"))
                 {
                     var playerCombat = PlayerControl.control.playerCombat;
