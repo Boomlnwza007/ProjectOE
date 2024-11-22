@@ -138,13 +138,11 @@ public class AreaEnermy : MonoBehaviour
         enemy.Remove(state);
         if (enemyCount == 0 && ready && !PlayerControl.control.isdaed)
         {
+            ready = false;
             foreach (var door in door)
             {
                 door.Unlock();
             }
-            PauseScene.spawnPoint = checkPoint;
-            checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
-            ready = false;
         }
     }
 
