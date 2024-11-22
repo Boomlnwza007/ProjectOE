@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialCheck : MonoBehaviour
+public class TutorialUlti : MonoBehaviour
 {
     private void Update()
     {
