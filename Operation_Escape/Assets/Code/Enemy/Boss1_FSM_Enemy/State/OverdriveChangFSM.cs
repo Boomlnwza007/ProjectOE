@@ -22,7 +22,7 @@ public class OverdriveChangFSM : BaseState
         Debug.Log("Start");
         var ani = state.boss1AniControl;
         ani.ChangeAnimationAttack("ChangeState");
-        //Over().Forget();
+        Over().Forget();
     }
 
     public async UniTask Over()
@@ -30,7 +30,7 @@ public class OverdriveChangFSM : BaseState
         var state = (FSMBoss1EnemySM)stateMachine;
         var ani = state.boss1AniControl;
         ani.ChangeAnimationAttack("ChangeState");
-        await UniTask.WaitForSeconds(3);
+        await UniTask.WaitUntil(() => ani.endAnim);
         state.JumpCenter();
         Debug.Log("Comple");
         state.overdrive = true;
@@ -40,15 +40,15 @@ public class OverdriveChangFSM : BaseState
 
     public override void UpdateLogic()
     {
-        time += Time.deltaTime;
-        if (time > 3)
-        {
-            ((FSMBoss1EnemySM)stateMachine).JumpCenter();
-            Debug.Log("Comple");
-            ((FSMBoss1EnemySM)stateMachine).overdrive = true;
-            ((FSMBoss1EnemySM)stateMachine).overdriveChang = false;
-            stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
-        }
+        //time += Time.deltaTime;
+        //if (time > 3)
+        //{
+        //    ((FSMBoss1EnemySM)stateMachine).JumpCenter();
+        //    Debug.Log("Comple");
+        //    ((FSMBoss1EnemySM)stateMachine).overdrive = true;
+        //    ((FSMBoss1EnemySM)stateMachine).overdriveChang = false;
+        //    stateMachine.ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
+        //}
     }
 
     public override void Exit()
