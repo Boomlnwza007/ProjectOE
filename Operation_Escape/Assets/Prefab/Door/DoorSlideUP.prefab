@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 1015114158740269013}
   - component: {fileID: 2041961609468466709}
   - component: {fileID: 7221209966230087464}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TrapLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
