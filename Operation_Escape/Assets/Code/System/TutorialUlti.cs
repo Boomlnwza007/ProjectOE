@@ -11,7 +11,7 @@ public class TutorialUlti : MonoBehaviour
         {
             if (PlayerControl.control.playerState.ultimateEnergy == 10)
             {
-                Tutorial.set.show(3, 3);
+                Tutorial.set.show(3, 5);
                 Destroy(gameObject);
             }
         }        

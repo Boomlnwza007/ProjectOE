@@ -12,7 +12,7 @@ public class TutorialReload : MonoBehaviour
             var currentGun = PlayerControl.control.playerCombat.gunList[PlayerControl.control.playerCombat.currentGun];
             if (currentGun.ammo < currentGun.maxAmmo)
             {
-                Tutorial.set.show(5, 3);
+                Tutorial.set.show(7, 3);
                 Destroy(gameObject);
             }
         }
