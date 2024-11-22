@@ -317,7 +317,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public void Die()
     {
         Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
-        Tutorial.set.show(7, 3);
         if (areaEnermy != null)
         {
             areaEnermy.Die(this);
@@ -419,4 +418,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
 
     }
+
+    public override void SetCombatPhase(AreaEnermy area)
+    {
+        areaEnermy = area;
+    }
+
 }

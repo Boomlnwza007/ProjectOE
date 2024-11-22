@@ -1950,7 +1950,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 60534
+  m_InstanceId: 88992
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -3985,7 +3985,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 390, y: 100}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &914413759780047923
 CanvasRenderer:
@@ -4015,7 +4015,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press to Heal
+  m_text: Press to Swap Gun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c5452ba644190ab41bed7453e6719584, type: 2}
   m_sharedMaterial: {fileID: -6757147923699314679, guid: c5452ba644190ab41bed7453e6719584, type: 2}
