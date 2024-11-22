@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class TutorialUlti : MonoBehaviour
 {
+    public bool On;
     private void Update()
     {
-        if (PlayerControl.control.playerState.ultimateEnergy == 10)
+        if (On)
         {
-            Tutorial.set.show(3, 3);
-            Destroy(gameObject);
+            if (PlayerControl.control.playerState.ultimateEnergy == 10)
+            {
+                Tutorial.set.show(3, 3);
+                Destroy(gameObject);
+            }
+        }        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (!On)
+            {
+                On = true;
+            }
         }
     }
+
 }

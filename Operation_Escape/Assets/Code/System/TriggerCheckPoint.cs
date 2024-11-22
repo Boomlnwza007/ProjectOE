@@ -8,7 +8,10 @@ public class TriggerCheckPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PauseScene.spawnPoint = checkPoint;
-        checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
+        if (collision.CompareTag("Player"))
+        {
+            PauseScene.spawnPoint = checkPoint;
+            checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
+        }
     }
 }

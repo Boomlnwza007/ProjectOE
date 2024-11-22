@@ -20,9 +20,12 @@ public class TutorialReload : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!On)
+        if (collision.CompareTag("Player"))
         {
-            On = true;
+            if (!On)
+            {
+                On = true;
+            }
         }
     }
 }
