@@ -17,6 +17,7 @@ public class Tutorial : MonoBehaviour
     public int curMode;
     public bool tutorial;
     public Coroutine curWait;
+    private Queue<KeyValuePair<int, float>> queue = new Queue<KeyValuePair<int, float>>();
     //public KeyCode key;
     public string key;
 
@@ -29,6 +30,7 @@ public class Tutorial : MonoBehaviour
     {
         if (tutorial)
         {
+            queue.Enqueue(new KeyValuePair<int, float>(index, time));
             return;
         }
 
@@ -76,6 +78,11 @@ public class Tutorial : MonoBehaviour
                     StopCoroutine(curWait);
                     curWait = StartCoroutine(Wait(0.5f));
                     tutorial = false;
+                    if (queue.Count > 0)
+                    {
+                        KeyValuePair<int, float> item = queue.Dequeue();
+                        show(item.Key, item.Value);
+                    }
                 }
             }
             else if (Input.GetButton(key))
@@ -83,6 +90,11 @@ public class Tutorial : MonoBehaviour
                 StopCoroutine(curWait);
                 curWait = StartCoroutine(Wait(0.5f));
                 tutorial = false;
+                if (queue.Count > 0)
+                {
+                    KeyValuePair<int, float> item = queue.Dequeue();
+                    show(item.Key, item.Value);
+                }
             }
         }
     }
