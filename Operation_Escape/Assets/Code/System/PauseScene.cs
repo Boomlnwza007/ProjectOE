@@ -10,7 +10,6 @@ public class PauseScene : MonoBehaviour
     public GameObject menuAfterDie;
     public Transform firstSpawn;
     public static Transform spawnPoint;
-    public static AreaEnermy area; 
     public bool onPauseMenu;
     public bool onmenuAfterDie;
     public bool retrying;
@@ -126,7 +125,7 @@ public class PauseScene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ControlScene.scene.animator.speed = 1;
         HideAfterDieCode();
-        if (area != null)
+        foreach (var area in AreaEnermy.area)
         {
             foreach (var item in area.door)
             {

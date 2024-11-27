@@ -5,13 +5,24 @@ using UnityEngine;
 public class TriggerCheckPoint : MonoBehaviour
 {
     public Transform checkPoint;
+    private bool active = true;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (active)
         {
-            PauseScene.spawnPoint = checkPoint;
-            checkPoint.gameObject.GetComponentInChildren<SavePoint>().SetAc(true);
+            if (collision.CompareTag("Player"))
+            {
+                //PauseScene.spawnPoint?.GetComponentInChildren<SavePoint>()?.SetAc(false);
+                PauseScene.spawnPoint = checkPoint;
+                checkPoint.gameObject?.GetComponentInChildren<SavePoint>()?.SetAc(true);
+                foreach (var area in AreaEnermy.area)
+                {
+                    area.ready = false;
+                }
+                AreaEnermy.area.Clear();
+                active = false;
+            }
         }
     }
 }

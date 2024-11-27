@@ -14,11 +14,10 @@ public class AreaEnermy : MonoBehaviour
     [SerializeField] public TriggerBoss areaBoss;
     public DelBulletAll delBulletAll;
     public bool ready = true;
-    public Transform checkPoint;
     public bool hasPlayer;
     public LayerMask enemyleLayer;
     public bool boss;
-    private Collider2D colliderHit;
+    public static HashSet<AreaEnermy> area = new HashSet<AreaEnermy>();
 
     // Start is called before the first frame update
     private void Awake()
@@ -113,8 +112,11 @@ public class AreaEnermy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            hasPlayer = true;
-            PauseScene.area = this;
+            if (ready)
+            {
+                hasPlayer = true;
+                area.Add(this);
+            }
         }
     }
 
@@ -138,7 +140,6 @@ public class AreaEnermy : MonoBehaviour
         enemy.Remove(state);
         if (enemyCount == 0 && ready && !PlayerControl.control.isdaed)
         {
-            ready = false;
             foreach (var door in door)
             {
                 door.Unlock();
