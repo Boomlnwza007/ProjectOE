@@ -78,7 +78,7 @@ public class WanderEMFSM : BaseState
 
     public async UniTask Awake()
     {
-        await UniTask.WaitForSeconds(0.5f);
+        await UniTask.WaitForSeconds(1f);
         stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
     }
 }
