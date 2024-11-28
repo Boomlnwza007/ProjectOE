@@ -88,10 +88,11 @@ public class NormalAttackEMFSM : BaseState
             Dash();
             await state.Attack("Attack", 0.3f);
             state.rb.velocity = Vector2.zero;
-            ai.canMove = true;
-            state.animator.isFacing = true;
 
+            state.animator.ChangeAnimationAttack("Tired");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            state.animator.ChangeAnimationAttack("Normal");
+            state.animator.isFacing = true;
             ai.canMove = true;
             state.Walk();
             ChangState(state.CheckDistance);

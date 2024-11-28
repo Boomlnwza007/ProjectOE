@@ -5015,14 +5015,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserUltiPrefab: {fileID: 4751903538654894310}
-  dmgUl: 60
-  maxDmgUl: 100
+  dmgUl: 20
+  maxDmgUl: 50
   laserDistance: 100
   laserSizeOffset: 0.5
   ShootLayer:
     serializedVersion: 2
     m_Bits: 192
-  dpsDamage: 1
+  dpsDamage: 0.2
   bulletTranform: {fileID: 0}
   startSFX: {fileID: 2296827858481454153}
   endSFX: {fileID: 8641772713087553751}

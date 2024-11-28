@@ -101,12 +101,15 @@ public class ChargeEMFSM : BaseState
                 await UniTask.Yield();               
             }
 
-            state.animator.isFacing = true;
+            //state.animator.isFacing = true;
             state.Walk();
             ai.canMove = false;
             Debug.Log("Stop");
+            state.animator.ChangeAnimationAttack("Tired");
             await UniTask.WaitForSeconds(3f, cancellationToken: token);//Edit time Stop
+            state.animator.ChangeAnimationAttack("Normal");
             ai.canMove = true;
+            state.animator.isFacing = true;
             Debug.Log("End");
             ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }

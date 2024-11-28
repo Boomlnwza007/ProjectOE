@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class WanderEMFSM : BaseState
 {
@@ -9,12 +10,14 @@ public class WanderEMFSM : BaseState
     public float distane = 5f;
     //float time;
     public Vector2 center;
+    private bool exit;
 
     public override void Enter()
     {
         ai = ((FSMMEnemySM)stateMachine).ai;
         ai.destination = Randomposition(ai.position, distane);
         ai.canMove = true;
+        exit = false;
         //time = 0;
 
         if (((FSMMEnemySM)stateMachine).areaEnermy != null)
@@ -31,6 +34,28 @@ public class WanderEMFSM : BaseState
 
     public override void UpdateLogic()
     {
+        if (!exit)
+        {
+            var enemySM = (FSMMEnemySM)stateMachine;
+
+            if (enemySM.areaEnermy != null && !enemySM.areaEnermy.hasPlayer)
+                return;
+
+            if (enemySM.attacking)
+            {
+                exit = true;
+                Awake().Forget();
+                return;
+            }
+
+            if (Vector2.Distance(ai.position, ai.targetTransform.position) < enemySM.visRange)
+            {
+                exit = true;
+                enemySM.CombatPhaseOn();
+                Awake().Forget();
+            }
+        }
+
         //if (ai.endMove)
         //{
         //    time += Time.deltaTime;
@@ -41,25 +66,6 @@ public class WanderEMFSM : BaseState
         //    }
         //}
 
-        if (((FSMMEnemySM)stateMachine).areaEnermy != null)
-        {
-            if (!((FSMMEnemySM)stateMachine).areaEnermy.hasPlayer)
-            {
-                return;
-            }
-        }
-
-        if (((FSMMEnemySM)stateMachine).attacking)
-        {
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
-        }
-
-        if (Vector2.Distance(ai.position, ai.targetTransform.position) < ((FSMMEnemySM)stateMachine).visRange)
-        {
-            ((FSMMEnemySM)stateMachine).CombatPhaseOn();
-            stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
-        }
-
 
     }
 
@@ -68,5 +74,11 @@ public class WanderEMFSM : BaseState
         var point = Random.insideUnitCircle * (Size-2f);
         point += position;
         return point;        
+    }
+
+    public async UniTask Awake()
+    {
+        await UniTask.WaitForSeconds(0.5f);
+        stateMachine.ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
     }
 }
