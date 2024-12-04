@@ -10,30 +10,29 @@ public class CheckDistanceSFSM : BaseState
 
     public override void Enter()
     {
+        var state = (FSMSEnemySM)stateMachine;
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.canMove = true;
         ai.destination = ai.targetTransform.position;
+        if (!state.shield.canGuard)
+        {
+            ChangState(state.NoShieldState);
+        }
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
         ai.destination = ai.targetTransform.position;
-
+        var state = (FSMSEnemySM)stateMachine;
         distance = Vector2.Distance(ai.position, ai.targetTransform.position);
-        if (distance < 2)
+        if (distance > 10)
         {
-            stateMachine.ChangState(((FSMSEnemySM)stateMachine).bashState);
+            ChangState(state.defendState);
         }
-        else if (distance < 8)
+        else if (distance < 5)
         {
-            stateMachine.ChangState(((FSMSEnemySM)stateMachine).chargState);
+            ChangState(state.defendAttState);
         }
-        else if (distance > 8)
-        {
-            stateMachine.ChangState(((FSMSEnemySM)stateMachine).defendState);
-        }
-
-        Debug.Log(distance);
     }
 }

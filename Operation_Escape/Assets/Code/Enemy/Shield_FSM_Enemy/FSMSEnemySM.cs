@@ -9,30 +9,38 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public float time;
     public float timeCooldown = 6f;
     public AreaEnermy areaEnermy;
-    public bool canGuard;
     public bool imortal { get; set; }
     public string stateName;
     public ES_animation animator;
+    private SpriteFlash spriteFlash;
+
+    [Header("circle")]
+    private float timeCircle;
+    public float radius = 10;
+    public float offset = 2;
 
     [Header("shild")]
     [SerializeField]public GuardShield shield;
 
     [HideInInspector]
-    public BashSFSM bashState;
-    [HideInInspector]
-    public ChargSFSM chargState;
-    [HideInInspector]
     public CheckDistanceSFSM checkDistanceState;
+
     [HideInInspector]
     public DefendSFSM defendState;
+
+    [HideInInspector]
+    public DefendAttackSFSM defendAttState;
+
+    [HideInInspector]
+    public NoShieldSFSM NoShieldState;    
+
     [HideInInspector]
     public WanderSFSM wanderState;
-    private SpriteFlash spriteFlash;
 
     private void Awake()
     {
-        bashState = new BashSFSM(this);
-        chargState = new ChargSFSM(this);
+        defendAttState = new DefendAttackSFSM(this);
+        NoShieldState = new NoShieldSFSM(this);
         checkDistanceState = new CheckDistanceSFSM(this);
         defendState = new DefendSFSM(this);
         wanderState = new WanderSFSM(this);
@@ -51,6 +59,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
             curState.UpdateLogic();
             stateName = curState.nameState;
         }
+
         if (cooldown)
         {
             time += Time.deltaTime;
@@ -60,49 +69,16 @@ public class FSMSEnemySM : StateMachine, IDamageable
                 cooldown = false;
             }
         }
-        Guard();
-    }
 
-    public void Guard()
-    {
-        if (canGuard)
-        {
-            shield.canGuard = canGuard;
-        }
-        else
-        {
-            shield.canGuard = canGuard;
-        }
-    }
+    }   
 
-    public void CooldownCharg()
+    public void Takedamage(int damage, DamageType type, float knockBack)
     {
-        if (areaEnermy == null)
+        if (shield.canGuard)
         {
             return;
         }
 
-        float _cooldown = 5;
-        List<StateMachine> enemy = areaEnermy.enemy;
-        foreach (var item in enemy)
-        {
-            if (item.TryGetComponent<FSMSEnemySM>(out FSMSEnemySM fSMM))
-            {
-                if (fSMM != this)
-                {
-                    if (!fSMM.cooldown)
-                    {
-                        fSMM.cooldown = true;
-                        fSMM.time = _cooldown;
-                        _cooldown--;
-                    }                    
-                }
-            }
-        }
-    }
-
-    public void Takedamage(int damage, DamageType type, float knockBack)
-    {
         Health -= damage;
         spriteFlash.Flash();
         switch (type)
@@ -128,7 +104,6 @@ public class FSMSEnemySM : StateMachine, IDamageable
             areaEnermy.Die(this);
         }
 
-        ChangState(wanderState);
         Destroy(gameObject);
     }
 
@@ -150,16 +125,26 @@ public class FSMSEnemySM : StateMachine, IDamageable
         areaEnermy = area;
     }
 
-    public void Attack()
+    public void Movement()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2.5f);
-        foreach (var hit in colliders)
+        if (Vector2.Distance(transform.position, target.position) > 5)
         {
-            IDamageable player = hit.GetComponent<IDamageable>();
-            if (hit.CompareTag("Player"))
+            timeCircle += Time.deltaTime;
+            var normal = (ai.position - target.position).normalized;
+            if (timeCircle > 3)
             {
-                player.Takedamage(dmg, DamageType.Melee, 0);
+                offset *= -1;
+                timeCircle = 0;
+                radius = Random.Range(15, 20);
             }
+            var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
+            ai.destination = target.position + normal * radius + tangent * offset;
         }
+        else
+        {
+            ai.destination = target.position;
+        }
+
     }
+
 }
