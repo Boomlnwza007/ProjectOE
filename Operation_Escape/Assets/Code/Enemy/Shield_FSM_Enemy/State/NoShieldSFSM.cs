@@ -9,6 +9,8 @@ public class NoShieldSFSM : BaseState
     public IAiAvoid ai;
     public float speed;
     public FSMSEnemySM nearMon;
+    public bool cooldownBuff;
+    public bool attack;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -18,33 +20,43 @@ public class NoShieldSFSM : BaseState
         speed = ai.maxspeed;
         ai.randomDeviation = false;
         ai.canMove = true;
-        if (state.cooldown)
-        {
-
-        }
+        nearMon = null;
     }
 
     public override void UpdateLogic()
     {
         var state = (FSMSEnemySM)stateMachine;
-        state.Movement();
+        //if (attack)
+        //{
+        //    state.Movement();
+        //}
+
         if (state.shield.canGuard)
         {
             ChangState(state.checkDistanceState);
         }
 
-        if (nearMon = null)
+        if (!cooldownBuff)
         {
-            Check();
+            if (Check())
+            {
+                buff().Forget();
+            }            
         }
-        else
-        {
 
+        if (!Check() || cooldownBuff)
+        {
+            if (Vector2.Distance(ai.position,ai.targetTransform.position) < 5)
+            {
+                if (!attack)
+                {
+                    Attack().Forget();
+                }
+            }
         }
-        
     }
 
-    public void Check()
+    public bool Check()
     {
         var state = (FSMSEnemySM)stateMachine;
         foreach (StateMachine mon in state.areaEnermy.enemy)
@@ -54,9 +66,29 @@ public class NoShieldSFSM : BaseState
                 if (Vector2.Distance(mon.gameObject.transform.position,ai.position)<10)
                 {
                     nearMon = enemyState;
-                    return;
+                    return true;
                 }
             }
         }
+
+        return false;
+    }
+
+    public async UniTaskVoid buff()
+    {
+        cooldownBuff = true;
+        await UniTask.WaitForSeconds(3);
+        nearMon.shield.canGuard = true;
+        await UniTask.WaitForSeconds(6);
+        cooldownBuff = false;
+    }
+
+    public async UniTaskVoid Attack()
+    {
+        attack = true;
+        await UniTask.WaitForSeconds(0.5f);
+        Debug.Log("attack");
+        await UniTask.WaitForSeconds(1f);
+        attack = true;
     }
 }
