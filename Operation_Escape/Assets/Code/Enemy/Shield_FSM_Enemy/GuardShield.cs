@@ -60,6 +60,8 @@ public class GuardShield : MonoBehaviour
         if (bullet is BulletCharge)
         {
             canGuard = false;
+            Destroy(bullet.gameObject);
+
         }
         else if (bullet.ultimate)
         {

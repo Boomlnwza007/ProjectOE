@@ -68,9 +68,8 @@ public class BulletCharge : BaseBullet
                 {
                     target.Takedamage(damage, DamageType.Rang, knockbackForce);
                     KnockBackPush(collision);
+                    Destroy(gameObject);
                 }
-
-                Destroy(gameObject);
             }
             else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
             {

@@ -59,17 +59,17 @@ public class NoShieldSFSM : BaseState
     public bool Check()
     {
         var state = (FSMSEnemySM)stateMachine;
-        foreach (StateMachine mon in state.areaEnermy.enemy)
-        {
-            if (mon is FSMSEnemySM enemyState)
-            {
-                if (Vector2.Distance(mon.gameObject.transform.position,ai.position)<10)
-                {
-                    nearMon = enemyState;
-                    return true;
-                }
-            }
-        }
+        //foreach (StateMachine mon in state.areaEnermy.enemy)
+        //{
+        //    if (mon is FSMSEnemySM enemyState)
+        //    {
+        //        if (Vector2.Distance(mon.gameObject.transform.position,ai.position)<10)
+        //        {
+        //            nearMon = enemyState;
+        //            return true;
+        //        }
+        //    }
+        //}
 
         return false;
     }

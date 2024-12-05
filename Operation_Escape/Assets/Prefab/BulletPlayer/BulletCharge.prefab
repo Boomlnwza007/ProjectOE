@@ -162,13 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0463d38605bee54da22b70f9f42d9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 3549296484395045884}
   damage: 10
   speed: 45
   knockbackForce: 5
   tagUse: Enemy
   target: {fileID: 0}
   ready: 0
+  ultimate: 0
   time: 0
   chargeTime: 3
   damageChargeMax: 50
