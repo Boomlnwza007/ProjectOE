@@ -42,32 +42,39 @@ public class GuardShield : MonoBehaviour
         Physics2D.OverlapCollider(shield, filter, colliderHit);
         foreach (var collider in colliderHit)
         {
-            if (collider != shield)
-            {
-                if (collider.tag == "BulletPlayer")
-                {
-                    Debug.Log(collider.tag + " " + collider.name);
-                    BaseBullet bullet = collider.GetComponent<BaseBullet>();
-                    if (bullet != null)
-                    {
-                        if (bullet.tagUse != "Player" && bullet.ready)
-                        {
-                            bullet.target = target;
-                            bullet.tagUse = "Player";
-                            //bullet.rb.velocity = (target.position - transform.position).normalized * bullet.speed;
-                            //Vector2 dir = (target.position - transform.position);
-                            //float a = Mathf.Atan2(dir.y,dir.x); 
-                            bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle + Random.Range(-10f,10f));
-                            bullet.rb.velocity = bullet.gameObject.transform.right * bullet.speed;
-                            SpriteRenderer spriteRenderer = collider.GetComponent<SpriteRenderer>();
-                            spriteRenderer.color = Color.red;
-                            bullet.ResetGameObj();
-                        }                        
-                    }
-                }
-            }
-            
+            if (collider == shield) continue;
+
+            if (!collider.CompareTag("BulletPlayer")) continue;
+
+            BaseBullet bullet = collider.GetComponent<BaseBullet>();
+            if (bullet == null || bullet.tagUse == "Player" || !bullet.ready) continue;
+
+            HandleBulletInteraction(bullet, angle);            
         }
+
         colliderHit.Clear();
+    }
+
+    public void HandleBulletInteraction(BaseBullet bullet, float angle)
+    {
+        if (bullet is BulletCharge)
+        {
+            canGuard = false;
+        }
+        else if (bullet.ultimate)
+        {
+            Destroy(bullet.gameObject);
+        }
+        else
+        {
+            bullet.target = target;
+            bullet.tagUse = "Player";
+
+            bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle + Random.Range(-10f, 10f));
+            bullet.rb.velocity = bullet.gameObject.transform.right * bullet.speed;
+            SpriteRenderer spriteRenderer = bullet.gameObject.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.red;
+            bullet.ResetGameObj();
+        }
     }
 }

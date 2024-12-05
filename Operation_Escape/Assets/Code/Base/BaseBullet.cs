@@ -11,6 +11,8 @@ public abstract class BaseBullet : MonoBehaviour
     public string tagUse;
     public Transform target;
     public bool ready;
+    public bool ultimate;
+
     public virtual void ResetGameObj() {}
 
     public void KnockBackPush(Collider2D collision)

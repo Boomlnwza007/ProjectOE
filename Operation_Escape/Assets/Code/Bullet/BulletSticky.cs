@@ -10,7 +10,6 @@ public class BulletSticky : BaseBullet
     public int exDmg = 5;
     public float timeBomb = 10;
     public SpriteRenderer spriteBullet;
-    public bool ultimate;
     private IDamageable targetDmg;
     private StateMachine enermy;
     private bool sticky;

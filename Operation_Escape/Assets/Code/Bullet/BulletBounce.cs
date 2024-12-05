@@ -6,7 +6,6 @@ public class BulletBounce : BaseBullet
 {
     public int maxBunceCount = 3;
     public int bounceCount = 0;
-    public bool ultimate;
 
     void Start()
     {
