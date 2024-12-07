@@ -71,26 +71,6 @@ public class LaserCharge : MonoBehaviour
             dmgUl = (int)Mathf.Lerp(startDmg, maxDmgUl, t);
         }
 
-        if (Physics2D.BoxCast(bulletTranform.transform.position, new Vector2(laserUltiPrefab.endWidth, laserUltiPrefab.endWidth), 0f, transform.right, laserDistance, ShootLayer))
-        {
-            RaycastHit2D hitInfo = Physics2D.BoxCast(bulletTranform.transform.position, new Vector2(laserUltiPrefab.endWidth, laserUltiPrefab.endWidth), 0f, transform.right, laserDistance, ShootLayer);
-            if (hitInfo.collider.CompareTag("Enemy"))
-            {
-                IDamageable Enemy = hitInfo.collider.GetComponent<IDamageable>();
-                if (Enemy != null)
-                {
-                    ////////Edit
-                    if (canDamage)
-                    {
-                        canDamage = false;
-                        Enemy.Takedamage(dmgUl, DamageType.Rang, 0);
-                        DamageHit().Forget();
-                    }
-                    //Debug.Log("hit");
-                }
-            }
-        }
-
         if (Physics2D.Raycast(bulletTranform.transform.position, bulletTranform.transform.right, laserDistance, ShootLayer))
         {
             RaycastHit2D _hit = Physics2D.Raycast(bulletTranform.transform.position, bulletTranform.transform.right, laserDistance, ShootLayer);
@@ -100,7 +80,28 @@ public class LaserCharge : MonoBehaviour
         {
             DrawRay(bulletTranform.transform.position, bulletTranform.transform.position + bulletTranform.transform.right * laserDistance);
         }
-    }   
+
+        RaycastHit2D hitInfo = Physics2D.BoxCast(bulletTranform.transform.position, new Vector2(laserUltiPrefab.endWidth, laserUltiPrefab.endWidth), 0f, bulletTranform.transform.right, laserDistance, ShootLayer);
+        if (hitInfo.collider != null)
+        {
+            Debug.Log(hitInfo.collider.name);
+            if (hitInfo.collider.CompareTag("Enemy"))
+            {
+                IDamageable Enemy = hitInfo.collider.GetComponent<IDamageable>();
+                GuardShield guard = hitInfo.collider.GetComponent<GuardShield>();
+                if (Enemy != null && canDamage)
+                {
+                    canDamage = false;
+                    Enemy.Takedamage(dmgUl, DamageType.Rang, 0);
+                    DamageHit().Forget();
+                }
+                guard?.BreakShield();
+            }
+        }
+
+        //hitInfo = default;
+    }
+
 
     public void DrawRay(Vector2 startPos, Vector2 endPos)
     {

@@ -5,9 +5,9 @@ using UnityEngine;
 //using System.Threading;
 //using System;
 
-public class DefendSFSM : BaseState
+public class ChargeAttack : BaseState
 {
-    public DefendSFSM(FSMSEnemySM stateMachine) : base("DefendlAttack", stateMachine) { }
+    public ChargeAttack(FSMSEnemySM stateMachine) : base("chargeAttState", stateMachine) { }
     public IAiAvoid ai;
     //private CancellationTokenSource cancellationToken;
 

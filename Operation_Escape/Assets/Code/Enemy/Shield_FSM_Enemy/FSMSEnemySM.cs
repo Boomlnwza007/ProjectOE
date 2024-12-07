@@ -26,10 +26,10 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public CheckDistanceSFSM checkDistanceState;
 
     [HideInInspector]
-    public DefendSFSM defendState;
+    public ChargeAttack chargeAttState;
 
     [HideInInspector]
-    public DefendAttackSFSM defendAttState;
+    public SlamAttackSFSM slamAttState;
 
     [HideInInspector]
     public NoShieldSFSM NoShieldState;    
@@ -39,10 +39,10 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     private void Awake()
     {
-        defendAttState = new DefendAttackSFSM(this);
+        slamAttState = new SlamAttackSFSM(this);
         NoShieldState = new NoShieldSFSM(this);
         checkDistanceState = new CheckDistanceSFSM(this);
-        defendState = new DefendSFSM(this);
+        chargeAttState = new ChargeAttack(this);
         wanderState = new WanderSFSM(this);
         spriteFlash = GetComponent<SpriteFlash>();
     }

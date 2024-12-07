@@ -28,11 +28,11 @@ public class CheckDistanceSFSM : BaseState
         distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         if (distance > 10)
         {
-            ChangState(state.defendState);
+            ChangState(state.chargeAttState);
         }
         else if (distance < 5)
         {
-            ChangState(state.defendAttState);
+            ChangState(state.slamAttState);
         }
     }
 }

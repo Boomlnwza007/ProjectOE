@@ -184,7 +184,7 @@ public class PlayerControl : MonoBehaviour
         {
             bulletBar.ultimate = currentGun.canUltimate;
             bulletBar.ChangPrefab(bulletBar.ultimate);
-            Debug.Log("Ultimate Ui " + bulletBar.ultimate);
+           
         }
 
         if (currentGun.ammo != bulletBar.value)

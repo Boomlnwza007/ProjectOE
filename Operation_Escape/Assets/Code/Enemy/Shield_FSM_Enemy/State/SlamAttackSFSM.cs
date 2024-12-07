@@ -5,9 +5,9 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
 
-public class DefendAttackSFSM : BaseState
+public class SlamAttackSFSM : BaseState
 {
-    public DefendAttackSFSM(FSMSEnemySM stateMachine) : base("defendAttState", stateMachine) { }
+    public SlamAttackSFSM(FSMSEnemySM stateMachine) : base("slamAttState", stateMachine) { }
     private CancellationTokenSource cancellationToken;
     public IAiAvoid ai;
     public float speed;
