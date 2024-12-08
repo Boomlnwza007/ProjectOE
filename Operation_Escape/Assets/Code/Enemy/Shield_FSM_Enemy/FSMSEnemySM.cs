@@ -13,6 +13,11 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public ES_animation animator;
     private SpriteFlash spriteFlash;
 
+    [Header("status")]
+    public bool stun;
+    public float timeStunCooldown = 2;
+    [HideInInspector] public float timeStun = 0;
+
     [Header("circle")]
     private float timeCircle;
     public float radius = 10;

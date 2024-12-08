@@ -24,7 +24,7 @@ public class CheckDistanceSFSM : BaseState
     {
         base.UpdateLogic();
         var state = (FSMSEnemySM)stateMachine;
-        if (state.shield.canGuard)
+        if (!state.stun)
         {
             ai.canMove = true;
             ai.destination = ai.targetTransform.position;
@@ -41,6 +41,13 @@ public class CheckDistanceSFSM : BaseState
         else
         {
             ai.canMove = false;
+            state.timeStun += Time.deltaTime;
+            if (state.timeStun > state.timeStunCooldown)
+            {
+                state.timeStun = 0;
+                state.stun = false;
+                ai.canMove = true;
+            }
         }
     }
 }
