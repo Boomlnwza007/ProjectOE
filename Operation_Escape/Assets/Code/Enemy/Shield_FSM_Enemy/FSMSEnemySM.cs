@@ -5,9 +5,8 @@ using UnityEngine;
 public class FSMSEnemySM : StateMachine, IDamageable
 {
     [Header("status")]
-    public bool cooldown;
-    public float time;
-    public float timeCooldown = 6f;
+    public bool cooldownChargeAttack = true;
+    public bool cooldownSlamAttack = true;
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
     public string stateName;
@@ -18,6 +17,12 @@ public class FSMSEnemySM : StateMachine, IDamageable
     private float timeCircle;
     public float radius = 10;
     public float offset = 2;
+
+    [Header("Charge")]
+    public LayerMask raycastMaskWay;
+    public LayerMask raycastMask;
+    public float jumpLength = 20;
+    public float forcePush = 100;
 
     [Header("shild")]
     [SerializeField]public GuardShield shield;
@@ -59,17 +64,6 @@ public class FSMSEnemySM : StateMachine, IDamageable
             curState.UpdateLogic();
             stateName = curState.nameState;
         }
-
-        if (cooldown)
-        {
-            time += Time.deltaTime;
-            if (time > timeCooldown)
-            {
-                time = 0;
-                cooldown = false;
-            }
-        }
-
     }   
 
     public void Takedamage(int damage, DamageType type, float knockBack)
@@ -145,6 +139,18 @@ public class FSMSEnemySM : StateMachine, IDamageable
             ai.destination = target.position;
         }
 
+    }
+
+    public void Run(float multiply)
+    {
+        ai.maxspeed *= multiply;
+        animator.animator.speed *= multiply;
+    }
+
+    public void Walk()
+    {
+        ai.maxspeed = Speed;
+        animator.animator.speed = 1;
     }
 
 }

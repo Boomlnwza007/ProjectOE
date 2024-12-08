@@ -10,8 +10,6 @@ public class SlamAttackSFSM : BaseState
     public SlamAttackSFSM(FSMSEnemySM stateMachine) : base("slamAttState", stateMachine) { }
     private CancellationTokenSource cancellationToken;
     public IAiAvoid ai;
-    public float speed;
-    public bool cooldown;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -19,15 +17,7 @@ public class SlamAttackSFSM : BaseState
         var state = (FSMSEnemySM)stateMachine;
         ai = state.ai;
         ai.destination = ai.targetTransform.position;
-        speed = ai.maxspeed;
-        if (!cooldown)
-        {
-            Attack().Forget();
-        }
-        else
-        {
-            ChangState(state.checkDistanceState);
-        }
+        Attack().Forget();
     }
 
     public async UniTask Attack()
@@ -39,10 +29,24 @@ public class SlamAttackSFSM : BaseState
 
         try
         {
-            await UniTask.WaitForSeconds(1);
+
+            state.shield.ShieldIsOn(false);
+            ai.canMove = false;
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
             Debug.Log("attack");
-            cooldown = true;
-            Cooldown().Forget();
+            await UniTask.WaitForSeconds(state.shield.canGuard ? 2 : 1, cancellationToken: token);
+
+            if (state.shield.canGuard)
+            {
+                Debug.Log("JumpAttack");
+                await UniTask.WaitForSeconds(2, cancellationToken: token);
+            }
+
+            state.shield.ShieldIsOn(true);
+            state.cooldownSlamAttack = true;
+            Cooldown(state.shield.canGuard ? 3 : 2).Forget();
+
+            ChangState(state.checkDistanceState);
         }
         catch (OperationCanceledException)
         {
@@ -51,9 +55,18 @@ public class SlamAttackSFSM : BaseState
         }
     }
 
-    public async UniTaskVoid Cooldown()
+    public async UniTaskVoid Cooldown(float time)
     {
-        await UniTask.WaitForSeconds(2);
-        cooldown = false;
+        await UniTask.WaitForSeconds(time);
+        var state = (FSMSEnemySM)stateMachine;
+        state.cooldownChargeAttack = false;
+    }
+
+
+
+    public override void Exit()
+    {
+        // Cancel the attack when exiting the state
+        cancellationToken?.Cancel();
     }
 }

@@ -5,9 +5,10 @@ using UnityEngine;
 public class GuardShield : MonoBehaviour
 {
     public bool canGuard;
+    [HideInInspector]public bool redy = true;
     private bool conShield = true;
-    [SerializeField] public SpriteRenderer shieldSprite;
-    [SerializeField] public Collider2D shieldCollider;
+    private SpriteRenderer shieldSprite;
+    private Collider2D shieldCollider;
     [SerializeField] Transform target;
     [SerializeField] public GameObject bulletPrefab;
     public ContactFilter2D filter;
@@ -18,6 +19,9 @@ public class GuardShield : MonoBehaviour
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        shieldSprite = gameObject.GetComponent<SpriteRenderer>();
+        shieldCollider = gameObject.GetComponent<Collider2D>();
+
     }
 
     // Update is called once per frame
@@ -27,8 +31,8 @@ public class GuardShield : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (conShield)
         {
-            shieldCollider.enabled = canGuard;
-            shieldSprite.enabled = canGuard;
+            shieldCollider.enabled = redy ? canGuard : false;
+            shieldSprite.enabled = redy ? canGuard : false;
 
             if (canGuard)
             {
@@ -92,12 +96,17 @@ public class GuardShield : MonoBehaviour
 
     public void ShieldIsOn(bool on)
     {
-        conShield = on;
-        shieldCollider.gameObject.SetActive(on);
+        if (canGuard)
+        {
+            conShield = on;
+            shieldCollider.enabled = on;
+            shieldSprite.enabled = on;
+        }
     }
 
     public void BreakShield()
     {
         canGuard = false;
+        redy = false;
     }
 }
