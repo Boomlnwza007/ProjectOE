@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonSMFSM : MonoBehaviour
+public class SummonSMFSM : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public SummonSMFSM(FSMSMEnemySM stateEnemy) : base("Summon", stateEnemy) {}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

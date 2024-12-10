@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckDistanceDFSM : MonoBehaviour
+public class CheckDistanceDFSM : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CheckDistanceDFSM(FSMDroneSM stateEnemy) : base("checkDistance", stateEnemy) { }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

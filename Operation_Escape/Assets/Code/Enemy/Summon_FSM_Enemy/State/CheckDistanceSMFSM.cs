@@ -2,17 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckDistanceSMFSM : MonoBehaviour
+public class CheckDistanceSMFSM : BaseState
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public CheckDistanceSMFSM(FSMSMEnemySM stateEnemy) : base("CheckDistance", stateEnemy) { }
 }
