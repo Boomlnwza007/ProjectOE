@@ -76,6 +76,7 @@ public class WanderSFSM : BaseState
     public async UniTask Awake()
     {
         await UniTask.WaitForSeconds(1f);
-        stateMachine.ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
+        ChangState(((FSMSEnemySM)stateMachine).checkDistanceState);
+        ((FSMSEnemySM)stateMachine).chargeAttState.Cooldown(3).Forget();
     }
 }

@@ -12,7 +12,6 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public AreaEnermy areaEnermy;
     public bool imortal { get; set; }
     public string stateName;
-    private SpriteFlash spriteFlash;
     public EM_Animation animator;
     public LayerMask raycastMaskWay;
     public LayerMask raycastMask;

@@ -712,7 +712,7 @@ MonoBehaviour:
   rb: {fileID: 8775170577091479340}
   dropChange: 0
   jumpCenter: {fileID: 0}
-  cooldown: 0
+  cooldown: 1
   time: 0
   timeCooldown: 6
   areaEnermy: {fileID: 0}

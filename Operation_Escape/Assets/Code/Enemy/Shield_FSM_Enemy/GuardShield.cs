@@ -6,7 +6,7 @@ public class GuardShield : MonoBehaviour
 {
     public bool canGuard;
     [HideInInspector]public bool redy = true;
-    private bool conShield = true;
+    public bool conShield = true;
     private SpriteRenderer shieldSprite;
     private Collider2D shieldCollider;
     [SerializeField] Transform target;

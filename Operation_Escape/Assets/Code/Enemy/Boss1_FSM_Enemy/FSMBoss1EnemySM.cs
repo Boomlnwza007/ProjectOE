@@ -41,7 +41,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public float fireRate = 0.8f;
     public bool imortal { get; set; }
     public string stateName;
-    private SpriteFlash spriteFlash;
     public UIBoss uiBoss;
     public GameObject gunDrop;
     public Collider2D colliderBoss;

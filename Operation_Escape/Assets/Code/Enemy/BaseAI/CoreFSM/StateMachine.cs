@@ -14,6 +14,7 @@ public class StateMachine : MonoBehaviour
     public float visRange;
     public bool attacking;
     public IAiAvoid ai;
+    protected SpriteFlash spriteFlash;
     public LootTable lootDrop;
     public Transform target;
     public Rigidbody2D rb;

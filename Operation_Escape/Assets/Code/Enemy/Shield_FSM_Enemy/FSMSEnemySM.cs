@@ -11,7 +11,6 @@ public class FSMSEnemySM : StateMachine, IDamageable
     public bool imortal { get; set; }
     public string stateName;
     public ES_animation animator;
-    private SpriteFlash spriteFlash;
 
     [Header("status")]
     public bool stun;
@@ -73,9 +72,12 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
-        if (shield.canGuard)
+        if (shield.conShield)
         {
-            return;
+            if (shield.canGuard)
+            {
+                return;
+            }
         }
 
         Health -= damage;

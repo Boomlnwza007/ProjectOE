@@ -46,7 +46,6 @@ public class FSMREnemySM : StateMachine, IDamageable
     public CloseAttackRFSM closeAttackState;
     [HideInInspector]
     public NormalAttackRFSM normalAttackState;
-    private SpriteFlash spriteFlash;
     public string stateName; 
 
     private void Awake()

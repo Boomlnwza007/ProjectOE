@@ -20,15 +20,7 @@ public class ChargeAttack : BaseState
         var state = (FSMSEnemySM)stateMachine;
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = ai.targetTransform.position;
-        if (state.cooldownChargeAttack)
-        {
-            float time = state.shield.canGuard ? 3 : 2;
-            Cooldown(time).Forget();
-        }
-        else
-        {
-            Attack().Forget();
-        }
+        Attack().Forget();
     }
 
     public async UniTask Attack()
