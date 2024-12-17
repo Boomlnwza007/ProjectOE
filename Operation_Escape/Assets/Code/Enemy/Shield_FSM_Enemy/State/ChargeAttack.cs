@@ -28,9 +28,9 @@ public class ChargeAttack : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMSEnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
 
-        
+
         time = 0;
 
         try
@@ -38,8 +38,9 @@ public class ChargeAttack : BaseState
             state.shield.ShieldIsOn(false);
             ai.canMove = false;
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
+            ani.animator.speed = 0;
+            ani.ChangeAnimationAttack("Dash");
             await UniTask.WaitForSeconds(2f , cancellationToken: token);
-
             await Charge();            
 
             if (!state.shield.canGuard)
@@ -47,12 +48,16 @@ public class ChargeAttack : BaseState
                 ai.canMove = false;
                 ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
                 await UniTask.WaitForSeconds(1f, cancellationToken: token);
-
+                ani.animator.speed = 0;
+                ani.ChangeAnimationAttack("Dash");
                 await Charge();
             }
 
+            ani.animator.speed = 1;
             state.Walk();
             ai.canMove = false;
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            ani.ChangeAnimationAttack("Idle");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.shield.ShieldIsOn(true);
             state.cooldownChargeAttack = true;
@@ -90,9 +95,10 @@ public class ChargeAttack : BaseState
         var token = cancellationToken.Token;
         var state = (FSMSEnemySM)stateMachine;
         bool hasAttacked = false;
+        var ani = state.animator;
 
         ai.canMove = true;
-        state.Run(2);
+        state.Run(5);
 
         while (time < 10 && !hasAttacked)//Edit Time Run 
         {
@@ -100,6 +106,7 @@ public class ChargeAttack : BaseState
             if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
             {
                 //Debug.Log("ai.endMove");
+                ani.animator.speed = 1;
                 Debug.Log("Attack");
                 hasAttacked = true;
                 //state.animator.isFacing = true;
@@ -112,6 +119,7 @@ public class ChargeAttack : BaseState
                 if (hit.gameObject != state.gameObject)
                 {
                     Debug.Log(hit.name + "hit 2 ");
+                    ani.animator.speed = 1;
                     Debug.Log("Attack");
                     hasAttacked = true;
                     //state.animator.isFacing = true;

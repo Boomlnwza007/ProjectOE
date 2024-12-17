@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EM_Animation : BaseAnimEnemy
 {
-
     public IAiAvoid ai;
     private string currentAnimaton;
     public bool isFacing = true;

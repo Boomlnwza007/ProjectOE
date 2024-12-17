@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGuard: 1
   redy: 1
+  conShield: 1
   target: {fileID: 0}
   bulletPrefab: {fileID: 0}
   filter:
@@ -444,10 +445,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4114375735812272087}
-  layerIndex: 1
+  layerIndex: 0
   rb: {fileID: 4793684831444295515}
   timeplay: 0
   endAnim: 0
+  isFacing: 1
+  isFacingRight: 1
 --- !u!1 &7764771964787874837
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +650,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 39640
+  m_InstanceId: 38152
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
