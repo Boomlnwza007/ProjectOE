@@ -107,7 +107,6 @@ MonoBehaviour:
   areaBoss: {fileID: 0}
   delBulletAll: {fileID: 5168941981807238506}
   ready: 1
-  checkPoint: {fileID: 0}
   hasPlayer: 0
   enemyleLayer:
     serializedVersion: 2

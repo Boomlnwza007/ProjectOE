@@ -32,8 +32,10 @@ public class SlamAttackSFSM : BaseState
 
             state.shield.ShieldIsOn(false);
             ai.canMove = false;
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            Debug.Log("attack");
+            //await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            ani.ChangeAnimationAttack("GPush");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Idle");
             await UniTask.WaitForSeconds(state.shield.canGuard ? 2 : 1, cancellationToken: token);
 
             if (state.shield.canGuard)
