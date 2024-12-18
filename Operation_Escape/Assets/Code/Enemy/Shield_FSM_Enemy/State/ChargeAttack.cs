@@ -38,26 +38,31 @@ public class ChargeAttack : BaseState
             state.shield.ShieldIsOn(false);
             ai.canMove = false;
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
+            ani.isFacing = false;
             ani.animator.speed = 0;
             ani.ChangeAnimationAttack("Dash");
             await UniTask.WaitForSeconds(2f , cancellationToken: token);
-            await Charge();            
+            await Charge();
+            ani.isFacing = true;
+            await UniTask.DelayFrame(1);
 
             if (!state.shield.canGuard)
             {
                 ai.canMove = false;
                 ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
+                ani.isFacing = false;
                 await UniTask.WaitForSeconds(1f, cancellationToken: token);
                 ani.animator.speed = 0;
                 ani.ChangeAnimationAttack("Dash");
                 await Charge();
+                ani.isFacing = true;
             }
 
             ani.animator.speed = 1;
             state.Walk();
             ai.canMove = false;
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-            ani.ChangeAnimationAttack("Idle");
+            ani.ChangeAnimationAttack("IdleNS");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.shield.ShieldIsOn(true);
             state.cooldownChargeAttack = true;
@@ -74,7 +79,7 @@ public class ChargeAttack : BaseState
         }
     }
 
-    private Vector2 CalculateDestination(Vector2 currentPosition, Vector2 targetPosition, float jumpLength, LayerMask mask)
+    public Vector2 CalculateDestination(Vector2 currentPosition, Vector2 targetPosition, float jumpLength, LayerMask mask)
     {
         Vector2 direction = (targetPosition - currentPosition).normalized;
         RaycastHit2D[] raycast = Physics2D.RaycastAll(currentPosition, direction, jumpLength, mask);

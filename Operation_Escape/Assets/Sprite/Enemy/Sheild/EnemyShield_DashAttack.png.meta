@@ -206,6 +206,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: EnemyShield_DashAttack_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b3b20a88502c1449b215c36481f93f
+      internalID: 1794968607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -221,6 +242,7 @@ TextureImporter:
       EnemyShield_DashAttack_1: 1027032341
       EnemyShield_DashAttack_2: -487985065
       EnemyShield_DashAttack_3: -2143536156
+      EnemyShield_DashAttack_4: 1794968607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

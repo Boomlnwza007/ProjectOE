@@ -98,9 +98,9 @@ public class GuardShield : MonoBehaviour
     {
         if (canGuard)
         {
-            conShield = on;
             shieldCollider.enabled = on;
             shieldSprite.enabled = on;
+            conShield = on;
         }
     }
 

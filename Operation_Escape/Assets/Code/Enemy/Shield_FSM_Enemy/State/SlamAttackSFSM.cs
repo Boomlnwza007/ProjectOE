@@ -35,12 +35,22 @@ public class SlamAttackSFSM : BaseState
             //await UniTask.WaitForSeconds(2f, cancellationToken: token);
             ani.ChangeAnimationAttack("GPush");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            ani.ChangeAnimationAttack("Idle");
+            ani.ChangeAnimationAttack("IdleNS");
             await UniTask.WaitForSeconds(state.shield.canGuard ? 2 : 1, cancellationToken: token);
 
-            if (state.shield.canGuard)
+            if (!state.shield.canGuard)
             {
-                Debug.Log("JumpAttack");
+                ai.canMove = false;
+                ani.isFacing = false;
+                ai.destination = state.chargeAttState.CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
+                ani.animator.speed = 0;
+                ani.ChangeAnimationAttack("Dash");
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
+
+                await Charge();
+
+                ani.ChangeAnimationAttack("IdleNS");
+                ani.isFacing = true;
                 await UniTask.WaitForSeconds(2, cancellationToken: token);
             }
 
@@ -64,7 +74,47 @@ public class SlamAttackSFSM : BaseState
         state.cooldownChargeAttack = false;
     }
 
+    public async UniTask Charge()
+    {
+        var token = cancellationToken.Token;
+        var state = (FSMSEnemySM)stateMachine;
+        bool hasAttacked = false;
+        var ani = state.animator;
+        float time = 0;
+        ai.canMove = true;
+        state.Run(5);
 
+        while (time < 10 && !hasAttacked)//Edit Time Run 
+        {
+            time += Time.deltaTime;
+            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
+            {
+                //Debug.Log("ai.endMove");
+                ani.animator.speed = 1;
+                Debug.Log("Attack");
+                hasAttacked = true;
+                //state.animator.isFacing = true;
+                break;
+            }
+
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
+            foreach (var hit in colliders)
+            {
+                if (hit.gameObject != state.gameObject)
+                {
+                    Debug.Log(hit.name + "hit 2 ");
+                    ani.animator.speed = 1;
+                    Debug.Log("Attack");
+                    hasAttacked = true;
+                    //state.animator.isFacing = true;
+                    break;
+                }
+            }
+            token.ThrowIfCancellationRequested();
+            await UniTask.Yield();
+        }
+
+    }
 
     public override void Exit()
     {
