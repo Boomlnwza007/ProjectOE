@@ -100,8 +100,9 @@ public class ChargeAttack : BaseState
         var token = cancellationToken.Token;
         var state = (FSMSEnemySM)stateMachine;
         bool hasAttacked = false;
-        var ani = state.animator;
-
+        var ani = state.animator;     
+        
+        state.Walk();
         ai.canMove = true;
         state.Run(5);
 
