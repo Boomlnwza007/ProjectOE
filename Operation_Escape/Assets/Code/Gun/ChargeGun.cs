@@ -72,11 +72,11 @@ public class ChargeGun : BaseGun
                 if (Input.GetButtonUp("Fire1"))
                 {
                     ammo--;
+                    bullet.ready = true;
                     firing = false;
                     charge = false;
                     bullet.charging = false;
                     bullet.rb.velocity = bullet.transform.right * bullet.speed;
-                    bullet.ready = true;
                     PlayerControl.control.Slow(0);
                     Destroy(ChangeEff);
                 }

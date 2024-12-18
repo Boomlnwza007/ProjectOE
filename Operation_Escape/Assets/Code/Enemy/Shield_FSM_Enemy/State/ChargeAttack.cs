@@ -44,7 +44,9 @@ public class ChargeAttack : BaseState
             await UniTask.WaitForSeconds(2f , cancellationToken: token);
             await Charge();
             ani.isFacing = true;
+            ani.ChangeAnimationAttack("IdleNS");
             await UniTask.DelayFrame(1);
+
 
             if (!state.shield.canGuard)
             {

@@ -108,9 +108,8 @@ public class GuardShield : MonoBehaviour
     {
         canGuard = false;
         redy = false;
-        var state = gameObject.GetComponent<FSMSEnemySM>();
+        var state = gameObject.GetComponentInParent<FSMSEnemySM>();
         state.stun = true;
         state.ChangState(state.checkDistanceState);
-
     }
 }
