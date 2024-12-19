@@ -44,14 +44,15 @@ public class SlamAttackSFSM : BaseState
                 ani.isFacing = false;
                 ai.destination = state.chargeAttState.CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
                 ani.animator.speed = 0;
-                ani.ChangeAnimationAttack("Dash");
+                ani.ChangeAnimationAttack("PreDash");
                 await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
                 await Charge();
 
+                await UniTask.WaitForSeconds(1, cancellationToken: token);
                 ani.ChangeAnimationAttack("IdleNS");
                 ani.isFacing = true;
-                await UniTask.WaitForSeconds(2, cancellationToken: token);
+                await UniTask.WaitForSeconds(1, cancellationToken: token);
             }
 
             state.shield.ShieldIsOn(true);
@@ -81,16 +82,19 @@ public class SlamAttackSFSM : BaseState
         bool hasAttacked = false;
         var ani = state.animator;
         float time = 0;
+
+        state.Walk();
         ai.canMove = true;
         state.Run(5);
+        ani.animator.speed = 1;
 
         while (time < 10 && !hasAttacked)//Edit Time Run 
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
+            if (Vector2.Distance(ai.destination, ai.position) < 3f && ai.endMove)
             {
                 //Debug.Log("ai.endMove");
-                ani.animator.speed = 1;
+                ani.ChangeAnimationAttack("Dash");
                 Debug.Log("Attack");
                 hasAttacked = true;
                 //state.animator.isFacing = true;
@@ -103,7 +107,7 @@ public class SlamAttackSFSM : BaseState
                 if (hit.gameObject != state.gameObject)
                 {
                     Debug.Log(hit.name + "hit 2 ");
-                    ani.animator.speed = 1;
+                    ani.ChangeAnimationAttack("Dash");
                     Debug.Log("Attack");
                     hasAttacked = true;
                     //state.animator.isFacing = true;

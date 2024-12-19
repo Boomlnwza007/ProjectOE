@@ -40,9 +40,10 @@ public class ChargeAttack : BaseState
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             ani.isFacing = false;
             ani.animator.speed = 0;
-            ani.ChangeAnimationAttack("Dash");
+            ani.ChangeAnimationAttack("PreDash");
             await UniTask.WaitForSeconds(2f , cancellationToken: token);
             await Charge();
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             ani.isFacing = true;
             ani.ChangeAnimationAttack("IdleNS");
             await UniTask.DelayFrame(1);
@@ -53,10 +54,11 @@ public class ChargeAttack : BaseState
                 ai.canMove = false;
                 ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
                 ani.isFacing = false;
-                await UniTask.WaitForSeconds(1f, cancellationToken: token);
                 ani.animator.speed = 0;
-                ani.ChangeAnimationAttack("Dash");
+                ani.ChangeAnimationAttack("PreDash");
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
                 await Charge();
+                await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                 ani.isFacing = true;
             }
 
@@ -106,14 +108,15 @@ public class ChargeAttack : BaseState
         state.Walk();
         ai.canMove = true;
         state.Run(5);
+        ani.animator.speed = 1;
 
         while (time < 10 && !hasAttacked)//Edit Time Run 
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
+            if (Vector2.Distance(ai.destination, ai.position) < 3f && ai.endMove)
             {
                 //Debug.Log("ai.endMove");
-                ani.animator.speed = 1;
+                ani.ChangeAnimationAttack("Dash");
                 Debug.Log("Attack");
                 hasAttacked = true;
                 //state.animator.isFacing = true;
@@ -126,7 +129,7 @@ public class ChargeAttack : BaseState
                 if (hit.gameObject != state.gameObject)
                 {
                     Debug.Log(hit.name + "hit 2 ");
-                    ani.animator.speed = 1;
+                    ani.ChangeAnimationAttack("Dash");
                     Debug.Log("Attack");
                     hasAttacked = true;
                     //state.animator.isFacing = true;
