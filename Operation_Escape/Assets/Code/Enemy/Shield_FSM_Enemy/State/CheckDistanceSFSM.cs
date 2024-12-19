@@ -37,7 +37,7 @@ public class CheckDistanceSFSM : BaseState
             {
                 ChangState(state.slamAttState);
             }
-            else
+            else if(state.cooldownSlamAttack)
             {
                 state.Movement();
             }

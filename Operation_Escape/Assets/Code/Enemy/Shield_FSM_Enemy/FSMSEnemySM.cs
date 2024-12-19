@@ -137,7 +137,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
             {
                 offset *= -1;
                 timeCircle = 0;
-                radius = Random.Range(8, 10);
+                radius = Random.Range(5, 11);
             }
             var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
             ai.destination = target.position + normal * radius + tangent * offset;
