@@ -29,7 +29,7 @@ public class SlamAttackSFSM : BaseState
 
         try
         {
-
+            ai.monVelocity = Vector2.zero;
             state.shield.ShieldIsOn(false);
             ai.canMove = false;
             //await UniTask.WaitForSeconds(2f, cancellationToken: token);

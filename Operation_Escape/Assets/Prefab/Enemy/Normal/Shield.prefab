@@ -355,10 +355,10 @@ MonoBehaviour:
   offset: 2
   raycastMaskWay:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   raycastMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 640
   jumpLength: 20
   forcePush: 100
   shield: {fileID: 9136803762061904664}
@@ -650,7 +650,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 116608
+  m_InstanceId: 73062
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}

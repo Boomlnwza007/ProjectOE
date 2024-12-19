@@ -92,6 +92,7 @@ public class ChargeAttack : BaseState
             }
         }
 
+        Debug.DrawLine(currentPosition, currentPosition + (direction * jumpLength), Color.green, 2f);
         return currentPosition + (direction * jumpLength);
     }
 

@@ -129,24 +129,19 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     public void Movement()
     {
-        if (Vector2.Distance(transform.position, target.position) > 5)
-        {
+
             timeCircle += Time.deltaTime;
             var normal = (ai.position - target.position).normalized;
             if (timeCircle > 3)
             {
-                offset *= -1;
+                int randomValue = Random.Range(0, 2) * 2 - 1;
+                offset *= randomValue;
                 timeCircle = 0;
-                radius = Random.Range(5, 11);
+                radius = Random.Range(5, 6);
             }
             var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
             ai.destination = target.position + normal * radius + tangent * offset;
-        }
-        else
-        {
-            ai.destination = target.position;
-        }
-
+        
     }
 
     public void Run(float multiply)

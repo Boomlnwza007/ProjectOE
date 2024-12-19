@@ -18,7 +18,7 @@ public class ES_animation : BaseAnimEnemy
     private void Update()
     {
         UpdateAnimation();
-        animator.SetBool("HasShield", enemySM.shield.redy);
+        animator.SetBool("HasShield", enemySM.shield.conShield && enemySM.shield.redy);
     }
 
     public void UpdateAnimation()
