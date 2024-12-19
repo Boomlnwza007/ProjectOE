@@ -67,8 +67,6 @@ public class ChargeAttack : BaseState
             ani.ChangeAnimationAttack("IdleNS");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.shield.ShieldIsOn(true);
-            state.cooldownChargeAttack = true;
-
             float timeCooldown = state.shield.canGuard ? 3 : 2;
             Cooldown(timeCooldown).Forget();
             ChangState(state.checkDistanceState);
@@ -142,8 +140,9 @@ public class ChargeAttack : BaseState
 
     public async UniTaskVoid Cooldown(float time)
     {
-        await UniTask.WaitForSeconds(time);
         var state = (FSMSEnemySM)stateMachine;
+        state.cooldownChargeAttack = true;
+        await UniTask.WaitForSeconds(time); 
         state.cooldownChargeAttack = false;
     }
 

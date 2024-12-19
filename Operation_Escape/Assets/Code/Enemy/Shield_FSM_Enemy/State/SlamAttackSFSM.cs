@@ -55,7 +55,6 @@ public class SlamAttackSFSM : BaseState
             }
 
             state.shield.ShieldIsOn(true);
-            state.cooldownSlamAttack = true;
             Cooldown(state.shield.canGuard ? 3 : 2).Forget();
 
             ChangState(state.checkDistanceState);
@@ -69,9 +68,10 @@ public class SlamAttackSFSM : BaseState
 
     public async UniTaskVoid Cooldown(float time)
     {
-        await UniTask.WaitForSeconds(time);
         var state = (FSMSEnemySM)stateMachine;
-        state.cooldownChargeAttack = false;
+        state.cooldownSlamAttack = true;
+        await UniTask.WaitForSeconds(time);
+        state.cooldownSlamAttack = false;
     }
 
     public async UniTask Charge()
