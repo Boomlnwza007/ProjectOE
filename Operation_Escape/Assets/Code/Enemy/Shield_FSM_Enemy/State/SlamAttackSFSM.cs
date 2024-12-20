@@ -36,7 +36,6 @@ public class SlamAttackSFSM : BaseState
             ani.ChangeAnimationAttack("GPush");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ani.ChangeAnimationAttack("IdleNS");
-            await UniTask.WaitForSeconds(state.shield.canGuard ? 2 : 1, cancellationToken: token);
 
             if (!state.shield.canGuard)
             {
@@ -55,8 +54,9 @@ public class SlamAttackSFSM : BaseState
                 await UniTask.WaitForSeconds(1, cancellationToken: token);
             }
 
+            await UniTask.WaitForSeconds(2, cancellationToken: token);
             state.shield.ShieldIsOn(true);
-            Cooldown(state.shield.canGuard ? 3 : 2).Forget();
+            Cooldown(state.shield.canGuard ? 4 : 2).Forget();
 
             ChangState(state.checkDistanceState);
         }
@@ -91,7 +91,7 @@ public class SlamAttackSFSM : BaseState
         while (time < 10 && !hasAttacked)//Edit Time Run 
         {
             time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 3f && ai.endMove)
+            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
             {
                 //Debug.Log("ai.endMove");
                 ani.ChangeAnimationAttack("Dash");
