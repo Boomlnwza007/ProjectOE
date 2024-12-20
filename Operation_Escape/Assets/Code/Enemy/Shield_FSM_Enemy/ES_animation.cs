@@ -27,7 +27,11 @@ public class ES_animation : BaseAnimEnemy
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
         isFacingRight = angle > -90 && angle < 90;
 
-        animator.SetBool("IsRight", isFacingRight);
+        if (isFacing)
+        {
+            animator.SetBool("IsRight", isFacingRight);
+        }
+
         animator.SetFloat("horizon", isFacingRight ? 1 : -1);
 
         if (rb.velocity != Vector2.zero && !ai.endMove)

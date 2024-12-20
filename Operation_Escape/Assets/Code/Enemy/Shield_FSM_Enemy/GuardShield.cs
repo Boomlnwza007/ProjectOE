@@ -110,6 +110,8 @@ public class GuardShield : MonoBehaviour
         redy = false;
         var state = gameObject.GetComponentInParent<FSMSEnemySM>();
         state.stun = true;
+        state.ai.monVelocity = Vector2.zero;
+        state.animator.ChangeAnimationAttack("Stun");
         state.ChangState(state.checkDistanceState);
     }
 }

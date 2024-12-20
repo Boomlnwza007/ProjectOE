@@ -46,7 +46,6 @@ public class CheckDistanceSFSM : BaseState
         else
         {
             var ani = state.animator;
-            ani.ChangeAnimationAttack("IdleNS");
             ai.canMove = false;
             state.timeStun += Time.deltaTime;
             if (state.timeStun > state.timeStunCooldown)
@@ -54,6 +53,7 @@ public class CheckDistanceSFSM : BaseState
                 state.timeStun = 0;
                 state.stun = false;
                 ai.canMove = true;
+                ani.ChangeAnimationAttack("IdleNS");
             }
         }
     }

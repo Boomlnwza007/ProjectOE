@@ -61,6 +61,12 @@ public class BulletCharge : BaseBullet
     {
         if (!charging)
         {
+            if (collision.TryGetComponent(out GuardShield shield) && ready)
+            {
+                shield.BreakShield();
+                return;
+            }
+
             if (collision.tag == tagUse)
             {
                 IDamageable target = collision.GetComponent<IDamageable>();
