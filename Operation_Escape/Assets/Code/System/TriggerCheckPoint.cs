@@ -19,6 +19,7 @@ public class TriggerCheckPoint : MonoBehaviour
                 foreach (var area in AreaEnermy.area)
                 {
                     area.ready = false;
+                    area.ForceLock();
                 }
                 AreaEnermy.area.Clear();
                 active = false;
