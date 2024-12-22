@@ -10,6 +10,7 @@ public class AutoDoor : MonoBehaviour
     public int key;
     public TriggerDoor plateSC;
     public AreaEnermy area;
+    public bool UnLock;
 
     private void Start()
     {
@@ -63,12 +64,10 @@ public class AutoDoor : MonoBehaviour
         locked = false;
     }
 
-    public void Lock()
-    {       
-
+    public void SetLock()
+    {      
         if (area != null)
         {
-
             area.Lock();
         }
         else
@@ -88,6 +87,14 @@ public class AutoDoor : MonoBehaviour
             aniDoor.Lock();
         }
         locked = true;
+    }
+
+    public void ForceLock()
+    {
+        if (!UnLock)
+        {
+            LockOn();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -154,4 +154,12 @@ public class AreaEnermy : MonoBehaviour
             door.LockOn();
         }
     }
+
+    public void ForceLock()    
+    {
+        foreach (var door in door)
+        {
+            door.ForceLock();
+        }
+    }
 }
