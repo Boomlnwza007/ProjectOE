@@ -8,6 +8,8 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM
     public float timeCooldownSpike;
     public float timeCooldownMinion;
 
+    public BaseAnimEnemy animator;
+
     [HideInInspector]
     public H4IdleFSM Idle;
     [HideInInspector]
