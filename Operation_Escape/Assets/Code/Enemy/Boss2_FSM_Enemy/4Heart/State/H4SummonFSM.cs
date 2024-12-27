@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class H4SummonFSM : BaseState
 {
-    public H4SummonFSM(FSMHeart4EnemySM stateEnemy) : base("Attack", stateEnemy) { }
+    public H4SummonFSM(FSMHeart4EnemySM stateEnemy) : base("Summon", stateEnemy) { }
     private CancellationTokenSource cancellationToken;
     public bool cooldown;
 
@@ -28,8 +28,10 @@ public class H4SummonFSM : BaseState
         {
             state.AttackZSpike();
             await UniTask.WaitForSeconds(2.5f, cancellationToken: token);
-            state.SummonMinion(0);
-            state.ResetPositions();
+            for (int i = 0; i < 2; i++)
+            {
+                state.SummonMinion(0,new Vector2Int(2,2));
+            }
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             Cooldown().Forget();
             ChangState(state.attack);

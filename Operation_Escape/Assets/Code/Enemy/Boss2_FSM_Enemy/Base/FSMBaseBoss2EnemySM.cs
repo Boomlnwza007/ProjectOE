@@ -39,6 +39,11 @@ public class FSMBaseBoss2EnemySM : StateMachine
         Instantiate(minion[type], chosenPosition, Quaternion.identity);
     }
 
+    public void SummonMinion(int type,Vector2Int size)
+    {
+        grid.SpawnMinion(size, minion[type]);
+    }
+
     public void ResetPositions()
     {
         availablePositions = new List<Transform>(spawnPoint);

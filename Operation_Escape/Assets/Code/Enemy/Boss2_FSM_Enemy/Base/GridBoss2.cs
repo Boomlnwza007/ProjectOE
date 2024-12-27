@@ -40,6 +40,28 @@ public class GridBoss2 : MonoBehaviour
         }
     }
 
+    public Vector2Int SpawnMinion(Vector2Int size ,GameObject minion)
+    {
+        Vector2Int? spawnPosition = FindAvailablePosition(size);
+
+        if (spawnPosition != null)
+        {
+            Vector2Int pos = spawnPosition.Value;
+            Vector3 worldPos = GridToWorldPosition(pos);
+
+            Instantiate(minion, worldPos, Quaternion.identity).GetComponent<Spike>();
+
+            MarkGrid(pos, size, true);
+
+            return pos;
+        }
+        else
+        {
+            Debug.Log("No available space for this tower!");
+            return Vector2Int.zero;
+        }
+    }
+
     private Vector2Int? FindAvailablePosition(Vector2Int size)
     {
         List<Vector2Int> possiblePositions = new List<Vector2Int>();

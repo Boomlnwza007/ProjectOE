@@ -12,12 +12,11 @@ public class CheckDistanceEMFSM : BaseState
     {
         ai = ((FSMMEnemySM)stateMachine).ai;
         ai.canMove = true;
-        ai.destination = ai.position;
+        ai.destination = ai.targetTransform.position;
     }
 
     public override void UpdateLogic()
     {
-        base.UpdateLogic();
         var state = (FSMMEnemySM)stateMachine;
         ai.destination = ai.targetTransform.position;
 

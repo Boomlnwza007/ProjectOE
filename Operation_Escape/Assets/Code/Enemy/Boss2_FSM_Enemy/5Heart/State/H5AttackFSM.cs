@@ -29,7 +29,10 @@ public class H5AttackFSM : BaseState
             countSpike++;
             state.AttackZSpike();
             await UniTask.WaitForSeconds(2.5f, cancellationToken: token);
-            state.SummonMinion(0);
+            for (int i = 0; i < 2; i++)
+            {
+                state.SummonMinion(0);
+            }
             state.ResetPositions();
             if (countSpike > 1)
             {

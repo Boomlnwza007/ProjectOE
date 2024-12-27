@@ -1,4 +1,3 @@
-
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
@@ -8,7 +7,7 @@ using UnityEngine;
 
 public class H2SummonFSM : BaseState
 {
-    public H2SummonFSM(FSMHeart2EnemySM stateEnemy) : base("Attack", stateEnemy) { }
+    public H2SummonFSM(FSMHeart2EnemySM stateEnemy) : base("Summon", stateEnemy) { }
     private CancellationTokenSource cancellationToken;
     public bool cooldown;
 
@@ -28,6 +27,10 @@ public class H2SummonFSM : BaseState
         {
             state.AttackRSpike();
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            for (int i = 0; i < 3; i++)
+            {
+                state.SummonMinion(0);
+            }
             state.SummonMinion(0);
             state.ResetPositions();
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);

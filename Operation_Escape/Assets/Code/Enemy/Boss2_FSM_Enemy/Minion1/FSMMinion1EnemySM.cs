@@ -2,34 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
+public class FSMMinion1EnemySM : StateMachine , IDamageable
 {
-    [Header("Cooldown")]
-    public float timeCooldownSpike;
-    public float timeCooldownMinion;
+    BaseAnimEnemy animator;
 
-    public BaseAnimEnemy animator;
+    [Header("Charge")]
+    public LayerMask raycastMaskWay;
+    public LayerMask raycastMask;
+    public float jumpLength = 6;
+
+    [HideInInspector]
+    public M1AttackFSM attack;
+    [HideInInspector]
+    public M1IdleFSM idle;
+    [HideInInspector]
+    public M1checkDistanceFSM checkDistance;
+
     public bool imortal { get; set; }
-
-    [HideInInspector]
-    public H4IdleFSM Idle;
-    [HideInInspector]
-    public H4AttackFSM attack;
-    [HideInInspector]
-    public H4SummonFSM summon;
 
     private void Awake()
     {
-        ResetPositions();
-        Idle = new H4IdleFSM(this);
-        attack = new H4AttackFSM(this);
-        summon = new H4SummonFSM(this);
+        attack = new M1AttackFSM(this);
+        idle = new M1IdleFSM(this);
+        checkDistance = new M1checkDistanceFSM(this);
     }
 
-    protected override BaseState GetInitialState()
+    public void Run(float multiply)
     {
-        return Idle;
+        ai.maxspeed *= multiply;
+        animator.animator.speed *= multiply;
     }
+
+    public void Walk()
+    {
+        ai.maxspeed = Speed;
+        animator.animator.speed = 1;
+    }
+
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
