@@ -40,7 +40,7 @@ public class GridBoss2 : MonoBehaviour
         }
     }
 
-    public void SpawnMinion(Vector2Int size ,FSMMinion2EnemySM minionType)
+    public void SpawnMinion(Vector2Int size ,GameObject minionType)
     {
         Vector2Int? spawnPosition = FindAvailablePosition(size);
 
