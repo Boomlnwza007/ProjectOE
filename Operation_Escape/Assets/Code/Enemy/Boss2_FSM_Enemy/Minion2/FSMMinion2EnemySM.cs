@@ -5,7 +5,12 @@ using UnityEngine;
 public class FSMMinion2EnemySM : StateMachine , IDamageable
 {
     BaseAnimEnemy animator;
-    GameObject bullet;
+
+    [Header("Range")]
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    public Transform bulletTranform;
 
     [Header("Charge")]
     public LayerMask raycastMaskWay;
@@ -23,6 +28,12 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     {
         attack = new M2AttackFSM(this);
         idle = new M2IdleFSM(this);
+    }
+
+    public void Fire()
+    {
+        GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
+        bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)

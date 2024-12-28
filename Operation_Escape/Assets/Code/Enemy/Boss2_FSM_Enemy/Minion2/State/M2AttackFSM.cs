@@ -22,15 +22,9 @@ public class M2AttackFSM : BaseState
         timer += Time.deltaTime;
         if (timer >= time)
         {
-            Attack();
+            ((FSMMinion2EnemySM)stateMachine).Fire();
             timer = 0;
             time = Random.Range(1, 4);
         }
     }
-
-    public void Attack()
-    {
-        
-    }
-
 }

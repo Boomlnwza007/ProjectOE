@@ -39,12 +39,11 @@ public class M1AttackFSM : BaseState
                 time += Time.deltaTime;
                 if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
                 {
-                    //Debug.Log("ai.endMove");
 
                     ai.canMove = false;
                     ai.monVelocity = Vector2.zero;
                     state.Walk();
-                    Debug.Log("Attack");
+                    Debug.Log("Attack");   
                     
                     hasAttacked = true;
 
@@ -56,8 +55,6 @@ public class M1AttackFSM : BaseState
                 {
                     if (hit.gameObject != state.gameObject)
                     {
-                        Debug.Log(hit.name + "hit 2 ");
-
                         ai.canMove = false;
                         ai.monVelocity = Vector2.zero;
                         state.Walk();
