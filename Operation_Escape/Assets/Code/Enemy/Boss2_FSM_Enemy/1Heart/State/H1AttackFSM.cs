@@ -25,7 +25,7 @@ public class H1AttackFSM : BaseState
         try
         {
             state.AttackRSpike();
-            await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
             await UniTask.WaitForSeconds(state.timeCooldownSpike, cancellationToken: token);
             ChangState(state.attack);
         }

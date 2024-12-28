@@ -28,7 +28,7 @@ public class H2AttackFSM : BaseState
         {
             countSpike++;
             state.AttackRSpike();
-            await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
             if (countSpike > 3)
             {
                 if (state.summon.cooldown)

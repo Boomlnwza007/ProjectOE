@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     [SerializeField] private StateMachine mon;
+    public int dmg;
     public SpriteRenderer spriteRenderer;
     public Collider2D colliderA;
 
@@ -12,6 +13,7 @@ public class AttackCollider : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         colliderA = GetComponent<Collider2D>();
+        dmg = mon?.dmg ?? dmg;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
