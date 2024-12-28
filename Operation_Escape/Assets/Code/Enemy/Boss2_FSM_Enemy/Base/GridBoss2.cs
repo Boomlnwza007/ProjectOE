@@ -29,8 +29,8 @@ public class GridBoss2 : MonoBehaviour
             Vector2Int pos = spawnPosition.Value;
             Vector3 worldPos = GridToWorldPosition(pos);
 
-            Spike tower = Instantiate(spikeType.gameObject, worldPos, Quaternion.identity, spawnParent).GetComponent<Spike>();
-            tower.Setup(this, pos);
+            Spike spike = Instantiate(spikeType.gameObject, worldPos, Quaternion.identity, spawnParent).GetComponent<Spike>();
+            spike.Setup(this, pos);
 
             MarkGrid(pos, spikeType.size, true);
         }
@@ -40,7 +40,7 @@ public class GridBoss2 : MonoBehaviour
         }
     }
 
-    public Vector2Int SpawnMinion(Vector2Int size ,GameObject minion)
+    public void SpawnMinion(Vector2Int size ,FSMMinion2EnemySM minionType)
     {
         Vector2Int? spawnPosition = FindAvailablePosition(size);
 
@@ -49,16 +49,13 @@ public class GridBoss2 : MonoBehaviour
             Vector2Int pos = spawnPosition.Value;
             Vector3 worldPos = GridToWorldPosition(pos);
 
-            Instantiate(minion, worldPos, Quaternion.identity).GetComponent<Spike>();
-
+            FSMMinion2EnemySM minion = Instantiate(minionType.gameObject, worldPos, Quaternion.identity).GetComponent<FSMMinion2EnemySM>();
+            minion.Setup(this,pos);
             MarkGrid(pos, size, true);
-
-            return pos;
         }
         else
         {
             Debug.Log("No available space for this tower!");
-            return Vector2Int.zero;
         }
     }
 

@@ -5,6 +5,9 @@ using UnityEngine;
 public class FSMMinion2EnemySM : StateMachine , IDamageable
 {
     BaseAnimEnemy animator;
+    public Vector2Int size;
+    private Vector2Int gridPos;
+    private GridBoss2 grid;
 
     [Header("Range")]
     [SerializeField]
@@ -34,6 +37,11 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     {
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
         bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
+    }
+    public void Setup(GridBoss2 grid, Vector2Int gridPos)
+    {
+        this.grid = grid;
+        this.gridPos = gridPos;
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)
