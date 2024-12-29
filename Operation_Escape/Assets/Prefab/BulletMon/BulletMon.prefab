@@ -183,12 +183,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  damage: 20
-  speed: 10
+  damage: 30
+  speed: 20
   knockbackForce: 0
   tagUse: Player
   target: {fileID: 0}
   ready: 0
+  ultimate: 0
+  expo: {fileID: 0}
 --- !u!50 &1473662757371173205
 Rigidbody2D:
   serializedVersion: 4

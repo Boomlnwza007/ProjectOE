@@ -49,7 +49,7 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
                 //lootDrop.InstantiateLoot(3);
                 break;
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(dropChange);
+                lootDrop?.InstantiateLoot(dropChange);
                 break;
         }
         if (Health <= 0)

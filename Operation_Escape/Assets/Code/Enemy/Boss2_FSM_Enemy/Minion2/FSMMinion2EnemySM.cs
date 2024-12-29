@@ -15,11 +15,6 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     [SerializeField]
     public Transform bulletTranform;
 
-    [Header("Charge")]
-    public LayerMask raycastMaskWay;
-    public LayerMask raycastMask;
-    public float jumpLength = 6;
-
     [HideInInspector]
     public M2AttackFSM attack;
     [HideInInspector]

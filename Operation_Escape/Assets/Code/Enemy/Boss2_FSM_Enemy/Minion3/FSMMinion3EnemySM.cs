@@ -6,11 +6,6 @@ public class FSMMinion3EnemySM : StateMachine , IDamageable
 {
     BaseAnimEnemy animator;
 
-    [Header("Charge")]
-    public LayerMask raycastMaskWay;
-    public LayerMask raycastMask;
-    public float jumpLength = 6;
-
     [HideInInspector]
     public M3AttackFSM attack;
     [HideInInspector]
@@ -37,7 +32,7 @@ public class FSMMinion3EnemySM : StateMachine , IDamageable
                 //lootDrop.InstantiateLoot(3);
                 break;
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(dropChange);
+                lootDrop?.InstantiateLoot(dropChange);
                 break;
         }
         if (Health <= 0)
