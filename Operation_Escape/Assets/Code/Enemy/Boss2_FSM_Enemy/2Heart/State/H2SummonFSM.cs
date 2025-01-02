@@ -25,16 +25,15 @@ public class H2SummonFSM : BaseState
 
         try
         {
-            state.AttackRSpike();
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
             for (int i = 0; i < 3; i++)
             {
                 state.SummonMinion(0);
             }
-            state.SummonMinion(0);
             state.ResetPositions();
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             Cooldown().Forget();
+
+            await UniTask.WaitForSeconds(state.timeCooldownSpike);
             ChangState(state.attack);
         }
         catch (OperationCanceledException)

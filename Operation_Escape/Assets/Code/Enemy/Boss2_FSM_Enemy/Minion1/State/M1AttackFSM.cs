@@ -31,7 +31,7 @@ public class M1AttackFSM : BaseState
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             state.Walk();
             ai.canMove = true;
-            state.Run(5);
+            state.Run(3);
             float time = 0f;
 
             while (time < 10 && !hasAttacked)//Edit Time Run 
@@ -43,8 +43,8 @@ public class M1AttackFSM : BaseState
                     ai.canMove = false;
                     ai.monVelocity = Vector2.zero;
                     state.Walk();
-                    Debug.Log("Attack");   
-                    
+                    state.Attack();
+
                     hasAttacked = true;
 
                     return;
@@ -58,7 +58,8 @@ public class M1AttackFSM : BaseState
                         ai.canMove = false;
                         ai.monVelocity = Vector2.zero;
                         state.Walk();
-                        Debug.Log("Attack");
+                        state.Attack();
+
 
                         hasAttacked = true;
 

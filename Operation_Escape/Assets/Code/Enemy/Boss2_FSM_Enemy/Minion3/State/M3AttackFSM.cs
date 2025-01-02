@@ -27,7 +27,7 @@ public class M3AttackFSM : BaseState
 
         try
         {
-            Debug.Log("Attack");
+            state.Attack();
             await UniTask.WaitForSeconds(0.5f);
             ChangState(state.checkDistance);
         }

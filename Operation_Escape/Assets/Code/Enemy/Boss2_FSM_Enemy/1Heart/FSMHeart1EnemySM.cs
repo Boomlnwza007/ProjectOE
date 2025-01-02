@@ -21,6 +21,8 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         ResetPositions();
         Idle = new H1IdleFSM(this);
         attack = new H1AttackFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
+
     }
 
     protected override BaseState GetInitialState()

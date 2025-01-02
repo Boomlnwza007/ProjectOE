@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6499134677622411687}
   - component: {fileID: 7946128131045001210}
   - component: {fileID: 1751437643803895686}
+  - component: {fileID: 2453006889408840406}
   m_Layer: 7
   m_Name: Minion1
   m_TagString: Enemy
@@ -104,10 +105,10 @@ MonoBehaviour:
   rayLength: 3
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   agentLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   smoothTime: 0.1
   speed: 11
   stopRadiusOn: 0
@@ -168,7 +169,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -197,9 +198,9 @@ MonoBehaviour:
   Health: 20
   dmg: 15
   Speed: 11
-  visRange: 15
+  visRange: 30
   attacking: 1
-  lootDrop: {fileID: 0}
+  lootDrop: {fileID: 2453006889408840406}
   target: {fileID: 0}
   rb: {fileID: 7946128131045001210}
   dropChange: 0
@@ -211,3 +212,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   jumpLength: 6
+--- !u!114 &2453006889408840406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058521006033274985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f8d49ad0930ef44b995393120c0b375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootlist:
+  - {fileID: 11400000, guid: b272f7a7f44e6e24ca3b24d305eefb62, type: 2}

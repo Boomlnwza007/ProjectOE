@@ -67,8 +67,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     {
         if (!imortal)
         {
-            health -= damage;
-            Debug.Log(health+" "+ damage);
+            health -= damage;            
             if (health <= 0)
             {
                 health = 0;

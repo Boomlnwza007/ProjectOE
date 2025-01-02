@@ -7,7 +7,6 @@ using UnityEngine;
 public class M2IdleFSM : BaseState
 {
     public M2IdleFSM(FSMMinion2EnemySM stateEnemy) : base("IdleState", stateEnemy) { }
-    private CancellationTokenSource cancellationToken;
     public IAiAvoid ai;
     private bool ready;
 
@@ -21,16 +20,11 @@ public class M2IdleFSM : BaseState
     public override void UpdateLogic()
     {
         var state = (FSMMinion2EnemySM)stateMachine;
-        if (Vector2.Distance(ai.position, ai.targetTransform.position) < state.visRange && state.attacking && !ready)
+        if ((Vector2.Distance(ai.position, ai.targetTransform.position) < state.visRange || state.attacking) && !ready)
         {
             ready = true;
             Reay().Forget();
         }
-    }
-
-    public override void Exit()
-    {
-        cancellationToken.Cancel();
     }
 
     public async UniTask Reay()

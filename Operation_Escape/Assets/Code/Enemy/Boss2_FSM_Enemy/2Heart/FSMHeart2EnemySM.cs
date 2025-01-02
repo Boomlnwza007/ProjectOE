@@ -24,12 +24,14 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         Idle = new H2IdleFSM(this);
         attack = new H2AttackFSM(this);
         summon = new H2SummonFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()
     {
         return Idle;
     }
+
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;

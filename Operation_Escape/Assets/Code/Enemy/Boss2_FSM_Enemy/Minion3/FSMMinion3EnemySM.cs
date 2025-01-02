@@ -22,6 +22,11 @@ public class FSMMinion3EnemySM : StateMachine , IDamageable
         checkDistance = new M3checkDistanceFSM(this);
     }
 
+    protected override BaseState GetInitialState()
+    {
+        return idle;
+    }
+
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         Health -= damage;
@@ -49,5 +54,17 @@ public class FSMMinion3EnemySM : StateMachine , IDamageable
     public IEnumerator Imortal(float wait)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Attack()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f);
+        foreach (var hit in colliders)
+        {
+            if (hit.TryGetComponent(out IDamageable dam) && hit.CompareTag("Player"))
+            {
+                dam.Takedamage(dmg, DamageType.Melee, 5);
+            }
+        }
     }
 }

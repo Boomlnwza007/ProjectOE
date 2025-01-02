@@ -7,7 +7,6 @@ using UnityEngine;
 public class H2IdleFSM : BaseState
 {
     public H2IdleFSM(FSMHeart2EnemySM stateEnemy) : base("IdleState", stateEnemy) { }
-    private CancellationTokenSource cancellationToken;
     public IAiAvoid ai;
     private bool ready;
 
@@ -28,16 +27,11 @@ public class H2IdleFSM : BaseState
         }
     }
 
-    public override void Exit()
-    {
-        cancellationToken.Cancel();
-    }
-
     public async UniTask Reay()
     {
         var state = (FSMHeart2EnemySM)stateMachine;
         await UniTask.WaitForSeconds(1);
-        state.Shield.ShieldOn();
+        state.Shield.ShieldIsOn(true);
         ChangState(state.attack);
     }
 }

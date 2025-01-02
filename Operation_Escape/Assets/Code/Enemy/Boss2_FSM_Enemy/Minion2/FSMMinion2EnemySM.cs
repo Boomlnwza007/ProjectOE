@@ -28,6 +28,11 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
         idle = new M2IdleFSM(this);
     }
 
+    protected override BaseState GetInitialState()
+    {
+        return idle;
+    }
+
     public void Fire()
     {
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
@@ -60,6 +65,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
 
     public void Die()
     {
+        Destroy(gameObject.transform.parent.gameObject);
         Destroy(gameObject);
     }
 

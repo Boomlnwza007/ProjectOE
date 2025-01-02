@@ -15,7 +15,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
     private List<Transform> availablePositions = new List<Transform>();
 
     [Header("Shield")]
-    public ShieldHeart Shield;
+    public GuardShield Shield;
 
     public void AttackRSpike()
     {

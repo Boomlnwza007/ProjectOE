@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class GuardShield : MonoBehaviour
 {
-    public bool canGuard;
+    public bool canGuard = true;
     [HideInInspector]public bool redy = true;
     public bool conShield = true;
     private SpriteRenderer shieldSprite;
     private Collider2D shieldCollider;
-    [SerializeField] Transform target;
-    [SerializeField] public GameObject bulletPrefab;
+    private Transform target;
     public ContactFilter2D filter;
     public float cooldown;
     private float timeCooldown = 0;
@@ -109,9 +108,13 @@ public class GuardShield : MonoBehaviour
         canGuard = false;
         redy = false;
         var state = gameObject.GetComponentInParent<FSMSEnemySM>();
-        state.stun = true;
-        state.ai.monVelocity = Vector2.zero;
-        state.animator.ChangeAnimationAttack("Stun");
-        state.ChangState(state.checkDistanceState);
+        if (state)
+        {
+            state.stun = true;
+            state.ai.monVelocity = Vector2.zero;
+            state.animator.ChangeAnimationAttack("Stun");
+            state.ChangState(state.checkDistanceState);
+        }
+
     }
 }
