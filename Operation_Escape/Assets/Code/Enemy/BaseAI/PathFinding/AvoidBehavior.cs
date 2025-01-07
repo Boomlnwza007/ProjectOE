@@ -71,7 +71,9 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     {
         if (!canMove)
         {
-            rb.velocity = Vector2.SmoothDamp(rb.velocity, Vector2.zero, ref velocity, smoothTime);
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.Sleep();
             return;
         }
 
