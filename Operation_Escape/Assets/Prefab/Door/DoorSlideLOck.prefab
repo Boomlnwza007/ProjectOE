@@ -555,6 +555,7 @@ MonoBehaviour:
   key: 0
   plateSC: {fileID: 317149262169284259}
   area: {fileID: 0}
+  UnLock: 0
 --- !u!61 &2737638267092153965
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -634,22 +635,22 @@ MonoBehaviour:
   - {fileID: 4278695624336734005}
   - {fileID: 1965161489034140563}
   spriteDoorLock_L:
-  - {fileID: 1548209015, guid: 05c30d95dc6b98340a0fa956b547b841, type: 3}
-  - {fileID: 1916344511, guid: 05c30d95dc6b98340a0fa956b547b841, type: 3}
-  - {fileID: -1476504567, guid: 05c30d95dc6b98340a0fa956b547b841, type: 3}
-  - {fileID: -618174793, guid: 05c30d95dc6b98340a0fa956b547b841, type: 3}
-  spriteDoorLock_R:
-  - {fileID: 1951776639, guid: 1cea00fb7bf46a14cbba4abaa6c043f0, type: 3}
-  - {fileID: 1908697724, guid: 1cea00fb7bf46a14cbba4abaa6c043f0, type: 3}
-  - {fileID: -1479415155, guid: 1cea00fb7bf46a14cbba4abaa6c043f0, type: 3}
-  - {fileID: 2069243442, guid: 1cea00fb7bf46a14cbba4abaa6c043f0, type: 3}
-  spriteDoorUnlock_L:
   - {fileID: -712602129, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
   - {fileID: 1651780502, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
   - {fileID: 1010657274, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
   - {fileID: 1483140640, guid: 167c8bbb8fea6c241b450779c4ba75d9, type: 3}
-  spriteDoorUnlock_R:
+  spriteDoorLock_R:
   - {fileID: 1875753342, guid: d9d1600c59127594584df713780c933d, type: 3}
   - {fileID: 754039176, guid: d9d1600c59127594584df713780c933d, type: 3}
   - {fileID: -622900125, guid: d9d1600c59127594584df713780c933d, type: 3}
   - {fileID: 1856697827, guid: d9d1600c59127594584df713780c933d, type: 3}
+  spriteDoorUnlock_L:
+  - {fileID: 713378771, guid: 4fd62ee25adf3b44db6bf0f8b436baae, type: 3}
+  - {fileID: -1970026339, guid: 4fd62ee25adf3b44db6bf0f8b436baae, type: 3}
+  - {fileID: 428620626, guid: 4fd62ee25adf3b44db6bf0f8b436baae, type: 3}
+  - {fileID: -1553158839, guid: 4fd62ee25adf3b44db6bf0f8b436baae, type: 3}
+  spriteDoorUnlock_R:
+  - {fileID: 1182705025, guid: 5e34cd0cad9c3474eb468dba1694d4b2, type: 3}
+  - {fileID: -1130952476, guid: 5e34cd0cad9c3474eb468dba1694d4b2, type: 3}
+  - {fileID: -1458646429, guid: 5e34cd0cad9c3474eb468dba1694d4b2, type: 3}
+  - {fileID: -2144799551, guid: 5e34cd0cad9c3474eb468dba1694d4b2, type: 3}
