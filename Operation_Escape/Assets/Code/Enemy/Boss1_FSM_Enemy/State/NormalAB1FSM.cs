@@ -226,6 +226,7 @@ public class NormalAB1FSM : BaseState
         var state = ((FSMBoss1EnemySM)stateMachine);
         dash = true;
         state.rollSpeed = state.dodgeMaxSpeed;
+        state.isFacing = false;
     }
 
     public void DashStart()
@@ -238,6 +239,7 @@ public class NormalAB1FSM : BaseState
         {
             state.rollSpeed = state.dodgeMinimium;
             dash = false;
+            state.isFacing = true;
             return;
         }
         state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
@@ -245,6 +247,7 @@ public class NormalAB1FSM : BaseState
         {
             dash = false;
             state.rb.velocity = Vector3.zero;
+            state.isFacing = true;
         }
 
         state.rb.velocity = dir * state.rollSpeed;
