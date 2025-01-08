@@ -9,6 +9,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public LayerMask agentLayer;
     public float smoothTime = 0.3f;
     public float speed = 5f;
+    private bool hasStopped;
     public float maxspeed { get { return speed; } set { speed = value; } }
     public bool canMove { get; set; }
     public bool slowMove { get; private set; }
@@ -71,10 +72,18 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     {
         if (!canMove)
         {
-            rb.velocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-            rb.Sleep();
+            if (!hasStopped)
+            {
+                rb.velocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+                rb.Sleep();
+                hasStopped = true;
+            }
             return;
+        }
+        else
+        {
+            hasStopped = false;
         }
 
         Vector2 avoidForce = Vector2.zero;

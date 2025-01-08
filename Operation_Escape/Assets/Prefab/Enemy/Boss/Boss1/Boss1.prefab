@@ -850,6 +850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &1244210965028990519
@@ -1195,6 +1196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &2298168706154552170
@@ -1341,6 +1343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &2331986421017698221
@@ -1487,6 +1490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &2391929580316021871
@@ -1633,6 +1637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &2991465870566339611
@@ -1769,6 +1774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &3263185191202326107
@@ -1915,6 +1921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &3349776667180781743
@@ -2124,7 +2131,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 100
-  m_LinearDrag: 2
+  m_LinearDrag: 6
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -2461,6 +2468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &3681957227022291829
@@ -2607,6 +2615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &3708022768369971840
@@ -2890,6 +2899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &4365755039134015315
@@ -3097,6 +3107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &4798881577897989193
@@ -3233,6 +3244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &4937237111107688395
@@ -3635,6 +3647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &6611495823305785923
@@ -4204,6 +4217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &8156868994415019319
@@ -4508,6 +4522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &8768310849304656518
@@ -4654,6 +4669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 4419614992927084286}
+  dmg: 0
   spriteRenderer: {fileID: 0}
   colliderA: {fileID: 0}
 --- !u!1 &8804594485787066393

@@ -49,8 +49,6 @@ MonoBehaviour:
   canGuard: 1
   redy: 1
   conShield: 1
-  target: {fileID: 0}
-  bulletPrefab: {fileID: 0}
   filter:
     useTriggers: 1
     useLayerMask: 1
@@ -291,7 +289,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 1
+  m_LinearDrag: 6
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

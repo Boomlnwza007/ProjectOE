@@ -18,33 +18,33 @@ public class EM_Animation : BaseAnimEnemy
 
     private void Update()
     {
-        if (isFacing)
-        {
-            UpdateAnimation();
-        }
+        UpdateAnimation();      
     }
 
     public void UpdateAnimation()
     {
-        Vector2 target = (PlayerControl.control.transform.position - gameObject.transform.position).normalized;
-        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
-        bool isFacingRight = angle > -90 && angle < 90;
-        animator.SetBool("IsRight", isFacingRight);
+        if (isFacing)
+        {
+            Vector2 target = (PlayerControl.control.transform.position - gameObject.transform.position).normalized;
+            float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+            bool isFacingRight = angle > -90 && angle < 90;
+            animator.SetBool("IsRight", isFacingRight);
 
-        if (isFacingRight)
-        {
-            animator.SetFloat("horizon", 1);
-            this.isFacingRight = true;
-        }
-        else
-        {
-            animator.SetFloat("horizon", -1);
-            this.isFacingRight = false;
-        }
+            if (isFacingRight)
+            {
+                animator.SetFloat("horizon", 1);
+                this.isFacingRight = true;
+            }
+            else
+            {
+                animator.SetFloat("horizon", -1);
+                this.isFacingRight = false;
+            }
+        }     
 
-        if (rb.velocity != Vector2.zero && !ai.endMove)
+        if (rb.velocity.magnitude > 0.05f && !ai.endMove)
         {
-            animator.speed = 1;
+            animator.speed = Mathf.Clamp(rb.velocity.magnitude / ai.maxspeed, 0.1f, 1f);
             animator.SetBool("Walk", true);
         }
         else

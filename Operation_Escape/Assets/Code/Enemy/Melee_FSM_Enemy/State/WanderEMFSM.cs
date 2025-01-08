@@ -30,6 +30,7 @@ public class WanderEMFSM : BaseState
             distane = 7;
             center = ai.position;
         }
+        ai.randomDeviation = false;
     }
 
     public override void UpdateLogic()

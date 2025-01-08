@@ -46,49 +46,6 @@ public class NormalAttackEMFSM : BaseState
             Dash();
             await state.Attack("Attack", 0.3f);
             state.rb.velocity = Vector2.zero;
-            if (Distance())
-            {
-                state.animator.ChangeAnimationAttack("Normal");
-                await UniTask.WaitForSeconds(1f, cancellationToken: token);
-                ai.canMove = true;
-                state.animator.isFacing = true;
-                state.Walk();
-                ChangState(state.CheckDistance);
-                return;
-            }
-
-            ai.canMove = true;
-            state.animator.isFacing = true;
-            await UniTask.DelayFrame(1);
-
-            ai.canMove = false;
-            state.animator.isFacing = false;
-            await state.PreAttack("PreAttack", 0.8f);
-            Dash();
-            await state.Attack("Attack", 0.3f);
-            state.rb.velocity = Vector2.zero;
-            if (Distance())
-            {
-                state.animator.ChangeAnimationAttack("Normal");
-                await UniTask.WaitForSeconds(1f, cancellationToken: token);
-                ai.canMove = true;
-                state.animator.isFacing = true;
-                state.Walk();
-                ChangState(state.CheckDistance);
-                return;
-            }
-
-            ai.canMove = true;
-            state.animator.isFacing = true;
-            await UniTask.DelayFrame(1);
-
-            ai.canMove = false;
-            state.animator.isFacing = false;
-            await state.PreAttack("PreAttack", 1.5f);
-            Dash();
-            await state.Attack("Attack", 0.3f);
-            state.rb.velocity = Vector2.zero;
-
             state.animator.ChangeAnimationAttack("Tired");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.animator.ChangeAnimationAttack("Normal");
