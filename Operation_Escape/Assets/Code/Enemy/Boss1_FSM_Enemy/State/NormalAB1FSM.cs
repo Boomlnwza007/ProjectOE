@@ -91,7 +91,7 @@ public class NormalAB1FSM : BaseState
                     await UniTask.DelayFrame(1, cancellationToken: token);
 
                     ai.canMove = false; ///
-                    state.isFacing = false;
+                    //state.isFacing = false;
                     ani.ChangeAnimationAttack("PreAtk2");
                     await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                     //await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
@@ -110,7 +110,7 @@ public class NormalAB1FSM : BaseState
 
 
                     ai.canMove = false;///
-                    state.isFacing = false;
+                    //state.isFacing = false;
                     ani.ChangeAnimationAttack("PreAtk3");
                     await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                     //await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
@@ -129,7 +129,7 @@ public class NormalAB1FSM : BaseState
                     if (!overdrive)
                     {
                         ai.canMove = false;///
-                        state.isFacing = false;
+                        //state.isFacing = false;
                         ani.ChangeAnimationAttack("PreAtk4");
                         await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                         //await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
@@ -146,7 +146,7 @@ public class NormalAB1FSM : BaseState
                     else
                     {
                         ai.canMove = false;///
-                        state.isFacing = false;
+                        //state.isFacing = false;
                         ani.ChangeAnimationAttack("PreAtk4");
                         await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                         //await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
