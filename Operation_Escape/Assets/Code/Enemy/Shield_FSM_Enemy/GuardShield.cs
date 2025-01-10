@@ -36,7 +36,10 @@ public class GuardShield : MonoBehaviour
             if (canGuard)
             {
                 //gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
-                Guard(angle);
+                if (redy)
+                {
+                    Guard(angle);
+                }
             }
             else
             {
@@ -106,10 +109,10 @@ public class GuardShield : MonoBehaviour
     public void BreakShield()
     {
         canGuard = false;
-        redy = false;
         var state = gameObject.GetComponentInParent<FSMSEnemySM>();
         if (state)
         {
+            redy = false;
             state.stun = true;
             state.ai.monVelocity = Vector2.zero;
             state.animator.ChangeAnimationAttack("Stun");
