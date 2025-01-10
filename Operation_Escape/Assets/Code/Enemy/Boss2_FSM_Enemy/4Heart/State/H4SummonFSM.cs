@@ -25,9 +25,7 @@ public class H4SummonFSM : BaseState
         //var ani = state.animator;
 
         try
-        {
-            state.AttackZSpike();
-            await UniTask.WaitForSeconds(2.5f, cancellationToken: token);
+        {            
             for (int i = 0; i < 2; i++)
             {
                 state.SummonMinion(0,new Vector2Int(2,2));

@@ -28,7 +28,7 @@ public class H5SummonFSM : BaseState
         {
             for (int i = 0; i < 5; i++)
             {
-                state.SummonMinion(1,new Vector2Int(2,2));
+                state.SummonMinion(0,new Vector2Int(2,2));
             }
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             Cooldown().Forget();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FSMHeart3EnemySM : FSMBaseBoss2EnemySM , IDamageable
 {
     [Header("Cooldown")]
+    public float timePreSpike;
     public float timeCooldownSpike;
     public float timeCooldownMinion;
 

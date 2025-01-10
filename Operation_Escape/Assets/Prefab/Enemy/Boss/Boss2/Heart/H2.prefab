@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1ef38a24d9d59a34f8128ffc1aeb0732, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41800047761c1e54984480ac123fb8ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -265,7 +265,8 @@ MonoBehaviour:
   - {fileID: 3073503027850581209}
   - {fileID: 1153355626336742865}
   Shield: {fileID: 7359513997428217204}
-  timeCooldownSpike: 5
+  timePreSpike: 0.8
+  timeCooldownSpike: 0.5
   timeCooldownMinion: 2
   animator: {fileID: 0}
 --- !u!114 &-6068073495496497274
@@ -581,6 +582,8 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 128
+  playerTransform: {fileID: 0}
+  spawnRadius: 2
 --- !u!1 &8901641830565669523
 GameObject:
   m_ObjectHideFlags: 0

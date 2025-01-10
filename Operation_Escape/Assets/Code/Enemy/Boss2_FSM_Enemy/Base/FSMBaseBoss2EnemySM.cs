@@ -19,10 +19,25 @@ public class FSMBaseBoss2EnemySM : StateMachine
 
     public void AttackRSpike()
     {
-        for (int i = 0; i < 10; i++)
+        grid.SpawnAtPlayer(spikeR, 1);
+        for (int i = 0; i < 9; i++)
         {
             grid.SpawnSpike(spikeR);
         }
+    }
+
+    public void AttackRSpike(float time)
+    {
+        grid.SpawnAtPlayer(spikeR, 1);
+        for (int i = 0; i < 9; i++)
+        {
+            grid.SpawnSpike(spikeR,time);
+        }
+    }
+
+    public void AttackNSpike(float time)
+    {
+        grid.SpawnAtPlayer(spikeR,time);
     }
 
     public void AttackZSpike()
@@ -47,5 +62,11 @@ public class FSMBaseBoss2EnemySM : StateMachine
     public void ResetPositions()
     {
         availablePositions = new List<Transform>(spawnPoint);
+    }
+
+    public void ResetGrid()
+    {
+        grid.ResetGrid();
+        grid.CheckGridObstacles();
     }
 }

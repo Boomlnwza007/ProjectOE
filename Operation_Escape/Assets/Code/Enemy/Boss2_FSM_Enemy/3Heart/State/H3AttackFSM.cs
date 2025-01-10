@@ -14,6 +14,7 @@ public class H3AttackFSM : BaseState
 
     public override void Enter()
     {
+        countSpike++;
         Attack().Forget();
     }
 
@@ -26,20 +27,23 @@ public class H3AttackFSM : BaseState
         
         try
         {
-            countSpike++;
-            state.AttackZSpike();
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            if (countSpike > 2)
+            state.AttackNSpike(state.timePreSpike);
+            await UniTask.WaitForSeconds(state.timePreSpike + 0.5f, cancellationToken: token);
+            for (int i = 0; i < 3; i++)
             {
-                if (state.summon.cooldown)
-                {
-                    countSpike = 0;
-                    ChangState(state.summon);
-                    return;
-                }
+                state.AttackNSpike(0.5f);
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
             }
 
-            await UniTask.WaitForSeconds(state.timeCooldownSpike);
+            if (countSpike >= 4)
+            {
+                state.AttackRSpike();
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                state.ResetGrid();
+                ChangState(state.summon);
+                return;
+            }
+            await UniTask.WaitForSeconds(state.timeCooldownSpike, cancellationToken: token);
             ChangState(state.attack);
 
         }

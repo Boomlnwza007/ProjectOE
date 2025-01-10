@@ -14,6 +14,7 @@ public class H5AttackFSM : BaseState
 
     public override void Enter()
     {
+        countSpike++;
         Attack().Forget();
     }
 
@@ -26,24 +27,28 @@ public class H5AttackFSM : BaseState
         
         try
         {
-            countSpike++;
-            state.AttackZSpike();
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            for (int i = 0; i < 2; i++)
+            state.AttackNSpike(state.timePreSpike);
+            await UniTask.WaitForSeconds(state.timePreSpike + 0.5f, cancellationToken: token);
+            for (int i = 0; i < 3; i++)
             {
-                state.SummonMinion(0);
+                state.AttackNSpike(0.5f);
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
             }
-            state.ResetPositions();
-            if (countSpike > 1)
+
+            state.AttackRSpike(0.5f);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            state.AttackRSpike(0.5f);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+
+            if (countSpike >= 5)
             {
-                if (state.summon.cooldown)
-                {
-                    countSpike = 0;
-                    ChangState(state.summon);
-                    return;
-                }
+                state.AttackZSpike();
+                await UniTask.WaitForSeconds(2f, cancellationToken: token);
+                ChangState(state.summon);
+                return;
             }
-            await UniTask.WaitForSeconds(state.timeCooldownSpike);
+
+            await UniTask.WaitForSeconds(state.timeCooldownSpike, cancellationToken: token);
             ChangState(state.attack);
 
         }
