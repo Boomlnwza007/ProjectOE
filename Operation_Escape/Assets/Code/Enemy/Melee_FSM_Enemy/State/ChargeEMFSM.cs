@@ -18,7 +18,12 @@ public class ChargeEMFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         ai = ((FSMMEnemySM)stateMachine).ai;
         ((FSMMEnemySM)stateMachine).Walk();
+        var state = (FSMMEnemySM)stateMachine;
 
+        if (CalculateDestination(ai.position,ai.targetTransform.position,state.jumpLength,state.raycastMaskWay))
+        {
+            ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
+        }
 
         if (!((FSMMEnemySM)stateMachine).cooldown)
         {
@@ -29,6 +34,7 @@ public class ChargeEMFSM : BaseState
             ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }      
         
+
     }
 
     public async UniTaskVoid Attack(CancellationToken token) // Pass the CancellationToken
@@ -76,6 +82,24 @@ public class ChargeEMFSM : BaseState
         await state.Attack("DashAttack", 0.4f);
         state.animator.ChangeAnimationAttack("Normal");
         state.cooldown = true;
+    }
+    public bool CalculateDestination(Vector2 currentPosition, Vector2 targetPosition, float jumpLength, LayerMask mask)
+    {
+        Vector2 direction = (targetPosition - currentPosition).normalized;
+        RaycastHit2D[] raycast = Physics2D.RaycastAll(currentPosition, direction, jumpLength, mask);
+
+        if (Physics2D.Raycast(currentPosition, direction, jumpLength, mask))
+        {
+            return false;
+        }
+
+        foreach (var hit in raycast)
+        {
+            return false;
+        }
+
+        Debug.DrawLine(currentPosition, currentPosition + (direction * jumpLength), Color.green, 2f);
+        return true;
     }
 
     public override void Exit()
