@@ -15,6 +15,10 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     [SerializeField]
     public Transform bulletTranform;
 
+    [Header("Range")]
+    public float minShoot = 1;
+    public float maxShoot = 3;
+
     [HideInInspector]
     public M2AttackFSM attack;
     [HideInInspector]

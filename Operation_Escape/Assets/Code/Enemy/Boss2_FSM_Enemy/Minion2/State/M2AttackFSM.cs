@@ -13,7 +13,8 @@ public class M2AttackFSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        time = Random.Range(1, 4);
+        var state = ((FSMMinion2EnemySM)stateMachine);
+        time = Random.Range(state.minShoot, state.minShoot);
         timer = 0;
     }
 
@@ -22,9 +23,10 @@ public class M2AttackFSM : BaseState
         timer += Time.deltaTime;
         if (timer >= time)
         {
+            var state = ((FSMMinion2EnemySM)stateMachine);
             ((FSMMinion2EnemySM)stateMachine).Fire();
             timer = 0;
-            time = Random.Range(1, 4);
+            time = Random.Range(state.minShoot, state.minShoot);
             Debug.Log(time);
         }
     }
