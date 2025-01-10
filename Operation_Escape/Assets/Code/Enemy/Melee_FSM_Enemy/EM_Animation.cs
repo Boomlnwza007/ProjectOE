@@ -44,7 +44,7 @@ public class EM_Animation : BaseAnimEnemy
 
         if (rb.velocity.magnitude > 0.05f && !ai.endMove)
         {
-            animator.speed = Mathf.Clamp(rb.velocity.magnitude / ai.maxspeed, 0.1f, 1f);
+            animator.speed = 1;
             animator.SetBool("Walk", true);
         }
         else
