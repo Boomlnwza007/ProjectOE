@@ -35,13 +35,13 @@ public class ChargeEMFSM : BaseState
     {
         var state = (FSMMEnemySM)stateMachine;
         ai.randomDeviation = false;
-        state.Run(2);
+        state.Run(3.5f);
         time = 0f;
 
         try
         {
             ai.canMove = false;
-            await state.PreAttackN("PreDashAttack", 0.5f);
+            await state.PreAttackN("PreDashAttack", 1f);
             Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
             RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.jumpLength, state.raycastMaskWay);
             if (raycast.Length > 0)

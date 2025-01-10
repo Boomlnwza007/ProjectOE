@@ -726,7 +726,7 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 640
-  jumpLength: 20
+  jumpLength: 10
   forcePush: 100
   dash: 0
   dodgeMaxSpeed: 50
