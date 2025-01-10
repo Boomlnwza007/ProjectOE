@@ -40,6 +40,7 @@ public class ChargeAttack : BaseState
             //ani.isFacing = false;
             ani.animator.speed = 0;
             ani.ChangeAnimationAttack("PreDash");
+            ani.isFacing = false;
             await UniTask.WaitForSeconds(2f , cancellationToken: token);
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             await Charge();
@@ -55,6 +56,7 @@ public class ChargeAttack : BaseState
                 //ani.isFacing = false;
                 ani.animator.speed = 0;
                 ani.ChangeAnimationAttack("PreDash");
+                ani.isFacing = false;
                 await UniTask.WaitForSeconds(1f, cancellationToken: token);
                 ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
                 await Charge();
