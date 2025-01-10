@@ -43,7 +43,7 @@ public class ChargeEMFSM : BaseState
             ai.canMove = false;
             await state.PreAttackN("PreDashAttack", 0.5f);
             Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, dir.magnitude, state.raycastMaskWay);
+            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.jumpLength, state.raycastMaskWay);
             if (raycast.Length > 0)
             {
                 foreach (var hit in raycast)
@@ -56,15 +56,15 @@ public class ChargeEMFSM : BaseState
                     }
                     else
                     {
-                        ai.destination = (Vector2)ai.position + (dir.normalized * dir.magnitude);
-                        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * dir.magnitude), Color.red);  
+                        ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
+                        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);  
                         //Debug.Log("no hit");                       
                     }
                 }
             }
             else
             {
-                ai.destination = (Vector2)ai.position + (dir.normalized * dir.magnitude);
+                ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
                 //Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);
             }
 
