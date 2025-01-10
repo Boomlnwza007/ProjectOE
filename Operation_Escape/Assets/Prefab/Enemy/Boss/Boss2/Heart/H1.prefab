@@ -53,7 +53,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5996144668885280560
 Transform:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f35a86c4964eb4a843e7cddd6d4f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 4
   maxHealth: 300
   Health: 300
   dmg: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   - {fileID: 4149392097314644650}
   - {fileID: 524059695793529396}
   - {fileID: 5416475654488468091}
-  Shield: {fileID: 7499227324876162349}
+  shield: {fileID: 7499227324876162349}
   timePreSpike: 1
   timeCooldownSpike: 0.5
   animator: {fileID: 0}
@@ -204,7 +204,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!58 &7277349388640302341
 CircleCollider2D:
   m_ObjectHideFlags: 0

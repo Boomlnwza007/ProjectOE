@@ -35,6 +35,14 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
+        if (shield.conShield)
+        {
+            if (shield.canGuard)
+            {
+                return;
+            }
+        }
+
         Health -= damage;
         spriteFlash.Flash();
         switch (type)

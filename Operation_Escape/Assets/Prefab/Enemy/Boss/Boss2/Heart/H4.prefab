@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b58f6f61dc9344ca8034bc54aec812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 7
   maxHealth: 300
   Health: 300
   dmg: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   - {fileID: 8473395493588918172}
   - {fileID: 3092418138000325783}
   - {fileID: 5290339197808266630}
-  Shield: {fileID: 119795513167290100}
+  shield: {fileID: 119795513167290100}
   timePreSpike: 0.4
   timeCooldownSpike: 0.5
   timeCooldownMinion: 5

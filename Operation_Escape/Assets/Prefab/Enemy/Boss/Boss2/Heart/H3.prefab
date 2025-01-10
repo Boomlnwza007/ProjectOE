@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1854022443057259980
 Transform:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3654bc43beafc4cb8fe8180972d409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 6
   maxHealth: 300
   Health: 300
   dmg: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   - {fileID: 1686017727488634903}
   - {fileID: 6361345353589355251}
   - {fileID: 3054321665127161610}
-  Shield: {fileID: 6849585347823298003}
+  shield: {fileID: 6849585347823298003}
   timePreSpike: 0.6
   timeCooldownSpike: 0.5
   timeCooldownMinion: 5

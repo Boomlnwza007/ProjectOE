@@ -207,7 +207,7 @@ MonoBehaviour:
   dropChange: 0
   jumpCenter: {fileID: 1739218988822365822}
   size: {x: 2, y: 2}
-  bullet: {fileID: 0}
+  bullet: {fileID: 7636867113743857662, guid: 91855ec18d2170341bdb950eb55b3c4d, type: 3}
   bulletTranform: {fileID: 7332043667675507394}
 --- !u!114 &4934487722625905113
 MonoBehaviour:

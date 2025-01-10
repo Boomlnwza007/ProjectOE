@@ -31,7 +31,7 @@ public class H1IdleFSM : BaseState
     {
         var state = (FSMHeart1EnemySM)stateMachine;
         await UniTask.WaitForSeconds(1);
-        state.Shield.ShieldIsOn(true);
+        state.shield.ShieldIsOn(true);
         ChangState(state.attack);
     }
 }

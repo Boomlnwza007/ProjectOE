@@ -25,14 +25,24 @@ public class FSMHeart5EnemySM : FSMBaseBoss2EnemySM , IDamageable
         Idle = new H5IdleFSM(this);
         attack = new H5AttackFSM(this);
         summon = new H5SummonFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
+
     }
 
     protected override BaseState GetInitialState()
     {
         return Idle;
     }
+
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
+        if (shield.conShield)
+        {
+            if (shield.canGuard)
+            {
+                return;
+            }
+        }
         Health -= damage;
         spriteFlash.Flash();
         switch (type)

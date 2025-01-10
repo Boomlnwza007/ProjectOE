@@ -25,6 +25,8 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         Idle = new H4IdleFSM(this);
         attack = new H4AttackFSM(this);
         summon = new H4SummonFSM(this);
+        spriteFlash = GetComponent<SpriteFlash>();
+
     }
 
     protected override BaseState GetInitialState()
@@ -33,6 +35,13 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     }
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
+        if (shield.conShield)
+        {
+            if (shield.canGuard)
+            {
+                return;
+            }
+        }
         Health -= damage;
         spriteFlash.Flash();
         switch (type)

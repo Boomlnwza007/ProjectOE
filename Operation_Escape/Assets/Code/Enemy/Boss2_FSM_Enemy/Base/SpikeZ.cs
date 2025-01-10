@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpikeZ : MonoBehaviour
 {
     public float time;
+    public float speed = 5f;
     private float timer = 0;
     public Transform player;
 
@@ -18,7 +19,7 @@ public class SpikeZ : MonoBehaviour
         if (timer < time)
         {
             timer += Time.deltaTime;
-            transform.position = player.position;
+            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
     }
 
