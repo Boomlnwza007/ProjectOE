@@ -181,7 +181,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &4503304217181318163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   dmg: 30
   Speed: 0
   visRange: 30
-  attacking: 0
+  attacking: 1
   lootDrop: {fileID: 4934487722625905113}
   target: {fileID: 0}
   rb: {fileID: 5515718774292183391}

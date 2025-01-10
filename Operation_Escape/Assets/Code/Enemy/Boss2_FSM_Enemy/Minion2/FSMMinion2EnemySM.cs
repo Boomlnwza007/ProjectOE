@@ -36,7 +36,6 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     public void Fire()
     {
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
-        bulletG.GetComponent<BulletFollow>().target = ai.targetTransform;
     }
     public void Setup(GridBoss2 grid, Vector2Int gridPos)
     {
