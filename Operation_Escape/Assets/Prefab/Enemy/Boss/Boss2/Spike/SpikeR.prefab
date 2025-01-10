@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1026904506470668315}
   - component: {fileID: 5080217231298091345}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpikeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8943367788751424349}
   - component: {fileID: 5675185944669354996}
   - component: {fileID: 5695480036875566005}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpikeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5882020234622887049}
   - component: {fileID: 3683230633300164481}
   - component: {fileID: 5429378525151583694}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Hitzone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

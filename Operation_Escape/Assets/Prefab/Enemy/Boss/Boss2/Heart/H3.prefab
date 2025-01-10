@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1854022443057259980
 Transform:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   jumpCenter: {fileID: 0}
   grid: {fileID: 2955436653629226378}
   spikeR: {fileID: 5695480036875566005, guid: 3c3714576a0d8d54b8f874f46f9e811d, type: 3}
-  spikeZ: {fileID: 3212797410905886312, guid: fde3b6a6a15a88d49bfed946a6f5a777, type: 3}
+  spikeZ: {fileID: 7281230762825036943, guid: fde3b6a6a15a88d49bfed946a6f5a777, type: 3}
   minion:
   - {fileID: 1058521006033274985, guid: d6b82472b2559e1428da111fd4b3f5bf, type: 3}
   spawnPoint:

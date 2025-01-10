@@ -443,7 +443,7 @@ MonoBehaviour:
   jumpCenter: {fileID: 2638416177024746114}
   grid: {fileID: 5498119468378626252}
   spikeR: {fileID: 5695480036875566005, guid: 3c3714576a0d8d54b8f874f46f9e811d, type: 3}
-  spikeZ: {fileID: 3212797410905886312, guid: fde3b6a6a15a88d49bfed946a6f5a777, type: 3}
+  spikeZ: {fileID: 7281230762825036943, guid: fde3b6a6a15a88d49bfed946a6f5a777, type: 3}
   minion:
   - {fileID: 5669909769043285304, guid: 3c658297f90f1c942a365f8c1d5393b6, type: 3}
   spawnPoint:
@@ -452,8 +452,9 @@ MonoBehaviour:
   - {fileID: 3092418138000325783}
   - {fileID: 5290339197808266630}
   Shield: {fileID: 119795513167290100}
-  timeCooldownSpike: 0.4
-  timeCooldownMinion: 0.5
+  timePreSpike: 0.4
+  timeCooldownSpike: 0.5
+  timeCooldownMinion: 5
   animator: {fileID: 0}
 --- !u!1 &6390348655801494761
 GameObject:

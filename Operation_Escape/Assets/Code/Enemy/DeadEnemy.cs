@@ -14,8 +14,8 @@ public class DeadEnemy : MonoBehaviour, IBulletInteract
         switch (type)
         {           
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(1);
-                spriteFlash.Flash();
+                lootDrop?.InstantiateLoot(1);
+                spriteFlash?.Flash();
                 Hp--;
                 if (Hp <= 0)
                 {

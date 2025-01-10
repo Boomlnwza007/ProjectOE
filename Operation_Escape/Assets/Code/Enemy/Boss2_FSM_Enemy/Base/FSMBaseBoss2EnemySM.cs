@@ -7,7 +7,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
     [Header("Spike")]
     [SerializeField] private GridBoss2 grid;
     public Spike spikeR;
-    public Spike spikeZ;
+    public GameObject spikeZ;
 
     [Header("Minion")]
     public GameObject[] minion;
@@ -42,7 +42,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
 
     public void AttackZSpike()
     {
-        grid.SpawnSpike(spikeZ);
+        Instantiate(spikeZ.gameObject, ai.targetTransform.position, Quaternion.identity);
     }
 
     public void SummonMinion(int type)
