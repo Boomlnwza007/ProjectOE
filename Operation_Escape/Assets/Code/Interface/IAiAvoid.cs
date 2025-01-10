@@ -12,6 +12,7 @@ public interface IAiAvoid
     public float maxspeed { get; set; }
     public float slowDownRadius { get; set; }
     public float stopRadius { get; set; }
+    public bool stopRadiusOn { get; set; }
     public bool canMove { get; set; }
     public bool endMove { get;}
     public bool slowMove { get; }

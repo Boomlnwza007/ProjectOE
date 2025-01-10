@@ -35,82 +35,26 @@ public class ChargeEMFSM : BaseState
     {
         var state = (FSMMEnemySM)stateMachine;
         ai.randomDeviation = false;
-        state.Run(2);
-        time = 0f;
 
         try
         {
             ai.canMove = false;
-            await state.PreAttackN("PreDashAttack", 0.5f);
-            Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.jumpLength, state.raycastMaskWay);
-            if (raycast.Length > 0)
-            {
-                foreach (var hit in raycast)
-                {
-                    if (hit.collider != null && hit.collider.gameObject != state.gameObject)
-                    {
-                        //Debug.Log(hit.collider.name + " hit");
-                        ai.destination = hit.point;
-                        break;
-                    }
-                    else
-                    {
-                        ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
-                        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);  
-                        //Debug.Log("no hit");                       
-                    }
-                }
-            }
-            else
-            {
-                ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
-                //Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);
-            }
-
-
-            ai.canMove = true;
-            bool hasAttacked = false;
+            state.Run(3);
+            await state.PreAttackN("PreDashAttack", 1f);
             state.animator.isFacing = false;
-
-            while (time < 10 && !hasAttacked)//Edit Time Run 
-            {
-                time += Time.deltaTime;
-                if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
-                {
-                    //Debug.Log("ai.endMove");
-                    await Attack();
-                    hasAttacked = true;
-                    state.animator.isFacing = true;
-                    break;
-                }
-
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-                foreach (var hit in colliders)
-                {
-                    if (hit.gameObject != state.gameObject)
-                    {
-                        Debug.Log(hit.name + "hit 2 ");
-                        await Attack();
-                        hasAttacked = true;     
-                        state.animator.isFacing = true;
-                        break;
-                    }
-                }
-                token.ThrowIfCancellationRequested();
-                await UniTask.Yield();               
-            }
-
-            //state.animator.isFacing = true;
-            state.Walk();
-            ai.canMove = false;
-            Debug.Log("Stop");
-            state.animator.ChangeAnimationAttack("Tired");
-            await UniTask.WaitForSeconds(3f, cancellationToken: token);//Edit time Stop
-            state.animator.ChangeAnimationAttack("Normal");
+            Vector3 target = ai.targetTransform.position;
+            var col = state.gameObject.GetComponent<Collider2D>();
+            col.enabled = false;
+            ai.destination = target;
+            //ai.stopRadiusOn = false;
             ai.canMove = true;
+            await UniTask.WaitUntil(() => ai.endMove, cancellationToken: token);
+            await Attack();
+            state.animator.ChangeAnimationAttack("Tired");
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            state.animator.ChangeAnimationAttack("Normal");
             state.animator.isFacing = true;
-            Debug.Log("End");
+            ai.canMove = true;
             ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
         catch (OperationCanceledException)
@@ -129,7 +73,6 @@ public class ChargeEMFSM : BaseState
         await state.Attack("DashAttack", 0.4f);
         state.animator.ChangeAnimationAttack("Normal");
         state.cooldown = true;
-        Debug.Log("A12");
     }
 
     public override void Exit()

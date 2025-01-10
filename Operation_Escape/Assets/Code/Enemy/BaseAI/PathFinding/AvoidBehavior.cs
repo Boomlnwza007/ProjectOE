@@ -23,7 +23,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
     public Vector2 monVelocity { get { return rb.velocity; } set { rb.velocity = value; } }
     float IAiAvoid.slowDownRadius { get { return slowDownRadius; } set { slowDownRadius = value; } }
     float IAiAvoid.stopRadius { get { return stopRadius; } set { stopRadius = value; } }
-
+    bool IAiAvoid.stopRadiusOn { get { return stopRadiusOn; } set { stopRadiusOn = value; } }
     private Vector3 curDestination;
 
     public bool stopRadiusOn;
@@ -85,7 +85,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
         {
             hasStopped = false;
         }
-
+        bool move;
         Vector2 avoidForce = Vector2.zero;
 
         Collider2D[] obstacles = Physics2D.OverlapCircleAll(transform.position, avoidRadius, obstacleLayer);
@@ -112,13 +112,13 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
 
         curSpeed = speed;
 
-        endMove = false;
+        move = false;
         slowMove = false;
 
         if (distanceToTarget < stopRadius)
         {
             curSpeed = 0f;
-            endMove = true;
+            move = true;
         }
         else if (distanceToTarget < slowDownRadius && stopRadiusOn)
         {
@@ -166,6 +166,8 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             Vector2 newDirection = (hitLeft.collider != null) ? Quaternion.Euler(0, 0, -45) * rb.velocity.normalized : Quaternion.Euler(0, 0, 45) * rb.velocity.normalized;
             rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
         }
+
+        endMove = move;
     }
 
     void OnDrawGizmos()
