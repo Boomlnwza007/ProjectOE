@@ -47,17 +47,26 @@ public class ChargeEMFSM : BaseState
             ai.canMove = false;
             state.Run(3);
             await state.PreAttackN("PreDashAttack", 1f);
-            state.animator.isFacing = false;
-            Vector3 target = ai.targetTransform.position;
-            var col = state.gameObject.GetComponent<Collider2D>();
-            col.enabled = false;
-            ai.destination = target;
-            ai.randomDeviation = false;
-            //ai.stopRadiusOn = false;
-            ai.canMove = true;
-            await UniTask.WaitUntil(() => ai.endMove, cancellationToken: token);
-            await Attack();
-            col.enabled = true;
+            if (CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay))
+            {
+                await Attack();
+                ai.canMove = true;
+
+            }
+            else
+            {
+                state.animator.isFacing = false;
+                Vector3 target = ai.targetTransform.position;
+                var col = state.gameObject.GetComponent<Collider2D>();
+                col.enabled = false;
+                ai.destination = target;
+                ai.randomDeviation = false;
+                //ai.stopRadiusOn = false;
+                ai.canMove = true;
+                await UniTask.WaitUntil(() => ai.endMove, cancellationToken: token);
+                await Attack();
+                col.enabled = true;            }
+            
             state.animator.ChangeAnimationAttack("Tired");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.animator.ChangeAnimationAttack("Normal");
