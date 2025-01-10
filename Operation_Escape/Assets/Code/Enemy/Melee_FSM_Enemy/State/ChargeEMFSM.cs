@@ -46,6 +46,7 @@ public class ChargeEMFSM : BaseState
             var col = state.gameObject.GetComponent<Collider2D>();
             col.enabled = false;
             ai.destination = target;
+            ai.randomDeviation = false;
             //ai.stopRadiusOn = false;
             ai.canMove = true;
             await UniTask.WaitUntil(() => ai.endMove, cancellationToken: token);
@@ -55,6 +56,7 @@ public class ChargeEMFSM : BaseState
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.animator.ChangeAnimationAttack("Normal");
             state.animator.isFacing = true;
+            ai.randomDeviation = true;
             ai.canMove = true;
             ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
