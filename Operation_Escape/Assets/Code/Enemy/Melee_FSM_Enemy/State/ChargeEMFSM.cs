@@ -50,6 +50,7 @@ public class ChargeEMFSM : BaseState
             ai.canMove = true;
             await UniTask.WaitUntil(() => ai.endMove, cancellationToken: token);
             await Attack();
+            col.enabled = true;
             state.animator.ChangeAnimationAttack("Tired");
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
             state.animator.ChangeAnimationAttack("Normal");
