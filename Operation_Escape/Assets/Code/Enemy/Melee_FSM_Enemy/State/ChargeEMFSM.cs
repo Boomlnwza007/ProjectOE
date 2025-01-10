@@ -18,12 +18,7 @@ public class ChargeEMFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         ai = ((FSMMEnemySM)stateMachine).ai;
         ((FSMMEnemySM)stateMachine).Walk();
-        var state = (FSMMEnemySM)stateMachine;
 
-        if (CalculateDestination(ai.position,ai.targetTransform.position,state.jumpLength,state.raycastMaskWay))
-        {
-            ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
-        }
 
         if (!((FSMMEnemySM)stateMachine).cooldown)
         {
@@ -34,45 +29,88 @@ public class ChargeEMFSM : BaseState
             ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }      
         
-
     }
 
     public async UniTaskVoid Attack(CancellationToken token) // Pass the CancellationToken
     {
         var state = (FSMMEnemySM)stateMachine;
         ai.randomDeviation = false;
+        state.Run(2);
+        time = 0f;
 
         try
         {
             ai.canMove = false;
-            state.Run(3);
-            await state.PreAttackN("PreDashAttack", 1f);
-            if (CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay))
+            await state.PreAttackN("PreDashAttack", 0.5f);
+            Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
+            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, dir.magnitude, state.raycastMaskWay);
+            if (raycast.Length > 0)
             {
-                await Attack();
-                ai.canMove = true;
-
+                foreach (var hit in raycast)
+                {
+                    if (hit.collider != null && hit.collider.gameObject != state.gameObject)
+                    {
+                        //Debug.Log(hit.collider.name + " hit");
+                        ai.destination = hit.point;
+                        break;
+                    }
+                    else
+                    {
+                        ai.destination = (Vector2)ai.position + (dir.normalized * dir.magnitude);
+                        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * dir.magnitude), Color.red);  
+                        //Debug.Log("no hit");                       
+                    }
+                }
             }
             else
             {
-                state.animator.isFacing = false;
-                Vector3 target = ai.targetTransform.position;
-                var col = state.gameObject.GetComponent<Collider2D>();
-                col.enabled = false;
-                ai.destination = target;
-                ai.randomDeviation = false;
-                //ai.stopRadiusOn = false;
-                ai.canMove = true;
-                await UniTask.WaitUntil(() => ai.endMove, cancellationToken: token);
-                await Attack();
-                col.enabled = true;            }
-            
-            state.animator.ChangeAnimationAttack("Tired");
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
-            state.animator.ChangeAnimationAttack("Normal");
-            state.animator.isFacing = true;
-            ai.randomDeviation = true;
+                ai.destination = (Vector2)ai.position + (dir.normalized * dir.magnitude);
+                //Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);
+            }
+
+
             ai.canMove = true;
+            bool hasAttacked = false;
+            state.animator.isFacing = false;
+
+            while (time < 10 && !hasAttacked)//Edit Time Run 
+            {
+                time += Time.deltaTime;
+                if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
+                {
+                    //Debug.Log("ai.endMove");
+                    await Attack();
+                    hasAttacked = true;
+                    state.animator.isFacing = true;
+                    break;
+                }
+
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
+                foreach (var hit in colliders)
+                {
+                    if (hit.gameObject != state.gameObject)
+                    {
+                        Debug.Log(hit.name + "hit 2 ");
+                        await Attack();
+                        hasAttacked = true;     
+                        state.animator.isFacing = true;
+                        break;
+                    }
+                }
+                token.ThrowIfCancellationRequested();
+                await UniTask.Yield();               
+            }
+
+            //state.animator.isFacing = true;
+            state.Walk();
+            ai.canMove = false;
+            Debug.Log("Stop");
+            state.animator.ChangeAnimationAttack("Tired");
+            await UniTask.WaitForSeconds(3f, cancellationToken: token);//Edit time Stop
+            state.animator.ChangeAnimationAttack("Normal");
+            ai.canMove = true;
+            state.animator.isFacing = true;
+            Debug.Log("End");
             ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
         }
         catch (OperationCanceledException)
@@ -91,24 +129,7 @@ public class ChargeEMFSM : BaseState
         await state.Attack("DashAttack", 0.4f);
         state.animator.ChangeAnimationAttack("Normal");
         state.cooldown = true;
-    }
-    public bool CalculateDestination(Vector2 currentPosition, Vector2 targetPosition, float jumpLength, LayerMask mask)
-    {
-        Vector2 direction = (targetPosition - currentPosition).normalized;
-        RaycastHit2D[] raycast = Physics2D.RaycastAll(currentPosition, direction, jumpLength, mask);
-
-        if (Physics2D.Raycast(currentPosition, direction, jumpLength, mask))
-        {
-            return false;
-        }
-
-        foreach (var hit in raycast)
-        {
-            return false;
-        }
-
-        Debug.DrawLine(currentPosition, currentPosition + (direction * jumpLength), Color.green, 2f);
-        return true;
+        Debug.Log("A12");
     }
 
     public override void Exit()
