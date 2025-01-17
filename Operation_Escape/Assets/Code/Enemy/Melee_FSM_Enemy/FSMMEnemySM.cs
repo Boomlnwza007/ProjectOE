@@ -41,7 +41,6 @@ public class FSMMEnemySM : StateMachine, IDamageable
         N1Attack = new NormalAttackEMFSM(this);
         CheckDistance = new CheckDistanceEMFSM(this);
         Charge = new ChargeEMFSM(this);
-        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     private void Update()

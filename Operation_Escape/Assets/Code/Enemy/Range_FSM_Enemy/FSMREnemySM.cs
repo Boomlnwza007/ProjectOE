@@ -54,7 +54,6 @@ public class FSMREnemySM : StateMachine, IDamageable
         checkDistanceState = new CheckDistanceRFSM(this);
         closeAttackState = new CloseAttackRFSM(this);
         normalAttackState = new NormalAttackRFSM(this);
-        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()

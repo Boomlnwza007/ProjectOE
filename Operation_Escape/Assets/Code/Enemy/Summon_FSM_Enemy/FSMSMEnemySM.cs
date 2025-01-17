@@ -35,7 +35,6 @@ public class FSMSMEnemySM : StateMachine ,IDamageable
         wander = new WanderSMFSM(this);
         distance = new DistanceSMFSM(this);
         summon = new SummonSMFSM(this);
-        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()

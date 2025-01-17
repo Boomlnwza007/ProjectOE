@@ -74,7 +74,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         dashAState = new DashAB1FSM(this);
         rangeAState = new RangeAB1Fsm(this);
         overdriveChangState = new OverdriveChangFSM(this);
-        spriteFlash = GetComponentInChildren<SpriteFlash>();
         isFacing = true;
     }
 

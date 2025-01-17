@@ -29,6 +29,7 @@ public class StateMachine : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         ai.targetTransform = target;
         ai.maxspeed = Speed;
+        spriteFlash = GetComponentInChildren<SpriteFlash>();
 
         curState = GetInitialState();
         if (curState != null)

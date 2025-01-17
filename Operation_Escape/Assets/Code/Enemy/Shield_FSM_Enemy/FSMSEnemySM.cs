@@ -54,7 +54,6 @@ public class FSMSEnemySM : StateMachine, IDamageable
         checkDistanceState = new CheckDistanceSFSM(this);
         chargeAttState = new ChargeAttack(this);
         wanderState = new WanderSFSM(this);
-        spriteFlash = GetComponent<SpriteFlash>();
     }
 
     protected override BaseState GetInitialState()

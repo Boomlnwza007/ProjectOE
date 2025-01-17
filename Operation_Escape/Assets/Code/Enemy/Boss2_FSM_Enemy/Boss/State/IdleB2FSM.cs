@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class IdleB2FSM : BaseState
 {
-    public IdleB2FSM(FSMBoss2EnemySM stateMachine) : base("Burrow", stateMachine) { }
+    public IdleB2FSM(FSMBoss2EnemySM stateMachine) : base("Idle", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
 

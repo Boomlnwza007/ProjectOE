@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class StrikeB2FSM : BaseState
 {
-    public StrikeB2FSM(FSMBoss2EnemySM stateMachine) : base("Burrow", stateMachine) { }
+    public StrikeB2FSM(FSMBoss2EnemySM stateMachine) : base("Strike", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
 

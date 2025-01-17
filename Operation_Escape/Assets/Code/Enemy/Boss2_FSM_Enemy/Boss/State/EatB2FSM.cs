@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EatB2FSM : BaseState
 {
-    public EatB2FSM(FSMBoss2EnemySM stateMachine) : base("Burrow", stateMachine) { }
+    public EatB2FSM(FSMBoss2EnemySM stateMachine) : base("Eat", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
 

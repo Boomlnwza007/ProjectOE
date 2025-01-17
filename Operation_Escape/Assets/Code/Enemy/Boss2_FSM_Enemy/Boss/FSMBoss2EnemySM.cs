@@ -6,12 +6,28 @@ public class FSMBoss2EnemySM : StateMachine, IDamageable
 {
     [Header("status")]
     public AreaEnermy areaEnermy;
+    public Boss2Mark areaMark;
 
-    public bool imortal { get; set; }
+    [HideInInspector] 
+    public IdleB2FSM idle;
+    [HideInInspector]
+    public StrikeB2FSM strike;
+    [HideInInspector]
+    public BurrowB2FSM burrow;
+    [HideInInspector]
+    public SwarmB2FSM swarm;
+    [HideInInspector]
+    public EatB2FSM eat;
+
+     public bool imortal { get; set; }
 
     private void Awake()
     {
-        
+        idle = new IdleB2FSM(this);
+        strike = new StrikeB2FSM(this);
+        burrow = new BurrowB2FSM(this);
+        swarm = new SwarmB2FSM(this);
+        eat = new EatB2FSM(this);
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)

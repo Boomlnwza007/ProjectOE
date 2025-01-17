@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SwarmB2FSM : BaseState
 {
-    public SwarmB2FSM(FSMBoss2EnemySM stateMachine) : base("Burrow", stateMachine) { }
+    public SwarmB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
 
