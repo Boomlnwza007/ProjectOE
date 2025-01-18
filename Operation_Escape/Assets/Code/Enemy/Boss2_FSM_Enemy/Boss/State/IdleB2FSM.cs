@@ -8,38 +8,33 @@ public class IdleB2FSM : BaseState
 {
     public IdleB2FSM(FSMBoss2EnemySM stateMachine) : base("Idle", stateMachine) { }
     public IAiAvoid ai;
+    private bool ready;
     private CancellationTokenSource cancellationToken;
 
     // Start is called before the first frame update
     public override void Enter()
     {
-        ai = ((FSMMinion1EnemySM)stateMachine).ai;
-        Attack().Forget();
+        ai = ((FSMBoss2EnemySM)stateMachine).ai;
+        ai.destination = ai.position;
+        ai.canMove = false;
+        ready = false;
     }
-
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public override void UpdateLogic()
     {
-        cancellationToken = new CancellationTokenSource();
-        var token = cancellationToken.Token;
-        var state = (FSMMinion1EnemySM)stateMachine;
-        //var ani = state.animator;
-        //await UniTask.WaitForSeconds(1f, cancellationToken: token);
-
-        try
+        if (((FSMBoss2EnemySM)stateMachine).attacking && !ready)
         {
-
-
-        }
-        catch (System.OperationCanceledException)
-        {
-            Debug.Log("Attack was cancelled.");
-            return;
+            ready = true;
+            Reay().Forget();
         }
     }
 
-    public override void Exit()
+    public async UniTask Reay()
     {
-        // Cancel the attack when exiting the state
-        cancellationToken?.Cancel();
+        //var ani = ((FSMBoss2EnemySM)stateMachine).boss1AniControl;
+        //ani.ChangeAnimationAttack("ChangeState");
+        //await UniTask.WaitUntil(() => ani.endAnim);
+        //ani.ChangeAnimationAttack("Wait");
+        ai.canMove = true;
+        stateMachine.ChangState(((FSMBoss2EnemySM)stateMachine).strike);
     }
 }

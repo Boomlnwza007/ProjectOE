@@ -13,7 +13,7 @@ public class EatB2FSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        ai = ((FSMMinion1EnemySM)stateMachine).ai;
+        ai = ((FSMBoss2EnemySM)stateMachine).ai;
         Attack().Forget();
     }
 

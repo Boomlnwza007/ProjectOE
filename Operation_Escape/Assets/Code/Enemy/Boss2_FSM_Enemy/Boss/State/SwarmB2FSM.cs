@@ -13,7 +13,7 @@ public class SwarmB2FSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        ai = ((FSMMinion1EnemySM)stateMachine).ai;
+        ai = ((FSMBoss2EnemySM)stateMachine).ai;
         Attack().Forget();
     }
 
@@ -21,7 +21,7 @@ public class SwarmB2FSM : BaseState
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
-        var state = (FSMMinion1EnemySM)stateMachine;
+        var state = (FSMBoss2EnemySM)stateMachine;
         //var ani = state.animator;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 

@@ -12,4 +12,6 @@ public class Boss2Mark : MonoBehaviour
 
     [Header("Minion")]
     public Transform[] monSpawn;
+
+    [HideInInspector] public FSMBoss2EnemySM state;
 }

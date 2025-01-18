@@ -7,6 +7,10 @@ public class FSMBoss2EnemySM : StateMachine, IDamageable
     [Header("status")]
     public AreaEnermy areaEnermy;
     public Boss2Mark areaMark;
+    public Collider2D colliderBoss;
+
+    [Header("status")]
+    public bool inRoom;
 
     [HideInInspector] 
     public IdleB2FSM idle;
@@ -28,6 +32,7 @@ public class FSMBoss2EnemySM : StateMachine, IDamageable
         burrow = new BurrowB2FSM(this);
         swarm = new SwarmB2FSM(this);
         eat = new EatB2FSM(this);
+        areaMark.state = this;
     }
 
     public void Takedamage(int damage, DamageType type, float knockBack)
