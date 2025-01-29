@@ -45,6 +45,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
         {
             energy -= healUseEnergy;
             health = maxHealth;
+            AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.reload);
             canHealth = false;
             StartCoroutine(ColDownHealth(collDownHealth));
         }

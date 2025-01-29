@@ -29,7 +29,6 @@ public class PlayerCombat : MonoBehaviour
     public float knockBack = 1;
     private IEnergy energy;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -217,6 +216,7 @@ public class PlayerCombat : MonoBehaviour
         canReload = true;
         canFire = true;
         gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
+        AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.reload);
     }
 
     private IEnumerator ComboDelay(float wait)
