@@ -53,6 +53,7 @@ public class EnergyDrop : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.eCollect);
             collision.gameObject.GetComponent<IEnergy>().GetEnergy(1);
             Destroy(gameObject);
         }
@@ -64,8 +65,8 @@ public class EnergyDrop : MonoBehaviour
         {
             if (collision.TryGetComponent(out IEnergy energy))
             {
+                AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.eCollect);
                 energy.GetEnergy(1);
-                AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.reload);
                 Destroy(gameObject);
             }
         }

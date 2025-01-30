@@ -205,6 +205,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("Reload");
             canReload = false;
             canFire = false;
+            AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.reload);
             reloadCoroutine = StartCoroutine(ReloadWait(gunList[currentGun].timeReload));
         }
     }
@@ -216,7 +217,7 @@ public class PlayerCombat : MonoBehaviour
         canReload = true;
         canFire = true;
         gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
-        AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.reload);
+        
     }
 
     private IEnumerator ComboDelay(float wait)

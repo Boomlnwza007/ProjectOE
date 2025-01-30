@@ -33,7 +33,6 @@ public abstract class BaseGun : MonoBehaviour
     public void SetUpbulletTranform()
     {
         aimDistance = Vector2.Distance(gameObject.transform.position, aimTranform.position);
-        Debug.Log(aimDistance);
     }
 
     public void PlaySound(AudioClip clip)

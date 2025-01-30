@@ -39,6 +39,8 @@ public class ChargeGun : BaseGun
                     bullet.follow = bulletTranform;
                     ChangeEff = Instantiate(ChangeEffPrefab, bulletTranform.position, bulletTranform.rotation, bulletTranform);
                 }
+
+                PlayLoop().Forget();
             }
         }
     }
@@ -53,14 +55,7 @@ public class ChargeGun : BaseGun
                 PlayerControl.control.Slow(80);
                 if (Input.GetButtonUp("Fire1"))
                 {
-                    var playerCombat = PlayerControl.control.playerCombat;
-                    ammo--;
-                    firing = false;
-                    charge = false;
-                    canUltimate = false;
-                    RemoveUltimate();
-                    playerCombat.ReUltimate();
-
+                    ShootUlt();
                     //bullet.charging = false;
                     //PlayerControl.control.Slow(0);
                 }
@@ -71,17 +66,44 @@ public class ChargeGun : BaseGun
                 PlayerControl.control.Slow(50);
                 if (Input.GetButtonUp("Fire1"))
                 {
-                    ammo--;
-                    bullet.ready = true;
-                    firing = false;
-                    charge = false;
-                    bullet.charging = false;
-                    bullet.rb.velocity = bullet.transform.right * bullet.speed;
-                    PlayerControl.control.Slow(0);
-                    Destroy(ChangeEff);
+                    Shoot();
                 }
             }
         }        
+    }
+
+    public void Shoot()
+    {
+        ammo--;
+        bullet.ready = true;
+        firing = false;
+        charge = false;
+        bullet.charging = false;
+        bullet.rb.velocity = bullet.transform.right * bullet.speed;
+        PlayerControl.control.Slow(0);
+        PlaySound(sound.shoot);
+        Destroy(ChangeEff);
+    }
+
+    public void ShootUlt()
+    {
+        var playerCombat = PlayerControl.control.playerCombat;
+        ammo--;
+        firing = false;
+        charge = false;
+        canUltimate = false;
+        RemoveUltimate();
+        playerCombat.ReUltimate();
+        PlaySound(sound.shootUltimate);
+    }
+
+    private async UniTask PlayLoop()
+    {
+        while (charge)
+        {
+            PlaySound(sound.special[0]);
+            await UniTask.Delay((int)(sound.special[0].length * 1000));
+        }
     }
 
     public override void Ultimate()
@@ -104,11 +126,7 @@ public class ChargeGun : BaseGun
     {
         if (bullet != null)
         {
-            firing = false;
-            charge = false;
-            bullet.charging = false;
-            bullet.rb.velocity = bullet.transform.right * bullet.speed;
-            bullet.ready = true;
+            Shoot();
             PlayerControl.control.Slow(0);
             Destroy(ChangeEff);
         }        
