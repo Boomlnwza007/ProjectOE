@@ -28,6 +28,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Status")]
     public float knockBack = 1;
     private IEnergy energy;
+    private bool fireReload = true;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +85,11 @@ public class PlayerCombat : MonoBehaviour
             HandleFire();
         }
 
+        if (Input.GetButtonUp("Fire1") && canFire && gunList[currentGun].firing)
+        {
+            fireReload = true;
+        }
+
         if (Input.GetButtonDown("Reload") && canReload && !gunList[currentGun].canUltimate)
         {
             Reload();
@@ -107,7 +113,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            if (canReload)
+            if (canReload & fireReload)
             {
                 Reload();
             }
@@ -207,6 +213,11 @@ public class PlayerCombat : MonoBehaviour
             canFire = false;
             AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.reload);
             reloadCoroutine = StartCoroutine(ReloadWait(gunList[currentGun].timeReload));
+        }
+        else
+        {
+            fireReload = false;
+            AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.gunFail);
         }
     }
 
@@ -359,6 +370,7 @@ public class PlayerCombat : MonoBehaviour
         PlayerControl.control.guntSprite = currentEquipGun.GetComponentInChildren<SpriteRenderer>();
         gunList[index].Enter();
         PlayerControl.control.ammoBar.value = gunList[index].energyUse;
+        AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.ChangGun);
     }
 
     private void OnDrawGizmos()
