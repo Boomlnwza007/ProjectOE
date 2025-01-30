@@ -2025,7 +2025,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 44878
+  m_InstanceId: 44734
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8931,8 +8931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ddc63746e5793409b0cd37b2406775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangGun: {fileID: 0}
-  gunFail: {fileID: 0}
+  ChangGun: {fileID: 8300000, guid: d934dc8d8924db046af554f4925a3061, type: 3}
+  gunFail: {fileID: 8300000, guid: e910f18c10aa4094688f8f3b73fc966a, type: 3}
   reload: {fileID: 8300000, guid: 37ea6888753cd9543a3e698e57258805, type: 3}
   melee: {fileID: 8300000, guid: 1284e40d5098c1e449fcd762d8383a76, type: 3}
   dash:
