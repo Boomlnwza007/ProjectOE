@@ -246,6 +246,7 @@ public class PlayerCombat : MonoBehaviour
         gunList[currentGun].Setup();
         aimPoint.localPosition = new Vector3(gunList[currentGun].aimDistance, 0, 0);
         gunList[currentGun].bulletTranform = aimPoint;
+        PlayerControl.control.ammoBar.gameObject.SetActive(true);
         EquipGun(currentGun);
     }
 
@@ -291,6 +292,7 @@ public class PlayerCombat : MonoBehaviour
         if (gunList.Count < 1)
         {
             Destroy(currentEquipGun);
+            PlayerControl.control.ammoBar.gameObject.SetActive(false);
         }
     }
 
@@ -355,6 +357,7 @@ public class PlayerCombat : MonoBehaviour
         currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
         PlayerControl.control.guntSprite = currentEquipGun.GetComponentInChildren<SpriteRenderer>();
         gunList[index].Enter();
+        PlayerControl.control.ammoBar.value = gunList[index].energyUse;
     }
 
     private void OnDrawGizmos()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private SliderBar reloadBar;
     [SerializeField] private OBJBar bulletBar;
     [SerializeField] private PauseScene menu;
+    [SerializeField] public Slider ammoBar;
+    [SerializeField] public GameObject healUseBar;
 
 
     [Header("Gun")]
@@ -251,5 +254,4 @@ public class PlayerControl : MonoBehaviour
            playerCombat.currentEquipGun.SetActive(on);
         }
     }
-
 }

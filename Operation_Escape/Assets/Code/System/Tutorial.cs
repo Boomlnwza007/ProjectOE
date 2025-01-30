@@ -51,6 +51,7 @@ public class Tutorial : MonoBehaviour
                 break;
             case 4:
                 key = "Heal";
+                PlayerControl.control.healUseBar.SetActive(true);
                 break;
             case 5:
                 key = "Reload";
