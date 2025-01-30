@@ -117,7 +117,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 195138
+  m_InstanceId: 170316
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -441,9 +441,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 4323551829530719477}
-  walk: {fileID: 0}
-  attack: []
-  dodge: {fileID: 0}
+  walk:
+  - {fileID: 8300000, guid: ee13691df0aa57546bea3a485ab84fde, type: 3}
+  - {fileID: 8300000, guid: 2801b11f5ad6a7c43a5ae55d7db5731a, type: 3}
+  attack:
+  - {fileID: 8300000, guid: 46ba206bbb0388d4189fec3d3b833251, type: 3}
+  dodge: {fileID: 8300000, guid: f5500e57035d21143824f09d1c35f530, type: 3}
 --- !u!82 &4323551829530719477
 AudioSource:
   m_ObjectHideFlags: 0
