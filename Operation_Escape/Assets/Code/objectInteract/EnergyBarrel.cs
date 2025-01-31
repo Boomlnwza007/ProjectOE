@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
 {
@@ -29,26 +30,35 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
                 else
                 {
                     StopCoroutine("FadeBomb");
-                    BombBlast(bomb.GetComponent<SpriteRenderer>());
+                    BombBlast(bomb.GetComponent<SpriteRenderer>()).Forget();
                 }
                 break;
             case DamageType.Melee:
                 if (!blast)
                 {
-                    lootDrop.InstantiateLoot(0);
-                    gameObject.SetActive(false);
-                    sfxSource.PlayOneShot(meleeHit);
+                    MeleeBomb().Forget();
                 }
                 else
                 {
                     StopCoroutine("FadeBomb");
-                    BombBlast(bomb.GetComponent<SpriteRenderer>());
+                    BombBlast(bomb.GetComponent<SpriteRenderer>()).Forget();
                 }                
                 break;
             default:
                 break;
         }
         
+    }
+
+    private async UniTask MeleeBomb()
+    {
+        lootDrop.InstantiateLoot(0);
+        var sprite = gameObject.GetComponent<SpriteRenderer>();
+        sprite.enabled = false;
+        sfxSource.PlayOneShot(meleeHit);
+        await UniTask.WaitForSeconds(meleeHit.length);
+        sprite.enabled = true;
+        gameObject.SetActive(false);
     }
 
     public void SetBomb()
@@ -90,18 +100,22 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
         color = Color.white;
         color.a = 1f;
         spriteRenderer.color = color;
-        BombBlast(spriteRenderer);
+        BombBlast(spriteRenderer).Forget();
     }
 
-    public void BombBlast(SpriteRenderer spriteRenderer)
+    public async UniTask BombBlast(SpriteRenderer spriteRenderer)
     {
         Color color = Color.white;
         color.a = 1f;
         spriteRenderer.color = color;
+        var sprite = gameObject.GetComponent<SpriteRenderer>();
+        sprite.enabled = false;
         MakeDamage();
-        gameObject.SetActive(false);
-        Destroy(bomb.gameObject);
         sfxSource.PlayOneShot(explode);
+        Destroy(bomb.gameObject);
+        await UniTask.WaitForSeconds(explode.length);
+        sprite.enabled = true;
+        gameObject.SetActive(false);
     }
 
     public void Reset()

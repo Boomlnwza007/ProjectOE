@@ -48,7 +48,6 @@ public class ChargeEMFSM : BaseState
             ai.canMove = false;
             if (CheckWay())
             {
-                ani.isFacing = false;
                 await state.PreAttackN("PreDashAttack");
                 state.col.enabled = false;
                 state.shadow.SetActive(false);
@@ -114,6 +113,7 @@ public class ChargeEMFSM : BaseState
         if (raycast.collider != null && raycast.collider.CompareTag("Player"))
         {
             target = raycast.collider.gameObject.transform.position;
+            state.animator.isFacing = false;
         }
         return raycast.collider != null && raycast.collider.CompareTag("Player");
     }   
