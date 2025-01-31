@@ -48,7 +48,6 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
                     time = 0f;
                     Destroy(trap.gameObject);                    
                     gameObject.SetActive(false);
-                    sfxSource.PlayOneShot(explode);
                 }
             }
             else
@@ -114,6 +113,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
         color = Color.red;
         color.a = 1f;
         spriteRenderer.color = color;
+        sfxSource.PlayOneShot(explode);
     }
 
     public void Reset()
