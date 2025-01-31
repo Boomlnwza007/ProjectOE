@@ -15,6 +15,8 @@ public class FSMMEnemySM : StateMachine, IDamageable
     public EM_Animation animator;
     public LayerMask raycastMaskWay;
     public LayerMask raycastMask;
+    public Collider2D col;
+    public GameObject shadow;
     public float jumpLength = 20;
     public float forcePush = 100;
 
@@ -152,26 +154,17 @@ public class FSMMEnemySM : StateMachine, IDamageable
         animator.ChangeAnimationAttack("Normal");
     }
 
-    public async UniTask PreAttackN(string name, float time)
+    public async UniTask PreAttackN(string name)
     {
         animator.ChangeAnimationAttack(name);
-        await UniTask.WaitForSeconds(time);
+        await UniTask.WaitUntil(() => animator.endAnim);
     }
 
-    public async UniTask Attack(string name, float time)
+    public async UniTask Attack(string name , float t)
     {
         animator.ChangeAnimationAttack(name);
-        await UniTask.WaitForSeconds(time);
-    }
-    public async UniTask Attack(string name, int time)
-    {
-        animator.ChangeAnimationAttack(name);
-        await UniTask.DelayFrame(time);
-    }
-    public async UniTask Attack(string name)
-    {
-        animator.animator.SetTrigger(name);
-        await UniTask.WaitForSeconds(animator.TimePlayer());
+        await UniTask.WaitForSeconds(t);
+        //await UniTask.WaitUntil(() => animator.endAnim);
     }
 
     public void Run(float multiply)

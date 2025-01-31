@@ -11,6 +11,13 @@ public class ChargeEMFSM : BaseState
     public IAiAvoid ai;
     float time;
     private CancellationTokenSource cancellationToken;
+    private Vector2 startPos;
+    private Vector2 controlPoint;
+    private Vector2 target;
+    private bool jump;
+    private float t = 0f;
+
+
 
     // Start is called before the first frame update
     public override void Enter()
@@ -18,7 +25,7 @@ public class ChargeEMFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         ai = ((FSMMEnemySM)stateMachine).ai;
         ((FSMMEnemySM)stateMachine).Walk();
-
+        t = 0;
 
         if (!((FSMMEnemySM)stateMachine).cooldown)
         {
@@ -34,84 +41,33 @@ public class ChargeEMFSM : BaseState
     public async UniTaskVoid Attack(CancellationToken token) // Pass the CancellationToken
     {
         var state = (FSMMEnemySM)stateMachine;
-        ai.randomDeviation = false;
-        state.Run(3.5f);
-        time = 0f;
+        var ani = state.animator;
 
         try
         {
             ai.canMove = false;
-            await state.PreAttackN("PreDashAttack", 1f);
-            Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-            RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.jumpLength, state.raycastMaskWay);
-            if (raycast.Length > 0)
+            if (CheckWay())
             {
-                foreach (var hit in raycast)
-                {
-                    if (hit.collider != null && hit.collider.gameObject != state.gameObject)
-                    {
-                        //Debug.Log(hit.collider.name + " hit");
-                        ai.destination = hit.point;
-                        break;
-                    }
-                    else
-                    {
-                        ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
-                        Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);  
-                        //Debug.Log("no hit");                       
-                    }
-                }
-            }
-            else
-            {
-                ai.destination = (Vector2)ai.position + (dir.normalized * state.jumpLength);
-                //Debug.DrawLine((Vector2)ai.position, (Vector2)ai.position + (dir.normalized * state.jumpLength), Color.red);
+                ani.isFacing = false;
+                await state.PreAttackN("PreDashAttack");
+                state.col.enabled = false;
+                state.shadow.SetActive(false);
+                jump = true;
+                startPos = ai.position;
+                target = ai.targetTransform.position;
+                controlPoint = (startPos + (Vector2)ai.targetTransform.position) / 2 + Vector2.up * 3;
+                await UniTask.WaitUntil(() => !jump , cancellationToken: token);
+                state.col.enabled = true;
+                state.shadow.SetActive(true);
+                ani.isFacing = true;
+                await state.Attack("DashAttack",1f);
+                state.animator.ChangeAnimationAttack("Normal");
+                state.cooldown = true;
             }
 
 
             ai.canMove = true;
-            bool hasAttacked = false;
-            state.animator.isFacing = false;
-
-            while (time < 10 && !hasAttacked)//Edit Time Run 
-            {
-                time += Time.deltaTime;
-                if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
-                {
-                    //Debug.Log("ai.endMove");
-                    await Attack();
-                    hasAttacked = true;
-                    state.animator.isFacing = true;
-                    break;
-                }
-
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-                foreach (var hit in colliders)
-                {
-                    if (hit.gameObject != state.gameObject)
-                    {
-                        Debug.Log(hit.name + "hit 2 ");
-                        await Attack();
-                        hasAttacked = true;     
-                        state.animator.isFacing = true;
-                        break;
-                    }
-                }
-                token.ThrowIfCancellationRequested();
-                await UniTask.Yield();               
-            }
-
-            //state.animator.isFacing = true;
-            state.Walk();
-            ai.canMove = false;
-            Debug.Log("Stop");
-            state.animator.ChangeAnimationAttack("Tired");
-            await UniTask.WaitForSeconds(3f, cancellationToken: token);//Edit time Stop
-            state.animator.ChangeAnimationAttack("Normal");
-            ai.canMove = true;
-            state.animator.isFacing = true;
-            Debug.Log("End");
-            ((FSMMEnemySM)stateMachine).ChangState(((FSMMEnemySM)stateMachine).CheckDistance);
+            ChangState(state.CheckDistance);
         }
         catch (OperationCanceledException)
         {
@@ -120,13 +76,49 @@ public class ChargeEMFSM : BaseState
         }
     }
 
+    public override void UpdateLogic()
+    {
+        base.UpdateLogic();
+    }
+
+    public override void UpdatePhysics()
+    {
+        if (jump)
+        {
+            t += Time.deltaTime * 1;
+            t = Mathf.Clamp01(t);
+
+            Vector2 pos = Mathf.Pow(1 - t, 2) * startPos +
+                          2 * (1 - t) * t * controlPoint +
+                          Mathf.Pow(t, 2) * (Vector2)target;
+            var state = (FSMMEnemySM)stateMachine;
+
+            state.gameObject.transform.position = pos;
+
+            if (Vector2.Distance(ai.position,target) < 1f)
+            {
+                jump = false;
+                t = 0;
+            }
+        }
+    }
+
+    public bool CheckWay()
+    {
+        var state = (FSMMEnemySM)stateMachine;
+        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
+        RaycastHit2D raycast = Physics2D.Raycast(ai.position, dir, state.jumpLength, state.raycastMaskWay);
+        target = raycast.collider.gameObject.transform.position;
+        return raycast.collider != null && raycast.collider.CompareTag("Player");
+    }   
+
     public async UniTask Attack()
     {
         var state = (FSMMEnemySM)stateMachine;
         ai.canMove = false;
         ai.monVelocity = Vector2.zero;
         state.Walk();
-        await state.Attack("DashAttack", 0.4f);
+        await state.Attack("DashAttack",1);
         state.animator.ChangeAnimationAttack("Normal");
         state.cooldown = true;
         Debug.Log("A12");
