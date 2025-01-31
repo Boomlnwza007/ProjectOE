@@ -40,10 +40,15 @@ public interface IEnergy
 
     public void GetultimateEnergy(int amount)
     {
-        ultimateEnergy += amount;
-        if (ultimateEnergy > maxUltimateEnergy)
+        if (ultimateEnergy < maxUltimateEnergy)
         {
-            ultimateEnergy = maxUltimateEnergy;
+            ultimateEnergy += amount;
+
+            if (ultimateEnergy >= maxUltimateEnergy)
+            {
+                ultimateEnergy = maxUltimateEnergy;
+                AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.ultFull);
+            }
         }
     }
 }

@@ -100,6 +100,7 @@ public class PlayerCombat : MonoBehaviour
             energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
             Debug.Log("Ultimate");
+            AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.useUlt);
         }
 
         HandleWeaponSwitch();
