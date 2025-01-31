@@ -99,14 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954d916d152f04a4b96510d41763e3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 4667104554719650411, guid: 2c2d0c2a1f37ac249aa424b11d90e102, type: 3}
+  hitbox: {fileID: 4667104554719650411, guid: b92fa9db76059bc46bd2bffc8319ed7f, type: 3}
   timeAc: 1
   duration: 5
   damage: 20
   dpsDamage: 1
   sfxSource: {fileID: 5970275077196338060}
-  prepare: {fileID: 0}
-  explode: {fileID: 0}
+  prepare: {fileID: 8300000, guid: 8f4b5c15175ddd74888fcc7e964c52b7, type: 3}
+  explode: {fileID: 8300000, guid: 9453069f0760ae2469eccf70bb5af3f2, type: 3}
 --- !u!58 &6226026235090724623
 CircleCollider2D:
   m_ObjectHideFlags: 0
