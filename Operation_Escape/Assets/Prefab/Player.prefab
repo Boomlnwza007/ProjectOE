@@ -2025,7 +2025,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 44734
+  m_InstanceId: 801294
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8642,6 +8642,7 @@ GameObject:
   - component: {fileID: 8529641966930444737}
   - component: {fileID: 6778737011727104026}
   - component: {fileID: 3186234886009120841}
+  - component: {fileID: 2102879129126952594}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -8945,6 +8946,14 @@ MonoBehaviour:
   heal: {fileID: 8300000, guid: cfe0b3d6637129a4382cc2caa491644f, type: 3}
   ultFull: {fileID: 8300000, guid: fb22715912514524b8cd7ff078e93393, type: 3}
   useUlt: {fileID: 8300000, guid: 7f64e6badef08614bb2c158325ef5f61, type: 3}
+--- !u!81 &2102879129126952594
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152304519124941005}
+  m_Enabled: 1
 --- !u!1 &8175531228837757456
 GameObject:
   m_ObjectHideFlags: 0
