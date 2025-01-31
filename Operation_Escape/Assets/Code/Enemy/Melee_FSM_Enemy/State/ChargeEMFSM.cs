@@ -63,6 +63,9 @@ public class ChargeEMFSM : BaseState
                 await state.Attack("DashAttack",1f);
                 state.animator.ChangeAnimationAttack("Normal");
                 state.cooldown = true;
+                ai.canMove = true;
+                ChangState(state.CheckDistance);
+                return;
             }
 
 
@@ -108,7 +111,10 @@ public class ChargeEMFSM : BaseState
         var state = (FSMMEnemySM)stateMachine;
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
         RaycastHit2D raycast = Physics2D.Raycast(ai.position, dir, state.jumpLength, state.raycastMaskWay);
-        target = raycast.collider.gameObject.transform.position;
+        if (raycast.collider != null && raycast.collider.CompareTag("Player"))
+        {
+            target = raycast.collider.gameObject.transform.position;
+        }
         return raycast.collider != null && raycast.collider.CompareTag("Player");
     }   
 
