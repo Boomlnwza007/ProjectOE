@@ -9,11 +9,13 @@ public class AudioManager : MonoBehaviour
     public float fadeDuration = 2f;
     [Header("----- Audio Soure -----")]
     public AudioSource musicBGMSource;
+    public AudioSource musicAMSource;
     public AudioSource newMusicBGMSource;
     public AudioSource sfxSource;
 
     [Header("----- Audio Clip -----")]
     public AudioClip backGround;
+    public AudioClip ambient;
     //public AudioClip[] backGroundBoss;
     public AudioClip gameOver;
     public AudioClip click;
@@ -27,11 +29,21 @@ public class AudioManager : MonoBehaviour
     {
         musicBGMSource.clip = backGround;
         musicBGMSource.Play();
+        musicAMSource.clip = ambient;
+        musicAMSource.Play();
     }
 
     public void PlaySFX(AudioClip clip)
     {
         sfxSource.PlayOneShot(clip);
+    }
+
+    public async UniTask ChangeBGM(AudioClip newClip , float fade)
+    {
+        float oldfade = fadeDuration;
+        fadeDuration = fade;
+        await ChangeBGM(newClip);
+        fadeDuration = oldfade;
     }
 
     public async UniTask ChangeBGM(AudioClip newClip)
