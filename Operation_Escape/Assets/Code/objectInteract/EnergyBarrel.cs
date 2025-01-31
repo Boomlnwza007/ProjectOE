@@ -14,6 +14,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
 
     [Header("------ Audio Base ------")]
     public AudioSource sfxSource;
+    public AudioClip PreExplode;
     public AudioClip explode;
     public AudioClip meleeHit;
 
