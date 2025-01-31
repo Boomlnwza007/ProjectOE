@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TypeDoor : MonoBehaviour
 {
+    public DoorSound sound;
     private bool opening;
     public void Open() 
     {

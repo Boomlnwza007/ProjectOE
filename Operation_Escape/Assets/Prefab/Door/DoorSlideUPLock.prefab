@@ -523,6 +523,7 @@ MonoBehaviour:
   key: 1
   plateSC: {fileID: 1539696848800170153}
   area: {fileID: 0}
+  UnLock: 0
 --- !u!61 &1612879199829810908
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -580,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d97f186d5f8d643810b3287459c071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 11400000, guid: da785d126fe967b4c983d5740360213e, type: 2}
   doorL: {fileID: 1745262482250799753}
   doorR: {fileID: 927741564179476512}
   speed: 7

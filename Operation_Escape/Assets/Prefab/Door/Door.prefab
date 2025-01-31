@@ -179,9 +179,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1001274004760511120}
+  aniDoor: {fileID: 0}
   locked: 0
   key: 0
   plateSC: {fileID: 8719212055899636410}
+  area: {fileID: 0}
+  UnLock: 0
 --- !u!61 &5329434545779695586
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -239,6 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac55ed6849515034f9e918807042999a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 11400000, guid: da785d126fe967b4c983d5740360213e, type: 2}
   door: {fileID: 661712496161558166}
 --- !u!1 &6656444642249361238
 GameObject:

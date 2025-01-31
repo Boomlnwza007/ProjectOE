@@ -34,6 +34,7 @@ public class AutoDoor : MonoBehaviour
             aniDoor.Openning();
         }
         door.Open();
+        AudioManager.audioManager.PlaySFX(door.sound.doorOpen);
     }
 
     public void Close()
@@ -43,6 +44,7 @@ public class AutoDoor : MonoBehaviour
             aniDoor.Closesing();
         }
         door.Close();
+        AudioManager.audioManager.PlaySFX(door.sound.doorClose);
     }
 
     public void Unlock()

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d86e3431a35fc4fa8f62ad6fa3cf8e, type: 3}
   m_Name: ChangeGun
   m_EditorClassIdentifier: 
-  shoot: {fileID: 0}
-  shootUltimate: {fileID: 0}
+  shoot: {fileID: 8300000, guid: 6b46d4764b5064142bccb6a6c4354a5f, type: 3}
+  shootUltimate: {fileID: 8300000, guid: 6db94f5f586d4984790a9c356b63da3b, type: 3}
+  special:
+  - {fileID: 8300000, guid: 2e5c3dd1093e5074ea922f41678bd1ec, type: 3}

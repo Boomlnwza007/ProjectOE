@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f989dfb9b5a1b48b76083e2bf50d0b, type: 3}
   m_Name: Doorslide
   m_EditorClassIdentifier: 
-  doorOpen: {fileID: 0}
-  doorClose: {fileID: 0}
+  doorOpen: {fileID: 8300000, guid: d368b8a3f3cc7a544bd2c25b60b59eca, type: 3}
+  doorClose: {fileID: 8300000, guid: d368b8a3f3cc7a544bd2c25b60b59eca, type: 3}
