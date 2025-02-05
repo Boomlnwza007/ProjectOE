@@ -57,13 +57,13 @@ public class ChargeEMFSM : BaseState
                 controlPoint = (startPos + (Vector2)ai.targetTransform.position) / 2 + Vector2.up * 3;
                 await UniTask.WaitUntil(() => !jump , cancellationToken: token);
                 state.col.enabled = true;
-                state.shadow.SetActive(true);
-                ani.isFacing = true;
+                state.shadow.SetActive(true);                
                 await state.Attack("DashAttack",1f);
                 state.animator.ChangeAnimationAttack("Normal");
                 state.cooldown = true;
                 ai.canMove = true;
-                ChangState(state.CheckDistance);
+                ani.isFacing = true;
+                ChangState(state.CheckDistance); 
                 return;
             }
 
