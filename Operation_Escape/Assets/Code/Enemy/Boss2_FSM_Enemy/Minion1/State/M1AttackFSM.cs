@@ -15,6 +15,7 @@ public class M1AttackFSM : BaseState
     public override void Enter()
     {
         ai = ((FSMMinion1EnemySM)stateMachine).ai;
+        ai.canMove = false;
         Attack().Forget();
     }
 
@@ -28,6 +29,7 @@ public class M1AttackFSM : BaseState
 
         try
         {
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             state.Walk();
             ai.canMove = true;
@@ -70,6 +72,7 @@ public class M1AttackFSM : BaseState
                 await UniTask.Yield();
             }
 
+            ai.canMove = true;
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
             ChangState(state.checkDistance);
 
