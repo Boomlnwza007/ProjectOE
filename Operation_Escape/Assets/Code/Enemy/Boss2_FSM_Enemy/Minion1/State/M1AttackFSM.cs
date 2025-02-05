@@ -29,7 +29,7 @@ public class M1AttackFSM : BaseState
 
         try
         {
-            await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
             ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             state.Walk();
             ai.canMove = true;
