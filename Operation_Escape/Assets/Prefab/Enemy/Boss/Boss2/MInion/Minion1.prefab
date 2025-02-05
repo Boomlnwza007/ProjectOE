@@ -110,7 +110,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.1
-  speed: 11
+  speed: 5
   stopRadiusOn: 0
   slowDownRadius: 3
   stopRadius: 2
