@@ -18,6 +18,8 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
     [HideInInspector]
     public M1checkDistanceFSM checkDistance;
 
+    public string nameState;
+
     public bool imortal { get; set; }
 
     private void Awake()
@@ -30,6 +32,16 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
     protected override BaseState GetInitialState()
     {
         return idle;
+    }
+
+    private void Update()
+    {
+        if (curState != null)
+        {
+            curState.UpdateLogic();
+            nameState = curState.nameState;
+
+        }
     }
 
     public void Run(float multiply)

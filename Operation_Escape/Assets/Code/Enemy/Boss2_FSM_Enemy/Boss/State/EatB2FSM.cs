@@ -27,6 +27,7 @@ public class EatB2FSM : BaseState
 
         try
         {
+            await UniTask.Delay(1);
 
 
         }

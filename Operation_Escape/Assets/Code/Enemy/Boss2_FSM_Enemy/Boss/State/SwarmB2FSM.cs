@@ -28,6 +28,7 @@ public class SwarmB2FSM : BaseState
         try
         {
 
+            await UniTask.Delay(1);
 
         }
         catch (System.OperationCanceledException)

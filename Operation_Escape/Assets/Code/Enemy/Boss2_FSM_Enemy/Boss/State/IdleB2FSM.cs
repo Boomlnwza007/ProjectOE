@@ -34,6 +34,7 @@ public class IdleB2FSM : BaseState
         //ani.ChangeAnimationAttack("ChangeState");
         //await UniTask.WaitUntil(() => ani.endAnim);
         //ani.ChangeAnimationAttack("Wait");
+        await UniTask.Delay(1);
         ai.canMove = true;
         stateMachine.ChangState(((FSMBoss2EnemySM)stateMachine).strike);
     }

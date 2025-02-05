@@ -26,9 +26,8 @@ public class BurrowB2FSM : BaseState
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
-        {         
-
-
+        {
+            await UniTask.Delay(1);
         }
         catch (System.OperationCanceledException)
         {

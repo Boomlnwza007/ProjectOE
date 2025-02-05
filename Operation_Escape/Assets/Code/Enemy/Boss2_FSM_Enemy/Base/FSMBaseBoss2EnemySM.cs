@@ -6,11 +6,12 @@ public class FSMBaseBoss2EnemySM : StateMachine
 {
     [Header("Spike")]
     [SerializeField] private GridBoss2 grid;
-    public Spike spikeR;
-    public GameObject spikeZ;
+    public ID spike;
+
+    [HideInInspector]public SpikeN spikeN;
 
     [Header("Minion")]
-    public GameObject[] minion;
+    public ID minion;
     public List<Transform> spawnPoint;
     private List<Transform> availablePositions = new List<Transform>();
 
@@ -19,7 +20,8 @@ public class FSMBaseBoss2EnemySM : StateMachine
 
     public void AttackRSpike()
     {
-        grid.SpawnAtPlayer(spikeR, 1);
+        Spike spikeR = spike.Item[0].GetComponent<Spike>();
+        grid.SpawnAtPlayer(spikeR.gameObject,spikeR.size, 1);
         for (int i = 0; i < 9; i++)
         {
             grid.SpawnSpike(spikeR);
@@ -28,21 +30,28 @@ public class FSMBaseBoss2EnemySM : StateMachine
 
     public void AttackRSpike(float time)
     {
-        grid.SpawnAtPlayer(spikeR, 1);
+        Spike spikeR = spike.Item[0].GetComponent<Spike>();
+        grid.SpawnAtPlayer(spikeR.gameObject, spikeR.size, 1);
         for (int i = 0; i < 9; i++)
         {
             grid.SpawnSpike(spikeR,time);
         }
     }
 
+    public void AttackNSpike(Vector2Int size)
+    {
+        spikeN = Instantiate(spike.Item[2],ai.targetTransform.position,Quaternion.identity).GetComponent<SpikeN>();
+    }
+
     public void AttackNSpike(float time)
     {
-        grid.SpawnAtPlayer(spikeR,time);
+        Spike spikeR = spike.Item[0].GetComponent<Spike>();
+        grid.SpawnAtPlayer(spikeR.gameObject,spikeR.size,time);
     }
 
     public void AttackZSpike()
     {
-        Instantiate(spikeZ.gameObject, ai.targetTransform.position, Quaternion.identity);
+        Instantiate(spike.Item[1].gameObject, ai.targetTransform.position, Quaternion.identity);
     }
 
     public void SummonMinion(int type)
@@ -51,12 +60,12 @@ public class FSMBaseBoss2EnemySM : StateMachine
         Vector2 chosenPosition = availablePositions[randomIndex].position;
 
         availablePositions.RemoveAt(randomIndex);
-        Instantiate(minion[type], chosenPosition, Quaternion.identity);
+        Instantiate(minion.Item[type], chosenPosition, Quaternion.identity);
     }
 
     public void SummonMinion(int type,Vector2Int size)
     {
-        grid.SpawnMinion(size, minion[type]);
+        grid.SpawnMinion(size, minion.Item[type]);
     }
 
     public void ResetPositions()

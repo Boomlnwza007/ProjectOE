@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class M1checkDistanceFSM : BaseState
 {
-    public M1checkDistanceFSM(FSMMinion1EnemySM stateMachine) : base("Attacck", stateMachine) { }
+    public M1checkDistanceFSM(FSMMinion1EnemySM stateMachine) : base("distance", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
 
@@ -21,6 +21,7 @@ public class M1checkDistanceFSM : BaseState
 
     public override void UpdateLogic()
     {
+        ai.destination = ai.targetTransform.position;
         float distance = Vector2.Distance(ai.position, ai.targetTransform.position);
         if (distance < 5)
         {

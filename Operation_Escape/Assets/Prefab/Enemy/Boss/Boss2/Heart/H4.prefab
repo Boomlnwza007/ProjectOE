@@ -81,8 +81,8 @@ Transform:
   m_GameObject: {fileID: 3749064570309579385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.049, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2638416177024746114}
@@ -111,7 +111,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 256
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -155,9 +155,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 767578383
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3b034d49b47d92a4684aec5d2ecb49f3, type: 3}
   m_Color: {r: 1, g: 0.5896226, b: 0.5896226, a: 0.29803923}
   m_FlipX: 0
@@ -283,9 +283,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 767578383
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 41800047761c1e54984480ac123fb8ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -442,10 +442,8 @@ MonoBehaviour:
   dropChange: 0
   jumpCenter: {fileID: 2638416177024746114}
   grid: {fileID: 5498119468378626252}
-  spikeR: {fileID: 5695480036875566005, guid: 3c3714576a0d8d54b8f874f46f9e811d, type: 3}
-  spikeZ: {fileID: 7281230762825036943, guid: fde3b6a6a15a88d49bfed946a6f5a777, type: 3}
-  minion:
-  - {fileID: 5669909769043285304, guid: 3c658297f90f1c942a365f8c1d5393b6, type: 3}
+  spike: {fileID: 11400000, guid: 8e8e23b70bceadc4bb1d49d30c1ea942, type: 2}
+  minion: {fileID: 11400000, guid: 1cf89fbeb89539f408b1692afa1065a5, type: 2}
   spawnPoint:
   - {fileID: 3732721272179918888}
   - {fileID: 8473395493588918172}

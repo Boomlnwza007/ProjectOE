@@ -7,6 +7,7 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     [Header("Cooldown")]
     public float timePreSpike;
     public float timeCooldownSpike;
+    public float timeCooldownMinion;
 
     public BaseAnimEnemy animator;
 
@@ -14,6 +15,8 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     public H1IdleFSM Idle;
     [HideInInspector]
     public H1AttackFSM attack;
+    [HideInInspector]
+    public H1SummonFSM summon;
 
     public bool imortal { get; set; }
 
@@ -22,8 +25,7 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         ResetPositions();
         Idle = new H1IdleFSM(this);
         attack = new H1AttackFSM(this);
-        spriteFlash = GetComponent<SpriteFlash>();
-
+        summon = new H1SummonFSM(this);
     }
 
     protected override BaseState GetInitialState()

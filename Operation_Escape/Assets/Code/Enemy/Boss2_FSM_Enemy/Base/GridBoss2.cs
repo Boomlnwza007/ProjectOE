@@ -182,7 +182,7 @@ public class GridBoss2 : MonoBehaviour
         }
     }
 
-    public void SpawnAroundPlayer(Spike spikeType)
+    public SpikeN SpawnAroundPlayer(GameObject spike,Vector2Int size)
     {
         Vector2Int playerGridPos = FindPlayer();
         List<Vector2Int> possiblePositions = new List<Vector2Int>();
@@ -193,7 +193,7 @@ public class GridBoss2 : MonoBehaviour
             {
                 Vector2Int checkPos = playerGridPos + new Vector2Int(x, y);
 
-                if (IsValidGridPosition(checkPos) && CanPlaceFromAnyCorner(checkPos, spikeType.size))
+                if (IsValidGridPosition(checkPos) && CanPlaceFromAnyCorner(checkPos, size))
                 {
                     possiblePositions.Add(checkPos);
                 }
@@ -205,24 +205,26 @@ public class GridBoss2 : MonoBehaviour
         possiblePositions.RemoveAt(randomIndex);
 
         Vector3 worldPos = GridToWorldPosition(spawnPos);
-        Spike spike = Instantiate(spikeType.gameObject, worldPos, Quaternion.identity).GetComponent<Spike>();
-        spike.Setup(this, playerGridPos);
-        MarkGrid(spawnPos, spikeType.size, true);
+        SpikeN spike1 = Instantiate(spike, worldPos, Quaternion.identity).GetComponent<SpikeN>();
+        return spike1;
     }
 
-    public void SpawnAtPlayer(Spike spikeType, float time)
+    public void SpawnAtPlayer(GameObject spikeObj, Vector2Int size, float time)
     {
         Vector2Int playerGridPos = FindPlayer();
         List<Vector2Int> possiblePositions = new List<Vector2Int>();
 
-        if (CanPlaceFromAnyCorner(playerGridPos, spikeType.size))
+        if (CanPlaceFromAnyCorner(playerGridPos, size))
         {
             //possiblePositions.Add(playerGridPos);
             Vector3 worldPos = GridToWorldPosition(playerGridPos);
-            Spike spike = Instantiate(spikeType.gameObject, worldPos, Quaternion.identity).GetComponent<Spike>();
-            spike.Time(time);
-            spike.Setup(this, playerGridPos);
-            MarkGrid(playerGridPos, spikeType.size, true);
+            Spike spike = Instantiate(spikeObj, worldPos, Quaternion.identity).GetComponent<Spike>();
+            if (spike)
+            {
+                spike.Time(time);
+                spike.Setup(this, playerGridPos);
+                MarkGrid(playerGridPos, size, true);
+            }
         }
         else
         {
@@ -232,7 +234,7 @@ public class GridBoss2 : MonoBehaviour
                 {
                     Vector2Int checkPos = playerGridPos + new Vector2Int(x, y);
 
-                    if (IsValidGridPosition(checkPos) && CanPlaceFromAnyCorner(checkPos, spikeType.size))
+                    if (IsValidGridPosition(checkPos) && CanPlaceFromAnyCorner(checkPos, size))
                     {
                         possiblePositions.Add(checkPos);
                     }
@@ -242,10 +244,13 @@ public class GridBoss2 : MonoBehaviour
             Vector2Int spawnPos = possiblePositions[Random.Range(0, possiblePositions.Count)];
 
             Vector3 worldPos = GridToWorldPosition(spawnPos);
-            Spike spike = Instantiate(spikeType.gameObject, worldPos, Quaternion.identity).GetComponent<Spike>();
-            spike.Time(time);
-            spike.Setup(this, playerGridPos);
-            MarkGrid(spawnPos, spikeType.size, true);
+            Spike spike = Instantiate(spikeObj, worldPos, Quaternion.identity).GetComponent<Spike>();
+            if (spike)
+            {
+                spike.Time(time);
+                spike.Setup(this, playerGridPos);
+                MarkGrid(spawnPos, size, true);
+            }
         }      
 
 
