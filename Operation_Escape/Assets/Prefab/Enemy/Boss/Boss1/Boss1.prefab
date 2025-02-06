@@ -584,8 +584,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 8198879129867316059}
-  walk: {fileID: 0}
-  attack: []
+  walk: []
+  attack:
+  - {fileID: 8300000, guid: 322e3614f4e7d5f4e86266c6939cf445, type: 3}
+  - {fileID: 8300000, guid: 429b6d4daacda394ea99bd62b48572dc, type: 3}
   effect: []
 --- !u!82 &8198879129867316059
 AudioSource:
@@ -607,8 +609,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 0
-  MinDistance: 1
-  MaxDistance: 13
+  MinDistance: 19.801981
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
