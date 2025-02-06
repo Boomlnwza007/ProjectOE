@@ -11,6 +11,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
     public float timeBlast = 2f;
     public bool blast;
     public LootTable lootDrop;
+    public Animator animator;
 
     [Header("------ Audio Base ------")]
     public AudioSource sfxSource;
@@ -64,6 +65,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
 
     public void SetBomb()
     {
+        animator.SetTrigger("Bomb");
         bomb = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
         blast = true;
     }
