@@ -483,7 +483,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 228068
+  m_InstanceId: 251388
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -791,7 +791,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2801b11f5ad6a7c43a5ae55d7db5731a, type: 3}
   attack:
   - {fileID: 8300000, guid: c3362bd1058a14242940ef0e60f14d24, type: 3}
-  jump: {fileID: 0}
+  jump: {fileID: 8300000, guid: 07088419d4a01fd42ae0729af46c1ea1, type: 3}
 --- !u!95 &5011779000538463124
 Animator:
   serializedVersion: 5
