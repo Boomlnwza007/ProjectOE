@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3448027926733318550}
   - component: {fileID: 6226026235090724623}
   - component: {fileID: 5970275077196338060}
+  - component: {fileID: 5675263090454282844}
   m_Layer: 13
   m_Name: ShockTrap
   m_TagString: Untagged
@@ -239,6 +240,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &5675263090454282844
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263534146330254225}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73005d19799e0a9448b541ec36f80353, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7239023541834450128
 GameObject:
   m_ObjectHideFlags: 0
