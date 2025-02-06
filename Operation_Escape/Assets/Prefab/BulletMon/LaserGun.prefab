@@ -14719,7 +14719,7 @@ MonoBehaviour:
   startSFX: {fileID: 3829977727478605525}
   endSFX: {fileID: 945649479424472061}
   sfx: {fileID: 4562095607082384380}
-  preShoot: {fileID: 0}
+  preShoot: {fileID: 8300000, guid: 7757194f205b53d40adf471907b147af, type: 3}
   shoot: {fileID: 0}
 --- !u!82 &4562095607082384380
 AudioSource:
