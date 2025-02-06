@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: Operation_Escape
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: f67254f59853d094bbdd43684d14095e, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.058823533, g: 0.058823533, b: 0.058823533, a: 1}
   m_ShowUnitySplashScreen: 1
