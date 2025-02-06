@@ -42,7 +42,7 @@ public class NormalAttackEMFSM : BaseState
 
             ai.canMove = false;
             state.animator.isFacing = false;
-            await state.PreAttack("PreAttack", 0.5f);
+            await state.PreAttackN("PreAttack");
             Dash();
             await state.Attack("Attack",0.5f);
             state.rb.velocity = Vector2.zero;

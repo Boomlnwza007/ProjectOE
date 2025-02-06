@@ -144,16 +144,6 @@ public class FSMMEnemySM : StateMachine, IDamageable
         areaEnermy = area;
     }
 
-    public async UniTask PreAttack(string name,float time)
-    {
-        float animationSpeed = 1 / time;
-        animator.animator.speed = animationSpeed;
-        animator.ChangeAnimationAttack(name);
-        await UniTask.WaitForSeconds(time);
-        animator.animator.speed = 1;
-        animator.ChangeAnimationAttack("Normal");
-    }
-
     public async UniTask PreAttackN(string name)
     {
         animator.ChangeAnimationAttack(name);
