@@ -28,7 +28,7 @@ public class RangeAB1Fsm : BaseState
 
         if (overdrive)
         {
-            charge = 0.3f;
+            charge = 0.5f;
         }
         else
         {

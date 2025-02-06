@@ -20,8 +20,6 @@ public class OverdriveChangFSM : BaseState
         ai.canMove = false;
         time = 0;
         Debug.Log("Start");
-        var ani = state.boss1AniControl;
-        ani.ChangeAnimationAttack("ChangeState");
         Over().Forget();
     }
 

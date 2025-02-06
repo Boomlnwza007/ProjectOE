@@ -29,6 +29,12 @@ public class LaserFire : MonoBehaviour
     public GameObject endSFX;
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
 
+    [Header("Sound")]
+    public AudioSource sfx;
+    public AudioClip preShoot;
+    public AudioClip shoot;
+
+
     private void Start()
     {
         FillLaser();
