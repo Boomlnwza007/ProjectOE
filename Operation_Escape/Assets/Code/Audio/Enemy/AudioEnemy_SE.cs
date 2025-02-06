@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioEnemy_EM : AudioCharacter
+public class AudioEnemy_SE : AudioCharacter
 {
     [Header("------ Audio Special ------")]
-    public AudioClip jump;
+    public AudioClip charge;
 
-    public void PlayJump()
+    public void PlayCharge()
     {
-        audioGame.PlayOneShot(jump);
+        audioGame.PlayOneShot(charge);
     }
 }

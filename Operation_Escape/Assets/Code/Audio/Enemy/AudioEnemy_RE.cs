@@ -7,7 +7,7 @@ public class AudioEnemy_RE : AudioCharacter
     [Header("------ Audio Special ------")]
     public AudioClip dodge;
 
-    public void PlayDodge(string name)
+    public void PlayDodge()
     {
         audioGame.PlayOneShot(dodge);
     }
