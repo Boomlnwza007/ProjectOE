@@ -12,6 +12,7 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
     public bool blast;
     public LootTable lootDrop;
     public Animator animator;
+    public GameObject objLight; 
 
     [Header("------ Audio Base ------")]
     public AudioSource sfxSource;
@@ -111,14 +112,20 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
         Color color = Color.white;
         color.a = 1f;
         spriteRenderer.color = color;
-        var sprite = gameObject.GetComponent<SpriteRenderer>();
-        sprite.enabled = false;
+        SetHide(false);
         MakeDamage();
         sfxSource.PlayOneShot(explode);
         Destroy(bomb.gameObject);
         await UniTask.WaitForSeconds(explode.length);
-        sprite.enabled = true;
+        SetHide(true);
         gameObject.SetActive(false);
+    }
+
+    public void SetHide(bool hide)
+    {
+        var sprite = gameObject.GetComponent<SpriteRenderer>();
+        sprite.enabled = hide;
+        objLight.SetActive(hide);
     }
 
     public void Reset()

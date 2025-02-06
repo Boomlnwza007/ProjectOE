@@ -190,6 +190,7 @@ MonoBehaviour:
   blast: 0
   lootDrop: {fileID: 4491084232716396565}
   animator: {fileID: 5121646708901158165}
+  objLight: {fileID: 6823913619905097456}
   sfxSource: {fileID: 193183226264297365}
   PreExplode: {fileID: 0}
   explode: {fileID: 8300000, guid: 1466391a54b591543acde27725361259, type: 3}
