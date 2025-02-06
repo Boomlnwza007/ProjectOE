@@ -26,7 +26,7 @@ public class TriggerBoss : MonoBehaviour
         this.Boss = Boss;
         this.uiBoss = uiBoss;
         this.Boss.jumpCenter = jumpCenter;
-        AudioManager.audioManager.ChangeBGM(AudioManager.audioManager.backGround,1).Forget();
+        AudioManager.audioManager.ChangeBGM(AudioManager.audioManager.oldBackGround,1).Forget();
         first = false;
     }
 }

@@ -15,10 +15,13 @@ public class AudioManager : MonoBehaviour
 
     [Header("----- Audio Clip -----")]
     public AudioClip backGround;
+   
     public AudioClip ambient;
     //public AudioClip[] backGroundBoss;
     public AudioClip gameOver;
     public AudioClip click;
+    [HideInInspector]
+    public AudioClip oldBackGround;
 
     private void Awake()
     {
@@ -49,7 +52,7 @@ public class AudioManager : MonoBehaviour
     public async UniTask ChangeBGM(AudioClip newClip)
     {
         if (musicBGMSource.clip == newClip) return;
-
+        oldBackGround = backGround;
         newMusicBGMSource.clip = newClip;
         newMusicBGMSource.volume = 0;
         newMusicBGMSource.Play();
