@@ -15,6 +15,8 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
     public int damage = 60;
     public float dpsDamage = 1;
     private bool trapOn;
+    public Animator animator;
+    public Sprite sprite;
 
     [Header("------ Audio Base ------")]
     public AudioSource sfxSource;
@@ -90,6 +92,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
         {
             trapOn = true;
             trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
+            animator.SetTrigger("Shock");
             StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
             sfxSource.PlayOneShot(prepare);
         }
@@ -113,6 +116,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
         color = Color.red;
         color.a = 1f;
         spriteRenderer.color = color;
+        GetComponent<SpriteRenderer>().sprite = sprite;
         sfxSource.PlayOneShot(explode);
     }
 
