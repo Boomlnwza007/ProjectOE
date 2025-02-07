@@ -407,7 +407,7 @@ MonoBehaviour:
   musicAMSource: {fileID: 1891594264}
   newMusicBGMSource: {fileID: 933640397}
   sfxSource: {fileID: 1377583052}
-  backGround: {fileID: 0}
+  backGround: {fileID: 8300000, guid: 5483b780173ffdf4c8fb6e443aa79319, type: 3}
   ambient: {fileID: 0}
   gameOver: {fileID: 0}
   click: {fileID: 0}
@@ -590,7 +590,7 @@ AudioSource:
   m_GameObject: {fileID: 933640396}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5053479974940071920, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1620,7 +1620,7 @@ AudioSource:
   m_GameObject: {fileID: 1377583051}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3850052866485147620, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2224,7 +2224,7 @@ AudioSource:
   m_GameObject: {fileID: 1875015261}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5053479974940071920, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2337,7 +2337,7 @@ AudioSource:
   m_GameObject: {fileID: 1891594263}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2619503884165121413, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
