@@ -13,6 +13,7 @@ public class PauseScene : MonoBehaviour
     public bool onPauseMenu;
     public bool onmenuAfterDie;
     public bool retrying;
+    public Menu menu;
 
     private void Awake()
     {
@@ -61,7 +62,7 @@ public class PauseScene : MonoBehaviour
         {
             return;
         }
-
+        menu.RollBack();
         onPauseMenu = !onPauseMenu;
         PlayerControl.control.EnableInput(!onPauseMenu);
         menuPause.SetActive(onPauseMenu);
