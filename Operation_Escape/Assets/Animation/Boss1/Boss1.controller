@@ -167,6 +167,32 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 1
+--- !u!1102 &-8857490982269905029
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BossStopRight
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 035f4a74c73b80348b8045ec971a6882, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-8746613511012331024
 AnimatorState:
   serializedVersion: 6
@@ -1079,6 +1105,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 3473748759474836795}
     m_Position: {x: 740, y: -190, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8857490982269905029}
+    m_Position: {x: 775, y: -125, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -1708857977680505265}
@@ -1098,11 +1127,11 @@ AnimatorStateMachine:
   m_StateMachineTransitions:
   - first: {fileID: -1708857977680505265}
     second: []
-  - first: {fileID: 6121468552177849588}
-    second: []
   - first: {fileID: 1812269073269794583}
     second: []
   - first: {fileID: 1865369292924268927}
+    second: []
+  - first: {fileID: 6121468552177849588}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 1130, y: -880, z: 0}
