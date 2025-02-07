@@ -52,11 +52,11 @@ public class AudioSetting : MonoBehaviour
 
     private void LoadVolume()
     {
-        mainSlider.value = PlayerPrefs.GetFloat("MainVolume");
-        enemySlider.value = PlayerPrefs.GetFloat("EnemyVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
-        ambientSlider.value = PlayerPrefs.GetFloat("AmbientVolume");
+        mainSlider.value = PlayerPrefs.HasKey("MainVolume") ? PlayerPrefs.GetFloat("MainVolume") : 1f;
+        enemySlider.value = PlayerPrefs.HasKey("EnemyVolume") ? PlayerPrefs.GetFloat("EnemyVolume") : 1f;
+        sfxSlider.value = PlayerPrefs.HasKey("SFXVolume") ? PlayerPrefs.GetFloat("SFXVolume") : 1f;
+        musicSlider.value = PlayerPrefs.HasKey("MusicVolume") ? PlayerPrefs.GetFloat("MusicVolume") : 1f;
+        ambientSlider.value = PlayerPrefs.HasKey("AmbientVolume") ? PlayerPrefs.GetFloat("AmbientVolume") : 1f;
         SetVolume();
     }
 
