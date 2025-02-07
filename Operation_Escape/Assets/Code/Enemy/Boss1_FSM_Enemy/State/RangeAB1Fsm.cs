@@ -95,7 +95,10 @@ public class RangeAB1Fsm : BaseState
             ani.ChangeAnimationAttack("Wait");
 
             ai.canMove = false;
-            await UniTask.WaitForSeconds(3f);
+            ani.ChangeAnimationAttack("BossStop");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.animator.SetTrigger("endStop");
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             ai.canMove = true;
 
             ani.ChangeAnimationAttack("Wait");

@@ -100,8 +100,11 @@ public class DashAB1FSM : BaseState
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
                 state.isFacing = true;
-                ani.ChangeAnimationAttack("Wait");
-                await UniTask.WaitForSeconds(3f, cancellationToken: token);
+                ai.canMove = false;
+                ani.ChangeAnimationAttack("BossStop");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+                ani.animator.SetTrigger("endStop");
+                await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                 ai.canMove = true;
 
                 ChangState(state.normalAState);
@@ -116,8 +119,11 @@ public class DashAB1FSM : BaseState
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
                 state.isFacing = true;
-                ani.ChangeAnimationAttack("Wait");
-                await UniTask.WaitForSeconds(3f, cancellationToken: token);
+                ai.canMove = false;
+                ani.ChangeAnimationAttack("BossStop");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+                ani.animator.SetTrigger("endStop");
+                await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                 ai.canMove = true;
 
                 if (UnityEngine.Random.value > 0.5f)

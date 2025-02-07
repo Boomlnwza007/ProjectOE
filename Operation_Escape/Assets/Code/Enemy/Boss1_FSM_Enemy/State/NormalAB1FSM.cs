@@ -181,8 +181,12 @@ public class NormalAB1FSM : BaseState
             ai.canMove = false;
 
             ai.maxspeed = speed;
-            ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(3, cancellationToken: token);
+            ani.ChangeAnimationAttack("BossStop");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.animator.SetTrigger("endStop");
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+
+            ai.canMove = true;
             ChangState(((FSMBoss1EnemySM)stateMachine).checkDistanceState);
         }
         catch (OperationCanceledException)
