@@ -9,6 +9,7 @@ public class TriggerBoss : MonoBehaviour
     [SerializeField] private UIBoss uiBoss;
     [SerializeField] private Transform jumpCenter;
     [SerializeField] private AudioClip bgmBoss;
+    [SerializeField] private float fadeDuration;
     private bool first;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +18,7 @@ public class TriggerBoss : MonoBehaviour
         {
             Boss.attacking = true;
             uiBoss.uiBody.SetActive(true);
-            AudioManager.audioManager.ChangeBGM(bgmBoss).Forget();
+            AudioManager.audioManager.ChangeBGM(bgmBoss, fadeDuration).Forget();
             first = true;
         }
     }
