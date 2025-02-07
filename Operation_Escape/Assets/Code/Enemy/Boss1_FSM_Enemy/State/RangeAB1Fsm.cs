@@ -65,9 +65,11 @@ public class RangeAB1Fsm : BaseState
             if (CheckDistance())
             {
                 //ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
-                ani.ChangeAnimationAttack("Wait");
+                ani.ChangeAnimationAttack("RangeAtkEnd");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                 return;
             }
+            ani.ChangeAnimationAttack("RangeAtkEnd");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
             ani.ChangeAnimationAttack("RangeAtk");
@@ -76,21 +78,27 @@ public class RangeAB1Fsm : BaseState
             if (CheckDistance())
             {
                 //ChangState(((FSMBoss1EnemySM)stateMachine).normalAState);
-                ani.ChangeAnimationAttack("Wait");
+                ani.ChangeAnimationAttack("RangeAtkEnd");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                 return;
             }
+
+            ani.ChangeAnimationAttack("RangeAtkEnd");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
             ani.ChangeAnimationAttack("RangeAtk");
             await UniTask.WhenAll(state.ShootLaser(charge, 0.5f, 1, charge - 0.1f), state.ShootMissile(token));
+            ani.ChangeAnimationAttack("RangeAtkEnd");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
 
             if (overdrive)
             {
-                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
                 ani.ChangeAnimationAttack("RangeAtk");
                 await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
+                ani.ChangeAnimationAttack("RangeAtkEnd");
+                await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             }
-            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+
             state.DelLaserGun();
             ani.ChangeAnimationAttack("Wait");
 
