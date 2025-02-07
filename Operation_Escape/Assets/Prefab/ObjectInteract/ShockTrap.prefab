@@ -106,6 +106,8 @@ MonoBehaviour:
   duration: 5
   damage: 20
   dpsDamage: 1
+  animator: {fileID: 5675263090454282844}
+  sprite: {fileID: 21300000, guid: b34bea7266d83fb4b9894ba83bb1eeca, type: 3}
   sfxSource: {fileID: 5970275077196338060}
   prepare: {fileID: 8300000, guid: 8f4b5c15175ddd74888fcc7e964c52b7, type: 3}
   explode: {fileID: 8300000, guid: 9453069f0760ae2469eccf70bb5af3f2, type: 3}
@@ -165,7 +167,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 7
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
