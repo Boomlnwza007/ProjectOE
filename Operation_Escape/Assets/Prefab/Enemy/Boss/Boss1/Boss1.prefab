@@ -588,7 +588,11 @@ MonoBehaviour:
   attack:
   - {fileID: 8300000, guid: 322e3614f4e7d5f4e86266c6939cf445, type: 3}
   - {fileID: 8300000, guid: 429b6d4daacda394ea99bd62b48572dc, type: 3}
-  effect: []
+  - {fileID: 8300000, guid: 6e9e5180ae71bf441a73ee6a84bcad38, type: 3}
+  - {fileID: 8300000, guid: 54d4bfb7e3e5c6d429bb66134e649d81, type: 3}
+  - {fileID: 8300000, guid: a71dc02d9f0c88d4fb40dbb1d892ddee, type: 3}
+  effect:
+  - {fileID: 8300000, guid: 3743f65ed5c3b474faeab8010b0dfb1a, type: 3}
 --- !u!82 &8198879129867316059
 AudioSource:
   m_ObjectHideFlags: 0
