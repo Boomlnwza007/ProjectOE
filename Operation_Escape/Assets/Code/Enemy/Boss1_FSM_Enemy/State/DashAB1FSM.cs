@@ -45,7 +45,7 @@ public class DashAB1FSM : BaseState
             Attack().Forget();
         }
 
-        
+        state.normalAState.countATK = 0;
     }
 
     public override void UpdateLogic()

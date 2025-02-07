@@ -65,6 +65,8 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public RangeAB1Fsm rangeAState;
     [HideInInspector]
     public OverdriveChangFSM overdriveChangState;
+    [HideInInspector]
+    public AtkCloseB1FSM atkCloseState;
 
     private void Awake()
     {        
@@ -74,6 +76,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         dashAState = new DashAB1FSM(this);
         rangeAState = new RangeAB1Fsm(this);
         overdriveChangState = new OverdriveChangFSM(this);
+        atkCloseState = new AtkCloseB1FSM(this);
         isFacing = true;
     }
 

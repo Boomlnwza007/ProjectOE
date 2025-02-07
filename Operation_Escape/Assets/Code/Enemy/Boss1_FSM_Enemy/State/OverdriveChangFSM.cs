@@ -30,7 +30,8 @@ public class OverdriveChangFSM : BaseState
         ani.ChangeAnimationAttack("ChangeState");
         await UniTask.WaitUntil(() => ani.endAnim);
         state.JumpCenter();
-        Debug.Log("Comple");
+        ani.ChangeAnimationAttack("AfterChangeState");
+        await UniTask.WaitUntil(() => ani.endAnim);
         state.overdrive = true;
         state.overdriveChang = false;
         stateMachine.ChangState(state.checkDistanceState);

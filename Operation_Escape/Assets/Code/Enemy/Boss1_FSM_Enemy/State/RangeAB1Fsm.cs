@@ -36,6 +36,7 @@ public class RangeAB1Fsm : BaseState
         }
 
         Attack().Forget();
+        state.normalAState.countATK = 0;
     }
 
     public override void UpdateLogic()

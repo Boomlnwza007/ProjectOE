@@ -14,7 +14,9 @@ public class NormalAB1FSM : BaseState
     public float Charg;
     public float runTime;
     public bool overdrive;
-    bool dash;
+    private bool dash;
+    public int countATK = 0;
+    public int maxCountATK = 3;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -34,9 +36,14 @@ public class NormalAB1FSM : BaseState
         {
             runTime = 3f;
         }
-
+        countATK++;
+        if (countATK > maxCountATK)
+        {
+            countATK = 0;
+            ChangState(state.atkCloseState);
+            return;
+        }
         Attack().Forget();
-
     }
 
     public override void UpdateLogic()
