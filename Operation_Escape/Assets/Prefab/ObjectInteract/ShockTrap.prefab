@@ -108,6 +108,7 @@ MonoBehaviour:
   dpsDamage: 1
   animator: {fileID: 5675263090454282844}
   sprite: {fileID: 21300000, guid: b34bea7266d83fb4b9894ba83bb1eeca, type: 3}
+  oldSprite: {fileID: 21300000, guid: d768c4c7119221446b8c7fdf23e0ed81, type: 3}
   sfxSource: {fileID: 5970275077196338060}
   prepare: {fileID: 8300000, guid: 8f4b5c15175ddd74888fcc7e964c52b7, type: 3}
   explode: {fileID: 8300000, guid: 9453069f0760ae2469eccf70bb5af3f2, type: 3}

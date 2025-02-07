@@ -17,6 +17,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
     private bool trapOn;
     public Animator animator;
     public Sprite sprite;
+    public Sprite oldSprite;
 
     [Header("------ Audio Base ------")]
     public AudioSource sfxSource;
@@ -124,6 +125,7 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
     {
         trapOn = false;
         gameObject.SetActive(true);
+        GetComponent<SpriteRenderer>().sprite = oldSprite;
         time = 0;
 
         if (trap != null)
