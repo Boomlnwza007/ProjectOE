@@ -28,9 +28,9 @@ public class LaserFire : MonoBehaviour
     public GameObject startSFX;
     public GameObject endSFX;
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+    [SerializeField]private GameObject[] spritLaser;
 
     [Header("Sound")]
-    public AudioSource sfx;
     public AudioClip preShoot;
     public AudioClip shoot;
 
@@ -86,6 +86,7 @@ public class LaserFire : MonoBehaviour
         pre_lineRenderer.colorGradient = laserColorGradient;
         pre_lineRenderer.enabled = true;
         laserHitZone = true;
+        PlayLoopPre().Forget();
 
         await FadeLaser(pre_lineRenderer,charge, laserColorGradient, false);
         pre_lineRenderer.enabled = false;
@@ -98,8 +99,13 @@ public class LaserFire : MonoBehaviour
         {
             particleSystems[i].Play();
         }
-        laserFiring = true;
+        foreach (var item in spritLaser)
+        {
+            item.SetActive(true);
+        }
 
+        laserFiring = true;
+        PlayLoopShoot().Forget();
         await UniTask.WaitForSeconds(duration);
 
         await FadeLaser(m_lineRenderer,0.1f, laserColorGradientOriginal, true);
@@ -110,6 +116,10 @@ public class LaserFire : MonoBehaviour
         for (int i = 0; i < particleSystems.Count; i++)
         {
             particleSystems[i].Stop();
+        }
+        foreach (var item in spritLaser)
+        {
+            item.SetActive(false);
         }
     }
     
@@ -331,6 +341,24 @@ public class LaserFire : MonoBehaviour
         for (int i = 0; i < particleSystems.Count; i++)
         {
             particleSystems[i].Stop();
+        }
+    }
+
+    private async UniTask PlayLoopPre()
+    {
+        while (laserHitZone)
+        {
+            AudioManager.audioManager.PlaySFX(preShoot);
+            await UniTask.Delay((int)(preShoot.length * 1000));
+        }
+    }
+
+    private async UniTask PlayLoopShoot()
+    {
+        while (laserFiring)
+        {
+            AudioManager.audioManager.PlaySFX(shoot);
+            await UniTask.Delay((int)(shoot.length * 1000));
         }
     }
 }
