@@ -292,7 +292,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
         overdriveGage += damage;
-        if (overdriveGage >= overdriveGageMax && !overdrive)
+        if (overdriveGage >= overdriveGageMax && !overdriveChang)
         {
             overdriveChang = true;
             ChangState(overdriveChangState);
