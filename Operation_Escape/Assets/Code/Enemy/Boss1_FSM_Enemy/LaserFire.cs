@@ -31,6 +31,7 @@ public class LaserFire : MonoBehaviour
     [SerializeField]private GameObject[] spritLaser;
 
     [Header("Sound")]
+    public AudioSource sfx;
     public AudioClip preShoot;
     public AudioClip shoot;
 
@@ -348,7 +349,7 @@ public class LaserFire : MonoBehaviour
     {
         while (laserHitZone)
         {
-            AudioManager.audioManager.PlaySFX(preShoot);
+            sfx?.PlayOneShot(preShoot);
             await UniTask.Delay((int)(preShoot.length * 1000));
         }
     }
@@ -357,7 +358,7 @@ public class LaserFire : MonoBehaviour
     {
         while (laserFiring)
         {
-            AudioManager.audioManager.PlaySFX(shoot);
+            sfx?.PlayOneShot(shoot);
             await UniTask.Delay((int)(shoot.length * 1000));
         }
     }

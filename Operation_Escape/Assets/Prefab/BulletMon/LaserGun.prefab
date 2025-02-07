@@ -14807,6 +14807,7 @@ MonoBehaviour:
   spritLaser:
   - {fileID: 8737448099387838295}
   - {fileID: 2229811090737098400}
+  sfx: {fileID: 4562095607082384380}
   preShoot: {fileID: 8300000, guid: 7757194f205b53d40adf471907b147af, type: 3}
   shoot: {fileID: 8300000, guid: cf61d1f57f6327848b7514fa2de9cec3, type: 3}
 --- !u!82 &4562095607082384380
