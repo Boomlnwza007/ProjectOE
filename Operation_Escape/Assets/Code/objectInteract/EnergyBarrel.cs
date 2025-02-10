@@ -6,7 +6,8 @@ using Cysharp.Threading.Tasks;
 public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
 {
     [SerializeField] private GameObject hitbox;
-    private Collider2D bomb;
+    private GameObject bomb;
+    private Coroutine fadeBomb;
     public int damage = 10;
     public float timeBlast = 2f;
     public bool blast;
@@ -28,12 +29,12 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
                 if (!blast)
                 {
                     SetBomb();
-                    StartCoroutine(FadeBomb(bomb.GetComponent<SpriteRenderer>(), timeBlast));
+                    fadeBomb = StartCoroutine(FadeBomb(timeBlast));
                 }
                 else
                 {
-                    StopCoroutine("FadeBomb");
-                    BombBlast(bomb.GetComponent<SpriteRenderer>()).Forget();
+                    StopCoroutine(fadeBomb);
+                    BombBlast().Forget();
                 }
                 break;
             case DamageType.Melee:
@@ -43,8 +44,8 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
                 }
                 else
                 {
-                    StopCoroutine("FadeBomb");
-                    BombBlast(bomb.GetComponent<SpriteRenderer>()).Forget();
+                    StopCoroutine(fadeBomb);
+                    BombBlast().Forget();
                 }                
                 break;
             default:
@@ -67,15 +68,17 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
     public void SetBomb()
     {
         animator.SetTrigger("Bomb");
-        bomb = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
+        bomb = Instantiate(hitbox, transform.position, Quaternion.identity);
         blast = true;
     }
 
     public void MakeDamage()
     {
+        bomb.GetComponentInChildren<ParticleSystem>().Play();
+        Collider2D bombCollider = bomb.GetComponent<Collider2D>();
         List<Collider2D> colliders = new List<Collider2D>();
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        Physics2D.OverlapCollider(bomb, filter, colliders);
+        Physics2D.OverlapCollider(bombCollider, filter, colliders);
         foreach (var hit in colliders)
         {
             IDamageable any = hit.GetComponent<IDamageable>();
@@ -86,36 +89,17 @@ public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
         }
     }
 
-    public IEnumerator FadeBomb(SpriteRenderer spriteRenderer, float duration)
-    {
-        Color color = spriteRenderer.color;
-        float startAlpha = color.a;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / duration);
-            color.a = newAlpha;
-            spriteRenderer.color = color;
-            yield return null;
-        }
-
-        color = Color.white;
-        color.a = 1f;
-        spriteRenderer.color = color;
-        BombBlast(spriteRenderer).Forget();
+    public IEnumerator FadeBomb(float duration)
+    {        
+        yield return new WaitForSeconds(duration);
+        BombBlast().Forget();
     }
 
-    public async UniTask BombBlast(SpriteRenderer spriteRenderer)
+    public async UniTask BombBlast()
     {
-        Color color = Color.white;
-        color.a = 1f;
-        spriteRenderer.color = color;
         SetHide(false);
         MakeDamage();
         sfxSource.PlayOneShot(explode);
-        Destroy(bomb.gameObject);
         await UniTask.WaitForSeconds(explode.length);
         SetHide(true);
         gameObject.SetActive(false);
