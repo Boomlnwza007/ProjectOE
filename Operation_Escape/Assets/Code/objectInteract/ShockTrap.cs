@@ -94,31 +94,17 @@ public class ShockTrap : MonoBehaviour , IRestartOBJ
             trapOn = true;
             trap = Instantiate(hitbox, transform.position, Quaternion.identity).GetComponent<Collider2D>();
             animator.SetTrigger("Shock");
-            StartCoroutine(FadeBomb(trap.GetComponent<SpriteRenderer>(), timeAc));
+            StartCoroutine(FadeBomb(timeAc));
             sfxSource.PlayOneShot(prepare);
         }
     }
 
-    public IEnumerator FadeBomb(SpriteRenderer spriteRenderer, float duration)
-    {
-        Color color = spriteRenderer.color;
-        float startAlpha = color.a;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / duration);
-            color.a = newAlpha;
-            spriteRenderer.color = color;
-            yield return null;
-        }
-
-        color = Color.red;
-        color.a = 1f;
-        spriteRenderer.color = color;
+    public IEnumerator FadeBomb(float duration)
+    {        
+        yield return new WaitForSeconds(duration);
         GetComponent<SpriteRenderer>().sprite = sprite;
         sfxSource.PlayOneShot(explode);
+        trap.gameObject.GetComponentInChildren<ParticleSystem>().Play();
     }
 
     public void Reset()
