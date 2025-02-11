@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 
-public class EnergyBarrel : MonoBehaviour, IBulletInteract , IRestartOBJ
+public class EnergyBarrel : MonoBehaviour, IObjInteract , IRestartOBJ
 {
     [SerializeField] private GameObject hitbox;
     private GameObject bomb;

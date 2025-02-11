@@ -16,7 +16,7 @@ public class BulletBounce : BaseBullet
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out IBulletInteract bulletInteract))
+        if (collision.gameObject.TryGetComponent(out IObjInteract bulletInteract))
         {
             bulletInteract.Interact(DamageType.Rang);
             Destroy(gameObject);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserPillar : MonoBehaviour, IBulletInteract, IRestartOBJ
+public class LaserPillar : MonoBehaviour, IObjInteract, IRestartOBJ
 {
     [SerializeField] private LaserDrone laserDrone;
 

@@ -173,7 +173,7 @@ public class PlayerCombat : MonoBehaviour
                 }
                 Debug.Log(hit.name);
             }
-            else if (hit.TryGetComponent(out IBulletInteract bulletInteract))
+            else if (hit.TryGetComponent(out IObjInteract bulletInteract))
             {
                 bulletInteract.Interact(DamageType.Melee);
             }

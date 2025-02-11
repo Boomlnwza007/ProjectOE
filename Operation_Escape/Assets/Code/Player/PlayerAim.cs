@@ -26,23 +26,18 @@ public class PlayerAim : MonoBehaviour
         float _angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         angle = _angle;
         Vector3 localScaleGun = Vector3.one;
-        //Vector3 localScaleBody = Vector3.one;
 
         if (_angle > 90 || _angle < -90)
         {
             localScaleGun.y = -1;
-            //localScaleBody.x = -1;
-            //_angle += 180f;
         }
         else
         {
             localScaleGun.y = +1;
-            //localScaleBody.x = +1;
         }
 
         transform.eulerAngles = new Vector3(0, 0, _angle);
         transform.localScale = localScaleGun;
-        //body.localScale = localScaleBody;
     }
 
 }

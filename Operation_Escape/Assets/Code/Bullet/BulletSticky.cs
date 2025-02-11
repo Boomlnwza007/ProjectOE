@@ -41,7 +41,7 @@ public class BulletSticky : BaseBullet
                 StartBlast();
             }
         }
-        else if (collision.TryGetComponent(out IBulletInteract bulletInteract))
+        else if (collision.TryGetComponent(out IObjInteract bulletInteract))
         {
             bulletInteract.Interact(DamageType.Rang);
             Destroy(gameObject);

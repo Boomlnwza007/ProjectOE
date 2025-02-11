@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadEnemy : MonoBehaviour, IBulletInteract
+public class DeadEnemy : MonoBehaviour, IObjInteract
 {
     public int Hp = 1;
     public LootTable lootDrop;

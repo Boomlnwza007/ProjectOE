@@ -20,8 +20,7 @@ public class StateMachine : MonoBehaviour
     public Rigidbody2D rb;
     public int dropChange = 0;
     public Transform jumpCenter;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+   
     void Start()
     {
         ai = gameObject.GetComponent<IAiAvoid>();
