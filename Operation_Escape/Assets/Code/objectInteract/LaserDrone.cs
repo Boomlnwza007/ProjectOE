@@ -19,6 +19,7 @@ public class LaserDrone : MonoBehaviour
     public GameObject startSFX;
     public GameObject endSFX;
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+    public LineRenderer PreLaser;
     private LineRenderer laser;
     public LayerMask ShootLayer;
 
@@ -30,6 +31,7 @@ public class LaserDrone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetupPreLaser();
         FillLaser();
         time = 0;
         laser = GetComponent<LineRenderer>();
@@ -37,6 +39,7 @@ public class LaserDrone : MonoBehaviour
         for (int i = 0; i < particleSystems.Count; i++)
         {
             particleSystems[i].Stop();
+            PreLaser.enabled = true;
         }
     }
 
@@ -49,6 +52,7 @@ public class LaserDrone : MonoBehaviour
             for (int i = 0; i < particleSystems.Count; i++)
             {
                 particleSystems[i].Play();
+                PreLaser.enabled = false;
             }
             time = 0f;
         }
@@ -64,6 +68,7 @@ public class LaserDrone : MonoBehaviour
                 for (int i = 0; i < particleSystems.Count; i++)
                 {
                     particleSystems[i].Stop();
+                    PreLaser.enabled = true;
                 }
                 time = 0f;
             }
@@ -163,5 +168,11 @@ public class LaserDrone : MonoBehaviour
         laser.enabled = true;
         firstPos.gameObject.SetActive(true);
         endPos.gameObject.SetActive(true);
+    }
+
+    public void SetupPreLaser()
+    {        
+        PreLaser.SetPosition(0, firstPos.position);
+        PreLaser.SetPosition(1, endPos.position);
     }
 }
