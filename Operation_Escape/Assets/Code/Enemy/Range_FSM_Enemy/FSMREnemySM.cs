@@ -36,6 +36,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     public float dodgeMinimium = 30f;
     public float dodgeSpeedDropMultiplier = 5f;
     public float dodgeStopRange = 5f;
+    public GameObject dashEff;
     [HideInInspector] public float rollSpeed;
 
     [HideInInspector]
@@ -151,18 +152,29 @@ public class FSMREnemySM : StateMachine, IDamageable
 
     public void Movement()
     {
-        if (Vector2.Distance(transform.position,target.position) < 15)
+        
+        if (Vector2.Distance(bulletTranform.position,target.position) < 15)
         {
-            timeCircle += Time.deltaTime;
-            var normal = (ai.position - target.position).normalized;
-            if (timeCircle > 3)
+            Vector2 dir = ai.targetTransform.position - transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 15,LayerMask.GetMask("Player"));
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                offset *= -1;
-                timeCircle = 0;
-                radius = Random.Range(5,13);
+                timeCircle += Time.deltaTime;
+                Vector2 normal = (ai.position - target.position).normalized;
+                if (timeCircle > 3)
+                {
+                    offset *= -1;
+                    timeCircle = 0;
+                    radius = Mathf.Lerp(radius, Random.Range(5, 13), 0.5f);
+                }
+                Vector2 tangent = new Vector2(-normal.y, normal.x);
+                ai.destination = (Vector2)target.position + normal * radius + tangent * offset;
             }
-            var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
-            ai.destination = target.position + normal * radius + tangent * offset;
+            else
+            {
+                ai.destination = target.position;
+
+            }
         }
         else
         {
