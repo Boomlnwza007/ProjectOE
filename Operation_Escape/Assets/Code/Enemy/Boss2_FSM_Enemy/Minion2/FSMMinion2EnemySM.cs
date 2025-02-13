@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FSMMinion2EnemySM : StateMachine , IDamageable
 {
-    BaseAnimEnemy animator;
+    public Animator animator;
     public Vector2Int size;
     private Vector2Int gridPos;
     private GridBoss2 grid;
@@ -39,8 +39,10 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
 
     public void Fire()
     {
-        GameObject bulletG = Instantiate(bullet, bulletTranform.position, bulletTranform.rotation);
+        animator.SetTrigger("Shoot");
+        GameObject bulletG = Instantiate(bullet, bulletTranform.position, Quaternion.identity);
     }
+
     public void Setup(GridBoss2 grid, Vector2Int gridPos)
     {
         this.grid = grid;

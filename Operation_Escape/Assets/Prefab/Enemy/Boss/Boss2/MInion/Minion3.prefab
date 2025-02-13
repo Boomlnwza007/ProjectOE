@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4971809789070053961}
   - component: {fileID: 1072483864178654776}
   - component: {fileID: 6350491389227396562}
+  - component: {fileID: 3148289689730808246}
+  - component: {fileID: 4422849570791061063}
   m_Layer: 7
   m_Name: Minion3
   m_TagString: Enemy
@@ -77,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.764151, g: 0.12615699, b: 0.75845325, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b5e64d94d362036458928f76a39bfc6b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -179,7 +181,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6350491389227396562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,3 +206,43 @@ MonoBehaviour:
   rb: {fileID: 1072483864178654776}
   dropChange: 0
   jumpCenter: {fileID: 3654373423982788840}
+--- !u!95 &3148289689730808246
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385571796329690185}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 90de1e2f21937114a9806d1ce51d87ce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4422849570791061063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385571796329690185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3413cf8456f604e923ab22aadc4da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3148289689730808246}
+  layerIndex: 0
+  rb: {fileID: 1072483864178654776}
+  timeplay: 0
+  endAnim: 0
+  isFacing: 1
+  isFacingRight: 1

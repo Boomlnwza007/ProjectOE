@@ -9,7 +9,7 @@ public class M2AttackFSM : BaseState
     public IAiAvoid ai;
     private float timer;
     private float time;
-
+    private bool shoot;
     // Start is called before the first frame update
     public override void Enter()
     {
@@ -24,10 +24,19 @@ public class M2AttackFSM : BaseState
         if (timer >= time)
         {
             var state = ((FSMMinion2EnemySM)stateMachine);
-            ((FSMMinion2EnemySM)stateMachine).Fire();
-            timer = 0;
-            time = Random.Range(state.minShoot, state.minShoot);
-            Debug.Log(time);
+            if (!shoot)
+            {
+                shoot = true;
+                state.animator.SetTrigger("Shoot");
+            }
+            if (timer >= time + 0.5f)
+            {
+                state.Fire();
+                timer = 0;
+                time = Random.Range(state.minShoot, state.minShoot);
+                state.animator.SetTrigger("Shoot");
+                shoot = false;
+            }
         }
     }
 }

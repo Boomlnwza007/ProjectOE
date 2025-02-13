@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5515718774292183391}
   - component: {fileID: 4503304217181318163}
   - component: {fileID: 4934487722625905113}
+  - component: {fileID: 8298483822516895945}
   m_Layer: 7
   m_Name: Minion2
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6493184610828517028}
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.764151, g: 0.12615699, b: 0.75845325, a: 1}
+  m_Sprite: {fileID: 1663675975, guid: 08ca19409d459bd4ba38ae312e4905aa, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -154,7 +155,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.19
 --- !u!50 &5515718774292183391
 Rigidbody2D:
   serializedVersion: 4
@@ -206,9 +207,12 @@ MonoBehaviour:
   rb: {fileID: 5515718774292183391}
   dropChange: 0
   jumpCenter: {fileID: 1739218988822365822}
+  animator: {fileID: 0}
   size: {x: 2, y: 2}
   bullet: {fileID: 7636867113743857662, guid: 91855ec18d2170341bdb950eb55b3c4d, type: 3}
   bulletTranform: {fileID: 7332043667675507394}
+  minShoot: 1
+  maxShoot: 3
 --- !u!114 &4934487722625905113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +227,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootlist:
   - {fileID: 11400000, guid: b272f7a7f44e6e24ca3b24d305eefb62, type: 2}
+--- !u!95 &8298483822516895945
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262169369160659716}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 015db686a7d7fdc44b2706e837eef5a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5669909769043285304
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +273,7 @@ Transform:
   m_GameObject: {fileID: 5669909769043285304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.78, y: -137.8, z: -0.089503035}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -280,7 +305,7 @@ Transform:
   m_GameObject: {fileID: 7355641826983853437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -295,7 +320,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6493184610828517028}
-  - component: {fileID: 4861306373207064515}
   m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
@@ -319,16 +343,3 @@ Transform:
   - {fileID: 7332043667675507394}
   m_Father: {fileID: 7081292065540033373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4861306373207064515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7398574459716759630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8cb17d78a2378947acdcf64f1ed6b39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}

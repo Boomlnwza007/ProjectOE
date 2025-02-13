@@ -169,6 +169,7 @@ MonoBehaviour:
   tagUse: Player
   target: {fileID: 0}
   ready: 0
+  ultimate: 0
   speedChangSpeed: 20
   startSpeed: 20
   rotationSpeed: 2
