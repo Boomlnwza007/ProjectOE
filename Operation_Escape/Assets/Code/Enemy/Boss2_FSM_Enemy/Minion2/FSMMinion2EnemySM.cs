@@ -39,7 +39,6 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
 
     public void Fire()
     {
-        animator.SetTrigger("Shoot");
         GameObject bulletG = Instantiate(bullet, bulletTranform.position, Quaternion.identity);
     }
 
