@@ -1810,8 +1810,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 1
-  maxHealth: 600
-  Health: 600
+  maxHealth: 1000
+  Health: 1000
   dmg: 40
   Speed: 13
   visRange: 30
@@ -1844,10 +1844,10 @@ MonoBehaviour:
   cooldown: 0
   overdrive: 0
   overdriveChang: 0
-  overdriveGageMax: 300
+  overdriveGageMax: 500
   overdriveGage: 0
   overdriveTime: 0
-  overdriveTimer: 600
+  overdriveTimer: 1000
   fireRate: 0.7
   stateName: 
   uiBoss: {fileID: 1622645830190059736}
