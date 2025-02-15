@@ -398,3 +398,5 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 0
+  distance: 20
+  offset: 10
