@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6350491389227396562}
   - component: {fileID: 3148289689730808246}
   - component: {fileID: 4422849570791061063}
+  - component: {fileID: -7228178424523739774}
   m_Layer: 7
   m_Name: Minion3
   m_TagString: Enemy
@@ -246,3 +247,17 @@ MonoBehaviour:
   endAnim: 0
   isFacing: 1
   isFacingRight: 1
+--- !u!114 &-7228178424523739774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385571796329690185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbf60ef407b25948b152f31d3807d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 0}
+  duration: 0.1

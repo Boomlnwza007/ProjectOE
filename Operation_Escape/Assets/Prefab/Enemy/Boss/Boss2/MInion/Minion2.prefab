@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4503304217181318163}
   - component: {fileID: 4934487722625905113}
   - component: {fileID: 8298483822516895945}
+  - component: {fileID: 3719281921559749655}
   m_Layer: 7
   m_Name: Minion2
   m_TagString: Untagged
@@ -248,6 +249,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3719281921559749655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262169369160659716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fbf60ef407b25948b152f31d3807d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 0}
+  duration: 0.1
 --- !u!1 &5669909769043285304
 GameObject:
   m_ObjectHideFlags: 0
