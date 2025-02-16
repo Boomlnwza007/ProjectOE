@@ -137,6 +137,7 @@ public class LaserDrone : MonoBehaviour
     public void Destroy()
     {
         laser.enabled = false;
+        PreLaser.enabled = false;
         firstPos.gameObject.SetActive(false);
         endPos.gameObject.SetActive(false);
         GetComponent<LaserDrone>().enabled = false;
@@ -166,6 +167,7 @@ public class LaserDrone : MonoBehaviour
     public void Reset()
     {
         laser.enabled = true;
+        PreLaser.enabled = true;
         firstPos.gameObject.SetActive(true);
         endPos.gameObject.SetActive(true);
     }
