@@ -158,8 +158,8 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
         }
 
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, 45) * rb.velocity.normalized, rayLength, obstacleLayer);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -45) * rb.velocity.normalized, rayLength, obstacleLayer);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, 90) * rb.velocity.normalized, rayLength, obstacleLayer);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -90) * rb.velocity.normalized, rayLength, obstacleLayer);
 
         if (hitLeft.collider != null || hitRight.collider != null)
         {
@@ -167,6 +167,14 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
             rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
         }
 
+        RaycastHit2D hitLeft45 = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, 45) * rb.velocity.normalized, rayLength, obstacleLayer);
+        RaycastHit2D hitRight45 = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -45) * rb.velocity.normalized, rayLength, obstacleLayer);
+
+        if (hitLeft45.collider != null || hitRight45.collider != null)
+        {
+            Vector2 newDirection = (hitLeft45.collider != null) ? Quaternion.Euler(0, 0, -45) * rb.velocity.normalized : Quaternion.Euler(0, 0, 45) * rb.velocity.normalized;
+            rb.velocity = Vector2.SmoothDamp(rb.velocity, newDirection * curSpeed, ref velocity, smoothTime);
+        }
         endMove = move;
     }
 
