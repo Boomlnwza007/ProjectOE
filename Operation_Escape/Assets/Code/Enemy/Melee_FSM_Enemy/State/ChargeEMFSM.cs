@@ -45,15 +45,16 @@ public class ChargeEMFSM : BaseState
 
         try
         {
+            ai.canMove = false;
             if (CheckWay())
             {
-                ai.canMove = false;
                 await state.PreAttackN("PreDashAttack");
                 state.col.enabled = false;
                 state.shadow.SetActive(false);
                 jump = true;
                 startPos = ai.position;
-                controlPoint = (startPos + target) / 2 + Vector2.up * 3;
+                target = ai.targetTransform.position;
+                controlPoint = (startPos + (Vector2)ai.targetTransform.position) / 2 + Vector2.up * 3;
                 await UniTask.WaitUntil(() => !jump , cancellationToken: token);
                 state.col.enabled = true;
                 state.shadow.SetActive(true);                
@@ -69,7 +70,6 @@ public class ChargeEMFSM : BaseState
 
             ai.canMove = true;
             ChangState(state.CheckDistance);
-            Debug.Log("jumpF");
         }
         catch (OperationCanceledException)
         {
@@ -109,11 +109,10 @@ public class ChargeEMFSM : BaseState
     {
         var state = (FSMMEnemySM)stateMachine;
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-        RaycastHit2D raycast = Physics2D.BoxCast(ai.position,new Vector2(1,2),0, dir, state.jumpLength, state.raycastMaskWay);
+        RaycastHit2D raycast = Physics2D.Raycast(ai.position, dir, state.jumpLength, state.raycastMaskWay);
         if (raycast.collider != null && raycast.collider.CompareTag("Player"))
         {
-            Vector2 backDirection = (-dir).normalized;
-            target = raycast.point - (backDirection * 2f);
+            target = raycast.collider.gameObject.transform.position;
             state.animator.isFacing = false;
         }
         return raycast.collider != null && raycast.collider.CompareTag("Player");
