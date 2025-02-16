@@ -598,6 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 3
   rayLength: 2
+  rayLengthLR: 2.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32832
