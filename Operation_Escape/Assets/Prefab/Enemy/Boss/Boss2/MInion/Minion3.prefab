@@ -107,7 +107,7 @@ MonoBehaviour:
   rayLength: 2
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 32832
   agentLayer:
     serializedVersion: 2
     m_Bits: 128
