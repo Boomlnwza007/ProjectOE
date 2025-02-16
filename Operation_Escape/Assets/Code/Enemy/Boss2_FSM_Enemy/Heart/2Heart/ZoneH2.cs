@@ -7,7 +7,7 @@ public class ZoneH2 : MonoBehaviour
     [SerializeField] private StateMachine mon;
     public int dmg;
     public float distance;
-    private float size = 7;
+    private float size = 10;
 
     private void Start()
     {
