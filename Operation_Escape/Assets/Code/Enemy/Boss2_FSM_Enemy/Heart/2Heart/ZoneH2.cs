@@ -7,7 +7,7 @@ public class ZoneH2 : MonoBehaviour
     [SerializeField] private StateMachine mon;
     public int dmg;
     public float distance;
-    private float size = 5;
+    private float size = 7;
 
     private void Start()
     {
@@ -24,5 +24,5 @@ public class ZoneH2 : MonoBehaviour
                 player.Takedamage(dmg, DamageType.Melee, 0);
             }
         }
-    }
+    }   
 }
