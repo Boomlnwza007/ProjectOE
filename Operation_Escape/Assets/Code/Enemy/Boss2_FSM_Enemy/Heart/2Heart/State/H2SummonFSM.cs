@@ -27,9 +27,9 @@ public class H2SummonFSM : BaseState
 
         try
         {
-
             state.animator.ChangeAnimationAttack("ExpandAttack");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            state.animator.ChangeAnimationAttack("Idle");
             Cooldown().Forget();
             state.shield.ShieldIsOn(true);
             ChangState(state.attack);
