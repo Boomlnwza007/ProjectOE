@@ -112,7 +112,7 @@ public class ChargeEMFSM : BaseState
         RaycastHit2D raycast = Physics2D.Raycast(ai.position, dir, state.jumpLength, state.raycastMaskWay);
         if (raycast.collider != null && raycast.collider.CompareTag("Player"))
         {
-            target = raycast.collider.gameObject.transform.position;
+            target = raycast.point;
             state.animator.isFacing = false;
         }
         return raycast.collider != null && raycast.collider.CompareTag("Player");
