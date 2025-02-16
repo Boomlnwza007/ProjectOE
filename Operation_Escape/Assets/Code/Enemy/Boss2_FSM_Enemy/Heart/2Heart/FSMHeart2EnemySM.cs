@@ -9,6 +9,8 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     public float timeCooldownSpike;
     public float timeCooldownMinion;
 
+    public GameObject particleZone;
+
     public BaseAnimEnemy animator;
     public bool imortal { get; set; }
 
@@ -68,5 +70,19 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     public IEnumerator Imortal(float wait)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void SpawnParticle(float radius)
+    {
+        int numObjects = Mathf.FloorToInt((2 * Mathf.PI * radius) / 1); ;
+        for (int i = 0; i < numObjects; i++)
+        {
+            float angle = i * Mathf.PI * 2f / numObjects; // คำนวณมุมของแต่ละจุด
+            float x = Mathf.Cos(angle) * radius;
+            float y = Mathf.Sin(angle) * radius;
+            Vector3 spawnPosition = new Vector3(x, y, 0) + transform.position;
+
+            Instantiate(particleZone, spawnPosition, Quaternion.identity);
+        }
     }
 }

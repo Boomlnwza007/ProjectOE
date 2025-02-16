@@ -13,7 +13,9 @@ public class H2SummonFSM : BaseState
 
     public override void Enter()
     {
+        var state = (FSMHeart2EnemySM)stateMachine;
         Attack().Forget();
+        state.shield.ShieldIsOn(false);
     }
 
     public async UniTask Attack()
@@ -21,19 +23,15 @@ public class H2SummonFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMHeart2EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
 
         try
         {
-            for (int i = 0; i < 3; i++)
-            {
-                state.SummonMinion(0);
-            }
-            state.ResetPositions();
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-            Cooldown().Forget();
 
-            await UniTask.WaitForSeconds(state.timeCooldownSpike);
+            state.animator.ChangeAnimationAttack("ExpandAttack");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            Cooldown().Forget();
+            state.shield.ShieldIsOn(true);
             ChangState(state.attack);
         }
         catch (OperationCanceledException)
