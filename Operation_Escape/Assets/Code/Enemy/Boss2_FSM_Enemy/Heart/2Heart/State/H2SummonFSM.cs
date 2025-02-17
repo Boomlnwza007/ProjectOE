@@ -15,7 +15,7 @@ public class H2SummonFSM : BaseState
     {
         var state = (FSMHeart2EnemySM)stateMachine;
         Attack().Forget();
-        state.shield.ShieldIsOn(false);
+       state.shield.ShieldIsOn(false);
     }
 
     public async UniTask Attack()

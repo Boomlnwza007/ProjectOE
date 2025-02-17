@@ -33,6 +33,7 @@ public class H2AttackFSM : BaseState
             if (count >= 4)
             {
                 ChangState(state.summon);
+                count = 0;
                 return;
             }
 

@@ -31,6 +31,7 @@ public class H1AttackFSM : BaseState
             if (count>=4)
             {                
                 ChangState(state.summon);
+                count = 0;
                 return;
             }
 
