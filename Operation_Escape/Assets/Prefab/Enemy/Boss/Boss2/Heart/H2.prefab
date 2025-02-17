@@ -101,11 +101,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 623214947
+  m_SortingLayer: -1
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9056604, g: 0.47419012, b: 0.5626968, a: 0.16862746}
+  m_Color: {r: 0.5, g: 0.21933961, b: 0.27547178, a: 0.16862746}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -124,8 +124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6299109644858568845}
-  - component: {fileID: 3382094603375854172}
-  - component: {fileID: 1589622796600040984}
   m_Layer: 7
   m_Name: Hit
   m_TagString: Untagged
@@ -148,56 +146,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1769670117586182860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3382094603375854172
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3481883505362523656}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &1589622796600040984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3481883505362523656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c3d63d75957e3b4b95482a0b557e2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mon: {fileID: 293495755794988441}
-  dmg: 30
-  distance: 0
 --- !u!1 &3880008754529431870
 GameObject:
   m_ObjectHideFlags: 0

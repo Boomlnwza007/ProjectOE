@@ -10,6 +10,7 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
     public LayerMask raycastMaskWay;
     public LayerMask raycastMask;
     public float jumpLength = 6;
+    public GameObject eDead;
 
     [HideInInspector]
     public M1AttackFSM attack;
@@ -95,6 +96,7 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
                 dam.Takedamage(dmg, DamageType.Melee, 5);
             }
         }
+        Instantiate(eDead,transform.position,Quaternion.identity);
         Destroy(gameObject);
     }
 }

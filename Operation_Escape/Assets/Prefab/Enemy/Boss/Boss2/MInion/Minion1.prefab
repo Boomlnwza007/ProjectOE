@@ -106,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 3
   rayLength: 3
+  rayLengthLR: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32832
@@ -215,6 +216,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   jumpLength: 6
+  eDead: {fileID: 7541123403067889326, guid: d6190a36a6043a544b97a1079241d9b9, type: 3}
   nameState: 
 --- !u!114 &2453006889408840406
 MonoBehaviour:

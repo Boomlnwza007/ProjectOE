@@ -52,8 +52,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3224f04030b14ca2be4708dc4ef2d2b5_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: e8a3101f3d4b33941bd406b2453f018e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
         m_Texture: {fileID: 2800000, guid: 2137c4aa23c1ed342aa052baf0bea753, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DTe:
+        m_Texture: {fileID: 2800000, guid: 736cb85684f534c40b760c2c0ccf512b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -78,7 +86,7 @@ Material:
     - _outline: 0.1
     - _speed: 12
     m_Colors:
-    - _Color: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 1}
+    - _Color: {r: 2, g: 2, b: 2, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _Offet: {r: 1, g: 0, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

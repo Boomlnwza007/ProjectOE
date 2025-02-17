@@ -10,6 +10,7 @@ public class M1AttackFSM : BaseState
     public M1AttackFSM(FSMMinion1EnemySM stateMachine) : base("Attacck", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
+    public bool cooldown;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -30,9 +31,9 @@ public class M1AttackFSM : BaseState
         try
         {
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
-            ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             state.Walk();
             ai.canMove = true;
+            ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
             state.Run(3);
             float time = 0f;
 
@@ -45,10 +46,8 @@ public class M1AttackFSM : BaseState
                     ai.canMove = false;
                     ai.monVelocity = Vector2.zero;
                     state.Walk();
-                    state.Attack();
-
-                    hasAttacked = true;
-
+                    Cooldown().Forget();
+                    ChangState(state.checkDistance);
                     return;
                 }
 
@@ -61,10 +60,8 @@ public class M1AttackFSM : BaseState
                         ai.monVelocity = Vector2.zero;
                         state.Walk();
                         state.Attack();
-
-
+                        Cooldown().Forget();
                         hasAttacked = true;
-
                         return;
                     }
                 }
@@ -74,6 +71,7 @@ public class M1AttackFSM : BaseState
 
             ai.canMove = true;
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            Cooldown().Forget();
             ChangState(state.checkDistance);
 
         }
@@ -153,6 +151,13 @@ public class M1AttackFSM : BaseState
             token.ThrowIfCancellationRequested();
             await UniTask.Yield();
         }
+    }
+
+    public async UniTask Cooldown()
+    {
+        cooldown = true;
+        await UniTask.WaitForSeconds(1);
+        cooldown = false;
     }
 
     public override void Exit()
