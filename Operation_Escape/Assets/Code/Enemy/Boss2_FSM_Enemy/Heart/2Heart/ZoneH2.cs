@@ -6,8 +6,8 @@ public class ZoneH2 : MonoBehaviour
 {
     [SerializeField] private StateMachine mon;
     public int dmg;
-    public float distance;
-    private float size = 10;
+    public static bool hit;
+    public float size = 5;
 
     private void Start()
     {
@@ -16,13 +16,11 @@ public class ZoneH2 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")&& !hit)
         {
-            if (Vector2.Distance(transform.position, collision.transform.position) > distance - size)
-            {
-                IDamageable player = collision.GetComponent<IDamageable>();
-                player.Takedamage(dmg, DamageType.Melee, 0);
-            }
+            hit = true;
+            IDamageable player = collision.GetComponent<IDamageable>();
+            player.Takedamage(dmg, DamageType.Melee, 0);
         }
     }   
 }

@@ -74,6 +74,7 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
 
     public void SpawnParticle(float radius)
     {
+        ZoneH2.hit = false;
         int numObjects = Mathf.FloorToInt((2 * Mathf.PI * radius) / 1); ;
         for (int i = 0; i < numObjects; i++)
         {
