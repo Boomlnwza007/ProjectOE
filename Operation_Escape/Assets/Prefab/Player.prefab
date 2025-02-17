@@ -2038,7 +2038,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 137056
+  m_InstanceId: 68970
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -4002,6 +4002,37 @@ MonoBehaviour:
   numberOfItems: 8
   iconShow: {fileID: 4474842958386755581, guid: 0bfa6271844aeb7489d52dffb8e775b2, type: 3}
   Wheel: {fileID: 1578681322766815945}
+--- !u!1 &3281990316655141796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84803880909640251}
+  m_Layer: 0
+  m_Name: feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &84803880909640251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281990316655141796}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.12763596, y: -0.812, z: -0.0025384426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9178602101280717769}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3351793893570267720
 GameObject:
   m_ObjectHideFlags: 0
@@ -8781,6 +8812,7 @@ Transform:
   - {fileID: 3211886747834535048}
   - {fileID: 6915200824899305768}
   - {fileID: 1388982272212292330}
+  - {fileID: 84803880909640251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8238799296013795416
@@ -8985,6 +9017,7 @@ MonoBehaviour:
   playerAim: {fileID: 1781867465748768360}
   animator: {fileID: 6778737011727104026}
   isdaed: 0
+  feet: {fileID: 3281990316655141796}
   UI: {fileID: 3257738974196051764}
   healthBar: {fileID: 4370306752507434572}
   ultimateEnergyBar: {fileID: 2533806186777912645}

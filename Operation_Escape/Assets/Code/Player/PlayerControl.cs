@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private PlayerAim playerAim;
     public Animator animator;
     public bool isdaed;
+    public GameObject feet;
 
     [Header("UI")]
     [SerializeField] private GameObject UI;

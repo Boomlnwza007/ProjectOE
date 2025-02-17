@@ -53,7 +53,7 @@ public class ChargeEMFSM : BaseState
                 state.shadow.SetActive(false);
                 jump = true;
                 startPos = ai.position;
-                target = ai.targetTransform.position;
+                target = PlayerControl.control.feet.transform.position;
                 controlPoint = (startPos + (Vector2)ai.targetTransform.position) / 2 + Vector2.up * 3;
                 await UniTask.WaitUntil(() => !jump , cancellationToken: token);
                 state.col.enabled = true;
