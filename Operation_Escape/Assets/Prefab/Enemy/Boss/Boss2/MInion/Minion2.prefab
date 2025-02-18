@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3719281921559749655}
   m_Layer: 7
   m_Name: Minion2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 3
   rayLength: 3
+  rayLengthLR: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -208,9 +209,9 @@ MonoBehaviour:
   rb: {fileID: 5515718774292183391}
   dropChange: 0
   jumpCenter: {fileID: 1739218988822365822}
-  animator: {fileID: 0}
+  animator: {fileID: 8298483822516895945}
   size: {x: 2, y: 2}
-  bullet: {fileID: 7636867113743857662, guid: 91855ec18d2170341bdb950eb55b3c4d, type: 3}
+  bullet: {fileID: 7636867113743857662, guid: 88937e3c1b3f996499e0cfe08a4c48be, type: 3}
   bulletTranform: {fileID: 7332043667675507394}
   minShoot: 1
   maxShoot: 3
@@ -261,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbf60ef407b25948b152f31d3807d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashMaterial: {fileID: 0}
+  flashMaterial: {fileID: 2100000, guid: 5de474ef38adb3c4cbd6871473a905be, type: 2}
   duration: 0.1
 --- !u!1 &5669909769043285304
 GameObject:

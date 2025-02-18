@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &258363197673395361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4135059611919228615}
+  m_Layer: 7
+  m_Name: HandGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4135059611919228615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258363197673395361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2638416177024746114}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2937491080201041158
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +134,7 @@ MonoBehaviour:
   redy: 1
   conShield: 0
   filter:
-    useTriggers: 0
+    useTriggers: 1
     useLayerMask: 0
     useDepth: 0
     useOutsideDepth: 0
@@ -220,6 +251,7 @@ GameObject:
   - component: {fileID: 4437696357558524318}
   - component: {fileID: 7906573636221047302}
   - component: {fileID: 821126017381750788}
+  - component: {fileID: 5312739473816157307}
   m_Layer: 7
   m_Name: H4
   m_TagString: Enemy
@@ -243,6 +275,8 @@ Transform:
   - {fileID: 5051025814757502835}
   - {fileID: 1940768176715720196}
   - {fileID: 1616173377875099494}
+  - {fileID: 1616168734901873020}
+  - {fileID: 4135059611919228615}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2337673144820239612
@@ -387,6 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 1
   rayLength: 1
+  rayLengthLR: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -435,7 +470,7 @@ MonoBehaviour:
   dmg: 0
   Speed: 0
   visRange: 30
-  attacking: 0
+  attacking: 1
   lootDrop: {fileID: 4459137585408212846}
   target: {fileID: 0}
   rb: {fileID: 1020634064356078739}
@@ -443,6 +478,7 @@ MonoBehaviour:
   jumpCenter: {fileID: 2638416177024746114}
   grid: {fileID: 5498119468378626252}
   spike: {fileID: 11400000, guid: 8e8e23b70bceadc4bb1d49d30c1ea942, type: 2}
+  spikeN: {fileID: 0}
   minion: {fileID: 11400000, guid: 1cf89fbeb89539f408b1692afa1065a5, type: 2}
   spawnPoint:
   - {fileID: 3732721272179918888}
@@ -453,7 +489,33 @@ MonoBehaviour:
   timePreSpike: 0.4
   timeCooldownSpike: 0.5
   timeCooldownMinion: 5
+  bulletmon: {fileID: 7636867113743857662, guid: 174cc0ad29140374587101318d4e8bbe, type: 3}
+  speedRot: 10
+  lineRendererPrefab: {fileID: 6985345348325332878, guid: 6dd1025c435c2814aba30f3618331e48, type: 3}
+  handGun: {fileID: 4135059611919228615}
+  bulletTransform: {fileID: 1616168734901873020}
   animator: {fileID: 0}
+--- !u!95 &5312739473816157307
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772528000506552950}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c990a1b6430da448961481388aaa36b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6390348655801494761
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +643,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1616173377875099494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7826963303950389599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1616168734901873020}
+  m_Layer: 0
+  m_Name: Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1616168734901873020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826963303950389599}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2638416177024746114}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8331324830581285748
 GameObject:

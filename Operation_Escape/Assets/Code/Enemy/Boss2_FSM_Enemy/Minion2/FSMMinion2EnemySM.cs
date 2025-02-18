@@ -8,6 +8,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     public Vector2Int size;
     private Vector2Int gridPos;
     private GridBoss2 grid;
+    public static List<FSMMinion2EnemySM> monInMap = new List<FSMMinion2EnemySM>();
 
     [Header("Range")]
     [SerializeField]
@@ -30,6 +31,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     {
         attack = new M2AttackFSM(this);
         idle = new M2IdleFSM(this);
+        monInMap.Add(this);
     }
 
     protected override BaseState GetInitialState()
@@ -69,6 +71,8 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
 
     public void Die()
     {
+        monInMap.Remove(this);
+        grid.MarkGrid(gridPos, size, false);
         Destroy(gameObject.transform.parent.gameObject);
         Destroy(gameObject);
     }

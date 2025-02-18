@@ -30,7 +30,7 @@ public class M2IdleFSM : BaseState
     public async UniTask Reay()
     {
         var state = (FSMMinion2EnemySM)stateMachine;
-        await UniTask.WaitForSeconds(1);
+        await UniTask.WaitForSeconds(Random.Range(0,state.maxShoot));
         ChangState(state.attack);
     }
 }

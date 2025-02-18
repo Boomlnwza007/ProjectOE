@@ -251,9 +251,16 @@ public class LaserFire : MonoBehaviour
         Vector2 dir = (target.position - transform.position).normalized;
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float currentAngle = transform.eulerAngles.z;
-        float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
+
+        // คำนวณความเร็วการหมุนตามระยะห่าง เพื่อให้การหมุนคงที่
+        float distance = Vector2.Distance(transform.position, target.position);
+        float rotationSpeed = speedRot / (distance + 1f); // บวก 1 เพื่อป้องกันหารด้วย 0
+
+        // หมุนไปยังมุมเป้าหมายด้วยความเร็วที่เหมาะสม
+        float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
         transform.eulerAngles = new Vector3(0, 0, newAngle);
+
     }
 
     public void LaserFollowStF(Vector3 target)

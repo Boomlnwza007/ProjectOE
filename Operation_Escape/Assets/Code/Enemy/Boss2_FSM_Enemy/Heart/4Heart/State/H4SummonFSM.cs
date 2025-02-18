@@ -11,6 +11,8 @@ public class H4SummonFSM : BaseState
     public H4SummonFSM(FSMHeart4EnemySM stateEnemy) : base("Summon", stateEnemy) { }
     private CancellationTokenSource cancellationToken;
     public bool cooldown;
+    public float charge = 2;
+    public float shoot = 5;
 
     public override void Enter()
     {
@@ -26,10 +28,21 @@ public class H4SummonFSM : BaseState
 
         try
         {            
-            for (int i = 0; i < 2; i++)
+            state.CreatLaserGun();
+            await state.ShootLaser(charge, shoot, 1, charge + shoot);
+            state.DelLaserGun();
+            for (int i = 0; i < 3; i++)
             {
-                state.SummonMinion(0,new Vector2Int(2,2));
+                state.ChargeBullet();
+                await UniTask.WaitForSeconds(1.2f);
             }
+            int start = FSMMinion2EnemySM.monInMap.Count;
+            Debug.Log(start);
+            for (int i = start; i < 2; i++)
+            {
+                state.SummonMinion(1, new Vector2Int(2, 2));
+            }
+
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             Cooldown().Forget();
             ChangState(state.attack);

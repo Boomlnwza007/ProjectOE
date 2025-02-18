@@ -70,7 +70,7 @@ public class GridBoss2 : MonoBehaviour
             Vector2Int pos = spawnPosition.Value;
             Vector3 worldPos = GridToWorldPosition(pos);
 
-            FSMMinion2EnemySM minion = Instantiate(minionType.gameObject, worldPos, Quaternion.identity).GetComponent<FSMMinion2EnemySM>();
+            FSMMinion2EnemySM minion = Instantiate(minionType.gameObject, worldPos, Quaternion.identity).GetComponentInChildren<FSMMinion2EnemySM>();
             minion.Setup(this,pos);
             MarkGrid(pos, size, true);
         }

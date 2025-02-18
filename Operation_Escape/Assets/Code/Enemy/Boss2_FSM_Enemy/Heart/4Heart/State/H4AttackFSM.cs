@@ -9,13 +9,12 @@ public class H4AttackFSM : BaseState
 {
     public H4AttackFSM(FSMHeart4EnemySM stateEnemy) : base("Attack", stateEnemy) { }
     private CancellationTokenSource cancellationToken;
-    private int countSpike = 0;
+    private int count = 0;
     public bool cooldown;
 
     public override void Enter()
     {
-        var state = (FSMHeart4EnemySM)stateMachine;
-        countSpike++;
+        count++;
         Attack().Forget();
     }
 
@@ -28,22 +27,13 @@ public class H4AttackFSM : BaseState
         
         try
         {
-            state.AttackNSpike(state.timePreSpike);
-            await UniTask.WaitForSeconds(state.timePreSpike + 0.5f, cancellationToken: token);
-            for (int i = 0; i < 3; i++)
-            {
-                state.AttackNSpike(0.5f);
-                await UniTask.WaitForSeconds(1f, cancellationToken: token);
-            }
+            state.AttackNSpike();
+            await UniTask.WaitUntil(() => state.spikeN.final, cancellationToken: token);
 
-            state.AttackRSpike();
-            await UniTask.WaitForSeconds(1f, cancellationToken: token);
-
-            if (countSpike >= 5)
+            if (count >= 4 && !state.summon.cooldown)
             {
-                state.AttackZSpike();
-                await UniTask.WaitForSeconds(2f, cancellationToken: token);
-                ChangState(state.summon); 
+                ChangState(state.summon);
+                count = 0;
                 return;
             }
 
