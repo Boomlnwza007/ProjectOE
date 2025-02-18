@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043108c831c95bc44b1b18cd7d3f9f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 1
-  dps: 0.1
+  dmg: 5
+  dps: 0.5
 --- !u!58 &4425483007267899958
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a65a1f3d7e0b6394391c7a13dde71219, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,8 +155,8 @@ SpriteRenderer:
   m_SortingLayerID: 1314857649
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9528302, g: 0.21124065, b: 0.21124065, a: 0.25490198}
+  m_Sprite: {fileID: 21300000, guid: 2137c4aa23c1ed342aa052baf0bea753, type: 3}
+  m_Color: {r: 0.8301887, g: 0.58348167, b: 0.58348167, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -12,6 +12,7 @@ public class H3SummonFSM : BaseState
     private CancellationTokenSource cancellationToken;
     public bool cooldown;
     public int count = 0;
+    private bool endState;
 
     public override void Enter()
     {
@@ -21,31 +22,32 @@ public class H3SummonFSM : BaseState
 
     public override void UpdateLogic()
     {
-
-        if (SpikeZ.hit)
+        if (!endState)
         {
-            var state = (FSMHeart3EnemySM)stateMachine;
-            Cooldown().Forget();
-            ChangState(state.attack);
-            return;
-        }
-        else if (SpikeZ.end)
-        {
-            var state = (FSMHeart3EnemySM)stateMachine;
-            count++;
-            if (count > 3)
+            if (SpikeZ.end)
             {
-                count = 0;
-                Cooldown().Forget();
-                ChangState(state.attack);
+                if (SpikeZ.hit || ++count > 3)
+                {
+                    endState = true;
+                    ExitState().Forget();
+                }
+                else
+                {
+                    var state = (FSMHeart3EnemySM)stateMachine;
+                    ChangState(state.summon);
+                }
             }
-            else
-            {
-                ChangState(state.summon);
-            }
-            return;
-        }
+        }     
 
+    }
+
+    public async UniTask ExitState()
+    {
+        await UniTask.WaitForSeconds(1f);
+        var state = (FSMHeart3EnemySM)stateMachine;
+        count = 0;
+        Cooldown().Forget();
+        ChangState(state.attack);
     }
 
     public async UniTask Cooldown()

@@ -30,7 +30,7 @@ public class H2AttackFSM : BaseState
             state.AttackNSpike();
             await UniTask.WaitUntil(() => state.spikeN.final, cancellationToken: token);
 
-            if (count >= 4)
+            if (count >= 4 && !state.summon.cooldown)
             {
                 ChangState(state.summon);
                 count = 0;

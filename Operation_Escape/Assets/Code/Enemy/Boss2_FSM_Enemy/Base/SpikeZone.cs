@@ -8,7 +8,17 @@ public class SpikeZone : MonoBehaviour
     public float dps;
     private float time;
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Hit(collision);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
+    {
+        Hit(collision);
+    }
+
+    public void Hit(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -20,7 +30,6 @@ public class SpikeZone : MonoBehaviour
                     damage.Takedamage(dmg, DamageType.Melee, 0);
                     SpikeZ.hit = true;
                 }
-
                 time = 0;
             }
         }
