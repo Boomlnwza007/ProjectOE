@@ -94,7 +94,7 @@ public class RangeAB1Fsm : BaseState
             if (overdrive)
             {
                 ani.ChangeAnimationAttack("RangeAtk");
-                await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 3.5f), Missil());
+                await UniTask.WhenAll(state.ShootLaser(charge, 6f, 1, charge + 6f, 45f), Missil());
                 ani.ChangeAnimationAttack("RangeAtkEnd");
                 await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             }

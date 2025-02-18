@@ -41282,7 +41282,7 @@ MonoBehaviour:
   dropChange: 0
   jumpCenter: {fileID: 0}
   bulletmon: {fileID: 4640713933992763453, guid: 3aaaae0f0a045f242be35346e039847d, type: 3}
-  speedRot: 10
+  speedRot: 70
   lineRendererPrefab: {fileID: 6985345348325332878, guid: 6dd1025c435c2814aba30f3618331e48, type: 3}
   handGun: {fileID: 827654921515527445}
   hand: {fileID: 2975821635399385749}

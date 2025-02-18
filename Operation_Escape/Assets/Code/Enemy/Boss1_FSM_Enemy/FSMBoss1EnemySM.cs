@@ -167,7 +167,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         foreach (var laserGun in lasers)
         {
             LaserFire laser = laserGun.GetComponent<LaserFire>();
-            laser.speedRot = speedRot;
+            laser.speedRot = speedRot*10;
             laser.targetPlayer = target;
             laser.followCode = 2;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));            
@@ -180,7 +180,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         foreach (var laserGun in lasers)
         {
             LaserFire laser = laserGun.GetComponent<LaserFire>();
-            laser.speedRot = speedRot;
+            laser.speedRot = speedRot*10;
             laser.targetPlayer = target;
             laser.followCode = 2;
             await UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime));
@@ -194,7 +194,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
-            laser.speedRot = speedRot;
+            laser.speedRot = speedRot*10;
             laser.target = target.position;
             laser.followCode = 0;
             UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime)).Forget();
@@ -225,7 +225,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
                 LaserFire laser = lasers[i].GetComponent<LaserFire>();
                 laser.target = target.position;
             }
-            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot);
+            float newAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * speedRot*10);
             handGun.eulerAngles = new Vector3(0, 0, newAngle);
 
             if (timer > time)
