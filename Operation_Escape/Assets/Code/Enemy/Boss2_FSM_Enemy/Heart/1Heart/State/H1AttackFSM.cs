@@ -25,7 +25,7 @@ public class H1AttackFSM : BaseState
 
         try
         {
-            state.AttackNSpike(new Vector2Int(2,2));
+            state.AttackNSpike();
             await UniTask.WaitUntil(() => state.spikeN.final, cancellationToken: token);
 
             if (count>=4)

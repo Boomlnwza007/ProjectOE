@@ -30,7 +30,7 @@ public class H1SummonFSM : BaseState
             {
                 state.SummonMinion(0);
             }
-            state.ResetPositions();
+            state.ResetPositionsMInion();
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             Cooldown().Forget();
 

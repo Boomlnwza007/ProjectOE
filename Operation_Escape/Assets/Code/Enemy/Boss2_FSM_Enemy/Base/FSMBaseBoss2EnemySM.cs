@@ -38,7 +38,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
         }
     }
 
-    public void AttackNSpike(Vector2Int size)
+    public void AttackNSpike()
     {
         spikeN = Instantiate(spike.Item[2],ai.targetTransform.position,Quaternion.identity).GetComponent<SpikeN>();
     }
@@ -51,6 +51,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
 
     public void AttackZSpike()
     {
+        SpikeZ.Setup();
         Instantiate(spike.Item[1].gameObject, ai.targetTransform.position, Quaternion.identity);
     }
 
@@ -68,7 +69,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
         grid.SpawnMinion(size, minion.Item[type]);
     }
 
-    public void ResetPositions()
+    public void ResetPositionsMInion()
     {
         availablePositions = new List<Transform>(spawnPoint);
     }

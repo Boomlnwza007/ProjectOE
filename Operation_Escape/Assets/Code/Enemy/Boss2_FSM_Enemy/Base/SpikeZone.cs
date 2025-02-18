@@ -18,6 +18,7 @@ public class SpikeZone : MonoBehaviour
                 if (collision.TryGetComponent(out IDamageable damage))
                 {
                     damage.Takedamage(dmg, DamageType.Melee, 0);
+                    SpikeZ.hit = true;
                 }
 
                 time = 0;

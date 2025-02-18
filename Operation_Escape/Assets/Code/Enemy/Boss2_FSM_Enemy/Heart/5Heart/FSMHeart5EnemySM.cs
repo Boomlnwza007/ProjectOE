@@ -21,7 +21,7 @@ public class FSMHeart5EnemySM : FSMBaseBoss2EnemySM , IDamageable
 
     private void Awake()
     {
-        ResetPositions();
+        ResetPositionsMInion();
         Idle = new H5IdleFSM(this);
         attack = new H5AttackFSM(this);
         summon = new H5SummonFSM(this);
