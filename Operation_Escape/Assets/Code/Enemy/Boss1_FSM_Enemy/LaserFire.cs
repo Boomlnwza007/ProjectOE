@@ -63,10 +63,6 @@ public class LaserFire : MonoBehaviour
                     {
                         LaserFollowIN(targetPlayer);
                     }
-                    else
-                    {
-                        Debug.Log(gameObject.name);
-                    }
                     break;
                 case 1:
                     LaserFollowStF(target);

@@ -166,6 +166,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     {
         foreach (var laserGun in lasers)
         {
+            SetupHandGun();
             LaserFire laser = laserGun.GetComponent<LaserFire>();
             laser.speedRot = speedRot*10;
             laser.targetPlayer = target;
@@ -179,6 +180,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     {
         foreach (var laserGun in lasers)
         {
+            SetupHandGun();
             LaserFire laser = laserGun.GetComponent<LaserFire>();
             laser.speedRot = speedRot*10;
             laser.targetPlayer = target;
@@ -187,14 +189,14 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }
     }
 
-    public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime)
+    public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime, float speedRot)
     {
         CreatLaserGunFollow();
 
         for (int i = 0; i < lasers.Count; i++)
         {
             LaserFire laser = lasers[i].GetComponent<LaserFire>();
-            laser.speedRot = speedRot*10;
+            laser.speedRot = speedRot;
             laser.target = target.position;
             laser.followCode = 0;
             UniTask.WhenAll(laser.ShootLaser(charge, duration, speedMulti), laser.Aim(Atime)).Forget();

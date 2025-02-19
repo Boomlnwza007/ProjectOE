@@ -230,7 +230,7 @@ public class NormalAB1FSM : BaseState
 
         //state.CreatLaserGun(angle);
 
-        await UniTask.WhenAll(state.ShootLaserFollowIn(1f, 3f, 1, 4.5f), state.RangeFollow(2f));
+        await UniTask.WhenAll(state.ShootLaserFollowIn(1f, 3f, 1, 4.5f,9f), state.RangeFollow(2f));
         state.DelLaserGun();
     }
 
