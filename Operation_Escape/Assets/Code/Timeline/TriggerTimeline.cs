@@ -53,6 +53,7 @@ public class TriggerTimeline : MonoBehaviour
     {
         systemControl.Cutscene(true);
         PlayerControl.control.EnableUI(true);
+        PlayerControl.control.ShowGun(true);
         if (playAwake)
         {
             Actor.position = EndPos;
@@ -65,6 +66,7 @@ public class TriggerTimeline : MonoBehaviour
         {
             Play = true;
             systemControl.Cutscene(false);
+            PlayerControl.control.ShowGun(false);
             StartCoroutine(StartPosition());            
         }
     }

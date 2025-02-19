@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     public Animator animator;
     public bool isdaed;
     public GameObject feet;
+    private bool showgun = true;
 
     [Header("UI")]
     [SerializeField] private GameObject UI;
@@ -82,7 +83,7 @@ public class PlayerControl : MonoBehaviour
     private void UpdateAnimation()
     {
         bool isFacingRight = playerAim.angle > -90 && playerAim.angle < 90;
-        bool HasGun = playerCombat.gunList.Count > 0;
+        bool HasGun = playerCombat.gunList.Count > 0 && showgun;
 
         animator.SetBool("Right", isFacingRight);
 
@@ -252,7 +253,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (playerCombat.currentEquipGun!=null)
         {
-           playerCombat.currentEquipGun.SetActive(on);
+            showgun = on;
+            playerCombat.currentEquipGun.SetActive(on);
         }
     }
 }
