@@ -18,6 +18,7 @@ public class H3SummonFSM : BaseState
     {
         var state = (FSMHeart3EnemySM)stateMachine;
         state.AttackZSpike();
+        endState = false;
     }
 
     public override void UpdateLogic()
@@ -43,7 +44,7 @@ public class H3SummonFSM : BaseState
 
     public async UniTask ExitState()
     {
-        await UniTask.WaitForSeconds(1f);
+        await UniTask.WaitForSeconds(0.5f);
         var state = (FSMHeart3EnemySM)stateMachine;
         count = 0;
         Cooldown().Forget();
