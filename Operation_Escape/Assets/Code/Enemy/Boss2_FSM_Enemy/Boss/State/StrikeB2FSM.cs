@@ -28,12 +28,12 @@ public class StrikeB2FSM : BaseState
         try
         {
             await UniTask.WaitForSeconds(3, cancellationToken: token);
-            await Strike(token);
+            await Strike();
             RandomEdge();
             for (int i = 0; i < 3; i++)
             {
                 await UniTask.WaitForSeconds(2);
-                await Strike(token);
+                await Strike();
             }
             ChangState(state.eat);
         }
@@ -44,14 +44,14 @@ public class StrikeB2FSM : BaseState
         }
     }
 
-    public async UniTask Strike(CancellationToken token)
+    public async UniTask Strike()
     {
         var state = (FSMBoss2EnemySM)stateMachine;
         state.inRoom = true;
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
         state.colliderBoss.enabled = false;            
         state.rb.velocity = dir * state.Speed;
-        await UniTask.WaitUntil(() => !state.inRoom, cancellationToken: token);
+        await UniTask.WaitUntil(() => !state.inRoom, cancellationToken: cancellationToken.Token);
     }
 
     public void RandomEdge()

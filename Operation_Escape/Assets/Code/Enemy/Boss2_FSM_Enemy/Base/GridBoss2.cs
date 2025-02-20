@@ -171,7 +171,8 @@ public class GridBoss2 : MonoBehaviour
             for (int y = 0; y < gridHeight; y++)
             {
                 Vector3 worldPos = GridToWorldPosition(new Vector2Int(x, y));
-
+                worldPos.x += cellSize / 2;
+                worldPos.y += cellSize / 2;
                 Collider2D collider = Physics2D.OverlapBox(worldPos, new Vector2(cellSize, cellSize), 0, raycastMask);
 
                 if (collider != null)

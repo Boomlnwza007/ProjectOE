@@ -223,6 +223,7 @@ Transform:
   - {fileID: 4390777039724118862}
   - {fileID: 6157199860428865868}
   - {fileID: 3698946483416667695}
+  - {fileID: 715113557135065808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8767429172101682466
@@ -258,6 +259,8 @@ MonoBehaviour:
   - {fileID: 1869477757368021162}
   - {fileID: 3571709010763893651}
   - {fileID: 53948520717746739}
+  grid: {fileID: 1720161896626208416}
+  state: {fileID: 0}
 --- !u!1 &3413124035343407261
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +354,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7873789245328199656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4502558037687429045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715113557135065808}
+  - component: {fileID: 1720161896626208416}
+  m_Layer: 7
+  m_Name: 'Grid '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &715113557135065808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502558037687429045}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19.9, y: -19.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5855219726757868698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1720161896626208416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502558037687429045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd24f95e693063a4ab690df905745a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridWidth: 40
+  gridHeight: 40
+  cellSize: 1
+  spawnParent: {fileID: 715113557135065808}
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 128
+  playerTransform: {fileID: 0}
+  spawnRadius: 2
 --- !u!1 &4578487517808305893
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +533,7 @@ BoxCollider2D:
     m_Bits: 128
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 128
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -506,7 +562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36153d89223828c4bacf5b31b243d3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: {fileID: 0}
 --- !u!1 &5281192665911454181
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,11 +12,17 @@ public class CheckInRoom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        state.inRoom = true;
+        if (collision.gameObject.GetComponent<FSMBoss2EnemySM>())
+        {
+            state.inRoom = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        state.inRoom = false;
+        if (collision.gameObject.GetComponent<FSMBoss2EnemySM>() == state)
+        {
+            state.inRoom = false;
+        }
     }
 }

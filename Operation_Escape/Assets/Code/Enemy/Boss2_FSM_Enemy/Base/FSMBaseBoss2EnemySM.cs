@@ -5,7 +5,7 @@ using UnityEngine;
 public class FSMBaseBoss2EnemySM : StateMachine
 {
     [Header("Spike")]
-    [SerializeField] private GridBoss2 grid;
+    [SerializeField] protected GridBoss2 grid;
     public ID spike;
 
     [HideInInspector]public SpikeN spikeN;
@@ -14,9 +14,6 @@ public class FSMBaseBoss2EnemySM : StateMachine
     public ID minion;
     public List<Transform> spawnPoint;
     private List<Transform> availablePositions = new List<Transform>();
-
-    [Header("Shield")]
-    public GuardShield shield;
 
     public void AttackRSpike()
     {

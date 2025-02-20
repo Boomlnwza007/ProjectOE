@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
 {
+    [Header("Shield")]
+    public GuardShield shield;
+
     [Header("Cooldown")]
     public float timePreSpike;
     public float timeCooldownSpike;

@@ -11,7 +11,10 @@ public class Boss2Mark : MonoBehaviour
     public Transform[] right;
 
     [Header("Minion")]
-    public Transform[] monSpawn;
+    public List<Transform> monSpawn;
+
+    [Header("Grid")]
+    public GridBoss2 grid;
 
     [HideInInspector] public FSMBoss2EnemySM state;
 }
