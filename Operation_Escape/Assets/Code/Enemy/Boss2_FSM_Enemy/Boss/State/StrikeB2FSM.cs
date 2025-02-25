@@ -9,6 +9,7 @@ public class StrikeB2FSM : BaseState
     public StrikeB2FSM(FSMBoss2EnemySM stateMachine) : base("Strike", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
+    private bool agian;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -27,14 +28,18 @@ public class StrikeB2FSM : BaseState
 
         try
         {
+            ai.canMove = false;
             await UniTask.WaitForSeconds(3, cancellationToken: token);
             await Strike();
             RandomEdge();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 await UniTask.WaitForSeconds(2);
+                agian = true;
                 await Strike();
+                RandomEdge();
             }
+            state.colliderBoss.isTrigger = false;
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
@@ -47,11 +52,18 @@ public class StrikeB2FSM : BaseState
     public async UniTask Strike()
     {
         var state = (FSMBoss2EnemySM)stateMachine;
-        state.inRoom = true;
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-        state.colliderBoss.enabled = false;            
-        state.rb.velocity = dir * state.Speed;
-        await UniTask.WaitUntil(() => !state.inRoom, cancellationToken: cancellationToken.Token);
+        state.colliderBoss.isTrigger = true;  
+        
+        while (state.inRoom || agian)
+        {
+            state.rb.velocity = dir * state.Speed*3;
+            if (state.inRoom)
+            {
+                agian = false;
+            }
+            await UniTask.Yield(cancellationToken: cancellationToken.Token);
+        }            
     }
 
     public void RandomEdge()

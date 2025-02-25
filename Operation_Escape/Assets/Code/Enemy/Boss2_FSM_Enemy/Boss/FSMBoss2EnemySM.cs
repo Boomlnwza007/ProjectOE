@@ -87,4 +87,16 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     {
         areaEnermy = area;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            IDamageable target = collision.GetComponent<IDamageable>();
+            if (target != null)
+            {
+                target.Takedamage(dmg, DamageType.Rang,10);
+            }
+        }
+    }
 }

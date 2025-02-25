@@ -26,6 +26,8 @@ public class CheckNextB2FSM : BaseState
     public BaseState CaseState(int number)
     {
         var state = (FSMBoss2EnemySM)stateMachine;
+        return state.laser;
+
         switch (number)
         {
             case 1 :
