@@ -18,11 +18,15 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [HideInInspector]
     public StrikeB2FSM strike;
     [HideInInspector]
-    public BurrowB2FSM burrow;
+    public AreaAttackB2FSM area;
     [HideInInspector]
     public SwarmB2FSM swarm;
     [HideInInspector]
     public EatB2FSM eat;
+    [HideInInspector]
+    public CheckNextB2FSM checkNext;
+    [HideInInspector]
+    public LaserB2FSM laser;
 
      public bool imortal { get; set; }
 
@@ -30,7 +34,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     {
         idle = new IdleB2FSM(this);
         strike = new StrikeB2FSM(this);
-        burrow = new BurrowB2FSM(this);
+        area = new AreaAttackB2FSM(this);
         swarm = new SwarmB2FSM(this);
         eat = new EatB2FSM(this);
         areaMark.state = this;
