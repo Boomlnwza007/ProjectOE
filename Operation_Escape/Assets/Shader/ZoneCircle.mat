@@ -86,7 +86,7 @@ Material:
     - _outline: 0.1
     - _speed: 12
     m_Colors:
-    - _Color: {r: 2, g: 2, b: 2, a: 0}
+    - _Color: {r: 5.1552525, g: 1.2401786, b: 1.2401786, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _Offet: {r: 1, g: 0, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

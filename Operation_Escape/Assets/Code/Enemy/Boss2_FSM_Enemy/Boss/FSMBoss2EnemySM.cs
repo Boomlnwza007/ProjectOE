@@ -10,6 +10,8 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
     [Header("status")]
     public bool inRoom;
+    public Boss2_Animation animator;
+    public GameObject particleZone;
 
     [HideInInspector]
     public AreaEnermy areaEnermy;
@@ -42,6 +44,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         areaMark.state = this;
         grid = areaMark.grid;
         spawnPoint = areaMark.monSpawn;
+        jumpCenter = areaMark.jumpCenter;
     }
 
     protected override BaseState GetInitialState()
@@ -87,6 +90,22 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     {
         areaEnermy = area;
     }
+
+    public void SpawnParticle(float radius)
+    {
+        ZoneH2.hit = false;
+        int numObjects = Mathf.FloorToInt((2 * Mathf.PI * radius) / 1); ;
+        for (int i = 0; i < numObjects; i++)
+        {
+            float angle = i * Mathf.PI * 2f / numObjects; // คำนวณมุมของแต่ละจุด
+            float x = Mathf.Cos(angle) * radius;
+            float y = Mathf.Sin(angle) * radius;
+            Vector3 spawnPosition = new Vector3(x, y, 0) + transform.position;
+
+            Instantiate(particleZone, spawnPosition, Quaternion.identity);
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

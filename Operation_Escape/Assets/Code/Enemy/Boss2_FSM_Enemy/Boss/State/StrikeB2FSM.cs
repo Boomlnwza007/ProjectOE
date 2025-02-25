@@ -32,7 +32,7 @@ public class StrikeB2FSM : BaseState
             await UniTask.WaitForSeconds(3, cancellationToken: token);
             await Strike();
             RandomEdge();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 await UniTask.WaitForSeconds(2);
                 agian = true;

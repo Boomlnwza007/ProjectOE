@@ -16,5 +16,8 @@ public class Boss2Mark : MonoBehaviour
     [Header("Grid")]
     public GridBoss2 grid;
 
+    [Header("Jump")]
+    public Transform jumpCenter;
+
     [HideInInspector] public FSMBoss2EnemySM state;
 }
