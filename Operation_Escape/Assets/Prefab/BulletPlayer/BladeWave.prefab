@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  damage: 5
+  damage: 20
   speed: 15
   knockbackForce: 5
   tagUse: Enemy
