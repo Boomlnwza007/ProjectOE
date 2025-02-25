@@ -37,6 +37,8 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         area = new AreaAttackB2FSM(this);
         swarm = new SwarmB2FSM(this);
         eat = new EatB2FSM(this);
+        checkNext = new CheckNextB2FSM(this);
+        laser = new LaserB2FSM(this);
         areaMark.state = this;
         grid = areaMark.grid;
         spawnPoint = areaMark.monSpawn;

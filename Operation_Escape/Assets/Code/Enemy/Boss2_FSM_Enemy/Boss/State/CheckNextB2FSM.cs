@@ -7,40 +7,43 @@ using UnityEngine;
 public class CheckNextB2FSM : BaseState
 {
     public CheckNextB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
-    public IAiAvoid ai;
-    private CancellationTokenSource cancellationToken;
-
+    private List<int> rNumber = new List<int> { 1, 2, 3, 4 };
+    int selectedAttack = 0;
     // Start is called before the first frame update
     public override void Enter()
     {
-        ai = ((FSMBoss2EnemySM)stateMachine).ai;
-        Attack().Forget();
+        if (rNumber.Count == 0)
+        {
+            rNumber = new List<int> { 1, 2, 3, 4 };
+        }
+
+        int index = Random.Range(0, rNumber.Count);
+        int selectedAttack = rNumber[index];
+        rNumber.RemoveAt(index);
+        ChangState(CaseState(selectedAttack));
     }
 
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public BaseState CaseState(int number)
     {
-        cancellationToken = new CancellationTokenSource();
-        var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
-        //var ani = state.animator;
-        //await UniTask.WaitForSeconds(1f, cancellationToken: token);
-
-        try
+        switch (number)
         {
-
-            await UniTask.Delay(1);
-
+            case 1 :
+                return state.strike;
+            case 2:
+                return state.area;
+            case 3:
+                return state.swarm;
+            case 4:
+                return state.laser;
+            default:
+                return state.strike;
         }
-        catch (System.OperationCanceledException)
-        {
-            Debug.Log("Attack was cancelled.");
-            return;
-        }
+
     }
 
     public override void Exit()
     {
         // Cancel the attack when exiting the state
-        cancellationToken?.Cancel();
     }
 }
