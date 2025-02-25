@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3148289689730808246}
   - component: {fileID: 4422849570791061063}
   - component: {fileID: -7228178424523739774}
+  - component: {fileID: -6334747312076077575}
   m_Layer: 7
   m_Name: Minion3
   m_TagString: Enemy
@@ -203,7 +204,7 @@ MonoBehaviour:
   Speed: 15
   visRange: 30
   attacking: 1
-  lootDrop: {fileID: 0}
+  lootDrop: {fileID: -6334747312076077575}
   target: {fileID: 0}
   rb: {fileID: 1072483864178654776}
   dropChange: 0
@@ -262,3 +263,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 5de474ef38adb3c4cbd6871473a905be, type: 2}
   duration: 0.1
+--- !u!114 &-6334747312076077575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385571796329690185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f8d49ad0930ef44b995393120c0b375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootlist:
+  - {fileID: 11400000, guid: b272f7a7f44e6e24ca3b24d305eefb62, type: 2}
