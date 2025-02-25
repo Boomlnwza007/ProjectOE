@@ -27,6 +27,10 @@ public class AreaAttackB2FSM : BaseState
 
         try
         {
+            await UniTask.WaitForSeconds(0.5f);
+            state.Jump(state.jumpCenter.position);
+            await UniTask.WaitForSeconds(0.5f);
+
             ani.ChangeAnimationAttack("Area_PreAttack");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             bool increasing = true;

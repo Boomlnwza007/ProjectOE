@@ -106,6 +106,11 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         }
     }
 
+    public void Jump(Vector3 position)
+    {
+        transform.position = position;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
