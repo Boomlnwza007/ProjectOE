@@ -9,12 +9,15 @@ public class SwarmB2FSM : BaseState
     public SwarmB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
+    private bool final;
 
     // Start is called before the first frame update
     public override void Enter()
     {
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
         Attack().Forget();
+        ai.canMove = false;
+        final = false;
     }
 
     public async UniTaskVoid Attack() // Pass the CancellationToken
@@ -27,14 +30,32 @@ public class SwarmB2FSM : BaseState
 
         try
         {
+            await UniTask.WaitForSeconds(1f);
+            SpriteRenderer sprite = state.GetComponent<SpriteRenderer>();
+            sprite.enabled = false;
+            state.colliderBoss.enabled = false;
+            state.SpawnEgg();
+            await UniTask.WaitForSeconds(3f);
+            final = true;
+            await UniTask.WaitUntil(() => !final, cancellationToken: token);
 
-            await UniTask.Delay(1);
-
+            ai.canMove = true;
+            sprite.enabled = true;
+            state.colliderBoss.enabled = true;
+            ChangState(state.checkNext);
         }
         catch (System.OperationCanceledException)
         {
             Debug.Log("Attack was cancelled.");
             return;
+        }
+    }
+
+    public override void UpdateLogic()
+    {
+        if (FSMBoss2EnemySM.minionHave <= 0 && final)
+        {
+            final = false;
         }
     }
 

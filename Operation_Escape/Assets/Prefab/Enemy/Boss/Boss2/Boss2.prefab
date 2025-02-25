@@ -694,6 +694,8 @@ MonoBehaviour:
   colliderBoss: {fileID: 9189821930112009302}
   inRoom: 0
   animator: {fileID: 6173886458415788687}
+  eggMinion: {fileID: 0}
+  particleZone: {fileID: 3909465721922937394, guid: fb17fc5698182d648afbdce5c0b355d8, type: 3}
   areaEnermy: {fileID: 0}
 --- !u!114 &6173886458415788687
 MonoBehaviour:
@@ -707,9 +709,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822d7369a236d8e41a3c2ffe18d76455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 8558460478967452365}
   layerIndex: 0
-  rb: {fileID: 0}
+  rb: {fileID: 7633064530594775026}
   timeplay: 0
   endAnim: 0
 --- !u!212 &3217351600395591580

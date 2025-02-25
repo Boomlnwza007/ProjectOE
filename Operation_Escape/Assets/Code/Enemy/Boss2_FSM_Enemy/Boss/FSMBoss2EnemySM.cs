@@ -7,11 +7,14 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [Header("status")]
     public Boss2Mark areaMark;
     public Collider2D colliderBoss;
-
-    [Header("status")]
     public bool inRoom;
     public Boss2_Animation animator;
+
+    [Header("Prefab")]
+    public GameObject eggMinion;
     public GameObject particleZone;
+
+    public static float minionHave;
 
     [HideInInspector]
     public AreaEnermy areaEnermy;
@@ -111,6 +114,14 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         transform.position = position;
     }
 
+    public void SpawnEgg()
+    {
+        for (int i = 0; i < spawnPoint.Count; i++)
+        {
+            Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity);
+        }
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

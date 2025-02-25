@@ -30,7 +30,7 @@ public class M3IdleFSM : BaseState
     public async UniTask Reay()
     {
         var state = (FSMMinion3EnemySM)stateMachine;
-        await UniTask.WaitForSeconds(1);
+        await UniTask.WaitForSeconds(0.5f);
         ChangState(state.checkDistance);
     }
 }

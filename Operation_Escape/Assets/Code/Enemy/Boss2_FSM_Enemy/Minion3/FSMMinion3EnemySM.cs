@@ -48,6 +48,7 @@ public class FSMMinion3EnemySM : StateMachine , IDamageable
 
     public void Die()
     {
+        FSMBoss2EnemySM.minionHave--;
         Destroy(gameObject);
     }
 

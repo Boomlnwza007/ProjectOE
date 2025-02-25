@@ -22,6 +22,7 @@ public class M3checkDistanceFSM : BaseState
     public override void UpdateLogic()
     {
         float distance = Vector2.Distance(ai.position, ai.targetTransform.position);
+        ai.destination = ai.targetTransform.position;
         if (distance < 2)
         {
             stateMachine.ChangState(((FSMMinion3EnemySM)stateMachine).attack);
