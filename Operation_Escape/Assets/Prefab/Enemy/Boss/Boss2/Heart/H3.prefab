@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3254557109223887898}
   - component: {fileID: 1270098285178565968}
   - component: {fileID: 4910781271620282070}
+  - component: {fileID: 6452386012025010345}
   m_Layer: 7
   m_Name: H3
   m_TagString: Enemy
@@ -232,7 +233,7 @@ MonoBehaviour:
   dmg: 0
   Speed: 0
   visRange: 30
-  attacking: 1
+  attacking: 0
   lootDrop: {fileID: 65813735825550634}
   target: {fileID: 0}
   rb: {fileID: 6697961273869876166}
@@ -252,6 +253,27 @@ MonoBehaviour:
   timeCooldownSpike: 0.5
   timeCooldownMinion: 5
   animator: {fileID: 0}
+--- !u!95 &6452386012025010345
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084713317445996800}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 161b3b06308ced74a92c84b3b000f955, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1611964251380916959
 GameObject:
   m_ObjectHideFlags: 0
