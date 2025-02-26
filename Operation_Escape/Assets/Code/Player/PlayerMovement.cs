@@ -66,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
                 if (rollSpeed < dodgeMinimium)
                 {
                     damageable.imortal = false;
-                    int OldLayer = LayerMask.NameToLayer("Player");
-                    gameObject.layer = OldLayer;
+                    ////int OldLayer = LayerMask.NameToLayer("Player");
+                    ////gameObject.layer = OldLayer;
                     PlayerControl.control.ShowGun(true);
                     PlayerControl.control.playerCombat.canFire = true;
                     state = State.Normal;
@@ -105,8 +105,8 @@ public class PlayerMovement : MonoBehaviour
         if (rollCharge < maxRollCharge)
         {
             PlayerControl.control.ShowGun(false);
-            int LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
-            gameObject.layer = LayerIgnoreRaycast;
+            //int LayerIgnoreRaycast = LayerMask.NameToLayer("Ignore Raycast");
+            //gameObject.layer = LayerIgnoreRaycast;
             PlayerControl.control.playerCombat.canFire = false;
             rollCharge++;
             rollTimer = 0;
