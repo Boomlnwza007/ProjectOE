@@ -19,6 +19,7 @@ public class H3SummonFSM : BaseState
         var state = (FSMHeart3EnemySM)stateMachine;
         state.AttackZSpike();
         endState = false;
+        state.shield.ShieldIsOn(false);
     }
 
     public override void UpdateLogic()
@@ -48,6 +49,7 @@ public class H3SummonFSM : BaseState
         var state = (FSMHeart3EnemySM)stateMachine;
         count = 0;
         Cooldown().Forget();
+        state.shield.ShieldIsOn(true);
         ChangState(state.attack);
     }
 
