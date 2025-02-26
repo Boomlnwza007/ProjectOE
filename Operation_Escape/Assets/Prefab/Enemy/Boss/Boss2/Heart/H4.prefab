@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGuard: 1
   redy: 1
-  conShield: 0
+  conShield: 1
   filter:
     useTriggers: 1
     useLayerMask: 0

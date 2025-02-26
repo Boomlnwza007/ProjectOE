@@ -262,8 +262,8 @@ MonoBehaviour:
   redy: 1
   conShield: 0
   filter:
-    useTriggers: 0
-    useLayerMask: 0
+    useTriggers: 1
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
@@ -546,6 +546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 1
   rayLength: 1
+  rayLengthLR: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -602,6 +603,7 @@ MonoBehaviour:
   jumpCenter: {fileID: 425878005356936182}
   grid: {fileID: 6495278621552787999}
   spike: {fileID: 11400000, guid: 8e8e23b70bceadc4bb1d49d30c1ea942, type: 2}
+  spikeN: {fileID: 0}
   minion: {fileID: 11400000, guid: 1cf89fbeb89539f408b1692afa1065a5, type: 2}
   spawnPoint:
   - {fileID: 4126791681454822978}
