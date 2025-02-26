@@ -5510,7 +5510,7 @@ MonoBehaviour:
   offset: 2
   raycastMaskWay:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 32832
   raycastMask:
     serializedVersion: 2
     m_Bits: 640
