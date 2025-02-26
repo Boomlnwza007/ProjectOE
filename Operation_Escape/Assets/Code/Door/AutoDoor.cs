@@ -59,6 +59,7 @@ public class AutoDoor : MonoBehaviour
 
     public void UnlockDead()
     {
+        plateSC.gameObject.SetActive(true);
         if (aniDoor != null)
         {
             aniDoor.UnLock();
