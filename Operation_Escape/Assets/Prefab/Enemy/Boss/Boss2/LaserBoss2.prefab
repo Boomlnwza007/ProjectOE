@@ -24586,8 +24586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a739036a445164793ae70511890aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 20
-  dpsDamage: 1
+  dmg: 25
+  dpsDamage: 0.2
   pre_lineRenderer: {fileID: 1154228454118754969}
   m_lineRenderer: {fileID: 4766254307389685854}
   laserFireStart: {fileID: 8333773968265695727}
