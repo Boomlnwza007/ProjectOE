@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69700489462683971}
   - component: {fileID: 8823317789423334994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,13 +94,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3102991612906764622}
   - component: {fileID: 2506518076261996141}
-  - component: {fileID: 4189628949748446785}
   - component: {fileID: 5472032032745900149}
   - component: {fileID: 3912060770769639191}
   - component: {fileID: 7316068100570450995}
-  m_Layer: 14
+  - component: {fileID: -2098720178864006827}
+  - component: {fileID: 2652002044264776762}
+  m_Layer: 7
   m_Name: SpikeZ_Mini
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,22 +174,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &4189628949748446785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7366031716192156954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e105ea05ef63b40aea472439fec710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp: 10
-  lootDrop: {fileID: 0}
-  gun: {fileID: 0}
-  spriteFlash: {fileID: 3912060770769639191}
 --- !u!50 &5472032032745900149
 Rigidbody2D:
   serializedVersion: 4
@@ -265,3 +250,32 @@ CircleCollider2D:
   m_Offset: {x: 0.021688223, y: 0.64681387}
   serializedVersion: 2
   m_Radius: 0.9938278
+--- !u!114 &-2098720178864006827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366031716192156954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba0445a9a5f3ce4582de840b4741ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 10
+  lootDrop: {fileID: 2652002044264776762}
+  spriteFlash: {fileID: 3912060770769639191}
+--- !u!114 &2652002044264776762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7366031716192156954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f8d49ad0930ef44b995393120c0b375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootlist:
+  - {fileID: 11400000, guid: b272f7a7f44e6e24ca3b24d305eefb62, type: 2}
