@@ -16,7 +16,9 @@ public class H4SummonFSM : BaseState
 
     public override void Enter()
     {
+        var state = (FSMHeart4EnemySM)stateMachine;
         Attack().Forget();
+        state.shield.ShieldIsOn(false);
     }
 
     public async UniTask Attack()
@@ -45,6 +47,7 @@ public class H4SummonFSM : BaseState
 
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             Cooldown().Forget();
+            state.shield.ShieldIsOn(true);
             ChangState(state.attack);
         }
         catch (OperationCanceledException)
