@@ -111,7 +111,6 @@ public class LaserDrone : MonoBehaviour
         {
             DrawRay(firstPos.position, endPos.position);
         }
-        //sfxSource.PlayOneShot(shoot);
     }
 
     public async UniTask DamageHit()

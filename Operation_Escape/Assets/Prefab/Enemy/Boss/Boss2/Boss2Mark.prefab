@@ -225,6 +225,7 @@ Transform:
   - {fileID: 3698946483416667695}
   - {fileID: 715113557135065808}
   - {fileID: 8741059316069903890}
+  - {fileID: 7155357874804454206}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8767429172101682466
@@ -262,6 +263,7 @@ MonoBehaviour:
   - {fileID: 53948520717746739}
   grid: {fileID: 1720161896626208416}
   jumpCenter: {fileID: 8741059316069903890}
+  startLaser: {fileID: 7155357874804454206}
   state: {fileID: 0}
 --- !u!1 &3413124035343407261
 GameObject:
@@ -700,6 +702,37 @@ Transform:
   - {fileID: 6474143242589760242}
   - {fileID: 9217062628143151573}
   m_Father: {fileID: 4390777039724118862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7185134152029460013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7155357874804454206}
+  m_Layer: 0
+  m_Name: StartLaser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7155357874804454206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185134152029460013}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20, y: 22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5855219726757868698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7355511524666897290
 GameObject:

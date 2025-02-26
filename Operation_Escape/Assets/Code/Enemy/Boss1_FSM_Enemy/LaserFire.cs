@@ -191,7 +191,6 @@ public class LaserFire : MonoBehaviour
                 IDamageable player = hitInfo.collider.GetComponent<IDamageable>();
                 if (player != null)
                 {
-                    ////////Edit
                     if (canDamage)
                     {
                         canDamage = false;
@@ -199,7 +198,6 @@ public class LaserFire : MonoBehaviour
                         DamageHit().Forget();
                         Debug.Log("hit");
                     }
-                    //Debug.Log("hit");
                 }
             }
         }

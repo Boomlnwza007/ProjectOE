@@ -18,6 +18,7 @@ public class Boss2Mark : MonoBehaviour
 
     [Header("Jump")]
     public Transform jumpCenter;
+    public Transform startLaser;
 
     [HideInInspector] public FSMBoss2EnemySM state;
 }

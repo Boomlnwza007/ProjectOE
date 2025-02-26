@@ -27,8 +27,13 @@ public class LaserB2FSM : BaseState
 
         try
         {
-
-            await UniTask.Delay(1);
+            state.SpawnLaserCols(-10);
+            await UniTask.WaitForSeconds(1);
+            state.SpawnLaserRows(8);
+            await UniTask.WaitForSeconds(1);
+            state.SpawnLaserGrid();
+            await UniTask.WaitForSeconds(1);
+            ChangState(state.checkNext);
 
         }
         catch (System.OperationCanceledException)

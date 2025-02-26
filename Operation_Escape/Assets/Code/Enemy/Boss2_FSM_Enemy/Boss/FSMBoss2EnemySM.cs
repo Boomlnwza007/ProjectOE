@@ -14,6 +14,13 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public GameObject eggMinion;
     public GameObject particleZone;
 
+    [Header("Laser")]
+    public GameObject laser;
+    public float sizeLaser=5;
+    public int cols = 20;
+    public int rows = 40;
+    public float spacingCols = 2f;
+    public float spacingRows = 1f;
     public static float minionHave;
 
     [HideInInspector]
@@ -31,7 +38,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [HideInInspector]
     public CheckNextB2FSM checkNext;
     [HideInInspector]
-    public LaserB2FSM laser;
+    public LaserB2FSM laserState;
 
      public bool imortal { get; set; }
 
@@ -43,7 +50,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         swarm = new SwarmB2FSM(this);
         eat = new EatB2FSM(this);
         checkNext = new CheckNextB2FSM(this);
-        laser = new LaserB2FSM(this);
+        laserState = new LaserB2FSM(this);
         areaMark.state = this;
         grid = areaMark.grid;
         spawnPoint = areaMark.monSpawn;
@@ -121,6 +128,56 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity);
         }
 
+    }
+
+    public void SpawnLaserGrid()
+    {
+        Vector3 startPos = areaMark.startLaser.position;
+        SpawnLaserCols(startPos);
+        SpawnLaserRows(startPos);
+    }
+    public void SpawnLaserCols(float offset)
+    {
+        Vector3 startPos = areaMark.startLaser.position;
+        startPos.x += offset;
+        SpawnLaserCols(startPos);
+    }
+
+    public void SpawnLaserCols(Vector3 startPos)
+    {
+        for (int i = 1; i < cols; i++)
+        {
+            Vector3 spawnPos = startPos + new Vector3(i * (spacingCols + sizeLaser), 0, 0);
+            Instantiate(laser, spawnPos, Quaternion.identity).GetComponent<LaserBoss2>().isUp = true;
+        }
+    }
+
+    public void SpawnLaserCols(Vector3 startPos , float offset)
+    {
+        startPos.x += offset;
+        SpawnLaserCols(startPos);
+    }
+
+    public void SpawnLaserRows(float offset)
+    {
+        Vector3 startPos = areaMark.startLaser.position;
+        startPos.y += offset;
+        SpawnLaserRows(startPos);
+    }
+
+    public void SpawnLaserRows(Vector3 startPos)
+    {
+        for (int j = 1; j < rows; j++)
+        {
+            Vector3 spawnPos = startPos + new Vector3(0, -j * (spacingRows + sizeLaser), 0);
+            Instantiate(laser, spawnPos, Quaternion.identity).GetComponent<LaserBoss2>().isUp = false;
+        }
+    }
+
+    public void SpawnLaserRows(Vector3 startPos, float offset)
+    {
+        startPos.y += offset;
+        SpawnLaserRows(startPos);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
