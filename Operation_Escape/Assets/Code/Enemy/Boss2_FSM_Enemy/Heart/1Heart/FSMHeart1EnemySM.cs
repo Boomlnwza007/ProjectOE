@@ -13,7 +13,6 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     public float timeCooldownMinion;
 
     public BaseAnimEnemy animator;
-    [HideInInspector]public AreaEnermy areaEnermy;
 
     [HideInInspector]
     public H1IdleFSM Idle;
@@ -64,18 +63,14 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         }
     }
 
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
     public IEnumerator Imortal(float wait)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void SetCombatPhase(AreaEnermy area)
+    public void Die()
     {
-        areaEnermy = area;
+        Destroy(gameObject);
+        areaEnermy?.Die(this);
     }
 }

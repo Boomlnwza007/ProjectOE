@@ -65,6 +65,7 @@ public class FSMHeart3EnemySM : FSMBaseBoss2EnemySM , IDamageable
     public void Die()
     {
         Destroy(gameObject);
+        areaEnermy?.Die(this);
     }
 
     public IEnumerator Imortal(float wait)

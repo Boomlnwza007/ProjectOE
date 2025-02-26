@@ -23,8 +23,6 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public float spacingRows = 1f;
     public static float minionHave;
 
-    [HideInInspector]
-    public AreaEnermy areaEnermy;
     [HideInInspector] 
     public IdleB2FSM idle;
     [HideInInspector]
@@ -94,11 +92,6 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public IEnumerator Imortal(float wait)
     {
         return null;
-    }
-
-    public override void SetCombatPhase(AreaEnermy area)
-    {
-        areaEnermy = area;
     }
 
     public void SpawnParticle(float radius)

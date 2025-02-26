@@ -9,6 +9,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
     public ID spike;
 
     [HideInInspector]public SpikeN spikeN;
+    [HideInInspector] public AreaEnermy areaEnermy;
 
     [Header("Minion")]
     public ID minion;
@@ -75,5 +76,10 @@ public class FSMBaseBoss2EnemySM : StateMachine
     {
         grid.ResetGrid();
         grid.CheckGridObstacles();
+    }
+
+    public override void SetCombatPhase(AreaEnermy area)
+    {
+        areaEnermy = area;
     }
 }
