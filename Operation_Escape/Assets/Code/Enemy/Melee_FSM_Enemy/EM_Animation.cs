@@ -52,5 +52,10 @@ public class EM_Animation : BaseAnimEnemy
             animator.speed = 1;
             animator.SetBool("Walk", false);
         }
-    } 
+    }
+
+    public void ChangeSortingLayer(string newLayer)
+    {
+        GetComponent<SpriteRenderer>().sortingLayerName = newLayer;
+    }
 }

@@ -3,67 +3,64 @@ using UnityEngine;
 
 public class ReflectingRay : MonoBehaviour
 {
-    public float retreatSpeed = 5f; // ความเร็วในการถอยหลัง
-    public float detectionRadius = 10f; // ระยะที่ตรวจจับผู้เล่น
-    public LayerMask obstacleLayer; // เลเยอร์สำหรับกำแพงหรืออุปสรรค
-    private Transform player;
-    private Rigidbody2D rb;
 
-    void Start()
+    public LayerMask obstacleLayer;
+    public Transform playerTest;
+    public float width;
+    public float height;
+    public int gridSize;
+
+    [ContextMenu("Check")]
+    public void Test()
     {
-        player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
+        CheckObjectsInArea(playerTest.position, width, height, gridSize, obstacleLayer);
     }
 
-    void Update()
+    public List<Vector3> CheckObjectsInArea(Vector2 center, float width, float height, int gridSize, LayerMask layerMask)
     {
-        Vector2 directionToPlayer = (transform.position - player.position).normalized; // คำนวณทิศทางที่มอนสเตอร์จะถอยไป
-        Vector2 retreatDirection = GetRetreatDirection(directionToPlayer);
+        float gridWidth = width / gridSize;  // ความกว้างของแต่ละช่อง
+        float gridHeight = height / gridSize; // ความสูงของแต่ละช่อง
+        List<Vector3> vectors = new List<Vector3>();
 
-        // เคลื่อนที่ถอยหลังไปในทิศทางที่ไม่ชนกำแพง
-        rb.velocity = retreatDirection * retreatSpeed;
-    }
-
-    Vector2 GetRetreatDirection(Vector2 directionToPlayer)
-    {
-        Vector2 newDirection = directionToPlayer;
-
-        // ตรวจสอบว่าทิศทางนี้ชนกำแพงหรือไม่
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer, 1f, obstacleLayer);
-
-        if (hit.collider != null) // ถ้าชนกำแพง
+        for (int x = 0; x < gridSize; x++)
         {
-            // ลองหาทิศทางใหม่ที่ไม่ชนกำแพง
-            newDirection = GetAvoidanceDirection(directionToPlayer);
+            for (int y = 0; y < gridSize; y++)
+            {
+                // ปรับให้ `center` เป็นศูนย์กลางของตารางแทนที่จะเป็นมุมซ้ายล่าง
+                Vector2 checkPosition = center + new Vector2(
+                    (x - (gridSize - 1) / 2f) * gridWidth,
+                    (y - (gridSize - 1) / 2f) * gridHeight
+                );
+
+                Collider2D[] colliders = Physics2D.OverlapBoxAll(checkPosition, new Vector2(gridWidth, gridHeight), 0f, layerMask);
+
+                // ถ้าไม่มีวัตถุให้เพิ่มใน List และวาดเส้นเป็น "สีเขียว"
+                Color debugColor = colliders.Length == 0 ? Color.green : Color.red;
+
+                if (colliders.Length == 0)
+                {
+                    vectors.Add(checkPosition);
+                }
+
+                // วาดตาราง Debug
+                DrawDebugBox(checkPosition, gridWidth, gridHeight, debugColor);
+            }
         }
 
-        return newDirection;
+        return vectors;
     }
 
-    Vector2 GetAvoidanceDirection(Vector2 directionToPlayer)
+    // ฟังก์ชันสำหรับวาด Debug Box
+    private void DrawDebugBox(Vector2 center, float width, float height, Color color)
     {
-        Vector2 leftDirection = new Vector2(-directionToPlayer.y, directionToPlayer.x).normalized;
-        Vector2 rightDirection = new Vector2(directionToPlayer.y, -directionToPlayer.x).normalized;
+        Vector3 bottomLeft = center - new Vector2(width / 2, height / 2);
+        Vector3 bottomRight = center + new Vector2(width / 2, -height / 2);
+        Vector3 topLeft = center + new Vector2(-width / 2, height / 2);
+        Vector3 topRight = center + new Vector2(width / 2, height / 2);
 
-        // ตรวจสอบทิศทางซ้าย
-        if (!IsBlocked(leftDirection))
-        {
-            return leftDirection;
-        }
-
-        // ตรวจสอบทิศทางขวา
-        if (!IsBlocked(rightDirection))
-        {
-            return rightDirection;
-        }
-
-        // ถ้าทั้งสองทิศทางไม่ว่าง ก็ค่อยกลับไปใช้ทิศทางเดิม
-        return directionToPlayer;
-    }
-
-    bool IsBlocked(Vector2 direction)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, obstacleLayer);
-        return hit.collider != null; // ถ้าชนกำแพงให้ return true
+        Debug.DrawLine(bottomLeft, bottomRight, color, 0.1f);
+        Debug.DrawLine(bottomRight, topRight, color, 0.1f);
+        Debug.DrawLine(topRight, topLeft, color, 0.1f);
+        Debug.DrawLine(topLeft, bottomLeft, color, 0.1f);
     }
 }

@@ -5611,10 +5611,10 @@ MonoBehaviour:
   animator: {fileID: 1353224174552318050}
   raycastMaskWay:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 33344
   raycastMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 32832
   col: {fileID: 4329810430280661751}
   shadow: {fileID: 3884833157819263856}
   jumpLength: 10

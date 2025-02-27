@@ -233,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 3
   rayLength: 2
+  rayLengthLR: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32832
@@ -324,7 +325,7 @@ MonoBehaviour:
   animator: {fileID: 8165175477225224536}
   raycastMaskWay:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 32832
   raycastMask:
     serializedVersion: 2
     m_Bits: 704

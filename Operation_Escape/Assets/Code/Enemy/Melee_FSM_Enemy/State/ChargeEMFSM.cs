@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using System;
 
 public class ChargeEMFSM : BaseState
 {
@@ -49,15 +48,23 @@ public class ChargeEMFSM : BaseState
             if (CheckWay())
             {
                 await state.PreAttackN("PreDashAttack");
+                ani.ChangeSortingLayer("TileMapON");
                 state.col.enabled = false;
                 state.shadow.SetActive(false);
                 jump = true;
                 startPos = ai.position;
-                target = PlayerControl.control.feet.transform.position;
+                List<Vector3> vectors = CheckObjectsInArea(PlayerControl.control.transform.position,3,6,3, state.raycastMask);
+                if (vectors.Count != 0)
+                {
+                    target = vectors[Random.Range(0, vectors.Count)];
+                }
+
                 controlPoint = (startPos + (Vector2)ai.targetTransform.position) / 2 + Vector2.up * 3;
                 await UniTask.WaitUntil(() => !jump , cancellationToken: token);
                 state.col.enabled = true;
-                state.shadow.SetActive(true);                
+                state.shadow.SetActive(true);       
+                ani.ChangeSortingLayer("Player");
+
                 await state.Attack("DashAttack",1f);
                 state.animator.ChangeAnimationAttack("Normal");
                 state.cooldown = true;
@@ -71,7 +78,7 @@ public class ChargeEMFSM : BaseState
             ai.canMove = true;
             ChangState(state.CheckDistance);
         }
-        catch (OperationCanceledException)
+        catch (System.OperationCanceledException)
         {
             Debug.Log("Attack was cancelled.");
             return;
@@ -130,6 +137,31 @@ public class ChargeEMFSM : BaseState
         Debug.Log("A12");
     }
 
+    public List<Vector3> CheckObjectsInArea(Vector2 center, float width, float height, int gridSize, LayerMask layerMask)
+    {
+        float gridWidth = width / gridSize;
+        float gridHeight = height / gridSize;
+        List<Vector3> vectors = new List<Vector3>();
+
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int y = 0; y < gridSize; y++)
+            {
+                Vector2 checkPosition = center + new Vector2(
+                    (x - (gridSize - 1) / 2f) * gridWidth,
+                    (y - (gridSize - 1) / 2f) * gridHeight
+                );
+                Collider2D[] colliders = Physics2D.OverlapBoxAll(checkPosition, new Vector2(gridWidth, gridHeight), 0f, layerMask);
+                if (colliders.Length == 0)
+                {
+                    vectors.Add(checkPosition);
+                }
+
+            }
+        }
+
+        return vectors;
+    }
     public override void Exit()
     {
         // Cancel the attack when exiting the state
