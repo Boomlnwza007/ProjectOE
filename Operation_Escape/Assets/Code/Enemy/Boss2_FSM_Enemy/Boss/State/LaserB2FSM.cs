@@ -14,6 +14,7 @@ public class LaserB2FSM : BaseState
     public override void Enter()
     {
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
+        ai.canMove = false;
         Attack().Forget();
     }
 
@@ -27,13 +28,25 @@ public class LaserB2FSM : BaseState
 
         try
         {
-            state.SpawnLaserCols(-10);
-            await UniTask.WaitForSeconds(1);
-            state.SpawnLaserRows(8);
-            await UniTask.WaitForSeconds(1);
-            state.SpawnLaserGrid();
-            await UniTask.WaitForSeconds(1);
-            ChangState(state.checkNext);
+            await UniTask.WaitForSeconds(1f);
+            state.spriteBoss.enabled = false;
+            state.colliderBoss.enabled = false;
+            state.Jump(state.jumpCenter.position);
+
+            for (int i = 0; i < 3; i++)
+            {
+                state.SpawnLaserCols(-10);
+                await UniTask.WaitForSeconds(1);
+                state.SpawnLaserRows(8);
+                await UniTask.WaitForSeconds(1);
+                state.SpawnLaserGrid();
+                await UniTask.WaitForSeconds(1);
+            }
+
+            state.spriteBoss.enabled = true;
+            state.colliderBoss.enabled = true;
+            ai.canMove = true;
+            ChangState(state.eat);
 
         }
         catch (System.OperationCanceledException)

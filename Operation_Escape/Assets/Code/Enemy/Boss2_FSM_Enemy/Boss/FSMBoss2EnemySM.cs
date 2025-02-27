@@ -7,8 +7,10 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [Header("status")]
     public Boss2Mark areaMark;
     public Collider2D colliderBoss;
+    public SpriteRenderer spriteBoss;
     public bool inRoom;
     public Boss2_Animation animator;
+    public float speedEat;
 
     [Header("Prefab")]
     public GameObject eggMinion;
@@ -129,6 +131,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         SpawnLaserCols(startPos);
         SpawnLaserRows(startPos);
     }
+
     public void SpawnLaserCols(float offset)
     {
         Vector3 startPos = areaMark.startLaser.position;

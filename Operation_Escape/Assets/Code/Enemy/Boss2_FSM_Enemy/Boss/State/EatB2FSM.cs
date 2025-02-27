@@ -14,22 +14,43 @@ public class EatB2FSM : BaseState
     public override void Enter()
     {
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
+        ai.canMove = false;
         Attack().Forget();
+    }
+
+    public override void UpdateLogic()
+    {
+        ai.destination = ai.targetTransform.position;
     }
 
     public async UniTaskVoid Attack() // Pass the CancellationToken
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
-        var state = (FSMMinion1EnemySM)stateMachine;
-        //var ani = state.animator;
+        var state = (FSMBoss2EnemySM)stateMachine;
+        var ani = state.animator;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
+        ai.maxspeed = state.speedEat;
 
         try
         {
-            await UniTask.Delay(1);
-
-
+            Debug.Log("Eat");
+            await UniTask.WaitForSeconds(1 , cancellationToken : token);
+            state.spriteBoss.enabled = false;
+            state.colliderBoss.enabled = false;
+            state.Jump(ai.targetTransform.position);
+            ai.canMove = true;
+            ani.ChangeAnimationAttack("Eat");
+            await UniTask.WaitUntil(() => ani.endAnim , cancellationToken : token);
+            ai.canMove = false;
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            ai.maxspeed = state.Speed;
+            ani.ChangeAnimationAttack("Wait");
+            state.spriteBoss.enabled = true;
+            state.colliderBoss.enabled = true;
+            await UniTask.WaitForSeconds(5f, cancellationToken: token);
+            ai.canMove = true;
+            ChangState(state.checkNext);
         }
         catch (System.OperationCanceledException)
         {

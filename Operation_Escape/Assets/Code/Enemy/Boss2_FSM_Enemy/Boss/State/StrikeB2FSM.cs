@@ -40,6 +40,7 @@ public class StrikeB2FSM : BaseState
                 RandomEdge();
             }
             state.colliderBoss.isTrigger = false;
+            ai.canMove = true;
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)

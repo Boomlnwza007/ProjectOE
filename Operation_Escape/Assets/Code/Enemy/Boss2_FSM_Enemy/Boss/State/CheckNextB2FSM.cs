@@ -8,7 +8,6 @@ public class CheckNextB2FSM : BaseState
 {
     public CheckNextB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
     private List<int> rNumber = new List<int> { 1, 2, 3, 4 };
-    int selectedAttack = 0;
     // Start is called before the first frame update
     public override void Enter()
     {
@@ -26,8 +25,6 @@ public class CheckNextB2FSM : BaseState
     public BaseState CaseState(int number)
     {
         var state = (FSMBoss2EnemySM)stateMachine;
-        return state.laserState;
-
         switch (number)
         {
             case 1 :

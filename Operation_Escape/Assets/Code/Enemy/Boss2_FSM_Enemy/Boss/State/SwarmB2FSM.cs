@@ -31,18 +31,20 @@ public class SwarmB2FSM : BaseState
         try
         {
             await UniTask.WaitForSeconds(1f);
-            SpriteRenderer sprite = state.GetComponent<SpriteRenderer>();
-            sprite.enabled = false;
+            state.spriteBoss.enabled = false;
             state.colliderBoss.enabled = false;
+
             state.SpawnEgg();
             await UniTask.WaitForSeconds(3f);
             final = true;
             await UniTask.WaitUntil(() => !final, cancellationToken: token);
 
             ai.canMove = true;
-            sprite.enabled = true;
+
+            state.spriteBoss.enabled = true;
             state.colliderBoss.enabled = true;
-            ChangState(state.checkNext);
+
+            ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
         {
