@@ -31,6 +31,12 @@ public class CheatMenu : MonoBehaviour
     public static Transform[] warpPointReal;
     public Transform menuWarp;
 
+    [Header("EStae")]
+    [SerializeField] private GameObject buttonPrefabEState;
+    private static StateMachine curState;
+    private static List<BaseState> allState = new List<BaseState>();
+    public Transform menuEStae;
+
     [Header("Other")]
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject menuTop;
@@ -38,7 +44,7 @@ public class CheatMenu : MonoBehaviour
     public bool onMainMenu = true;
     public bool onMainMenuTop = false;
     private GameObject player;
-    public enum Mode { Spawnmon ,PlayerStatus ,GunEdit,Warp };
+    public enum Mode { Spawnmon ,PlayerStatus ,GunEdit,Warp,State };
     [SerializeField] private GameObject[] allMenu;
     public Mode mode;
     private int curPage = 0;
@@ -138,7 +144,10 @@ public class CheatMenu : MonoBehaviour
         {
             if (IsVisible(monster))
             {
-                Destroy(monster);
+                if (monster.TryGetComponent<IDamageable>(out var damage))
+                {
+                    damage.Die();
+                }
             }
         }
     }
@@ -477,6 +486,9 @@ public class CheatMenu : MonoBehaviour
             case 4:
                 _mode = Mode.Warp;
                 break;
+            case 5:
+                _mode = Mode.State;
+                break;
         }
 
         ChangMode(_mode);
@@ -500,6 +512,9 @@ public class CheatMenu : MonoBehaviour
             case Mode.Warp:
                 allMenu[3].SetActive(false);
                 break;
+            case Mode.State:
+                allMenu[4].SetActive(false);
+                break;
         }      
 
         mode = _mode;
@@ -517,6 +532,9 @@ public class CheatMenu : MonoBehaviour
                 break;
             case Mode.Warp:
                 allMenu[3].SetActive(true);
+                break;
+            case Mode.State:
+                allMenu[4].SetActive(true);
                 break;
         }
     }
@@ -555,5 +573,52 @@ public class CheatMenu : MonoBehaviour
         Collider2D collider = PlayerControl.control.gameObject.GetComponent<Collider2D>();
         collider.enabled = !collider.enabled; // สลับสถานะเปิด/ปิด Collider
         button.GetComponentInChildren<TMP_Text>().text = "Colition " + collider.enabled.ToString();
+    }
+
+    public void OnClickScanBoss()
+    {
+        for (int i = menuEStae.childCount - 1; i >= 0; i--)
+        {
+            Destroy(menuEStae.GetChild(i).gameObject);
+        }
+
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject monster in monsters)
+        {
+            if (IsVisible(monster))
+            {
+                if (monster.TryGetComponent<StateMachine>(out var state))
+                {
+                    allState = state.GetAllState();
+                    curState = state;
+                    break;
+                }
+            }
+        }
+
+        if (allState.Count != 0)
+        {
+            for (int i = 0; i < allState.Count; i++)
+            {
+                GameObject button = Instantiate(buttonPrefabEState, menuEStae);
+                button.name = i.ToString();
+                button.GetComponentInChildren<TMP_Text>().text = allState[i].nameState;
+            }
+        }
+    }
+
+    public void OnClickChanStateBoss(Button button)
+    {
+        string buttonName = button.name;
+        int buttonNumber;
+
+        if (int.TryParse(buttonName, out buttonNumber) && curState != null)
+        {
+            curState.ChangState(allState[buttonNumber]);
+        }
+        else
+        {
+            Debug.LogError("Button name is not a valid integer: " + buttonName);
+        }
     }
 }

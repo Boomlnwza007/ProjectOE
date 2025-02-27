@@ -125,4 +125,12 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     {
         throw new System.NotImplementedException();
     }
+
+    public override List<BaseState> GetAllState()
+    {
+        List<BaseState> allState = new List<BaseState>();
+        allState.Add(attack);
+        allState.Add(summon);
+        return allState;
+    }
 }

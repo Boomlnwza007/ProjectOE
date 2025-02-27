@@ -93,5 +93,11 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         }
     }
 
-
+    public override List<BaseState> GetAllState()
+    {
+        List<BaseState> allState = new List<BaseState>();
+        allState.Add(attack);
+        allState.Add(summon);
+        return allState;
+    }
 }

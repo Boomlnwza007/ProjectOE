@@ -187,4 +187,15 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             }
         }
     }
+
+    public override List<BaseState> GetAllState()
+    {
+        List<BaseState> allState = new List<BaseState>();
+        allState.Add(strike);
+        allState.Add(area);
+        allState.Add(swarm);
+        allState.Add(eat);
+        allState.Add(laserState);
+        return allState;
+    }
 }

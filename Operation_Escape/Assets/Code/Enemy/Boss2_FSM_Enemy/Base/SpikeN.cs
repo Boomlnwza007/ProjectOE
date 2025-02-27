@@ -48,7 +48,6 @@ public class SpikeN : MonoBehaviour
     public void Move()
     {
         Transform player = CinemachineControl.Instance.player;
-        Debug.Log(Vector2.Distance(gameObject.transform.position, player.position) + " " + (range - 0.5));
         if (Vector2.Distance(gameObject.transform.position,player.position) <= range+1)
         {
             transform.position = player.position;

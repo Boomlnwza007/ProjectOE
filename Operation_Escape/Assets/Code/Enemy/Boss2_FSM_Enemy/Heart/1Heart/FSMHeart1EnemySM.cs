@@ -74,4 +74,12 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         Destroy(gameObject);
         areaEnermy?.Die(this);
     }
+
+    public override List<BaseState> GetAllState()
+    {
+        List<BaseState> allState = new List<BaseState>();
+        allState.Add(attack);
+        allState.Add(summon);
+        return allState;
+    }
 }
