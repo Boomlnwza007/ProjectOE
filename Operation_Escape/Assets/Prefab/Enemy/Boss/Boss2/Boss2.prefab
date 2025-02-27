@@ -869,7 +869,7 @@ MonoBehaviour:
   dmg: 20
   Speed: 15
   visRange: 30
-  attacking: 1
+  attacking: 0
   lootDrop: {fileID: 5057346778294696577}
   target: {fileID: 0}
   rb: {fileID: 7633064530594775026}

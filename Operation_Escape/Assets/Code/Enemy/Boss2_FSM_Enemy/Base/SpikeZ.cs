@@ -11,6 +11,7 @@ public class SpikeZ : MonoBehaviour
     public GameObject Spike;
     public static bool hit;
     public static bool end;
+    public LayerMask raycastMask;
 
     private void Start()
     {
@@ -53,12 +54,15 @@ public class SpikeZ : MonoBehaviour
         int numObjects = Mathf.FloorToInt((2 * Mathf.PI * radius) / 2); ;
         for (int i = 0; i < numObjects; i++)
         {
-            float angle = i * Mathf.PI * 2f / numObjects; // คำนวณมุมของแต่ละจุด
+            float angle = i * Mathf.PI * 2f / numObjects;
             float x = Mathf.Cos(angle) * radius;
             float y = Mathf.Sin(angle) * radius;
             Vector3 spawnPosition = new Vector3(x, y, 0) + transform.position;
 
-            Instantiate(Spike, spawnPosition, Quaternion.identity,transform);
+            if (!Physics2D.OverlapCircle(spawnPosition, 0.5f, raycastMask))
+            { 
+                Instantiate(Spike, spawnPosition, Quaternion.identity, transform);
+            }
         }
     }
 }
