@@ -88,13 +88,14 @@ public class LaserCharge : MonoBehaviour
             if (hitInfo.collider.CompareTag("Enemy"))
             {
                 IDamageable Enemy = hitInfo.collider.GetComponent<IDamageable>();
-                GuardShield guard = hitInfo.collider.GetComponent<GuardShield>();
+                GuardShield guard = hitInfo.collider.GetComponentInChildren<GuardShield>();
                 if (Enemy != null && canDamage)
                 {
                     canDamage = false;
                     Enemy.Takedamage(dmgUl, DamageType.Rang, 0);
                     DamageHit().Forget();
                 }
+
                 guard?.BreakShield();
             }
         }
