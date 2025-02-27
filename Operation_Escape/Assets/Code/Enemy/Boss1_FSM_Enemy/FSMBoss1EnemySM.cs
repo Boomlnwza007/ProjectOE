@@ -365,6 +365,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     {
         areaEnermy = area;
     }
+
     public override List<BaseState> GetAllState()
     {
         List<BaseState> allState = new List<BaseState>();

@@ -161,6 +161,15 @@ public class CheatMenu : MonoBehaviour
             return renderer.isVisible;
         }
 
+        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+        foreach (var render in renderers)
+        {
+            if (render.isVisible)
+            {
+                return true;
+            }
+        }
+
         return false;
     }
 
