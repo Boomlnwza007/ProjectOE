@@ -133,7 +133,7 @@ public class ChargeGun : BaseGun
 
         if (laser != null)
         {
-            Destroy(laser.gameObject);
+            RemoveUltimate();
         }
     }   
 
