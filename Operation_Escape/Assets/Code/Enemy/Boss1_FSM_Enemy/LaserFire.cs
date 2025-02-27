@@ -170,15 +170,16 @@ public class LaserFire : MonoBehaviour
     
     public void LaserHitZone()
     {
-        if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, obstacleLayer))
-        {
-            RaycastHit2D _hit = Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, obstacleLayer);
-            DrawRayHitZone(laserFireStart.position, _hit.point);
-        }
-        else
-        {
-            DrawRayHitZone(laserFireStart.position, laserFireStart.position + laserFireStart.transform.right * laserDistance);
-        }
+        DrawRayHitZone(laserFireStart.position, laserFireStart.position + laserFireStart.transform.right * laserDistance);
+
+        //if (Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, obstacleLayer))
+        //{
+        //    RaycastHit2D _hit = Physics2D.Raycast(laserFireStart.position, laserFireStart.transform.right, laserDistance, obstacleLayer);
+        //    DrawRayHitZone(laserFireStart.position, _hit.point);
+        //}
+        //else
+        //{
+        //}
     }
     
     public void LaserFiring()
