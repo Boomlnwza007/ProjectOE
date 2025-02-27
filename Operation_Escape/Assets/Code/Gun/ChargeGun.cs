@@ -129,7 +129,12 @@ public class ChargeGun : BaseGun
             Shoot();
             PlayerControl.control.Slow(0);
             Destroy(ChangeEff);
-        }        
+        }
+
+        if (laser != null)
+        {
+            Destroy(laser.gameObject);
+        }
     }   
 
     public override void RemoveUltimate()

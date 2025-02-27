@@ -343,7 +343,6 @@ public class PlayerCombat : MonoBehaviour
         }
 
         gunList[currentGun].Remove();
-        gunList[currentGun].RemoveUltimate();
         gunList[currentGun].Exit();
         if (gunList[currentGun].canUltimate)
         {
