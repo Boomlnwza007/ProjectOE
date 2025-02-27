@@ -238,3 +238,6 @@ MonoBehaviour:
   speed: 5
   player: {fileID: 0}
   Spike: {fileID: 7366031716192156954, guid: e264ebdcd7f9c6647a4d07be41529d58, type: 3}
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 32832
