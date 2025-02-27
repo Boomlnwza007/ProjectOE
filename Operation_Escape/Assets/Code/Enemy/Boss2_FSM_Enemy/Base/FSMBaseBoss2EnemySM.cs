@@ -8,7 +8,8 @@ public class FSMBaseBoss2EnemySM : StateMachine
     [SerializeField] protected GridBoss2 grid;
     public ID spike;
 
-    [HideInInspector]public SpikeN spikeN;
+    [HideInInspector] public SpikeN spikeN;
+    [HideInInspector] public GameObject spikeZ;
     [HideInInspector] public AreaEnermy areaEnermy;
 
     [Header("Minion")]
@@ -50,7 +51,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
     public void AttackZSpike()
     {
         SpikeZ.Setup();
-        Instantiate(spike.Item[1].gameObject, ai.targetTransform.position, Quaternion.identity);
+        spikeZ = Instantiate(spike.Item[1].gameObject, ai.targetTransform.position, Quaternion.identity);
     }
 
     public void SummonMinion(int type)
@@ -81,5 +82,20 @@ public class FSMBaseBoss2EnemySM : StateMachine
     public override void SetCombatPhase(AreaEnermy area)
     {
         areaEnermy = area;
+    }
+
+    public void BeforDie()
+    {
+        if (spikeN != null)
+        {
+            Destroy(spikeN.gameObject);
+        }
+
+        if (spikeZ != null)
+        {
+            Destroy(spikeZ.gameObject);
+        }
+
+        areaEnermy?.ClaerMonMinion();
     }
 }

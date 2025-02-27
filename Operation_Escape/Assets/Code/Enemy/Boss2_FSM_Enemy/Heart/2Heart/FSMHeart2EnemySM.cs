@@ -12,6 +12,7 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     public float timeCooldownSpike;
     public float timeCooldownMinion;
 
+    public Transform Zone;
     public GameObject particleZone;
 
     public BaseAnimEnemy animator;
@@ -67,9 +68,9 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
 
     public void Die()
     {
+        BeforDie();
         Destroy(gameObject);
         areaEnermy?.Die(this);
-
     }
 
     public IEnumerator Imortal(float wait)
@@ -88,7 +89,7 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
             float y = Mathf.Sin(angle) * radius;
             Vector3 spawnPosition = new Vector3(x, y, 0) + transform.position;
 
-            Instantiate(particleZone, spawnPosition, Quaternion.identity);
+            Instantiate(particleZone, spawnPosition, Quaternion.identity,Zone);
         }
     }
 

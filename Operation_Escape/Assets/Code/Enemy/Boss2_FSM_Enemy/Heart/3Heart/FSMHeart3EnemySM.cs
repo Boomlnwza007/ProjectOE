@@ -64,6 +64,7 @@ public class FSMHeart3EnemySM : FSMBaseBoss2EnemySM , IDamageable
 
     public void Die()
     {
+        BeforDie();
         Destroy(gameObject);
         areaEnermy?.Die(this);
     }

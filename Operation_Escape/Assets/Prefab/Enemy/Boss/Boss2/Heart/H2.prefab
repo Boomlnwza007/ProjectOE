@@ -424,6 +424,7 @@ MonoBehaviour:
   grid: {fileID: 7269889646939044773}
   spike: {fileID: 11400000, guid: 8e8e23b70bceadc4bb1d49d30c1ea942, type: 2}
   spikeN: {fileID: 0}
+  spikeZ: {fileID: 0}
   areaEnermy: {fileID: 0}
   minion: {fileID: 11400000, guid: 1cf89fbeb89539f408b1692afa1065a5, type: 2}
   spawnPoint:
@@ -435,6 +436,7 @@ MonoBehaviour:
   timePreSpike: 0.8
   timeCooldownSpike: 0.5
   timeCooldownMinion: 5
+  Zone: {fileID: 1769670117586182860}
   particleZone: {fileID: 3909465721922937394, guid: fb17fc5698182d648afbdce5c0b355d8, type: 3}
   animator: {fileID: 7577479847187630518}
 --- !u!114 &-6068073495496497274

@@ -80,6 +80,21 @@ public class AreaEnermy : MonoBehaviour
         enemy.Clear();
     }
 
+    public void ClaerMonMinion()
+    {
+        Collider2D[] enemygameObject = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0, enemyleLayer);
+        foreach (var item in enemygameObject)
+        {
+            if (item.TryGetComponent<StateMachine>(out var stateMachine) && stateMachine.ID == 0)
+            {
+                if (item.TryGetComponent<IDamageable>(out var damage))
+                {
+                    damage.Die();
+                }
+            }
+        }
+    }
+
     public void ReItem()
     {
         foreach (var item in objInterac)
