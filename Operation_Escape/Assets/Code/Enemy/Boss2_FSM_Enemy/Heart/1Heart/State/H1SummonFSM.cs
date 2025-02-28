@@ -22,10 +22,12 @@ public class H1SummonFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMHeart1EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
 
         try
         {
+            ani.ChangeAnimationAttack("Summon");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             for (int i = 0; i < 3; i++)
             {
                 state.SummonMinion(0);
