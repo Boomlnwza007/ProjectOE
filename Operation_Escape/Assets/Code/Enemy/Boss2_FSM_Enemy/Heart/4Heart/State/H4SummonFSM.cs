@@ -26,10 +26,12 @@ public class H4SummonFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMHeart4EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
 
         try
-        {            
+        {
+            ani.ChangeAnimationAttack("Pre_ChargeBullet");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.CreatLaserGun();
             await state.ShootLaser(charge, shoot, 1, charge + shoot);
             state.DelLaserGun();
@@ -46,6 +48,9 @@ public class H4SummonFSM : BaseState
             }
 
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            ani.ChangeAnimationAttack("ChageBullet");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Idle");
             Cooldown().Forget();
             state.shield.ShieldIsOn(true);
             ChangState(state.attack);

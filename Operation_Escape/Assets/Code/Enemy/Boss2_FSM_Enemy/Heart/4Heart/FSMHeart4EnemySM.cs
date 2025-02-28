@@ -74,7 +74,7 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
     public void CreatLaserGun()
     {
         SetupHandGun();
-        GameObject laser = Instantiate(lineRendererPrefab, transform.position, Quaternion.identity, handGun);
+        GameObject laser = Instantiate(lineRendererPrefab, bulletTransform.position, Quaternion.identity, bulletTransform);
         LaserFire laserg = laser.GetComponent<LaserFire>();
         laserg.SetStartFollow(target.position);
         lasers.Add(laser);
@@ -110,7 +110,7 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
 
     public void ChargeBullet()
     {
-        Instantiate(bulletmon, bulletTransform.position, Quaternion.identity);
+        Instantiate(bulletmon, handGun.position, Quaternion.identity);
     }
 
 
