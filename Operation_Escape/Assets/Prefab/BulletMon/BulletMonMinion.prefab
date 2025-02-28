@@ -392,11 +392,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1473662757371173205}
   damage: 30
-  speed: 20
+  speed: 25
   knockbackForce: 0
   tagUse: Player
   target: {fileID: 0}
   ready: 0
   ultimate: 0
   distance: 20
-  offset: 10
+  offset: 5
+  particle: {fileID: 7541123403067889326, guid: 4b18775e04fb83e4c9638cf572df9a6e, type: 3}
