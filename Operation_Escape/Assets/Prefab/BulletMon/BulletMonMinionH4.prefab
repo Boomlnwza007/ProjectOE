@@ -400,8 +400,6 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 0
-  distance: 20
-  offset: 10
 --- !u!95 &3465315325880801900
 Animator:
   serializedVersion: 5

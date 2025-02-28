@@ -4,63 +4,32 @@ using UnityEngine;
 
 public class BulletMonH4 : BaseBullet
 {
-    private SpriteRenderer sprite;
-    private bool shoot;
-    private float yTarget;
-    private float yPos;
-    private bool yPosSet = false;
-    public float distance = 10;
-    public float offset = 10;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        yPos = transform.position.y;
     }
 
     public void lunch()
     {
-        rb.velocity = transform.up * speed;
+        Vector2 direction = (Prefire(PlayerControl.control.transform, transform, speed) - (Vector2)transform.position).normalized;
+        rb.velocity = direction * speed;
         ready = true;
     }
 
-    private void Update()
+    public Vector2 Prefire(Transform target, Transform bulletTransform, float bulletSpeed)
     {
-        if (ready)
-        {
-            if (Mathf.Abs(transform.position.y - yPos) > distance && !yPosSet)
-            {
-                Debug.Log(transform.position.y + " " + yPos);
-                yPos = transform.position.y;
-                yPosSet = true;
-            }
-            else if (yPosSet)
-            {
-                if (!sprite.isVisible && !shoot)
-                {
-                    if (transform.position.y > yPos + offset)
-                    {
-                        yTarget = CinemachineControl.Instance.player.position.y;
-                        transform.position = new Vector3(CinemachineControl.Instance.player.position.x, transform.position.y, transform.position.z);
-                        rb.velocity = -transform.up * speed;
-                        shoot = true;
+        Vector2 toTarget = (Vector2)target.position - (Vector2)bulletTransform.position;
 
-                        // Debug.Log(transform.position.y + " "+yPos + 10);
-                    }
-                    return;
-                }
-                else if (transform.position.y <= yTarget && shoot)
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }        
+        float timeToTarget = toTarget.magnitude / bulletSpeed;
+
+        Vector2 predictedPosition = (Vector2)target.position + (Vector2)target.GetComponent<Rigidbody2D>().velocity * timeToTarget;
+
+        return predictedPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == tagUse && shoot)
+        if (collision.tag == tagUse && ready)
         {
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
