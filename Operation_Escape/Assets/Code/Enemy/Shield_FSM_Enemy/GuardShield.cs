@@ -30,8 +30,8 @@ public class GuardShield : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (conShield)
         {
-            shieldCollider.enabled = redy ? canGuard : false;
             shieldSprite.enabled = redy ? canGuard : false;
+            shieldCollider.enabled = redy ? canGuard : false;
 
             if (canGuard)
             {
@@ -118,6 +118,5 @@ public class GuardShield : MonoBehaviour
             state.animator.ChangeAnimationAttack("Stun");
             state.ChangState(state.checkDistanceState);
         }
-
     }
 }
