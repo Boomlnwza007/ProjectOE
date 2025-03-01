@@ -152,15 +152,30 @@ public class ChargeEMFSM : BaseState
                     (y - (gridSize - 1) / 2f) * gridHeight
                 );
                 Collider2D[] colliders = Physics2D.OverlapBoxAll(checkPosition, new Vector2(gridWidth, gridHeight), 0f, layerMask);
+                Color debugColor = colliders.Length == 0 ? Color.green : Color.red;
+
                 if (colliders.Length == 0)
                 {
                     vectors.Add(checkPosition);
                 }
-
+                DrawDebugBox(checkPosition, gridWidth, gridHeight, debugColor);
             }
         }
 
         return vectors;
+    }
+
+    private void DrawDebugBox(Vector2 center, float width, float height, Color color)
+    {
+        Vector3 bottomLeft = center - new Vector2(width / 2, height / 2);
+        Vector3 bottomRight = center + new Vector2(width / 2, -height / 2);
+        Vector3 topLeft = center + new Vector2(-width / 2, height / 2);
+        Vector3 topRight = center + new Vector2(width / 2, height / 2);
+
+        Debug.DrawLine(bottomLeft, bottomRight, color, 0.1f);
+        Debug.DrawLine(bottomRight, topRight, color, 0.1f);
+        Debug.DrawLine(topRight, topLeft, color, 0.1f);
+        Debug.DrawLine(topLeft, bottomLeft, color, 0.1f);
     }
     public override void Exit()
     {
