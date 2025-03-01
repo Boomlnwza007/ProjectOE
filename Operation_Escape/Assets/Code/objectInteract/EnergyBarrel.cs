@@ -13,7 +13,7 @@ public class EnergyBarrel : MonoBehaviour, IObjInteract , IRestartOBJ
     public bool blast;
     public LootTable lootDrop;
     public Animator animator;
-    public GameObject objLight; 
+    public GameObject[] objAll; 
 
     [Header("------ Audio Base ------")]
     public AudioSource sfxSource;
@@ -107,9 +107,13 @@ public class EnergyBarrel : MonoBehaviour, IObjInteract , IRestartOBJ
 
     public void SetHide(bool hide)
     {
-        var sprite = gameObject.GetComponent<SpriteRenderer>();
-        sprite.enabled = hide;
-        objLight.SetActive(hide);
+        GetComponent<SpriteRenderer>().enabled = hide;
+        GetComponent<Collider2D>().enabled = hide;
+        foreach (var item in objAll)
+
+        {
+            item.SetActive(hide);
+        }
     }
 
     public void Reset()
