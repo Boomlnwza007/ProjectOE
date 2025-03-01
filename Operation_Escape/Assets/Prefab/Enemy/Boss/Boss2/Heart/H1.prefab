@@ -166,7 +166,7 @@ MonoBehaviour:
   timePreSpike: 1
   timeCooldownSpike: 0.6
   timeCooldownMinion: 5
-  animator: {fileID: 0}
+  animator: {fileID: 5315040633833674080}
 --- !u!114 &2194988785450867398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e729d71f6c7cc934f8a2bbfc7ba979d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 6384499375628457769}
   layerIndex: 0
-  rb: {fileID: 0}
+  rb: {fileID: 209352617987546641}
   timeplay: 0
   endAnim: 0
 --- !u!1 &3546661318249556242
