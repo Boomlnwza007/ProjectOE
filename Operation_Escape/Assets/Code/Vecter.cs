@@ -58,9 +58,9 @@ public class ReflectingRay : MonoBehaviour
         Vector3 topLeft = center + new Vector2(-width / 2, height / 2);
         Vector3 topRight = center + new Vector2(width / 2, height / 2);
 
-        Debug.DrawLine(bottomLeft, bottomRight, color, 0.1f);
-        Debug.DrawLine(bottomRight, topRight, color, 0.1f);
-        Debug.DrawLine(topRight, topLeft, color, 0.1f);
-        Debug.DrawLine(topLeft, bottomLeft, color, 0.1f);
+        Debug.DrawLine(bottomLeft, bottomRight, color, 5f);
+        Debug.DrawLine(bottomRight, topRight, color, 5f);
+        Debug.DrawLine(topRight, topLeft, color, 5f);
+        Debug.DrawLine(topLeft, bottomLeft, color, 5f);
     }
 }
