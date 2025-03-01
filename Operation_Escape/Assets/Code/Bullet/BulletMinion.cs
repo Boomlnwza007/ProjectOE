@@ -27,7 +27,6 @@ public class BulletMinion : BaseBullet
     {
         if (Mathf.Abs(transform.position.y - yPos) > distance && !yPosSet)
         {
-            Debug.Log(transform.position.y + " " + yPos);
             yPos = transform.position.y;
             yPosSet = true;
         }

@@ -215,7 +215,7 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 640
-  jumpLength: 6
+  jumpLength: 12
   eDead: {fileID: 7541123403067889326, guid: d6190a36a6043a544b97a1079241d9b9, type: 3}
   nameState: 
 --- !u!114 &2453006889408840406

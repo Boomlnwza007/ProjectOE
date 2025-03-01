@@ -47,7 +47,7 @@ public class M1AttackFSM : BaseState
                     ai.monVelocity = Vector2.zero;
                     state.Walk();
                     Cooldown().Forget();
-                    ChangState(state.checkDistance);
+                    state.Attack();
                     return;
                 }
 
@@ -60,7 +60,6 @@ public class M1AttackFSM : BaseState
                         ai.monVelocity = Vector2.zero;
                         state.Walk();
                         state.Attack();
-                        Cooldown().Forget();
                         hasAttacked = true;
                         return;
                     }
@@ -69,11 +68,7 @@ public class M1AttackFSM : BaseState
                 await UniTask.Yield();
             }
 
-            ai.canMove = true;
-            await UniTask.WaitForSeconds(1f, cancellationToken: token);
-            Cooldown().Forget();
-            ChangState(state.checkDistance);
-
+            state.Attack();
         }
         catch (OperationCanceledException)
         {

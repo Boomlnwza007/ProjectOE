@@ -23,7 +23,7 @@ public class M1checkDistanceFSM : BaseState
     {
         ai.destination = ai.targetTransform.position;
         float distance = Vector2.Distance(ai.position, ai.targetTransform.position);
-        if (distance < 5 && !((FSMMinion1EnemySM)stateMachine).attack.cooldown)
+        if (distance < 10 && !((FSMMinion1EnemySM)stateMachine).attack.cooldown)
         {
             stateMachine.ChangState(((FSMMinion1EnemySM)stateMachine).attack);
         }

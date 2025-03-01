@@ -33,7 +33,7 @@ public class M2AttackFSM : BaseState
             {
                 state.Fire();
                 timer = 0;
-                time = Random.Range(state.minShoot, state.minShoot);
+                time = Random.Range(state.minShoot, state.maxShoot);
                 state.animator.SetTrigger("Shoot");
                 shoot = false;
             }
