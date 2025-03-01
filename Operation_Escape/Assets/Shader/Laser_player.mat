@@ -50,6 +50,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Bits: 128
     - _LaserEdgeSmoothness: 10
     - _LaserScale: 1
     - _LaserSmooth: 10

@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Range")]
     [SerializeField] public List<BaseGun> gunList = new List<BaseGun>();
     [HideInInspector] public GameObject currentEquipGun;
+    [HideInInspector] public GameObject currentEquipGunUL;
     [HideInInspector] public int currentGun = -1;
     [SerializeField] private GameObject WeaponGun;
     [SerializeField] private Transform aimPoint;
@@ -99,7 +100,7 @@ public class PlayerCombat : MonoBehaviour
         {
             energy.canGetUltimateEnergy = false;
             gunList[currentGun].Ultimate();
-            Debug.Log("Ultimate");
+            SwitchGun();
             AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.useUlt);
         }
 
@@ -203,6 +204,7 @@ public class PlayerCombat : MonoBehaviour
         energy.ultimateEnergy = 0;
         UltiTime = 0;
         gunList[currentGun].ammo = gunList[currentGun].maxAmmo;
+        SwitchGun();
     }
 
     public void Reload()
@@ -237,6 +239,20 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(wait);
         canMelee = true;
         canFire = true;        
+    }
+
+    public void SwitchGun()
+    {
+        currentEquipGun.SetActive(!currentEquipGun.activeSelf);
+        currentEquipGunUL.SetActive(!currentEquipGunUL.activeSelf);
+        if (currentEquipGun.activeSelf)
+        {
+            aimPoint.localPosition = currentEquipGun.GetComponentInChildren<Transform>().Find("Aim").localPosition;
+        }
+        else
+        {
+            aimPoint.localPosition = currentEquipGunUL.GetComponentInChildren<Transform>().Find("Aim").localPosition;
+        }
     }
 
     public void Addgun(BaseGun gun)
@@ -305,6 +321,7 @@ public class PlayerCombat : MonoBehaviour
         if (gunList.Count < 1)
         {
             Destroy(currentEquipGun);
+            Destroy(currentEquipGunUL);
             PlayerControl.control.ammoBar.gameObject.SetActive(false);
         }
     }
@@ -353,7 +370,6 @@ public class PlayerCombat : MonoBehaviour
         }
 
         currentGun = index;
-        aimPoint.localPosition = new Vector3(gunList[currentGun].aimDistance, 0, 0);
         gunList[currentGun].bulletTranform = aimPoint;
         canFire = true;
         canReload = true;
@@ -365,10 +381,12 @@ public class PlayerCombat : MonoBehaviour
         if (currentEquipGun != null)
         {
             Destroy(currentEquipGun);
+            Destroy(currentEquipGunUL);
         }
 
         currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
-        PlayerControl.control.guntSprite = currentEquipGun.GetComponentInChildren<SpriteRenderer>();
+        currentEquipGunUL = Instantiate(gunList[index].gunULPrefab, WeaponGun.transform);
+        aimPoint.localPosition = currentEquipGun.GetComponentInChildren<Transform>().Find("Aim").localPosition;
         gunList[index].Enter();
         PlayerControl.control.ammoBar.value = gunList[index].energyUse;
         AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.ChangGun);

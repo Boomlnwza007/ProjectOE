@@ -46,9 +46,20 @@ public class FireRateBar : MonoBehaviour
             slider.value = Mathf.Lerp(0, currentGun.maxFireRate, currentGun.fireRate / currentGun.maxFireRate);
         }
 
-        if (canvas.sortingOrder != gunSprite.sortingOrder)
+        if (gunSprite != null)
         {
-            canvas.sortingOrder = gunSprite.sortingOrder+1;
+            if (Player.isFacingRight)
+            {
+                gunSprite.sortingOrder = 6;
+                canvas.sortingOrder = gunSprite.sortingOrder + 1;
+
+            }
+            else
+            {
+                gunSprite.sortingOrder = 3;
+                canvas.sortingOrder = gunSprite.sortingOrder + 1;
+
+            }
         }
     }
 

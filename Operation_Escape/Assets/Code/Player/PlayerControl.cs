@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     public bool isdaed;
     public GameObject feet;
     private bool showgun = true;
+    [HideInInspector] public bool isFacingRight;
 
     [Header("UI")]
     [SerializeField] private GameObject UI;
@@ -30,10 +31,6 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private PauseScene menu;
     [SerializeField] public Slider ammoBar;
     [SerializeField] public GameObject healUseBar;
-
-
-    [Header("Gun")]
-    [SerializeField] public SpriteRenderer guntSprite;
 
     private float reloadTime = 0;
     private string currentGunName;
@@ -82,7 +79,7 @@ public class PlayerControl : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        bool isFacingRight = playerAim.angle > -90 && playerAim.angle < 90;
+        isFacingRight = playerAim.angle > -90 && playerAim.angle < 90;
         bool HasGun = playerCombat.gunList.Count > 0 && showgun;
 
         animator.SetBool("Right", isFacingRight);
@@ -99,19 +96,6 @@ public class PlayerControl : MonoBehaviour
         {
             animator.SetBool("Move", false);
         }
-
-
-        if (guntSprite!=null)
-        {
-            if (isFacingRight)
-            {
-                guntSprite.sortingOrder = 6;
-            }
-            else
-            {
-                guntSprite.sortingOrder = 3;
-            }
-        }        
     }
 
     private void HandleReload()

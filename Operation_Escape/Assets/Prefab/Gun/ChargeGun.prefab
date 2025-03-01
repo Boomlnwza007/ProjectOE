@@ -444,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ChargeGun
   gunPrefab: {fileID: 4387351244970923408}
+  gunULPrefab: {fileID: 4387351244970923408}
   bulletPrefab: {fileID: 6928389756606254245, guid: 20107695ad05c934cb36491d46cb2200, type: 3}
   iconGun: {fileID: 21300000, guid: 26dda8d265ce32b4f98a64043e66e44a, type: 3}
   bulletTranform: {fileID: 0}

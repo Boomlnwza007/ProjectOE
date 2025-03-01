@@ -502,6 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ShieldGun
   gunPrefab: {fileID: 5520762139760519814}
+  gunULPrefab: {fileID: 5520762139760519814}
   bulletPrefab: {fileID: 7771206494892856151, guid: 07def35f49f7b8a4593be21946fa812a, type: 3}
   iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
   bulletTranform: {fileID: 0}
