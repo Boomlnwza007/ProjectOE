@@ -5468,9 +5468,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 6092705830766519241}
-  walk: []
-  attack: []
-  charge: {fileID: 0}
+  walk:
+  - {fileID: 8300000, guid: ee13691df0aa57546bea3a485ab84fde, type: 3}
+  - {fileID: 8300000, guid: 2801b11f5ad6a7c43a5ae55d7db5731a, type: 3}
+  attack:
+  - {fileID: 8300000, guid: 073d236285f547e40a96e22c12a34a3e, type: 3}
+  charge: {fileID: 8300000, guid: 68a0558483ab60e4589014b9a54fea1a, type: 3}
 --- !u!82 &6092705830766519241
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5766,7 +5769,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 84976
+  m_InstanceId: 984840
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
