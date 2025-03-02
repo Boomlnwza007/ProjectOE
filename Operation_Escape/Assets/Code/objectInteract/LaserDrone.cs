@@ -21,12 +21,14 @@ public class LaserDrone : MonoBehaviour
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
     public LineRenderer PreLaser;
     private LineRenderer laser;
+    private bool playerSound;
     public LayerMask ShootLayer;
 
     [Header("------ Audio Base ------")]
-    public AudioSource sfxSource;
-    public AudioClip shoot;
-    public AudioClip breakLaser;
+    public AudioSource[] sfxSource;
+    public AudioClip PrepareShoot;
+    public AudioClip WhileShoot;
+    public AudioClip StopShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -61,10 +63,12 @@ public class LaserDrone : MonoBehaviour
         {
             time += Time.deltaTime;
             LaserFire();
+            PlayLoop(WhileShoot).Forget();
             if (time >= duration)
             {
                 isFiring = false;
                 laser.enabled = false;
+                PlayerSound(StopShoot);
                 for (int i = 0; i < particleSystems.Count; i++)
                 {
                     particleSystems[i].Stop();
@@ -76,6 +80,7 @@ public class LaserDrone : MonoBehaviour
         else
         {
             time += Time.deltaTime;
+            PlayLoop(PrepareShoot).Forget();
         }
     }
 
@@ -175,5 +180,26 @@ public class LaserDrone : MonoBehaviour
     {        
         PreLaser.SetPosition(0, firstPos.position);
         PreLaser.SetPosition(1, endPos.position);
+    }
+
+    public void PlayerSound(AudioClip clip)
+    {
+        foreach (var sound in sfxSource)
+        {
+            sound.PlayOneShot(clip);
+        }
+
+    }
+
+    private async UniTask PlayLoop(AudioClip clip)
+    {
+        if (!playerSound)
+        {
+            Debug.Log(clip.name);
+            playerSound = true;
+            PlayerSound(clip);
+            await UniTask.Delay((int)(clip.length * 1000));
+            playerSound = false;
+        }
     }
 }

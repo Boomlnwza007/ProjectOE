@@ -9,7 +9,6 @@ public class LaserPillar : MonoBehaviour, IObjInteract, IRestartOBJ
     public void Interact(DamageType type)
     {       
         laserDrone.Destroy();
-        laserDrone.sfxSource.PlayOneShot(laserDrone.breakLaser);
     }
 
     public void Reset()
