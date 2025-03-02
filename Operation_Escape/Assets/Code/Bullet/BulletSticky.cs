@@ -39,6 +39,7 @@ public class BulletSticky : BaseBullet
                 gameObject.transform.parent = collision.transform;
                 rb.velocity = Vector3.zero;  
                 Destroy(rb);
+                Destroy(GetComponent<Collider2D>());
                 if (collision.TryGetComponent(out enermy))
                 {
                     enermy.dropChange++;
@@ -55,8 +56,8 @@ public class BulletSticky : BaseBullet
     public async UniTask Blast(CancellationToken cancellationToken)
     {
         float timer = 0f;
-        float flashSpeed = 1f; // ความเร็วเริ่มต้นของการกระพริบ
-        Color originalColor = spriteBullet.color; // เก็บสีเดิมไว้
+        float flashSpeed = 1f;
+        Color originalColor = spriteBullet.color;
         sticky = true;
 
         while (timer < timeBomb)
