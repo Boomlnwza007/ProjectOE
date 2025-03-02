@@ -68,15 +68,12 @@ public class BulletSticky : BaseBullet
             }
 
             timer += Time.deltaTime;
-
-            // เปลี่ยนสีให้ค่อย ๆ แดงเมื่อเข้าใกล้ 10 วินาที
+            
             float redValue = Mathf.Lerp(0, 1, timer / timeBomb);
             spriteBullet.color = new Color(redValue, originalColor.g * (1 - redValue), originalColor.b * (1 - redValue));
-
-            // หากเวลาเกิน 7 วินาที เริ่มกระพริบ
+            
             if (timer >= timeBomb - 3f)
             {
-                // เพิ่มความเร็วของการกระพริบเมื่อใกล้ถึงเวลา
                 flashSpeed = Mathf.Lerp(1f, 10f, (timer - (timeBomb - 3f)) / 3f);
                 spriteBullet.color = Color.Lerp(originalColor, Color.red, Mathf.PingPong(Time.time * flashSpeed, 1f));
             }
@@ -89,7 +86,7 @@ public class BulletSticky : BaseBullet
             enermy.dropChange--;
             if (ultimate)
             {
-                enermy.lootDrop.InstantiateLoot(4);
+                enermy.lootDrop.InstantiateLoot(1);
             }
         }
 
