@@ -68,7 +68,8 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
     {
         if (!imortal)
         {
-            health -= damage;         
+            health -= damage;
+            AudioManager.audioManager.PlaySFX(PlayerSound.playerSound.GetHit);
             spriteFlash?.Flash();
             if (health <= 0)
             {
