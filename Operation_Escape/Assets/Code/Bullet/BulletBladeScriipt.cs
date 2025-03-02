@@ -50,7 +50,10 @@ public class BulletBladeScriipt : BaseBullet
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
-            Destroy(gameObject);
+            if (!collision.CompareTag("InEdgeWall"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
