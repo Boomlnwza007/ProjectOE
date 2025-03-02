@@ -34,19 +34,19 @@ public class BulletBladeScriipt : BaseBullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == tagUse)
+        if (collision.TryGetComponent(out IObjInteract bulletInteract))
+        {
+            bulletInteract.Interact(DamageType.Rang);
+        }        
+        else if (collision.tag == tagUse)
         {
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null && !hitTargets.Contains(target))
             {
-                target.Takedamage(damage, DamageType.Rang,knockbackForce);
+                target.Takedamage(damage, DamageType.Rang, knockbackForce);
                 KnockBackPush(collision);
                 hitTargets.Add(target);
             }
-        }
-        else if (collision.TryGetComponent(out IObjInteract bulletInteract))
-        {
-            bulletInteract.Interact(DamageType.Rang);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {

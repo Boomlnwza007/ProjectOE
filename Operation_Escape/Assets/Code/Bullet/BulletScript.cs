@@ -20,23 +20,23 @@ public class BulletScript : BaseBullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == tagUse)
+        if (collision.TryGetComponent(out IObjInteract bulletInteract))
+        {
+            bulletInteract.Interact(DamageType.Rang);
+            Expo();
+
+        }        
+        else if (collision.tag == tagUse)
         {
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
             {
-                target.Takedamage(damage, DamageType.Rang,knockbackForce);
+                target.Takedamage(damage, DamageType.Rang, knockbackForce);
                 KnockBackPush(collision);
             }
 
             Expo();
             Destroy(gameObject);
-        }
-        else if (collision.TryGetComponent(out IObjInteract bulletInteract))
-        {
-            bulletInteract.Interact(DamageType.Rang);
-            Expo();
-
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {

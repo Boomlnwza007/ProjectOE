@@ -182,13 +182,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b171a609b8a322469c635132ca8bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: -8713237800413251932}
   damage: 5
   speed: 20
   knockbackForce: 5
   tagUse: Enemy
   target: {fileID: 0}
   ready: 0
+  ultimate: 0
   expo: {fileID: 4468603144254925480, guid: bff72df5c68973d449971adfb6f01e27, type: 3}
 --- !u!50 &-8713237800413251932
 Rigidbody2D:

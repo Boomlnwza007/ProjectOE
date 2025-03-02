@@ -24,7 +24,12 @@ public class BulletSticky : BaseBullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == tagUse)
+        if (collision.TryGetComponent(out IObjInteract bulletInteract))
+        {
+            bulletInteract.Interact(DamageType.Rang);
+            Destroy(gameObject);
+        }
+        else if (collision.tag == tagUse)
         {
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
@@ -40,12 +45,7 @@ public class BulletSticky : BaseBullet
                 }
                 StartBlast();
             }
-        }
-        else if (collision.TryGetComponent(out IObjInteract bulletInteract))
-        {
-            bulletInteract.Interact(DamageType.Rang);
-            Destroy(gameObject);
-        }
+        }        
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Destroy(gameObject);
