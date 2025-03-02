@@ -10,6 +10,7 @@ TagManager:
   - BulletMon
   - BulletPlayer
   - EdgeWall
+  - InEdgeWall
   layers:
   - Default
   - TransparentFX

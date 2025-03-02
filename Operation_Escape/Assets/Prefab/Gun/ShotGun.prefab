@@ -651,11 +651,11 @@ MonoBehaviour:
   iconGun: {fileID: 21300000, guid: 3fecb80e6a1df27459c688fdfb3dc496, type: 3}
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 2128694304809498545}
-  aimDistance: 0
-  fireRate: 1.0420547
+  aimDistance: 1.235
+  fireRate: 1.969219
   timeReload: 3
-  maxFireRate: 2
-  ammo: 4
+  maxFireRate: 1
+  ammo: 0
   maxAmmo: 5
   energyUse: 3
   canSpecial: 0
