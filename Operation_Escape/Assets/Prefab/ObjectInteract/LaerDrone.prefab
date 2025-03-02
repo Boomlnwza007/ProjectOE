@@ -15690,8 +15690,8 @@ MonoBehaviour:
   sfxSource:
   - {fileID: 7239386866128046904}
   - {fileID: 7532547866740675295}
-  PrepareShoot: {fileID: 8300000, guid: a1b547a432cf96a4382e3a7a0d5a97d6, type: 3}
-  WhileShoot: {fileID: 0}
+  PrepareShoot: {fileID: 8300000, guid: 92dc8817713b8264baa61c94b765611e, type: 3}
+  WhileShoot: {fileID: 8300000, guid: a1b547a432cf96a4382e3a7a0d5a97d6, type: 3}
   StopShoot: {fileID: 0}
 --- !u!120 &2345503973643408658
 LineRenderer:
