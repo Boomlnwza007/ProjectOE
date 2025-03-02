@@ -11406,7 +11406,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 100
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -11782,7 +11782,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1
+        scalar: 4.64
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -15662,7 +15662,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 1000
+  m_MaxParticleSize: 10000
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -26123,6 +26123,7 @@ GameObject:
   - component: {fileID: 3625196426795854563}
   - component: {fileID: 4419614992927084286}
   - component: {fileID: 5271488527250015382}
+  - component: {fileID: 8137119561640315182}
   m_Layer: 7
   m_Name: Boss1
   m_TagString: Enemy
@@ -26317,6 +26318,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootlist:
   - {fileID: 11400000, guid: b272f7a7f44e6e24ca3b24d305eefb62, type: 2}
+--- !u!95 &8137119561640315182
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444578226125662445}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3506982880928163096
 GameObject:
   m_ObjectHideFlags: 0
@@ -26666,7 +26688,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 35f74258bf6313d49a9c1ca883340fd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -26687,7 +26709,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4dd8a96f929ca004e98cc2601d77b828, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.49803922}
   m_FlipX: 0
   m_FlipY: 0
@@ -37193,7 +37215,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 35f74258bf6313d49a9c1ca883340fd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37214,7 +37236,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4dd8a96f929ca004e98cc2601d77b828, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.49803922}
   m_FlipX: 0
   m_FlipY: 0
@@ -42846,7 +42868,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 56e5cae7aadab9149af7a514b15578bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -42867,7 +42889,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4dd8a96f929ca004e98cc2601d77b828, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.49803922}
   m_FlipX: 0
   m_FlipY: 0
