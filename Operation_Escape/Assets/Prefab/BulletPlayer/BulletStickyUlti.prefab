@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3549296484395045884}
-  damage: 5
+  damage: 0
   speed: 30
   knockbackForce: 5
   tagUse: Enemy
@@ -171,7 +171,7 @@ MonoBehaviour:
   ready: 0
   ultimate: 1
   exDmg: 20
-  timeBomb: 10
+  timeBomb: 5
   spriteBullet: {fileID: 5284661742747309040}
 --- !u!1 &9091167028789888159
 GameObject:
