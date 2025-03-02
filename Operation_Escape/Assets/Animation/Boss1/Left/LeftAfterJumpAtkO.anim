@@ -1493,7 +1493,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 6.3333335
+        time: 2.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -1505,7 +1505,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HitZone/AfterJumpAtkO/Bomb
+    path: HitZone/AfterJumpAtkO/BombO1
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -1532,7 +1532,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 6.3333335
+        time: 3.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -1544,7 +1544,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HitZone/AfterJumpAtkO/BombO
+    path: HitZone/AfterJumpAtkO/BombO2
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -1764,7 +1764,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2787333653
+      path: 3529242105
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -1773,7 +1773,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1494905905
+      path: 1263707203
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -5963,7 +5963,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 6.3333335
+        time: 2.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -5975,7 +5975,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HitZone/AfterJumpAtkO/Bomb
+    path: HitZone/AfterJumpAtkO/BombO1
     classID: 1
     script: {fileID: 0}
     flags: 0
@@ -6002,7 +6002,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 6.3333335
+        time: 3.5
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -6014,7 +6014,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: HitZone/AfterJumpAtkO/BombO
+    path: HitZone/AfterJumpAtkO/BombO2
     classID: 1
     script: {fileID: 0}
     flags: 0

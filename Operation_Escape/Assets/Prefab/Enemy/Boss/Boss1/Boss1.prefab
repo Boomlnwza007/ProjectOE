@@ -433,7 +433,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946566690171257923}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5791,7 +5791,7 @@ GameObject:
   - component: {fileID: 7437970566354314804}
   - component: {fileID: 2535098109113882882}
   m_Layer: 0
-  m_Name: BombO
+  m_Name: BombO2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5821,7 +5821,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492688398276864563}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -10843,7 +10843,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888081790117273065}
   serializedVersion: 8
-  lengthInSec: 2.5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -16078,7 +16078,7 @@ GameObject:
   - component: {fileID: 3379571238195799440}
   - component: {fileID: 3655152792027098855}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: BombO1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16108,7 +16108,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2429701879318359744}
   serializedVersion: 8
-  lengthInSec: 3
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -20967,7 +20967,7 @@ GameObject:
   - component: {fileID: 4662949158956701203}
   - component: {fileID: 896245094061465603}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: GroundO1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32261,7 +32261,7 @@ GameObject:
   - component: {fileID: 5487492712923005603}
   - component: {fileID: 8882851062149552995}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: GroundO2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
