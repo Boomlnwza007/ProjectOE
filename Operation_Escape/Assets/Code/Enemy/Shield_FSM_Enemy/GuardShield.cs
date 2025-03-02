@@ -119,16 +119,19 @@ public class GuardShield : MonoBehaviour
 
     public void BreakShield()
     {
-        canGuard = false;
-        var state = gameObject.GetComponentInParent<FSMSEnemySM>();
-        if (state)
+        if (canGuard)
         {
-            redy = false;
-            state.stun = true;
-            state.ai.monVelocity = Vector2.zero;
-            state.animator.ChangeAnimationAttack("Stun");
-            state.ChangState(state.checkDistanceState);
-        }
-        audioGame.PlayOneShot(shieldBreak);
+            canGuard = false;
+            var state = gameObject.GetComponentInParent<FSMSEnemySM>();
+            if (state)
+            {
+                redy = false;
+                state.stun = true;
+                state.ai.monVelocity = Vector2.zero;
+                state.animator.ChangeAnimationAttack("Stun");
+                state.ChangState(state.checkDistanceState);
+            }
+            audioGame.PlayOneShot(shieldBreak);
+        }        
     }
 }
