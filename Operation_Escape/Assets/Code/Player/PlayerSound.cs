@@ -18,6 +18,7 @@ public class PlayerSound : MonoBehaviour
     public AudioClip heal;
     public AudioClip ultFull;
     public AudioClip useUlt;
+    public AudioClip GetHit;
 
 
     private void Awake()

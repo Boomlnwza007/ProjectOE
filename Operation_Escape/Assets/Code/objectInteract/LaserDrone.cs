@@ -68,7 +68,6 @@ public class LaserDrone : MonoBehaviour
             {
                 isFiring = false;
                 laser.enabled = false;
-                PlayerSound(StopShoot);
                 for (int i = 0; i < particleSystems.Count; i++)
                 {
                     particleSystems[i].Stop();
