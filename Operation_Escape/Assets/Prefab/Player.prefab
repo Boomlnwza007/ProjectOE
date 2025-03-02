@@ -2038,7 +2038,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 128254
+  m_InstanceId: 936000
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8969,6 +8969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunList: []
   currentEquipGun: {fileID: 0}
+  currentEquipGunUL: {fileID: 0}
   currentGun: -1
   WeaponGun: {fileID: 3767920626603049848}
   aimPoint: {fileID: 3776936949522445415}
@@ -9003,6 +9004,7 @@ MonoBehaviour:
   animator: {fileID: 6778737011727104026}
   isdaed: 0
   feet: {fileID: 3281990316655141796}
+  isFacingRight: 0
   UI: {fileID: 3257738974196051764}
   healthBar: {fileID: 4370306752507434572}
   ultimateEnergyBar: {fileID: 2533806186777912645}
@@ -9013,7 +9015,6 @@ MonoBehaviour:
   menu: {fileID: 146829580990553179}
   ammoBar: {fileID: 555719331048246373}
   healUseBar: {fileID: 1797580868792835273}
-  guntSprite: {fileID: 0}
 --- !u!114 &8529641966930444737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9075,6 +9076,7 @@ MonoBehaviour:
   heal: {fileID: 8300000, guid: cfe0b3d6637129a4382cc2caa491644f, type: 3}
   ultFull: {fileID: 8300000, guid: fb22715912514524b8cd7ff078e93393, type: 3}
   useUlt: {fileID: 8300000, guid: 7f64e6badef08614bb2c158325ef5f61, type: 3}
+  GetHit: {fileID: 8300000, guid: dc4c6507ad3cfc746830c2f996a0cf07, type: 3}
 --- !u!81 &2102879129126952594
 AudioListener:
   m_ObjectHideFlags: 0
