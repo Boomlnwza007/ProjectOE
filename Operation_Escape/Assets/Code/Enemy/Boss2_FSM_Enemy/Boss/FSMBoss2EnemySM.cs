@@ -51,6 +51,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         eat = new EatB2FSM(this);
         checkNext = new CheckNextB2FSM(this);
         laserState = new LaserB2FSM(this);
+        areaMark = GameObject.Find("Boss2Mark").GetComponent<Boss2Mark>();
         areaMark.state = this;
         grid = areaMark.grid;
         spawnPoint = areaMark.monSpawn;

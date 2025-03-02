@@ -718,6 +718,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7409186701920477614, guid: 1af28328bf13fd74fbc2594b1b9e19d8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8285305277117430483, guid: 1af28328bf13fd74fbc2594b1b9e19d8, type: 3}
       propertyPath: m_Name
       value: Shield
