@@ -194,7 +194,6 @@ public class LaserDrone : MonoBehaviour
     {
         if (!playerSound)
         {
-            Debug.Log(clip.name);
             playerSound = true;
             PlayerSound(clip);
             await UniTask.Delay((int)(clip.length * 1000));
