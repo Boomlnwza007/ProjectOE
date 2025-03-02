@@ -19,6 +19,8 @@ public class GuardShield : MonoBehaviour
     public AudioClip shieldBreak;
     public AudioClip shieldDeflec;
     public AudioClip shieldRecovery;
+    public AudioClip shieldOn;
+    public AudioClip shieldOff;
 
     // Start is called before the first frame update
     void Start()
@@ -111,6 +113,7 @@ public class GuardShield : MonoBehaviour
             shieldCollider.enabled = on;
             shieldSprite.enabled = on;
             conShield = on;
+            audioGame.PlayOneShot(on ? shieldOn : shieldOff);
         }
     }
 
