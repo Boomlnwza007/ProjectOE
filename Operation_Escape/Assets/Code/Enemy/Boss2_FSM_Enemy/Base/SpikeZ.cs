@@ -58,11 +58,7 @@ public class SpikeZ : MonoBehaviour
             float x = Mathf.Cos(angle) * radius;
             float y = Mathf.Sin(angle) * radius;
             Vector3 spawnPosition = new Vector3(x, y, 0) + transform.position;
-
-            if (!Physics2D.OverlapCircle(spawnPosition, 0.5f, raycastMask))
-            { 
-                Instantiate(Spike, spawnPosition, Quaternion.identity, transform);
-            }
+            Instantiate(Spike, spawnPosition, Quaternion.identity, transform);
         }
     }
 }
