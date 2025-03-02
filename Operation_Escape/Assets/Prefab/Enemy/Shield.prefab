@@ -69,6 +69,8 @@ MonoBehaviour:
   shieldBreak: {fileID: 8300000, guid: 2e0a8b6518f9ecc499713769d117b627, type: 3}
   shieldDeflec: {fileID: 8300000, guid: 63d0cfa58a7aedf4b8d38bb894757654, type: 3}
   shieldRecovery: {fileID: 8300000, guid: ba58a01b065ffca4d97bb027635359b0, type: 3}
+  shieldOn: {fileID: 8300000, guid: 4161c04aacc26234289890825ed4fe4f, type: 3}
+  shieldOff: {fileID: 8300000, guid: 213ea37f79ce6204bbf74d35fb1647bd, type: 3}
 --- !u!212 &8783232817519859375
 SpriteRenderer:
   m_ObjectHideFlags: 0
