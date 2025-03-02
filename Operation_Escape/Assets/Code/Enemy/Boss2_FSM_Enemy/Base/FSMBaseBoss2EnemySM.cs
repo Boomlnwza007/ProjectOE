@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FSMBaseBoss2EnemySM : StateMachine
 {
+    [Header("Gun")]
+    public GameObject gun;
+
     [Header("Spike")]
     [SerializeField] protected GridBoss2 grid;
     public ID spike;
@@ -97,5 +100,13 @@ public class FSMBaseBoss2EnemySM : StateMachine
         }
 
         areaEnermy?.ClaerMonMinion();
+    }
+
+    public void SpawnGun()
+    {
+        if (gun != null)
+        {
+            Instantiate(gun, transform.position, Quaternion.identity);
+        }
     }
 }

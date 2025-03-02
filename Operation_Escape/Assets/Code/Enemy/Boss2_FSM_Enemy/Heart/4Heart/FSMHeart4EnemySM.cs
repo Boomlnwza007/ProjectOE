@@ -119,6 +119,7 @@ public class FSMHeart4EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         BeforDie();
         Destroy(gameObject);
         areaEnermy?.Die(this);
+        SpawnGun();
     }
 
     public IEnumerator Imortal(float wait)

@@ -90,6 +90,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             areaEnermy.Die(this);
         }
         Destroy(gameObject);
+        SpawnGun();
     }
 
     public IEnumerator Imortal(float wait)
