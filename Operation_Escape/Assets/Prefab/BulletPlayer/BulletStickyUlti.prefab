@@ -170,7 +170,7 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 1
-  exDmg: 20
+  exDmg: 10
   timeBomb: 5
   spriteBullet: {fileID: 5284661742747309040}
 --- !u!1 &9091167028789888159
