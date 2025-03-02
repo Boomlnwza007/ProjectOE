@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss2Mark : MonoBehaviour
 {
+    public static Boss2Mark mark;
     [Header("Strike")]
     public Transform[] top;
     public Transform[] down;

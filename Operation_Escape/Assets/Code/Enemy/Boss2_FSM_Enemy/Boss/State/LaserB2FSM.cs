@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LaserB2FSM : BaseState
 {
-    public LaserB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
+    public LaserB2FSM(FSMBoss2EnemySM stateMachine) : base("Laser", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
 
