@@ -19,7 +19,6 @@ public class BulletBounce : BaseBullet
         if (collision.gameObject.TryGetComponent(out IObjInteract bulletInteract))
         {
             bulletInteract.Interact(DamageType.Rang);
-            Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
@@ -54,6 +53,10 @@ public class BulletBounce : BaseBullet
             {
                 target.Takedamage(damage, DamageType.Rang, knockbackForce);
                 KnockBackPush(collision);
+            }
+            if (collision.gameObject.TryGetComponent(out IObjInteract bulletInteract))
+            {
+                bulletInteract.Interact(DamageType.Rang);
             }
             Destroy(gameObject);
         }

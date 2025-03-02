@@ -67,7 +67,12 @@ public class BulletCharge : BaseBullet
                 return;
             }
 
-            if (collision.tag == tagUse)
+            if (collision.TryGetComponent(out IObjInteract bulletInteract))
+            {
+                bulletInteract.Interact(DamageType.Rang);
+                Destroy(gameObject);
+            }
+            else if (collision.tag == tagUse)
             {
                 IDamageable target = collision.GetComponent<IDamageable>();
                 if (target != null)
@@ -76,12 +81,7 @@ public class BulletCharge : BaseBullet
                     KnockBackPush(collision);
                     Destroy(gameObject);
                 }
-            }
-            else if (collision.TryGetComponent(out IObjInteract bulletInteract))
-            {
-                bulletInteract.Interact(DamageType.Rang);
-                Destroy(gameObject);
-            }
+            }            
             else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
             {
                 Destroy(gameObject);
