@@ -14,6 +14,12 @@ public class GuardShield : MonoBehaviour
     public float cooldown;
     private float timeCooldown = 0;
 
+    [Header("------ Audio Base ------")]
+    public AudioSource audioGame;
+    public AudioClip shieldBreak;
+    public AudioClip shieldDeflec;
+    public AudioClip shieldRecovery;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +54,7 @@ public class GuardShield : MonoBehaviour
                 {
                     canGuard = true;
                     timeCooldown = 0;
+                    audioGame.PlayOneShot(shieldRecovery);
                 }
             }
         }        
@@ -66,7 +73,7 @@ public class GuardShield : MonoBehaviour
             BaseBullet bullet = collider.GetComponent<BaseBullet>();
             if (bullet == null || bullet.tagUse == "Player" || !bullet.ready) continue;
 
-            HandleBulletInteraction(bullet, angle);            
+            HandleBulletInteraction(bullet, angle);    
         }
 
         colliderHit.Clear();
@@ -93,6 +100,7 @@ public class GuardShield : MonoBehaviour
             SpriteRenderer spriteRenderer = bullet.gameObject.GetComponent<SpriteRenderer>();
             spriteRenderer.color = Color.red;
             bullet.ResetGameObj();
+            audioGame.PlayOneShot(shieldDeflec);
         }
     }
 
@@ -118,5 +126,6 @@ public class GuardShield : MonoBehaviour
             state.animator.ChangeAnimationAttack("Stun");
             state.ChangState(state.checkDistanceState);
         }
+        audioGame.PlayOneShot(shieldBreak);
     }
 }
