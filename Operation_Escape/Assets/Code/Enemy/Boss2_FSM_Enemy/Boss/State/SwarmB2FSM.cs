@@ -25,24 +25,24 @@ public class SwarmB2FSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
         {
-            await UniTask.WaitForSeconds(1f);
-            state.spriteBoss.enabled = false;
-            state.colliderBoss.enabled = false;
+            ani.ChangeAnimationAttack("UnderGround");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            state.Jump(state.jumpCenter.position);
 
             state.SpawnEgg();
             await UniTask.WaitForSeconds(3f);
             final = true;
             await UniTask.WaitUntil(() => !final, cancellationToken: token);
 
-            ai.canMove = true;
-
-            state.spriteBoss.enabled = true;
-            state.colliderBoss.enabled = true;
+            ani.ChangeAnimationAttack("UnderGroundUP");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Wait");
+            await UniTask.WaitForSeconds(1f);
 
             ChangState(state.eat);
         }

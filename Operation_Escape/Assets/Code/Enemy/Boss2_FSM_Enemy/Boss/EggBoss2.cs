@@ -53,7 +53,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
         {
             for (int i = 0; i < 5; i++)
             {
-                Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 3f;
+                Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 1f;
                 Instantiate(minion.Item[2], dropPosition ,Quaternion.identity);
                 FSMBoss2EnemySM.minionHave++;
             }

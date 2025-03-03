@@ -34,16 +34,16 @@ public class EatB2FSM : BaseState
 
         try
         {
-            Debug.Log("Eat");
-            await UniTask.WaitForSeconds(1 , cancellationToken : token);
+            ani.ChangeAnimationAttack("UnderGround");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.spriteBoss.enabled = false;
             state.colliderBoss.enabled = false;
-            state.Jump(ai.targetTransform.position);
-            ai.canMove = true;
+            state.Jump(ai.targetTransform.position + new Vector3(0, 1.83f, 0));            
             ani.ChangeAnimationAttack("Eat");
-            await UniTask.WaitUntil(() => ani.endAnim , cancellationToken : token);
+            ai.canMove = true;
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
             ai.canMove = false;
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            await UniTask.WaitUntil(() => ani.endAnim , cancellationToken : token);
             ai.maxspeed = state.Speed;
             ani.ChangeAnimationAttack("Wait");
             state.spriteBoss.enabled = true;

@@ -167,5 +167,5 @@ public class FSMMEnemySM : StateMachine, IDamageable
     {
         ai.maxspeed = Speed;
         animator.animator.speed = 1;
-    }
+    }   
 }

@@ -49,7 +49,7 @@ public class AvoidBehavior : MonoBehaviour, IAiAvoid
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+
         deviationTimer = deviationChangeInterval;
         currentDeviationAngle = Random.Range(-deviationAngle, deviationAngle);
 

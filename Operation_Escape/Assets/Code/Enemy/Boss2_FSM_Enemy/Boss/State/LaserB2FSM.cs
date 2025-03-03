@@ -23,14 +23,13 @@ public class LaserB2FSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
         {
-            await UniTask.WaitForSeconds(1f);
-            state.spriteBoss.enabled = false;
-            state.colliderBoss.enabled = false;
+            ani.ChangeAnimationAttack("UnderGround");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
 
             for (int i = 0; i < 3; i++)
@@ -43,9 +42,11 @@ public class LaserB2FSM : BaseState
                 await UniTask.WaitForSeconds(1.2f);
             }
 
-            state.spriteBoss.enabled = true;
-            state.colliderBoss.enabled = true;
-            ai.canMove = true;
+            ani.ChangeAnimationAttack("UnderGroundUP");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Wait");
+            await UniTask.WaitForSeconds(1f);
+
             ChangState(state.eat);
 
         }

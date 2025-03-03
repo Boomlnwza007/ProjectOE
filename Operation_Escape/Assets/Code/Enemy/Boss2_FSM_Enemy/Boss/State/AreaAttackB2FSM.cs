@@ -28,9 +28,12 @@ public class AreaAttackB2FSM : BaseState
 
         try
         {
-            await UniTask.WaitForSeconds(0.5f);
+            ani.ChangeAnimationAttack("UnderGround");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
-            await UniTask.WaitForSeconds(0.5f);
+            ani.ChangeAnimationAttack("UnderGroundUP");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Wait");
 
             ani.ChangeAnimationAttack("Area_PreAttack");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
@@ -65,8 +68,7 @@ public class AreaAttackB2FSM : BaseState
                 }
             }
 
-            ani.ChangeAnimationAttack("Area_EndAttack");
-            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            await UniTask.WaitForSeconds(0.5f);
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)

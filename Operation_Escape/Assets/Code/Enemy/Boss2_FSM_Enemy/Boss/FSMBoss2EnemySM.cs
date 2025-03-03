@@ -202,4 +202,17 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         allState.Add(laserState);
         return allState;
     }
+    public void CabWalk(int on)
+    {
+        if (on == 0)
+        {
+            ai.canMove = false;
+
+        }
+        else
+        {
+            ai.canMove = true;
+
+        }
+    }
 }
