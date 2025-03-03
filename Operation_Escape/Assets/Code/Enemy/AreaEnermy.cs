@@ -27,6 +27,15 @@ public class AreaEnermy : MonoBehaviour
             item.area = this;
         }
         AddAllEnemy();
+        if (boss)
+        {
+            foreach (var enemySpawn in enemy)
+            {
+                enemySpawn.attacking = false;
+                enemySpawn.SetCombatPhase(this);
+                areaBoss?.SetUp(enemySpawn, enemySpawn.GetComponentInChildren<UIBoss>());
+            }
+        }
     }
 
     public void ResetMon()
