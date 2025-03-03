@@ -7,6 +7,8 @@ public class SlideDoor : TypeDoor
     public Transform doorL;
     public Transform doorR;
     public float speed;
+    public float multiplySpeedLock = 10;
+    private float speedMultiply =   1;
     public float sizeDoor;
     public bool isLR;
     private Vector3 doorFPosition;
@@ -37,6 +39,18 @@ public class SlideDoor : TypeDoor
         
     }
 
+    public override void Locking(bool locked)
+    {
+        if (locked)
+        {
+            speedMultiply = multiplySpeedLock;
+        }
+        else
+        {
+            speedMultiply = 1;
+        }
+    }
+
     protected override void Openning()
     {
         isOpen = true;
@@ -53,14 +67,14 @@ public class SlideDoor : TypeDoor
     {
         if (isOpen)
         {
-            doorL.position = Vector2.MoveTowards(doorL.position, targetDoorFPosition, speed * Time.deltaTime);
-            doorR.position = Vector2.MoveTowards(doorR.position, targetDoorSPosition, speed * Time.deltaTime);
+            doorL.position = Vector2.MoveTowards(doorL.position, targetDoorFPosition, speed* speedMultiply * Time.deltaTime);
+            doorR.position = Vector2.MoveTowards(doorR.position, targetDoorSPosition, speed* speedMultiply * Time.deltaTime);
         }
 
         if (isClose)
         {
-            doorL.position = Vector2.MoveTowards(doorL.position, doorFPosition, speed * Time.deltaTime);
-            doorR.position = Vector2.MoveTowards(doorR.position, doorSPosition, speed * Time.deltaTime);
+            doorL.position = Vector2.MoveTowards(doorL.position, doorFPosition, speed * speedMultiply * Time.deltaTime);
+            doorR.position = Vector2.MoveTowards(doorR.position, doorSPosition, speed * speedMultiply * Time.deltaTime);
         }
     }
 

@@ -20,6 +20,7 @@ public class TypeDoor : MonoBehaviour
         }
     }
 
+    public virtual void Locking(bool locked) { }
     protected virtual void Openning() { }
     protected virtual void Closesing() { }
 

@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 1612879199829810908}
   - component: {fileID: 7421506709545490136}
   - component: {fileID: 2709348830439546881}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: DoorSlideUPLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,6 +670,7 @@ MonoBehaviour:
   doorL: {fileID: 1745262482250799753}
   doorR: {fileID: 927741564179476512}
   speed: 7
+  multiplySpeedLock: 2.5
   sizeDoor: 5
   isLR: 0
 --- !u!114 &2709348830439546881

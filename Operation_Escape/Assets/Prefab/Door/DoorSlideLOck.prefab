@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 2737638267092153965}
   - component: {fileID: 1797237683612347395}
   - component: {fileID: 86168620634772445}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: DoorSlideLOck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,6 +617,7 @@ MonoBehaviour:
   doorL: {fileID: 3938227232958868573}
   doorR: {fileID: 8213021759704807796}
   speed: 7
+  multiplySpeedLock: 2.5
   sizeDoor: 3
   isLR: 1
 --- !u!114 &86168620634772445

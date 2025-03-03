@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1598415747218189492}
   - component: {fileID: 6156291694624543428}
   - component: {fileID: 1737859693994317277}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: DoorSlide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,6 +286,7 @@ MonoBehaviour:
   doorL: {fileID: 7527597836417537825}
   doorR: {fileID: 817681664196923138}
   speed: 7
+  multiplySpeedLock: 2.5
   sizeDoor: 3
   isLR: 1
 --- !u!114 &1737859693994317277

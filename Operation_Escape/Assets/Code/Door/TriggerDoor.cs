@@ -10,8 +10,8 @@ public class TriggerDoor : MonoBehaviour
     {
         if (!door.locked)
         {
-            door.Close();
             door.SetLock();
+            door.Close();
             if (door.area != null)
             {
                 door.area.hasPlayer = true;

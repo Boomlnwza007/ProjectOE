@@ -55,6 +55,7 @@ public class AutoDoor : MonoBehaviour
             aniDoor.UnLock();
         }
         locked = false;
+        door.Locking(false);
     }
 
     public void UnlockDead()
@@ -65,6 +66,7 @@ public class AutoDoor : MonoBehaviour
             aniDoor.UnLock();
         }
         locked = false;
+        door.Locking(false);
     }
 
     public void SetLock()
@@ -75,11 +77,8 @@ public class AutoDoor : MonoBehaviour
         }
         else
         {
-            if (aniDoor != null)
-            {
-                aniDoor.Lock();
-            }
-            locked = true;
+            LockOn();
+            door.Locking(true);
         }
     }
 
