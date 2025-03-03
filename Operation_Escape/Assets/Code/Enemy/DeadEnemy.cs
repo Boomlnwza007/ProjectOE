@@ -2,41 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadEnemy : MonoBehaviour, IObjInteract
+public class DeadEnemy : MonoBehaviour, IDamageable
 {
     public int Hp = 1;
     public LootTable lootDrop;
     public GameObject gun;
     public SpriteFlash spriteFlash;
 
-    public void Interact(DamageType type)
+    public bool imortal { get; set; }
+
+    public void Die()
     {
-        switch (type)
-        {           
-            case DamageType.Melee:
-                lootDrop?.InstantiateLoot(1);
-                spriteFlash?.Flash();
-                Hp--;
-                if (Hp <= 0)
-                {
-                    if (gun != null)
-                    {
-                        Instantiate(gun,gameObject.transform.position, Quaternion.identity);
-                    }
-                    Destroy(gameObject);
-                }
-                break;
-            case DamageType.Rang:
-                Hp--;
-                if (Hp <= 0)
-                {
-                    Destroy(gameObject);
-                }
-                spriteFlash.Flash();
-                break;
+        Destroy(gameObject);
+        if (gun != null)
+        {
+            Instantiate(gun,transform.position,Quaternion.identity);
         }
     }
 
+    public IEnumerator Imortal(float wait)
+    {
+        return null;
+    }
 
-
+    public void Takedamage(int damage, DamageType type, float knockBack)
+    {
+        Hp -= damage;
+        spriteFlash?.Flash();
+        switch (type)
+        {
+            case DamageType.Rang:
+                break;
+            case DamageType.Melee:
+                lootDrop.InstantiateLoot(0);
+                break;
+        }
+        if (Hp <= 0)
+        {
+            Die();
+        }
+    }
 }
