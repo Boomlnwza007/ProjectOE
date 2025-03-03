@@ -40,7 +40,6 @@ public class StrikeB2FSM : BaseState
                 RandomEdge();
             }
             state.colliderBoss.isTrigger = false;
-            ai.canMove = true;
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
@@ -58,7 +57,7 @@ public class StrikeB2FSM : BaseState
         
         while (state.inRoom || agian)
         {
-            state.rb.velocity = dir * state.Speed*3;
+            state.rb.velocity = dir * state.speedStrike;
             if (state.inRoom)
             {
                 agian = false;

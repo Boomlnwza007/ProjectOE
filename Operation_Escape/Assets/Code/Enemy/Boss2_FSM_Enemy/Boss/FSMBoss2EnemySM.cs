@@ -11,6 +11,8 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public bool inRoom;
     public Boss2_Animation animator;
     public float speedEat;
+    public float speedStrike;
+
 
     [Header("Prefab")]
     public GameObject eggMinion;

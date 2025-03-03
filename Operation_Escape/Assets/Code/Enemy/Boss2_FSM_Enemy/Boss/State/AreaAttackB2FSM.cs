@@ -14,6 +14,7 @@ public class AreaAttackB2FSM : BaseState
     public override void Enter()
     {
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
+        ai.canMove = false;
         Attack().Forget();
     }
 

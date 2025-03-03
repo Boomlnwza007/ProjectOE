@@ -36,11 +36,11 @@ public class LaserB2FSM : BaseState
             for (int i = 0; i < 3; i++)
             {
                 state.SpawnLaserCols(-10);
-                await UniTask.WaitForSeconds(1);
+                await UniTask.WaitForSeconds(1.2f);
                 state.SpawnLaserRows(8);
-                await UniTask.WaitForSeconds(1);
+                await UniTask.WaitForSeconds(1.2f);
                 state.SpawnLaserGrid();
-                await UniTask.WaitForSeconds(1);
+                await UniTask.WaitForSeconds(1.2f);
             }
 
             state.spriteBoss.enabled = true;
