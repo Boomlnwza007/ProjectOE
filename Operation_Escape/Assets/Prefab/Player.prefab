@@ -2038,7 +2038,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 936000
+  m_InstanceId: 64798
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8971,7 +8971,7 @@ MonoBehaviour:
   currentEquipGun: {fileID: 0}
   currentEquipGunUL: {fileID: 0}
   currentGun: -1
-  WeaponGun: {fileID: 3767920626603049848}
+  weaponGun: {fileID: 3767920626603049848}
   aimPoint: {fileID: 3776936949522445415}
   canReload: 1
   canFire: 1

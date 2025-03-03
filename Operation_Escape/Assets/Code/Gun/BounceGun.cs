@@ -13,7 +13,7 @@ public class BounceGun : BaseGun
 
         if (canUltimate)
         {
-            BulletBounce bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletBounce>();
+            BulletBounce bullet = Instantiate(bulletUltiPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletBounce>();
             bullet.ultimate = true;
             PlaySound(sound.shoot);
         }

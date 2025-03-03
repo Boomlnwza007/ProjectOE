@@ -6,21 +6,30 @@ public class BulletBounce : BaseBullet
 {
     public int maxBunceCount = 3;
     public int bounceCount = 0;
+    private float time = 0;
+    public float timer = 3;
 
     void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
         ready = true;
         rb.velocity = transform.right * speed;
     }
 
+    private void Update()
+    {
+        if (ultimate)
+        {
+            time += Time.deltaTime;
+            if (time > timer)
+            {
+                Destroy(gameObject);
+            }
+        }        
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out IObjInteract bulletInteract))
-        {
-            bulletInteract.Interact(DamageType.Rang);
-        }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             bounceCount++;
 
@@ -59,8 +68,11 @@ public class BulletBounce : BaseBullet
                 bulletInteract.Interact(DamageType.Rang);
             }
             Destroy(gameObject);
-        }
+        }        
+    }
 
-        
+    public override void ResetGameObj()
+    {
+        bounceCount = 0;
     }
 }

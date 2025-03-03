@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     [HideInInspector] public GameObject currentEquipGun;
     [HideInInspector] public GameObject currentEquipGunUL;
     [HideInInspector] public int currentGun = -1;
-    [SerializeField] private GameObject WeaponGun;
+    public GameObject weaponGun;
     [SerializeField] private Transform aimPoint;
     public bool canReload = true;
     public bool canFire = true;
@@ -243,15 +243,17 @@ public class PlayerCombat : MonoBehaviour
 
     public void SwitchGun()
     {
-        currentEquipGun.SetActive(!currentEquipGun.activeSelf);
-        currentEquipGunUL.SetActive(!currentEquipGunUL.activeSelf);
         if (currentEquipGun.activeSelf)
         {
-            aimPoint.localPosition = currentEquipGun.GetComponentInChildren<Transform>().Find("Aim").localPosition;
+            currentEquipGun.SetActive(false);
+            currentEquipGunUL.SetActive(true);
+            aimPoint.localPosition = currentEquipGunUL.GetComponentInChildren<Transform>().Find("Aim").localPosition;
         }
         else
         {
-            aimPoint.localPosition = currentEquipGunUL.GetComponentInChildren<Transform>().Find("Aim").localPosition;
+            currentEquipGun.SetActive(true);
+            currentEquipGunUL.SetActive(false);
+            aimPoint.localPosition = currentEquipGun.GetComponentInChildren<Transform>().Find("Aim").localPosition;
         }
     }
 
@@ -384,8 +386,8 @@ public class PlayerCombat : MonoBehaviour
             Destroy(currentEquipGunUL);
         }
 
-        currentEquipGun = Instantiate(gunList[index].gunPrefab, WeaponGun.transform);
-        currentEquipGunUL = Instantiate(gunList[index].gunULPrefab, WeaponGun.transform);
+        currentEquipGun = Instantiate(gunList[index].gunPrefab, weaponGun.transform);
+        currentEquipGunUL = Instantiate(gunList[index].gunULPrefab, weaponGun.transform);
         aimPoint.localPosition = currentEquipGun.GetComponentInChildren<Transform>().Find("Aim").localPosition;
         gunList[index].Enter();
         PlayerControl.control.ammoBar.value = gunList[index].energyUse;

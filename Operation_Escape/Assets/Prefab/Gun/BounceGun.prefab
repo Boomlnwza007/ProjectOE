@@ -133,71 +133,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4280416868280369569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1980721014240176090
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8191989396980058724}
-  - component: {fileID: 7402088989210143373}
-  m_Layer: 0
-  m_Name: BounceGun (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8191989396980058724
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980721014240176090}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1748119269683718065}
-  m_Father: {fileID: 3555346580633687772}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7402088989210143373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980721014240176090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d99b3a84fbed78046801e1b34cbaac05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: BounceGun
-  gunPrefab: {fileID: 3658312290124698611}
-  gunULPrefab: {fileID: 3658312290124698611}
-  bulletPrefab: {fileID: 7771206494892856151, guid: bf344acf039ac174a99a73d449d80d96, type: 3}
-  iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
-  bulletTranform: {fileID: 0}
-  aimTranform: {fileID: 4279175821098773731}
-  aimDistance: 0
-  fireRate: 0
-  timeReload: 1
-  maxFireRate: 0.7
-  ammo: 10
-  maxAmmo: 10
-  energyUse: 3
-  canSpecial: 0
-  firing: 1
-  canUltimate: 0
-  timeUltimate: 5
-  sound: {fileID: 11400000, guid: bdfc0d8152dd42d4b8ba50d3253e9699, type: 2}
-  bulletUltiPrefab: {fileID: 7771206494892856151, guid: 2c6690ee42805e345bc22f123948cc84, type: 3}
 --- !u!1 &2290035833471304035
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,12 +344,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1748119269683718065}
   m_Layer: 0
-  m_Name: BounceGun
+  m_Name: BounceGunUL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1748119269683718065
 Transform:
   m_ObjectHideFlags: 0
@@ -423,14 +358,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3658312290124698611}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3833045036760232415}
   - {fileID: 4279175821098773731}
-  m_Father: {fileID: 8191989396980058724}
+  m_Father: {fileID: 3555346580633687772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4980307499770875345
 GameObject:
@@ -613,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1478178248493780005}
-  gun: {fileID: 7402088989210143373}
+  gun: {fileID: 151769514566049604}
   nameGun: 
   canvas: {fileID: 4117406458018463786}
   gunSprite: {fileID: 4874789046112724750}
@@ -1081,7 +1016,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4280416868280369569}
-  - {fileID: 8191989396980058724}
+  - {fileID: 1748119269683718065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &151769514566049604
@@ -1098,7 +1033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: BounceGun
   gunPrefab: {fileID: 5520762139760519814}
-  gunULPrefab: {fileID: 1980721014240176090}
+  gunULPrefab: {fileID: 3658312290124698611}
   bulletPrefab: {fileID: 7771206494892856151, guid: bf344acf039ac174a99a73d449d80d96, type: 3}
   iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
   bulletTranform: {fileID: 0}

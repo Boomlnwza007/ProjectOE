@@ -238,7 +238,7 @@ public class PlayerControl : MonoBehaviour
         if (playerCombat.currentEquipGun!=null)
         {
             showgun = on;
-            playerCombat.currentEquipGun.SetActive(on);
+            playerCombat.weaponGun.SetActive(on);
         }
     }
 }

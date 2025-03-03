@@ -252,9 +252,10 @@ MonoBehaviour:
   tagUse: Enemy
   target: {fileID: 0}
   ready: 0
+  ultimate: 1
   maxBunceCount: 3
   bounceCount: 0
-  ultimate: 1
+  timer: 3
 --- !u!58 &7476191367082400857
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -289,4 +290,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.125
+  m_Radius: 0.18
