@@ -47,12 +47,15 @@ public class ChargeEMFSM : BaseState
             ai.canMove = false;
             if (CheckWay())
             {
+                state.cooldown = true;
+                state.CooldownApproching();
                 await state.PreAttackN("PreDashAttack");
                 ani.ChangeSortingLayer("TileMapON");
                 state.col.enabled = false;
                 state.shadow.SetActive(false);
                 jump = true;
                 startPos = ai.position;
+                state.animator.isFacing = false;
                 List<Vector3> vectors = CheckObjectsInArea(PlayerControl.control.transform.position,3,6,3, state.raycastMask);
                 if (vectors.Count != 0)
                 {
@@ -120,7 +123,6 @@ public class ChargeEMFSM : BaseState
         if (raycast.collider != null && raycast.collider.CompareTag("Player"))
         {
             target = raycast.collider.gameObject.transform.position;
-            state.animator.isFacing = false;
         }
         return raycast.collider != null && raycast.collider.CompareTag("Player");
     }   

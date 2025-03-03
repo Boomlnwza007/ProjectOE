@@ -76,7 +76,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
             return;
         }
 
-        float _cooldown = 5;
+        float _cooldown = timeCooldown--;
         List<StateMachine> enemy = areaEnermy.enemy;
         foreach (var item in enemy)
         {
