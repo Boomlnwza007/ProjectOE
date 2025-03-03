@@ -36,6 +36,7 @@ public class CheatMenu : MonoBehaviour
     private static StateMachine curState;
     private static List<BaseState> allState = new List<BaseState>();
     public Transform menuEStae;
+    public TMP_Text nameBoss;
 
     [Header("Other")]
     [SerializeField] private Canvas canvas;
@@ -53,7 +54,6 @@ public class CheatMenu : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        mode = Mode.Spawnmon;
         mainMenu.SetActive(onMainMenu);
         menuTop.SetActive(onMainMenuTop);
         warpPointReal = warpPoint;
@@ -62,7 +62,7 @@ public class CheatMenu : MonoBehaviour
     void Start()
     {
         canvas.worldCamera = Camera.main;
-        ChangMode(Mode.Spawnmon);
+        ChangMode(mode);
         ModeGun();
         ModeSpawn();
         SetupWalk();
@@ -123,6 +123,8 @@ public class CheatMenu : MonoBehaviour
         {
             Debug.LogError("Button name is not a valid integer: " + buttonName);
         }
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     public void SpawnMon(int enemy)
@@ -133,7 +135,11 @@ public class CheatMenu : MonoBehaviour
         Debug.Log(enemy);
         GameObject _enemy = Instantiate(listenemy.Item[enemy], pos, Quaternion.identity);
         enemySpawnNow.Add(_enemy);
-        _enemy.GetComponent<StateMachine>().attacking = true;
+        var stateMachine = _enemy.GetComponent<StateMachine>() ?? _enemy.GetComponentInChildren<StateMachine>();
+        if (stateMachine != null)
+        {
+            stateMachine.attacking = true;
+        }
     }
 
     public void DestroyMonstersOnScreen()
@@ -254,6 +260,8 @@ public class CheatMenu : MonoBehaviour
                 button.GetComponentInChildren<TMP_Text>().text = "Add";
                 break;
         }
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     public void CheckListGun()
@@ -325,6 +333,8 @@ public class CheatMenu : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     public void PlayerImmortal(bool on)
@@ -501,6 +511,8 @@ public class CheatMenu : MonoBehaviour
         }
 
         ChangMode(_mode);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     public void ChangMode(Mode _mode)
@@ -572,7 +584,9 @@ public class CheatMenu : MonoBehaviour
         else
         {
             Debug.LogError("Button name is not a valid integer: " + buttonName);
-        }        
+        }   
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     public void HackWall(Button button)
@@ -600,6 +614,7 @@ public class CheatMenu : MonoBehaviour
                 {
                     allState = state.GetAllState();
                     curState = state;
+                    nameBoss.text = state.name;
                     break;
                 }
             }
@@ -614,6 +629,8 @@ public class CheatMenu : MonoBehaviour
                 button.GetComponentInChildren<TMP_Text>().text = allState[i].nameState;
             }
         }
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 
     public void OnClickChanStateBoss(Button button)
@@ -629,5 +646,7 @@ public class CheatMenu : MonoBehaviour
         {
             Debug.LogError("Button name is not a valid integer: " + buttonName);
         }
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
     }
 }
