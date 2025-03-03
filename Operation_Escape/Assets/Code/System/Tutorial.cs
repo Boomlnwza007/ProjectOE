@@ -20,6 +20,7 @@ public class Tutorial : MonoBehaviour
     private Queue<KeyValuePair<int, float>> queue = new Queue<KeyValuePair<int, float>>();
     //public KeyCode key;
     public string key;
+    private bool keyPress;
 
     private void Awake()
     {
@@ -34,6 +35,12 @@ public class Tutorial : MonoBehaviour
             return;
         }
 
+        Showing(index, time);
+    }
+
+    public void Showing(int index, float time)
+    {
+        tutorial = true;
         curMode = index;
         switch (curMode)
         {
@@ -64,45 +71,46 @@ public class Tutorial : MonoBehaviour
                 break;
         }
         mode[curMode].SetActive(true);
+        keyPress = true;
         curWait = StartCoroutine(Wait(time));
-        tutorial = true;
     }
 
     private void Update()
     {
-        if (tutorial)
+        if (keyPress)
         {
             if (key == "Walk")
             {
                 if (PlayerControl.control.playerMovement.rb.velocity != Vector2.zero)
                 {
+                    keyPress = false;
                     StopCoroutine(curWait);
                     curWait = StartCoroutine(Wait(0.5f));
-                    tutorial = false;
-                    if (queue.Count > 0)
-                    {
-                        KeyValuePair<int, float> item = queue.Dequeue();
-                        show(item.Key, item.Value);
-                    }
+                    Debug.Log("KeyPress");
                 }
             }
             else if (Input.GetButton(key))
             {
+                keyPress = false;
                 StopCoroutine(curWait);
                 curWait = StartCoroutine(Wait(0.5f));
-                tutorial = false;
-                if (queue.Count > 0)
-                {
-                    KeyValuePair<int, float> item = queue.Dequeue();
-                    show(item.Key, item.Value);
-                }
+                Debug.Log("KeyPress");
             }
         }
     }
 
     IEnumerator Wait(float wait)
-    {
+    {        
         yield return new WaitForSeconds(wait);
         mode[curMode].SetActive(false);
+        if (queue.Count > 0)
+        {
+            KeyValuePair<int, float> item = queue.Dequeue();
+            Showing(item.Key, item.Value);
+        }
+        else
+        {
+            tutorial = false;
+        }
     }
 }
