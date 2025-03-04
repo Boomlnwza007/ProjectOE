@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,148 +10,71 @@ public class M1AttackFSM : BaseState
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
     public bool cooldown;
+    private Vector2 startPos;
+    private Vector2 controlPoint;
+    private Vector2 target;
+    private bool jump;
+    private float t = 0f;
 
     // Start is called before the first frame update
     public override void Enter()
     {
         ai = ((FSMMinion1EnemySM)stateMachine).ai;
         ai.canMove = false;
+        t = 0f;
         Attack().Forget();
+
     }
 
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public override void UpdatePhysics()
+    {
+        if (jump)
+        {
+            t += Time.deltaTime * 2f;
+            t = Mathf.Clamp01(t);
+
+            Vector2 pos = Mathf.Pow(1 - t, 2) * startPos +
+                          2 * (1 - t) * t * controlPoint +
+                          Mathf.Pow(t, 2) * (Vector2)target;
+            var state = (FSMMinion1EnemySM)stateMachine;
+
+            state.gameObject.transform.position = pos;
+
+            if (Vector2.Distance(ai.position, target) < 0.5f)
+            {
+                jump = false;
+                t = 0;
+            }
+        }
+    }
+
+    public async UniTaskVoid Attack()
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMMinion1EnemySM)stateMachine;
-        //var ani = state.animator;
-        bool hasAttacked = false;
+        var ani = state.animator;
 
         try
         {
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
-            state.Walk();
-            ai.canMove = true;
-            ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
-            state.Run(3);
-            float time = 0f;
+            state.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "TileMapON";
+            state.Jump(false);
+            jump = true;
+            startPos = ai.position;
+            state.animator.isFacing = false;
+            target = PlayerControl.control.transform.position;
 
-            while (time < 10 && !hasAttacked)//Edit Time Run 
-            {
-                time += Time.deltaTime;
-                if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
-                {
-
-                    ai.canMove = false;
-                    ai.monVelocity = Vector2.zero;
-                    state.Walk();
-                    Cooldown().Forget();
-                    state.Attack();
-                    return;
-                }
-
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-                foreach (var hit in colliders)
-                {
-                    if (hit.gameObject != state.gameObject)
-                    {
-                        ai.canMove = false;
-                        ai.monVelocity = Vector2.zero;
-                        state.Walk();
-                        state.Attack();
-                        hasAttacked = true;
-                        return;
-                    }
-                }
-                token.ThrowIfCancellationRequested();
-                await UniTask.Yield();
-            }
-
-            state.Attack();
+            controlPoint = (startPos + (Vector2)ai.targetTransform.position) / 2 + Vector2.up * 4;
+            await UniTask.WaitUntil(() => !jump, cancellationToken: token);
+            state.Jump(true);
+            state.Attack();            
         }
-        catch (OperationCanceledException)
+        catch (System.OperationCanceledException)
         {
             Debug.Log("Attack was cancelled.");
             return;
         }
-    }
-
-    public Vector2 CalculateDestination(Vector2 currentPosition, Vector2 targetPosition, float jumpLength, LayerMask mask)
-    {
-        Vector2 direction = (targetPosition - currentPosition).normalized;
-        RaycastHit2D[] raycast = Physics2D.RaycastAll(currentPosition, direction, jumpLength, mask);
-
-        foreach (var hit in raycast)
-        {
-            if (hit.collider != null && hit.collider.gameObject != stateMachine.gameObject)
-            {
-                return hit.point;
-            }
-        }
-
-        Debug.DrawLine(currentPosition, currentPosition + (direction * jumpLength), Color.green, 2f);
-        return currentPosition + (direction * jumpLength);
-    }
-
-    public async UniTask Charge()
-    {
-        var token = cancellationToken.Token;
-        var state = (FSMSEnemySM)stateMachine;
-        bool hasAttacked = false;
-        var ani = state.animator;
-
-        state.Walk();
-        ai.canMove = true;
-        state.Run(5);
-        ani.animator.speed = 1;
-        float time = 0f;
-
-        while (time < 10 && !hasAttacked)//Edit Time Run 
-        {
-            time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
-            {
-                //Debug.Log("ai.endMove");
-
-                ai.canMove = false;
-                ai.monVelocity = Vector2.zero;
-                state.Walk();
-                ani.ChangeAnimationAttack("Dash");
-                Debug.Log("Attack");
-
-                hasAttacked = true;
-                //state.animator.isFacing = true;
-                break;
-            }
-
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-            foreach (var hit in colliders)
-            {
-                if (hit.gameObject != state.gameObject)
-                {
-                    Debug.Log(hit.name + "hit 2 ");
-
-                    ai.canMove = false;
-                    ai.monVelocity = Vector2.zero;
-                    state.Walk();
-                    ani.ChangeAnimationAttack("Dash");
-                    Debug.Log("Attack");
-
-                    hasAttacked = true;
-                    //state.animator.isFacing = true;
-                    break;
-                }
-            }
-            token.ThrowIfCancellationRequested();
-            await UniTask.Yield();
-        }
-    }
-
-    public async UniTask Cooldown()
-    {
-        cooldown = true;
-        await UniTask.WaitForSeconds(1);
-        cooldown = false;
     }
 
     public override void Exit()

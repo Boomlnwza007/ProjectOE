@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class FSMMinion1EnemySM : StateMachine , IDamageable
 {
-    BaseAnimEnemy animator;
+    public M1_Animation animator;
 
     [Header("Charge")]
     public LayerMask raycastMaskWay;
     public LayerMask raycastMask;
     public float jumpLength = 6;
     public GameObject eDead;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Collider2D col;
 
     [HideInInspector]
     public M1AttackFSM attack;
@@ -98,5 +100,19 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
         }
         Instantiate(eDead,transform.position,Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    public void Jump(bool on)
+    {
+        if (on)
+        {
+            sprite.sortingLayerName = "TileMapON";
+
+        }
+        else
+        {
+            sprite.sortingLayerName = "Player";
+        }
+        col.enabled = on;
     }
 }

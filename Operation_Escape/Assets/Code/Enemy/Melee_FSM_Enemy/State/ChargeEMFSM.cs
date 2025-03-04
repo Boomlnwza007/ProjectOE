@@ -8,7 +8,6 @@ public class ChargeEMFSM : BaseState
 {
     public ChargeEMFSM(FSMMEnemySM stateMachine) : base("Charge", stateMachine) { }
     public IAiAvoid ai;
-    float time;
     private CancellationTokenSource cancellationToken;
     private Vector2 startPos;
     private Vector2 controlPoint;

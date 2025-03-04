@@ -211,6 +211,7 @@ MonoBehaviour:
   rb: {fileID: 7946128131045001210}
   dropChange: 0
   jumpCenter: {fileID: 3969137864566672963}
+  animator: {fileID: 1617561225061217621}
   raycastMaskWay:
     serializedVersion: 2
     m_Bits: 64
@@ -219,6 +220,8 @@ MonoBehaviour:
     m_Bits: 640
   jumpLength: 12
   eDead: {fileID: 7541123403067889326, guid: d6190a36a6043a544b97a1079241d9b9, type: 3}
+  sprite: {fileID: 5246614789063726442}
+  col: {fileID: 6499134677622411687}
   nameState: 
 --- !u!114 &2453006889408840406
 MonoBehaviour:
