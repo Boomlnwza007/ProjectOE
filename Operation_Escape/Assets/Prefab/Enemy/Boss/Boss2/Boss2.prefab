@@ -1215,7 +1215,7 @@ MonoBehaviour:
   speedStrike: 40
   curStateName: 
   eggMinion: {fileID: 7680352206040218167, guid: afb6301ffe59cb744b82fd12e9f0ef81, type: 3}
-  particleZone: {fileID: 3909465721922937394, guid: fb17fc5698182d648afbdce5c0b355d8, type: 3}
+  particleZone: {fileID: 3909465721922937394, guid: 0942ee781b4f6b44db7f681a9a2e039f, type: 3}
   laser: {fileID: 7783026331782980882, guid: d2922ba515272514b81bf1eb214cf2be, type: 3}
   sizeLaser: 5
   cols: 20
