@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d86e3431a35fc4fa8f62ad6fa3cf8e, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
-  shoot: {fileID: 0}
+  shoot: {fileID: 8300000, guid: 832f64071a2061049babe394e6701cae, type: 3}
   shootUltimate: {fileID: 0}
+  special: []
