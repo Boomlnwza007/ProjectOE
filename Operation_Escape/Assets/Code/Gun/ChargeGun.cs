@@ -30,6 +30,8 @@ public class ChargeGun : BaseGun
                     charge = true;
                     laser = Instantiate(laserUltiPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<LaserCharge>();
                     laser.bulletTranform = bulletTranform;
+                    PlayLoop(1).Forget();
+
                 }
                 else
                 {
@@ -37,10 +39,11 @@ public class ChargeGun : BaseGun
                     bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletCharge>();
                     bullet.charging = true;
                     bullet.follow = bulletTranform;
-                    ChangeEff = Instantiate(ChangeEffPrefab, bulletTranform.position, bulletTranform.rotation, bulletTranform);                    
+                    ChangeEff = Instantiate(ChangeEffPrefab, bulletTranform.position, bulletTranform.rotation, bulletTranform);
+                    PlayLoop(0).Forget();
+
                 }
 
-                PlayLoop().Forget();
             }
         }
     }
@@ -97,11 +100,11 @@ public class ChargeGun : BaseGun
         PlaySound(sound.shootUltimate);
     }
 
-    private async UniTask PlayLoop()
+    private async UniTask PlayLoop(int n)
     {
         while (charge)
         {
-            PlaySound(sound.special[0]);
+            PlaySound(sound.special[n]);
             await UniTask.Delay((int)(sound.special[0].length * 1000));
         }
     }
