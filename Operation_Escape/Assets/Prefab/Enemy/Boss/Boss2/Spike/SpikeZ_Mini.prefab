@@ -330,5 +330,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 1115493757541282848}
-  preSpike: {fileID: 0}
-  spikeAtk: {fileID: 0}
+  preSpike: {fileID: 8300000, guid: 0931c8b86818114468e2aec8e5fc6c43, type: 3}
+  spikeAtk: {fileID: 8300000, guid: fcb193a27a4df474fbe4f61274ed0279, type: 3}
