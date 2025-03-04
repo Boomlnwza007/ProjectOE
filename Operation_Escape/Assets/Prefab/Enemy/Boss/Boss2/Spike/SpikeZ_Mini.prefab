@@ -185,7 +185,10 @@ MonoBehaviour:
   spriteFlash: {fileID: 3912060770769639191}
   raycastMask:
     serializedVersion: 2
-    m_Bits: 32832
+    m_Bits: 49216
+  raycastMaskEnemy:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &2652002044264776762
 MonoBehaviour:
   m_ObjectHideFlags: 0

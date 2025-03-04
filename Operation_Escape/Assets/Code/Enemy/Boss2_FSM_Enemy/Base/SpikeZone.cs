@@ -20,6 +20,7 @@ public class SpikeZone : MonoBehaviour
 
     public void Hit(Collider2D collision)
     {
+        Debug.Log(collision.name);
         if (collision.CompareTag("Player"))
         {
             time += Time.deltaTime;

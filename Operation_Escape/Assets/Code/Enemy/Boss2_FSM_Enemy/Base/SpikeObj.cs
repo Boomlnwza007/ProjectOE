@@ -8,6 +8,7 @@ public class SpikeObj : MonoBehaviour, IDamageable
     public LootTable lootDrop;
     public SpriteFlash spriteFlash;
     public LayerMask raycastMask;
+    public LayerMask raycastMaskEnemy;
 
     public bool imortal { get ; set ; }
 
@@ -47,11 +48,13 @@ public class SpikeObj : MonoBehaviour, IDamageable
 
     public void Check()
     {
+
         if (Physics2D.OverlapCircle(transform.position, 0.5f, raycastMask))
         {
             Destroy(gameObject);
         }
+
+        GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+
     }
-
-
 }

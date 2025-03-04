@@ -70,4 +70,9 @@ public class SpikeN : MonoBehaviour
         }
     }
 
+    public void ChangeSortingLayer(string newLayer)
+    {
+        GetComponent<SpriteRenderer>().sortingLayerName = newLayer;
+    }
+
 }
