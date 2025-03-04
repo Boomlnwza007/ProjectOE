@@ -7,7 +7,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     public Animator animator;
     public Vector2Int size;
     private Vector2Int gridPos;
-    private GridBoss2 grid;
+    [SerializeField]private GridBoss2 grid;
     public static List<FSMMinion2EnemySM> monInMap = new List<FSMMinion2EnemySM>();
 
     [Header("Range")]
@@ -72,7 +72,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     public void Die()
     {
         monInMap.Remove(this);
-        grid.MarkGrid(gridPos, size, false);
+        grid?.MarkGrid(gridPos, size, false);
         Destroy(gameObject.transform.parent.gameObject);
         Destroy(gameObject);
     }
