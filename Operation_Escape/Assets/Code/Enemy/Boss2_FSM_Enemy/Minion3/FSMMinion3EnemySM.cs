@@ -48,11 +48,7 @@ public class FSMMinion3EnemySM : StateMachine , IDamageable
 
     public void Die()
     {
-        if (FSMBoss2EnemySM.minionHave > 0)
-        {
-            FSMBoss2EnemySM.minionHave--;
-        }
-        
+        FSMBoss2EnemySM.minionHave.Remove(this);
         Destroy(gameObject);
     }
 

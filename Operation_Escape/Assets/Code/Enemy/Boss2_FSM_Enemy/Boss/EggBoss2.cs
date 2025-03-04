@@ -54,8 +54,8 @@ public class EggBoss2 : MonoBehaviour , IDamageable
             for (int i = 0; i < 5; i++)
             {
                 Vector2 dropPosition = (Vector2)transform.position + Random.insideUnitCircle * 1f;
-                Instantiate(minion.Item[2], dropPosition ,Quaternion.identity);
-                FSMBoss2EnemySM.minionHave++;
+                FSMMinion3EnemySM m3 = Instantiate(minion.Item[2], dropPosition ,Quaternion.identity).GetComponent<FSMMinion3EnemySM>();
+                FSMBoss2EnemySM.minionHave.Add(m3);
             }
             Destroy(gameObject);
         }

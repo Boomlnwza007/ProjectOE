@@ -26,7 +26,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public int rows = 40;
     public float spacingCols = 2f;
     public float spacingRows = 1f;
-    public static float minionHave;
+    public static List<FSMMinion3EnemySM> minionHave = new List<FSMMinion3EnemySM>();
 
     [HideInInspector] 
     public IdleB2FSM idle;

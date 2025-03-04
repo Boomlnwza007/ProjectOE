@@ -55,7 +55,7 @@ public class SwarmB2FSM : BaseState
 
     public override void UpdateLogic()
     {
-        if (FSMBoss2EnemySM.minionHave <= 0 && final)
+        if (FSMBoss2EnemySM.minionHave.Count <= 0 && final)
         {
             final = false;
         }
