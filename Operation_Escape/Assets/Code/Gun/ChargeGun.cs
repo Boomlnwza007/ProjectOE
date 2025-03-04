@@ -105,7 +105,7 @@ public class ChargeGun : BaseGun
         while (charge)
         {
             PlaySound(sound.special[n]);
-            await UniTask.Delay((int)(sound.special[0].length * 1000));
+            await UniTask.WaitForSeconds(sound.special[0].length);
         }
     }
 
