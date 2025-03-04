@@ -15,11 +15,12 @@ public class CheckNextB2FSM : BaseState
         {
             rNumber = new List<int> { 1, 2, 3, 4 };
         }
-
+        var state = (FSMBoss2EnemySM)stateMachine;
         int index = Random.Range(0, rNumber.Count);
         int selectedAttack = rNumber[index];
         rNumber.RemoveAt(index);
         ChangState(CaseState(selectedAttack));
+        state.curStateName = state.curState.nameState;
     }
 
     public BaseState CaseState(int number)
@@ -38,7 +39,6 @@ public class CheckNextB2FSM : BaseState
             default:
                 return state.strike;
         }
-
     }
 
     public override void Exit()

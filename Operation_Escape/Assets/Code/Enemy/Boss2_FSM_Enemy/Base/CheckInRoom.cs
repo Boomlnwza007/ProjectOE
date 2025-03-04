@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class CheckInRoom : MonoBehaviour
 {    
-    private FSMBoss2EnemySM state;
-    private void Start()
-    {
-        state = GetComponentInParent<Boss2Mark>().state;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<FSMBoss2EnemySM>())
+        if (collision.gameObject.TryGetComponent(out FSMBoss2EnemySM state))
         {
             state.inRoom = true;
         }
@@ -20,7 +14,7 @@ public class CheckInRoom : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<FSMBoss2EnemySM>() == state)
+        if (collision.gameObject.TryGetComponent(out FSMBoss2EnemySM state))
         {
             state.inRoom = false;
         }

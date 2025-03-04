@@ -12,6 +12,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public Boss2_Animation animator;
     public float speedEat;
     public float speedStrike;
+    [SerializeField]public string curStateName;
 
 
     [Header("Prefab")]
@@ -148,7 +149,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         for (int i = 1; i < cols; i++)
         {
             Vector3 spawnPos = startPos + new Vector3(i * (spacingCols + sizeLaser), 0, 0);
-            Instantiate(laser, spawnPos, Quaternion.identity).GetComponent<LaserBoss2>().isUp = true;
+            Instantiate(laser, spawnPos, Quaternion.identity, transform).GetComponent<LaserBoss2>().isUp = true;
         }
     }
 
@@ -170,7 +171,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         for (int j = 1; j < rows; j++)
         {
             Vector3 spawnPos = startPos + new Vector3(0, -j * (spacingRows + sizeLaser), 0);
-            Instantiate(laser, spawnPos, Quaternion.identity).GetComponent<LaserBoss2>().isUp = false;
+            Instantiate(laser, spawnPos, Quaternion.identity,transform).GetComponent<LaserBoss2>().isUp = false;
         }
     }
 

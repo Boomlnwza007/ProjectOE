@@ -1213,6 +1213,7 @@ MonoBehaviour:
   animator: {fileID: 6173886458415788687}
   speedEat: 15
   speedStrike: 40
+  curStateName: 
   eggMinion: {fileID: 7680352206040218167, guid: afb6301ffe59cb744b82fd12e9f0ef81, type: 3}
   particleZone: {fileID: 3909465721922937394, guid: fb17fc5698182d648afbdce5c0b355d8, type: 3}
   laser: {fileID: 7783026331782980882, guid: d2922ba515272514b81bf1eb214cf2be, type: 3}
@@ -1587,7 +1588,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!70 &1027165576052855892
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
