@@ -388,5 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 7879812819981198705}
-  walk: []
-  attack: []
+  walk:
+  - {fileID: 8300000, guid: 90e52c68973ab564ab602086215eaba3, type: 3}
+  attack:
+  - {fileID: 8300000, guid: f6fd8f5372f680c4186a12b0b963143e, type: 3}
