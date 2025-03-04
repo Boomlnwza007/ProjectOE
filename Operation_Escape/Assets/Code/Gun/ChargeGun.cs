@@ -37,7 +37,7 @@ public class ChargeGun : BaseGun
                     bullet = Instantiate(bulletPrefab, bulletTranform.position, bulletTranform.rotation).GetComponent<BulletCharge>();
                     bullet.charging = true;
                     bullet.follow = bulletTranform;
-                    ChangeEff = Instantiate(ChangeEffPrefab, bulletTranform.position, bulletTranform.rotation, bulletTranform);
+                    ChangeEff = Instantiate(ChangeEffPrefab, bulletTranform.position, bulletTranform.rotation, bulletTranform);                    
                 }
 
                 PlayLoop().Forget();
