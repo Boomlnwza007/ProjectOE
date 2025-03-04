@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ShotGun
   m_EditorClassIdentifier: 
   shoot: {fileID: 8300000, guid: 832f64071a2061049babe394e6701cae, type: 3}
-  shootUltimate: {fileID: 0}
+  shootUltimate: {fileID: 8300000, guid: b7ffd9332487cc5458d4d3217c65cf40, type: 3}
   special: []
