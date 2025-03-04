@@ -97,7 +97,7 @@ public class ChargeGun : BaseGun
         canUltimate = false;
         RemoveUltimate();
         playerCombat.ReUltimate();
-        PlaySound(sound.shootUltimate);
+        //PlaySound(sound.shootUltimate);
     }
 
     private async UniTask PlayLoop(int n)
