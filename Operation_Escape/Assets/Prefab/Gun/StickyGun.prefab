@@ -965,11 +965,11 @@ MonoBehaviour:
   aimTranform: {fileID: 5693397721559973199}
   aimDistance: 0
   fireRate: 0
-  timeReload: 2
+  timeReload: 1
   maxFireRate: 0.5
   ammo: 5
   maxAmmo: 5
-  energyUse: 4
+  energyUse: 8
   canSpecial: 0
   firing: 1
   canUltimate: 0

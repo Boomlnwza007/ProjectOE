@@ -955,7 +955,7 @@ MonoBehaviour:
   aimTranform: {fileID: 5693397721559973199}
   aimDistance: 1.16
   fireRate: 0
-  timeReload: 1.5
+  timeReload: 1
   maxFireRate: 1
   ammo: 15
   maxAmmo: 15

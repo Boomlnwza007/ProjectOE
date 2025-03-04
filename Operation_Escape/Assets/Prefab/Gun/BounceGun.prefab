@@ -1044,7 +1044,7 @@ MonoBehaviour:
   maxFireRate: 0.7
   ammo: 10
   maxAmmo: 10
-  energyUse: 3
+  energyUse: 4
   canSpecial: 0
   firing: 1
   canUltimate: 0
