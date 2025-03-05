@@ -10,6 +10,11 @@ public class CheckInRoom : MonoBehaviour
         {
             state.inRoom = true;
         }
+
+        if (collision.gameObject.TryGetComponent(out DummyBoss2 dummy))
+        {
+            dummy.inRoom = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -17,6 +22,11 @@ public class CheckInRoom : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out FSMBoss2EnemySM state))
         {
             state.inRoom = false;
+        }
+
+        if (collision.gameObject.TryGetComponent(out DummyBoss2 dummy))
+        {
+            dummy.inRoom = false;
         }
     }
 }

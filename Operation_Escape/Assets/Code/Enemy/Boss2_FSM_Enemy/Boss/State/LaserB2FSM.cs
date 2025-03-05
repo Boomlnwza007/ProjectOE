@@ -18,7 +18,7 @@ public class LaserB2FSM : BaseState
         Attack().Forget();
     }
 
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public async UniTask Attack() // Pass the CancellationToken
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
@@ -28,6 +28,7 @@ public class LaserB2FSM : BaseState
 
         try
         {
+
             ani.ChangeAnimationAttack("UnderGround");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
@@ -42,11 +43,10 @@ public class LaserB2FSM : BaseState
                 await UniTask.WaitForSeconds(1.2f);
             }
 
-            ani.ChangeAnimationAttack("UnderGroundUP");
-            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            //ani.ChangeAnimationAttack("UnderGroundUP");
+            //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ani.ChangeAnimationAttack("Wait");
             await UniTask.WaitForSeconds(1f);
-
             ChangState(state.eat);
 
         }

@@ -20,7 +20,7 @@ public class SwarmB2FSM : BaseState
         final = false;
     }
 
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public async UniTaskVoid Attack()
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
@@ -39,10 +39,10 @@ public class SwarmB2FSM : BaseState
             final = true;
             await UniTask.WaitUntil(() => !final, cancellationToken: token);
 
-            ani.ChangeAnimationAttack("UnderGroundUP");
-            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            //ani.ChangeAnimationAttack("UnderGroundUP");
+            //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(1f);
+            await UniTask.WaitForSeconds(0.5f);
 
             ChangState(state.eat);
         }

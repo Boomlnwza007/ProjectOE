@@ -80,8 +80,8 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
 
     public void Die()
     {
-        FSMBoss2EnemySM.minionHave.Remove(this);
         Destroy(gameObject);
+        FSMBoss2EnemySM.minionHave.Remove(this);
     }
 
     public IEnumerator Imortal(float wait)

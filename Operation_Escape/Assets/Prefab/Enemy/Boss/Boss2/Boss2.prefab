@@ -1214,8 +1214,11 @@ MonoBehaviour:
   speedEat: 15
   speedStrike: 40
   curStateName: 
+  phase: 0
   eggMinion: {fileID: 7680352206040218167, guid: afb6301ffe59cb744b82fd12e9f0ef81, type: 3}
   particleZone: {fileID: 3909465721922937394, guid: 0942ee781b4f6b44db7f681a9a2e039f, type: 3}
+  particleLightning: {fileID: 566512742481770042, guid: bd9d839bcc4d2a74b89ea8dc16f1a853, type: 3}
+  dummyBoss: {fileID: 4359821534863373680, guid: e56c1be859abfec489fb3ff9235f2256, type: 3}
   laser: {fileID: 7783026331782980882, guid: d2922ba515272514b81bf1eb214cf2be, type: 3}
   sizeLaser: 5
   cols: 20

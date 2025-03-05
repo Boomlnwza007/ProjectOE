@@ -7,20 +7,39 @@ using UnityEngine;
 public class CheckNextB2FSM : BaseState
 {
     public CheckNextB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
-    private List<int> rNumber = new List<int> { 1, 2, 3, 4 };
+    public List<int> rNumber = new List<int> { 1, 2, 3, 4 };
     // Start is called before the first frame update
     public override void Enter()
     {
-        if (rNumber.Count == 0)
-        {
-            rNumber = new List<int> { 1, 2, 3, 4 };
-        }
         var state = (FSMBoss2EnemySM)stateMachine;
-        int index = Random.Range(0, rNumber.Count);
-        int selectedAttack = rNumber[index];
-        rNumber.RemoveAt(index);
-        ChangState(CaseState(selectedAttack));
-        state.curStateName = state.curState.nameState;
+        if (state.phase)
+        {
+            if (rNumber.Count <= 0)
+            {
+                rNumber = new List<int> { 1, 2, 3, 4 };
+            }
+            state.merge.stateAtk.Clear(); 
+            for (int i = 0; i < 2; i++)
+            {
+                int index = Random.Range(0, rNumber.Count);
+                int selectedAttack = rNumber[index];
+                rNumber.RemoveAt(index);
+                state.merge.stateAtk.Add(selectedAttack);
+            }
+            ChangState(state.merge);
+        }
+        else
+        {
+            if (rNumber.Count == 0)
+            {
+                rNumber = new List<int> { 1, 2, 3, 4 };
+            }
+            int index = Random.Range(0, rNumber.Count);
+            int selectedAttack = rNumber[index];
+            rNumber.RemoveAt(index);
+            ChangState(CaseState(selectedAttack));
+            state.curStateName = state.curState.nameState;
+        }
     }
 
     public BaseState CaseState(int number)

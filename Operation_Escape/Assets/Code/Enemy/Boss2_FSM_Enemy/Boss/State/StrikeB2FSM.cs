@@ -18,7 +18,7 @@ public class StrikeB2FSM : BaseState
         Attack().Forget();
     }
 
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public async UniTask Attack()
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;

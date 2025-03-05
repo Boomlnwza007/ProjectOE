@@ -13,11 +13,14 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public float speedEat;
     public float speedStrike;
     [SerializeField]public string curStateName;
-
+    public bool phase;
+    public bool isInGound;
 
     [Header("Prefab")]
     public GameObject eggMinion;
     public GameObject particleZone;
+    public GameObject particleLightning;
+    public GameObject dummyBoss;
 
     [Header("Laser")]
     public GameObject laser;
@@ -39,9 +42,12 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [HideInInspector]
     public EatB2FSM eat;
     [HideInInspector]
-    public CheckNextB2FSM checkNext;
-    [HideInInspector]
     public LaserB2FSM laserState;
+    [HideInInspector]
+    public MergeB2FSM merge;
+    [HideInInspector]
+    public CheckNextB2FSM checkNext;
+
 
      public bool imortal { get; set; }
 
@@ -54,6 +60,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         eat = new EatB2FSM(this);
         checkNext = new CheckNextB2FSM(this);
         laserState = new LaserB2FSM(this);
+        merge = new MergeB2FSM(this);
         areaMark = GameObject.Find("Boss2Mark").GetComponent<Boss2Mark>();
         areaMark.state = this;
         grid = areaMark.grid;
@@ -81,6 +88,12 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         if (Health <= 0)
         {
             Die();
+        }
+
+        if (!phase && Health <= maxHealth/2 )
+        {
+            phase = true;
+            checkNext.rNumber = new List<int> { 1, 2, 3, 4 };
         }
 
     }
@@ -211,7 +224,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             IDamageable target = collision.GetComponent<IDamageable>();
             if (target != null)
             {
-                target.Takedamage(dmg, DamageType.Rang,10);
+                target.Takedamage(dmg, DamageType.Melee,10);
             }
         }
     }
@@ -224,6 +237,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         allState.Add(swarm);
         allState.Add(eat);
         allState.Add(laserState);
+        allState.Add(merge);
         return allState;
     }
     public void CabWalk(int on)
@@ -238,5 +252,28 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             ai.canMove = true;
 
         }
+    }
+
+    public void GoundCheck(int n)
+    {
+        if (n==0)
+        {
+            isInGound = false;
+        }
+        else
+        {
+            isInGound = true;
+        }
+    }
+
+    public DummyBoss2 SpawnDummy()
+    {
+        Vector2 dropPosition2;
+        do
+        {
+            dropPosition2 = (Vector2)transform.position + Random.insideUnitCircle * 8f;
+        } while (Vector2.Distance(transform.position, dropPosition2) < 6f);
+
+        return Instantiate(dummyBoss, dropPosition2, Quaternion.identity).GetComponent<DummyBoss2>();
     }
 }

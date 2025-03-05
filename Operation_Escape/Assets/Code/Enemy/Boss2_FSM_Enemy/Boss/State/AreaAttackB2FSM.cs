@@ -9,6 +9,7 @@ public class AreaAttackB2FSM : BaseState
     public AreaAttackB2FSM(FSMBoss2EnemySM stateMachine) : base("Burrow", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
+    public bool pass;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -18,7 +19,7 @@ public class AreaAttackB2FSM : BaseState
         Attack().Forget();
     }
 
-    public async UniTaskVoid Attack() // Pass the CancellationToken
+    public async UniTask Attack()
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;

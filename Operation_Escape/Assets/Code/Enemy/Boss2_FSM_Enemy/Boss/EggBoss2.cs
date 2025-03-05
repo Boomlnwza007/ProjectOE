@@ -84,7 +84,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
     public void SpawnM2()
     {
         Vector2 dropPosition1 = (Vector2)transform.position + Random.insideUnitCircle * 2f;
-        StateMachine m1 = Instantiate(minion.Item[1], dropPosition1, Quaternion.identity).GetComponent<StateMachine>();
+        StateMachine m1 = Instantiate(minion.Item[1], dropPosition1, Quaternion.identity).GetComponentInChildren<StateMachine>();
         FSMBoss2EnemySM.minionHave.Add(m1);
 
         Vector2 dropPosition2;
@@ -93,7 +93,8 @@ public class EggBoss2 : MonoBehaviour , IDamageable
             dropPosition2 = (Vector2)transform.position + Random.insideUnitCircle * 4f;
         } while (Vector2.Distance(dropPosition1, dropPosition2) < 2f);
 
-        StateMachine m2 = Instantiate(minion.Item[1], dropPosition2, Quaternion.identity).GetComponent<StateMachine>();
+        StateMachine m2 = Instantiate(minion.Item[1], dropPosition2, Quaternion.identity).GetComponentInChildren<StateMachine>();
+        Debug.Log(m2.name);
         FSMBoss2EnemySM.minionHave.Add(m2);
     }
 
