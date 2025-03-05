@@ -781,8 +781,8 @@ MonoBehaviour:
   fireRate: 0
   timeReload: 1
   maxFireRate: 0.7
-  ammo: 2
-  maxAmmo: 2
+  ammo: 3
+  maxAmmo: 3
   energyUse: 7
   canSpecial: 1
   firing: 1
