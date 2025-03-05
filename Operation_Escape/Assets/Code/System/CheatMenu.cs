@@ -293,6 +293,13 @@ public class CheatMenu : MonoBehaviour
         
     }
 
+    public void OnClickDeadPlayer()
+    {
+        PlayerControl.control.playerState.Takedamage(200,DamageType.Melee,5);
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
+
+    }
+
     public void OnClickPlayer(Button button)
     {
         string buttonName = button.name;
