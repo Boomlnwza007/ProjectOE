@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 896
         width: 448
         height: 448
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 448
-        y: 0
+        y: 896
         width: 448
         height: 448
       alignment: 0
@@ -169,7 +169,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 0
+        y: 896
         width: 448
         height: 448
       alignment: 0
@@ -190,7 +190,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1344
-        y: 0
+        y: 896
         width: 448
         height: 448
       alignment: 0
@@ -210,8 +210,8 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_4
       rect:
         serializedVersion: 2
-        x: 1792
-        y: 0
+        x: 0
+        y: 448
         width: 448
         height: 448
       alignment: 0
@@ -231,8 +231,8 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_5
       rect:
         serializedVersion: 2
-        x: 2240
-        y: 0
+        x: 448
+        y: 448
         width: 448
         height: 448
       alignment: 0
@@ -252,8 +252,8 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_6
       rect:
         serializedVersion: 2
-        x: 2688
-        y: 0
+        x: 896
+        y: 448
         width: 448
         height: 448
       alignment: 0
@@ -273,8 +273,8 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_7
       rect:
         serializedVersion: 2
-        x: 3136
-        y: 0
+        x: 1344
+        y: 448
         width: 448
         height: 448
       alignment: 0
@@ -294,7 +294,7 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_8
       rect:
         serializedVersion: 2
-        x: 3584
+        x: 0
         y: 0
         width: 448
         height: 448
@@ -315,7 +315,7 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_9
       rect:
         serializedVersion: 2
-        x: 4032
+        x: 448
         y: 0
         width: 448
         height: 448
@@ -336,7 +336,7 @@ TextureImporter:
       name: Boss_Lv02_StrikeAttack_10
       rect:
         serializedVersion: 2
-        x: 4480
+        x: 896
         y: 0
         width: 448
         height: 448
