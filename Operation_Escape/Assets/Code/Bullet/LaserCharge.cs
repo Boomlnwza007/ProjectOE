@@ -88,7 +88,6 @@ public class LaserCharge : MonoBehaviour
             if (hitInfo.collider.CompareTag("Enemy"))
             {
                 IDamageable Enemy = hitInfo.collider.GetComponent<IDamageable>();
-                GuardShield guard = hitInfo.collider.GetComponentInChildren<GuardShield>();
                 IObjInteract ObjIner = hitInfo.collider.GetComponentInChildren<IObjInteract>();
 
                 if (Enemy != null && canDamage)
@@ -99,7 +98,10 @@ public class LaserCharge : MonoBehaviour
                 }
 
                 ObjIner?.Interact(DamageType.Rang);
-                guard?.BreakShield();
+            }
+            if (hitInfo.collider.TryGetComponent(out GuardShield guard))
+            {
+                guard.BreakShield();
             }
         }
 

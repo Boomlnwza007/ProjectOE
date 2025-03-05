@@ -20,6 +20,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        //boss2 = GameObject.Find("Boss2").GetComponent<FSMBoss2EnemySM>();
         //StrikeB2FSM().Forget();
     }
 
@@ -38,6 +39,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
             RandomEdge();
             for (int i = 0; i < 3; i++)
             {
+                Debug.Log(i+" Round");
                 await UniTask.WaitForSeconds(2);
                 agian = true;
                 await Strike();
@@ -67,12 +69,17 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
             ani.ChangeAnimationAttack("Striking_R");
         }
 
+        Debug.Log(inRoom + " " + agian + "Out");
+
         while (inRoom || agian)
         {
+            Debug.Log(inRoom + " " + agian + "IN");
+
             rb.velocity = dir * state.speedStrike;
-            if (state.inRoom)
+            if (inRoom)
             {
                 agian = false;
+                Debug.Log(inRoom + " " + agian + "INRoom");
             }
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
@@ -83,6 +90,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
         var state = boss2;
         int rEdge = Random.Range(0, 4);
         int rNumber = 0;
+        rb.velocity = Vector2.zero;
         Vector3 pos;
         switch (rEdge)
         {
@@ -119,6 +127,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        cancellationToken.Cancel();
         Destroy(gameObject);
         if (gun != null)
         {

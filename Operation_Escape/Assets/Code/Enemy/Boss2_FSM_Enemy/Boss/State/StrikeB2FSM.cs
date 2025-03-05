@@ -84,6 +84,7 @@ public class StrikeB2FSM : BaseState
         var state = (FSMBoss2EnemySM)stateMachine;
         int rEdge = Random.Range(0, 4);
         int rNumber = 0;
+        state.rb.velocity = Vector2.zero;
         Vector3 pos;
         switch (rEdge)
         {
