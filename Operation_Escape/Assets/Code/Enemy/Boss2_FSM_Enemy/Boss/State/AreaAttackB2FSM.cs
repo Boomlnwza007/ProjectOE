@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class AreaAttackB2FSM : BaseState
 {
-    public AreaAttackB2FSM(FSMBoss2EnemySM stateMachine) : base("Burrow", stateMachine) { }
+    public AreaAttackB2FSM(FSMBoss2EnemySM stateMachine) : base("AreaAtk", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
     public bool pass;
@@ -46,6 +46,7 @@ public class AreaAttackB2FSM : BaseState
                 Debug.Log(1);
                 for (int j = 0; j < 5; j++)
                 {
+                    state.SpawnLight();
                     state.SpawnParticle(radius);
                     if (increasing)
                     {

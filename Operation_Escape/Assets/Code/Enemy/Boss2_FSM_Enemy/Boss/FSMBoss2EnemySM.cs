@@ -278,4 +278,9 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         dummy = Instantiate(dummyBoss, dropPosition2, Quaternion.identity).GetComponent<DummyBoss2>();
         return dummy;
     }
+
+    public void SpawnLight()
+    {
+        Instantiate(particleLightning,ai.targetTransform.position,Quaternion.identity).GetComponent<Lightning>().move = true;
+    }
 }
