@@ -207,8 +207,8 @@ SpriteRenderer:
   m_SortingLayerID: 767578383
   m_SortingLayer: 4
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 16f81660107e5994d9cbaa0ba947b28a, type: 3}
-  m_Color: {r: 0.8490566, g: 0.37386855, b: 0.28435388, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6904a68c50606534080a29f932a2f07f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.8305375, b: 0.41869882, a: 1}
+  m_Color: {r: 0.9960785, g: 0.75294125, b: 0.078431375, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
