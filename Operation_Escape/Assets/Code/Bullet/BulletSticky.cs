@@ -13,6 +13,7 @@ public class BulletSticky : BaseBullet
     private IDamageable targetDmg;
     private StateMachine enermy;
     private bool sticky;
+    [SerializeField]private Sprite spriteSticky;
     private CancellationTokenSource cancellationTokenSource;
 
     void Start()
@@ -40,6 +41,7 @@ public class BulletSticky : BaseBullet
                 rb.velocity = Vector3.zero;  
                 Destroy(rb);
                 Destroy(GetComponent<Collider2D>());
+                spriteBullet.sprite = spriteSticky;
                 if (collision.TryGetComponent(out enermy))
                 {
                     enermy.dropChange++;
