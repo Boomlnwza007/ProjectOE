@@ -45,8 +45,8 @@ public class LaserB2FSM : BaseState
 
             //ani.ChangeAnimationAttack("UnderGroundUP");
             //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(1f);
+            //ani.ChangeAnimationAttack("Wait");
+            await UniTask.WaitForSeconds(0.5f);
             ChangState(state.eat);
 
         }

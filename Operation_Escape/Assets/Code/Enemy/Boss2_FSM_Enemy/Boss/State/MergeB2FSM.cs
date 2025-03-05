@@ -128,6 +128,7 @@ public class MergeB2FSM : BaseState
                 Debug.Log(1);
                 for (int j = 0; j < 5; j++)
                 {
+                    state.SpawnLight();
                     state.SpawnParticle(radius);
                     if (increasing)
                     {
