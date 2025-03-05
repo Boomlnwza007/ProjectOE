@@ -33,41 +33,35 @@ public class AreaAttackB2FSM : BaseState
             state.Jump(state.jumpCenter.position);
             ani.ChangeAnimationAttack("UnderGroundUP");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            ani.ChangeAnimationAttack("Wait");
-
             ani.ChangeAnimationAttack("Area_PreAttack");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Area_Attacking");
+
             bool increasing = true;
             int radius = 5;
 
             for (int i = 0; i < 3; i++)
             {
                 Debug.Log(1);
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     state.SpawnParticle(radius);
                     if (increasing)
                     {
                         radius += 5;
-                        if (radius > 35)
-                        {
-                            radius = 35;
-                            increasing = false;
-                        }
-                    }
-                    else
-                    {
-                        radius -= 5;
-                        if (radius < 5)
+                        if (radius > 25)
                         {
                             radius = 5;
-                            increasing = true;
+                            //increasing = false;
                         }
                     }
                     await UniTask.WaitForSeconds(0.5f);
                 }
             }
 
+            ani.ChangeAnimationAttack("Area_EndAttack");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Wait");
             await UniTask.WaitForSeconds(0.5f);
             ChangState(state.eat);
         }

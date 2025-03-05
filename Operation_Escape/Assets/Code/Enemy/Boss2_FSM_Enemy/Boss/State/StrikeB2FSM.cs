@@ -23,13 +23,14 @@ public class StrikeB2FSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
         {
             ai.canMove = false;
-            await UniTask.WaitForSeconds(3, cancellationToken: token);
+            ani.ChangeAnimationAttack("Strike");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             await Strike();
             RandomEdge();
             for (int i = 0; i < 3; i++)
@@ -39,7 +40,11 @@ public class StrikeB2FSM : BaseState
                 await Strike();
                 RandomEdge();
             }
+
             state.colliderBoss.isTrigger = false;
+            ani.ChangeAnimationAttack("UnderGroundUP");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Wait");
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
@@ -52,9 +57,17 @@ public class StrikeB2FSM : BaseState
     public async UniTask Strike()
     {
         var state = (FSMBoss2EnemySM)stateMachine;
+        var ani = state.animator;
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-        state.colliderBoss.isTrigger = true;  
-        
+        state.colliderBoss.isTrigger = true;
+        if (dir.x < 0)
+        {
+            ani.ChangeAnimationAttack("Striking_L");
+        }
+        else
+        {
+            ani.ChangeAnimationAttack("Striking_R");
+        }
         while (state.inRoom || agian)
         {
             state.rb.velocity = dir * state.speedStrike;
