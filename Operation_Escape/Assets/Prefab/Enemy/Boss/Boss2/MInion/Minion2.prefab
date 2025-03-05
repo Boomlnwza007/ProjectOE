@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 4934487722625905113}
   - component: {fileID: 8298483822516895945}
   - component: {fileID: 3719281921559749655}
+  - component: {fileID: 6853932848857379083}
+  - component: {fileID: 3273852552669105880}
   m_Layer: 7
   m_Name: Minion2
   m_TagString: Enemy
@@ -211,6 +213,7 @@ MonoBehaviour:
   jumpCenter: {fileID: 1739218988822365822}
   animator: {fileID: 8298483822516895945}
   size: {x: 2, y: 2}
+  grid: {fileID: 0}
   bullet: {fileID: 7636867113743857662, guid: 88937e3c1b3f996499e0cfe08a4c48be, type: 3}
   bulletTranform: {fileID: 7332043667675507394}
   minShoot: 1
@@ -264,53 +267,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 5de474ef38adb3c4cbd6871473a905be, type: 2}
   duration: 0.1
---- !u!1 &5669909769043285304
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1739218988822365822}
-  - component: {fileID: 2411519667645736433}
-  - component: {fileID: 8959553028560247842}
-  m_Layer: 7
-  m_Name: Minion2
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1739218988822365822
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5669909769043285304}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7081292065540033373}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &2411519667645736433
+--- !u!82 &6853932848857379083
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5669909769043285304}
+  m_GameObject: {fileID: 3262169369160659716}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1147578239375868831, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -394,21 +363,53 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8959553028560247842
+--- !u!114 &3273852552669105880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5669909769043285304}
+  m_GameObject: {fileID: 3262169369160659716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23dcab0187a97bb458cce920cdb3f4e9, type: 3}
+  m_Script: {fileID: 11500000, guid: d5c2c5d3a1e47d342bf607f1ef462536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioGame: {fileID: 2411519667645736433}
-  walk: []
-  attack: []
+  audioGame: {fileID: 6853932848857379083}
+  preAtk: []
+  monAtk: []
+--- !u!1 &5669909769043285304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739218988822365822}
+  m_Layer: 7
+  m_Name: Minion2
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739218988822365822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669909769043285304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7081292065540033373}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7355641826983853437
 GameObject:
   m_ObjectHideFlags: 0
