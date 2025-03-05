@@ -376,8 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 6853932848857379083}
-  preAtk: []
-  monAtk: []
+  preAtk:
+  - {fileID: 8300000, guid: 0b22e420753e86d46afcb4a34054f694, type: 3}
+  monAtk:
+  - {fileID: 8300000, guid: 894b7ecef9fa9d547b2adcf98f1b561b, type: 3}
 --- !u!1 &5669909769043285304
 GameObject:
   m_ObjectHideFlags: 0
