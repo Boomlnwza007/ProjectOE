@@ -335,8 +335,8 @@ SpriteRenderer:
   m_SortingLayerID: 767578383
   m_SortingLayer: 4
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 16f81660107e5994d9cbaa0ba947b28a, type: 3}
-  m_Color: {r: 0.86524314, g: 0.5050285, b: 0.9150943, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 377a2f7ecb72c054a868e8ced7a0c991, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -787,7 +787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1, y: 0}
+  m_AnchoredPosition: {x: -0.172, y: 0.002}
   m_SizeDelta: {x: 0.5, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5784870435321536204
@@ -960,7 +960,7 @@ MonoBehaviour:
   gunPrefab: {fileID: 5520762139760519814}
   gunULPrefab: {fileID: 4776368658368605692}
   bulletPrefab: {fileID: 6928389756606254245, guid: f18ce48597e360d4b96d7d5d85c29f27, type: 3}
-  iconGun: {fileID: 21300000, guid: ad361400ed44de5468a20ba1a23bd20d, type: 3}
+  iconGun: {fileID: 21300000, guid: 313941e8dba263d499d93706b426b265, type: 3}
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 5693397721559973199}
   aimDistance: 0
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.8305375, b: 0.41869882, a: 1}
+  m_Color: {r: 0.9960785, g: 0.75294125, b: 0.078431375, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
