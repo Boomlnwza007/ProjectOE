@@ -172,7 +172,7 @@ MonoBehaviour:
   ultimate: 0
   time: 0
   chargeTime: 3
-  damageChargeMax: 50
+  damageChargeMax: 60
   damageChargeMin: 10
   charging: 0
   originScale: {x: 1, y: 1, z: 0}
