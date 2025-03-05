@@ -132,7 +132,6 @@ public class CheatMenu : MonoBehaviour
         Vector3 pos = CinemachineControl.Instance.player.position;
         pos += (Random.insideUnitSphere * 10);
         pos.z = 0;
-        Debug.Log(enemy);
         GameObject _enemy = Instantiate(listenemy.Item[enemy], pos, Quaternion.identity);
         enemySpawnNow.Add(_enemy);
         var stateMachine = _enemy.GetComponent<StateMachine>() ?? _enemy.GetComponentInChildren<StateMachine>();
