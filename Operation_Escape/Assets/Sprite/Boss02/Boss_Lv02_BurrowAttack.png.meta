@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
+        y: 640
         width: 320
         height: 320
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 320
-        y: 320
+        y: 640
         width: 320
         height: 320
       alignment: 0
@@ -169,7 +169,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 320
+        y: 640
         width: 320
         height: 320
       alignment: 0
@@ -190,7 +190,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 960
-        y: 320
+        y: 640
         width: 320
         height: 320
       alignment: 0
@@ -211,7 +211,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 320
         width: 320
         height: 320
       alignment: 0
@@ -232,7 +232,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 320
-        y: 0
+        y: 320
         width: 320
         height: 320
       alignment: 0
@@ -253,7 +253,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 0
+        y: 320
         width: 320
         height: 320
       alignment: 0
@@ -274,7 +274,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 960
-        y: 0
+        y: 320
         width: 320
         height: 320
       alignment: 0
@@ -286,6 +286,27 @@ TextureImporter:
       bones: []
       spriteID: 4d157009b4448cb4a915512ed9aa3554
       internalID: -1602387048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss_Lv02_BurrowAttack_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 393e0363c15af4f4a85a090424770a72
+      internalID: 1373262435
       vertices: []
       indices: 
       edges: []
@@ -309,6 +330,7 @@ TextureImporter:
       Boss_Lv02_BurrowAttack_5: -222010537
       Boss_Lv02_BurrowAttack_6: 1309393413
       Boss_Lv02_BurrowAttack_7: -1602387048
+      Boss_Lv02_BurrowAttack_8: 1373262435
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
