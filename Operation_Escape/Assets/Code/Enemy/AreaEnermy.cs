@@ -82,10 +82,21 @@ public class AreaEnermy : MonoBehaviour
 
     public void ClaerMon()
     {
-        foreach (var enemy in enemy)
+        enemy.RemoveAll(e =>
         {
-            Destroy(enemy.gameObject);
-        }
+            if (e.TryGetComponent<IDamageable>(out var damage))
+            {
+                damage.Die();
+                return true;
+            }
+            else
+            {
+                Destroy(e.gameObject);
+                return true;
+            }
+        });
+
+
         enemy.Clear();
         ClaerMonMinion();
     }

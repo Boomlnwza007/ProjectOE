@@ -15,6 +15,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [SerializeField]public string curStateName;
     public bool phase;
     public bool isInGound;
+    private DummyBoss2 dummy;
 
     [Header("Prefab")]
     public GameObject eggMinion;
@@ -105,6 +106,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         {
             areaEnermy.Die(this);
         }
+        dummy.Die();
         Destroy(gameObject);
         SpawnGun();
     }
@@ -273,7 +275,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         {
             dropPosition2 = (Vector2)transform.position + Random.insideUnitCircle * 8f;
         } while (Vector2.Distance(transform.position, dropPosition2) < 6f);
-
-        return Instantiate(dummyBoss, dropPosition2, Quaternion.identity).GetComponent<DummyBoss2>();
+        dummy = Instantiate(dummyBoss, dropPosition2, Quaternion.identity).GetComponent<DummyBoss2>();
+        return dummy;
     }
 }

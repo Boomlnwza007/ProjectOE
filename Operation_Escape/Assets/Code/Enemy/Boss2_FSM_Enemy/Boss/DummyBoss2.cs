@@ -119,6 +119,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        cancellationToken.Cancel();
         Destroy(gameObject);
         if (gun != null)
         {
