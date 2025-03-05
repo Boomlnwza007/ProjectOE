@@ -80,6 +80,7 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
 
     public void Die()
     {
+        FSMBoss2EnemySM.minionHave.Remove(this);
         Destroy(gameObject);
     }
 
@@ -99,7 +100,7 @@ public class FSMMinion1EnemySM : StateMachine , IDamageable
             }
         }
         Instantiate(eDead,transform.position,Quaternion.identity);
-        Destroy(gameObject);
+        Die();
     }
 
     public void Jump(bool on)

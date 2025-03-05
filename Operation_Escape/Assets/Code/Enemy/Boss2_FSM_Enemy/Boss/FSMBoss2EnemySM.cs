@@ -26,7 +26,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public int rows = 40;
     public float spacingCols = 2f;
     public float spacingRows = 1f;
-    public static List<FSMMinion3EnemySM> minionHave = new List<FSMMinion3EnemySM>();
+    public static List<StateMachine> minionHave = new List<StateMachine>();
 
     [HideInInspector] 
     public IdleB2FSM idle;
@@ -125,9 +125,32 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     {
         for (int i = 0; i < spawnPoint.Count; i++)
         {
-            Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity);
+           EggBoss2 egg = Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity).GetComponent<EggBoss2>();
         }
+    }
 
+    public void SpawnEggP2()
+    {
+        List<int> spawnIndices = new List<int> { 0, 1, 2 };
+
+        int minion1Index = spawnIndices[Random.Range(0, spawnIndices.Count)];
+        spawnIndices.Remove(minion1Index);
+
+        int minion2Index = spawnIndices[Random.Range(0, spawnIndices.Count)];
+        spawnIndices.Remove(minion2Index);
+
+        for (int i = 0; i < spawnPoint.Count; i++)
+        {
+            EggBoss2 egg = Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity).GetComponent<EggBoss2>();
+
+            // กำหนด Minion ID ตามที่สุ่มได้
+            if (i == minion1Index)
+                egg.minionID = 1;
+            else if (i == minion2Index)
+                egg.minionID = 2;
+            else
+                egg.minionID = 3;
+        }
     }
 
     public void SpawnLaserGrid()

@@ -73,6 +73,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
     {
         monInMap.Remove(this);
         grid?.MarkGrid(gridPos, size, false);
+        FSMBoss2EnemySM.minionHave.Remove(this);
         Destroy(gameObject.transform.parent.gameObject);
         Destroy(gameObject);
     }
