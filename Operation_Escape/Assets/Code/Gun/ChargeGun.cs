@@ -144,7 +144,10 @@ public class ChargeGun : BaseGun
     {
         firing = false;
         charge = false;
-        Destroy(laser?.gameObject);
+        if (laser != null)
+        {
+            Destroy(laser?.gameObject);
+        }
         PlayerControl.control.Slow(0);
     }
 }
