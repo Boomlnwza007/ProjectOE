@@ -46,10 +46,10 @@ public class EatB2FSM : BaseState
             ai.canMove = false;
             await UniTask.WaitUntil(() => ani.endAnim , cancellationToken : token);
             ai.maxspeed = state.Speed;
-            ani.ChangeAnimationAttack("Wait");
+            ani.ChangeAnimationAttack("Tired");
             state.spriteBoss.enabled = true;
             state.colliderBoss.enabled = true;
-            await UniTask.WaitForSeconds(3f, cancellationToken: token);
+            await UniTask.WaitForSeconds(5f, cancellationToken: token);
             ai.canMove = true;
             ChangState(state.checkNext);
         }
