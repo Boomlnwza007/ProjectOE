@@ -8,6 +8,7 @@ public class ParticleAlongLineWithShape : MonoBehaviour
     private float baseSize;
     private float baseRate;
     private bool particleActice = true;
+    public bool rotation;
 
     void Start()
     {
@@ -40,9 +41,12 @@ public class ParticleAlongLineWithShape : MonoBehaviour
         float lineLength = Vector3.Distance(startPoint, endPoint);
 
         shapeModule.scale = new Vector3(lineLength, lineRenderer.startWidth, 1.0f);
-        //Vector2 direction = endPoint - startPoint;
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //particle.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
+        if (rotation)
+        {
+            Vector2 direction = endPoint - startPoint;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            particle.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
+        }
         particle.gameObject.transform.position = startPoint;
     }
 

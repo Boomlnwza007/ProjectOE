@@ -18,6 +18,7 @@ public class MergeB2FSM : BaseState
 
     public async UniTask Change()
     {
+        cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;

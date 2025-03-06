@@ -25717,3 +25717,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 391182469826832311}
   particle: {fileID: 323806074911329748}
+  rotation: 1

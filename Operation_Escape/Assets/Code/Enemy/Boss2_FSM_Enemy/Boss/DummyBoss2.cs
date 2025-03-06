@@ -17,6 +17,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
     public bool imortal { get; set; }
     public bool agian;
     public bool inRoom;
+    public HeartSound sound;
 
     private void Start()
     {
@@ -33,7 +34,9 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
         try
         {
+            sound.PlayPreAtk(0);
             ani.ChangeAnimationAttack("Strike");
+
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             await Strike();
             RandomEdge();
@@ -82,9 +85,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
         {
             ani.ChangeAnimationAttack("Striking_R");
         }
-
-        Debug.Log(inRoom + " " + agian + "Out");
-
+        sound.PlayMonAtk(0);
         while (inRoom || agian)
         {
             Debug.Log(inRoom + " " + agian + "IN");

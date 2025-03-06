@@ -24,18 +24,20 @@ public class StrikeB2FSM : BaseState
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
+        var sound = state.sound;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
         {
             ai.canMove = false;
+            sound.PlayPreAtk(1);
             ani.ChangeAnimationAttack("Strike");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             await Strike();
             RandomEdge();
             for (int i = 0; i < 3; i++)
             {
-                await UniTask.WaitForSeconds(1);
+                await UniTask.WaitForSeconds(2);
                 agian = true;
                 await Strike();
                 RandomEdge();
@@ -58,6 +60,8 @@ public class StrikeB2FSM : BaseState
     {
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
+        var sound = state.sound;
+
         Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
         state.colliderBoss.isTrigger = true;
         if (dir.x < 0)
@@ -68,6 +72,7 @@ public class StrikeB2FSM : BaseState
         {
             ani.ChangeAnimationAttack("Striking_R");
         }
+        sound.PlayMonAtk(1);
         while (state.inRoom || agian)
         {
             state.rb.velocity = dir * state.speedStrike;
