@@ -9,7 +9,6 @@ public class MstrikeB2FSM : BaseState
     public MstrikeB2FSM(FSMBoss2EnemySM stateMachine) : base("StrikeMerge", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
-    private bool final;
     public List<int> rNumber = new List<int> { 2, 3, 4 };
     public List<int> spawnPoint = new List<int> {0, 1, 2, 3};
 
@@ -32,7 +31,7 @@ public class MstrikeB2FSM : BaseState
         Debug.Log(1 + " " + selectedAttack);
     }
 
-    public async UniTask ChooseState(int number)
+    public async UniTaskVoid ChooseState(int number)
     {
 
         var token = cancellationToken.Token;
@@ -218,13 +217,6 @@ public class MstrikeB2FSM : BaseState
         }
     }
 
-    public override void UpdateLogic()
-    {
-        if (FSMBoss2EnemySM.minionHave.Count <= 0 && final)
-        {
-            final = false;
-        }
-    }
 
     public override void Exit()
     {

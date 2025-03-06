@@ -18,7 +18,7 @@ public class LaserB2FSM : BaseState
         Attack().Forget();
     }
 
-    public async UniTask Attack() // Pass the CancellationToken
+    public async UniTask Attack()
     {
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;

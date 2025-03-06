@@ -9,28 +9,26 @@ public class MareaB2FSM : BaseState
     public MareaB2FSM(FSMBoss2EnemySM stateMachine) : base("AreaMerge", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
-    private bool final;
-    public List<int> rNumber = new List<int> { 2, 3, 4 };
+    public List<int> rNumber = new List<int> {3, 4 };
 
     // Start is called before the first frame update
     public override void Enter()
     {
+        cancellationToken = new CancellationTokenSource();
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
-        Attack().Forget();
         ai.canMove = false;
         if (rNumber.Count == 0)
         {
-            rNumber = new List<int> { 2, 3, 4 };
+            rNumber = new List<int> {3, 4 };
         }
         int index = Random.Range(0, rNumber.Count);
         int selectedAttack = rNumber[index];
         rNumber.RemoveAt(index);
-
+        ChooseState(selectedAttack).Forget();
     }
 
-    public async UniTaskVoid Attack()
+    public async UniTaskVoid ChooseState(int number)
     {
-        cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
@@ -38,6 +36,71 @@ public class MareaB2FSM : BaseState
 
         try
         {
+            ani.ChangeAnimationAttack("UnderGround");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            state.Jump(state.jumpCenter.position);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+
+            switch (number)
+            {
+                case 3:
+                    await Attack3();
+                    break;
+                case 4:
+                    await Attack4();
+                    break;
+            }
+
+            ani.ChangeAnimationAttack("Area_EndAttack");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Wait");
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            ChangState(state.eat);
+        }
+        catch (System.OperationCanceledException)
+        {
+            Debug.Log("Attack was cancelled.");
+            return;
+        }
+    }
+
+    public async UniTask Attack3()
+    {
+        var token = cancellationToken.Token;
+        var state = (FSMBoss2EnemySM)stateMachine;
+        var ani = state.animator;
+
+        try
+        {
+            state.SpawnEggP2();
+            float radius = 4.5f;
+
+            ani.ChangeAnimationAttack("UnderGroundUP");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Area_PreAttack");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Area_Attacking");
+            await UniTask.WaitForSeconds(0.5f);
+
+            while (FSMBoss2EnemySM.minionHave.Count > 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        state.SpawnLightning();
+                        state.SpawnParticle(radius);
+                        radius += 5;
+                        if (radius > 25)
+                        {
+                            radius = 5;
+                        }
+                        await UniTask.WaitForSeconds(0.5f);
+                    }
+                }
+                await UniTask.Yield(cancellationToken: token);
+            }
+
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         }
@@ -47,12 +110,66 @@ public class MareaB2FSM : BaseState
             return;
         }
     }
-
-    public override void UpdateLogic()
+    public async UniTask Attack4()
     {
-        if (FSMBoss2EnemySM.minionHave.Count <= 0 && final)
+        cancellationToken = new CancellationTokenSource();
+        var token = cancellationToken.Token;
+        var state = (FSMBoss2EnemySM)stateMachine;
+        var ani = state.animator;
+        //await UniTask.WaitForSeconds(1f, cancellationToken: token);
+
+        try
         {
-            final = false;
+            ani.ChangeAnimationAttack("UnderGroundUP");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Area_PreAttack");
+            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            ani.ChangeAnimationAttack("Area_Attacking");
+
+            float radius = 4.5f;
+            for (int i = 0; i < 3; i++)
+            {
+                await LaserB2FSM();
+                for (int j = 0; j < 5; j++)
+                {
+                    state.SpawnLightning();
+                    state.SpawnParticle(radius);
+                    radius += 5;
+                    if (radius > 25)
+                    {
+                        radius = 5;
+                    }
+                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+                }
+            }
+
+        }
+        catch (System.OperationCanceledException)
+        {
+            Debug.Log("Attack was cancelled.");
+            return;
+        }
+    }
+
+    public async UniTask LaserB2FSM()
+    {
+        var token = cancellationToken.Token;
+        var state = (FSMBoss2EnemySM)stateMachine;
+
+        try
+        {
+            state.SpawnLaserCols(-10);
+            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            state.SpawnLaserRows(8);
+            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            state.SpawnLaserGrid();
+            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+        }
+        catch (System.OperationCanceledException)
+        {
+            Debug.Log("Attack was cancelled.");
+            return;
         }
     }
 

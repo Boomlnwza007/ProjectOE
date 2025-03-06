@@ -9,15 +9,14 @@ public class MswarmB2FSM : BaseState
     public MswarmB2FSM(FSMBoss2EnemySM stateMachine) : base("SwarmMerge", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
-    private bool final;
+    public List<int> rNumber = new List<int> { 2, 3, 4 };
 
     // Start is called before the first frame update
     public override void Enter()
     {
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
-        Attack().Forget();
         ai.canMove = false;
-        final = false;
+        Attack().Forget();
     }
 
     public async UniTaskVoid Attack()
@@ -33,17 +32,24 @@ public class MswarmB2FSM : BaseState
             ani.ChangeAnimationAttack("UnderGround");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
+            state.SpawnEggP2(4, 2);
 
-            state.SpawnEgg();
-            await UniTask.WaitForSeconds(3f);
-            final = true;
-            await UniTask.WaitUntil(() => !final, cancellationToken: token);
+            for (int i = 0; i < 3; i++)
+            {
+                state.SpawnLaserCols(-10);
+                await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+                state.SpawnLaserRows(8);
+                await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+                state.SpawnLaserGrid();
+                await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            }
 
-            //ani.ChangeAnimationAttack("UnderGroundUP");
-            //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            //ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(0.5f);
+            while (FSMBoss2EnemySM.minionHave.Count > 0)
+            {
+                await UniTask.Yield(cancellationToken: token);
+            }
 
+            await UniTask.WaitForSeconds(0.5f,cancellationToken: token);
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
@@ -53,13 +59,7 @@ public class MswarmB2FSM : BaseState
         }
     }
 
-    public override void UpdateLogic()
-    {
-        if (FSMBoss2EnemySM.minionHave.Count <= 0 && final)
-        {
-            final = false;
-        }
-    }
+
 
     public override void Exit()
     {

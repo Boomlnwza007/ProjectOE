@@ -39,7 +39,7 @@ public class AreaAttackB2FSM : BaseState
             ani.ChangeAnimationAttack("Area_Attacking");
 
             bool increasing = true;
-            int radius = 5;
+            float radius = 4.5f;
 
             for (int i = 0; i < 3; i++)
             {
