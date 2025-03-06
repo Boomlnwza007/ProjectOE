@@ -1216,6 +1216,7 @@ MonoBehaviour:
   curStateName: 
   phase: 0
   isInGound: 0
+  phaseStart: 0
   eggMinion: {fileID: 7680352206040218167, guid: afb6301ffe59cb744b82fd12e9f0ef81, type: 3}
   particleZone: {fileID: 3909465721922937394, guid: 0942ee781b4f6b44db7f681a9a2e039f, type: 3}
   particleLightning: {fileID: 566512742481770042, guid: bd9d839bcc4d2a74b89ea8dc16f1a853, type: 3}
@@ -1387,8 +1388,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 7498308211446184485}
-  preAtk: []
-  monAtk: []
+  preAtk:
+  - {fileID: 8300000, guid: 07f3806c56e88b14a808ff626fac21fd, type: 3}
+  - {fileID: 8300000, guid: 339a0a4b7f7059345a95e761d50ee603, type: 3}
+  - {fileID: 8300000, guid: 162a1b8445dcd374291ca4c72bea29dd, type: 3}
+  - {fileID: 8300000, guid: 17b80dd708b52184d947b1d7e56d3567, type: 3}
+  - {fileID: 8300000, guid: 9865e0e3a0f1aa04b971ed74e93886ec, type: 3}
+  - {fileID: 8300000, guid: 73f089ac3eba07742920b19bb95b16c4, type: 3}
+  - {fileID: 8300000, guid: bafa6dd774439584baf34f7d4715f299, type: 3}
+  - {fileID: 8300000, guid: 21ee15f421700d44dbf44b494e6bffad, type: 3}
+  - {fileID: 8300000, guid: 134baacdc30c9ba4aa3d2677c9fab1c2, type: 3}
+  monAtk:
+  - {fileID: 8300000, guid: 3bd1fdb0fd1ac6b41a427234d0f5d914, type: 3}
+  - {fileID: 8300000, guid: c9728f0bea0d0d74fb6b4fba4b69389e, type: 3}
+  - {fileID: 8300000, guid: 91fd35d67725d59418428f64dd78ebde, type: 3}
+  - {fileID: 8300000, guid: d163dff9c7b3d6e44aa483d7aa359d21, type: 3}
+  - {fileID: 8300000, guid: ba60d1547f004dd429157ef3fa332563, type: 3}
 --- !u!1 &6528181741979595389
 GameObject:
   m_ObjectHideFlags: 0

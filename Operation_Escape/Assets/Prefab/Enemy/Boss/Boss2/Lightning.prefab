@@ -4916,7 +4916,7 @@ MonoBehaviour:
   player: {fileID: 0}
   move: 0
   audioSource: {fileID: 1084879415848340676}
-  lightning: {fileID: 0}
+  lightning: {fileID: 8300000, guid: d58394d6b9acc1546bf7d109ef8cdccc, type: 3}
 --- !u!82 &1084879415848340676
 AudioSource:
   m_ObjectHideFlags: 0
