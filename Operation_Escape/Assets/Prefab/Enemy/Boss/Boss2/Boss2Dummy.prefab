@@ -278,7 +278,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1999910459543346174}
   - {fileID: 177537724881072422}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -481,7 +480,9 @@ MonoBehaviour:
   spriteFlash: {fileID: 1307824316455379167}
   rb: {fileID: 5568218353465863293}
   colliderBoss: {fileID: 1663701936399451455}
+  agian: 0
   inRoom: 0
+  sound: {fileID: 8224428183247710552}
 --- !u!82 &7918627365322728670
 AudioSource:
   m_ObjectHideFlags: 0
@@ -591,71 +592,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioGame: {fileID: 7918627365322728670}
-  preAtk: []
-  monAtk: []
---- !u!1 &6841108098779101637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1999910459543346174}
-  - component: {fileID: 6231488668347277942}
-  m_Layer: 0
-  m_Name: Avoid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1999910459543346174
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841108098779101637}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8315786394131114826}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6231488668347277942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841108098779101637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b110071dd80bd2a4a8b15793338d0772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  avoidRadius: 5
-  rayLength: 4
-  rayLengthLR: 1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  agentLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  smoothTime: 0.3
-  speed: 15
-  stopRadiusOn: 1
-  slowDownRadius: 5
-  stopRadius: 2.7
-  enableRandomDeviation: 1
-  deviationAngle: 10
-  deviationChangeInterval: 2
-  rb: {fileID: 5568218353465863293}
-  curSpeed: 0
+  preAtk:
+  - {fileID: 8300000, guid: 339a0a4b7f7059345a95e761d50ee603, type: 3}
+  monAtk:
+  - {fileID: 8300000, guid: c9728f0bea0d0d74fb6b4fba4b69389e, type: 3}
 --- !u!1 &7132391518273759825
 GameObject:
   m_ObjectHideFlags: 0

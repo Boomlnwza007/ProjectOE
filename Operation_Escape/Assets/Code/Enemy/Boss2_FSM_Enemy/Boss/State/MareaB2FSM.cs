@@ -95,7 +95,9 @@ public class MareaB2FSM : BaseState
                         {
                             radius = 5;
                         }
-                        await UniTask.WaitForSeconds(0.5f);
+                        await UniTask.WaitForSeconds(0.25f, cancellationToken: token);
+                        state.sound.PlayMonAtk(2);
+                        await UniTask.WaitForSeconds(0.25f, cancellationToken: token);
                     }
                 }
                 await UniTask.Yield(cancellationToken: token);
@@ -139,7 +141,9 @@ public class MareaB2FSM : BaseState
                     {
                         radius = 5;
                     }
-                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.25f, cancellationToken: token);
+                    state.sound.PlayMonAtk(2);
+                    await UniTask.WaitForSeconds(0.25f, cancellationToken: token);
                 }
             }
 
@@ -155,15 +159,27 @@ public class MareaB2FSM : BaseState
     {
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
+        var sound = state.sound;
 
         try
         {
             state.SpawnLaserCols(-10);
-            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            sound.PlayPreAtk(9);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            sound.PlayMonAtk(3);
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
+
             state.SpawnLaserRows(8);
-            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            sound.PlayPreAtk(9);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            sound.PlayMonAtk(3);
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
+
             state.SpawnLaserGrid();
-            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+            sound.PlayPreAtk(9);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            sound.PlayMonAtk(3);
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
         }
         catch (System.OperationCanceledException)

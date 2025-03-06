@@ -1127,7 +1127,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 6, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1217,6 +1217,7 @@ MonoBehaviour:
   phase: 0
   isInGound: 0
   phaseStart: 0
+  sound: {fileID: 5923379752890206294}
   eggMinion: {fileID: 7680352206040218167, guid: afb6301ffe59cb744b82fd12e9f0ef81, type: 3}
   particleZone: {fileID: 3909465721922937394, guid: 0942ee781b4f6b44db7f681a9a2e039f, type: 3}
   particleLightning: {fileID: 566512742481770042, guid: bd9d839bcc4d2a74b89ea8dc16f1a853, type: 3}
@@ -1398,6 +1399,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bafa6dd774439584baf34f7d4715f299, type: 3}
   - {fileID: 8300000, guid: 21ee15f421700d44dbf44b494e6bffad, type: 3}
   - {fileID: 8300000, guid: 134baacdc30c9ba4aa3d2677c9fab1c2, type: 3}
+  - {fileID: 8300000, guid: 5e6357be95c800642b1cccc18068afbf, type: 3}
+  - {fileID: 8300000, guid: 84fcaf667eb5f3a469089c17ffc6a61c, type: 3}
   monAtk:
   - {fileID: 8300000, guid: 3bd1fdb0fd1ac6b41a427234d0f5d914, type: 3}
   - {fileID: 8300000, guid: c9728f0bea0d0d74fb6b4fba4b69389e, type: 3}

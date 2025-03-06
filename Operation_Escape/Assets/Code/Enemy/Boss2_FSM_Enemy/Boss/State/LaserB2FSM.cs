@@ -24,6 +24,7 @@ public class LaserB2FSM : BaseState
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
+        var sound = state.sound;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
@@ -36,11 +37,22 @@ public class LaserB2FSM : BaseState
             for (int i = 0; i < 3; i++)
             {
                 state.SpawnLaserCols(-10);
-                await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+                sound.PlayPreAtk(9);
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                sound.PlayMonAtk(3);
+                await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
+
                 state.SpawnLaserRows(8);
-                await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+                sound.PlayPreAtk(9);
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                sound.PlayMonAtk(3);
+                await UniTask.WaitForSeconds(0.2f, cancellationToken: token); 
+
                 state.SpawnLaserGrid();
-                await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
+                sound.PlayPreAtk(9);
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                sound.PlayMonAtk(3);
+                await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
             }
 
             //ani.ChangeAnimationAttack("UnderGroundUP");

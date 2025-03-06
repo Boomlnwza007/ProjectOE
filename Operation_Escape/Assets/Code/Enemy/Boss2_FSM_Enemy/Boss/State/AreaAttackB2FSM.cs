@@ -57,7 +57,9 @@ public class AreaAttackB2FSM : BaseState
                             //increasing = false;
                         }
                     }
-                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+                    await UniTask.WaitForSeconds(0.25f, cancellationToken: token);
+                    state.sound.PlayMonAtk(2);
+                    await UniTask.WaitForSeconds(0.25f, cancellationToken: token);
                 }
             }
 

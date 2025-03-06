@@ -19537,6 +19537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 1154228454118754969}
   particle: {fileID: 6617623911789073441}
+  rotation: 1
 --- !u!1 &5621637797856500378
 GameObject:
   m_ObjectHideFlags: 0

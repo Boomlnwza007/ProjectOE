@@ -80,7 +80,8 @@ public class MstrikeB2FSM : BaseState
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
-        {            
+        {
+            dummy.sound.PlayPreAtk(0);
             dummy.ani.ChangeAnimationAttack("Strike");
             await UniTask.WaitUntil(() => dummy.ani.endAnim, cancellationToken: token);
             await UniTask.WhenAll(dummy.StrikeAtk(), Lightning());
@@ -170,19 +171,27 @@ public class MstrikeB2FSM : BaseState
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
+        var sound = state.sound;
+
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
         {
             await dummy.StrikeB2FSM();
             await LaserB2FSM();
-            await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
+            sound.PlayPreAtk(9);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            sound.PlayMonAtk(3);
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
             await dummy.StrikeAtk();
 
             for (int i = 0; i < 2; i++)
             {
                 await LaserB2FSM();
-                await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
+                sound.PlayPreAtk(9);
+                await UniTask.WaitForSeconds(1f, cancellationToken: token);
+                sound.PlayMonAtk(3);
+                await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
                 await dummy.StrikeAtk();
             }
 
@@ -199,16 +208,24 @@ public class MstrikeB2FSM : BaseState
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
+        var sound = state.sound;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
         {
             state.SpawnLaserCols(-10);
-            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
-            state.SpawnLaserRows(8);
-            await UniTask.WaitForSeconds(1.2f, cancellationToken: token);
-            state.SpawnLaserGrid();
+            sound.PlayPreAtk(9);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            sound.PlayMonAtk(3);
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
 
+            state.SpawnLaserRows(8);
+            sound.PlayPreAtk(9);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
+            sound.PlayMonAtk(3);
+            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
+
+            state.SpawnLaserGrid();
         }
         catch (System.OperationCanceledException)
         {
