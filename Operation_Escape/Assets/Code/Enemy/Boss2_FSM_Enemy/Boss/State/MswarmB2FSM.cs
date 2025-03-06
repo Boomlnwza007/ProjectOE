@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class SwarmB2FSM : BaseState
+public class MswarmB2FSM : BaseState
 {
-    public SwarmB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
+    public MswarmB2FSM(FSMBoss2EnemySM stateMachine) : base("SwarmMerge", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
     private bool final;
@@ -42,7 +42,7 @@ public class SwarmB2FSM : BaseState
             //ani.ChangeAnimationAttack("UnderGroundUP");
             //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             //ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+            await UniTask.WaitForSeconds(0.5f);
 
             ChangState(state.eat);
         }

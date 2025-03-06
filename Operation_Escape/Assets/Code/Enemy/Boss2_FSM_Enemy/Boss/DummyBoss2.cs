@@ -15,7 +15,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
     public Rigidbody2D rb;
     public Collider2D colliderBoss;
     public bool imortal { get; set; }
-    private bool agian;
+    public bool agian;
     public bool inRoom;
 
     private void Start()
@@ -37,14 +37,10 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             await Strike();
             RandomEdge();
-            for (int i = 0; i < 3; i++)
-            {
-                Debug.Log(i+" Round");
-                await UniTask.WaitForSeconds(2);
-                agian = true;
-                await Strike();
-                RandomEdge();
-            }
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    await StrikeAtk();
+            //}
             rb.velocity = Vector2.zero;
         }
         catch (System.OperationCanceledException)
@@ -53,6 +49,24 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
             return;
         }
 
+    }
+
+    public async UniTask StrikeAtk()
+    {
+        cancellationToken = new CancellationTokenSource();
+        var token = cancellationToken.Token;
+
+        try
+        {
+            agian = true;
+            await Strike();
+            RandomEdge();
+        }
+        catch (System.OperationCanceledException)
+        {
+            Debug.Log("Attack was cancelled.");
+            return;
+        }
     }
 
     public async UniTask Strike()

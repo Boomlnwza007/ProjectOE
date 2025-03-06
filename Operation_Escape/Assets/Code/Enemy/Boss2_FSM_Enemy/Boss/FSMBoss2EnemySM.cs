@@ -47,6 +47,12 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [HideInInspector]
     public MergeB2FSM merge;
     [HideInInspector]
+    public MstrikeB2FSM mStrike;
+    [HideInInspector]
+    public MareaB2FSM mArea;
+    [HideInInspector]
+    public MswarmB2FSM mSwarm;
+    [HideInInspector]
     public CheckNextB2FSM checkNext;
 
 
@@ -62,6 +68,9 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         checkNext = new CheckNextB2FSM(this);
         laserState = new LaserB2FSM(this);
         merge = new MergeB2FSM(this);
+        mStrike = new MstrikeB2FSM(this);
+        mArea = new MareaB2FSM(this);
+        mSwarm = new MswarmB2FSM(this);
         areaMark = GameObject.Find("Boss2Mark").GetComponent<Boss2Mark>();
         areaMark.state = this;
         grid = areaMark.grid;
@@ -138,9 +147,38 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
     public void SpawnEgg()
     {
-        for (int i = 0; i < spawnPoint.Count; i++)
+        SpawnEgg(spawnPoint.Count);
+    }
+
+    public void SpawnEgg(int count)
+    {
+        SpawnEggP2(count, 3);
+    }
+
+    public void SpawnEggPos(int pos)
+    {
+        EggBoss2 egg = Instantiate(eggMinion, spawnPoint[pos].position, Quaternion.identity).GetComponent<EggBoss2>();
+        egg.minionID = 3;
+    }
+
+    public void SpawnEggP2(int count , int id)
+    {
+        count = Mathf.Clamp(count, 0, spawnPoint.Count);
+        List<Transform> availableSpawns = new List<Transform>(spawnPoint);
+        if (count >= availableSpawns.Count)
         {
-           EggBoss2 egg = Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity).GetComponent<EggBoss2>();
+            count = availableSpawns.Count;
+        }
+
+        for (int i = 0; i < availableSpawns.Count - count; i++)
+        {
+            availableSpawns.RemoveAt(Random.Range(0, availableSpawns.Count));
+        }
+
+        foreach (var spawn in availableSpawns)
+        {
+            EggBoss2 egg = Instantiate(eggMinion, spawn.position, Quaternion.identity).GetComponent<EggBoss2>();
+            egg.minionID = id;
         }
     }
 
@@ -158,7 +196,6 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         {
             EggBoss2 egg = Instantiate(eggMinion, spawnPoint[i].position, Quaternion.identity).GetComponent<EggBoss2>();
 
-            // กำหนด Minion ID ตามที่สุ่มได้
             if (i == minion1Index)
                 egg.minionID = 1;
             else if (i == minion2Index)
@@ -240,6 +277,9 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         allState.Add(eat);
         allState.Add(laserState);
         allState.Add(merge);
+        allState.Add(mStrike);
+        allState.Add(mArea);
+        allState.Add(mSwarm);
         return allState;
     }
     public void CabWalk(int on)
@@ -279,8 +319,13 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         return dummy;
     }
 
-    public void SpawnLight()
+    public void SpawnLightning()
     {
-        Instantiate(particleLightning,ai.targetTransform.position,Quaternion.identity).GetComponent<Lightning>().move = true;
+        SpawnLightning(ai.targetTransform.position);
+    }
+
+    public void SpawnLightning(Vector2 pos)
+    {
+        Instantiate(particleLightning, pos, Quaternion.identity).GetComponent<Lightning>().move = true;
     }
 }

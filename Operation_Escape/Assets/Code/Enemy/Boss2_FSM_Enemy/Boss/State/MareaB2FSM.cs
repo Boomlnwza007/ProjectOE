@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class SwarmB2FSM : BaseState
+public class MareaB2FSM : BaseState
 {
-    public SwarmB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
+    public MareaB2FSM(FSMBoss2EnemySM stateMachine) : base("AreaMerge", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
     private bool final;
+    public List<int> rNumber = new List<int> { 2, 3, 4 };
 
     // Start is called before the first frame update
     public override void Enter()
@@ -17,7 +18,14 @@ public class SwarmB2FSM : BaseState
         ai = ((FSMBoss2EnemySM)stateMachine).ai;
         Attack().Forget();
         ai.canMove = false;
-        final = false;
+        if (rNumber.Count == 0)
+        {
+            rNumber = new List<int> { 2, 3, 4 };
+        }
+        int index = Random.Range(0, rNumber.Count);
+        int selectedAttack = rNumber[index];
+        rNumber.RemoveAt(index);
+
     }
 
     public async UniTaskVoid Attack()
@@ -30,21 +38,8 @@ public class SwarmB2FSM : BaseState
 
         try
         {
-            ani.ChangeAnimationAttack("UnderGround");
-            await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            state.Jump(state.jumpCenter.position);
+            await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
-            state.SpawnEgg();
-            await UniTask.WaitForSeconds(3f);
-            final = true;
-            await UniTask.WaitUntil(() => !final, cancellationToken: token);
-
-            //ani.ChangeAnimationAttack("UnderGroundUP");
-            //await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            //ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-
-            ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
         {

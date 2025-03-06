@@ -16,16 +16,13 @@ public class CheckNextB2FSM : BaseState
         {
             if (rNumber.Count <= 0)
             {
-                rNumber = new List<int> { 1, 2, 3, 4 };
+                rNumber = new List<int> { 1, 2, 3};
             }
-            state.merge.stateAtk.Clear(); 
-            for (int i = 0; i < 2; i++)
-            {
-                int index = Random.Range(0, rNumber.Count);
-                int selectedAttack = rNumber[index];
-                rNumber.RemoveAt(index);
-                state.merge.stateAtk.Add(selectedAttack);
-            }
+            state.merge.stateAtk.Clear();
+            int index = Random.Range(0, rNumber.Count);
+            int selectedAttack = rNumber[index];
+            rNumber.RemoveAt(index);
+            state.merge.stateAtk.Add(selectedAttack);
             ChangState(state.merge);
         }
         else

@@ -35,7 +35,7 @@ public class StrikeB2FSM : BaseState
             RandomEdge();
             for (int i = 0; i < 3; i++)
             {
-                await UniTask.WaitForSeconds(2);
+                await UniTask.WaitForSeconds(1);
                 agian = true;
                 await Strike();
                 RandomEdge();

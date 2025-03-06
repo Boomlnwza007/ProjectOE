@@ -11,6 +11,7 @@ public class MergeB2FSM : BaseState
     private CancellationTokenSource cancellationToken;
     public List<int> stateAtk = new List<int>();
     private bool final;
+    public List<int> rNumberS2 = new List<int> { 3, 4 };
 
     public override void Enter()
     {
@@ -23,7 +24,6 @@ public class MergeB2FSM : BaseState
             return;
         }
 
-        Debug.Log(stateAtk[0]+" "+ stateAtk[1]);
         Attack().Forget();
     }
 
@@ -42,7 +42,7 @@ public class MergeB2FSM : BaseState
             state.Jump(state.jumpCenter.position);
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
-            await UniTask.WhenAll(ChooseState(stateAtk[0]), ChooseState(stateAtk[1]));
+            //await UniTask.WhenAll(ChooseState(stateAtk[0]), ChooseState(stateAtk[1]));
             Debug.Log("allEnd");
 
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
@@ -128,7 +128,7 @@ public class MergeB2FSM : BaseState
                 Debug.Log(1);
                 for (int j = 0; j < 5; j++)
                 {
-                    state.SpawnLight();
+                    state.SpawnLightning();
                     state.SpawnParticle(radius);
                     if (increasing)
                     {
@@ -199,15 +199,12 @@ public class MergeB2FSM : BaseState
                 await UniTask.WaitForSeconds(1.2f);
             }
             await UniTask.WaitForSeconds(0.5f);
-            Debug.Log("4+End");
-
         }
         catch (System.OperationCanceledException)
         {
             Debug.Log("Attack was cancelled.");
             return;
         }
-
     }
 
     public override void Exit()

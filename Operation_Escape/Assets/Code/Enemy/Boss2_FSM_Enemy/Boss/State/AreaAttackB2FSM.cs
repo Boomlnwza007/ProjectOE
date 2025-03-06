@@ -46,7 +46,7 @@ public class AreaAttackB2FSM : BaseState
                 Debug.Log(1);
                 for (int j = 0; j < 5; j++)
                 {
-                    state.SpawnLight();
+                    state.SpawnLightning();
                     state.SpawnParticle(radius);
                     if (increasing)
                     {
@@ -57,14 +57,14 @@ public class AreaAttackB2FSM : BaseState
                             //increasing = false;
                         }
                     }
-                    await UniTask.WaitForSeconds(0.5f);
+                    await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
                 }
             }
 
             ani.ChangeAnimationAttack("Area_EndAttack");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ani.ChangeAnimationAttack("Wait");
-            await UniTask.WaitForSeconds(0.5f);
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             ChangState(state.eat);
         }
         catch (System.OperationCanceledException)
