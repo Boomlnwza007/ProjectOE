@@ -124,6 +124,7 @@ public class FSMMEnemySM : StateMachine, IDamageable
 
         ChangState(wanderState);
         Destroy(gameObject);
+        Instantiate(deadBody,transform.position,Quaternion.identity);
     }
 
     public IEnumerator Imortal(float wait)

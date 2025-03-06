@@ -543,6 +543,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   dropChange: 0
   jumpCenter: {fileID: 0}
+  deadBody: {fileID: 730258697577150956, guid: 4c7616abcde003347baf1b1f374fa530, type: 3}
   cooldownChargeAttack: 0
   cooldownSlamAttack: 0
   areaEnermy: {fileID: 0}
@@ -965,7 +966,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 1347696
+  m_InstanceId: 132758
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}

@@ -799,6 +799,7 @@ MonoBehaviour:
   rb: {fileID: 8775170577091479340}
   dropChange: 0
   jumpCenter: {fileID: 0}
+  deadBody: {fileID: 4770966628063016593, guid: 159754cb9dd62074488216c94a7e3a47, type: 3}
   cooldown: 1
   time: 0
   timeCooldown: 6

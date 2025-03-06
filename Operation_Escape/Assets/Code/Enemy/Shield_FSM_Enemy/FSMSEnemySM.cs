@@ -106,6 +106,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
         }
 
         Destroy(gameObject);
+        Instantiate(deadBody, transform.position, Quaternion.identity);
     }
 
     public IEnumerator Imortal(float wait)

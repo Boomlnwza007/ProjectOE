@@ -211,7 +211,8 @@ public class FSMREnemySM : StateMachine, IDamageable
         }
 
         ChangState(wanderState);
-        Destroy(gameObject);
+        Destroy(gameObject); 
+        Instantiate(deadBody, transform.position, Quaternion.identity);
     }
 
     public IEnumerator Imortal(float wait)

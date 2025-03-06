@@ -13,6 +13,7 @@ public class BulletSticky : BaseBullet
     private IDamageable targetDmg;
     private StateMachine enermy;
     private bool sticky;
+    [SerializeField]private SpriteRenderer spriteR;
     [SerializeField]private Sprite spriteSticky;
     private CancellationTokenSource cancellationTokenSource;
 
@@ -21,6 +22,29 @@ public class BulletSticky : BaseBullet
         rb = GetComponent<Rigidbody2D>();
         ready = true;
         rb.velocity = transform.right * speed;
+    }
+
+    private void Update()
+    {
+        if (spriteR != null)
+        {
+            if (spriteR.enabled && !spriteBullet.enabled)
+            {
+                spriteBullet.enabled = true;
+                foreach (Transform item in gameObject.transform)
+                {
+                    item.gameObject.SetActive(true);
+                }
+            }
+            if (!spriteR.enabled && spriteBullet.enabled)
+            {
+                spriteBullet.enabled = false;
+                foreach (Transform item in gameObject.transform)
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,6 +66,7 @@ public class BulletSticky : BaseBullet
                 Destroy(rb);
                 Destroy(GetComponent<Collider2D>());
                 spriteBullet.sprite = spriteSticky;
+                spriteR = collision.GetComponent<SpriteRenderer>() ?? collision.GetComponentInChildren<SpriteRenderer>();
                 if (collision.TryGetComponent(out enermy))
                 {
                     enermy.dropChange++;
@@ -124,7 +149,10 @@ public class BulletSticky : BaseBullet
     public void DelAFMelee()
     {
         StopBlast();
-        enermy.dropChange--;
+        if (enermy != null)
+        {
+            enermy.dropChange--;
+        }
         Destroy(gameObject);
     }
 }
