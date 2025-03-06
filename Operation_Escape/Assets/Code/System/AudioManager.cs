@@ -63,7 +63,7 @@ public class AudioManager : MonoBehaviour
         (musicBGMSource, newMusicBGMSource) = (newMusicBGMSource, musicBGMSource);
     }
 
-    private async UniTask CrossfadeBGM()
+    public async UniTask CrossfadeBGM()
     {
         float timer = 0f;
         float startVolume = musicBGMSource.volume;
