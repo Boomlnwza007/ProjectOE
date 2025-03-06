@@ -172,3 +172,6 @@ MonoBehaviour:
   bulletleLayer:
     serializedVersion: 2
     m_Bits: 256
+  BodyLayer:
+    serializedVersion: 2
+    m_Bits: 64

@@ -59,6 +59,8 @@ public class AreaEnermy : MonoBehaviour
                 //ReItem();
 
                 delBulletAll.DestroyBullet();
+                delBulletAll.DestroyBody();
+
             }
             else
             {
@@ -74,6 +76,7 @@ public class AreaEnermy : MonoBehaviour
                 enemyCount = enemy.Count;
                 //ReItem();
                 delBulletAll.DestroyBullet();
+                delBulletAll.DestroyBody();
             }
 
             hasPlayer = false;
