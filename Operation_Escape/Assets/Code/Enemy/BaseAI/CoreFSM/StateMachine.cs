@@ -20,7 +20,9 @@ public class StateMachine : MonoBehaviour
     public Rigidbody2D rb;
     public int dropChange = 0;
     public Transform jumpCenter;
-   
+
+    [Header("Dead")]
+    public GameObject deadBody;
     void Start()
     {
         ai = GetComponent<IAiAvoid>() ?? GetComponentInChildren<IAiAvoid>(); ;

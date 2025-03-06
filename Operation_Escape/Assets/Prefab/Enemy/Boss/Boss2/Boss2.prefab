@@ -1198,6 +1198,7 @@ MonoBehaviour:
   rb: {fileID: 7633064530594775026}
   dropChange: 0
   jumpCenter: {fileID: 0}
+  deadBody: {fileID: 7623025284704083248, guid: 5df584733250ecf4fa389a81a29d8881, type: 3}
   gun: {fileID: 0}
   grid: {fileID: 0}
   spike: {fileID: 11400000, guid: 8e8e23b70bceadc4bb1d49d30c1ea942, type: 2}
@@ -1292,7 +1293,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1147578239375868831, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
