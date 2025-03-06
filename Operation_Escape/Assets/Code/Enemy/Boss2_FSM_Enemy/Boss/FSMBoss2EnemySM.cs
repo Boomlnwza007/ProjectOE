@@ -16,6 +16,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public bool phase;
     public bool isInGound;
     private DummyBoss2 dummy;
+    [HideInInspector] public bool phaseStart;
 
     [Header("Prefab")]
     public GameObject eggMinion;
@@ -102,8 +103,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
         if (!phase && Health <= maxHealth/2 )
         {
-            phase = true;
-            checkNext.rNumber = new List<int> { 1, 2, 3, 4 };
+            phaseStart = true;            
         }
 
     }

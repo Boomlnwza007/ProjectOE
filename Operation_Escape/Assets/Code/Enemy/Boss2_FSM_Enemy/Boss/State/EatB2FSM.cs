@@ -51,7 +51,14 @@ public class EatB2FSM : BaseState
             state.colliderBoss.enabled = true;
             await UniTask.WaitForSeconds(5f, cancellationToken: token);
             ai.canMove = true;
-            ChangState(state.checkNext);
+            if (state.phaseStart)
+            {
+                ChangState(state.merge);
+            }
+            else
+            {
+                ChangState(state.checkNext);
+            }
         }
         catch (System.OperationCanceledException)
         {
