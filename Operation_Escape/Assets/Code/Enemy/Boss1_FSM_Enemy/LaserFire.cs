@@ -28,6 +28,7 @@ public class LaserFire : MonoBehaviour
     public GameObject startSFX;
     public GameObject endSFX;
     private List<ParticleSystem> particleSystems = new List<ParticleSystem>();
+    public ParticleAlongLineWithShape particlePreLaser;
     [SerializeField]private GameObject[] spritLaser;
 
     [Header("Sound")]
@@ -80,12 +81,17 @@ public class LaserFire : MonoBehaviour
     {
         float speedRotOri = speedRot;
         speedRot = speedRot * speedMulti;
-        pre_lineRenderer.colorGradient = laserColorGradient;
+        //pre_lineRenderer.colorGradient = laserColorGradient;
+        particlePreLaser.ActiceParticle(true);
+
         pre_lineRenderer.enabled = true;
         laserHitZone = true;
         PlayLoopPre().Forget();
+        await UniTask.WaitForSeconds(charge - 0.3f);
+        particlePreLaser.ActiceParticle(false);
+        await UniTask.WaitForSeconds(0.5f);
 
-        await FadeLaser(pre_lineRenderer,charge, laserColorGradient, false);
+        //await FadeLaser(pre_lineRenderer,charge, laserColorGradient, false);
         pre_lineRenderer.enabled = false;
 
         laserHitZone = false;
