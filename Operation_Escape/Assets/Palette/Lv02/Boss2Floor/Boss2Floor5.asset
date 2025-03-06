@@ -13,26 +13,12 @@ MonoBehaviour:
   m_Name: Boss2Floor5
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 1286609545, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 181378226, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: -1665902574, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 348569536, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 171157316, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 1481980030, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: -1350898769, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
   - {fileID: 1962088010, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 1845772748, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 565367165, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
   - {fileID: -2090686622, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: -38220657, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 332689441, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: -673215803, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 2092052223, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: -1948484183, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: 761553783, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  - {fileID: -1210727697, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
-  m_MinSpeed: 7.5
-  m_MaxSpeed: 7.5
+  - {fileID: 1962088010, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
+  - {fileID: 1962088010, guid: 0dd83956be33b7641a79a4746c410884, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
   m_AnimationStartTime: 0
-  m_AnimationStartFrame: 5
+  m_AnimationStartFrame: 1
   m_TileColliderType: 0
