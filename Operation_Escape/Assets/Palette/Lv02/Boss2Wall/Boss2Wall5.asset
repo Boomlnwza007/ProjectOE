@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Boss2Wall5
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 1038350628, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1946689010, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -703246985, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1563960949, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -609969969, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1374290600, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: 170914109, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: 343218934, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1862061600, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: 1455590499, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1600185200, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: 977293238, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1717769778, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -336760811, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -500731896, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: 1808850073, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -344043420, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  - {fileID: -1289102469, guid: 7d569e31c22fbcf4d831ef1e1e0a3860, type: 3}
+  m_MinSpeed: 7.5
+  m_MaxSpeed: 7.5
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 5
+  m_TileColliderType: 0
