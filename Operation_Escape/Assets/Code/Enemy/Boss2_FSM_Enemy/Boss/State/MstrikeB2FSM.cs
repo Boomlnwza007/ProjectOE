@@ -114,8 +114,8 @@ public class MstrikeB2FSM : BaseState
             Vector2 dropPosition;
             for (int i = 0; i < 10; i++)
             {
-                await UniTask.WaitForSeconds(0.1f, cancellationToken: token);
-                dropPosition = (Vector2)dummy.gameObject.transform.position + Random.insideUnitCircle * 7f;
+                await UniTask.WaitForSeconds(0.05f, cancellationToken: token);
+                dropPosition = (Vector2)dummy.gameObject.transform.position + Random.insideUnitCircle * 8f;
                 state.SpawnLightning(dropPosition);
             }
             //await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
