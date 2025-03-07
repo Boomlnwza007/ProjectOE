@@ -108,7 +108,8 @@ MonoBehaviour:
   spriteFlash: {fileID: 4041182704391475761}
   minion: {fileID: 11400000, guid: 1cf89fbeb89539f408b1692afa1065a5, type: 2}
   minionID: 3
-  time: 3
+  minion2Count: 2
+  time: 4
 --- !u!114 &4041182704391475761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +201,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1147578239375868831, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
