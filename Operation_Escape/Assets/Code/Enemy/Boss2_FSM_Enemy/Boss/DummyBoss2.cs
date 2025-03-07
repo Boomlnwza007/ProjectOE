@@ -85,17 +85,34 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
         {
             ani.ChangeAnimationAttack("Striking_R");
         }
+
         sound.PlayMonAtk(0);
+
+
+        float time = 0;        
         while (inRoom || agian)
         {
-            Debug.Log(inRoom + " " + agian + "IN");
-
             rb.velocity = dir * state.speedStrike;
             if (inRoom)
             {
                 agian = false;
-                Debug.Log(inRoom + " " + agian + "INRoom");
             }
+            time += Time.deltaTime;
+
+            if (time > 3)
+            {
+                dir = (state.ai.targetTransform.position - transform.position).normalized;
+                if (dir.x < 0)
+                {
+                    ani.ChangeAnimationAttack("Striking_L");
+                }
+                else
+                {
+                    ani.ChangeAnimationAttack("Striking_R");
+                }
+                time = 0;
+            }
+
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
     }
