@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 9105796329023759800}
   - component: {fileID: 6388857289404530461}
   - component: {fileID: 7710540807158061438}
-  - component: {fileID: 1931718967315364793}
   - component: {fileID: 7284548674345327385}
+  - component: {fileID: 914156220749081239}
   m_Layer: 0
   m_Name: DeadBoss
   m_TagString: Untagged
@@ -273,22 +273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 5de474ef38adb3c4cbd6871473a905be, type: 2}
   duration: 0.1
---- !u!114 &1931718967315364793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7623025284704083248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e105ea05ef63b40aea472439fec710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp: 1
-  lootDrop: {fileID: 7284548674345327385}
-  gun: {fileID: 7541123403067889326, guid: d6190a36a6043a544b97a1079241d9b9, type: 3}
-  spriteFlash: {fileID: 7710540807158061438}
 --- !u!114 &7284548674345327385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,3 +287,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootlist:
   - {fileID: 11400000, guid: b272f7a7f44e6e24ca3b24d305eefb62, type: 2}
+--- !u!114 &914156220749081239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7623025284704083248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e55fcb278db26949aadc2d86c7fc458, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 1000
+  lootDrop: {fileID: 7284548674345327385}
+  gun: {fileID: 0}
+  spriteFlash: {fileID: 7710540807158061438}
+  boss2Mark: {fileID: 0}
