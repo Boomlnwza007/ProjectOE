@@ -41,7 +41,7 @@ public class FSMMinion2EnemySM : StateMachine , IDamageable
 
     public void Fire()
     {
-        GameObject bulletG = Instantiate(bullet, bulletTranform.position, Quaternion.identity);
+        GameObject bulletG = Instantiate(bullet, bulletTranform.position, Quaternion.identity,transform);
     }
 
     public void Setup(GridBoss2 grid, Vector2Int gridPos)
