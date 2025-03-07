@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1455958565467997136}
   - component: {fileID: 2279141054555658696}
   - component: {fileID: 368237139311630346}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: DeadMelee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
