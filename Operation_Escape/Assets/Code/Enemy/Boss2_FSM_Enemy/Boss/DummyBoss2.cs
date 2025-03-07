@@ -15,7 +15,6 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
     public Rigidbody2D rb;
     public Collider2D colliderBoss;
     public bool imortal { get; set; }
-    public bool agian;
     public bool inRoom;
     public HeartSound sound;
 
@@ -61,7 +60,6 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
         try
         {
-            agian = true;
             await Strike();
             RandomEdge();
         }
@@ -88,31 +86,12 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
         sound.PlayMonAtk(0);
 
-
-        float time = 0;        
-        while (inRoom || agian)
+        rb.velocity = dir * state.speedStrike;
+        await UniTask.WaitUntil(() => inRoom, cancellationToken: cancellationToken.Token);
+        
+        while (inRoom)
         {
             rb.velocity = dir * state.speedStrike;
-            if (inRoom)
-            {
-                agian = false;
-            }
-            time += Time.deltaTime;
-
-            if (time > 3)
-            {
-                dir = (state.ai.targetTransform.position - transform.position).normalized;
-                if (dir.x < 0)
-                {
-                    ani.ChangeAnimationAttack("Striking_L");
-                }
-                else
-                {
-                    ani.ChangeAnimationAttack("Striking_R");
-                }
-                time = 0;
-            }
-
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
     }

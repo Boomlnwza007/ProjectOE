@@ -109,7 +109,7 @@ public class MstrikeB2FSM : BaseState
         var token = cancellationToken.Token;
 
         //await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
-        while (dummy.inRoom || dummy.agian)
+        while (dummy.inRoom)
         {
             Vector2 dropPosition;
             for (int i = 0; i < 10; i++)
