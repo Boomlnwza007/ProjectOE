@@ -77,6 +77,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         overdriveChangState = new OverdriveChangFSM(this);
         atkCloseState = new AtkCloseB1FSM(this);
         isFacing = true;
+        jumpCenter = GameObject.Find("MIddleBossPoint").transform;
     }
 
     protected override BaseState GetInitialState()
