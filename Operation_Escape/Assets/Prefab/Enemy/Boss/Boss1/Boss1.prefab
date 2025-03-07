@@ -26267,6 +26267,7 @@ MonoBehaviour:
   rb: {fileID: 7838424579805757511}
   dropChange: 0
   jumpCenter: {fileID: 0}
+  deadBody: {fileID: 1079298960027362699, guid: efead6a67d8ab944989da266eeb49773, type: 3}
   bulletmon: {fileID: 4640713933992763453, guid: 3aaaae0f0a045f242be35346e039847d, type: 3}
   speedRot: 70
   lineRendererPrefab: {fileID: 6985345348325332878, guid: 6dd1025c435c2814aba30f3618331e48, type: 3}
