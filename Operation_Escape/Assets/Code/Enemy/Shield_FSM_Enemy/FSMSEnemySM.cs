@@ -106,7 +106,7 @@ public class FSMSEnemySM : StateMachine, IDamageable
         }
 
         Destroy(gameObject);
-        Instantiate(deadBody, transform.position, Quaternion.identity);
+        Instantiate(deadBody, transform.position, Quaternion.identity).GetComponent<SpriteRenderer>().flipX = animator.isFacingRight;
     }
 
     public IEnumerator Imortal(float wait)

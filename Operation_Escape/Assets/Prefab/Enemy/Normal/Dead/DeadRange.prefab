@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2787941637198898985}
   - component: {fileID: 7008549759133134341}
   - component: {fileID: 6865432184915866972}
+  - component: {fileID: 929358296283824235}
   m_Layer: 15
   m_Name: DeadRange
   m_TagString: Enemy
@@ -168,3 +169,24 @@ MonoBehaviour:
   gun: {fileID: 7541123403067889326, guid: ac6d98c5ad5feb04285b282ecab09c1d, type: 3}
   spriteFlash: {fileID: 2787941637198898985}
   time: 5
+--- !u!95 &929358296283824235
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981662236219511894}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f63263bfb78fdf4aadc8fb128630134, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3953771918290521735}
   - component: {fileID: 1545147962674379114}
   - component: {fileID: 8284296316423272564}
+  - component: {fileID: 2291868542837211978}
   m_Layer: 15
   m_Name: DeadShield
   m_TagString: Enemy
@@ -197,3 +198,24 @@ PolygonCollider2D:
       - {x: 0.875, y: -0.65625}
       - {x: 0.84375, y: -0.59375}
   m_UseDelaunayMesh: 0
+--- !u!95 &2291868542837211978
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730258697577150956}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b98c9f7fddda8044887f24b63bd6e7f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

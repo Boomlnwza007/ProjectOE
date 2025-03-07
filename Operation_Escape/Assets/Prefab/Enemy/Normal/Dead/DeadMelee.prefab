@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1455958565467997136}
   - component: {fileID: 2279141054555658696}
   - component: {fileID: 368237139311630346}
+  - component: {fileID: 6047263096934677175}
   m_Layer: 15
   m_Name: DeadMelee
   m_TagString: Enemy
@@ -168,3 +169,24 @@ MonoBehaviour:
   gun: {fileID: 7541123403067889326, guid: ac6d98c5ad5feb04285b282ecab09c1d, type: 3}
   spriteFlash: {fileID: 1455958565467997136}
   time: 5
+--- !u!95 &6047263096934677175
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4770966628063016593}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e705b791168ee284f88e71f45a5942b3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
