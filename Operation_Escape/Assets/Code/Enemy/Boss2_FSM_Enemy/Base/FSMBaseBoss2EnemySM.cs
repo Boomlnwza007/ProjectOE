@@ -42,7 +42,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
 
     public void AttackNSpike()
     {
-        spikeN = Instantiate(spike.Item[2],ai.targetTransform.position,Quaternion.identity).GetComponent<SpikeN>();
+        spikeN = Instantiate(spike.Item[2],ai.targetTransform.position,Quaternion.identity, transform).GetComponent<SpikeN>();
     }
 
     public void AttackNSpike(float time)
@@ -54,7 +54,7 @@ public class FSMBaseBoss2EnemySM : StateMachine
     public void AttackZSpike()
     {
         SpikeZ.Setup();
-        spikeZ = Instantiate(spike.Item[1].gameObject, ai.targetTransform.position, Quaternion.identity);
+        spikeZ = Instantiate(spike.Item[1].gameObject, ai.targetTransform.position, Quaternion.identity,transform);
     }
 
     public void SummonMinion(int type)
