@@ -74,4 +74,6 @@ public class StateMachine : MonoBehaviour
 
     public virtual List<BaseState> GetAllState() { return null; }
 
+    public virtual void ClearObj() { }
+
 }

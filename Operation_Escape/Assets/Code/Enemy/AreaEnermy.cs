@@ -52,7 +52,6 @@ public class AreaEnermy : MonoBehaviour
                     mon.attacking = false;
                     mon.SetCombatPhase(this);
                     enemy.Add(mon);
-
                 }  
                 enemyCount = enemy.Count;
 
@@ -85,21 +84,11 @@ public class AreaEnermy : MonoBehaviour
 
     public void ClaerMon()
     {
-        enemy.RemoveAll(e =>
+        foreach (var e in enemy)
         {
-            if (e.TryGetComponent<IDamageable>(out var damage))
-            {
-                damage.Die();
-                return true;
-            }
-            else
-            {
-                Destroy(e.gameObject);
-                return true;
-            }
-        });
-
-
+            e.ClearObj();
+            Destroy(e.gameObject);
+        }
         enemy.Clear();
         ClaerMonMinion();
     }

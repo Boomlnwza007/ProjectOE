@@ -68,12 +68,16 @@ public class FSMHeart2EnemySM : FSMBaseBoss2EnemySM ,IDamageable
 
     public void Die()
     {
-        BeforDie();
+        ClearObj();
         Destroy(gameObject);
         areaEnermy?.Die(this);
         SpawnGun(); 
         Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
+    }
 
+    public override void ClearObj()
+    {
+        BeforDie();
     }
 
     public IEnumerator Imortal(float wait)

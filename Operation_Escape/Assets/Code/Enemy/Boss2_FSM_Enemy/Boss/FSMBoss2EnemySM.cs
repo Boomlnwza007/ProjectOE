@@ -117,11 +117,16 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         //if (areaEnermy != null)
         //{
         //    areaEnermy.Die(this);
-        //}
-        dummy?.Die();
+        //}       
+        ClearObj();
         Destroy(gameObject);
         SpawnGun();
         Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
+    }
+
+    public override void ClearObj()
+    {
+        dummy?.Die();
     }
 
     public IEnumerator Imortal(float wait)
