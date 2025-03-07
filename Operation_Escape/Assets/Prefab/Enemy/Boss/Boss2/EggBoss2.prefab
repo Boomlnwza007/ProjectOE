@@ -188,7 +188,8 @@ MonoBehaviour:
   audioGame: {fileID: 8555980516003480736}
   preAtk:
   - {fileID: 8300000, guid: dab05ac751b904443931154c3dbb977a, type: 3}
-  monAtk: []
+  monAtk:
+  - {fileID: 8300000, guid: b718eeb08d1807541b82a0d1d915a9b3, type: 3}
 --- !u!82 &8555980516003480736
 AudioSource:
   m_ObjectHideFlags: 0
