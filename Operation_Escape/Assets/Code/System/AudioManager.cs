@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         audioManager = this;
+        newMusicBGMSource.volume = 1;
+        newMusicBGMSource.volume = 1;
     }
 
     private void Start()
