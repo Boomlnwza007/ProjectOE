@@ -62,13 +62,16 @@ public class TriggerTimeline : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!Play)
+        if (collision.CompareTag("Player"))
         {
-            Play = true;
-            systemControl.Cutscene(false);
-            PlayerControl.control.ShowGun(false);
-            StartCoroutine(StartPosition());            
-        }
+            if (!Play)
+            {
+                Play = true;
+                systemControl.Cutscene(false);
+                PlayerControl.control.ShowGun(false);
+                StartCoroutine(StartPosition());
+            }
+        }        
     }
 
     public IEnumerator StartPosition()
@@ -78,11 +81,10 @@ public class TriggerTimeline : MonoBehaviour
         while (Vector3.Distance(Actor.position, StarPos) > 0.01f)
         {
             Vector2 targetDirection = ((Vector2)StarPos - (Vector2)Actor.position).normalized;
-            ActorRb.velocity = Vector2.SmoothDamp(ActorRb.velocity, targetDirection * speed, ref velocity, 0.1f);
+            ActorRb.velocity = targetDirection * speed;
 
-            if (Vector3.Distance(Actor.position, StarPos) <= 0.1f)
+            if (Vector3.Distance(Actor.position, StarPos) <= 0.5f)
             {
-                // Ensure the actor reaches the target position exactly
                 Actor.position = StarPos;
                 ActorRb.velocity = Vector2.zero;
                 break;
