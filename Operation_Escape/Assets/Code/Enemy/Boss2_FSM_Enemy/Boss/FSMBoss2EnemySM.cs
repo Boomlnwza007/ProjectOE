@@ -127,6 +127,15 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     public override void ClearObj()
     {
         dummy?.Die();
+        clearLight();
+    }
+
+    public void clearLight()
+    {
+        foreach (Transform item in areaMark.spark)
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     public IEnumerator Imortal(float wait)
@@ -357,6 +366,6 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
     public void SpawnLightning(Vector2 pos)
     {
-        Instantiate(particleLightning, pos, Quaternion.identity).GetComponent<Lightning>().move = true;
+        Instantiate(particleLightning, pos, Quaternion.identity,areaMark.spark).GetComponent<Lightning>().move = true;
     }
 }
