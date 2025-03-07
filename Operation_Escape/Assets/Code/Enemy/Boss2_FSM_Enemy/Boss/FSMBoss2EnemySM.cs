@@ -18,6 +18,8 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     private DummyBoss2 dummy;
     [HideInInspector] public bool phaseStart;
     public HeartSound sound;
+    public bool first;
+
 
     [Header("Prefab")]
     public GameObject eggMinion;

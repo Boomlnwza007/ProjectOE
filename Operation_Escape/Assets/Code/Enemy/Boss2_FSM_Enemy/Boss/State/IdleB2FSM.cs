@@ -31,9 +31,13 @@ public class IdleB2FSM : BaseState
     public async UniTask Reay()
     {
         var ani = ((FSMBoss2EnemySM)stateMachine).animator;
-        ani.ChangeAnimationAttack("Roar");
-        await UniTask.WaitUntil(() => ani.endAnim);
-        ani.ChangeAnimationAttack("Wait");
+        if (!((FSMBoss2EnemySM)stateMachine).first)
+        {
+            ani.ChangeAnimationAttack("Roar");
+            await UniTask.WaitUntil(() => ani.endAnim);
+            ani.ChangeAnimationAttack("Wait");
+        }
+        await UniTask.WaitForSeconds(0.5f);
         ai.canMove = true;
         stateMachine.ChangState(((FSMBoss2EnemySM)stateMachine).checkNext);
     }
