@@ -185,7 +185,7 @@ MonoBehaviour:
   Range: 20
   originScale: {x: 1, y: 1, z: 0}
   finalScale: {x: 1.5, y: 1.5, z: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 6142224185955287790}
 --- !u!95 &6142224185955287790
 Animator:
   serializedVersion: 5
@@ -194,7 +194,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3888396136867698908}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3650e9f9dcbabdd4cbe6443cd2a446fe, type: 2}
   m_CullingMode: 0
