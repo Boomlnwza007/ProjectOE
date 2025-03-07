@@ -129,7 +129,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     {
         if (dummy != null)
         {
-            dummy?.Die();
+            Destroy(dummy.gameObject);
         }
         clearLight();
     }
