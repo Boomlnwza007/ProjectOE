@@ -42,7 +42,6 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public bool imortal { get; set; }
     public string stateName;
     public UIBoss uiBoss;
-    public GameObject gunDrop;
     public Collider2D colliderBoss;
     public AreaEnermy areaEnermy;
 
@@ -306,12 +305,12 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
 
     public void Die()
     {
-        Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
         if (areaEnermy != null)
         {
             areaEnermy.Die(this);
         }
         Destroy(gameObject);
+        Instantiate(deadBody, gameObject.transform.position, Quaternion.identity).GetComponent<Animator>().SetFloat("isRight", isFacingRight ? 1 : -1);
     }
 
     public IEnumerator Imortal(float wait)
