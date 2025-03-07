@@ -119,7 +119,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         //    areaEnermy.Die(this);
         //}
         areaEnermy.ClaerMonMinion();
-        ClearObj();
+        clearLight();
         Destroy(gameObject);
         SpawnGun();
         Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
