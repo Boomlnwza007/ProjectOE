@@ -53,6 +53,7 @@ public class BulletSticky : BaseBullet
         {
             bulletInteract.Interact(DamageType.Rang);
             Destroy(gameObject);
+            Expo();
         }
         else if (collision.tag == tagUse)
         {
@@ -77,6 +78,7 @@ public class BulletSticky : BaseBullet
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Destroy(gameObject);
+            Expo();
         }
     }
 
@@ -120,6 +122,7 @@ public class BulletSticky : BaseBullet
 
         targetDmg.Takedamage(exDmg, DamageType.Rang, knockbackForce);
         Destroy(gameObject);
+        Expo();
     }
 
     public void StartBlast()
@@ -143,6 +146,7 @@ public class BulletSticky : BaseBullet
         if (!sticky)
         {
             Destroy(gameObject);
+            Expo();
         }
     }
 
@@ -154,5 +158,6 @@ public class BulletSticky : BaseBullet
             enermy.dropChange--;
         }
         Destroy(gameObject);
+        Expo();
     }
 }

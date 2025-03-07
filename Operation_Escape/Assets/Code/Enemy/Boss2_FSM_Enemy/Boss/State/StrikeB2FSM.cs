@@ -72,7 +72,6 @@ public class StrikeB2FSM : BaseState
         }
 
         sound.PlayMonAtk(1);
-
         state.rb.velocity = dir * state.speedStrike;
         await UniTask.WaitUntil(() => state.inRoom, cancellationToken: cancellationToken.Token);
 

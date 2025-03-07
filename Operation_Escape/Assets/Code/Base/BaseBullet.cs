@@ -12,6 +12,7 @@ public abstract class BaseBullet : MonoBehaviour
     public Transform target;
     public bool ready;
     public bool ultimate;
+    public GameObject expo;
 
     public virtual void ResetGameObj() {}
 
@@ -24,6 +25,14 @@ public abstract class BaseBullet : MonoBehaviour
             knockbackDirection.Normalize();
 
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+        }
+    }
+
+    public void Expo()
+    {
+        if (expo != null)
+        {
+            Instantiate(expo, gameObject.transform.position, Quaternion.identity);
         }
     }
 }

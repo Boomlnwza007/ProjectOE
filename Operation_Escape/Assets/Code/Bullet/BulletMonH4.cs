@@ -39,10 +39,12 @@ public class BulletMonH4 : BaseBullet
             }
 
             Destroy(gameObject);
-        }        
+            Expo();
+        }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Destroy(gameObject);
+            Expo();
         }
     }
 }

@@ -191,7 +191,7 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 1
-  expo: {fileID: 0}
+  expo: {fileID: 3042412020121723511, guid: cf4ba7e48d567d4478593b9aba8963be, type: 3}
 --- !u!50 &-8713237800413251932
 Rigidbody2D:
   serializedVersion: 4

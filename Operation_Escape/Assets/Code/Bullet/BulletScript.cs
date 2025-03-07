@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletScript : BaseBullet
 {
-    public GameObject expo;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,15 +40,6 @@ public class BulletScript : BaseBullet
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Expo();
-            Destroy(gameObject);
-        }
-    }
-
-    public void Expo()
-    {
-        if (expo != null)
-        {
-            Instantiate(expo, gameObject.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

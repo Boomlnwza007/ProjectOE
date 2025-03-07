@@ -9,6 +9,7 @@ public class BulletBladeScriipt : BaseBullet
     public float Range;
     public Vector3 originScale;
     public Vector3 finalScale = new Vector3(0.2f, 0.2f, 0);
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,8 @@ public class BulletBladeScriipt : BaseBullet
     {
         float distance = Vector2.Distance(startPos, gameObject.transform.position);
         if (distance >= Range)
-        {
-            Destroy(gameObject);
+        {            
+            animator.enabled = true;
         }
 
         float t = Mathf.Clamp01(distance / Range);
@@ -37,6 +38,7 @@ public class BulletBladeScriipt : BaseBullet
         if (collision.TryGetComponent(out IObjInteract bulletInteract))
         {
             bulletInteract.Interact(DamageType.Rang);
+            animator.enabled = true;
         }        
         else if (collision.tag == tagUse)
         {
@@ -52,7 +54,7 @@ public class BulletBladeScriipt : BaseBullet
         {
             if (!collision.CompareTag("InEdgeWall"))
             {
-                Destroy(gameObject);
+                animator.enabled = true;
             }
         }
     }
@@ -60,5 +62,10 @@ public class BulletBladeScriipt : BaseBullet
     public override void ResetGameObj()
     {
         startPos = transform.position;
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

@@ -90,6 +90,7 @@ public class BulletMinion : BaseBullet
             }
 
             Destroy(gameObject);
+            Expo();
         }
     }
 }

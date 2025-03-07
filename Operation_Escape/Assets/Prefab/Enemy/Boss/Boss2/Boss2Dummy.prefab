@@ -480,7 +480,6 @@ MonoBehaviour:
   spriteFlash: {fileID: 1307824316455379167}
   rb: {fileID: 5568218353465863293}
   colliderBoss: {fileID: 1663701936399451455}
-  agian: 0
   inRoom: 0
   sound: {fileID: 8224428183247710552}
 --- !u!82 &7918627365322728670
@@ -495,7 +494,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1147578239375868831, guid: 4d2b829f96d47204094681643aeb3474, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

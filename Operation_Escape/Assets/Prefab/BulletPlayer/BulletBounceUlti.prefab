@@ -253,6 +253,7 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 1
+  expo: {fileID: 3042412020121723511, guid: 1ef55ddbf7b0ff349bf5e43635b3c997, type: 3}
   maxBunceCount: 3
   bounceCount: 0
   timer: 3

@@ -398,6 +398,7 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 0
+  expo: {fileID: 3042412020121723511, guid: 9c7a66a9bbc2a954bb8019007f6a2959, type: 3}
   distance: 20
   offset: 5
   particle: {fileID: 7541123403067889326, guid: 4b18775e04fb83e4c9638cf572df9a6e, type: 3}

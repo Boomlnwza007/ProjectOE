@@ -54,6 +54,7 @@ public class BulletCharge : BaseBullet
         if (!charging)
         {
             Destroy(gameObject);
+            Expo();
         }
     }
 
@@ -71,6 +72,7 @@ public class BulletCharge : BaseBullet
             {
                 bulletInteract.Interact(DamageType.Rang);
                 Destroy(gameObject);
+                Expo();
             }
             else if (collision.tag == tagUse)
             {
@@ -80,11 +82,13 @@ public class BulletCharge : BaseBullet
                     target.Takedamage(damage, DamageType.Rang, knockbackForce);
                     KnockBackPush(collision);
                     Destroy(gameObject);
+                    Expo();
                 }
             }            
             else if (collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
             {
                 Destroy(gameObject);
+                Expo();
             }
         }
         

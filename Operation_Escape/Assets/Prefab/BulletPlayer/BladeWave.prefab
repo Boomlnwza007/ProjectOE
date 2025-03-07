@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6124808370032824950}
   - component: {fileID: 3729552039013170064}
   - component: {fileID: 7054453331396606789}
+  - component: {fileID: 3333925483569688941}
   m_Layer: 8
   m_Name: BladeWave
   m_TagString: BulletPlayer
@@ -180,9 +181,32 @@ MonoBehaviour:
   target: {fileID: 0}
   ready: 0
   ultimate: 0
+  expo: {fileID: 0}
   Range: 7
   originScale: {x: 1, y: 1, z: 0}
   finalScale: {x: 2, y: 2, z: 0}
+  animator: {fileID: 3333925483569688941}
+--- !u!95 &3333925483569688941
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3888396136867698908}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f8e87f51c262b9448986dc1a55db217, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5470466550372543909
 GameObject:
   m_ObjectHideFlags: 0

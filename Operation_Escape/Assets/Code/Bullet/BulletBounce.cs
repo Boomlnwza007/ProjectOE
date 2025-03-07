@@ -23,6 +23,7 @@ public class BulletBounce : BaseBullet
             if (time > timer)
             {
                 Destroy(gameObject);
+                Expo();
             }
         }        
     }
@@ -38,6 +39,7 @@ public class BulletBounce : BaseBullet
                 if (!ultimate)
                 {
                     Destroy(gameObject);
+                    Expo();
                     return;
                 }
             }
@@ -68,6 +70,7 @@ public class BulletBounce : BaseBullet
                 bulletInteract.Interact(DamageType.Rang);
             }
             Destroy(gameObject);
+            Expo();
         }        
     }
 
