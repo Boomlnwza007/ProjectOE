@@ -54,7 +54,7 @@ public class Lightning : MonoBehaviour
         if (!particle.isPlaying)
         {
             particle.Play();
-            //audioSource.PlayOneShot(lightning);
+            audioSource.PlayOneShot(lightning);
         }
     }
 
