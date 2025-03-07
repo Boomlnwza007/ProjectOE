@@ -113,11 +113,11 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
     public void Die()
     {
-        //Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
-        if (areaEnermy != null)
-        {
-            areaEnermy.Die(this);
-        }
+        ////Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
+        //if (areaEnermy != null)
+        //{
+        //    areaEnermy.Die(this);
+        //}
         dummy?.Die();
         Destroy(gameObject);
         SpawnGun();
