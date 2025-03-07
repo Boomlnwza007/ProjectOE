@@ -63,7 +63,16 @@ public class PauseScene : MonoBehaviour
             return;
         }
         menu.RollBack();
-        onPauseMenu = !onPauseMenu;
+        if (onPauseMenu)
+        {
+            onPauseMenu = false;
+            PlayerControl.control.playerState.canHealth = true;
+        }
+        else
+        {
+            onPauseMenu = true;
+            PlayerControl.control.playerState.canHealth = false;
+        }
         PlayerControl.control.EnableInput(!onPauseMenu);
         menuPause.SetActive(onPauseMenu);
         if (onPauseMenu)
