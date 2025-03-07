@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2787941637198898985}
   - component: {fileID: 7008549759133134341}
   - component: {fileID: 6865432184915866972}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: DeadRange
   m_TagString: Enemy
   m_Icon: {fileID: 0}
