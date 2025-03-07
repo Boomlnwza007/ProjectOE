@@ -189,6 +189,7 @@ MonoBehaviour:
   raycastMaskEnemy:
     serializedVersion: 2
     m_Bits: 0
+  sound: {fileID: 8806282030791020493}
 --- !u!114 &2652002044264776762
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -74,6 +74,7 @@ public class FSMHeart1EnemySM : FSMBaseBoss2EnemySM ,IDamageable
         Destroy(gameObject);
         areaEnermy?.Die(this);
         SpawnGun();
+        Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
     }
 
     public override List<BaseState> GetAllState()

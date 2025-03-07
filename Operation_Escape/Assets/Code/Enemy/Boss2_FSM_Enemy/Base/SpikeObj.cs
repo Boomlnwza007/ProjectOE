@@ -9,8 +9,13 @@ public class SpikeObj : MonoBehaviour, IDamageable
     public SpriteFlash spriteFlash;
     public LayerMask raycastMask;
     public LayerMask raycastMaskEnemy;
-
+    public SpikeSound sound;
     public bool imortal { get ; set ; }
+
+    private void Start()
+    {
+        sound.PlayPreSpike();
+    }
 
     public void Die()
     {
@@ -48,7 +53,6 @@ public class SpikeObj : MonoBehaviour, IDamageable
 
     public void Check()
     {
-
         if (Physics2D.OverlapCircle(transform.position, 0.5f, raycastMask))
         {
             Destroy(gameObject);

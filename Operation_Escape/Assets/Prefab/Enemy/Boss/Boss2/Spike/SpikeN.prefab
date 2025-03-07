@@ -107,6 +107,7 @@ MonoBehaviour:
   range: 2
   preAtk: 0.6
   final: 0
+  sound: {fileID: 5439462306997029230}
 --- !u!58 &8553227553392059970
 CircleCollider2D:
   m_ObjectHideFlags: 0
