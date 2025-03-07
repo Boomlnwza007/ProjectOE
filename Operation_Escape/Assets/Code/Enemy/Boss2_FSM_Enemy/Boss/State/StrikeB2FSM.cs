@@ -9,7 +9,6 @@ public class StrikeB2FSM : BaseState
     public StrikeB2FSM(FSMBoss2EnemySM stateMachine) : base("Strike", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
-    private bool agian;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -38,7 +37,6 @@ public class StrikeB2FSM : BaseState
             for (int i = 0; i < 3; i++)
             {
                 await UniTask.WaitForSeconds(2);
-                agian = true;
                 await Strike();
                 RandomEdge();
             }
@@ -72,14 +70,15 @@ public class StrikeB2FSM : BaseState
         {
             ani.ChangeAnimationAttack("Striking_R");
         }
+
         sound.PlayMonAtk(1);
-        while (state.inRoom || agian)
+
+        state.rb.velocity = dir * state.speedStrike;
+        await UniTask.WaitUntil(() => state.inRoom, cancellationToken: cancellationToken.Token);
+
+        while (state.inRoom)
         {
             state.rb.velocity = dir * state.speedStrike;
-            if (state.inRoom)
-            {
-                agian = false;
-            }
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }            
     }
