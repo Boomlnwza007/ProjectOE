@@ -195,6 +195,7 @@ public class MstrikeB2FSM : BaseState
                 await dummy.StrikeAtk();
             }
 
+            dummy.Die();
         }
         catch (System.OperationCanceledException)
         {
