@@ -1189,7 +1189,7 @@ MonoBehaviour:
   ID: 2
   maxHealth: 1500
   Health: 1500
-  dmg: 50
+  dmg: 40
   Speed: 15
   visRange: 40
   attacking: 0

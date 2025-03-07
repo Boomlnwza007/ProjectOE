@@ -4904,7 +4904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mon: {fileID: 0}
-  dmg: 50
+  dmg: 40
   size: 5
 --- !u!58 &2119001313704580687
 CircleCollider2D:
