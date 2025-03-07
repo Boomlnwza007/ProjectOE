@@ -5016,7 +5016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserUltiPrefab: {fileID: 4751903538654894310}
   dmgUl: 10
-  maxDmgUl: 15
+  maxDmgUl: 14
   laserDistance: 100
   laserSizeOffset: 0.5
   ShootLayer:
