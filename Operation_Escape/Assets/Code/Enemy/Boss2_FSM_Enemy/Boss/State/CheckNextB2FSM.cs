@@ -7,8 +7,8 @@ using UnityEngine;
 public class CheckNextB2FSM : BaseState
 {
     public CheckNextB2FSM(FSMBoss2EnemySM stateMachine) : base("Swarm", stateMachine) { }
-    public List<int> rNumber = new List<int> { 1, 2, 3};
-    public List<int> rNumberP2 = new List<int> { 1, 2, 3, 4 };
+    public List<int> rNumber = new List<int> { 1, 2, 3, 4 };
+    public List<int> rNumberP2 = new List<int> { 1, 2, 3};
 
     // Start is called before the first frame update
     public override void Enter()
@@ -30,7 +30,7 @@ public class CheckNextB2FSM : BaseState
         {
             if (rNumber.Count == 0)
             {
-                rNumber = new List<int> { 1, 2, 3};
+                rNumber = new List<int> { 1, 2, 3, 4 };
             }
             int index = Random.Range(0, rNumber.Count);
             int selectedAttack = rNumber[index];
