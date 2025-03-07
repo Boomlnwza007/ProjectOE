@@ -161,20 +161,20 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
-        boss2.Health -= damage;
-        spriteFlash?.Flash();
-        switch (type)
-        {
-            case DamageType.Rang:
-                break;
-            case DamageType.Melee:
-                lootDrop.InstantiateLoot(0);
-                break;
-        }
-        if (boss2.Health <= 0)
-        {
-            Die();
-        }
+        //boss2.Health -= damage;
+        //spriteFlash?.Flash();
+        //switch (type)
+        //{
+        //    case DamageType.Rang:
+        //        break;
+        //    case DamageType.Melee:
+        //        lootDrop.InstantiateLoot(0);
+        //        break;
+        //}
+        //if (boss2.Health <= 0)
+        //{
+        //    Die();
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
