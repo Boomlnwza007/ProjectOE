@@ -202,6 +202,7 @@ public class PlayerControl : MonoBehaviour
     public void EnableUI(bool enable)
     {
         UIOnUpdate = enable;
+        playerState.canHealth = enable;
         UI.SetActive(enable);
     }
 

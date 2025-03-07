@@ -6,7 +6,7 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 {
     [Header("Status")]
     public int health;
-    private bool canHealth = true;
+    public bool canHealth = true;
     public int maxHealth = 10;
     public int healUseEnergy = 5;
     public int energy { get; set; }
