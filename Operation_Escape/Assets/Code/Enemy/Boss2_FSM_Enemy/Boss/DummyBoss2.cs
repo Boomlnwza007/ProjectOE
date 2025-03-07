@@ -88,9 +88,9 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
         rb.velocity = dir * state.speedStrike;
 
-        while (!state.inRoom)
+        while (!inRoom)
         {
-            state.rb.velocity = dir * state.speedStrike;
+            rb.velocity = dir * state.speedStrike;
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
 
