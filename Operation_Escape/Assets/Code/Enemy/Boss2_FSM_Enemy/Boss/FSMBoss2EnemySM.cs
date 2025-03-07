@@ -184,6 +184,28 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         }
     }
 
+    public void SpawnEggP2(int count, int id, int mCount)
+    {
+        count = Mathf.Clamp(count, 0, spawnPoint.Count);
+        List<Transform> availableSpawns = new List<Transform>(spawnPoint);
+        if (count >= availableSpawns.Count)
+        {
+            count = availableSpawns.Count;
+        }
+
+        for (int i = 0; i < availableSpawns.Count - count; i++)
+        {
+            availableSpawns.RemoveAt(Random.Range(0, availableSpawns.Count));
+        }
+
+        foreach (var spawn in availableSpawns)
+        {
+            EggBoss2 egg = Instantiate(eggMinion, spawn.position, Quaternion.identity).GetComponent<EggBoss2>();
+            egg.minionID = id;
+            egg.minion2Count = mCount;
+        }
+    }
+
     public void SpawnEggP2()
     {
         List<int> spawnIndices = new List<int> { 0, 1, 2 };

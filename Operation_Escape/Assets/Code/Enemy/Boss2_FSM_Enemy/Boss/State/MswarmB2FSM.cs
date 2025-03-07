@@ -33,7 +33,7 @@ public class MswarmB2FSM : BaseState
             ani.ChangeAnimationAttack("UnderGround");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
-            state.SpawnEggP2(4, 2);
+            state.SpawnEggP2(4, 2,1);
 
             for (int i = 0; i < 3; i++)
             {

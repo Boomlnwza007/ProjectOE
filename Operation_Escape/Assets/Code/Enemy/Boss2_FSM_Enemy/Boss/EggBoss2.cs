@@ -9,6 +9,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
     public SpriteFlash spriteFlash;
     public ID minion;
     public  int minionID = 3;
+    public  int minion2Count = 2;
     public float time = 3;
     private float timer = 0;
     public bool imortal { get; set; }
@@ -86,6 +87,11 @@ public class EggBoss2 : MonoBehaviour , IDamageable
         Vector2 dropPosition1 = (Vector2)transform.position + Random.insideUnitCircle * 2f;
         StateMachine m1 = Instantiate(minion.Item[1], dropPosition1, Quaternion.identity).GetComponentInChildren<StateMachine>();
         FSMBoss2EnemySM.minionHave.Add(m1);
+
+        if (minion2Count < 2)
+        {
+            return;
+        }
 
         Vector2 dropPosition2;
         do
