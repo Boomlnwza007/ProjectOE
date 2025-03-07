@@ -117,7 +117,8 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         //if (areaEnermy != null)
         //{
         //    areaEnermy.Die(this);
-        //}       
+        //}
+        areaEnermy.ClaerMonMinion();
         ClearObj();
         Destroy(gameObject);
         SpawnGun();
@@ -126,7 +127,10 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
     public override void ClearObj()
     {
-        dummy?.Die();
+        if (dummy != null)
+        {
+            dummy?.Die();
+        }
         clearLight();
     }
 

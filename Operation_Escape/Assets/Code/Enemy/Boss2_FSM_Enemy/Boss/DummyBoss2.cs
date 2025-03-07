@@ -9,7 +9,6 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
     public FSMBoss2EnemySM boss2;
     public Boss2_Animation ani;
     public LootTable lootDrop;
-    public GameObject gun;
     public SpriteFlash spriteFlash;
     private CancellationTokenSource cancellationToken;
     public Rigidbody2D rb;
@@ -145,10 +144,6 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
     {
         cancellationToken.Cancel();
         Destroy(gameObject);
-        if (gun != null)
-        {
-            Instantiate(gun, transform.position, Quaternion.identity);
-        }
     }
 
     public IEnumerator Imortal(float wait)
