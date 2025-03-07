@@ -211,6 +211,7 @@ MonoBehaviour:
   rb: {fileID: 7946128131045001210}
   dropChange: 0
   jumpCenter: {fileID: 3969137864566672963}
+  deadBody: {fileID: 0}
   animator: {fileID: 1617561225061217621}
   raycastMaskWay:
     serializedVersion: 2

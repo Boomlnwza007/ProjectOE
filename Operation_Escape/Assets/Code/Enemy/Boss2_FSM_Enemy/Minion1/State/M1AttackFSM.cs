@@ -60,6 +60,7 @@ public class M1AttackFSM : BaseState
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
             state.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "TileMapON";
             state.Jump(false);
+            ani.ChangeAnimationAttack("jump");
             jump = true;
             startPos = ai.position;
             state.animator.isFacing = false;
