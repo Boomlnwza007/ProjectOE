@@ -123,6 +123,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         Destroy(gameObject);
         SpawnGun();
         Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
+        areaMark.endanimation.SetActive(true);
     }
 
     public override void ClearObj()
