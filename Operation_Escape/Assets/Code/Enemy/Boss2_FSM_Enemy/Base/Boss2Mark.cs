@@ -23,7 +23,15 @@ public class Boss2Mark : MonoBehaviour
 
     [Header("SpawnObj")]
     public Transform spark;
-    public GameObject endanimation;
+    public GameObject[] endAnimation;
+
+    public void SetActive()
+    {
+        foreach (var item in endAnimation)
+        {
+            item.SetActive(true);
+        }
+    }
 
     [HideInInspector] public FSMBoss2EnemySM state;
 }
