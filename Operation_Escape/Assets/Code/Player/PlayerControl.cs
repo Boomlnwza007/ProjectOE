@@ -53,15 +53,15 @@ public class PlayerControl : MonoBehaviour
     }
 
     private void Update()
-    {
-
-        if (Input.GetButtonDown("Pause"))
-        {
-            menu.HidePause();
-        }
+    {        
 
         if (UIOnUpdate)
         {
+            if (Input.GetButtonDown("Pause"))
+            {
+                menu.HidePause();
+            }
+
             UpdateBars();
             UpdateBullets();
             HandleReload();
