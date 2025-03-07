@@ -32,6 +32,7 @@ public class AreaAttackB2FSM : BaseState
             ani.ChangeAnimationAttack("UnderGround");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             ani.ChangeAnimationAttack("UnderGroundUP");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ani.ChangeAnimationAttack("Area_PreAttack");
