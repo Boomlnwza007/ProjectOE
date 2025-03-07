@@ -11,6 +11,7 @@ public class SpikeN : MonoBehaviour
     public float range = 2.5f;
     public float preAtk;
     public bool final;
+    public SpikeSound sound;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class SpikeN : MonoBehaviour
 
     public async UniTask Next()
     {
+        sound.PlayPreSpike();
         await UniTask.WaitForSeconds(preAtk);
         animator.SetTrigger("Go");
     }
