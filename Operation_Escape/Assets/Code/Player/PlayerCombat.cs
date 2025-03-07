@@ -153,34 +153,39 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public void Attack()
-    {       
+    {
+        PlayerControl.control.Slow(0);
+
         Collider2D _colliders = meleeZone.GetComponent<Collider2D>();
         List<Collider2D> colliders = new List<Collider2D>();
+
         ContactFilter2D filter = new ContactFilter2D().NoFilter();
         Physics2D.OverlapCollider(_colliders, filter, colliders);
 
         foreach (var hit in colliders)
         {
-            if (hit.gameObject != gameObject && hit.TryGetComponent(out IDamageable dam))
+            if (hit.gameObject == gameObject) continue;
+
+            if (hit.TryGetComponent(out IDamageable dam))
             {
                 dam.Takedamage(damage, DamageType.Melee, knockBack);
+
                 foreach (Transform child in hit.transform)
                 {
-                    BulletSticky bullet = child.GetComponent<BulletSticky>();
-                    if (bullet != null)
+                    if (child.TryGetComponent(out BulletSticky bullet))
                     {
                         bullet.DelAFMelee();
                     }
                 }
-                Debug.Log(hit.name);
+
             }
             else if (hit.TryGetComponent(out IObjInteract bulletInteract))
             {
                 bulletInteract.Interact(DamageType.Melee);
             }
-        }
+        } 
+
         meleeZone.SetActive(false);
-        PlayerControl.control.Slow(0);
     }
 
     private void TimeUltimate()

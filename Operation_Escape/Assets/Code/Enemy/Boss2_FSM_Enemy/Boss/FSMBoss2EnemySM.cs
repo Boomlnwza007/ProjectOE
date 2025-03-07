@@ -96,7 +96,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             case DamageType.Rang:
                 break;
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(dropChange);
+                lootDrop.InstantiateLoot(dropChange,4);
                 break;
         }
         if (Health <= 0)

@@ -93,7 +93,6 @@ public class BulletSticky : BaseBullet
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                Debug.Log("Blast was canceled!");
                 return;
             }
 

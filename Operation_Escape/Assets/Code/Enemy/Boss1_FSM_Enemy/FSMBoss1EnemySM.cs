@@ -294,7 +294,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
                 //lootDrop.InstantiateLoot(3);
                 break;
             case DamageType.Melee:
-                lootDrop.InstantiateLoot(dropChange);
+                lootDrop.InstantiateLoot(dropChange,3);
                 break;
         }
         if (Health <= 0)
