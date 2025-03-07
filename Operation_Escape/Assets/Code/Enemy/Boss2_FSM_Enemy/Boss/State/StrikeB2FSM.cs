@@ -60,22 +60,15 @@ public class StrikeB2FSM : BaseState
         var ani = state.animator;
         var sound = state.sound;
 
-        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
         state.colliderBoss.isTrigger = true;
-        if (dir.x < 0)
-        {
-            ani.ChangeAnimationAttack("Striking_L");
-        }
-        else
-        {
-            ani.ChangeAnimationAttack("Striking_R");
-        }
+        Vector2 dir = Diraction();
 
         sound.PlayMonAtk(1);
         state.rb.velocity = dir * state.speedStrike;
 
         while (!state.inRoom)
         {
+            dir = Diraction();
             state.rb.velocity = dir * state.speedStrike;
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
@@ -85,6 +78,22 @@ public class StrikeB2FSM : BaseState
             state.rb.velocity = dir * state.speedStrike;
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }            
+    }
+
+    public Vector2 Diraction()
+    {
+        var state = (FSMBoss2EnemySM)stateMachine;
+        var ani = state.animator;
+        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;        
+        if (dir.x < 0)
+        {
+            ani.ChangeAnimationAttack("Striking_L");
+        }
+        else
+        {
+            ani.ChangeAnimationAttack("Striking_R");
+        }
+        return dir;
     }
 
     public void RandomEdge()

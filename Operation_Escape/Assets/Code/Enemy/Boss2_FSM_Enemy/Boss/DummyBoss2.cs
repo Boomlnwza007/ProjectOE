@@ -72,16 +72,8 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
     public async UniTask Strike()
     {
         var state = boss2;
-        Vector2 dir = (state.ai.targetTransform.position - transform.position).normalized;
+        Vector2 dir = Diraction();
         colliderBoss.isTrigger = true;
-        if (dir.x < 0)
-        {
-            ani.ChangeAnimationAttack("Striking_L");
-        }
-        else
-        {
-            ani.ChangeAnimationAttack("Striking_R");
-        }
 
         sound.PlayMonAtk(0);
 
@@ -89,6 +81,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
         while (!inRoom)
         {
+            Diraction();
             rb.velocity = dir * state.speedStrike;
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
@@ -98,6 +91,21 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
             rb.velocity = dir * state.speedStrike;
             await UniTask.Yield(cancellationToken: cancellationToken.Token);
         }
+    }
+
+    public Vector2 Diraction()
+    {
+        var state = boss2;
+        Vector2 dir = (state.ai.targetTransform.position - transform.position).normalized;
+        if (dir.x < 0)
+        {
+            ani.ChangeAnimationAttack("Striking_L");
+        }
+        else
+        {
+            ani.ChangeAnimationAttack("Striking_R");
+        }
+        return dir;
     }
 
     public void RandomEdge()
