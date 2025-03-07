@@ -23,12 +23,15 @@ public class M3AttackFSM : BaseState
         cancellationToken = new CancellationTokenSource();
         var token = cancellationToken.Token;
         var state = (FSMMinion3EnemySM)stateMachine;
-        //var ani = state.animator;
+        var ani = state.animator;
 
         try
         {
-            state.Attack();
+            ani.ChangeAnimationAttack("Atk");
             await UniTask.WaitForSeconds(0.5f);
+            state.Attack(); 
+            ani.ChangeAnimationAttack("Idle");
+            await UniTask.WaitForSeconds(0.2f);
             ChangState(state.checkDistance);
         }
         catch (OperationCanceledException)

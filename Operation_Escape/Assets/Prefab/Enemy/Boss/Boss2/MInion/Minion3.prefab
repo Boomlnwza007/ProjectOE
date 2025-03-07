@@ -211,6 +211,8 @@ MonoBehaviour:
   rb: {fileID: 1072483864178654776}
   dropChange: 0
   jumpCenter: {fileID: 3654373423982788840}
+  deadBody: {fileID: 0}
+  animator: {fileID: 4422849570791061063}
 --- !u!95 &3148289689730808246
 Animator:
   serializedVersion: 5

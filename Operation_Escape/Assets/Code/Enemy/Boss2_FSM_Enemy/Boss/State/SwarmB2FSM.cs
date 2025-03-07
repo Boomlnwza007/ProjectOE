@@ -35,7 +35,7 @@ public class SwarmB2FSM : BaseState
             state.Jump(state.jumpCenter.position);
 
             state.SpawnEgg();
-            await UniTask.WaitForSeconds(3f);
+            await UniTask.WaitForSeconds(4.5f);
             final = true;
             await UniTask.WaitUntil(() => !final, cancellationToken: token);
 

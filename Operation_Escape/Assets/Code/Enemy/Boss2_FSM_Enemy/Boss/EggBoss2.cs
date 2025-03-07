@@ -13,6 +13,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
     public float time = 3;
     private float timer = 0;
     public bool imortal { get; set; }
+    public HeartSound sound;
 
     public void Die()
     {
@@ -53,6 +54,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
         timer += Time.deltaTime;
         if (timer >= time)
         {
+            sound.PlayMonAtk(0);
             switch (minionID)
             {
                 case 1:

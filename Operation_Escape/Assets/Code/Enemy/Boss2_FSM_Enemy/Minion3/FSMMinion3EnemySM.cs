@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FSMMinion3EnemySM : StateMachine , IDamageable
 {
-    BaseAnimEnemy animator;
+    public BaseAnimEnemy animator;
 
     [HideInInspector]
     public M3AttackFSM attack;

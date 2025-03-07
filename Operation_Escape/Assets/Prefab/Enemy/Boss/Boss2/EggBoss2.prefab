@@ -110,6 +110,7 @@ MonoBehaviour:
   minionID: 3
   minion2Count: 2
   time: 4
+  sound: {fileID: 1278143923235418389}
 --- !u!114 &4041182704391475761
 MonoBehaviour:
   m_ObjectHideFlags: 0

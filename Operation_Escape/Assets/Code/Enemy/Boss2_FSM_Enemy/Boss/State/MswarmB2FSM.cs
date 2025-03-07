@@ -56,6 +56,8 @@ public class MswarmB2FSM : BaseState
                 await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
             }
 
+            await UniTask.WaitForSeconds(1.5f, cancellationToken: token);
+
             while (FSMBoss2EnemySM.minionHave.Count > 0)
             {
                 await UniTask.Yield(cancellationToken: token);

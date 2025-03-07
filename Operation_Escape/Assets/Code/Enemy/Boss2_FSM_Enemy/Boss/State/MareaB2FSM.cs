@@ -80,7 +80,7 @@ public class MareaB2FSM : BaseState
             ani.ChangeAnimationAttack("Area_PreAttack");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             ani.ChangeAnimationAttack("Area_Attacking");
-            await UniTask.WaitForSeconds(0.5f);
+            await UniTask.WaitForSeconds(1.5f);
 
             while (FSMBoss2EnemySM.minionHave.Count > 0)
             {
