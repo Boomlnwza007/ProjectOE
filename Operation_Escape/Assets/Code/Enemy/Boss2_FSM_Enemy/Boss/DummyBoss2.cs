@@ -87,8 +87,13 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
         sound.PlayMonAtk(0);
 
         rb.velocity = dir * state.speedStrike;
-        await UniTask.WaitUntil(() => inRoom, cancellationToken: cancellationToken.Token);
-        
+
+        while (!state.inRoom)
+        {
+            state.rb.velocity = dir * state.speedStrike;
+            await UniTask.Yield(cancellationToken: cancellationToken.Token);
+        }
+
         while (inRoom)
         {
             rb.velocity = dir * state.speedStrike;
