@@ -44,6 +44,7 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
     public UIBoss uiBoss;
     public Collider2D colliderBoss;
     public AreaEnermy areaEnermy;
+    public bool facingStart;
 
     [Header("Animation")]
     [SerializeField] public Animator animator;
@@ -93,7 +94,10 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
             stateName = curState.nameState;
         }
 
-        DiractionAttack();
+        if (facingStart)
+        {
+            DiractionAttack();
+        }
     }
 
     public void CreatLaserGun()

@@ -37,6 +37,7 @@ public class IdleB1FSM : BaseState
     {
         var ani = ((FSMBoss1EnemySM)stateMachine).boss1AniControl;
         ani.ChangeAnimationAttack("ChangeState");
+        ((FSMBoss1EnemySM)stateMachine).facingStart = true;
         await UniTask.WaitUntil(() => ani.endAnim);
         ani.ChangeAnimationAttack("Wait");
         ai.canMove = true;
