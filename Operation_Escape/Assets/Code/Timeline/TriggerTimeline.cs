@@ -54,6 +54,7 @@ public class TriggerTimeline : MonoBehaviour
         systemControl.Cutscene(true);
         PlayerControl.control.EnableUI(true);
         PlayerControl.control.ShowGun(true);
+        PlayerControl.control.playerCombat.canFire = true;
         if (playAwake)
         {
             Actor.position = EndPos;
