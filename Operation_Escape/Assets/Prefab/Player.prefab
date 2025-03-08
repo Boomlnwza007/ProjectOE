@@ -2038,7 +2038,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 418206
+  m_InstanceId: -2622866
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -8927,6 +8927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  canHealth: 1
   maxHealth: 100
   healUseEnergy: 5
   collDownHealth: 3
@@ -9068,6 +9069,7 @@ MonoBehaviour:
   melee: {fileID: 8300000, guid: 1284e40d5098c1e449fcd762d8383a76, type: 3}
   dash:
   - {fileID: 8300000, guid: 0f7b75e3f8ebfaf4c85dcf3e1c2bc3e1, type: 3}
+  - {fileID: 8300000, guid: ef5bee62b3fd1e347866c471415e7fa3, type: 3}
   walk:
   - {fileID: 8300000, guid: b6257390b4b167c4e9da468cf95540d2, type: 3}
   - {fileID: 8300000, guid: 34d41f65a6dc0624abfc4e0c9e71ffbf, type: 3}
