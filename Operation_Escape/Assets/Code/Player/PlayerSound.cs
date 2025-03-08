@@ -33,6 +33,11 @@ public class PlayerSound : MonoBehaviour
 
     public void Playdash(int n)
     {
+        var roll = PlayerControl.control.playerMovement;
+        if (roll.rollCharge >= roll.maxRollCharge)
+        {
+            n = 1;
+        }
         AudioManager.audioManager.PlaySFX(dash[n]);
     }
 

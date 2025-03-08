@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 mousePos;
     private bool canDodge = true;
     private float rollSpeed;
-    private int maxRollCharge = 3;
+    public int maxRollCharge = 3;
     private float rollTimer;
     [HideInInspector] public int rollCharge;
 
