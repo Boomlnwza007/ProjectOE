@@ -14,9 +14,16 @@ public class EggBoss2 : MonoBehaviour , IDamageable
     private float timer = 0;
     public bool imortal { get; set; }
     public HeartSound sound;
+    public static List<EggBoss2> eggSpawn = new List<EggBoss2>();
+
+    private void Start()
+    {
+        eggSpawn.Add(this);
+    }
 
     public void Die()
     {
+        eggSpawn.Remove(this);
         Destroy(gameObject);
     }
 

@@ -15,7 +15,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
     [SerializeField]public string curStateName;
     public bool phase;
     public bool isInGound;
-    private DummyBoss2 dummy;
+    public DummyBoss2 dummy;
     [HideInInspector] public bool phaseStart;
     public HeartSound sound;
     public bool first;
@@ -113,23 +113,22 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
 
     public void Die()
     {
-        ////Instantiate(gunDrop, gameObject.transform.position, Quaternion.identity);
-        //if (areaEnermy != null)
-        //{
-        //    areaEnermy.Die(this);
-        //}
         areaEnermy.ClaerMonMinion();
         clearLight();
         Destroy(gameObject);
         SpawnGun();
-        Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
+        if (dummy == null)
+        {
+            Instantiate(deadBody, gameObject.transform.position, Quaternion.identity);
+        }
     }
 
     public override void ClearObj()
     {
         if (dummy != null)
         {
-            Destroy(dummy.gameObject);
+            dummy.Die();
+            //Destroy(dummy.gameObject);
         }
         clearLight();
     }
@@ -352,6 +351,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
         }
     }
 
+    [ContextMenu("spawndummy")]
     public DummyBoss2 SpawnDummy()
     {
         Vector2 dropPosition2;
@@ -360,6 +360,7 @@ public class FSMBoss2EnemySM : FSMBaseBoss2EnemySM, IDamageable
             dropPosition2 = (Vector2)transform.position + Random.insideUnitCircle * 8f;
         } while (Vector2.Distance(transform.position, dropPosition2) < 6f);
         dummy = Instantiate(dummyBoss, dropPosition2, Quaternion.identity).GetComponent<DummyBoss2>();
+        dummy.boss2 = this;
         return dummy;
     }
 

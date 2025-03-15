@@ -107,6 +107,12 @@ public class AreaEnermy : MonoBehaviour
                 }
             }
         }
+
+        for (int i = EggBoss2.eggSpawn.Count - 1; i >= 0; i--)
+        {
+            EggBoss2.eggSpawn[i].Die();
+        }
+        EggBoss2.eggSpawn.Clear();
     }
 
     public void ReItem()

@@ -11,9 +11,6 @@ public class MstrikeB2FSM : BaseState
     private CancellationTokenSource cancellationToken;
     public List<int> rNumber = new List<int> { 2, 3, 4 };
     public List<int> spawnPoint = new List<int> {0, 1, 2, 3};
-
-    private DummyBoss2 dummy;
-
     // Start is called before the first frame update
     public override void Enter()
     {
@@ -45,8 +42,7 @@ public class MstrikeB2FSM : BaseState
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
             state.Jump(state.jumpCenter.position);
             await UniTask.WaitForSeconds(1f, cancellationToken: token);
-            dummy = state.SpawnDummy();
-            dummy.boss2 = state;
+            state.dummy = state.SpawnDummy();
 
             switch (number)
             {
@@ -77,6 +73,7 @@ public class MstrikeB2FSM : BaseState
         var token = cancellationToken.Token;
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
+        var dummy = state.dummy;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 
         try
@@ -107,6 +104,7 @@ public class MstrikeB2FSM : BaseState
     {
         var state = (FSMBoss2EnemySM)stateMachine;
         var token = cancellationToken.Token;
+        var dummy = state.dummy;
 
         //await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
         await UniTask.WaitUntil(() => dummy.inRoom, cancellationToken: cancellationToken.Token);
@@ -129,6 +127,7 @@ public class MstrikeB2FSM : BaseState
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
+        var dummy = state.dummy;
 
         try
         {
@@ -173,6 +172,7 @@ public class MstrikeB2FSM : BaseState
         var state = (FSMBoss2EnemySM)stateMachine;
         var ani = state.animator;
         var sound = state.sound;
+        var dummy = state.dummy;
 
         //await UniTask.WaitForSeconds(1f, cancellationToken: token);
 

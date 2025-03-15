@@ -34,8 +34,9 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
         {
             sound.PlayPreAtk(0);
             ani.ChangeAnimationAttack("Strike");
-
+            imortal = true;
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
+            imortal = false;
             await Strike();
             RandomEdge();
             //for (int i = 0; i < 3; i++)
@@ -71,26 +72,35 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     public async UniTask Strike()
     {
-        var state = boss2;
-        Vector2 dir = Diraction();
-        colliderBoss.isTrigger = true;
-
-        sound.PlayMonAtk(0);
-
-        rb.velocity = dir * state.speedStrike;
-
-        while (!inRoom)
+        try
         {
-            Diraction();
-            rb.velocity = dir * state.speedStrike;
-            await UniTask.Yield(cancellationToken: cancellationToken.Token);
-        }
+            var state = boss2;
+            Vector2 dir = Diraction();
+            colliderBoss.isTrigger = true;
 
-        while (inRoom)
-        {
+            sound.PlayMonAtk(0);
+
             rb.velocity = dir * state.speedStrike;
-            await UniTask.Yield(cancellationToken: cancellationToken.Token);
+
+            while (!inRoom)
+            {
+                Diraction();
+                rb.velocity = dir * state.speedStrike;
+                await UniTask.Yield(cancellationToken: cancellationToken.Token);
+            }
+
+            while (inRoom)
+            {
+                rb.velocity = dir * state.speedStrike;
+                await UniTask.Yield(cancellationToken: cancellationToken.Token);
+            }
         }
+        catch (System.OperationCanceledException)
+        {
+            Debug.Log("Attack was cancelled.");
+            return;
+        }
+       
     }
 
     public Vector2 Diraction()
@@ -150,7 +160,7 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        cancellationToken.Cancel();
+        cancellationToken?.Cancel();
         Destroy(gameObject);
     }
 
@@ -161,20 +171,23 @@ public class DummyBoss2 : MonoBehaviour, IDamageable
 
     public void Takedamage(int damage, DamageType type, float knockBack)
     {
-        //boss2.Health -= damage;
-        //spriteFlash?.Flash();
-        //switch (type)
-        //{
-        //    case DamageType.Rang:
-        //        break;
-        //    case DamageType.Melee:
-        //        lootDrop.InstantiateLoot(0);
-        //        break;
-        //}
-        //if (boss2.Health <= 0)
-        //{
-        //    Die();
-        //}
+        if (imortal) return;      
+        boss2.Health -= damage;
+        spriteFlash?.Flash();
+        switch (type)
+        {
+            case DamageType.Rang:
+                break;
+            case DamageType.Melee:
+                lootDrop.InstantiateLoot(0);
+                break;
+        }
+        if (boss2.Health <= 0)
+        {
+            Die();
+            Instantiate(boss2.deadBody, gameObject.transform.position, Quaternion.identity);
+            boss2.Die();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
