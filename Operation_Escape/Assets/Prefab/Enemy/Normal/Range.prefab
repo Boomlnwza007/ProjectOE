@@ -318,6 +318,9 @@ MonoBehaviour:
   deadBody: {fileID: 1981662236219511894, guid: 4ed091daee6ad164db0c99ea3760c7ea, type: 3}
   bullet: {fileID: 4640713933992763453, guid: 1600d66847cfab747ad170f37004b054, type: 3}
   bulletTranform: {fileID: 2257339517205150815}
+  raycastMaskFire:
+    serializedVersion: 2
+    m_Bits: 576
   cooldown: 0
   timeCooldown: 2
   fireRate: 0.8
@@ -334,6 +337,7 @@ MonoBehaviour:
   jumpLength: 7
   radius: 13
   offset: 3
+  aimPlayer: 0
   dash: 0
   dodgeMaxSpeed: 50
   dodgeMinimium: 30

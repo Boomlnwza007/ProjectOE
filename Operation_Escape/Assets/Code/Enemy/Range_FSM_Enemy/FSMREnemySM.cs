@@ -10,6 +10,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     private GameObject bullet;
     [SerializeField]
     public Transform bulletTranform;
+    public LayerMask raycastMaskFire;
 
     [Header("status")]
     public bool cooldown;
@@ -29,6 +30,7 @@ public class FSMREnemySM : StateMachine, IDamageable
     private float timeCircle;
     public float radius = 13;
     public float offset = 2;
+    public bool aimPlayer;
 
     [Header("Dash")]
     public bool dash;
@@ -151,12 +153,11 @@ public class FSMREnemySM : StateMachine, IDamageable
     }
 
     public void Movement()
-    {
-        
+    {        
         if (Vector2.Distance(bulletTranform.position,target.position) < 15)
         {
             Vector2 dir = ai.targetTransform.position - transform.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 15,LayerMask.GetMask("Player"));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 15, raycastMaskFire);
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 timeCircle += Time.deltaTime;
@@ -173,7 +174,6 @@ public class FSMREnemySM : StateMachine, IDamageable
             else
             {
                 ai.destination = target.position;
-
             }
         }
         else

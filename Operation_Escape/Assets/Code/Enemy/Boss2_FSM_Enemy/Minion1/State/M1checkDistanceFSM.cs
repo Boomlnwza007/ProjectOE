@@ -9,7 +9,6 @@ public class M1checkDistanceFSM : BaseState
 {
     public M1checkDistanceFSM(FSMMinion1EnemySM stateMachine) : base("distance", stateMachine) { }
     public IAiAvoid ai;
-    private CancellationTokenSource cancellationToken;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -33,9 +32,4 @@ public class M1checkDistanceFSM : BaseState
         }
     }
 
-    public override void Exit()
-    {
-        // Cancel the attack when exiting the state
-        cancellationToken?.Cancel();
-    }
 }

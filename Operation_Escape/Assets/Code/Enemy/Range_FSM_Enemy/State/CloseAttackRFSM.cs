@@ -10,7 +10,6 @@ public class CloseAttackRFSM : BaseState
     public CloseAttackRFSM(FSMREnemySM stateMachine) : base("CloseAttack", stateMachine) { }
     public IAiAvoid ai;
     public float speed;
-    public bool go;
     bool dash;
     private CancellationTokenSource cancellationToken;
 
@@ -18,9 +17,7 @@ public class CloseAttackRFSM : BaseState
     // Start is called before the first frame update
     public override void Enter()
     {
-        go = false;
         cancellationToken = new CancellationTokenSource();
-
         var state = (FSMREnemySM)stateMachine;
         if (state.cooldown)
         {
@@ -30,7 +27,6 @@ public class CloseAttackRFSM : BaseState
 
         ai = ((FSMREnemySM)stateMachine).ai;
 
-        Debug.Log("ตั้งท่าเตรียมโจมตี CloseAttack");
         Attack(cancellationToken.Token).Forget();
 
     }
@@ -61,9 +57,10 @@ public class CloseAttackRFSM : BaseState
             ai.canMove = true;
 
             state.Walk();
+            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             state.cooldown = true;
             state.animator.isFacing = true;
-            stateMachine.ChangState(state.checkDistanceState);
+            ChangState(state.checkDistanceState);
         }
         catch (OperationCanceledException)
         {
