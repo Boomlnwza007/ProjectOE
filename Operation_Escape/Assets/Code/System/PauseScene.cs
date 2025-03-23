@@ -95,6 +95,7 @@ public class PauseScene : MonoBehaviour
 
         onmenuAfterDie = !onmenuAfterDie;
         PlayerControl.control.EnableInput(!onmenuAfterDie);
+        PlayerControl.control.EnableUI(!onmenuAfterDie);
 
         menuAfterDie.SetActive(onmenuAfterDie);
         if (onmenuAfterDie)
