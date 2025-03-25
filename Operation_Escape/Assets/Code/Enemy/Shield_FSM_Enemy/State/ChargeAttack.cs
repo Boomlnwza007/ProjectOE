@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 
@@ -11,8 +12,8 @@ public class ChargeAttack : BaseState
     public ChargeAttack(FSMSEnemySM stateMachine) : base("chargeAttState", stateMachine) { }
     public IAiAvoid ai;
     private CancellationTokenSource cancellationToken;
-    private float time;
-    private bool first;
+    public Vector3 target;
+    public bool dash;
 
     // Start is called before the first frame update
     public override void Enter()
@@ -20,7 +21,36 @@ public class ChargeAttack : BaseState
         var state = (FSMSEnemySM)stateMachine;
         ai = ((FSMSEnemySM)stateMachine).ai;
         ai.destination = ai.targetTransform.position;
-        Attack().Forget();
+        if (!CheckWay())
+        {
+            ChangState(state.checkDistanceState);
+        }
+        else
+        {
+            ai.canMove = false;
+            dash = false;
+            Attack().Forget();
+        }
+    }
+
+    public bool CheckWay()
+    {
+        var state = (FSMSEnemySM)stateMachine;
+        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
+        RaycastHit2D raycast = Physics2D.Raycast(ai.position, dir, state.jumpLength, state.raycastMaskWalk);
+        if (raycast.collider != null && raycast.collider.CompareTag("Player"))
+        {
+            target = ai.targetTransform.position;
+        }
+        return raycast.collider != null && raycast.collider.CompareTag("Player");
+    }
+
+    public override void UpdateLogic()
+    {
+        if (dash)
+        {
+            DashStart();
+        }
     }
 
     public async UniTask Attack()
@@ -30,49 +60,39 @@ public class ChargeAttack : BaseState
         var state = (FSMSEnemySM)stateMachine;
         var ani = state.animator;
 
-
-        time = 0;
-
         try
         {
             state.shield.ShieldIsOn(false);
-            ai.canMove = false;
-            //ani.isFacing = false;
             ani.animator.speed = 0;
             ani.ChangeAnimationAttack("PreDash");
-            ani.isFacing = false;
-            await UniTask.WaitForSeconds(2f , cancellationToken: token);
-            ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
-            await Charge();
+            await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            CheckWay();
+            Dash();
+            await UniTask.WaitUntil(() => !dash, cancellationToken: token);
+            state.rb.velocity = Vector2.zero; 
+            ani.ChangeAnimationAttack("Dash");
             await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-            ani.isFacing = true;
-            ani.ChangeAnimationAttack("IdleNS");
-            await UniTask.DelayFrame(1);
-
 
             if (!state.shield.canGuard)
             {
-                ai.canMove = false;
-                //ani.isFacing = false;
+                ani.isFacing = true;
                 ani.animator.speed = 0;
                 ani.ChangeAnimationAttack("PreDash");
-                ani.isFacing = false;
                 await UniTask.WaitForSeconds(1f, cancellationToken: token);
-                ai.destination = CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
-                await Charge();
+                CheckWay();
+                Dash();
+                await UniTask.WaitUntil(() => !dash, cancellationToken: token);
+                state.rb.velocity = Vector2.zero;
+                ani.ChangeAnimationAttack("Dash");
                 await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
-                ani.isFacing = true;
             }
 
-            ani.animator.speed = 1;
-            state.Walk();
-            ai.canMove = false;
-            await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             ani.ChangeAnimationAttack("IdleNS");
+            ani.isFacing = true;
             await UniTask.WaitForSeconds(2f, cancellationToken: token);
+            Cooldown(state.shield.canGuard ? 4 : 2).Forget();
             state.shield.ShieldIsOn(true);
-            float timeCooldown = state.shield.canGuard ? 4 : 2;
-            Cooldown(timeCooldown).Forget();
+            ai.canMove = true;
             ChangState(state.checkDistanceState);
 
         }
@@ -83,75 +103,40 @@ public class ChargeAttack : BaseState
         }
     }
 
-    public Vector2 CalculateDestination(Vector2 currentPosition, Vector2 targetPosition, float jumpLength, LayerMask mask)
+    public void DashStart()
     {
-        Vector2 direction = (targetPosition - currentPosition).normalized;
-        RaycastHit2D[] raycast = Physics2D.RaycastAll(currentPosition, direction, jumpLength, mask);
-
-        foreach (var hit in raycast)
+        var state = ((FSMSEnemySM)stateMachine);
+        Vector2 dir = (target - ai.position).normalized;
+        Collider2D[] raycastCircle = Physics2D.OverlapCircleAll(ai.position, 1.5f, state.raycastMask);
+        RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.dodgeStopRange, state.raycastMaskWay);
+        if (raycast.Length > 0 || raycastCircle.Any(item => item.gameObject != state.gameObject))
         {
-            if (hit.collider != null && hit.collider.gameObject != stateMachine.gameObject)
-            {
-                return hit.point;
-            }
+            state.rollSpeed = state.dodgeMinimium;
+            dash = false;
+            state.rb.velocity = Vector2.zero;
         }
 
-        Debug.DrawLine(currentPosition, currentPosition + (direction * jumpLength), Color.green, 2f);
-        return currentPosition + (direction * jumpLength);
+        state.rollSpeed -= state.rollSpeed * state.dodgeSpeedDropMultiplier * Time.deltaTime;
+        if (state.rollSpeed < state.dodgeMinimium)
+        {
+            dash = false;
+            state.rb.velocity = Vector3.zero;
+        }
+
+        state.rb.velocity = dir * state.rollSpeed;
     }
 
-    public async UniTask Charge()
+    public void Dash()
     {
-        var token = cancellationToken.Token;
-        var state = (FSMSEnemySM)stateMachine;
-        bool hasAttacked = false;
-        var ani = state.animator;     
-        
-        state.Walk();
-        ai.canMove = true;
-        state.Run(5);
-        ani.animator.speed = 1;
-
-        while (time < 10 && !hasAttacked)//Edit Time Run 
-        {
-            time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
-            {
-                //Debug.Log("ai.endMove");
-
-                ai.canMove = false;
-                ai.monVelocity = Vector2.zero;
-                state.Walk();
-                ani.ChangeAnimationAttack("Dash");
-                Debug.Log("Attack");
-
-                hasAttacked = true;
-                //state.animator.isFacing = true;
-                break;
-            }
-
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-            foreach (var hit in colliders)
-            {
-                if (hit.gameObject != state.gameObject)
-                {
-                    Debug.Log(hit.name + "hit 2 ");
-
-                    ai.canMove = false;
-                    ai.monVelocity = Vector2.zero;
-                    state.Walk();
-                    ani.ChangeAnimationAttack("Dash");
-                    Debug.Log("Attack");
-
-                    hasAttacked = true;
-                    //state.animator.isFacing = true;
-                    break;
-                }
-            }
-            token.ThrowIfCancellationRequested();
-            await UniTask.Yield();
-        }
-
+        var state = ((FSMSEnemySM)stateMachine);
+        state.animator.isFacing = false;
+        float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
+        bool isFacingRight = angle > -90 && angle < 90;
+        state.animator.animator.SetBool("IsRight", isFacingRight);
+        state.animator.animator.SetFloat("horizon", isFacingRight ? 1 : -1);
+        dash = true;
+        state.rollSpeed = state.dodgeMaxSpeed;
+        state.animator.animator.speed = 1;
     }
 
     public async UniTaskVoid Cooldown(float time)

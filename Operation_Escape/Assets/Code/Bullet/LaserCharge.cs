@@ -99,6 +99,7 @@ public class LaserCharge : MonoBehaviour
 
                 ObjIner?.Interact(DamageType.Rang);
             }
+
             if (hitInfo.collider.TryGetComponent(out GuardShield guard))
             {
                 guard.BreakShield();

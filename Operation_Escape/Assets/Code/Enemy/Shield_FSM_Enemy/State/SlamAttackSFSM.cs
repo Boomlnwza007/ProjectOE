@@ -20,6 +20,15 @@ public class SlamAttackSFSM : BaseState
         Attack().Forget();
     }
 
+    public override void UpdateLogic()
+    {
+        var chargeAttack = ((FSMSEnemySM)stateMachine).chargeAttState;
+        if (chargeAttack.dash)
+        {
+            chargeAttack.DashStart();
+        }
+    }
+
     public async UniTask Attack()
     {
         cancellationToken = new CancellationTokenSource();
@@ -35,29 +44,27 @@ public class SlamAttackSFSM : BaseState
             //await UniTask.WaitForSeconds(2f, cancellationToken: token);
             ani.ChangeAnimationAttack("GPush");
             await UniTask.WaitUntil(() => ani.endAnim, cancellationToken: token);
-            ani.ChangeAnimationAttack("IdleNS");
 
             if (!state.shield.canGuard)
             {
+                var chargeAttack = ((FSMSEnemySM)stateMachine).chargeAttState;
+                ani.isFacing = true;
                 ai.canMove = false;
-                ani.isFacing = false;
-                ai.destination = state.chargeAttState.CalculateDestination(ai.position, ai.targetTransform.position, state.jumpLength, state.raycastMaskWay);
                 ani.animator.speed = 0;
                 ani.ChangeAnimationAttack("PreDash");
                 await UniTask.WaitForSeconds(1f, cancellationToken: token);
-
-                await Charge();
-
-                await UniTask.WaitForSeconds(1, cancellationToken: token);
-                ani.ChangeAnimationAttack("IdleNS");
-                ani.isFacing = true;
-                await UniTask.WaitForSeconds(1, cancellationToken: token);
+                chargeAttack.CheckWay();
+                chargeAttack.Dash();
+                await UniTask.WaitUntil(() => !chargeAttack.dash, cancellationToken: token);
+                state.rb.velocity = Vector2.zero;
+                ani.ChangeAnimationAttack("Dash");
+                await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
             }
 
+            ani.ChangeAnimationAttack("IdleNS");
             await UniTask.WaitForSeconds(2, cancellationToken: token);
             state.shield.ShieldIsOn(true);
             Cooldown(state.shield.canGuard ? 4 : 2).Forget();
-
             ChangState(state.checkDistanceState);
         }
         catch (OperationCanceledException)
@@ -73,52 +80,7 @@ public class SlamAttackSFSM : BaseState
         state.cooldownSlamAttack = true;
         await UniTask.WaitForSeconds(time);
         state.cooldownSlamAttack = false;
-    }
-
-    public async UniTask Charge()
-    {
-        var token = cancellationToken.Token;
-        var state = (FSMSEnemySM)stateMachine;
-        bool hasAttacked = false;
-        var ani = state.animator;
-        float time = 0;
-
-        state.Walk();
-        ai.canMove = true;
-        state.Run(5);
-        ani.animator.speed = 1;
-
-        while (time < 10 && !hasAttacked)//Edit Time Run 
-        {
-            time += Time.deltaTime;
-            if (Vector2.Distance(ai.destination, ai.position) < 2f && ai.endMove)
-            {
-                //Debug.Log("ai.endMove");
-                ani.ChangeAnimationAttack("Dash");
-                Debug.Log("Attack");
-                hasAttacked = true;
-                //state.animator.isFacing = true;
-                break;
-            }
-
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(ai.position, 2f, state.raycastMask);
-            foreach (var hit in colliders)
-            {
-                if (hit.gameObject != state.gameObject)
-                {
-                    Debug.Log(hit.name + "hit 2 ");
-                    ani.ChangeAnimationAttack("Dash");
-                    Debug.Log("Attack");
-                    hasAttacked = true;
-                    //state.animator.isFacing = true;
-                    break;
-                }
-            }
-            token.ThrowIfCancellationRequested();
-            await UniTask.Yield();
-        }
-
-    }
+    }   
 
     public override void Exit()
     {

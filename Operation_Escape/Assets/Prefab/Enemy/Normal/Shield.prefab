@@ -62,8 +62,8 @@ Transform:
   m_GameObject: {fileID: 2982920950874795044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.8827, y: 1.4914, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5254160790491660108}
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidRadius: 3
   rayLength: 2
-  rayLengthLR: 1
+  rayLengthLR: 2.5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32832
@@ -552,8 +552,11 @@ MonoBehaviour:
   stun: 0
   timeStunCooldown: 2
   timeStun: 0
-  radius: 10
+  radius: 2
   offset: 2
+  raycastMaskWalk:
+    serializedVersion: 2
+    m_Bits: 33344
   raycastMaskWay:
     serializedVersion: 2
     m_Bits: 32832
@@ -562,6 +565,12 @@ MonoBehaviour:
     m_Bits: 640
   jumpLength: 20
   forcePush: 100
+  dash: 0
+  dodgeMaxSpeed: 60
+  dodgeMinimium: 40
+  dodgeSpeedDropMultiplier: 1.5
+  dodgeStopRange: 1
+  rollSpeed: 0
   shield: {fileID: 9136803762061904664}
 --- !u!70 &1983402571418764075
 CapsuleCollider2D:
@@ -966,7 +975,7 @@ MonoBehaviour:
   - {x: -0.5039787, y: -0.16078568, z: 0}
   m_ShapePathHash: -29996243
   m_Mesh: {fileID: 0}
-  m_InstanceId: 132758
+  m_InstanceId: -29094
   m_LocalBounds:
     m_Center: {x: -0.0033693314, y: -0.0011315346, z: 0}
     m_Extent: {x: 0.7539568, y: 0.2255845, z: 0}
@@ -1018,9 +1027,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7409186701920477614, guid: 1af28328bf13fd74fbc2594b1b9e19d8, type: 3}
+      propertyPath: m_CallbackLayers.m_Bits
+      value: 49143
+      objectReference: {fileID: 0}
+    - target: {fileID: 7409186701920477614, guid: 1af28328bf13fd74fbc2594b1b9e19d8, type: 3}
+      propertyPath: m_ContactCaptureLayers.m_Bits
+      value: 49143
+      objectReference: {fileID: 0}
     - target: {fileID: 8285305277117430483, guid: 1af28328bf13fd74fbc2594b1b9e19d8, type: 3}
       propertyPath: m_Name
       value: SH
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285305277117430483, guid: 1af28328bf13fd74fbc2594b1b9e19d8, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

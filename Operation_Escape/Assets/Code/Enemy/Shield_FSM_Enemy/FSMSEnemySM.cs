@@ -22,12 +22,19 @@ public class FSMSEnemySM : StateMachine, IDamageable
     private float timeCircle;
     public float radius = 10;
     public float offset = 2;
+    public LayerMask raycastMaskWalk;
 
     [Header("Charge")]
     public LayerMask raycastMaskWay;
     public LayerMask raycastMask;
     public float jumpLength = 20;
     public float forcePush = 100;
+    public bool dash;
+    public float dodgeMaxSpeed = 50f;
+    public float dodgeMinimium = 30f;
+    public float dodgeSpeedDropMultiplier = 5f;
+    public float dodgeStopRange = 5f;
+    [HideInInspector] public float rollSpeed;
 
     [Header("shild")]
     [SerializeField]public GuardShield shield;
@@ -129,18 +136,32 @@ public class FSMSEnemySM : StateMachine, IDamageable
 
     public void Movement()
     {
-
-            timeCircle += Time.deltaTime;
-            var normal = (ai.position - target.position).normalized;
-            if (timeCircle > 3)
+        if (Vector2.Distance(transform.position, target.position) < 10)
+        {
+            Vector2 dir = target.position - transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 15, raycastMaskWalk);
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                int randomValue = Random.Range(0, 2) * 2 - 1;
-                offset *= randomValue;
-                timeCircle = 0;
-                radius = Random.Range(5, 6);
+                timeCircle += Time.deltaTime;
+                Vector2 normal = (ai.position - target.position).normalized;
+                if (timeCircle > 3)
+                {
+                    offset *= -1;
+                    timeCircle = 0;
+                    radius = Mathf.Lerp(radius, Random.Range(5, 10), 0.5f);
+                }
+                Vector2 tangent = new Vector2(-normal.y, normal.x);
+                ai.destination = (Vector2)target.position + normal * radius + tangent * offset;
             }
-            var tangent = Vector3.Cross(normal, new Vector3(0, 0, 1));
-            ai.destination = target.position + normal * radius + tangent * offset;
+            else
+            {
+                ai.destination = target.position;
+            }
+        }
+        else
+        {
+            ai.destination = target.position;
+        }      
         
     }
 

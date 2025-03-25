@@ -41,7 +41,6 @@ public class CheckDistanceSFSM : BaseState
             {
                 state.Movement();
             }
-            Debug.Log(state.cooldownSlamAttack);
         }
         else
         {

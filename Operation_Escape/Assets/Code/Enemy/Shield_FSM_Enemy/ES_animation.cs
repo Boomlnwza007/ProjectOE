@@ -30,9 +30,9 @@ public class ES_animation : BaseAnimEnemy
         if (isFacing)
         {
             animator.SetBool("IsRight", isFacingRight);
-        }
+            animator.SetFloat("horizon", isFacingRight ? 1 : -1);
 
-        animator.SetFloat("horizon", isFacingRight ? 1 : -1);
+        }
 
         if (rb.velocity != Vector2.zero && !ai.endMove)
         {
