@@ -850,7 +850,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6029607850234138316}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetSFXVolume
         m_Mode: 1
@@ -1781,7 +1781,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6029607850234138316}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetMainVolume
         m_Mode: 1
@@ -1956,7 +1956,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6029607850234138316}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 1
@@ -2246,7 +2246,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6029607850234138316}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetAmbientVolume
         m_Mode: 1
@@ -2839,7 +2839,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6029607850234138316}
         m_TargetAssemblyTypeName: AudioSetting, Assembly-CSharp
         m_MethodName: SetEnemyVolume
         m_Mode: 1
