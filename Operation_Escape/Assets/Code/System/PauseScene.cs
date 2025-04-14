@@ -74,6 +74,7 @@ public class PauseScene : MonoBehaviour
             PlayerControl.control.playerState.canHealth = false;
         }
         PlayerControl.control.EnableInput(!onPauseMenu);
+
         menuPause.SetActive(onPauseMenu);
         if (onPauseMenu)
         {
@@ -132,6 +133,7 @@ public class PauseScene : MonoBehaviour
         retrying = true;
         ControlScene.scene.LoadScene = true;
         PlayerControl.control.EnableInput(false);
+        PlayerControl.control.EnableUI(false);
         CinemachineControl.Instance.cancameraMove = false;
         yield return new WaitForSeconds(1f);
         ControlScene.scene.animator.speed = 1;
@@ -168,6 +170,7 @@ public class PauseScene : MonoBehaviour
         retrying = false;
         ControlScene.scene.LoadScene = false;
         PlayerControl.control.EnableInput(true);
+        PlayerControl.control.EnableUI(true);
         CinemachineControl.Instance.cancameraMove = true;
         ControlScene.scene.PlayAnimation();
         PlayerControl.control.isdaed = false;
