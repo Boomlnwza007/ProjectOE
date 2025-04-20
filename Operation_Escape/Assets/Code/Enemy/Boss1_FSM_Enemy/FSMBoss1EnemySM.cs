@@ -180,6 +180,16 @@ public class FSMBoss1EnemySM : StateMachine, IDamageable
         }
     }
 
+    //[ContextMenu("LaserFIn")]
+    //public async UniTask LaserFollowIn()
+    //{
+    //    await UniTask.WhenAll(ShootLaserFollowIn(1f, 3f, 1, 4.5f, 7.5f), RangeFollow(1f));
+    //    DelLaserGun();
+
+    //    await UniTask.WaitForSeconds(1);
+    //    LaserFollowIn().Forget();
+    //}
+
     public async UniTask ShootLaserFollowIn(float charge, float duration, float speedMulti, float Atime, float speedRot)
     {
         CreatLaserGunFollow();
