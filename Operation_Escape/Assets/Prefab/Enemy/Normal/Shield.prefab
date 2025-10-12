@@ -469,7 +469,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   smoothTime: 0.3
-  speed: 15
+  speed: 9
   stopRadiusOn: 0
   slowDownRadius: 5
   stopRadius: 2
@@ -532,8 +532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 3
-  maxHealth: 80
-  Health: 80
+  maxHealth: 70
+  Health: 70
   dmg: 20
   Speed: 9
   visRange: 30

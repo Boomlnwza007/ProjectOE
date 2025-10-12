@@ -652,14 +652,14 @@ MonoBehaviour:
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 2128694304809498545}
   aimDistance: 1.235
-  fireRate: 1.969219
+  fireRate: 0
   timeReload: 1
   maxFireRate: 1
   ammo: 0
   maxAmmo: 5
-  energyUse: 6
+  energyUse: 4
   canSpecial: 0
-  firing: 0
+  firing: 1
   canUltimate: 0
   timeUltimate: 5
   sound: {fileID: 11400000, guid: 338238b194123e84ead609b6d0601d7e, type: 2}

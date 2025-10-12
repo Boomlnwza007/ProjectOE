@@ -1038,13 +1038,13 @@ MonoBehaviour:
   iconGun: {fileID: 21300000, guid: 313941e8dba263d499d93706b426b265, type: 3}
   bulletTranform: {fileID: 0}
   aimTranform: {fileID: 5693397721559973199}
-  aimDistance: 0
+  aimDistance: 1.16
   fireRate: 0
   timeReload: 1
   maxFireRate: 0.5
-  ammo: 6
+  ammo: 1
   maxAmmo: 6
-  energyUse: 5
+  energyUse: 4
   canSpecial: 0
   firing: 1
   canUltimate: 0
