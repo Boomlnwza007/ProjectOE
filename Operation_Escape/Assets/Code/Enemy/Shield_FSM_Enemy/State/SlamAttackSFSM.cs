@@ -59,6 +59,7 @@ public class SlamAttackSFSM : BaseState
                 state.rb.velocity = Vector2.zero;
                 ani.ChangeAnimationAttack("Dash");
                 await UniTask.WaitForSeconds(0.5f, cancellationToken: token);
+                ani.isFacing = true;
             }
 
             ani.ChangeAnimationAttack("IdleNS");

@@ -19,7 +19,7 @@ public class ChargeAttack : BaseState
     public override void Enter()
     {
         var state = (FSMSEnemySM)stateMachine;
-        ai = ((FSMSEnemySM)stateMachine).ai;
+        ai = state.ai;
         ai.destination = ai.targetTransform.position;
         if (!CheckWay())
         {
@@ -36,11 +36,12 @@ public class ChargeAttack : BaseState
     public bool CheckWay()
     {
         var state = (FSMSEnemySM)stateMachine;
-        Vector2 dir = (ai.targetTransform.position - ai.position).normalized;
-        RaycastHit2D raycast = Physics2D.Raycast(ai.position, dir, state.jumpLength, state.raycastMaskWalk);
+        ai = state.ai;
+        Vector2 dir = (state.ai.targetTransform.position - state.ai.position).normalized;
+        RaycastHit2D raycast = Physics2D.Raycast(state.ai.position, dir, state.jumpLength, state.raycastMaskWalk);
         if (raycast.collider != null && raycast.collider.CompareTag("Player"))
         {
-            target = ai.targetTransform.position;
+            target = state.ai.targetTransform.position;
         }
         return raycast.collider != null && raycast.collider.CompareTag("Player");
     }
@@ -59,6 +60,7 @@ public class ChargeAttack : BaseState
         var token = cancellationToken.Token;
         var state = (FSMSEnemySM)stateMachine;
         var ani = state.animator;
+        ai = state.ai;
 
         try
         {
@@ -106,6 +108,8 @@ public class ChargeAttack : BaseState
     public void DashStart()
     {
         var state = ((FSMSEnemySM)stateMachine);
+        ai = state.ai;
+
         Vector2 dir = (target - ai.position).normalized;
         Collider2D[] raycastCircle = Physics2D.OverlapCircleAll(ai.position, 1.5f, state.raycastMask);
         RaycastHit2D[] raycast = Physics2D.RaycastAll(ai.position, dir, state.dodgeStopRange, state.raycastMaskWay);
@@ -129,6 +133,8 @@ public class ChargeAttack : BaseState
     public void Dash()
     {
         var state = ((FSMSEnemySM)stateMachine);
+        ai = state.ai;
+
         state.animator.isFacing = false;
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
         bool isFacingRight = angle > -90 && angle < 90;
