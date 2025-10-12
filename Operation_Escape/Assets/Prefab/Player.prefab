@@ -2038,7 +2038,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 794186
+  m_InstanceId: 796748
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -4862,7 +4862,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9020,7 +9020,7 @@ MonoBehaviour:
   health: 100
   canHealth: 1
   maxHealth: 100
-  healUseEnergy: 4
+  healUseEnergy: 3
   collDownHealth: 3
 --- !u!114 &8600667175816881253
 MonoBehaviour:
