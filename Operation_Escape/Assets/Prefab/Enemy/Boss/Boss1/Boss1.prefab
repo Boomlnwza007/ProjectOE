@@ -26298,9 +26298,9 @@ MonoBehaviour:
   fireRate: 0.7
   stateName: 
   uiBoss: {fileID: 1622645830190059736}
-  gunDrop: {fileID: 6993148821742251366, guid: ef9f87c05a1aaae4f89b509d7eab4314, type: 3}
   colliderBoss: {fileID: 6807547225655466880}
   areaEnermy: {fileID: 0}
+  facingStart: 0
   animator: {fileID: 3544962096193456687}
   boss1AniControl: {fileID: 323760578986285259}
   isFacing: 0
@@ -37189,7 +37189,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_LocalScale: {x: 27, y: 27, z: 27}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3982736631046650073}
