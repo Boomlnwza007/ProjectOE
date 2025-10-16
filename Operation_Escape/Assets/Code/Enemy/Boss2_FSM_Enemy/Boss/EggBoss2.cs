@@ -16,14 +16,19 @@ public class EggBoss2 : MonoBehaviour , IDamageable
     public HeartSound sound;
     public static List<EggBoss2> eggSpawn = new List<EggBoss2>();
 
-    private void Start()
+    private void Awake()
     {
         eggSpawn.Add(this);
     }
+    //private void Start()
+    //{
+    //    eggSpawn.Add(this);
+    //}
 
     public void Die()
     {
         eggSpawn.Remove(this);
+
         Destroy(gameObject);
     }
 
@@ -77,7 +82,8 @@ public class EggBoss2 : MonoBehaviour , IDamageable
                     SpawnM3();
                     break;
             }
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            Die();
         }
     }
 
@@ -89,6 +95,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
             StateMachine m1 = Instantiate(minion.Item[0], dropPosition, Quaternion.identity).GetComponent<StateMachine>();
             FSMBoss2EnemySM.minionHave.Add(m1);
         }
+        
     }
 
     public void SpawnM2()
@@ -111,6 +118,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
         StateMachine m2 = Instantiate(minion.Item[1], dropPosition2, Quaternion.identity).GetComponentInChildren<StateMachine>();
         Debug.Log(m2.name);
         FSMBoss2EnemySM.minionHave.Add(m2);
+        
     }
 
     public void SpawnM3()
@@ -121,6 +129,7 @@ public class EggBoss2 : MonoBehaviour , IDamageable
             StateMachine m3 = Instantiate(minion.Item[2], dropPosition, Quaternion.identity).GetComponent<StateMachine>();
             FSMBoss2EnemySM.minionHave.Add(m3);
         }
+        
     }
 
 }

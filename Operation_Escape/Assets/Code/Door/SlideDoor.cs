@@ -17,6 +17,7 @@ public class SlideDoor : TypeDoor
     private Vector3 targetDoorSPosition;
     private bool isOpen;
     private bool isClose;
+    public GameObject BlockDoor;
 
     private void Awake()
     {
@@ -41,9 +42,11 @@ public class SlideDoor : TypeDoor
 
     public override void Locking(bool locked)
     {
+        BlockDoor.SetActive(locked);
         if (locked)
         {
             speedMultiply = multiplySpeedLock;
+            
         }
         else
         {
