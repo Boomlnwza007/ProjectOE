@@ -53,8 +53,14 @@ public class PlayerState : MonoBehaviour, IDamageable , IEnergy
 
     public void Die()
     {
-        PlayerControl.control.isdaed = true;
-        PlayerControl.control.ShowGameOver();
+        var playerControl = PlayerControl.control;
+        var playerCombat = playerControl.playerCombat;
+
+        playerControl.isdaed = true;
+        playerControl.ShowGameOver();
+
+        playerCombat.gunList[playerCombat.currentGun].Remove();
+        playerCombat.gunList[playerCombat.currentGun].Exit();
     }
 
     public IEnumerator Imortal(float wait)
