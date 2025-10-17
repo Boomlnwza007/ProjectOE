@@ -433,7 +433,7 @@ MonoBehaviour:
   doorL: {fileID: 7527597836417537825}
   doorR: {fileID: 817681664196923138}
   speed: 7
-  multiplySpeedLock: 200
+  multiplySpeedLock: 2.5
   sizeDoor: 3
   isLR: 1
   BlockDoor: {fileID: 6257108416029809514}

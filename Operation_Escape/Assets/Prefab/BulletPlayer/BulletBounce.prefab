@@ -234,9 +234,10 @@ MonoBehaviour:
   useCustomColors: 0
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 0, g: 0.5211234, b: 1, a: 1}
+  maxBound: 3
   start3Color: {r: 1, g: 1, b: 1, a: 1}
-  mid3Color: {r: 1, g: 0, b: 0.88550186, a: 1}
-  end3Color: {r: 0, g: 0.40823364, b: 1, a: 1}
+  mid3Color: {r: 0.25943398, g: 1, b: 0.25943398, a: 1}
+  end3Color: {r: 0, g: 0.9736638, b: 1, a: 1}
   targetSprite: {fileID: 312715687427346484}
 --- !u!50 &6217334650056492268
 Rigidbody2D:
