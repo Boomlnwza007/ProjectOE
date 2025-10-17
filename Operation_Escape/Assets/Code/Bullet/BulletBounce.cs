@@ -50,6 +50,8 @@ public class BulletBounce : BaseBullet
         if(collision.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             bounceCount++;
+            SetColorByValue(bounceCount, 1, 3);
+
             if (bounceCount > maxBunceCount)
             {
                 if (!ultimate)
@@ -58,18 +60,23 @@ public class BulletBounce : BaseBullet
                     Expo();
                     return;
                 }
+                else
+                {
+                    useCustomColors = true;
+                    SetColorByValue(bounceCount, 1, maxBound);
+                }
             }
 
             if (!ultimate)
             {
                 damage *= 2;
-                SetColorByValue(bounceCount, 1, 3);
             }
             else
             {
                 damage += 10;
-                SetColorByValue(bounceCount, 1, maxBound);
             }
+
+            
         }
     }
 
