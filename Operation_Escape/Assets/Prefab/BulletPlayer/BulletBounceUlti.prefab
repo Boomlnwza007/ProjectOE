@@ -258,12 +258,13 @@ MonoBehaviour:
   bounceCount: 0
   timer: 3
   value: 0
-  useCustomColors: 1
+  useCustomColors: 0
   startColor: {r: 1, g: 1, b: 1, a: 1}
-  endColor: {r: 0, g: 1, b: 1, a: 1}
+  endColor: {r: 0.2216981, g: 0.36514986, b: 1, a: 1}
+  maxBound: 7
   start3Color: {r: 1, g: 1, b: 1, a: 1}
-  mid3Color: {r: 1, g: 0, b: 0.9194479, a: 1}
-  end3Color: {r: 0, g: 0.08237839, b: 1, a: 1}
+  mid3Color: {r: 0.2216981, g: 1, b: 0.47242638, a: 1}
+  end3Color: {r: 0, g: 1, b: 0.9781742, a: 1}
   targetSprite: {fileID: 312715687427346484}
 --- !u!58 &7476191367082400857
 CircleCollider2D:
