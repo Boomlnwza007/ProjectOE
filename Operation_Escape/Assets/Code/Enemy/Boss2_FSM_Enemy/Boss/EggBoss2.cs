@@ -28,7 +28,6 @@ public class EggBoss2 : MonoBehaviour , IDamageable
     public void Die()
     {
         eggSpawn.Remove(this);
-
         Destroy(gameObject);
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AreaEnermy : MonoBehaviour
@@ -112,6 +113,24 @@ public class AreaEnermy : MonoBehaviour
             }
         }
 
+        foreach (var EggBoss2 in EggBoss2.eggSpawn.ToList())
+        {
+            Destroy(EggBoss2);
+        }
+        EggBoss2.eggSpawn.Clear();
+
+        //Collider2D[] eggBoss2gameObject = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0, enemyleLayer);
+        //foreach (var item in enemygameObject)
+        //{
+
+        //}
+        
+
+        //for (int i = EggBoss2.eggSpawn.Count - 1; i >= 0; i--)
+        //{
+        //    EggBoss2.eggSpawn[i].Die();
+        //}
+        //EggBoss2.eggSpawn.Clear();
         //for (int i = EggBoss2.eggSpawn.Count - 1; i >= 0; i--)
         //{
         //    EggBoss2.eggSpawn[i].Die(); 

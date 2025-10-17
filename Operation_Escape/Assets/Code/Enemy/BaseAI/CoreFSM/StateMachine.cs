@@ -25,7 +25,7 @@ public class StateMachine : MonoBehaviour
     public GameObject deadBody;
     void Start()
     {
-        ai = GetComponent<IAiAvoid>() ?? GetComponentInChildren<IAiAvoid>(); ;
+        ai = GetComponent<IAiAvoid>() ?? GetComponentInChildren<IAiAvoid>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         ai.targetTransform = target;
