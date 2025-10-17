@@ -115,7 +115,7 @@ public class AreaEnermy : MonoBehaviour
 
         foreach (var EggBoss2 in EggBoss2.eggSpawn.ToList())
         {
-            Destroy(EggBoss2);
+            Destroy(EggBoss2.gameObject);
         }
         EggBoss2.eggSpawn.Clear();
 
