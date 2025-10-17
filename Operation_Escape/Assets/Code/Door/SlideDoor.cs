@@ -42,15 +42,15 @@ public class SlideDoor : TypeDoor
 
     public override void Locking(bool locked)
     {
-        BlockDoor.SetActive(locked);
         if (locked)
         {
             speedMultiply = multiplySpeedLock;
-            
+            BlockDoor.SetActive(true);
         }
         else
         {
             speedMultiply = 1;
+            BlockDoor.SetActive(false);
         }
     }
 

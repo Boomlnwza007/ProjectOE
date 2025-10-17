@@ -74,6 +74,7 @@ public class AutoDoor : MonoBehaviour
         if (area != null)
         {
             area.Lock();
+            door.Locking(true);
         }
         else
         {
