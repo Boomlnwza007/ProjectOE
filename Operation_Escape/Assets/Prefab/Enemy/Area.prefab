@@ -175,3 +175,6 @@ MonoBehaviour:
   BodyLayer:
     serializedVersion: 2
     m_Bits: 64
+  gundropLayer:
+    serializedVersion: 2
+    m_Bits: 65536

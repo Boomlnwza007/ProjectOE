@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9023089216895054596}
   - component: {fileID: 6632621285194257836}
   - component: {fileID: 5740592605012378541}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: StickyGun
-  m_TagString: Untagged
+  m_TagString: Gundrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

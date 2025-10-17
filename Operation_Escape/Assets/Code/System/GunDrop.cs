@@ -28,7 +28,7 @@ public class GunDrop : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerCombat>().Addgun(gun);
+            collision.GetComponent<PlayerCombat>().Addgun(gun,true);
             Destroy(gameObject);
         }
     }

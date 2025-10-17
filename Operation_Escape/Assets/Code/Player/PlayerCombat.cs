@@ -261,6 +261,15 @@ public class PlayerCombat : MonoBehaviour
             aimPoint.localPosition = currentEquipGun.GetComponentInChildren<Transform>().Find("Aim").localPosition;
         }
     }
+    public void Addgun(BaseGun gun ,bool temporary)
+    {
+        if (temporary)
+        {
+            PlayerControl.control.fakeGun.Add(gun);
+        }
+
+        Addgun(gun);
+    }
 
     public void Addgun(BaseGun gun)
     {

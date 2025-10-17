@@ -22,6 +22,7 @@ public class TriggerCheckPoint : MonoBehaviour
                     area.ForceLock();
                 }
                 AreaEnermy.area.Clear();
+                PlayerControl.control.fakeGun.Clear();
                 active = false;
             }
         }

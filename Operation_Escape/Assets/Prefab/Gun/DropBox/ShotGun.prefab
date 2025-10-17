@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9023089216895054596}
   - component: {fileID: 6632621285194257836}
   - component: {fileID: 5740592605012378541}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ShotGun
-  m_TagString: Untagged
+  m_TagString: Gundrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,6 +214,10 @@ PrefabInstance:
     - target: {fileID: 7602349709561404355, guid: 4d71265947ee09f40933bbd5067a422c, type: 3}
       propertyPath: m_Name
       value: TriggerTutorial SwapGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602349709561404355, guid: 4d71265947ee09f40933bbd5067a422c, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

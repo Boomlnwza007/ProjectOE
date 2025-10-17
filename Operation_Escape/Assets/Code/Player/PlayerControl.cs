@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     public bool isdaed;
     public GameObject feet;
     private bool showgun = true;
+    [HideInInspector] public List<BaseGun> fakeGun = new List<BaseGun>();
     [HideInInspector] public bool isFacingRight;
 
     [Header("UI")]

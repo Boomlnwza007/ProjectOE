@@ -154,7 +154,7 @@ MonoBehaviour:
   dropChange: 0
   jumpCenter: {fileID: 5996144668885280560}
   deadBody: {fileID: 7134082757399271618, guid: 7835618c3598c49408c7c7558ef150ce, type: 3}
-  gun: {fileID: 0}
+  gun: {fileID: 5511712679682052109, guid: 39c930c72ad19b24f9482c2425821f9b, type: 3}
   grid: {fileID: 5270313084924020031}
   spike: {fileID: 11400000, guid: 8e8e23b70bceadc4bb1d49d30c1ea942, type: 2}
   spikeN: {fileID: 0}

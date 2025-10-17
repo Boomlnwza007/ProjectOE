@@ -138,6 +138,14 @@ public class PauseScene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ControlScene.scene.animator.speed = 1;
         HideAfterDieCode();
+        if (PlayerControl.control.fakeGun.Count != 0)
+        {
+            foreach (BaseGun gun in PlayerControl.control.fakeGun)
+            {
+                PlayerControl.control.playerCombat.RemoveGun(gun);
+            }
+            PlayerControl.control.fakeGun.Clear();
+        }
         foreach (var area in AreaEnermy.area)
         {
             foreach (var item in area.door)
