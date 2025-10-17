@@ -100,7 +100,9 @@ public class GuardShield : MonoBehaviour
             bullet.gameObject.transform.eulerAngles = new Vector3(0, 0, angle + Random.Range(-10f, 10f));
             bullet.rb.velocity = bullet.gameObject.transform.right * bullet.speed;
             SpriteRenderer spriteRenderer = bullet.gameObject.GetComponent<SpriteRenderer>();
+            TrailRenderer trailRenderer = bullet.gameObject.GetComponentInChildren<TrailRenderer>();
             spriteRenderer.color = Color.red;
+            trailRenderer.startColor = Color.red;
             bullet.ResetGameObj();
             audioGame.PlayOneShot(shieldDeflec);
         }
