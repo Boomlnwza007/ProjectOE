@@ -702,6 +702,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuPause: {fileID: 5083983246546334222}
   menuAfterDie: {fileID: 3040403701780722492}
+  mainmenuAfterDie: {fileID: 4481821954965120795}
+  fadeDuration: 0.5
   firstSpawn: {fileID: 0}
   onPauseMenu: 0
   onmenuAfterDie: 0
@@ -2038,7 +2040,7 @@ MonoBehaviour:
   - {x: -0.3435154, y: -0.13682133, z: 0}
   m_ShapePathHash: -1359256275
   m_Mesh: {fileID: 0}
-  m_InstanceId: 796748
+  m_InstanceId: 850052
   m_LocalBounds:
     m_Center: {x: -0.0011630058, y: -0.0033394396, z: 0}
     m_Extent: {x: 0.5078101, y: 0.1940535, z: 0}
@@ -3014,6 +3016,7 @@ GameObject:
   - component: {fileID: 6847095868616711031}
   - component: {fileID: 5077946489703749501}
   - component: {fileID: 7438290111169371918}
+  - component: {fileID: 4481821954965120795}
   m_Layer: 0
   m_Name: GropMenuPause
   m_TagString: Untagged
@@ -3083,6 +3086,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 2001990933519417278}
   settingMenu: {fileID: 5644313565552966808}
+--- !u!225 &4481821954965120795
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358542005661125707}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &2392456847781833884
 GameObject:
   m_ObjectHideFlags: 0
@@ -9097,6 +9112,7 @@ MonoBehaviour:
   animator: {fileID: 6778737011727104026}
   isdaed: 0
   feet: {fileID: 3281990316655141796}
+  fakeGun: []
   isFacingRight: 0
   UI: {fileID: 3257738974196051764}
   healthBar: {fileID: 4370306752507434572}

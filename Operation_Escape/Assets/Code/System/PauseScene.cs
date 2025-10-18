@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class PauseScene : MonoBehaviour
 {
     public GameObject menuPause;
     public GameObject menuAfterDie;
+    public CanvasGroup mainmenuAfterDie;
+    public float fadeDuration = 1f;
     public Transform firstSpawn;
     public static Transform spawnPoint;
     public bool onPauseMenu;
@@ -109,6 +111,8 @@ public class PauseScene : MonoBehaviour
             Time.timeScale = 1;
         }
         EventSystem.current.SetSelectedGameObject(null);
+        StartCoroutine(FadeInMenu());
+
     }
 
     public void HideAfterDieCode()
@@ -126,7 +130,7 @@ public class PauseScene : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
-    IEnumerator wait() 
+    IEnumerator wait()
     {
         ControlScene.scene.PlayAnimation();
         ControlScene.scene.animator.speed = 10;
@@ -179,10 +183,23 @@ public class PauseScene : MonoBehaviour
         ControlScene.scene.LoadScene = false;
         PlayerControl.control.EnableInput(true);
         PlayerControl.control.EnableUI(true);
+        mainmenuAfterDie.alpha = 0;
+        mainmenuAfterDie.blocksRaycasts = false ;
         CinemachineControl.Instance.cancameraMove = true;
         ControlScene.scene.PlayAnimation();
         PlayerControl.control.isdaed = false;
     }
 
-
+    private IEnumerator FadeInMenu()
+    {
+        float timer = 0f;
+        while (timer < fadeDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+            mainmenuAfterDie.alpha = Mathf.Lerp(0, 1, timer / fadeDuration);
+            yield return null;
+        }
+        mainmenuAfterDie.alpha = 1;
+        mainmenuAfterDie.blocksRaycasts = true;
+    }
 }
