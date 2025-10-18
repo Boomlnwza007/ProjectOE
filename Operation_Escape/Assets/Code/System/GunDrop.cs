@@ -7,6 +7,7 @@ public class GunDrop : MonoBehaviour
     [SerializeField]public BaseGun gun;
     public float floatAmplitude = 0.5f; // ความสูงของการลอย
     public float floatSpeed = 1f; // ความเร็วในการลอย
+    public bool fake;
 
     private Vector3 startPosition;
 
@@ -28,7 +29,7 @@ public class GunDrop : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<PlayerCombat>().Addgun(gun,true);
+            collision.GetComponent<PlayerCombat>().Addgun(gun, fake);
             Destroy(gameObject);
         }
     }

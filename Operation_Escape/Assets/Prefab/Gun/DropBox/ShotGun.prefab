@@ -102,6 +102,7 @@ MonoBehaviour:
   gun: {fileID: 4885397738666743173, guid: a718a593a0a8e224cbc8c188cbf94b88, type: 3}
   floatAmplitude: 0.5
   floatSpeed: 1
+  fake: 1
 --- !u!61 &5740592605012378541
 BoxCollider2D:
   m_ObjectHideFlags: 0
