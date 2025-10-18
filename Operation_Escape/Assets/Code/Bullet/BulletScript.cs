@@ -23,8 +23,9 @@ public class BulletScript : BaseBullet
         {
             bulletInteract.Interact(DamageType.Rang);
             Expo();
+            Destroy(gameObject);
 
-        }        
+        }
         else if (collision.tag == tagUse)
         {
             IDamageable target = collision.GetComponent<IDamageable>();
