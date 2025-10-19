@@ -173,8 +173,11 @@ public class AreaEnermy : MonoBehaviour
             if (ready)
             {
                 hasPlayer = true;
-                AllcombatPhase();
                 area.Add(this);
+                if (!boss)
+                {
+                    AllcombatPhase();
+                }
             }
         }
     }
